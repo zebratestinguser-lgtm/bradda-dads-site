@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
 import { NEWS_TAGS } from '../../content.config';
-import { getAlbums, photoYear } from '../../lib/albums';
+import { getAlbums, photoYear, categorySlug, CATEGORY_ORDER } from '../../lib/albums';
 import { getSite } from '../../lib/site';
 import { url } from '../../lib/url';
 
@@ -11,12 +11,11 @@ const site = await getSite();
 const albums = await getAlbums();
 const total = albums.reduce((n, a) => n + a.data.photos.length, 0);
 
-// Categories in a friendly order, with album counts
-const ORDER = ['Carnival', 'Duck race', 'Bonfire', "Pensioners' lunch", 'Christmas card', 'Wolfspit', 'Tour of Bradwell', 'Social', 'Village'];
+// Categories in a friendly order, with photo counts; each links to a page showing every photo in it
 const categories = [...NEWS_TAGS]
-  .sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b))
-  .map((c) => ({ name: c, count: albums.filter((a) => a.data.category === c).length }))
-  .filter((c) => c.count > 0);
+  .sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b))
+  .map((c) => ({ name: c, photos: albums.filter((a) => a.data.category === c).reduce((n, a) => n + a.data.photos.length, 0) }))
+  .filter((c) => c.photos > 0);
 
 // Group by the year the photos were taken; newest first, "Various years" last
 const groups = new Map<string, typeof albums>();
@@ -39,28 +38,26 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
   </PageHeader>
 
   <div class="container filters">
-    <div class="filter-row">
-      <p class="filter-row__label" id="cat-label">Event:</p>
-      <ul class="chips chips--scroll" role="list" aria-labelledby="cat-label" data-cat-filters>
-        <li><button type="button" class="chip" aria-pressed="true" data-cat="">All <span class="count">{albums.length}</span></button></li>
+    <nav class="filter-row" aria-labelledby="cat-label">
+      <p class="filter-row__label" id="cat-label">All photos of:</p>
+      <ul class="chips chips--scroll" role="list">
         {
           categories.map((c) => (
             <li>
-              <button type="button" class="chip" aria-pressed="false" data-cat={c.name}>
-                {c.name} <span class="count">{c.count}</span>
-              </button>
+              <a class="chip" href={url(`/photos/category/${categorySlug(c.name)}/`)}>
+                {c.name} <span class="count">{c.photos}</span>
+              </a>
             </li>
           ))
         }
       </ul>
-    </div>
+    </nav>
     <nav class="filter-row" aria-labelledby="year-label">
       <p class="filter-row__label" id="year-label">Year:</p>
       <ul class="chips chips--small chips--scroll" role="list">
         {years.map((y) => <li data-year-chip={y}><a class="chip" href={`#year-${y}`}>{yearName(y)}</a></li>)}
       </ul>
     </nav>
-    <p class="visually-hidden" aria-live="polite" data-photo-status></p>
   </div>
 
   {
@@ -80,41 +77,11 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
 </BaseLayout>
 
 <script>
-  const filters = document.querySelector<HTMLElement>('[data-cat-filters]');
-  const status = document.querySelector<HTMLElement>('[data-photo-status]');
-  if (filters) {
-    const buttons = [...filters.querySelectorAll<HTMLButtonElement>('button[data-cat]')];
-    const items = [...document.querySelectorAll<HTMLElement>('[data-album-cat]')];
-    const groups = [...document.querySelectorAll<HTMLElement>('[data-year-group]')];
-
-    function apply(cat: string, updateUrl = true) {
-      const known = buttons.some((b) => b.dataset.cat === cat);
-      if (!known) cat = '';
-      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === cat)));
-      let shown = 0;
-      items.forEach((li) => {
-        const on = !cat || li.dataset.albumCat === cat;
-        li.hidden = !on;
-        if (on) shown++;
-      });
-      groups.forEach((g) => {
-        const empty = !g.querySelector('[data-album-cat]:not([hidden])');
-        g.hidden = empty;
-        const chip = document.querySelector<HTMLElement>(`[data-year-chip="${g.dataset.yearGroup}"]`);
-        if (chip) chip.hidden = empty;
-      });
-      if (status) status.textContent = `${shown} albums shown`;
-      if (updateUrl) {
-        const u = new URL(location.href);
-        if (cat) u.searchParams.set('category', cat);
-        else u.searchParams.delete('category');
-        history.replaceState(null, '', u);
-      }
-    }
-
-    buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.cat!)));
-    const initial = new URLSearchParams(location.search).get('category');
-    if (initial) apply(initial, false);
+  // Old links like /photos/?category=Bonfire now go to that category's own page
+  const cat = new URLSearchParams(location.search).get('category');
+  if (cat) {
+    const slug = cat.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    location.replace(`${location.pathname.replace(/\/?$/, '/')}category/${slug}/`);
   }
 </script>
 
@@ -141,7 +108,7 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
   .filter-row__label {
     font-weight: 600;
     color: var(--muted);
-    min-width: 48px;
+    min-width: 110px;
   }
   .filter-row .chips {
     min-width: 0;
@@ -167,7 +134,7 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
     display: flex;
     flex-direction: column;
     gap: 18px;
-    scroll-margin-top: 16px;
+    scroll-margin-top: 90px;
   }
   .year-group:last-child {
     padding-bottom: var(--section-pad);

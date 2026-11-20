@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
 import { getEvents, pickNextEvent, statusFor, formatEventDates } from '../../lib/events';
-import { getAlbums, EVENT_TAG } from '../../lib/albums';
+import { getAlbums, EVENT_TAG, categorySlug } from '../../lib/albums';
 import { formatDate, formatTime } from '../../lib/format';
 import { url } from '../../lib/url';
 
@@ -71,8 +71,8 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
             </li>
           ))}
         </ul>
-        <a class="link-arrow" href={tag ? `${url('/photos/')}?category=${encodeURIComponent(tag)}` : url('/photos/')}>
-          {tag && eventAlbums.length > albums.length ? `All ${eventAlbums.length} ${d.name} albums →` : 'All photo albums →'}
+        <a class="link-arrow" href={tag ? url(`/photos/category/${categorySlug(tag)}/`) : url('/photos/')}>
+          {tag ? `Every ${d.name} photo, from all ${eventAlbums.length} album${eventAlbums.length === 1 ? '' : 's'} →` : 'All photo albums →'}
         </a>
       </section>
     )

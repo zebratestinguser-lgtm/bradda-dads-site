@@ -1,0 +1,107 @@
+---
+// A grid of photo previews that open in the shared <Lightbox>. Each photo carries its own caption
+// (album, date, position) so one viewer can page through several albums on the same page.
+import type { Album } from '../lib/albums';
+import { photoDate } from '../lib/albums';
+import { url, thumb } from '../lib/url';
+
+interface Props {
+  album: Album;
+  /** Include the album title in the viewer caption (on pages showing several albums) */
+  titleInCaption?: boolean;
+  /** Show this many, with a "Show all" button for the rest (JS only; without JS every photo shows) */
+  collapseAfter?: number;
+  eagerCount?: number;
+}
+const { album, titleInCaption = false, collapseAfter, eagerCount = 0 } = Astro.props;
+const photos = album.data.photos;
+const when = photoDate(album);
+const extra = collapseAfter && photos.length > collapseAfter + 2 ? photos.length - collapseAfter : 0;
+---
+
+<div class="pg" data-photo-grid data-collapse={extra ? collapseAfter : undefined}>
+  <ul class="pg__grid" role="list">
+    {
+      photos.map((p, i) => {
+        const cap = [titleInCaption ? album.data.title : '', when, `Photo ${i + 1} of ${photos.length}`, p.caption ?? ''].filter(Boolean).join(' · ');
+        return (
+          <li class="pg__item" data-extra={extra && i >= collapseAfter! ? '' : undefined}>
+            <a class="pg__link" href={url(p.src)} data-lb data-lb-caption={cap} aria-label={`Open photo ${i + 1} of ${photos.length}${titleInCaption ? ` from ${album.data.title}` : ''}${p.caption ? `: ${p.caption}` : ''}`}>
+              <img src={thumb(p.src)} alt={p.alt} loading={i < eagerCount ? 'eager' : 'lazy'} decoding="async" width="480" height="360" />
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+  {
+    extra > 0 && (
+      <button type="button" class="pg__more" data-show-all hidden>
+        Show all {photos.length} photos
+      </button>
+    )
+  }
+</div>
+
+<script>
+  // Collapse long albums to the first N photos, with a button to show the rest
+  document.querySelectorAll<HTMLElement>('[data-photo-grid][data-collapse]').forEach((grid) => {
+    const extras = [...grid.querySelectorAll<HTMLElement>('[data-extra]')];
+    const btn = grid.querySelector<HTMLButtonElement>('[data-show-all]');
+    if (!btn || !extras.length) return;
+    extras.forEach((li) => (li.hidden = true));
+    btn.hidden = false;
+    btn.addEventListener('click', () => {
+      extras.forEach((li) => (li.hidden = false));
+      btn.remove();
+      extras[0].querySelector<HTMLElement>('a')?.focus();
+    });
+  });
+</script>
+
+<style>
+  .pg__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(180px, 46%), 1fr));
+    gap: 10px;
+  }
+  .pg__link {
+    display: block;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--surface-green);
+    aspect-ratio: 4 / 3;
+  }
+  .pg__link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .pg__link img {
+      transition: transform 0.2s ease;
+    }
+    .pg__link:hover img {
+      transform: scale(1.04);
+    }
+  }
+  .pg__more {
+    margin-top: 14px;
+    min-height: var(--tap);
+    padding: 0 20px;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--green);
+    background: var(--white);
+    color: var(--green);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .pg__more:hover {
+    background: var(--green);
+    color: var(--white);
+  }
+</style>
