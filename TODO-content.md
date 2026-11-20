@@ -23,6 +23,10 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 - [ ] Decide: "Share your photos" → Facebook (current) or a `mailto:` address (`sharePhotosUrl`)
 - [ ] Wolf's Pit 2027 entry link (`wolfspitEntryUrl`)
 - [ ] Our story intro: add who started it and why (`storyIntro`)
+- [ ] **After the February 2027 membership vote:** if membership opens up, change the joining wording (Site settings → Join us headline / text) to:
+  - Headline: "Live in Bradwell? You're in."
+  - Text: "Bradda Dads is open to anyone in the parish who wants to help. No experience needed, just a spare pair of hands for a few events a year."
+  (This used to be a comment in site.yaml; comments there are lost when the editor saves the file.)
 
 ## Events: `src/content/events/`
 
@@ -80,10 +84,10 @@ Phone numbers and email addresses copied from the old sites.
 
 - [x] [events/wolfspit.md](src/content/events/wolfspit.md): the organiser's mobile number has been taken off the event page (an "Email the organiser" button remains). It's still in the imported Wolf's Pit photos album text below.
 - [ ] [2011 Boxing Day Duck Race](src/content/news/2011-12-27-2011-boxing-day-duck-race.md): braddadads@btinternet.com
-- [ ] [Wolf's Pit photos](src/content/albums/2018-10-17-wolfs-pit-photos/index.md) (album text from the old WordPress page): 07590 047104, wolfspitfellrace@gmail.com
+- [ ] [Wolf's Pit photos](src/content/albums/2018-10-17-wolfs-pit-photos.md) (album text from the old WordPress page): 07590 047104, wolfspitfellrace@gmail.com
 - [ ] [Wolf's Pit 2020: further info on cancellation](src/content/news/2020-03-26-wolfs-pit-2020-further-info-on-cancellation.md): wolfspitfellrace@gmail.com
 
-- [ ] **Scanned lunch invitations** (photo 1 in the albums [3rd Pensioners Christmas Lunch, 2003](src/content/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/index.md) and [6th Pensioners Lunch, 2006](src/content/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/index.md)) show a member's home address and phone number. Consider removing or cropping them.
+- [ ] **Scanned lunch invitations** (photo 1 in the albums [3rd Pensioners Christmas Lunch, 2003](src/content/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003.md) and [6th Pensioners Lunch, 2006](src/content/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006.md)) show a member's home address and phone number. Consider removing or cropping them.
 
 ### Posts about named individuals (7)
 
@@ -108,7 +112,7 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 - [ ] [Bowls Social (2007)](src/content/news/2007-09-08-bradda-dads-wives-and-children-bowls-social.md) · [8th Pensioners Lunch (2008)](src/content/news/2008-12-10-8th-annual-pensioners-christmas-lunch.md) · [10th Duck Race (2008)](src/content/news/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008.md) · [Wolf's Pit Walk Around (2009)](src/content/news/2009-02-07-wolfs-pit-fell-race-walk-around.md) · [Christmas Card Competition (2009)](src/content/news/2009-12-10-christmas-card-competition.md)
 - [ ] [Wolf's Pit (2010)](src/content/news/2010-03-14-wolfs-pit-fell-race-14-march-2010.md) · [Dads vs Lads football (2010)](src/content/news/2010-08-01-bradda-dads-vs-bradda-lads-carnival-football-match.md) · [Eyam Carnival (2010)](src/content/news/2010-09-04-eyam-carnival-winners-in-two-categories.md) · [10th Pensioners Lunch (2010)](src/content/news/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010.md) · [12th Duck Race (2010)](src/content/news/2010-12-26-12th-boxing-day-duck-race.md)
 - [ ] [MUGA opening (2011)](src/content/news/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga.md) · [2011 Duck Race](src/content/news/2011-12-27-2011-boxing-day-duck-race.md) · [Wolf's Pit (2012)](src/content/news/2012-03-11-wolfs-pit-fell-race.md) · [Jubilee Beacon (2012)](src/content/news/2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon.md) · [Carnival Duck Race (2012)](src/content/news/2012-08-07-duck-race-carnival-2012.md)
-- [ ] [12th Pensioners Lunch (2012)](src/content/news/2012-12-05-12th-pensioners-christmas-lunch.md) · [Valentine raffle (2012)](src/content/news/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine.md) · [Wolf's Pit photos album](src/content/albums/2018-10-17-wolfs-pit-photos/index.md), plus the birthday, retirement, Christmas card and 2007 duck race posts listed above
+- [ ] [12th Pensioners Lunch (2012)](src/content/news/2012-12-05-12th-pensioners-christmas-lunch.md) · [Valentine raffle (2012)](src/content/news/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine.md) · [Wolf's Pit photos album](src/content/albums/2018-10-17-wolfs-pit-photos.md), plus the birthday, retirement, Christmas card and 2007 duck race posts listed above
 
 ## Pages still to write (milestone 4)
 
@@ -117,4 +121,7 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 
 ## Team editing (next up)
 
-- [ ] **Set up Pages CMS** (pagescms.org, free) so the team can add news, albums and events without touching the layout. Plan: editing forms for news, albums (multi-photo upload with a description per photo), events, site settings and members; automatic resizing of uploaded photos on save; a one-page "How to update the site" guide; test with a dummy story and album, then remove them. You do: install the Pages CMS GitHub app on the repo and invite each editor (each needs a free GitHub account). Costs nothing: hosting stays on GitHub Pages and only the domain is paid for.
+- [x] **Pages CMS set up** (`.pages.yml`): forms for news, albums, events, members, where the money goes, timeline and site settings; uploaded photos are shrunk automatically; team guide in `docs/how-to-update.md`.
+- [ ] **You:** install the Pages CMS GitHub app on the repo (sign in at https://app.pagescms.org with GitHub as zebratestinguser-lgtm, then follow the prompt to install it on bradda-dads-site only).
+- [ ] **You:** add a test story and album through the editor to check it all works end to end, then delete them.
+- [ ] **You:** invite each editor by email (Pages CMS → the repo → Collaborators) and send them `docs/how-to-update.md`.

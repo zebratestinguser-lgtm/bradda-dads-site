@@ -30,6 +30,10 @@ export const NEWS_TAGS = [
   'Social',
 ] as const;
 
+/** The editor (Pages CMS) stores links to other entries as file paths ("src/content/albums/x.md");
+ *  turn those into plain ids ("x") so either form works. */
+const entryId = (v: unknown) => (typeof v === 'string' ? v.replace(/^.*\//, '').replace(/\.md$/, '') : v);
+
 /** Where an entry was imported from (old Blogspot/WordPress sites). */
 const source = z.url().optional();
 
@@ -45,7 +49,7 @@ const news = defineCollection({
       summary: z.string(),
       featured: z.boolean().default(false),
       /** Photo album for this story, if there is one. */
-      album: reference('albums').optional(),
+      album: z.preprocess(entryId, reference('albums')).optional(),
       source,
     })
     .refine((d) => !d.image || (d.imageAlt && d.imageAlt.length > 0), {
@@ -116,12 +120,12 @@ const events = defineCollection({
 });
 
 const albums = defineCollection({
-  loader: glob({ pattern: '*/index.md', base: './src/content/albums', generateId: ({ entry }) => entry.split('/')[0] }),
+  loader: glob({ pattern: '*.md', base: './src/content/albums', generateId: ({ entry }) => entry.replace(/\.md$/, '') }),
   schema: z.object({
     title: z.string(),
     /** What kind of event the photos are from (same list as news tags); used to filter the photos page. */
     category: z.enum(NEWS_TAGS).optional(),
-    event: reference('events').optional(),
+    event: z.preprocess(entryId, reference('events')).optional(),
     /** When the photos were taken (used for sorting and shown on every photo). */
     date: z.coerce.date(),
     /** Shown instead of the date when there isn't one exact date, e.g. "2017–2021" or "Summer 2016". */

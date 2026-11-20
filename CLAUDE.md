@@ -20,7 +20,7 @@ This file is the handover for building the new Bradda Dads website. Read it full
 1. **Static site, own domain, own hosting.** Not WordPress.
 2. **Stack:** Astro (latest stable), TypeScript, plain CSS (custom properties) or scoped component styles. No heavy UI framework. Minimal client JS (countdown, results search/filter, year tabs, map).
 3. **Hosting:** ~~Netlify~~ **Changed 2026-11-20: GitHub Pages for the concept phase** (Peter has hit Netlify free-tier limits before). Repo: `github.com/zebratestinguser-lgtm/bradda-dads-site`, site at `https://zebratestinguser-lgtm.github.io/bradda-dads-site/`, deployed by `.github/workflows/deploy.yml`. Consequences: no `netlify.toml`; Netlify Forms are unavailable, so the Christmas card form is built but not wired up (later: Formspree/Google Form, or move host); no redirects/headers. Keep the site host-agnostic: always link via `url()` in `src/lib/url.ts` so moving to a custom domain or another host is just `site`/`base` in `astro.config.mjs`. Note: Netlify Identity was deprecated in 2025, so phase 2 logins should plan on DecapBridge (works with GitHub).
-4. **Phasing:**
+4. **Phasing:** (phase 2 now uses Pages CMS, see "Phase 2: team editing" below)
    - **Phase 1 (now): Peter maintains it alone.** All content lives as Markdown/YAML/CSV files in the repo. Peter edits files (or asks Claude Code to), commits, GitHub Actions rebuilds.
    - **Phase 2 (later): other committee members can edit** via Decap CMS at `/admin`, logging in with email through Netlify Identity + Git Gateway (or DecapBridge as fallback). No GitHub accounts needed for editors.
 5. **Phase 1 must be "Decap-ready"** so phase 2 is configuration only, not a restructure (see Content model rules).
@@ -33,7 +33,7 @@ Use the content layer with `glob` loaders. Validate with Zod schemas. Every fiel
 |---|---|---|
 | `news` | `src/content/news/YYYY-MM-DD-slug.md` | `title`, `date`, `tag` (enum: Bonfire, Christmas card, Pensioners' lunch, Duck race, Wolfspit, Village), `image` (optional), `imageAlt`, `summary`, `featured` (bool), body (Markdown) |
 | `events` | `src/content/events/slug.md` | `name`, `start` (datetime, Europe/London), `end` (optional), `location`, `summary`, `status` (upcoming / open / done), `ctaLabel`, `ctaUrl` (usually a SumUp link), `order`, body |
-| `albums` | `src/content/albums/slug/index.md` + images in same folder or `public/uploads/albums/slug/` | `title`, `event` (reference to events), `date`, `cover`, `photos` (list of `{src, alt, caption?}`) |
+| `albums` | `src/content/albums/slug.md` + images in same folder or `public/uploads/albums/slug/` | `title`, `event` (reference to events), `date`, `cover`, `photos` (list of `{src, alt, caption?}`) |
 | `results` | `src/content/results/wolfspit/YYYY.md` + `YYYY.csv` | md: `year`, `date`, `courseNotes`, `finishers` (computed if absent), `csv` (file path); CSV columns below |
 | `timeline` | `src/content/timeline/YYYY-slug.md` | `year` (string, allows "[YEAR]"), `title`, `text`, `image` (optional) |
 | `funded` | `src/content/funded/slug.md` | `name`, `lat`, `lng`, `year`, `amount` (optional), `summary`, `image` (optional) — drives the "where the money goes" map |
@@ -158,13 +158,13 @@ Header row (exact): `position,name,club,category,time`
 - Album pages load full 1200px images in the grid (no thumbnails yet). For milestone 6: thumbnails, e.g. a prebuild step with `sharp` (Astro already depends on it, but it would need adding explicitly, so ask first).
 - Windows dev machine needs the Microsoft VC++ runtime (Astro's Markdown engine is native).
 
-## Phase 2 checklist (do not build yet, but don't block it)
+## Phase 2: team editing (Pages CMS, set up 2026-11-20)
 
-- Add `public/admin/index.html` + `public/admin/config.yml` for Decap CMS, collections mirroring the schemas above (folder collections, `media_folder` matching the chosen uploads folder).
-- Enable Netlify Identity (invite-only registration) + Git Gateway; add the Identity widget to `/admin` and the site's `<head>`.
-- Optional: editorial workflow (draft → review → publish) for news.
-- Fallback if Netlify Identity is unsuitable: DecapBridge for auth.
-- Write `docs/how-to-update.md` for editors with screenshots.
+- **Pages CMS** (free, hosted at app.pagescms.org) replaced the earlier Decap plan. Config: `.pages.yml` at the repo root, one form per collection (news, albums, events, members, funded, timeline) plus Site settings (`src/data/site.yaml`, under its `site:` object). Results CSVs are not editable there.
+- Keep `.pages.yml` in step with `src/content.config.ts`: **every schema field must appear in the form** (unused ones as `hidden: true`, like `source`), because saving rewrites the file and drops keys the form doesn't know. Saving also drops YAML comments, so don't keep notes in comments in content files; put them in TODO-content.md.
+- Media: new uploads go to `public/uploads/news`, `public/uploads/photos` (random names) and `public/uploads/images`. The deploy workflow runs `scripts/resize-uploads.mjs` first (max 1600px, EXIF rotation applied, metadata incl. GPS stripped) and commits any resized photos back.
+- Albums are single files (`src/content/albums/<id>.md`, flattened from `<id>/index.md` on 2026-11-20 so the editor can list them). The editor stores references as paths (`src/content/albums/x.md`); the schema's `entryId` preprocess turns them into ids.
+- Editors are invited by email from Pages CMS (no GitHub account needed). Their guide: `docs/how-to-update.md`.
 
 ## Working agreements
 
