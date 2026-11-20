@@ -2,7 +2,7 @@
 title: "Wolf's Pit Fell Race"
 date: 2009-03-22
 tag: "Wolf's Pit"
-summary: "Go to http://www.wolfspitfellrace.org.uk/ for full details of the race"
+summary: "Full details of the race are on the Wolf's Pit Fell Race website."
 source: https://braddadads.blogspot.com/2009/03/wolfs-pit-fell-race.html
 ---
 

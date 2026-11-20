@@ -2,7 +2,7 @@
 title: "2 November 2007 - Bradda Dads Bonfire"
 date: 2007-11-05
 tag: "Bonfire"
-summary: "Another successful bonfire - well done to all"
+summary: "Another successful bonfire. Well done to all!"
 image: /uploads/albums/2007-11-05-2-november-2007-bradda-dads-bonfire/001.jpg
 imageAlt: "A firework shooting up above the blazing bonfire at night (5 November 2007)"
 album: 2007-11-05-2-november-2007-bradda-dads-bonfire

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getSite } from '../lib/site';
+import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
@@ -37,7 +38,7 @@ const timeline = (await getCollection('timeline')).sort((a, b) => a.data.order -
               <span class="timeline__line" />
             </div>
             <div class="timeline__body">
-              <span class="timeline__year">{t.data.year}</span>
+              {!isPlaceholder(t.data.year) && <span class="timeline__year">{t.data.year}</span>}
               <h2 class="timeline__title">{t.data.title}</h2>
               <p class="timeline__text">{t.data.text}</p>
               {t.data.image && <img class="timeline__img" src={url(t.data.image)} alt={t.data.imageAlt ?? ''} loading="lazy" />}

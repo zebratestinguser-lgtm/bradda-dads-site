@@ -1,0 +1,31 @@
+---
+// A full-width page section with its own background, joined to the section above by a wave and duck.
+// Alternate tones down the page so every join shows:
+//
+//   <Band first><section class="container page-section">…</section></Band>   straight after a green header (white, no wave)
+//   <Band tone="mist">…</Band>                                                 pale grey, wave above
+//   <Band>…</Band>                                                             white, wave above
+//
+// Inside a band, use var(--panel) for tinted boxes so they stay visible on either tone.
+import BrookEdge from './BrookEdge.astro';
+
+interface Props {
+  tone?: 'white' | 'mist';
+  /** First section under a green header: no wave of its own (the header's wave already joins them) */
+  first?: boolean;
+  /** Extra class for the wrapper */
+  class?: string;
+}
+const { tone = 'white', first = false, class: extra } = Astro.props;
+const fills = { white: 'var(--white)', mist: 'var(--surface)' };
+
+// Number the bands on this page so each wave's duck lands in its own spot (same spot on every visit)
+const locals = Astro.locals as { bandCount?: number };
+locals.bandCount = (locals.bandCount ?? 0) + 1;
+const seed = `band-${locals.bandCount}`;
+---
+
+<div class:list={['band', `band--${tone}`, { 'band--wave': !first }, extra]}>
+  {!first && <BrookEdge position="rise" fill={fills[tone]} seed={seed} />}
+  <slot />
+</div>

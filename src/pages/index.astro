@@ -1,7 +1,10 @@
 ---
 // Homepage: what's on now and next, the year's events, news, then quick routes into the rest of the site.
 // (Results, photos, history, the map and the full donate/join sections live on their own pages.)
+// Every section sits in a <Band>, alternating white and pale grey, joined by a wave and duck.
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
 import Hero from '../components/home/Hero.astro';
 import EventsYear from '../components/home/EventsYear.astro';
 import NewsSection from '../components/home/NewsSection.astro';
@@ -9,18 +12,27 @@ import CardBanner from '../components/home/CardBanner.astro';
 import ExploreRow from '../components/home/ExploreRow.astro';
 import WhoWeAre from '../components/home/WhoWeAre.astro';
 import SupportStrip from '../components/home/SupportStrip.astro';
-import { getEvents, pickNextEvent } from '../lib/events';
+import { getEvents, pickNextEvent, isOpen } from '../lib/events';
 
 const events = await getEvents();
 const next = pickNextEvent(events);
+// The Christmas card banner only shows while entries are open, so work out the tones around it
+const card = await getEntry('events', 'christmas-card');
+const showCard = card ? isOpen(card) : false;
+const tones = ['mist', 'white'] as const;
+let i = 0;
+const tone = () => tones[i++ % 2];
+const [whoTone, newsTone] = [tone(), tone()];
+const cardTone = showCard ? tone() : 'white';
+const [exploreTone, supportTone] = [tone(), tone()];
 ---
 
 <BaseLayout>
   {next ? <Hero event={next} /> : <h1 class="visually-hidden">Bradda Dads</h1>}
-  <EventsYear events={events} nextId={next?.id} />
-  <WhoWeAre />
-  <NewsSection />
-  <CardBanner />
-  <ExploreRow />
-  <SupportStrip />
+  <Band first><EventsYear events={events} nextId={next?.id} /></Band>
+  <Band tone={whoTone}><WhoWeAre /></Band>
+  <Band tone={newsTone}><NewsSection /></Band>
+  {showCard && <Band tone={cardTone}><CardBanner /></Band>}
+  <Band tone={exploreTone}><ExploreRow /></Band>
+  <Band tone={supportTone}><SupportStrip /></Band>
 </BaseLayout>

@@ -1,21 +1,31 @@
 ---
 // Wavy "brook" edge between two differently coloured sections, with a duck bobbing on it.
-// The duck lands at a random spot (and sometimes faces the other way) on every page load.
+// The duck's spot along the wave (and which way it faces) looks random but is worked out from the page
+// address and the wave's seed, so it stays put on refresh and between rebuilds.
 //
-//   <BrookEdge />                                  bottom of a section, next section is white
+//   <BrookEdge />                                    bottom of a section, next section is white
 //   <BrookEdge position="top" fill="var(--white)" />  top of a section, previous section is white
+//   <BrookEdge position="rise" fill="var(--surface)" />  sits ABOVE a section, in that section's own colour,
+//                                                     spilling up into whatever comes before (used by <Band>)
 //
 // The parent section needs `position: relative` and a little extra padding on that edge (~40px).
+// Give each wave on a page a different `seed` so its duck lands somewhere different.
 import DuckLogo from './DuckLogo.astro';
+import { seeded } from '../lib/seed';
 
 interface Props {
   /** Which edge of the section the wave sits on */
-  position?: 'top' | 'bottom';
+  position?: 'top' | 'bottom' | 'rise';
   /** Colour of the neighbouring section (the one the wave "spills" into) */
   fill?: string;
   duck?: boolean;
+  /** Makes this wave's duck land somewhere different from the other waves on the page */
+  seed?: string;
 }
-const { position = 'bottom', fill = 'var(--white)', duck = true } = Astro.props;
+const { position = 'bottom', fill = 'var(--white)', duck = true, seed = position } = Astro.props;
+const rand = seeded(`${Astro.url.pathname.replace(/\/?$/, '/')}|${seed}`);
+const duckStyle = `left:${(6 + rand() * 82).toFixed(1)}%;--bob-delay:${(-rand() * 3.6).toFixed(2)}s`;
+const flipped = rand() < 0.4;
 ---
 
 <div class:list={['brook', `brook--${position}`]} aria-hidden="true">
@@ -24,7 +34,7 @@ const { position = 'bottom', fill = 'var(--white)', duck = true } = Astro.props;
   </svg>
   {
     duck && (
-      <span class="brook__duck" data-brook-duck>
+      <span class:list={['brook__duck', { 'is-flipped': flipped }]} style={duckStyle}>
         <span class="brook__bob">
           <DuckLogo size={44} />
         </span>
@@ -32,15 +42,6 @@ const { position = 'bottom', fill = 'var(--white)', duck = true } = Astro.props;
     )
   }
 </div>
-
-<script>
-  // Scatter the ducks: a random spot along each wave, sometimes facing left
-  document.querySelectorAll<HTMLElement>('[data-brook-duck]').forEach((d) => {
-    d.style.left = `${6 + Math.random() * 82}%`;
-    if (Math.random() < 0.4) d.classList.add('is-flipped');
-    d.style.setProperty('--bob-delay', `${-Math.random() * 3.6}s`);
-  });
-</script>
 
 <style>
   .brook {
@@ -56,6 +57,10 @@ const { position = 'bottom', fill = 'var(--white)', duck = true } = Astro.props;
   }
   .brook--top {
     top: -1px;
+  }
+  .brook--rise {
+    top: 1px;
+    transform: translateY(-100%);
   }
   .brook--top svg {
     transform: scaleY(-1);

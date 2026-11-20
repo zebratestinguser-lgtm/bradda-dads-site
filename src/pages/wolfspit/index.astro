@@ -116,7 +116,7 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
   }
   .any-results :global(li) {
     padding: 8px 12px;
-    background: var(--surface);
+    background: var(--panel, var(--surface));
     border-radius: 10px;
   }
   .any-results :global(.club) {

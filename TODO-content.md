@@ -3,7 +3,9 @@
 Every `[PLACEHOLDER]` or `[SQUARE BRACKET]` value on the site, and where to change it.
 Tick items off as they're done. Updated: 20 November 2026 (17 November minutes + SumUp store links).
 
-**The homepage hides anything still in [SQUARE BRACKETS]** (totals, donation labels, venue, Facebook posts, CIC details) so the concept reads as finished. Placeholders stay visible on inner pages as reminders. Fill them in here and they appear automatically.
+**The published site hides anything still in [SQUARE BRACKETS]** (totals, member names, years, CIC details, and every "[PLACEHOLDER: …]" note), so it reads as finished. They're still visible when running the site locally (`npm run dev`), and they're all listed below. Fill them in and they appear automatically.
+
+**Meet the dads:** a member's card and profile page only appear once their real name replaces "[MEMBER NAME]" in `src/content/members/`. Until then the page shows a group photo and "profiles are on their way".
 
 ## Site settings: `src/data/site.yaml`
 
@@ -112,3 +114,7 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 
 - [ ] Privacy notice (mention race results, photos, and OpenStreetMap map tiles)
 - [ ] Get involved / Contact copy
+
+## Team editing (next up)
+
+- [ ] **Set up Pages CMS** (pagescms.org, free) so the team can add news, albums and events without touching the layout. Plan: editing forms for news, albums (multi-photo upload with a description per photo), events, site settings and members; automatic resizing of uploaded photos on save; a one-page "How to update the site" guide; test with a dummy story and album, then remove them. You do: install the Pages CMS GitHub app on the repo and invite each editor (each needs a free GitHub account). Costs nothing: hosting stays on GitHub Pages and only the domain is paid for.

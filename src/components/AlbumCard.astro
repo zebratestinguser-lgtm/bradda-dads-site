@@ -2,6 +2,7 @@
 // Album tile: cover + two smaller photos, with the photo date always visible.
 import { type Album, photoDate, photoDateShort } from '../lib/albums';
 import { url, thumb } from '../lib/url';
+import { displayCover } from '../lib/photos';
 
 interface Props {
   album: Album;
@@ -19,7 +20,8 @@ const swatches = [
 ];
 const sw = swatches[index % swatches.length];
 const pics = album.data.photos;
-const coverSrc = album.data.cover ?? pics[0]?.src;
+// Lead with a real scene rather than a scanned poster or results sheet, where the album has one
+const coverSrc = displayCover(album)?.src;
 const rest = pics.filter((p) => p.src !== coverSrc);
 const shown = (coverSrc ? 1 : 0) + Math.min(rest.length, 1);
 const more = Math.max(0, pics.length - shown);

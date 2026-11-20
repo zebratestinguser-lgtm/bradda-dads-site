@@ -1,15 +1,29 @@
 ---
 // Green header band used at the top of inner pages.
+// Optional photo: fades in from the right behind the text, with its date always shown.
 import BrookEdge from './BrookEdge.astro';
+import { url } from '../lib/url';
 interface Props {
   title: string;
   eyebrow?: string;
   intro?: string;
+  /** Background photo (an /uploads/ path) */
+  image?: string;
+  /** When the photo was taken, e.g. "Dec 2012" (shown on the photo) */
+  imageLabel?: string;
 }
-const { title, eyebrow, intro } = Astro.props;
+const { title, eyebrow, intro, image, imageLabel } = Astro.props;
 ---
 
-<section class="page-header">
+<section class:list={['page-header', { 'page-header--photo': image }]}>
+  {
+    image && (
+      <div class="page-header__photo" aria-hidden="true">
+        <img src={url(image)} alt="" decoding="async" fetchpriority="high" />
+      </div>
+    )
+  }
+  {image && imageLabel && <p class="page-header__chip">Photo: {imageLabel}</p>}
   <div class="container page-header__inner">
     {eyebrow && <p class="eyebrow page-header__eyebrow">{eyebrow}</p>}
     <h1 class="page-header__title">{title}</h1>
@@ -26,7 +40,42 @@ const { title, eyebrow, intro } = Astro.props;
     color: var(--white);
     padding-block: 32px 72px;
   }
+  .page-header--photo {
+    overflow: hidden;
+    padding-block: 32px 96px;
+  }
+  .page-header__photo {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 62%;
+  }
+  .page-header__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Fade the photo into the green so the text always sits on solid colour */
+  .page-header__photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--green) 0%, rgba(29, 59, 44, 0.75) 35%, rgba(29, 59, 44, 0.15) 100%);
+  }
+  .page-header__chip {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 52px;
+    z-index: 2;
+    background: rgba(16, 36, 26, 0.85);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
   .page-header__inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -46,5 +95,16 @@ const { title, eyebrow, intro } = Astro.props;
     line-height: 1.55;
     color: var(--on-dark-soft);
     max-width: 640px;
+  }
+  @media (max-width: 800px) {
+    .page-header__photo {
+      width: 100%;
+    }
+    .page-header__photo::after {
+      background: rgba(29, 59, 44, 0.86);
+    }
+    .page-header__chip {
+      bottom: 38px;
+    }
   }
 </style>

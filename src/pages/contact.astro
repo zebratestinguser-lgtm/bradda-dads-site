@@ -16,10 +16,12 @@ const hasEmail = !site.contactEmail.startsWith('[');
       <p>The quickest way to reach us, and where we post day-to-day news.</p>
       <a class="btn btn--green btn--md" href={site.facebookUrl} rel="noopener">Bradda Dads on Facebook</a>
     </div>
-    <div class="card">
-      <h2 class="subhead">Email</h2>
-      {hasEmail ? <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p> : <p>{site.contactEmail}</p>}
-    </div>
+    {hasEmail && (
+      <div class="card">
+        <h2 class="subhead">Email</h2>
+        <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
+      </div>
+    )}
     <div class="card">
       <h2 class="subhead">Meetings</h2>
       <p>We meet {site.meetingInfo}.</p>

@@ -64,7 +64,7 @@ const picks = podium(year.rows).filter((_, i) => i === 0 || hasCats);
     margin: 0;
   }
   .ry__facts div {
-    background: var(--surface);
+    background: var(--panel, var(--surface));
     border-radius: 16px;
     padding: 14px 18px;
   }
@@ -145,7 +145,7 @@ const picks = podium(year.rows).filter((_, i) => i === 0 || hasCats);
     color: var(--green);
   }
   .btn--outline:hover {
-    background: var(--surface);
+    background: var(--panel, var(--surface));
   }
   .ry__source {
     font-size: 15px;

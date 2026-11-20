@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
 import { getEvents, pickNextEvent, statusFor, formatEventDates, isOpen, isPlaceholder } from '../../lib/events';
@@ -8,6 +9,7 @@ import { getWolfspitYears } from '../../lib/results';
 import { getAlbums, EVENT_TAG, categorySlug } from '../../lib/albums';
 import { formatDate, formatTime } from '../../lib/format';
 import { url } from '../../lib/url';
+import { eventPhoto } from '../../lib/photos';
 
 export async function getStaticPaths() {
   const events = await getEvents();
@@ -35,11 +37,13 @@ const isRace = event.id === 'wolfspit';
 const raceAll = isRace ? await getWolfspitYears() : [];
 const raceYears = raceAll.map((y) => y.year).sort((a, b) => a - b);
 const latestRace = raceAll[0];
+// Header photo: the event's own heroImage if set, else the latest real photo from its albums
+const photo = d.heroImage ? { src: d.heroImage, label: d.heroImageCaption } : await eventPhoto(event.id);
 const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
 ---
 
 <BaseLayout title={d.name} description={d.summary}>
-  <PageHeader eyebrow={status} title={d.name} intro={d.summary}>
+  <PageHeader eyebrow={status} title={d.name} intro={d.summary} image={photo?.src} imageLabel={photo?.label}>
     <a class="back" href={url('/events/')}>← All events</a>
     <ul class="facts" role="list">
       <li>
@@ -66,13 +70,13 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
   </PageHeader>
 
   <!-- 1. What's happening -->
-  <section class="container page-section ev-section" aria-labelledby="what-title">
+  <Band first><section class="container page-section ev-section" aria-labelledby="what-title">
     <h2 class="subhead" id="what-title">What's happening</h2>
     <div class="prose"><Content /></div>
-  </section>
+  </section></Band>
 
   <!-- 2. When and where -->
-  <section class="container page-section ev-section" aria-labelledby="when-title">
+  <Band tone="mist"><section class="container page-section ev-section" aria-labelledby="when-title">
     <h2 class="subhead" id="when-title">When and where</h2>
     <dl class="ww">
       <div class="ww__item">
@@ -90,10 +94,10 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
     </dl>
     {d.whenWhereNote && <p class="ww__note">{d.whenWhereNote}</p>}
     {d.start && <a class="link-arrow" href={url('/events.ics')}>Add our events to your calendar →</a>}
-  </section>
+  </section></Band>
 
   <!-- 3. How to get involved -->
-  <section class="container page-section ev-section" aria-labelledby="involved-title">
+  <Band tone="white"><section class="container page-section ev-section" aria-labelledby="involved-title">
     <h2 class="subhead" id="involved-title">How to get involved</h2>
     {
       ways.length > 0 ? (
@@ -116,12 +120,12 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
         </p>
       )
     }
-  </section>
+  </section></Band>
 
   <!-- 4. From past years -->
   {
     (albums.length > 0 || news.length > 0 || isRace) && (
-      <section class="container page-section ev-section past" aria-labelledby="past-title">
+      <Band tone="mist"><section class="container page-section ev-section past" aria-labelledby="past-title">
         <h2 class="subhead" id="past-title">From past years</h2>
         {isRace && latestRace && (
           <a class="race-link" href={url('/wolfspit/')}>
@@ -158,7 +162,7 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
             </ul>
           </div>
         )}
-      </section>
+      </section></Band>
     )
   }
 </BaseLayout>
@@ -179,7 +183,7 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
     gap: 12px;
   }
   .ww__item {
-    background: var(--surface);
+    background: var(--panel, var(--surface));
     border-radius: var(--radius-card);
     padding: 16px 20px;
   }

@@ -1,0 +1,1 @@
+Accessibility audit: 24 pages × 2 widths + reflow at 320px. 0 distinct issue types.
