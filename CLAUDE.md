@@ -126,6 +126,10 @@ Header row (exact): `position,name,club,category,time`
 - Events: `when` is the display label ("26 December"); `start` is optional; `startTimeConfirmed: false` shows `[START TIME]` instead of a made-up time.
 - Timeline entries have an `order` field (years can be "[YEAR]" so they can't be sorted by year).
 - Wolfspit CSV parsing + podium rules: `src/lib/results.ts` (`PODIUM_RULES`).
+- Results support several races: `src/content/results/<race>/YYYY.md|csv` with races `wolfspit`, `tour-of-bradwell-long`, `tour-of-bradwell-half`, `tour-of-bradwell` (`RACES` in `content.config.ts`, `getRaceYears(race)`). Optional `original` (PDF in `/uploads/results/`) and `notes`.
+- News tags gained `Carnival`, `Tour of Bradwell`, `Social` (legacy activities). News has optional `album` (reference) and every collection has optional `source` (URL of the original post).
+- Funded pins have `locationConfirmed` (false = guessed position, shown as "to be confirmed").
+- Imported photos have generic alt text; homepage-visible ones should get real descriptions (TODO-content.md).
 - Windows dev machine needs the Microsoft VC++ runtime (Astro's Markdown engine is native).
 
 ## Phase 2 checklist (do not build yet, but don't block it)
@@ -152,7 +156,7 @@ Header row (exact): `position,name,club,category,time`
 5. Christmas card form flow (form built; submission service TBD since GitHub Pages has no forms).
 6. Accessibility/performance pass, `TODO-content.md`, `docs/how-to-update.md`.
 7. Deploy (GitHub Pages now), then connect the domain.
-8. **Content migration** from the Blogspot and WordPress sites: inventory every post/page/photo, map each to a collection (news, albums, timeline, results, funded), import with original dates, download images into `public/uploads/`, keep a source URL on each entry, and plan redirects for old WordPress URLs once on a host that supports them. Do this before connecting the domain.
+8. **Content migration** (done 2026-11-20, done before milestone 4 at Peter's request: 124 posts → news, 1,269 photos → albums, Wolf's Pit 2022–26 + Tour of Bradwell results → CSV, timeline/funded/settings facts with `source:` links. Peter chose to import everything as-is and review privacy later; that list is in `TODO-content.md`. Scripts: `scripts/migration/`). Original plan, from the Blogspot and WordPress sites: inventory every post/page/photo, map each to a collection (news, albums, timeline, results, funded), import with original dates, download images into `public/uploads/`, keep a source URL on each entry, and plan redirects for old WordPress URLs once on a host that supports them. Do this before connecting the domain.
 
 ## The design file
 

@@ -1,0 +1,11 @@
+---
+title: "Wolf's Pit Fell Race"
+date: 2009-03-22
+tag: "Wolfspit"
+summary: "Go to http://www.wolfspitfellrace.org.uk/ for full details of the race"
+source: https://braddadads.blogspot.com/2009/03/wolfs-pit-fell-race.html
+---
+
+Go to [http://www.wolfspitfellrace.org.uk/](http://www.wolfspitfellrace.org.uk/) for full details of the race
+
+_Originally published on the old Bradda Dads Blogspot site: [view the original](https://braddadads.blogspot.com/2009/03/wolfs-pit-fell-race.html)._

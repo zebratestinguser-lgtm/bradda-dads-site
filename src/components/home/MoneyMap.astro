@@ -5,7 +5,14 @@ import { url } from '../../lib/url';
 
 const site = await getSite();
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
-const pins = funded.map((f) => ({ name: f.data.name, lat: f.data.lat, lng: f.data.lng, summary: f.data.summary, year: f.data.year }));
+const pins = funded.map((f) => ({
+  name: f.data.name,
+  lat: f.data.lat,
+  lng: f.data.lng,
+  summary: f.data.summary,
+  year: f.data.year,
+  confirmed: f.data.locationConfirmed,
+}));
 ---
 
 <section id="map" class="money" aria-labelledby="money-title">
@@ -51,7 +58,7 @@ const pins = funded.map((f) => ({ name: f.data.name, lat: f.data.lat, lng: f.dat
 
 <script>
   // Leaflet loads only when the map scrolls near the screen (keeps the page fast).
-  type Pin = { name: string; lat: number; lng: number; summary: string; year: string };
+  type Pin = { name: string; lat: number; lng: number; summary: string; year: string; confirmed: boolean };
 
   async function init(el: HTMLElement) {
     const [{ default: L }] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
@@ -65,7 +72,10 @@ const pins = funded.map((f) => ({ name: f.data.name, lat: f.data.lat, lng: f.dat
     const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
     const markers = pins.map((p) =>
       L.marker([p.lat, p.lng], { icon, title: p.name, alt: p.name, keyboard: true })
-        .bindPopup(`<strong>${esc(p.name)}</strong><br>${esc(p.year)}<br>${esc(p.summary)}`)
+        .bindPopup(
+          `<strong>${esc(p.name)}</strong><br>${esc(p.year)}<br>${esc(p.summary)}` +
+            (p.confirmed ? '' : '<br><em>Map position to be confirmed.</em>'),
+        )
         .addTo(map),
     );
     if (markers.length) map.fitBounds(L.featureGroup(markers).getBounds().pad(0.6), { maxZoom: 16 });

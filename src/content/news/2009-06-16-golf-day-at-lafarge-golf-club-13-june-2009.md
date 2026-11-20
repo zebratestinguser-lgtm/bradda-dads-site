@@ -1,0 +1,14 @@
+---
+title: "Golf Day at Lafarge Golf Club - 13 June 2009"
+date: 2009-06-16
+tag: "Social"
+summary: "Photos from the old Bradda Dads website: Golf Day at Lafarge Golf Club - 13 June 2009."
+image: /uploads/albums/2009-06-16-golf-day-at-lafarge-golf-club-13-june-2009/001.jpg
+imageAlt: "Photo 1 of 7 from Golf Day at Lafarge Golf Club - 13 June 2009 (2009-06-16)"
+album: 2009-06-16-golf-day-at-lafarge-golf-club-13-june-2009
+source: https://braddadads.blogspot.com/2009/06/golf-day-at-lafarge-golf-club-13-june.html
+---
+
+_Photos only. See the album._
+
+_Originally published on the old Bradda Dads Blogspot site: [view the original](https://braddadads.blogspot.com/2009/06/golf-day-at-lafarge-golf-club-13-june.html)._

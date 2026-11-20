@@ -1,0 +1,14 @@
+---
+title: "9th Annual Boxing Day Krazy Kraft and Duck Race"
+date: 2007-12-26
+tag: "Duck race"
+summary: "As 2007 draws to a close, Bradda Dads complete their year of events with the 9th annual Boxing Day krazy kraft and duck races."
+image: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/001.jpg
+imageAlt: "Photo 1 of 15 from 9th Annual Boxing Day Krazy Kraft and Duck Race (2007-12-26)"
+album: 2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race
+source: https://braddadads.blogspot.com/2007/12/boxing-day-duck-race.html
+---
+
+As 2007 draws to a close, Bradda Dads complete their year of events with the 9th annual Boxing Day krazy kraft and duck races. The Krazy Kraft race best designs of kraft went to Emma Tanfield in the under eights category and to Ben Harman in the eights and over. It was a double success for Emma as her kraft went on to win the race. 500 yellow plastic ducks (plus a couple of ducks on steroids) then bobbed their way down the brook and the first duck home was number 337 and joint first prizes went to Derek White and Mr Hawkins.
+
+_Originally published on the old Bradda Dads Blogspot site: [view the original](https://braddadads.blogspot.com/2007/12/boxing-day-duck-race.html)._

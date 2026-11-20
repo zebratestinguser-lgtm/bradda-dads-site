@@ -4,7 +4,9 @@ import { getSite } from '../../lib/site';
 import { url } from '../../lib/url';
 
 const site = await getSite();
-const albums = (await getCollection('albums')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 4);
+// Newest proper albums (3+ photos), so single posters/logos don't fill the homepage
+const all = (await getCollection('albums')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const albums = [...all.filter((a) => a.data.photos.length >= 3), ...all.filter((a) => a.data.photos.length < 3)].slice(0, 4);
 // Placeholder tile colours for albums that don't have photos yet
 const swatches = [
   ['#8fb7d6', '#F6C343', '#cfe1ee'],
