@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventCard from '../../components/EventCard.astro';
 import DiaryDates from '../../components/DiaryDates.astro';
@@ -14,14 +15,14 @@ const next = pickNextEvent(events);
   <PageHeader eyebrow="Events" title="The Bradda Dads year" intro="The big dates, all run by volunteer dads, all for the village. Each event has its own page with the details, photos from past years and news.">
     <a class="cal" href={url('/events.ics')}>Add them to your calendar →</a>
   </PageHeader>
-  <section class="container page-section">
+  <Band first><section class="container page-section">
     <ul class="grid" role="list">
       {events.map((e) => <li><EventCard event={e} isNext={e.id === next?.id} headingLevel="h2" /></li>)}
     </ul>
-  </section>
-  <section class="container page-section">
+  </section></Band>
+  <Band tone="mist"><section class="container page-section">
     <div class="diary-wrap"><DiaryDates /></div>
-  </section>
+  </section></Band>
 </BaseLayout>
 
 <style>

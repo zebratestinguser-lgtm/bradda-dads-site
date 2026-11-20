@@ -4,15 +4,19 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
+import Band from '../../components/Band.astro';
 import NewsTile from '../../components/NewsTile.astro';
 import { NEWS_TAGS } from '../../content.config';
 import { formatDate } from '../../lib/format';
 import { url, thumb } from '../../lib/url';
+import { storyPhotos } from '../../lib/photos';
 
 const LATEST = 6;
 const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const latest = news.slice(0, LATEST);
 const archive = news.slice(LATEST);
+// Latest stories without their own photo borrow a dated archive photo from the same kind of event
+const latestPhotos = await storyPhotos(latest);
 const tags = NEWS_TAGS.filter((t) => news.some((n) => n.data.tag === t));
 const byYear = new Map<number, typeof news>();
 for (const n of archive) {
@@ -34,7 +38,7 @@ const href = (id: string) => url(`/news/${id}/`);
     </form>
   </PageHeader>
 
-  <section class="container page-section news-page">
+  <Band first><section class="container page-section news-page">
     <div class="filters">
       <p class="filters__label" id="tag-filter-label">Show:</p>
       <ul class="chips chips--scroll" role="list" aria-labelledby="tag-filter-label" data-filters>
@@ -48,11 +52,12 @@ const href = (id: string) => url(`/news/${id}/`);
       <h2 class="subhead" id="latest-title">Latest news</h2>
       <ul class="latest" role="list">
         {
-          latest.map((n) => (
+          latest.map((n, i) => (
             <li class="card" data-row data-tag={n.data.tag}>
-              {n.data.image ? (
+              {latestPhotos[i] ? (
                 <a class="card__media" href={href(n.id)} tabindex="-1" aria-hidden="true">
-                  <img src={thumb(n.data.image)} alt="" loading="lazy" decoding="async" width="480" height="300" />
+                  <img src={thumb(latestPhotos[i]!.src)} alt="" loading="lazy" decoding="async" width="480" height="300" />
+                  {latestPhotos[i]!.label && <span class="card__chip">{latestPhotos[i]!.own ? latestPhotos[i]!.label : `Archive photo · ${latestPhotos[i]!.label}`}</span>}
                 </a>
               ) : (
                 <div class="card__strip">
@@ -74,6 +79,9 @@ const href = (id: string) => url(`/news/${id}/`);
         }
       </ul>
     </section>
+  </section></Band>
+
+  <Band tone="mist"><section class="container page-section news-page">
 
     <section class="archive" aria-labelledby="archive-title" data-group>
       <h2 class="subhead" id="archive-title">From the archive</h2>
@@ -113,7 +121,7 @@ const href = (id: string) => url(`/news/${id}/`);
         ))
       }
     </section>
-  </section>
+  </section></Band>
 </BaseLayout>
 
 <script>
@@ -231,6 +239,20 @@ const href = (id: string) => url(`/news/${id}/`);
     aspect-ratio: 16 / 10;
     overflow: hidden;
     background: var(--surface-green);
+  }
+  .card__media {
+    position: relative;
+  }
+  .card__chip {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(16, 36, 26, 0.85);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
   }
   .card__media img {
     width: 100%;

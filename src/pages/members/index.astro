@@ -1,45 +1,134 @@
 ---
+// Meet the dads: a group photo and introduction, then a card per member.
+// A member's card (and profile page) only appears once their real name replaces "[MEMBER NAME]"
+// in src/content/members/, so the page never shows blank placeholder cards.
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import MemberAvatar from '../../components/MemberAvatar.astro';
-import { getMembers, memberSince } from '../../lib/members';
+import { getPublishedMembers, memberSince } from '../../lib/members';
+import { dadsGroupPhoto } from '../../lib/photos';
+import { photoDate } from '../../lib/albums';
+import { getSite } from '../../lib/site';
+import { isPlaceholder } from '../../lib/events';
 import { url } from '../../lib/url';
 
-const members = await getMembers();
+const site = await getSite();
+const members = await getPublishedMembers();
+const group = await dadsGroupPhoto();
 ---
 
 <BaseLayout title="Meet the dads" description="The volunteers behind Bradda Dads: who they are, what they do, and how long they've been part of it.">
-  <PageHeader eyebrow="Meet the dads" title="The people behind the ducks" intro="Every event is run by volunteers. Here's who they are, what they do, and how long they've been part of Bradda Dads.">
-    <a class="join" href={url('/get-involved/')}>Fancy joining them? →</a>
-  </PageHeader>
+  <PageHeader eyebrow="Meet the dads" title="The people behind the ducks" intro="Every event is run by volunteers: dads from the parish who give up their evenings, weekends and Boxing Day mornings for the village." />
 
-  <section class="container page-section">
-    <ul class="members" role="list">
+  <Band first>
+    <section class="container page-section intro" aria-labelledby="intro-title">
       {
-        members.map((m) => (
-          <li>
-            <a class="member" href={url(`/members/${m.id}/`)}>
-              <MemberAvatar member={m} size={112} />
-              <div class="member__body">
-                <h2 class="member__name">{m.data.name}</h2>
-                {m.data.role && <span class="member__role">{m.data.role}</span>}
-                <span class="member__since">{memberSince(m)}</span>
-                <p class="member__summary">{m.data.summary}</p>
-              </div>
-            </a>
-          </li>
-        ))
+        group && (
+          <figure class="intro__photo">
+            <img src={url(group.src)} alt={group.alt} loading="eager" decoding="async" />
+            <figcaption>Photo taken {photoDate(group.album)}</figcaption>
+          </figure>
+        )
       }
-    </ul>
-  </section>
+      <div class="intro__text">
+        <h2 class="subhead" id="intro-title">Who we are</h2>
+        <p>
+          Bradda Dads started in 1999 with a duck race down the brook. Since then the dads have built bonfires, cooked Christmas lunches, marshalled fell races and
+          raised money for groups across Bradwell, all as volunteers.
+        </p>
+        <p>We meet {site.meetingInfo}. New faces are always welcome, whether you want to join or just lend a hand at an event.</p>
+        <div class="intro__actions">
+          <a class="btn btn--green btn--md" href={url('/get-involved/')}>Get involved</a>
+          <a class="link-arrow" href={url('/our-story/')}>Our story →</a>
+        </div>
+      </div>
+    </section>
+  </Band>
+
+  <Band tone="mist">
+    <section class="container page-section stack" aria-labelledby="members-title">
+      <h2 class="subhead" id="members-title">The dads</h2>
+      {
+        members.length > 0 ? (
+          <ul class="members" role="list">
+            {members.map((m) => (
+              <li>
+                <a class="member" href={url(`/members/${m.id}/`)}>
+                  <MemberAvatar member={m} size={112} />
+                  <div class="member__body">
+                    <h3 class="member__name">{m.data.name}</h3>
+                    {m.data.role && <span class="member__role">{m.data.role}</span>}
+                    {m.data.joined && <span class="member__since">{memberSince(m)}</span>}
+                    {!isPlaceholder(m.data.summary) && <p class="member__summary">{m.data.summary}</p>}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="note soon">
+            Profiles are on their way: we're asking each of the dads whether they're happy to appear here. In the meantime, the best way to meet them is at one of
+            our <a href={url('/events/')}>events</a>.
+          </p>
+        )
+      }
+    </section>
+  </Band>
 </BaseLayout>
 
 <style>
-  .join {
-    color: var(--white);
-    font-weight: 600;
-    align-self: flex-start;
-    padding-block: 10px;
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 36px 48px;
+    align-items: center;
+  }
+  .intro__photo {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .intro__photo img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+  .intro__photo figcaption {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .intro__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--muted-strong);
+  }
+  .intro__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    margin-top: 4px;
+  }
+  .btn--md {
+    min-height: 50px;
+    padding: 0 24px;
+    font-size: 17px;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .soon {
+    max-width: 68ch;
+    font-size: 17px;
+    line-height: 1.6;
   }
   .members {
     list-style: none;
@@ -97,6 +186,11 @@ const members = await getMembers();
     line-height: 1.5;
     color: var(--muted-strong);
     margin-top: 4px;
+  }
+  @media (max-width: 800px) {
+    .intro {
+      grid-template-columns: 1fr;
+    }
   }
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     .member {

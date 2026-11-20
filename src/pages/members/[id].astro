@@ -3,11 +3,12 @@ import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrookEdge from '../../components/BrookEdge.astro';
 import MemberAvatar from '../../components/MemberAvatar.astro';
-import { getMembers, memberSince } from '../../lib/members';
+import { getPublishedMembers, memberSince } from '../../lib/members';
+import { isPlaceholder } from '../../lib/events';
 import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
-  const members = await getMembers();
+  const members = await getPublishedMembers();
   return members.map((member, i) => ({
     params: { id: member.id },
     props: { member, prev: members[i - 1], next: members[i + 1] },
@@ -28,18 +29,18 @@ const { Content } = await render(member);
         <div class="profile-head__text">
           {d.role && <span class="role">{d.role}</span>}
           <h1 class="name">{d.name}</h1>
-          <p class="since">{memberSince(member)}</p>
+          {d.joined && <p class="since">{memberSince(member)}</p>}
           <p class="summary">{d.summary}</p>
         </div>
       </div>
     </div>
-    <BrookEdge />
+    <BrookEdge seed="profile" />
   </section>
 
   <section class="container page-section profile">
     <dl class="facts">
-      {d.favouriteEvent && (<div><dt>Favourite event</dt><dd>{d.favouriteEvent}</dd></div>)}
-      {d.funFact && (<div><dt>Fun fact</dt><dd>{d.funFact}</dd></div>)}
+      {d.favouriteEvent && !isPlaceholder(d.favouriteEvent) && (<div><dt>Favourite event</dt><dd>{d.favouriteEvent}</dd></div>)}
+      {d.funFact && !isPlaceholder(d.funFact) && (<div><dt>Fun fact</dt><dd>{d.funFact}</dd></div>)}
     </dl>
     <div class="prose"><Content /></div>
 

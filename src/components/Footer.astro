@@ -6,26 +6,15 @@ import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
+// Only pages that aren't already in the header menu (Header.astro), so nothing is listed twice
+const hasAccounts = Boolean(site.accountsUrl) && site.accountsUrl !== '#' && !isPlaceholder(site.accountsUrl);
 const columns = [
   {
-    title: 'Explore',
+    title: 'More from us',
     links: [
-      { label: 'Home', href: url('/') },
-      { label: 'Events', href: url('/events/') },
-      { label: 'News', href: url('/news/') },
-      { label: 'Photos', href: url('/photos/') },
-      { label: 'Races', href: url('/races/') },
-      { label: 'Our story', href: url('/our-story/') },
       { label: 'Meet the dads', href: url('/members/') },
-    ],
-  },
-  {
-    title: 'Support us',
-    links: [
-      { label: 'Get involved', href: url('/get-involved/') },
-      { label: 'Donate', href: url('/donate/') },
-      { label: 'Village Christmas card', href: url('/christmas-card/') },
       { label: 'Where the money goes', href: url('/where-the-money-goes/') },
+      { label: 'Village Christmas card', href: url('/christmas-card/') },
     ],
   },
   {
@@ -34,14 +23,14 @@ const columns = [
       { label: 'Contact us', href: url('/contact/') },
       { label: 'Facebook', href: site.facebookUrl },
       { label: 'Privacy', href: url('/privacy/') },
-      { label: 'Annual accounts', href: url(site.accountsUrl) },
+      ...(hasAccounts ? [{ label: 'Annual accounts', href: url(site.accountsUrl) }] : []),
     ],
   },
 ];
 ---
 
 <footer class="site-footer">
-  <BrookEdge position="top" />
+  <BrookEdge position="rise" fill="var(--green-deep)" seed="footer" />
   <div class="container site-footer__inner">
     <div class="site-footer__about">
       <a class="site-footer__brand" href={url('/')}>
@@ -80,13 +69,13 @@ const columns = [
     position: relative;
     background: var(--green-deep);
     color: var(--on-dark-muted);
-    padding-block: 80px 40px;
+    padding-block: 48px 40px;
     font-size: 15px;
     line-height: 1.6;
   }
   .site-footer__inner {
     display: grid;
-    grid-template-columns: minmax(240px, 1.4fr) repeat(3, minmax(150px, 1fr));
+    grid-template-columns: minmax(240px, 2fr) repeat(2, minmax(170px, 1fr));
     gap: 32px 28px;
   }
   .site-footer__about {
@@ -138,7 +127,7 @@ const columns = [
   }
   @media (max-width: 900px) {
     .site-footer__inner {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .site-footer__about {
       grid-column: 1 / -1;

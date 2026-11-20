@@ -1,7 +1,7 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import NewsTile from '../NewsTile.astro';
-import { photoDate } from '../../lib/albums';
+import { storyPhotos } from '../../lib/photos';
 import { formatDate, formatShortDate } from '../../lib/format';
 import { url, thumb } from '../../lib/url';
 
@@ -9,7 +9,8 @@ const all = (await getCollection('news')).sort((a, b) => b.data.date.getTime() -
 const lead = all.find((n) => n.data.featured) ?? all[0];
 const recent = all.filter((n) => n !== lead).slice(0, 3);
 const href = (id: string) => url(`/news/${id}/`);
-const leadAlbum = lead?.data.album ? await getEntry(lead.data.album) : undefined;
+// Stories without their own photo borrow an archive photo from the same kind of event, labelled with its date
+const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] : []);
 ---
 
 {
@@ -22,10 +23,10 @@ const leadAlbum = lead?.data.album ? await getEntry(lead.data.album) : undefined
         </div>
         <div class="news__layout">
           <article class="news-lead">
-            {lead.data.image ? (
+            {leadPhoto ? (
               <div class="news-lead__media">
-                <img class="news-lead__img" src={url(lead.data.image)} alt={lead.data.imageAlt ?? ''} width="800" height="260" loading="lazy" decoding="async" />
-                {leadAlbum && <span class="news-lead__date">{photoDate(leadAlbum)}</span>}
+                <img class="news-lead__img" src={url(leadPhoto.src)} alt={leadPhoto.own ? leadPhoto.alt : ''} width="800" height="260" loading="lazy" decoding="async" />
+                {leadPhoto.label && <span class="news-lead__date">{leadPhoto.own ? leadPhoto.label : `Archive photo · ${leadPhoto.label}`}</span>}
               </div>
             ) : (
               <div class="news-lead__img">
@@ -47,10 +48,10 @@ const leadAlbum = lead?.data.album ? await getEntry(lead.data.album) : undefined
             </div>
           </article>
           <div class="news-list">
-            {recent.map((n) => (
+            {recent.map((n, i) => (
               <article class="news-item">
-                {n.data.image ? (
-                  <img class="news-item__thumb" src={thumb(n.data.image)} alt="" width="84" height="84" loading="lazy" decoding="async" />
+                {recentPhotos[i] ? (
+                  <img class="news-item__thumb" src={thumb(recentPhotos[i]!.src)} alt="" width="84" height="84" loading="lazy" decoding="async" />
                 ) : (
                   <div class="news-item__thumb">
                     <NewsTile tag={n.data.tag} />
@@ -98,6 +99,7 @@ const leadAlbum = lead?.data.album ? await getEntry(lead.data.album) : undefined
   .news-lead {
     flex: 999 1 460px;
     min-width: 0;
+    background: var(--white);
     border-radius: 24px;
     overflow: hidden;
     border: 1px solid var(--border);
@@ -171,6 +173,7 @@ const leadAlbum = lead?.data.album ? await getEntry(lead.data.album) : undefined
     gap: 16px;
   }
   .news-item {
+    background: var(--white);
     border-radius: 20px;
     border: 1px solid var(--border);
     padding: 20px;

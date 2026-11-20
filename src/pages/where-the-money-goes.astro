@@ -1,60 +1,122 @@
 ---
+// Where the money goes: the projects first (what the village got), then how it works, then the map.
+// The totals in the header appear by themselves once totalRaised / groupsHelped are filled in (site.yaml).
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
 import FundedMap from '../components/FundedMap.astro';
+import DuckLogo from '../components/DuckLogo.astro';
 import { getSite } from '../lib/site';
+import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const items = await Promise.all(funded.map(async (f) => ({ f, Content: (await render(f)).Content })));
+const stats = [
+  ...(!isPlaceholder(site.totalRaised) ? [{ big: `£${site.totalRaised}`, small: 'raised since 1999' }] : []),
+  ...(!isPlaceholder(site.groupsHelped) ? [{ big: site.groupsHelped, small: 'groups and projects helped' }] : []),
+  { big: '100%', small: 'run by volunteers' },
+];
+const steps = [
+  { title: 'You join in', text: 'Buy a duck, come to the bonfire, add your message to the village Christmas card or donate.' },
+  { title: 'The dads run it', text: 'Every event is organised and run by volunteers, with plenty of help from the village.' },
+  { title: 'It goes back into Bradwell', text: 'The money raised goes to village groups, the schools and community projects.' },
+];
 ---
 
 <BaseLayout title="Where the money goes" description="Every pound Bradda Dads raises goes back into Bradwell. See the groups and projects we've helped.">
-  <PageHeader eyebrow="Your money at work" title="Where the money goes" intro="Everything we raise goes back to local good causes in Bradwell: the schools, village groups, and events like the bonfire and the pensioners' Christmas lunch.">
-    <div class="stats">
-      <div><span class="stat__num">£{site.totalRaised}</span><span>raised since 1999</span></div>
-      <div><span class="stat__num">{site.groupsHelped}</span><span>groups and projects helped</span></div>
-    </div>
-  </PageHeader>
-
-  <section class="container page-section">
-    <FundedMap tall />
-  </section>
-
-  <section class="container page-section stack" aria-labelledby="projects-title">
-    <h2 class="subhead" id="projects-title">Groups and projects</h2>
-    <ul class="projects" role="list">
+  <PageHeader eyebrow="Your money at work" title="Where the money goes" intro="Everything we raise goes back into Bradwell: village groups, the schools, and community events like the bonfire and the pensioners' Christmas lunch.">
+    <ul class="stats" role="list">
       {
-        items.map(({ f, Content }) => (
-          <li class="project">
-            {f.data.image && <img src={url(f.data.image)} alt={f.data.imageAlt ?? ''} loading="lazy" />}
-            <h3>{f.data.name}</h3>
-            <p class="project__meta">
-              {f.data.year}
-              {f.data.amount && ` · ${f.data.amount}`}
-            </p>
-            <p>{f.data.summary}</p>
-            <div class="prose project__body">
-              <Content />
-            </div>
+        stats.map((s) => (
+          <li>
+            <span class="stat__num">{s.big}</span>
+            <span>{s.small}</span>
           </li>
         ))
       }
     </ul>
-    <a class="btn btn--green btn--md" href={url('/donate/')}>Help fund the next one</a>
-  </section>
+  </PageHeader>
+
+  <Band first>
+    <section class="container page-section stack" aria-labelledby="projects-title">
+      <div class="head">
+        <h2 class="subhead" id="projects-title">What your money has paid for</h2>
+        <p class="lede">A few of the groups and projects Bradda Dads has helped fund.</p>
+      </div>
+      <ul class="projects" role="list">
+        {
+          items.map(({ f, Content }) => (
+            <li class="project">
+              <div class="project__media" aria-hidden={f.data.image ? undefined : 'true'}>
+                {f.data.image ? (
+                  <img src={url(f.data.image)} alt={f.data.imageAlt ?? ''} loading="lazy" decoding="async" />
+                ) : (
+                  <span class="project__duck">
+                    <DuckLogo size={64} />
+                  </span>
+                )}
+                {f.data.amount && <span class="project__amount">{f.data.amount}</span>}
+              </div>
+              <div class="project__body">
+                {!isPlaceholder(f.data.year) && <p class="project__year">{f.data.year}</p>}
+                <h3 class="project__name">{f.data.name}</h3>
+                <p class="project__summary">{f.data.summary}</p>
+                <div class="prose project__more">
+                  <Content />
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </Band>
+
+  <Band tone="mist">
+    <section class="container page-section stack" aria-labelledby="how-title">
+      <h2 class="subhead" id="how-title">How it works</h2>
+      <ol class="steps" role="list">
+        {
+          steps.map((s, i) => (
+            <li class="step">
+              <span class="step__num" aria-hidden="true">{i + 1}</span>
+              <h3 class="step__title">{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="cta">
+        <p class="cta__text">Want to help fund the next project?</p>
+        <div class="cta__actions">
+          <a class="btn btn--yellow btn--md" href={url('/donate/')}>Donate</a>
+          <a class="btn btn--ghost-light btn--md" href={url('/events/')}>Come to an event</a>
+        </div>
+      </div>
+    </section>
+  </Band>
+
+  <Band>
+    <section class="container page-section stack" aria-labelledby="map-title">
+      <h2 class="subhead" id="map-title">Around the village</h2>
+      <FundedMap tall />
+    </section>
+  </Band>
 </BaseLayout>
 
 <style>
   .stats {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
-    margin-top: 6px;
   }
-  .stats > div {
+  .stats li {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 18px;
     padding: 16px 20px;
@@ -72,44 +134,144 @@ const items = await Promise.all(funded.map(async (f) => ({ f, Content: (await re
   .stack {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--muted-strong);
   }
   .projects {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 20px;
   }
   .project {
     border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+  }
+  .project__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--yellow-panel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .project__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .project__amount {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    background: var(--green);
+    color: var(--yellow);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 20px;
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+  }
+  .project__body {
+    padding: 20px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .project__year {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  .project__name {
+    font-size: 21px;
+    line-height: 1.2;
+  }
+  .project__summary {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted-strong);
+  }
+  .project__more {
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 16px;
+  }
+  .step {
+    background: var(--panel);
     border-radius: var(--radius-card);
     padding: 22px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted-strong);
   }
-  .project img {
-    border-radius: var(--radius-sm);
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    width: 100%;
+  .step__num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--text);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 20px;
+    display: grid;
+    place-items: center;
   }
-  .project h3 {
-    font-size: 21px;
+  .step__title {
+    font-size: 20px;
+    color: var(--text);
   }
-  .project__meta {
-    font-size: 14px;
-    color: var(--muted);
+  .cta {
+    background: var(--green);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 26px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
   }
-  .project__body {
-    font-size: 15px;
+  .cta__text {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(22px, 3vw, 28px);
+    line-height: 1.15;
+  }
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   .btn--md {
-    min-height: 48px;
-    padding: 0 22px;
-    font-size: 16px;
-    align-self: flex-start;
+    min-height: 50px;
+    padding: 0 24px;
+    font-size: 17px;
   }
 </style>

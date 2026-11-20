@@ -61,6 +61,24 @@ a:hover {
   border-radius: 4px;
 }
 
+/* Full-width sections joined by waves (see src/components/Band.astro).
+   --panel is the colour for tinted boxes inside a band, so they show on either background. */
+.band {
+  position: relative;
+  background: var(--band-bg, var(--white));
+  --panel: var(--surface);
+}
+.band--mist {
+  --band-bg: var(--surface);
+  --panel: var(--white);
+}
+.band--wave {
+  padding-top: 24px;
+}
+.band--wave > .page-section {
+  padding-top: 32px;
+}
+
 /* Layout helpers */
 .container {
   max-width: var(--max-width);
@@ -284,7 +302,7 @@ a:hover {
 }
 
 .note {
-  background: var(--surface);
+  background: var(--panel, var(--surface));
   border-radius: var(--radius-sm);
   padding: 14px 18px;
   font-size: 15px;

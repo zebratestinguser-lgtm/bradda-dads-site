@@ -2,7 +2,7 @@
 title: "Carnival Duck Race - 6 August 2007"
 date: 2007-08-07
 tag: "Duck race"
-summary: "Another successful duck race - well done to everyone"
+summary: "Another successful duck race. Well done to everyone!"
 image: /uploads/albums/2007-08-07-carnival-duck-race-6-august-2007/001.jpg
 imageAlt: "Dads in yellow T-shirts with the giant wooden duck, getting ready for the carnival duck race (7 August 2007)"
 album: 2007-08-07-carnival-duck-race-6-august-2007

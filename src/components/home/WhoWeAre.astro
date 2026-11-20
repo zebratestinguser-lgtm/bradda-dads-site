@@ -109,6 +109,7 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
     gap: 2px;
   }
   .fact__big {
+    white-space: nowrap;
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: 32px;
@@ -125,7 +126,7 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
     flex-wrap: wrap;
     align-items: center;
     gap: 18px 24px;
-    background: var(--surface);
+    background: var(--panel, var(--surface));
     border-radius: var(--radius-lg);
     padding: 26px 30px;
   }

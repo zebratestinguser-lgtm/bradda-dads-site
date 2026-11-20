@@ -2,7 +2,7 @@
 title: "Wolf's Pit 2025 Entry LIVE"
 date: 2025-01-24
 tag: "Wolf's Pit"
-summary: "Wolf's Pit 2025 entry is now live via Fabian4 :"
+summary: "Wolf's Pit 2025 entry is now live via Fabian4."
 source: https://braddadads.wordpress.com/2025/01/24/wolfspit-2025-entry-live/
 ---
 
