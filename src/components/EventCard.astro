@@ -41,6 +41,8 @@ const ctaHref = url(e.data.ctaUrl);
 
 <style>
   .event-card {
+    /* anchors the screen-reader-only text inside, so it can't escape a scrolling strip */
+    position: relative;
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
     padding: 24px;

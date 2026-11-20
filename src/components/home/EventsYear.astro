@@ -1,4 +1,7 @@
 ---
+// "The Bradda Dads year": a swipeable strip of event cards (scroll-snap).
+// Phones: swipe. Desktop: arrow buttons or trackpad. Starts with the "Next up" event in view.
+// No auto-play (moving content is hard to read and an accessibility problem).
 import EventCard from '../EventCard.astro';
 import type { EventEntry } from '../../lib/events';
 import { url } from '../../lib/url';
@@ -17,25 +20,93 @@ const { events, nextId } = Astro.props;
         <h2 id="events-title" class="section-title">The Bradda Dads year</h2>
         <p>The big dates, all run by volunteer dads, all for the village.</p>
       </div>
-      <div class="events__links">
-        <a class="link-arrow" href={url('/events/')}>All events →</a>
-        <a class="link-arrow" href={url('/events.ics')}>Add to your calendar →</a>
+      <div class="events__tools">
+        <div class="events__links">
+          <a class="link-arrow" href={url('/events/')}>All events →</a>
+          <a class="link-arrow" href={url('/events.ics')}>Add to your calendar →</a>
+        </div>
+        <div class="carousel-btns" data-carousel-btns hidden>
+          <button type="button" class="carousel-btn" data-dir="-1" aria-label="Previous events" aria-controls="events-strip">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <button type="button" class="carousel-btn" data-dir="1" aria-label="Next events" aria-controls="events-strip">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+          </button>
+        </div>
       </div>
     </div>
-    <ul class="events__grid" role="list">
-      {events.map((e) => <li><EventCard event={e} isNext={e.id === nextId} /></li>)}
+  </div>
+
+  <div class="strip-wrap">
+    <ul id="events-strip" class="strip" role="list" tabindex="0" aria-label="Events through the year, scroll sideways for more" data-strip>
+      {
+        events.map((e) => (
+          <li class="strip__item" data-next={e.id === nextId ? 'true' : undefined}>
+            <EventCard event={e} isNext={e.id === nextId} />
+          </li>
+        ))
+      }
     </ul>
   </div>
+  <div class="container">
+    <div class="strip-dots" data-dots aria-hidden="true">
+      {events.map(() => <span class="strip-dot" />)}
+    </div>
+  </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
+    const section = strip.closest('section')!;
+    const btns = section.querySelector<HTMLElement>('[data-carousel-btns]');
+    const [prev, next] = [...section.querySelectorAll<HTMLButtonElement>('.carousel-btn')];
+    const dots = [...section.querySelectorAll<HTMLElement>('.strip-dot')];
+    const items = [...strip.querySelectorAll<HTMLElement>('.strip__item')];
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (btns) btns.hidden = false;
+
+    const step = () => (items[1] ? items[1].offsetLeft - items[0].offsetLeft : strip.clientWidth);
+    const update = () => {
+      const max = strip.scrollWidth - strip.clientWidth - 2;
+      if (prev) prev.disabled = strip.scrollLeft <= 2;
+      if (next) next.disabled = strip.scrollLeft >= max;
+      // Highlight the dot for the left-most fully visible card
+      const i = Math.round(strip.scrollLeft / step());
+      dots.forEach((d, n) => d.classList.toggle('is-active', n === Math.min(i, dots.length - 1)));
+      if (btns) btns.hidden = max <= 0; // everything fits: no buttons needed
+    };
+    [prev, next].forEach((b) =>
+      b?.addEventListener('click', () => {
+        strip.scrollBy({ left: Number(b.dataset.dir) * step(), behavior: reduce ? 'auto' : 'smooth' });
+        setTimeout(update, 450); // in case the browser doesn't send a final scroll event
+      }),
+    );
+    strip.addEventListener('scroll', update, { passive: true });
+    strip.addEventListener('scrollend', update);
+    window.addEventListener('resize', update);
+
+    // Start with the "Next up" event in view (without moving the page itself)
+    const nextItem = strip.querySelector<HTMLElement>('[data-next]');
+    if (nextItem) {
+      // offsetLeft is measured from the strip (it's positioned), so subtract the first card's offset
+      // If two or more cards fit, show a bit of the one before for context; on phones start exactly on it
+      const lead = strip.clientWidth >= step() * 2 ? step() * 0.5 : 0;
+      const target = Math.max(0, nextItem.offsetLeft - items[0].offsetLeft - lead);
+      strip.scrollTo({ left: Math.min(target, strip.scrollWidth - strip.clientWidth), behavior: 'instant' });
+    }
+    update();
+  });
+</script>
 
 <style>
   .events {
     padding-block: var(--section-pad);
+    overflow: hidden;
   }
   .events__inner {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 28px;
   }
   .events__head {
     display: flex;
@@ -43,6 +114,7 @@ const { events, nextId } = Astro.props;
     justify-content: space-between;
     align-items: flex-end;
     gap: 16px;
+    margin-bottom: 28px;
   }
   .events__intro {
     display: flex;
@@ -53,17 +125,98 @@ const { events, nextId } = Astro.props;
     font-size: 17px;
     color: var(--muted);
   }
+  .events__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 22px;
+  }
   .events__links {
     display: flex;
     flex-wrap: wrap;
     gap: 0 22px;
   }
-  .events__grid {
+  .carousel-btns {
+    display: flex;
+    gap: 8px;
+  }
+  .carousel-btns[hidden] {
+    display: none;
+  }
+  .carousel-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    background: var(--white);
+    color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .carousel-btn:hover:not(:disabled) {
+    background: var(--green);
+    color: var(--white);
+  }
+  .carousel-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  /* The strip lines up with the page content but can scroll out to the screen edges */
+  .strip-wrap {
+    --edge: max(var(--gutter), calc((100vw - var(--max-width)) / 2 + var(--gutter)));
+  }
+  .strip {
+    position: relative;
     list-style: none;
     margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+    padding: 6px var(--edge) 18px;
+    display: flex;
     gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--edge);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .strip::-webkit-scrollbar {
+    display: none;
+  }
+  .strip:focus-visible {
+    outline-offset: -3px;
+  }
+  .strip__item {
+    flex: 0 0 min(300px, 78vw);
+    scroll-snap-align: start;
+    display: flex;
+  }
+  .strip__item > :global(*) {
+    width: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .strip {
+      scroll-behavior: smooth;
+    }
+  }
+
+  .strip-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .strip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background-color 0.2s ease, width 0.2s ease;
+  }
+  .strip-dot.is-active {
+    background: var(--green);
+    width: 22px;
+    border-radius: 999px;
   }
 </style>
