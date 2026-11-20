@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads Legend Mike Thompson Retires After Nearly 13 Years"
+category: "Social"
 date: 2011-10-20
 cover: /uploads/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea/001.jpg
 coverAlt: "Photo 1 of 16 from Bradda Dads Legend Mike Thompson Retires After Nearly 13 Years (20 October 2011)"

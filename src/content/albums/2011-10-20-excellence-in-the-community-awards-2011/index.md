@@ -1,5 +1,6 @@
 ---
 title: "Excellence in the Community Awards 2011"
+category: "Village"
 date: 2011-10-20
 cover: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/001.jpg
 coverAlt: "Photo 1 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"

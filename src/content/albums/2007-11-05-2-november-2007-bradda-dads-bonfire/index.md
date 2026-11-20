@@ -1,5 +1,6 @@
 ---
 title: "2 November 2007 - Bradda Dads Bonfire"
+category: "Bonfire"
 event: bonfire
 date: 2007-11-05
 cover: /uploads/albums/2007-11-05-2-november-2007-bradda-dads-bonfire/001.jpg

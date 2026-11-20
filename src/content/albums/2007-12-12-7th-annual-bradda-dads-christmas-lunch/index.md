@@ -1,5 +1,6 @@
 ---
 title: "7th Annual Bradda Dads Christmas Lunch"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2007-12-12
 cover: /uploads/albums/2007-12-12-7th-annual-bradda-dads-christmas-lunch/001.jpg

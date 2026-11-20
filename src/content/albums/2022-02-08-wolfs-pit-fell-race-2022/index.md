@@ -1,5 +1,6 @@
 ---
 title: "Wolf’s Pit Fell Race 2022"
+category: "Wolfspit"
 event: wolfspit
 date: 2022-02-08
 cover: /uploads/albums/2022-02-08-wolfs-pit-fell-race-2022/001.jpg

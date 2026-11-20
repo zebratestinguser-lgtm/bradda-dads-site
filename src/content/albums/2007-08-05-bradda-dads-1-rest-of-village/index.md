@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads 1 - Rest of Village 1"
+category: "Village"
 date: 2007-08-05
 cover: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/001.jpg
 coverAlt: "Photo 1 of 15 from Bradda Dads 1 - Rest of Village 1 (5 August 2007)"

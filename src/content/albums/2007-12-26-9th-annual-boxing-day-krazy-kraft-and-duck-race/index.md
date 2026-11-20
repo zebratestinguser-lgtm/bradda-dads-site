@@ -1,5 +1,6 @@
 ---
 title: "9th Annual Boxing Day Krazy Kraft and Duck Race"
+category: "Duck race"
 event: duck-race
 date: 2007-12-26
 cover: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/001.jpg

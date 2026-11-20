@@ -1,5 +1,6 @@
 ---
 title: "Golf Day at Lafarge"
+category: "Social"
 date: 2010-06-26
 cover: /uploads/albums/2010-06-26-golf-day-at-lafarge/001.jpg
 coverAlt: "Photo 1 of 6 from Golf Day at Lafarge (26 June 2010)"

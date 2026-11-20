@@ -19,8 +19,9 @@ const { Content } = await render(event);
 const next = pickNextEvent(await getEvents());
 const status = event.id === next?.id ? 'Next up' : d.status === 'open' ? 'Open now' : d.status === 'done' ? 'Done for this year' : 'Coming up';
 
-const albums = (await getAlbums()).filter((a) => a.data.event?.id === event.id && a.data.photos.length > 0).slice(0, 4);
 const tag = EVENT_TAG[event.id];
+const eventAlbums = (await getAlbums()).filter((a) => a.data.photos.length > 0 && (a.data.event?.id === event.id || (tag && a.data.category === tag)));
+const albums = eventAlbums.slice(0, 4);
 const news = tag
   ? (await getCollection('news')).filter((n) => n.data.tag === tag).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 5)
   : [];
@@ -70,7 +71,9 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
             </li>
           ))}
         </ul>
-        <a class="link-arrow" href={url('/photos/')}>All photo albums →</a>
+        <a class="link-arrow" href={tag ? `${url('/photos/')}?category=${encodeURIComponent(tag)}` : url('/photos/')}>
+          {tag && eventAlbums.length > albums.length ? `All ${eventAlbums.length} ${d.name} albums →` : 'All photo albums →'}
+        </a>
       </section>
     )
   }

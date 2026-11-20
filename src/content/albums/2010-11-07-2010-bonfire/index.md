@@ -1,5 +1,6 @@
 ---
 title: "2010 Bonfire"
+category: "Bonfire"
 event: bonfire
 date: 2010-11-07
 cover: /uploads/albums/2010-11-07-2010-bonfire/001.jpg

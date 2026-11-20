@@ -1,5 +1,6 @@
 ---
 title: "Carnival Duck Race pics and results - 3 August 2009"
+category: "Duck race"
 event: duck-race
 date: 2009-08-04
 cover: /uploads/albums/2009-08-04-carnival-duck-race-pics-and-results-3-august-2009/001.jpg

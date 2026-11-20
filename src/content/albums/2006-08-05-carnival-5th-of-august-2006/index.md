@@ -1,5 +1,6 @@
 ---
 title: "Carnival : 5th of August 2006"
+category: "Carnival"
 date: 2006-08-05
 cover: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/001.jpg
 coverAlt: "Photo 1 of 32 from Carnival : 5th of August 2006 (5 August 2006)"

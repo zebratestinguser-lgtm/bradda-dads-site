@@ -1,5 +1,6 @@
 ---
 title: "6-a-side Carnival football - 2007"
+category: "Carnival"
 date: 2007-08-08
 cover: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/001.jpg
 coverAlt: "Photo 1 of 12 from 6-a-side Carnival football - 2007 (8 August 2007)"

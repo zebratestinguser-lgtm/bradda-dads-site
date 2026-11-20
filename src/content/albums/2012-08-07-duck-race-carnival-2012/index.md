@@ -1,5 +1,6 @@
 ---
 title: "Duck Race - Carnival 2012"
+category: "Duck race"
 event: duck-race
 date: 2012-08-07
 cover: /uploads/albums/2012-08-07-duck-race-carnival-2012/001.jpg

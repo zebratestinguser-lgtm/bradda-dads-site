@@ -1,5 +1,6 @@
 ---
 title: "Wolfspit 2025 Entry LIVE"
+category: "Wolfspit"
 event: wolfspit
 date: 2025-01-24
 cover: /uploads/albums/2025-01-24-wolfspit-2025-entry-live/001.png

@@ -1,5 +1,6 @@
 ---
 title: "Carnival 2002  : BraddaDads Army Float"
+category: "Carnival"
 date: 2002-07-06
 cover: /uploads/albums/2002-07-06-carnival-2002-braddadads-army-float/001.jpg
 coverAlt: "Photo 1 of 2 from Carnival 2002  : BraddaDads Army Float (6 July 2002)"

@@ -1,5 +1,6 @@
 ---
 title: "Praise indeed - pensioners lunch poem"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2008-12-16
 cover: /uploads/albums/2008-12-16-praise-indeed-pensioners-lunch-poem/001.jpg

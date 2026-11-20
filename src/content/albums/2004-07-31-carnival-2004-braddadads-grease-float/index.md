@@ -1,5 +1,6 @@
 ---
 title: "Carnival 2004 BraddaDads : 'Grease' float"
+category: "Carnival"
 date: 2004-07-31
 cover: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/001.jpg
 coverAlt: "Photo 1 of 6 from Carnival 2004 BraddaDads : 'Grease' float (31 July 2004)"

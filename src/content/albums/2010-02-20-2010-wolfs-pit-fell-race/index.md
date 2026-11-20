@@ -1,5 +1,6 @@
 ---
 title: "2010 Wolf's Pit Fell Race"
+category: "Wolfspit"
 event: wolfspit
 date: 2010-02-20
 cover: /uploads/albums/2010-02-20-2010-wolfs-pit-fell-race/001.jpg

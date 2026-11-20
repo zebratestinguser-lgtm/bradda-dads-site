@@ -1,5 +1,6 @@
 ---
 title: "Float Building for 2010 Carnival"
+category: "Carnival"
 date: 2010-08-01
 cover: /uploads/albums/2010-08-01-float-building-for-2010-carnival/001.jpg
 coverAlt: "Photo 1 of 23 from Float Building for 2010 Carnival (1 August 2010)"

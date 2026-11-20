@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
+import { NEWS_TAGS } from '../../content.config';
 import { getAlbums, photoYear } from '../../lib/albums';
 import { getSite } from '../../lib/site';
 import { url } from '../../lib/url';
@@ -10,15 +11,22 @@ const site = await getSite();
 const albums = await getAlbums();
 const total = albums.reduce((n, a) => n + a.data.photos.length, 0);
 
-// Group by the year the photos were taken
+// Categories in a friendly order, with album counts
+const ORDER = ['Carnival', 'Duck race', 'Bonfire', "Pensioners' lunch", 'Christmas card', 'Wolfspit', 'Tour of Bradwell', 'Social', 'Village'];
+const categories = [...NEWS_TAGS]
+  .sort((a, b) => ORDER.indexOf(a) - ORDER.indexOf(b))
+  .map((c) => ({ name: c, count: albums.filter((a) => a.data.category === c).length }))
+  .filter((c) => c.count > 0);
+
+// Group by the year the photos were taken; newest first, "Various years" last
 const groups = new Map<string, typeof albums>();
 for (const a of albums) {
   const y = photoYear(a);
   if (!groups.has(y)) groups.set(y, []);
   groups.get(y)!.push(a);
 }
-// Newest year first; albums without a year ("Various years") last
 const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Other' ? -1 : Number(b) - Number(a)));
+const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
 ---
 
 <BaseLayout title="Photos" description={`${albums.length} photo albums from Bradda Dads events in Bradwell since 2001.`}>
@@ -30,19 +38,38 @@ const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Othe
     <a class="btn btn--yellow btn--md" href={url(site.sharePhotosUrl)}>Share your photos</a>
   </PageHeader>
 
-  <nav class="container year-jump" aria-label="Jump to year">
-    <ul class="chips" role="list">
-      {years.map((y) => <li><a class="chip" href={`#year-${y}`}>{y === 'Other' ? 'Various years' : y}</a></li>)}
-    </ul>
-  </nav>
+  <div class="container filters">
+    <div class="filter-row">
+      <p class="filter-row__label" id="cat-label">Event:</p>
+      <ul class="chips chips--scroll" role="list" aria-labelledby="cat-label" data-cat-filters>
+        <li><button type="button" class="chip" aria-pressed="true" data-cat="">All <span class="count">{albums.length}</span></button></li>
+        {
+          categories.map((c) => (
+            <li>
+              <button type="button" class="chip" aria-pressed="false" data-cat={c.name}>
+                {c.name} <span class="count">{c.count}</span>
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <nav class="filter-row" aria-labelledby="year-label">
+      <p class="filter-row__label" id="year-label">Year:</p>
+      <ul class="chips chips--small chips--scroll" role="list">
+        {years.map((y) => <li data-year-chip={y}><a class="chip" href={`#year-${y}`}>{yearName(y)}</a></li>)}
+      </ul>
+    </nav>
+    <p class="visually-hidden" aria-live="polite" data-photo-status></p>
+  </div>
 
   {
     years.map((y, gi) => (
-      <section class="container year-group" id={`year-${y}`} aria-labelledby={`year-${y}-title`}>
-        <h2 class="subhead" id={`year-${y}-title`}>{y === 'Other' ? 'Various years' : y}</h2>
+      <section class="container year-group" id={`year-${y}`} aria-labelledby={`year-${y}-title`} data-year-group={y}>
+        <h2 class="subhead" id={`year-${y}-title`}>{yearName(y)}</h2>
         <ul class="card-grid" role="list">
           {groups.get(y)!.map((a, i) => (
-            <li>
+            <li data-album-cat={a.data.category ?? ''}>
               <AlbumCard album={a} index={gi + i} />
             </li>
           ))}
@@ -52,6 +79,45 @@ const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Othe
   }
 </BaseLayout>
 
+<script>
+  const filters = document.querySelector<HTMLElement>('[data-cat-filters]');
+  const status = document.querySelector<HTMLElement>('[data-photo-status]');
+  if (filters) {
+    const buttons = [...filters.querySelectorAll<HTMLButtonElement>('button[data-cat]')];
+    const items = [...document.querySelectorAll<HTMLElement>('[data-album-cat]')];
+    const groups = [...document.querySelectorAll<HTMLElement>('[data-year-group]')];
+
+    function apply(cat: string, updateUrl = true) {
+      const known = buttons.some((b) => b.dataset.cat === cat);
+      if (!known) cat = '';
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === cat)));
+      let shown = 0;
+      items.forEach((li) => {
+        const on = !cat || li.dataset.albumCat === cat;
+        li.hidden = !on;
+        if (on) shown++;
+      });
+      groups.forEach((g) => {
+        const empty = !g.querySelector('[data-album-cat]:not([hidden])');
+        g.hidden = empty;
+        const chip = document.querySelector<HTMLElement>(`[data-year-chip="${g.dataset.yearGroup}"]`);
+        if (chip) chip.hidden = empty;
+      });
+      if (status) status.textContent = `${shown} albums shown`;
+      if (updateUrl) {
+        const u = new URL(location.href);
+        if (cat) u.searchParams.set('category', cat);
+        else u.searchParams.delete('category');
+        history.replaceState(null, '', u);
+      }
+    }
+
+    buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.cat!)));
+    const initial = new URLSearchParams(location.search).get('category');
+    if (initial) apply(initial, false);
+  }
+</script>
+
 <style>
   .btn--md {
     min-height: 48px;
@@ -60,10 +126,39 @@ const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Othe
     align-self: flex-start;
     margin-top: 6px;
   }
-  .year-jump {
+  .filters {
     padding-block: 28px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
-  .year-jump .chip {
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  .filter-row__label {
+    font-weight: 600;
+    color: var(--muted);
+    min-width: 48px;
+  }
+  .filter-row .chips {
+    min-width: 0;
+    max-width: 100%;
+  }
+  @media (max-width: 600px) {
+    .filter-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  .chip .count {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-left: 6px;
+  }
+  .chips--small .chip {
     min-height: 40px;
     font-size: 14px;
   }

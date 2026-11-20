@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads vs Bradda Lads Carnival Football Match"
+category: "Carnival"
 date: 2010-08-01
 cover: /uploads/albums/2010-08-01-bradda-dads-vs-bradda-lads-carnival-football-match/001.jpg
 coverAlt: "Photo 1 of 5 from Bradda Dads vs Bradda Lads Carnival Football Match (1 August 2010)"

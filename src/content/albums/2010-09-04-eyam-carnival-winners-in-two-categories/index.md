@@ -1,5 +1,6 @@
 ---
 title: "Eyam Carnival - Winners in two categories!"
+category: "Carnival"
 date: 2010-09-04
 cover: /uploads/albums/2010-09-04-eyam-carnival-winners-in-two-categories/001.jpg
 coverAlt: "Photo 1 of 12 from Eyam Carnival - Winners in two categories! (4 September 2010)"

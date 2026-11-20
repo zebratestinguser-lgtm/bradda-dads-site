@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads, Wives and Children Bowls Social"
+category: "Social"
 date: 2007-09-08
 cover: /uploads/albums/2007-09-08-bradda-dads-wives-and-children-bowls-social/001.jpg
 coverAlt: "Photo 1 of 16 from Bradda Dads, Wives and Children Bowls Social (8 September 2007)"

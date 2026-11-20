@@ -1,5 +1,6 @@
 ---
 title: "Wolf’s Pit 2022 Entry via Fabian4"
+category: "Wolfspit"
 event: wolfspit
 date: 2022-02-18
 cover: /uploads/albums/2022-02-18-wolfs-pit-2022-entry-via-fabian4/001.png

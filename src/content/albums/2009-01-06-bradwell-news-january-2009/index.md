@@ -1,5 +1,6 @@
 ---
 title: "Bradwell News - January 2009"
+category: "Village"
 date: 2009-01-06
 cover: /uploads/albums/2009-01-06-bradwell-news-january-2009/001.jpg
 coverAlt: "Photo 1 of 1 from Bradwell News - January 2009 (6 January 2009)"

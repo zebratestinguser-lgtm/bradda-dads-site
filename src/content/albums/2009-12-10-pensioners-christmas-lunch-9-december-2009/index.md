@@ -1,5 +1,6 @@
 ---
 title: "Pensioners Christmas Lunch - 9 December 2009"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2009-12-10
 cover: /uploads/albums/2009-12-10-pensioners-christmas-lunch-9-december-2009/001.jpg

@@ -1,5 +1,6 @@
 ---
 title: "Bowls 2008"
+category: "Social"
 date: 2008-10-20
 cover: /uploads/albums/2008-10-20-bowls-2008/001.jpg
 coverAlt: "Photo 1 of 7 from Bowls 2008 (20 October 2008)"

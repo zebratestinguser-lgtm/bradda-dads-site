@@ -92,6 +92,8 @@ const albums = defineCollection({
   loader: glob({ pattern: '*/index.md', base: './src/content/albums', generateId: ({ entry }) => entry.split('/')[0] }),
   schema: z.object({
     title: z.string(),
+    /** What kind of event the photos are from (same list as news tags); used to filter the photos page. */
+    category: z.enum(NEWS_TAGS).optional(),
     event: reference('events').optional(),
     /** When the photos were taken (used for sorting and shown on every photo). */
     date: z.coerce.date(),

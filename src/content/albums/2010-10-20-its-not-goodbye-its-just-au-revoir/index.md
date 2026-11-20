@@ -1,5 +1,6 @@
 ---
 title: "It's not goodbye, it's just au revoir"
+category: "Social"
 date: 2010-10-20
 cover: /uploads/albums/2010-10-20-its-not-goodbye-its-just-au-revoir/001.jpg
 coverAlt: "Photo 1 of 4 from It's not goodbye, it's just au revoir (20 October 2010)"

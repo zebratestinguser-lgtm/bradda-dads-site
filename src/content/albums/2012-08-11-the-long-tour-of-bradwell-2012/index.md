@@ -1,5 +1,6 @@
 ---
 title: "The Long Tour of Bradwell 2012"
+category: "Tour of Bradwell"
 date: 2012-08-11
 cover: /uploads/albums/2012-08-11-the-long-tour-of-bradwell-2012/001.jpg
 coverAlt: "Photo 1 of 11 from The Long Tour of Bradwell 2012 (11 August 2012)"

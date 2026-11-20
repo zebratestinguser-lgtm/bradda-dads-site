@@ -1,5 +1,6 @@
 ---
 title: "Wolf's Pit photos"
+category: "Wolfspit"
 event: wolfspit
 # Photo date: Gallery from the old WordPress Wolf’s Pit page; the years aren’t recorded.
 date: 2018-10-17

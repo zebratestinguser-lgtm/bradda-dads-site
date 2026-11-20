@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 2008"
+category: "Carnival"
 date: 2008-08-08
 cover: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/001.jpg
 coverAlt: "Photo 1 of 19 from Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 2008 (8 August 2008)"

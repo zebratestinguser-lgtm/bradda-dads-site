@@ -1,5 +1,6 @@
 ---
 title: "Summer Duck Race 2016"
+category: "Duck race"
 event: duck-race
 # Photo date: From the old WordPress duck races page.
 date: 2018-10-17

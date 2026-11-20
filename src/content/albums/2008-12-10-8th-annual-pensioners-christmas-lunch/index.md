@@ -1,5 +1,6 @@
 ---
 title: "8th Annual Pensioners Christmas Lunch"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2008-12-10
 cover: /uploads/albums/2008-12-10-8th-annual-pensioners-christmas-lunch/001.jpg

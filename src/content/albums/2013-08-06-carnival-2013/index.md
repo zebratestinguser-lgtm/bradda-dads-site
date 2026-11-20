@@ -1,5 +1,6 @@
 ---
 title: "Carnival 2013"
+category: "Carnival"
 date: 2013-08-06
 cover: /uploads/albums/2013-08-06-carnival-2013/001.jpg
 coverAlt: "Photo 1 of 1 from Carnival 2013 (6 August 2013)"

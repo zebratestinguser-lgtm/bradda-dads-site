@@ -1,5 +1,6 @@
 ---
 title: "Annual Golf Day at Lafarge"
+category: "Social"
 date: 2011-07-17
 cover: /uploads/albums/2011-07-17-annual-golf-day-at-lafarge/001.jpg
 coverAlt: "Photo 1 of 16 from Annual Golf Day at Lafarge (17 July 2011)"

@@ -1,5 +1,6 @@
 ---
 title: "Carnival 30th July 2005"
+category: "Carnival"
 date: 2005-07-30
 cover: /uploads/albums/2005-07-30-carnival-30th-july-2005/001.jpg
 coverAlt: "Photo 1 of 34 from Carnival 30th July 2005 (30 July 2005)"

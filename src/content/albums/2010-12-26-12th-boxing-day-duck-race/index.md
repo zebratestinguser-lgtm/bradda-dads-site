@@ -1,5 +1,6 @@
 ---
 title: "12th Boxing Day Duck Race"
+category: "Duck race"
 event: duck-race
 date: 2010-12-26
 cover: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/001.jpg

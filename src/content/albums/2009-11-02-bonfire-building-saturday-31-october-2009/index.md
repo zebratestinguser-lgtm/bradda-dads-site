@@ -1,5 +1,6 @@
 ---
 title: "Bonfire Building - Saturday 31 October 2009"
+category: "Bonfire"
 event: bonfire
 date: 2009-11-02
 cover: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/001.jpg

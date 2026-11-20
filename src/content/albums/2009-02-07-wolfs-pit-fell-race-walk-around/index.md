@@ -1,5 +1,6 @@
 ---
 title: "Wolf's Pit Fell Race Walk Around"
+category: "Wolfspit"
 event: wolfspit
 date: 2009-02-07
 cover: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/001.jpg
