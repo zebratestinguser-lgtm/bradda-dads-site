@@ -155,6 +155,12 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
   .rt__table .pos {
     font-weight: 700;
   }
+  /* Keep names and times on one line (the table scrolls sideways on small screens) */
+  .rt__table td:nth-child(1),
+  .rt__table td:nth-child(2),
+  .rt__table .num {
+    white-space: nowrap;
+  }
   .rt__table .muted {
     color: var(--muted);
   }

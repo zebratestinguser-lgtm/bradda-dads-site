@@ -6,14 +6,17 @@ import { url } from '../lib/url';
 const site = await getSite();
 const current = Astro.url.pathname;
 
+const home = url('/');
 const nav = [
-  { label: 'Events', href: url('/#events') },
+  { label: 'Home', href: home },
+  { label: 'Events', href: url('/events/') },
   { label: 'News', href: url('/news/') },
   { label: 'Photos', href: url('/photos/') },
   { label: 'Wolfspit results', href: url('/wolfspit/') },
   { label: 'Our story', href: url('/our-story/') },
 ];
-const isCurrent = (href: string) => !href.includes('#') && current.startsWith(href);
+// Home is only "current" on the homepage itself; other links match their section
+const isCurrent = (href: string) => (href === home ? current === home : current.startsWith(href));
 ---
 
 <header class="site-header">

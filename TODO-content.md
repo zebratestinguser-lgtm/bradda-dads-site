@@ -22,6 +22,8 @@ Tick items off as they're done. Updated: content migration (milestone 8).
 
 ## Events: `src/content/events/`
 
+Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all listed at `/events/`). The card text comes from the front matter (`summary`, `when`, `ctaLabel` …). **Anything written below the `---` in the event's `.md` file appears on its page**, so that's the place for fuller details: timings, prices, what to bring, how to help, maps, FAQs.
+
 - [ ] **Duck race** (`duck-race.md`): start time (then set `startTimeConfirmed: true`), start point (`location`), duck price (`price`), prize and where ducks are sold (`heroNote`), SumUp link (`ctaUrl`)
 - [ ] **Bonfire** (`bonfire.md`): venue, date, details. The old WordPress page said "aiming to run again for 2025"; is it running?
 - [ ] **Christmas card** (`christmas-card.md`): closing date (`heroNote`), how the card is shown/delivered
