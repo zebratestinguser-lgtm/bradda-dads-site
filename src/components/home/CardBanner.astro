@@ -84,7 +84,7 @@ const show = card?.data.status === 'open';
   }
   .xmas-card {
     width: 260px;
-    max-width: 100%;
+    max-width: calc(100% - 24px); /* leaves room for the tilt so it stays inside the panel */
     height: 320px;
     background: var(--white);
     border-radius: var(--radius-sm);

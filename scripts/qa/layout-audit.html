@@ -1,0 +1,127 @@
+﻿<!doctype html><html><head><meta charset="utf-8"><title>audit</title></head><body>
+<pre id="out">running</pre>
+<script>
+const PAGES = (window.AUDIT_PAGES || ["/bradda-dads-site/"]); // set window.AUDIT_PAGES or edit this list
+const WIDTHS = [Number(new URLSearchParams(location.search).get('w') || 360)]; const SKIP_FN = new URLSearchParams(location.search).has('nofn');
+const out = []; let ok = 0, blank = [];
+function audit(doc, w) {
+  const issues = [];
+  const vw = doc.documentElement.clientWidth;
+  if (doc.documentElement.scrollWidth > vw + 1) issues.push(`PAGE scrolls sideways: ${doc.documentElement.scrollWidth}px > ${vw}px`);
+  const inScroller = (el) => { for (let p = el.parentElement; p; p = p.parentElement) { const o = getComputedStyle(p).overflowX; if (o === 'auto' || o === 'scroll') return true; } return false; };
+  const desc = (el) => `${el.tagName.toLowerCase()}${el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).slice(0,2).join('.') : ''} "${(el.textContent||'').trim().replace(/\s+/g,' ').slice(0,50)}"`;
+  for (const el of doc.body.querySelectorAll('*')) {
+    if (['SCRIPT','STYLE','svg','path','NOSCRIPT','DIALOG'].includes(el.tagName) || el.closest('svg') || el.closest('dialog') || el.closest('.leaflet-container')) continue;
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height) continue;
+    const cs = getComputedStyle(el);
+    if (r.right > vw + 1 && !inScroller(el) && cs.position !== 'fixed') issues.push(`OUTSIDE screen by ${Math.round(r.right - vw)}px: ${desc(el)}`);
+    // a single word broken across lines (e.g. "NOV / EMB / ER")
+    if (el.children.length === 0 && (el.textContent || '').trim() && (el.textContent || '').length < 120) {
+      const tn = el.firstChild;
+      if (tn && tn.nodeType === 3) {
+        const txt = tn.textContent; const re = /\S+/g; let m;
+        while ((m = re.exec(txt))) {
+          if (m[0].length < 3) continue;
+          const rg = doc.createRange(); rg.setStart(tn, m.index); rg.setEnd(tn, m.index + m[0].length);
+          const tops = new Set([...rg.getClientRects()].filter((q) => q.width > 0).map((q) => Math.round(q.top)));
+          if (tops.size > 1) { issues.push(`WORD SPLIT across lines: "${m[0]}" in ${desc(el)}`); break; }
+        }
+      }
+    }
+    // child sticking out of its parent's box (parent not scrolling/clipping)
+    const par = el.parentElement;
+    if (par && par !== doc.body && cs.position !== 'absolute' && cs.position !== 'fixed') {
+      const pcs = getComputedStyle(par);
+      if (pcs.overflowX === 'visible' && pcs.display !== 'inline' && cs.display !== 'inline' && !inScroller(el)) {
+        const pr = par.getBoundingClientRect();
+        if (r.right > pr.right + 1 || r.left < pr.left - 1) issues.push(`STICKS OUT of parent by ${Math.round(Math.max(r.right - pr.right, pr.left - r.left))}px: ${desc(el)} in ${desc(par).slice(0, 40)}`);
+      }
+      // overlapping the next sibling
+      const sib = el.nextElementSibling;
+      if (sib && cs.display !== 'inline' && getComputedStyle(sib).display !== 'inline' && getComputedStyle(sib).position !== 'absolute' && cs.position !== 'absolute') {
+        const sr = sib.getBoundingClientRect();
+        const ox = Math.min(r.right, sr.right) - Math.max(r.left, sr.left);
+        const oy = Math.min(r.bottom, sr.bottom) - Math.max(r.top, sr.top);
+        if (sr.width && sr.height && ox > 2 && oy > 2) issues.push(`OVERLAPS next element (${Math.round(ox)}x${Math.round(oy)}px): ${desc(el)} / ${desc(sib).slice(0, 40)}`);
+      }
+    }
+    // clipped content: hidden overflow with content wider/taller than the box (ignore images/visually-hidden)
+    if ((cs.overflowX === 'hidden' || cs.overflow === 'hidden' || cs.textOverflow === 'ellipsis') && el.scrollWidth > el.clientWidth + 2 && !el.classList.contains('visually-hidden') && el.children.length < 3 && (el.textContent||'').trim()) issues.push(`CLIPPED text (${el.scrollWidth}>${el.clientWidth}): ${desc(el)}`);
+    // text spilling out of a fixed-size box (e.g. chips, buttons)
+    if (el.children.length === 0 && (el.textContent||'').trim() && el.scrollWidth > el.clientWidth + 2 && cs.overflowX === 'visible' && cs.display !== 'inline' && !inScroller(el)) issues.push(`TEXT wider than box (${el.scrollWidth}>${el.clientWidth}): ${desc(el)}`);
+  }
+  return [...new Set(issues)].slice(0, 20);
+}
+async function functional(f) {
+  const res = [];
+  const load = (p) => new Promise((r) => { f.onload = r; f.src = p; setTimeout(r, 8000); });
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  f.style.cssText = 'width:1280px;height:900px;border:0';
+  // News filter
+  await load('/bradda-dads-site/news/'); await wait(300);
+  let d = f.contentDocument, w = f.contentWindow;
+  const vis = () => [...d.querySelectorAll('.news-row')].filter((r) => r.offsetParent !== null).length;
+  const total = vis();
+  const btn = [...d.querySelectorAll('[data-filters] button')].find((b) => b.dataset.tag === 'Bonfire');
+  btn.click(); await wait(100);
+  const bon = vis(); const expected = d.querySelectorAll('.news-row[data-tag="Bonfire"]').length;
+  const groupsShown = [...d.querySelectorAll('[data-year-group]')].filter((g) => g.offsetParent !== null).length;
+  res.push(`news filter: all=${total}, Bonfire shown=${bon} (expected ${expected}), year groups shown=${groupsShown}, pressed=${btn.getAttribute('aria-pressed')}`);
+  d.querySelector('[data-filters] button[data-tag=""]').click(); await wait(100);
+  res.push(`news filter reset: shown=${vis()}`);
+  // Results table search
+  await load('/bradda-dads-site/wolfspit/2026/'); await wait(300);
+  d = f.contentDocument; w = f.contentWindow;
+  const rows = () => [...d.querySelectorAll('.rt__table tbody tr')].filter((r) => r.offsetParent !== null).length;
+  const all = rows(); const s = d.querySelector('[data-rt-search]');
+  s.value = 'grant'; s.dispatchEvent(new w.Event('input')); await wait(100);
+  const g = rows();
+  const sel = d.querySelector('[data-rt-cat]'); s.value = ''; s.dispatchEvent(new w.Event('input'));
+  sel.value = '@women'; sel.dispatchEvent(new w.Event('change')); await wait(100);
+  res.push(`results 2026: all=${all}, search "grant"=${g}, women=${rows()}, status="${d.querySelector('[data-rt-status]').textContent}"`);
+  // Any-year search
+  await load('/bradda-dads-site/wolfspit/'); await wait(300);
+  d = f.contentDocument; w = f.contentWindow;
+  const a = d.querySelector('[data-any-year]'); a.value = 'kneen'; a.dispatchEvent(new w.Event('input')); await wait(100);
+  res.push(`any-year "kneen": ${d.querySelectorAll('[data-any-results] li').length} hits, first="${(d.querySelector('[data-any-results] li')||{}).textContent}"`);
+  // Homepage band tabs
+  await load('/bradda-dads-site/'); await wait(300);
+  d = f.contentDocument; w = f.contentWindow;
+  const tab = [...d.querySelectorAll('.year-tab[role=tab]')].find((t) => t.dataset.year === '2023');
+  tab.click(); await wait(100);
+  res.push(`home tabs: 2023 selected=${tab.getAttribute('aria-selected')}, caption="${d.querySelector('[data-caption]').textContent.trim()}", winner="${d.querySelector('[data-podium] .podium__name').textContent}"`);
+  // Lightbox
+  await load('/bradda-dads-site/photos/2007-12-12-7th-annual-bradda-dads-christmas-lunch/'); await wait(300);
+  d = f.contentDocument; w = f.contentWindow;
+  d.querySelectorAll('.gallery__item')[2].click(); await wait(100);
+  const dlg = d.querySelector('[data-lightbox]'); const cap1 = d.querySelector('[data-lb-caption]').textContent;
+  dlg.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); await wait(50);
+  const cap2 = d.querySelector('[data-lb-caption]').textContent;
+  d.querySelector('[data-lb-close]').click(); await wait(50);
+  res.push(`lightbox: open=${cap1 ? 'yes' : 'no'} caption1="${cap1}", after → "${cap2}", closed=${!dlg.open}, focus back="${d.activeElement && d.activeElement.getAttribute('aria-label')}"`);
+  return res;
+}
+async function run() {
+  const f = document.createElement('iframe'); document.body.appendChild(f);
+  for (const w of WIDTHS) {
+    f.style.cssText = `width:${w}px;height:900px;border:0`;
+    for (const p of PAGES) {
+      await new Promise((res) => { f.onload = res; f.src = p; setTimeout(res, 8000); });
+      await new Promise((r) => setTimeout(r, 150)); document.getElementById('out').textContent = 'running ' + w + ' ' + PAGES.indexOf(p) + ' ' + p + ' t=' + Math.round(performance.now());
+      try { const d = f.contentDocument; if (d.title.includes('Bradda') && d.querySelector('main')) ok++; else blank.push(p); const iss = audit(d, w); if (iss.length) out.push(`\n## ${w}px ${p}\n` + iss.map(i => ' - ' + i).join('\n')); } catch (e) { out.push(`\n## ${w}px ${p}\n - ERROR ${e}`); }
+    }
+  }
+  let fn = []; try { if (!SKIP_FN) fn = await functional(f); } catch (e) { fn = ['FUNCTIONAL ERROR ' + e]; } document.getElementById('out').textContent = fn.join('\n') + '\n' + 'DONE loaded=' + ok + ' of ' + (PAGES.length*WIDTHS.length) + ' blank=' + blank.slice(0,5).join(',') + '\n' + out.join('\n');
+}
+run();
+</script></body></html>
+
+
+
+
+
+
+
+
+

@@ -86,7 +86,7 @@ const pad = (n: number) => String(n);
               {event.data.ctaLabel}
               {event.data.price && ` · ${event.data.price}`}
             </a>
-            <a class="btn btn--ghost-light" href="#events">All events</a>
+            <a class="btn btn--ghost-light" href={url('/events/')}>All events</a>
           </div>
         </div>
 

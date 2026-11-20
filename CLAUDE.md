@@ -132,6 +132,9 @@ Header row (exact): `position,name,club,category,time`
 - Imported photos have generic alt text; homepage-visible ones should get real descriptions (TODO-content.md).
 - **Photo dates must always be visible** (Peter's request): album `date` = when the photos were taken, `dateLabel` overrides it for ranges/unknowns. Use `photoDate()` / `photoDateShort()` from `src/lib/albums.ts` wherever a photo appears (album cards show a date chip, album pages say "Photos taken …", the lightbox caption starts with the date, news images have a "Photo taken …" caption).
 - Milestone 4 routes: `/news/`, `/news/[id]/`, `/events/[id]/`, `/photos/`, `/photos/[id]/` (native `<dialog>` lightbox, no library), `/wolfspit/` (+ cross-year runner search), `/wolfspit/[year]/`, `/tour-of-bradwell/`, `/tour-of-bradwell/[slug]/` (`long-tour-2017`, `half-tour-2016`, `2019`), CSV endpoints, `/our-story/`, `/where-the-money-goes/`, `/get-involved/`, `/donate/`, `/contact/`, `/privacy/` (draft), `/christmas-card/` (form in M5).
+- Nav: Home, Events (`/events/` index), News, Photos, Wolfspit results, Our story, Get involved. Event cards (`src/components/EventCard.astro`) link to the event page ("More details") as well as the CTA; event page detail = the Markdown body of `src/content/events/<id>.md`.
+- Global CSS: `[hidden] { display: none !important }` (filters rely on it) and `overflow-wrap: break-word` on body. Don't use `anywhere`: it splits short labels like "NOVEMBER" in flex rows.
+- QA tools in `scripts/qa/` (link checker + layout/behaviour audit). Run them after layout changes.
 - Album pages load full 1200px images in the grid (no thumbnails yet). For milestone 6: thumbnails, e.g. a prebuild step with `sharp` (Astro already depends on it, but it would need adding explicitly, so ask first).
 - Windows dev machine needs the Microsoft VC++ runtime (Astro's Markdown engine is native).
 

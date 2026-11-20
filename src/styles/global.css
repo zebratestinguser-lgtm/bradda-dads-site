@@ -18,6 +18,14 @@ body {
   line-height: 1.5;
   color: var(--text);
   background: var(--white);
+  /* Long URLs (common in imported posts) wrap instead of overflowing. "break-word" only breaks a
+     word when it genuinely can't fit, so short labels like "NOVEMBER" are never split. */
+  overflow-wrap: break-word;
+}
+
+/* Make the hidden attribute win over component display rules (used by filters and search) */
+[hidden] {
+  display: none !important;
 }
 
 img,

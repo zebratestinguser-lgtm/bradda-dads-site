@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import EventCard from '../../components/EventCard.astro';
+import { getEvents, pickNextEvent } from '../../lib/events';
+import { url } from '../../lib/url';
+
+const events = await getEvents();
+const next = pickNextEvent(events);
+---
+
+<BaseLayout title="Events" description="The Bradda Dads year: bonfire, village Christmas card, pensioners' Christmas lunch, Boxing Day Duck Race and the Wolf's Pit Fell Race.">
+  <PageHeader eyebrow="Events" title="The Bradda Dads year" intro="The big dates, all run by volunteer dads, all for the village. Each event has its own page with the details, photos from past years and news.">
+    <a class="cal" href={url('/events.ics')}>Add them to your calendar →</a>
+  </PageHeader>
+  <section class="container page-section">
+    <ul class="grid" role="list">
+      {events.map((e) => <li><EventCard event={e} isNext={e.id === next?.id} headingLevel="h2" /></li>)}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .cal {
+    color: var(--white);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+  }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 20px;
+  }
+</style>
