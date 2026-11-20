@@ -25,7 +25,13 @@ export const NEWS_TAGS = [
   'Duck race',
   'Wolfspit',
   'Village',
+  'Carnival',
+  'Tour of Bradwell',
+  'Social',
 ] as const;
+
+/** Where an entry was imported from (old Blogspot/WordPress sites). */
+const source = z.url().optional();
 
 const news = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/news' }),
@@ -38,6 +44,9 @@ const news = defineCollection({
       imageAlt: z.string().optional(),
       summary: z.string(),
       featured: z.boolean().default(false),
+      /** Photo album for this story, if there is one. */
+      album: reference('albums').optional(),
+      source,
     })
     .refine((d) => !d.image || (d.imageAlt && d.imageAlt.length > 0), {
       message: 'imageAlt is required when an image is set',
@@ -96,11 +105,22 @@ const albums = defineCollection({
         }),
       )
       .default([]),
+    source,
   }),
 });
 
+/**
+ * Race results: src/content/results/<race>/YYYY.md + YYYY.csv
+ * Races: wolfspit, tour-of-bradwell-long, tour-of-bradwell-half
+ */
+export const RACES = {
+  wolfspit: "Wolf's Pit Fell Race",
+  'tour-of-bradwell-long': 'Long Tour of Bradwell',
+  'tour-of-bradwell-half': 'Half Tour of Bradwell',
+} as const;
+
 const results = defineCollection({
-  loader: glob({ pattern: 'wolfspit/*.md', base: './src/content/results' }),
+  loader: glob({ pattern: '*/*.md', base: './src/content/results' }),
   schema: z.object({
     year: z.number().int(),
     date: z.coerce.date().optional(),
@@ -109,6 +129,11 @@ const results = defineCollection({
     finishers: z.number().int().optional(),
     /** CSV file next to this one, e.g. "2026.csv". */
     csv: z.string().regex(/\.csv$/),
+    /** Original results document (PDF) in /uploads/results/, if there is one. */
+    original: z.string().startsWith('/uploads/').optional(),
+    /** Notes shown with the results, e.g. how the original was converted. */
+    notes: z.string().optional(),
+    source,
   }),
 });
 
@@ -123,6 +148,7 @@ const timeline = defineCollection({
     imageAlt: z.string().optional(),
     /** Sort position on the timeline (1 = earliest). */
     order: z.number().int(),
+    source,
   }),
 });
 
@@ -137,6 +163,9 @@ const funded = defineCollection({
     summary: z.string(),
     image: uploadPath.optional(),
     imageAlt: z.string().optional(),
+    /** Set false while the pin position is still a guess. */
+    locationConfirmed: z.boolean().default(false),
+    source,
   }),
 });
 

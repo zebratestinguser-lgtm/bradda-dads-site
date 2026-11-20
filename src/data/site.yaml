@@ -22,17 +22,18 @@ site:
   # donationQr: /uploads/site/sumup-qr.png
   totalRaised: "[TOTAL]"
   groupsHelped: "[NUMBER]"
-  meetingInfo: "[MEETING DAY / VENUE]"
+  # From the old WordPress site (2018–2022); confirm it's still current
+  meetingInfo: "on the third Wednesday of the month at 8:30pm, usually at the Shoulder of Mutton"
   # Phase 1: "Share your photos" goes to Facebook (or a mailto: link)
   sharePhotosUrl: https://www.facebook.com/BraddaDads/
   accountsUrl: "#"
   # Wolfspit Race: entry link for next year's race, and the intro on the results band
   wolfspitEntryUrl: "#"
-  wolfspitIntro: "[Short description of the course: distance, climb, start and finish.] Find your time, see who took the podium, and compare years."
+  wolfspitIntro: "A 9 km fell race with 450 m of climb from Shatton, near Bamford, held each March since 2009. Find your time, see who took the podium, and compare years."
   # Our story (homepage)
-  storyIntro: "Bradda Dads began in 1999, when a group of village dads raced rubber ducks down the brook on Boxing Day to raise money for Bradwell. [PLACEHOLDER: a paragraph or two on who started it, why, and how the group has grown.]"
-  # storyImage: /uploads/story/first-duck-race.jpg
-  # storyImageAlt: Describe the archive photo
+  storyIntro: "Bradda Dads began in 1999, when a group of village dads raced rubber ducks down the brook on Boxing Day to raise money for Bradwell. The pensioners' Christmas lunch followed in 2001, then the village bonfire, carnival floats, the Wolf's Pit Fell Race and plenty more, with everything raised going back into the village. [PLACEHOLDER: who started it and why.]"
+  storyImage: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg
+  storyImageAlt: "Pensioners in paper party hats at long tables at the first Bradda Dads Christmas lunch, December 2001"
   # Up to three hand-picked Facebook posts for the homepage
   facebookPosts:
     - date: "[DATE]"

@@ -74,7 +74,7 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
                   <span class="podium__medal" aria-hidden="true">1</span>
                   <div class="podium__body">
                     <span class="podium__label">{p.label}</span>
-                    <span class="podium__name">{p.runner?.name ?? 'No finisher'}</span>
+                    <span class="podium__name">{p.runner?.name ?? 'Not recorded'}</span>
                     <span class="podium__time">{p.runner?.time ?? '–'}</span>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
       podium.innerHTML = picks
         .map(
           ([label, r]) => `<div class="podium__card"><span class="podium__medal" aria-hidden="true">1</span><div class="podium__body">
-          <span class="podium__label">${label}</span><span class="podium__name">${r ? esc(r[1]) : 'No finisher'}</span>
+          <span class="podium__label">${label}</span><span class="podium__name">${r ? esc(r[1]) : 'Not recorded'}</span>
           <span class="podium__time">${r ? esc(r[4]) : '–'}</span></div></div>`,
         )
         .join('');

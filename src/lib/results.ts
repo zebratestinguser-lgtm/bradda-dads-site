@@ -79,19 +79,16 @@ export function podium(rows: ResultRow[]) {
   ];
 }
 
-/** All results years, newest first, with their rows loaded. */
-export async function getWolfspitYears() {
-  const entries = await getCollection('results');
+/** All results years for one race (folder name), newest first, with rows loaded. */
+export async function getRaceYears(race: string) {
+  const entries = (await getCollection('results')).filter((e) => e.id.startsWith(`${race}/`));
   return entries
     .map((entry) => {
-      const csvPath = join(process.cwd(), 'src/content/results/wolfspit', entry.data.csv);
-      const rows = parseResultsCsv(readFileSync(csvPath, 'utf-8'), entry.data.csv);
-      return {
-        ...entry.data,
-        rows,
-        finishers: entry.data.finishers ?? rows.length,
-        csvPath: `src/content/results/wolfspit/${entry.data.csv}`,
-      };
+      const rel = `src/content/results/${race}/${entry.data.csv}`;
+      const rows = parseResultsCsv(readFileSync(join(process.cwd(), rel), 'utf-8'), rel);
+      return { ...entry.data, race, rows, finishers: entry.data.finishers ?? rows.length, csvPath: rel };
     })
     .sort((a, b) => b.year - a.year);
 }
+
+export const getWolfspitYears = () => getRaceYears('wolfspit');
