@@ -10,8 +10,8 @@ const site = await getSite();
   <div class="container">
     <div class="support__inner">
       <div class="support__copy">
-        <h2 id="support-title" class="support__title">Got kids? Live in Bradwell? You're in.</h2>
-        <p>No experience needed, just a spare pair of hands for a few events a year. We meet {site.meetingInfo}.</p>
+        <h2 id="support-title" class="support__title">{site.joinHeadline}</h2>
+        <p>{site.joinText} We meet {site.meetingInfo}.</p>
       </div>
       <div class="support__actions">
         <a class="btn btn--yellow btn--sm" href={url('/get-involved/')}>Join the dads</a>

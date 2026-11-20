@@ -3,7 +3,8 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
-import { getEvents, pickNextEvent, statusFor, formatEventDates } from '../../lib/events';
+import { getEvents, pickNextEvent, statusFor, formatEventDates, isOpen, isPlaceholder } from '../../lib/events';
+import { getWolfspitYears } from '../../lib/results';
 import { getAlbums, EVENT_TAG, categorySlug } from '../../lib/albums';
 import { formatDate, formatTime } from '../../lib/format';
 import { url } from '../../lib/url';
@@ -26,6 +27,14 @@ const news = tag
   ? (await getCollection('news')).filter((n) => n.data.tag === tag).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 5)
   : [];
 const ctaHref = url(d.ctaUrl);
+// "How to get involved" cards; some only apply while entries are open
+const open = isOpen(event);
+const ways = d.involvement.filter((w) => !w.onlyWhenOpen || open);
+// Race results for the fell race
+const isRace = event.id === 'wolfspit';
+const raceAll = isRace ? await getWolfspitYears() : [];
+const raceYears = raceAll.map((y) => y.year).sort((a, b) => a - b);
+const latestRace = raceAll[0];
 const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
 ---
 
@@ -45,10 +54,10 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
       )}
       <li>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-        {d.location}
+        {isPlaceholder(d.location) ? 'Place to be confirmed' : d.location}
       </li>
     </ul>
-    {!ctaIsSelf && (
+    {!ctaIsSelf && (d.status !== 'open' || open) && (
       <a class="btn btn--yellow btn--md" href={ctaHref}>
         {d.ctaLabel}
         {d.price && ` · ${d.price}`}
@@ -56,46 +65,209 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
     )}
   </PageHeader>
 
-  <section class="container page-section">
+  <!-- 1. What's happening -->
+  <section class="container page-section ev-section" aria-labelledby="what-title">
+    <h2 class="subhead" id="what-title">What's happening</h2>
     <div class="prose"><Content /></div>
   </section>
 
-  {
-    albums.length > 0 && (
-      <section class="container page-section stack" aria-labelledby="photos-title">
-        <h2 class="subhead" id="photos-title">Photos from past years</h2>
-        <ul class="card-grid" role="list">
-          {albums.map((a, i) => (
-            <li>
-              <AlbumCard album={a} index={i} />
-            </li>
-          ))}
-        </ul>
-        <a class="link-arrow" href={tag ? url(`/photos/category/${categorySlug(tag)}/`) : url('/photos/')}>
-          {tag ? `Every ${d.name} photo, from all ${eventAlbums.length} album${eventAlbums.length === 1 ? '' : 's'} →` : 'All photo albums →'}
-        </a>
-      </section>
-    )
-  }
+  <!-- 2. When and where -->
+  <section class="container page-section ev-section" aria-labelledby="when-title">
+    <h2 class="subhead" id="when-title">When and where</h2>
+    <dl class="ww">
+      <div class="ww__item">
+        <dt>When</dt>
+        <dd>{formatEventDates(event, true) ?? d.when}</dd>
+      </div>
+      <div class="ww__item">
+        <dt>Time</dt>
+        <dd>{d.start && d.startTimeConfirmed ? formatTime(d.start) : 'To be confirmed'}</dd>
+      </div>
+      <div class="ww__item">
+        <dt>Where</dt>
+        <dd>{isPlaceholder(d.location) ? 'To be confirmed' : d.location}</dd>
+      </div>
+    </dl>
+    {d.whenWhereNote && <p class="ww__note">{d.whenWhereNote}</p>}
+    {d.start && <a class="link-arrow" href={url('/events.ics')}>Add our events to your calendar →</a>}
+  </section>
 
-  {
-    news.length > 0 && (
-      <section class="container page-section stack" aria-labelledby="news-title">
-        <h2 class="subhead" id="news-title">News</h2>
-        <ul class="related" role="list">
-          {news.map((n) => (
-            <li>
-              <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
-              <a href={url(`/news/${n.id}/`)}>{n.data.title}</a>
+  <!-- 3. How to get involved -->
+  <section class="container page-section ev-section" aria-labelledby="involved-title">
+    <h2 class="subhead" id="involved-title">How to get involved</h2>
+    {
+      ways.length > 0 ? (
+        <ul class="ways" role="list">
+          {ways.map((w) => (
+            <li class="way">
+              <h3 class="way__title">{w.title}</h3>
+              <p class="way__text">{w.text}</p>
+              {w.url && (
+                <a class="btn btn--green btn--md way__btn" href={url(w.url)}>
+                  {w.label ?? 'Find out more'}
+                </a>
+              )}
             </li>
           ))}
         </ul>
+      ) : (
+        <p class="note">
+          Details coming soon. In the meantime, <a href={url('/get-involved/')}>find out how to help</a>.
+        </p>
+      )
+    }
+  </section>
+
+  <!-- 4. From past years -->
+  {
+    (albums.length > 0 || news.length > 0 || isRace) && (
+      <section class="container page-section ev-section past" aria-labelledby="past-title">
+        <h2 class="subhead" id="past-title">From past years</h2>
+        {isRace && latestRace && (
+          <a class="race-link" href={url('/wolfspit/')}>
+            <span class="race-link__label">Race results</span>
+            <span class="race-link__title">Every Wolf's Pit result from {raceYears[0]} to {latestRace.year}</span>
+            <span class="race-link__meta">{latestRace.year}: {latestRace.finishers} finishers · search any runner →</span>
+          </a>
+        )}
+        {albums.length > 0 && (
+          <div class="stack">
+            <h3 class="past__sub" id="photos-title">Photos</h3>
+            <ul class="card-grid" role="list">
+              {albums.map((a, i) => (
+                <li>
+                  <AlbumCard album={a} index={i} />
+                </li>
+              ))}
+            </ul>
+            <a class="link-arrow" href={tag ? url(`/photos/category/${categorySlug(tag)}/`) : url('/photos/')}>
+              {tag ? `Every ${d.name} photo, from all ${eventAlbums.length} album${eventAlbums.length === 1 ? '' : 's'} →` : 'All photo albums →'}
+            </a>
+          </div>
+        )}
+        {news.length > 0 && (
+          <div class="stack">
+            <h3 class="past__sub" id="news-title">News</h3>
+            <ul class="related" role="list">
+              {news.map((n) => (
+                <li>
+                  <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
+                  <a href={url(`/news/${n.id}/`)}>{n.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </section>
     )
   }
 </BaseLayout>
 
 <style>
+  .ev-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .ev-section + .ev-section {
+    padding-top: 0;
+  }
+  .ww {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 12px;
+  }
+  .ww__item {
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    padding: 16px 20px;
+  }
+  .ww dt {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  .ww dd {
+    margin: 4px 0 0;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--text);
+  }
+  .ww__note {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+    max-width: 68ch;
+  }
+  .ways {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 16px;
+  }
+  .way {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--white);
+  }
+  .way__title {
+    font-size: 21px;
+    line-height: 1.2;
+  }
+  .way__text {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+    flex-grow: 1;
+  }
+  .way__btn {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  .past {
+    gap: 28px;
+  }
+  .past__sub {
+    font-size: 22px;
+  }
+  .race-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--green-deep);
+    color: var(--white);
+    border-radius: var(--radius-card);
+    padding: 22px 26px;
+    text-decoration: none;
+  }
+  .race-link:hover {
+    color: var(--white);
+  }
+  .race-link__label {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--yellow);
+  }
+  .race-link__title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.15;
+  }
+  .race-link__meta {
+    color: var(--on-dark-soft);
+  }
   .back {
     color: var(--on-dark-soft);
     font-weight: 600;

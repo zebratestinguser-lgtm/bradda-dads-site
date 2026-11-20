@@ -22,24 +22,20 @@ heroNote: "**Cash prizes** for the first ducks home. Ducks on sale online, and a
 heroImage: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/011.jpg
 heroImageAlt: Hundreds of yellow rubber ducks tumbling over the weir in Bradwell Brook
 heroImageCaption: Boxing Day 2009
+whenWhereNote: "In 2022 the ducks went in at 11am from Town Bottom Park. [PLACEHOLDER: confirm the 2026 start time and place.]"
+involvement:
+  - title: Buy a duck
+    text: "Online until midnight on Saturday 19 December, at the Co-op on Saturdays 12 and 19 December (10am to 2pm, card or cash), or at the pensioners' lunch."
+    url: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
+    label: Buy a duck online
+  - title: Race a raft
+    text: "Build a raft and race it down the brook. Trophies for 1st, 2nd and 3rd, best style, first to sink and, biggest of all, last place. Everyone who enters gets a treat. [PLACEHOLDER: age categories.]"
+  - title: Help on the day
+    text: From damming the brook to keeping the ducks moving under the bridges, there's a job for everyone.
+    url: /get-involved/
+    label: Volunteer
 ---
 
-Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.
+Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. It's where Bradda Dads started, in 1999.
 
-## Buying a duck
-
-- **Online:** from [our SumUp shop](https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1), until midnight on Saturday 19 December. Tickets are numbered after sales close.
-- **At the Co-op:** Saturdays 12 and 19 December, 10am to 2pm (card or cash).
-- **At the pensioners' Christmas lunch** on Friday 4 December.
-
-## Prizes
-
-Cash prizes for the first ducks past the finish.
-
-## The raft race
-
-Build a raft and race it down the brook too. Trophies for 1st, 2nd and 3rd, best style, first to sink, and the biggest of all for last place. Everyone who enters gets a treat. [PLACEHOLDER: raft age categories.]
-
-## On the day
-
-In 2022 the ducks went in at 11am from Town Bottom Park. [PLACEHOLDER: confirm the 2026 start time and start point, then set `startTimeConfirmed: true`.]
+**Prizes:** cash prizes for the first ducks past the finish. Tickets are numbered after online sales close.

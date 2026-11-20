@@ -1,6 +1,6 @@
 ---
 title: "2014 Wolf's Pit Fell Race"
-category: "Wolfspit"
+category: "Wolf's Pit"
 event: wolfspit
 date: 2014-03-16
 cover: /uploads/albums/2014-03-16-2014-wolfs-pit-fell-race/001.jpg

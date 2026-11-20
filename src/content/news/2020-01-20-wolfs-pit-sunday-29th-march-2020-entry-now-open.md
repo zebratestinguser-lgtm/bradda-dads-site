@@ -1,7 +1,7 @@
 ---
 title: "Wolf’s Pit Sunday 29th March 2020 – Entry now open"
 date: 2020-01-20
-tag: "Wolfspit"
+tag: "Wolf's Pit"
 summary: "Entry for 2020 via Fabian4 is now open!"
 source: https://braddadads.wordpress.com/2020/01/20/wolfs-pit-sunday-29th-march-2020-entry-now-open/
 ---

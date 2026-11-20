@@ -1,7 +1,7 @@
 ---
 title: "Wolf’s Pit results 2019"
 date: 2019-03-18
-tag: "Wolfspit"
+tag: "Wolf's Pit"
 summary: "Results from March 2019 are now up on RaceTek Live. Thanks to everyone for your support this year!"
 source: https://braddadads.wordpress.com/2019/03/18/wolfs-pit-results-2019/
 ---

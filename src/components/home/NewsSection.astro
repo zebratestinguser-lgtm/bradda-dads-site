@@ -35,7 +35,7 @@ const leadAlbum = lead?.data.album ? await getEntry(lead.data.album) : undefined
             <div class="news-lead__body">
               <div class="news-lead__meta">
                 <span class="tag">{lead.data.tag}</span>
-                <time datetime={lead.data.date.toISOString()}>{formatDate(lead.data.date)}</time>
+                <time datetime={lead.data.date.toISOString()}>Posted {formatDate(lead.data.date)}</time>
               </div>
               <h3 class="news-lead__title">
                 <a href={href(lead.id)}>{lead.data.title}</a>

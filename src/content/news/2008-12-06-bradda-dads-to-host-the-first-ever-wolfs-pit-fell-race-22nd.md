@@ -1,7 +1,7 @@
 ---
 title: "Bradda Dads to host the first ever ‘Wolf's Pit Fell Race’ - 22nd March 2009"
 date: 2008-12-06
-tag: "Wolfspit"
+tag: "Wolf's Pit"
 summary: "**********NEW FOR 2009********** The race, which will start at 1030hrs from Townfield Lane, Shatton (opposite High Peak Garden Centre), climbs to the summit of Shatton Moor before…"
 source: https://braddadads.blogspot.com/2008/12/bradda-dads-host-first-ever-wolfs-pit.html
 ---

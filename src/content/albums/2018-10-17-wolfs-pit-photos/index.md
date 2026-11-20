@@ -1,6 +1,6 @@
 ---
 title: "Wolf's Pit photos"
-category: "Wolfspit"
+category: "Wolf's Pit"
 event: wolfspit
 # Photo date: Gallery from the old WordPress Wolf’s Pit page; the years aren’t recorded.
 date: 2018-10-17
@@ -71,9 +71,9 @@ Text/WhatsApp/Phone: Stu on 07590 047104
 
 Previous Wolf’s Pit events:
 
-[Wolfspit Results 2026](https://braddadads.wordpress.com/wp-content/uploads/2026/03/wolfs-pit-results-2026-wolfs-pit-results-2026.pdf)
+[Wolf's Pit Results 2026](https://braddadads.wordpress.com/wp-content/uploads/2026/03/wolfs-pit-results-2026-wolfs-pit-results-2026.pdf)
 
-[Download Wolfspit 2025 Results](https://braddadads.wordpress.com/wp-content/uploads/2025/03/wolfspitresults2025.pdf)
+[Download Wolf's Pit 2025 Results](https://braddadads.wordpress.com/wp-content/uploads/2025/03/wolfspitresults2025.pdf)
 
 [Download Wolf’s Pit 2024 Results](https://braddadads.wordpress.com/wp-content/uploads/2024/03/2024wolfspitresultsfinal.pdf)
 

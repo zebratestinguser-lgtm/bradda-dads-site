@@ -1,7 +1,7 @@
 ---
 title: "Wolf’s Pit Fell Race 2024 open for entries"
 date: 2024-01-31
-tag: "Wolfspit"
+tag: "Wolf's Pit"
 summary: "Sunday 10th March 2024 Entries are now open via Fabian4 https://www.fabian4.co.uk/default.aspx?EventID=3647 See the event page for more details"
 source: https://braddadads.wordpress.com/2024/01/31/wolfs-pit-fell-race-2024-open-for-entries/
 ---

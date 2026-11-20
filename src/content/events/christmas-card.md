@@ -15,14 +15,25 @@ month: 11
 heroTitle: One card for the whole village
 heroText: Skip the stack of cards this year. Add your family's Christmas message to the community card for £5, and every penny goes back into Bradwell.
 heroNote: Entries close at midnight on Friday 20 November
+involvement:
+  - title: Add your message
+    text: £5 adds your family's Christmas message to the one shared card for the whole village.
+    url: https://bradda-dads-community-group.sumupstore.com/product/community-christmas-card
+    label: Pay £5 and add your message
+    onlyWhenOpen: true
+  - title: Prefer paper?
+    text: "Paper slips are counted too. [PLACEHOLDER: where to hand them in.]"
+    onlyWhenOpen: true
+  - title: Help deliver the cards
+    text: Cards are delivered around the village in the week of 14 December. Volunteers with a spare hour are very welcome.
+    url: /get-involved/
+    label: Volunteer
 ---
 
-Skip the stack of cards this year. Add your family's Christmas message to the community card for £5, and every penny goes back into Bradwell.
+Skip the stack of cards this year. Add your family's Christmas message to the one community card for £5, and every penny goes back into Bradwell.
 
 **How the 2026 card comes together:**
 
 - Entries close at midnight on Friday 20 November.
 - The artwork is picked at random by a member of the public in the Post Office.
 - Cards go to the printers at the end of November and are delivered around the village in the week of 14 December.
-
-Missed adding your name online? Paper slips are counted too. [PLACEHOLDER: where paper slips can be handed in.]

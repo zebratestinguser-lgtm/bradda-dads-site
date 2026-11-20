@@ -28,13 +28,13 @@ export const categorySlug = (c: string) =>
     .replace(/^-|-$/g, '');
 
 /** Friendly order for photo categories */
-export const CATEGORY_ORDER = ['Carnival', 'Duck race', 'Bonfire', "Pensioners' lunch", 'Christmas card', 'Wolfspit', 'Tour of Bradwell', 'Social', 'Village'];
+export const CATEGORY_ORDER = ['Carnival', 'Duck race', 'Bonfire', "Pensioners' lunch", 'Christmas card', "Wolf's Pit", 'Tour of Bradwell', 'Social', 'Village'];
 
 /** News tag that matches each event, for "related news" on event pages. */
 export const EVENT_TAG: Record<string, string> = {
   'duck-race': 'Duck race',
   bonfire: 'Bonfire',
   'pensioners-lunch': "Pensioners' lunch",
-  wolfspit: 'Wolfspit',
+  wolfspit: "Wolf's Pit",
   'christmas-card': 'Christmas card',
 };
