@@ -1,0 +1,165 @@
+---
+import { getSite } from '../../lib/site';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+---
+
+<section id="join" class="join" aria-label="Join us">
+  <div class="container join__grid">
+    <div class="join__card">
+      <h2 class="join__title">Got kids? Live in Bradwell? You're in.</h2>
+      <p class="join__text">
+        Bradda Dads is open to any dad in the parish. No experience needed, just a spare pair of hands for a few events a year. We meet {site.meetingInfo}.
+      </p>
+      <div class="join__actions">
+        <a class="btn btn--yellow btn--sm" href={url('/get-involved/')}>Join the dads</a>
+        <a class="btn btn--ghost-light btn--sm" href="#donate">Donate</a>
+      </div>
+    </div>
+    <div class="fb">
+      <div class="fb__head">
+        <h2 class="fb__title">Latest from Facebook</h2>
+        <a class="link-arrow" href={site.facebookUrl} rel="noopener">Follow us →</a>
+      </div>
+      <ul class="fb__list" role="list">
+        {
+          site.facebookPosts.map((post) => (
+            <li class="fb__post">
+              {post.image ? (
+                <img class="fb__thumb" src={url(post.image)} alt={post.imageAlt ?? ''} width="64" height="64" loading="lazy" />
+              ) : (
+                <div class="fb__thumb fb__thumb--empty" aria-hidden="true">
+                  Photo
+                </div>
+              )}
+              <div class="fb__body">
+                <span class="fb__when">{post.date}</span>
+                <a class="fb__text" href={url(post.url)} rel="noopener">
+                  {post.text}
+                </a>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .join {
+    padding-block: var(--section-pad);
+  }
+  .join__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 24px;
+  }
+  .join__card {
+    border-radius: var(--radius-lg);
+    background: var(--green);
+    color: var(--white);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .join__title {
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.6px;
+  }
+  .join__text {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--on-dark-soft);
+  }
+  .join__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .btn--sm {
+    min-height: 50px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+  .fb {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .fb__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .fb__title {
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.4px;
+  }
+  .fb__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .fb__post {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .fb__thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-green);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .fb__thumb--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .fb__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .fb__when {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .fb__text {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .fb__text:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    .join__card,
+    .fb {
+      padding: 28px 22px;
+    }
+  }
+</style>

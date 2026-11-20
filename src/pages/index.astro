@@ -1,59 +1,30 @@
 ---
-// Temporary homepage. The real sections from the design arrive in milestone 3.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import Hero from '../components/home/Hero.astro';
+import EventsYear from '../components/home/EventsYear.astro';
+import NewsSection from '../components/home/NewsSection.astro';
+import CardBanner from '../components/home/CardBanner.astro';
+import WolfspitBand from '../components/home/WolfspitBand.astro';
+import PhotosSection from '../components/home/PhotosSection.astro';
+import StorySection from '../components/home/StorySection.astro';
+import MoneyMap from '../components/home/MoneyMap.astro';
+import DonateSection from '../components/home/DonateSection.astro';
+import JoinSection from '../components/home/JoinSection.astro';
+import { getEvents, pickNextEvent } from '../lib/events';
 
-const counts = {
-  news: (await getCollection('news')).length,
-  events: (await getCollection('events')).length,
-  albums: (await getCollection('albums')).length,
-  results: (await getCollection('results')).length,
-  timeline: (await getCollection('timeline')).length,
-  funded: (await getCollection('funded')).length,
-};
+const events = await getEvents();
+const next = pickNextEvent(events);
 ---
 
 <BaseLayout>
-  <section class="holding">
-    <div class="container holding__inner">
-      <p class="eyebrow">Work in progress</p>
-      <h1>The new Bradda Dads website is on its way</h1>
-      <p>The layout, fonts and colours are in place. The homepage sections from the design come next.</p>
-      <ul>
-        {Object.entries(counts).map(([name, n]) => <li><strong>{n}</strong> sample {name} entries loaded</li>)}
-      </ul>
-    </div>
-  </section>
+  {next ? <Hero event={next} /> : <h1 class="visually-hidden">Bradda Dads</h1>}
+  <EventsYear events={events} nextId={next?.id} />
+  <NewsSection />
+  <CardBanner />
+  <WolfspitBand />
+  <PhotosSection />
+  <StorySection />
+  <MoneyMap />
+  <DonateSection />
+  <JoinSection />
 </BaseLayout>
-
-<style>
-  .holding {
-    background: var(--green);
-    color: var(--white);
-    padding-block: 40px var(--section-pad);
-  }
-  .holding__inner {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  .holding .eyebrow {
-    color: var(--yellow);
-  }
-  h1 {
-    font-weight: 800;
-    font-size: clamp(40px, 6vw, 64px);
-    line-height: 1;
-    letter-spacing: -1.5px;
-    max-width: 16ch;
-  }
-  p,
-  li {
-    color: var(--on-dark-soft);
-    font-size: 18px;
-  }
-  ul {
-    margin: 0;
-    padding-left: 20px;
-  }
-</style>

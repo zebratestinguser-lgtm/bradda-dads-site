@@ -1,0 +1,498 @@
+---
+import { getSite } from '../../lib/site';
+import { getWolfspitYears, podium, PODIUM_RULES } from '../../lib/results';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+const allYears = await getWolfspitYears();
+const years = allYears.slice(0, 4); // latest four on the homepage
+const latest = years[0];
+const ROWS = 6;
+
+// Compact data for client-side search/filter: [pos, name, club, category, time]
+const data = Object.fromEntries(
+  years.map((y) => [y.year, y.rows.map((r) => [r.position, r.name, r.club, r.category, r.time])]),
+);
+const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPattern.source };
+---
+
+<section id="wolfspit" class="wolfspit" aria-labelledby="wolfspit-title">
+  <div class="container wolfspit__inner">
+    <div class="wolfspit__head">
+      <div class="wolfspit__intro">
+        <p class="eyebrow wolfspit__eyebrow">Race results</p>
+        <h2 id="wolfspit-title" class="wolfspit__title">Wolfspit Race</h2>
+        <p class="wolfspit__text">{site.wolfspitIntro}</p>
+      </div>
+      <div class="wolfspit__actions">
+        <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>
+          Enter {latest ? latest.year + 1 : new Date().getFullYear()}
+        </a>
+        {
+          latest && (
+            <a class="btn btn--ghost-light btn--md" href={url(`/wolfspit/${latest.year}.csv`)} data-csv-link download>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+              </svg>
+              Download results
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    {
+      latest ? (
+        <div class="results" data-results={JSON.stringify(data)} data-rules={JSON.stringify(rules)} data-rows={ROWS} data-base={url('/wolfspit/')}>
+          <div role="tablist" aria-label="Race year" class="year-tabs">
+            {years.map((y, i) => (
+              <button
+                type="button"
+                role="tab"
+                class="year-tab"
+                id={`year-tab-${y.year}`}
+                aria-controls="results-panel"
+                aria-selected={i === 0 ? 'true' : 'false'}
+                tabindex={i === 0 ? 0 : -1}
+                data-year={y.year}
+                data-finishers={y.finishers}
+              >
+                {y.year}
+              </button>
+            ))}
+            {allYears.length > years.length && (
+              <a class="year-tab year-tab--link" href={url('/wolfspit/')}>
+                Earlier years
+              </a>
+            )}
+          </div>
+
+          <div id="results-panel" role="tabpanel" aria-labelledby={`year-tab-${latest.year}`} class="results__panel" tabindex="0">
+            <div class="podium" data-podium>
+              {podium(latest.rows).map((p) => (
+                <div class="podium__card">
+                  <span class="podium__medal" aria-hidden="true">1</span>
+                  <div class="podium__body">
+                    <span class="podium__label">{p.label}</span>
+                    <span class="podium__name">{p.runner?.name ?? 'No finisher'}</span>
+                    <span class="podium__time">{p.runner?.time ?? '–'}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="table-card">
+              <div class="table-card__controls">
+                <div class="field field--grow">
+                  <label for="runner-search">Find a runner</label>
+                  <input id="runner-search" type="search" placeholder="Name or club" autocomplete="off" />
+                </div>
+                <div class="field">
+                  <label for="cat-filter">Category</label>
+                  <select id="cat-filter">
+                    <option value="">All runners</option>
+                    <option value="@women">Women</option>
+                    <option value="@juniors">Juniors</option>
+                    {[...new Set(latest.rows.map((r) => r.category).filter(Boolean))].sort().map((c) => (
+                      <option value={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div class="table-scroll">
+                <table class="results-table">
+                  <caption data-caption>
+                    {latest.year} results · {latest.finishers} finishers
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Pos</th>
+                      <th scope="col">Runner</th>
+                      <th scope="col">Club</th>
+                      <th scope="col">Category</th>
+                      <th scope="col" class="num">Time</th>
+                    </tr>
+                  </thead>
+                  <tbody data-tbody>
+                    {latest.rows.slice(0, ROWS).map((r) => (
+                      <tr>
+                        <td class="pos">{r.position}</td>
+                        <td>{r.name}</td>
+                        <td class="muted">{r.club}</td>
+                        <td class="muted">{r.category}</td>
+                        <td class="num">{r.time}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p class="results__status visually-hidden" aria-live="polite" data-status />
+              <a class="link-arrow" href={url(`/wolfspit/${latest.year}/`)} data-all-link>
+                See all {latest.year} finishers →
+              </a>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <p class="wolfspit__text">Results will appear here after the race.</p>
+      )
+    }
+  </div>
+</section>
+
+<script>
+  type Row = [number, string, string, string, string];
+
+  document.querySelectorAll<HTMLElement>('[data-results]').forEach((root) => {
+    const data: Record<string, Row[]> = JSON.parse(root.dataset.results!);
+    const rules: { women: string[]; junior: string } = JSON.parse(root.dataset.rules!);
+    const junior = new RegExp(rules.junior, 'i');
+    const isWoman = (c: string) => rules.women.some((p) => c.toUpperCase().startsWith(p));
+    const ROWS = Number(root.dataset.rows);
+    const base = root.dataset.base!;
+
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panel = root.querySelector<HTMLElement>('[role="tabpanel"]')!;
+    const search = root.querySelector<HTMLInputElement>('#runner-search')!;
+    const filter = root.querySelector<HTMLSelectElement>('#cat-filter')!;
+    const tbody = root.querySelector<HTMLElement>('[data-tbody]')!;
+    const caption = root.querySelector<HTMLElement>('[data-caption]')!;
+    const status = root.querySelector<HTMLElement>('[data-status]')!;
+    const allLink = root.querySelector<HTMLAnchorElement>('[data-all-link]')!;
+    const podium = root.querySelector<HTMLElement>('[data-podium]')!;
+    const csvLink = document.querySelector<HTMLAnchorElement>('[data-csv-link]');
+
+    let year = tabs[0]?.dataset.year ?? '';
+
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+    function matches(r: Row) {
+      const q = search.value.trim().toLowerCase();
+      const f = filter.value;
+      if (q && !`${r[1]} ${r[2]}`.toLowerCase().includes(q)) return false;
+      if (f === '@women') return isWoman(r[3]);
+      if (f === '@juniors') return junior.test(r[3]);
+      if (f) return r[3] === f;
+      return true;
+    }
+
+    function renderTable() {
+      const rows = data[year] ?? [];
+      const filtered = rows.filter(matches);
+      const shown = filtered.slice(0, ROWS);
+      tbody.innerHTML = shown.length
+        ? shown
+            .map(
+              (r) =>
+                `<tr><td class="pos">${r[0]}</td><td>${esc(r[1])}</td><td class="muted">${esc(r[2])}</td><td class="muted">${esc(r[3])}</td><td class="num">${esc(r[4])}</td></tr>`,
+            )
+            .join('')
+        : `<tr><td colspan="5" class="empty">No runners match. Try a different name or category.</td></tr>`;
+      const tab = tabs.find((t) => t.dataset.year === year);
+      const filtering = search.value.trim() || filter.value;
+      caption.textContent = filtering
+        ? `${year} results · ${filtered.length} of ${tab?.dataset.finishers} finishers match`
+        : `${year} results · ${tab?.dataset.finishers} finishers`;
+      status.textContent = filtering ? `${filtered.length} runners found` : '';
+    }
+
+    function renderPodium() {
+      const rows = [...(data[year] ?? [])].sort((a, b) => a[0] - b[0]);
+      const picks: [string, Row | undefined][] = [
+        ['Overall winner', rows[0]],
+        ['First woman', rows.find((r) => isWoman(r[3]))],
+        ['First junior', rows.find((r) => junior.test(r[3]))],
+      ];
+      podium.innerHTML = picks
+        .map(
+          ([label, r]) => `<div class="podium__card"><span class="podium__medal" aria-hidden="true">1</span><div class="podium__body">
+          <span class="podium__label">${label}</span><span class="podium__name">${r ? esc(r[1]) : 'No finisher'}</span>
+          <span class="podium__time">${r ? esc(r[4]) : '–'}</span></div></div>`,
+        )
+        .join('');
+    }
+
+    function renderCategories() {
+      const cats = [...new Set((data[year] ?? []).map((r) => r[3]).filter(Boolean))].sort();
+      const keep = filter.value;
+      filter.innerHTML =
+        `<option value="">All runners</option><option value="@women">Women</option><option value="@juniors">Juniors</option>` +
+        cats.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+      filter.value = [...filter.options].some((o) => o.value === keep) ? keep : '';
+    }
+
+    function select(tab: HTMLButtonElement, focus = false) {
+      year = tab.dataset.year!;
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      panel.setAttribute('aria-labelledby', tab.id);
+      allLink.href = `${base}${year}/`;
+      allLink.textContent = `See all ${year} finishers →`;
+      if (csvLink) csvLink.href = `${base}${year}.csv`;
+      renderPodium();
+      renderCategories();
+      renderTable();
+      if (focus) tab.focus();
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab));
+      tab.addEventListener('keydown', (e) => {
+        let next = -1;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End') next = tabs.length - 1;
+        if (next >= 0) {
+          e.preventDefault();
+          select(tabs[next], true);
+        }
+      });
+    });
+    search.addEventListener('input', renderTable);
+    filter.addEventListener('change', renderTable);
+  });
+</script>
+
+<style>
+  .wolfspit {
+    padding-block: 80px;
+    background: var(--green-deep);
+    color: var(--white);
+  }
+  .wolfspit__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .wolfspit__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+  }
+  .wolfspit__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 640px;
+  }
+  .wolfspit__eyebrow {
+    color: var(--yellow);
+  }
+  .wolfspit__title {
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .wolfspit__text {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--on-dark-muted);
+  }
+  .wolfspit__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+  .wolfspit .btn--ghost-light {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .results {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .year-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .year-tab {
+    min-height: var(--tap);
+    padding: 0 20px;
+    border-radius: var(--radius-pill);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: transparent;
+    color: var(--white);
+    font: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .year-tab:hover {
+    border-color: var(--white);
+    color: var(--white);
+  }
+  .year-tab[aria-selected='true'] {
+    border-color: var(--yellow);
+    background: var(--yellow);
+    color: var(--text);
+    font-weight: 700;
+  }
+  .results__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .podium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 16px;
+  }
+  .podium :global(.podium__card) {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 22px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .podium :global(.podium__medal) {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .podium :global(.podium__body) {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .podium :global(.podium__label) {
+    font-size: 13px;
+    color: var(--on-dark-muted);
+  }
+  .podium :global(.podium__name) {
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .podium :global(.podium__time) {
+    font-size: 15px;
+    color: var(--yellow);
+    font-weight: 600;
+  }
+  .table-card {
+    background: var(--white);
+    color: var(--text);
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .table-card__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field--grow {
+    flex: 1 1 260px;
+  }
+  .field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .field input,
+  .field select {
+    min-height: 46px;
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 16px;
+    background: var(--white);
+    color: var(--text);
+    width: 100%;
+  }
+  .field input {
+    max-width: 380px;
+  }
+  .table-scroll {
+    overflow-x: auto;
+  }
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    min-width: 560px;
+  }
+  .results-table caption {
+    text-align: left;
+    font-size: 14px;
+    color: var(--muted);
+    padding-bottom: 10px;
+  }
+  .results-table th {
+    text-align: left;
+    color: var(--muted);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .results-table :global(td) {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .results-table :global(.pos) {
+    font-weight: 700;
+  }
+  .results-table :global(.muted) {
+    color: var(--muted);
+  }
+  .results-table :global(.num),
+  .results-table th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .results-table :global(.empty) {
+    color: var(--muted);
+    text-align: center;
+    padding: 24px 12px;
+  }
+  .table-card .link-arrow {
+    align-self: flex-start;
+    padding: 6px 0;
+  }
+  @media (max-width: 600px) {
+    .wolfspit {
+      padding-block: 56px;
+    }
+    .table-card {
+      padding: 18px 14px;
+    }
+  }
+</style>

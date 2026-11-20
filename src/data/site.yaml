@@ -26,6 +26,13 @@ site:
   # Phase 1: "Share your photos" goes to Facebook (or a mailto: link)
   sharePhotosUrl: https://www.facebook.com/BraddaDads/
   accountsUrl: "#"
+  # Wolfspit Race: entry link for next year's race, and the intro on the results band
+  wolfspitEntryUrl: "#"
+  wolfspitIntro: "[Short description of the course: distance, climb, start and finish.] Find your time, see who took the podium, and compare years."
+  # Our story (homepage)
+  storyIntro: "Bradda Dads began in 1999, when a group of village dads raced rubber ducks down the brook on Boxing Day to raise money for Bradwell. [PLACEHOLDER: a paragraph or two on who started it, why, and how the group has grown.]"
+  # storyImage: /uploads/story/first-duck-race.jpg
+  # storyImageAlt: Describe the archive photo
   # Up to three hand-picked Facebook posts for the homepage
   facebookPosts:
     - date: "[DATE]"

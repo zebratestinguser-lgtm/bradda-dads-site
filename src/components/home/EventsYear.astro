@@ -1,0 +1,152 @@
+---
+import type { EventEntry } from '../../lib/events';
+import { url } from '../../lib/url';
+
+interface Props {
+  events: EventEntry[];
+  nextId?: string;
+}
+const { events, nextId } = Astro.props;
+
+function tagFor(e: EventEntry) {
+  if (e.id === nextId) return { label: 'Next up', kind: 'next' };
+  if (e.data.status === 'open') return { label: 'Open now', kind: 'open' };
+  if (e.data.status === 'done') return { label: 'Done for this year', kind: 'done' };
+  return { label: 'Coming up', kind: 'upcoming' };
+}
+---
+
+<section id="events" class="events" aria-labelledby="events-title">
+  <div class="container events__inner">
+    <div class="events__head">
+      <div class="events__intro">
+        <h2 id="events-title" class="section-title">The Bradda Dads year</h2>
+        <p>The big dates, all run by volunteer dads, all for the village.</p>
+      </div>
+      <a class="link-arrow" href={url('/events.ics')}>Add to your calendar →</a>
+    </div>
+    <div class="events__grid">
+      {
+        events.map((e) => {
+          const tag = tagFor(e);
+          return (
+            <article class:list={['event-card', { 'event-card--next': e.id === nextId }]}>
+              <div class="event-card__top">
+                <span class="event-card__when">{e.data.when}</span>
+                <span class={`event-card__tag event-card__tag--${tag.kind}`}>{tag.label}</span>
+              </div>
+              <h3 class="event-card__name">{e.data.name}</h3>
+              <p class="event-card__summary">{e.data.summary}</p>
+              <a class="event-card__cta" href={url(e.data.ctaUrl)}>
+                {e.data.ctaLabel} <span aria-hidden="true">→</span>
+                <span class="visually-hidden">: {e.data.name}</span>
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .events {
+    padding-block: var(--section-pad);
+  }
+  .events__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .events__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .events__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .events__intro p {
+    font-size: 17px;
+    color: var(--muted);
+  }
+  .events__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 20px;
+  }
+  .event-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--white);
+    color: var(--text);
+  }
+  .event-card--next {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--white);
+  }
+  .event-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .event-card__when {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .event-card__tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--border-soft);
+    color: var(--muted-strong);
+    white-space: nowrap;
+  }
+  .event-card__tag--open {
+    background: var(--yellow-panel);
+    color: var(--yellow-ink);
+  }
+  .event-card__tag--done {
+    color: var(--muted);
+  }
+  .event-card__tag--next {
+    background: var(--yellow);
+    color: var(--text);
+  }
+  .event-card__name {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.15;
+  }
+  .event-card__summary {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted);
+    flex-grow: 1;
+  }
+  .event-card--next .event-card__summary {
+    color: var(--on-dark-soft);
+  }
+  .event-card__cta {
+    font-weight: 600;
+    font-size: 15px;
+    color: inherit;
+    padding: 10px 0;
+  }
+  .event-card__cta:hover {
+    color: inherit;
+  }
+</style>

@@ -17,12 +17,14 @@ Tick items off as they're done. Updated: milestone 2.
 - [ ] Annual accounts link (`accountsUrl`)
 - [ ] Three recent Facebook posts to show on the homepage (`facebookPosts`)
 - [ ] Decide: "Share your photos" → Facebook (current) or a `mailto:` address (`sharePhotosUrl`)
+- [ ] Wolfspit course description (`wolfspitIntro`) and next year's entry link (`wolfspitEntryUrl`)
+- [ ] Our story intro paragraph (`storyIntro`) and archive photo (`storyImage` + `storyImageAlt`)
 
 ## Events: `src/content/events/`
 
-- [ ] **Duck race** (`duck-race.md`): start time (then set `startTimeConfirmed: true`), start point, duck price, prize, where ducks are sold, SumUp link (`ctaUrl`)
+- [ ] **Duck race** (`duck-race.md`): start time (then set `startTimeConfirmed: true`), start point (`location`), duck price (`price`), prize and where ducks are sold (`heroNote`), SumUp link (`ctaUrl`)
 - [ ] **Bonfire** (`bonfire.md`): venue, date, details
-- [ ] **Christmas card** (`christmas-card.md`): closing date, how the card is shown/delivered
+- [ ] **Christmas card** (`christmas-card.md`): closing date (`heroNote`), how the card is shown/delivered
 - [ ] **Pensioners' lunch** (`pensioners-lunch.md`): date, venue, booking link
 - [ ] **Wolfspit Race** (`wolfspit.md`): month/date, start/finish, one-line description, entry link
 
@@ -51,6 +53,12 @@ Tick items off as they're done. Updated: milestone 2.
 
 - [ ] School stage lighting: real map position, year, amount (optional), details
 - [ ] Replace `sample-group-grant.md` with real funded groups/projects
+
+## Old websites to bring forward (milestone 8)
+
+- [ ] https://braddadads.blogspot.com/ (oldest): posts, photos, history
+- [ ] https://braddadads.wordpress.com/ (newest): posts, pages, photos, results
+- Many placeholders above (timeline years, past results, funded projects) can probably be filled from these.
 
 ## Pages still to write (milestone 4)
 

@@ -9,7 +9,8 @@ This file is the handover for building the new Bradda Dads website. Read it full
 - Annual activities: village Bonfire & Fireworks (November), village Christmas card (£5 per family message), free pensioners' Christmas lunch, Boxing Day Duck Race (26 December), and the Wolfspit Race (date TBC).
 - Also funds local projects, e.g. lighting and stage equipment for school productions, grants to local groups.
 - Facebook: https://www.facebook.com/BraddaDads/ (main day-to-day channel)
-- Old site: braddadads.wordpress.com. Parish listing: bradda.org/village_organisation/bradda-dads/
+- Old sites (both to be migrated, see "Content migration" milestone): **https://braddadads.blogspot.com/** (oldest) and **https://braddadads.wordpress.com/** (newest). Parish listing: bradda.org/village_organisation/bradda-dads/
+- Facts found on the old sites (dates, history, results, photos) are real content and can replace placeholders, but record the source URL for each one in `TODO-content.md` or the entry's front matter so Peter can check it.
 - Payments are taken through an existing **SumUp** account (online store + payment links).
 
 **Never invent facts** (dates, prices, totals, names, race results, history). Anything unknown stays a visible `[PLACEHOLDER]` and is listed in `TODO-content.md`.
@@ -151,6 +152,7 @@ Header row (exact): `position,name,club,category,time`
 5. Christmas card form flow (form built; submission service TBD since GitHub Pages has no forms).
 6. Accessibility/performance pass, `TODO-content.md`, `docs/how-to-update.md`.
 7. Deploy (GitHub Pages now), then connect the domain.
+8. **Content migration** from the Blogspot and WordPress sites: inventory every post/page/photo, map each to a collection (news, albums, timeline, results, funded), import with original dates, download images into `public/uploads/`, keep a source URL on each entry, and plan redirects for old WordPress URLs once on a host that supports them. Do this before connecting the domain.
 
 ## The design file
 

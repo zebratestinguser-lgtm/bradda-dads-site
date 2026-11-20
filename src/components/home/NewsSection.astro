@@ -1,0 +1,192 @@
+---
+import { getCollection } from 'astro:content';
+import { formatDate, formatShortDate } from '../../lib/format';
+import { url } from '../../lib/url';
+
+const all = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const lead = all.find((n) => n.data.featured) ?? all[0];
+const recent = all.filter((n) => n !== lead).slice(0, 3);
+const href = (id: string) => url(`/news/${id}/`);
+---
+
+{
+  lead && (
+    <section id="news" class="news" aria-labelledby="news-title">
+      <div class="container news__inner">
+        <div class="news__head">
+          <h2 id="news-title" class="section-title">News</h2>
+          <a class="link-arrow" href={url('/news/')}>All news →</a>
+        </div>
+        <div class="news__layout">
+          <article class="news-lead">
+            {lead.data.image ? (
+              <img class="news-lead__img" src={url(lead.data.image)} alt={lead.data.imageAlt ?? ''} width="800" height="260" loading="lazy" decoding="async" />
+            ) : (
+              <div class="news-lead__img news-lead__img--empty" aria-hidden="true">[Lead photo]</div>
+            )}
+            <div class="news-lead__body">
+              <div class="news-lead__meta">
+                <span class="tag">{lead.data.tag}</span>
+                <time datetime={lead.data.date.toISOString()}>{formatDate(lead.data.date)}</time>
+              </div>
+              <h3 class="news-lead__title">
+                <a href={href(lead.id)}>{lead.data.title}</a>
+              </h3>
+              <p class="news-lead__summary">{lead.data.summary}</p>
+              <a class="link-arrow" href={href(lead.id)} aria-hidden="true" tabindex="-1">
+                Read more →
+              </a>
+            </div>
+          </article>
+          <div class="news-list">
+            {recent.map((n) => (
+              <article class="news-item">
+                {n.data.image ? (
+                  <img class="news-item__thumb" src={url(n.data.image)} alt="" width="84" height="84" loading="lazy" decoding="async" />
+                ) : (
+                  <div class="news-item__thumb" aria-hidden="true" />
+                )}
+                <div class="news-item__body">
+                  <p class="news-item__meta">
+                    <span class="news-item__tag">{n.data.tag}</span> ·{' '}
+                    <time datetime={n.data.date.toISOString()}>{formatShortDate(n.data.date)}</time>
+                  </p>
+                  <h3 class="news-item__title">
+                    <a href={href(n.id)}>{n.data.title}</a>
+                  </h3>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .news {
+    padding-bottom: var(--section-pad);
+  }
+  .news__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .news__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .news__layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .news-lead {
+    flex: 999 1 460px;
+    min-width: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+  }
+  .news-lead__img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    background: var(--surface-green);
+  }
+  .news-lead__img--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .news-lead__body {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .news-lead__meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .tag {
+    background: var(--yellow-panel);
+    color: var(--yellow-ink);
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .news-lead__title {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.15;
+  }
+  .news-lead__title a,
+  .news-item__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .news-lead__title a:hover,
+  .news-item__title a:hover {
+    text-decoration: underline;
+  }
+  .news-lead__summary {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+  }
+  .news-list {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .news-item {
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .news-item__thumb {
+    width: 84px;
+    height: 84px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-green);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .news-item__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .news-item__meta {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .news-item__tag {
+    font-weight: 600;
+    color: var(--green);
+  }
+  .news-item__title {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+</style>

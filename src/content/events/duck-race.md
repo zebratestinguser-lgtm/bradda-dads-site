@@ -10,7 +10,13 @@ summary: Where it all started in 1999. Buy a duck and race it down the brook.
 status: upcoming
 ctaLabel: Buy a duck
 ctaUrl: "#"
+price: "£[PRICE]"
 order: 4
+heroTitle: The Boxing Day Duck Race
+heroHighlight: Duck Race
+heroText: Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.
+countdownLabel: Ducks hit the water in
+heroNote: First duck past the finish wins **[PRIZE]**. Ducks on sale online and at [SHOP / VENUE].
 ---
 
 Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.

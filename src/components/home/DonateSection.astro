@@ -1,0 +1,197 @@
+---
+import { getSite } from '../../lib/site';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+// Decorative stand-in until the real SumUp QR code image is added in site.yaml
+const pattern = '1110111101010110101111000100101101110011010111011';
+---
+
+<section id="donate" class="donate-wrap" aria-labelledby="donate-title">
+  <div class="container">
+    <div class="donate">
+      <div class="donate__copy">
+        <p class="eyebrow donate__eyebrow">Donate</p>
+        <h2 id="donate-title" class="section-title">Chip in for Bradwell</h2>
+        <p class="donate__text">
+          Every pound goes back into the village: the pensioners' lunch, the bonfire, and grants for local groups. Pick an amount to pay securely online.
+        </p>
+        <ul class="amounts" role="list">
+          {
+            site.donationLinks.map((d, i) => (
+              <li>
+                <a class:list={['amount', { 'amount--featured': i === 1 }]} href={url(d.url)}>
+                  <span class="amount__value">£{d.amount}</span>
+                  <span class="amount__label">{d.label}</span>
+                  <span class="visually-hidden"> (donate £{d.amount} via SumUp)</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="donate__foot">
+          <a class="link-arrow" href={url(site.sumupStoreUrl)}>Visit our SumUp shop →</a>
+          <span class="donate__secure">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="11" width="14" height="10" rx="2" />
+              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+            </svg>
+            Secure payments by SumUp
+          </span>
+        </div>
+      </div>
+      <div class="donate__qr-col">
+        {
+          site.donationQr ? (
+            <img class="qr" src={url(site.donationQr)} alt="QR code: scan to donate to Bradda Dads via SumUp" width="200" height="200" loading="lazy" />
+          ) : (
+            <div class="qr qr--placeholder" aria-hidden="true">
+              {pattern.split('').map((b) => <span class={b === '1' ? 'on' : ''} />)}
+            </div>
+          )
+        }
+        <p class="donate__qr-text">
+          At an event? Scan to donate on your phone.
+          {!site.donationQr && ' [Real SumUp QR code goes here]'}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .donate-wrap {
+    padding-top: var(--section-pad);
+  }
+  .donate {
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--green);
+    padding: 44px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+  }
+  .donate__copy {
+    flex: 999 1 480px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .donate__eyebrow {
+    color: var(--green);
+  }
+  .donate__text {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+    max-width: 560px;
+  }
+  .amounts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 480px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .amount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 84px;
+    height: 100%;
+    padding: 10px 6px;
+    border-radius: 18px;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .amount:hover {
+    color: var(--text);
+    background: var(--border);
+  }
+  .amount--featured {
+    background: var(--green);
+    color: var(--white);
+  }
+  .amount--featured:hover {
+    background: var(--green-hover);
+    color: var(--white);
+  }
+  .amount__value {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+  }
+  .amount__label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .amount--featured .amount__label {
+    color: var(--on-dark-soft);
+  }
+  .donate__foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    align-items: center;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .donate__foot .link-arrow {
+    font-size: 15px;
+    padding: 10px 0;
+  }
+  .donate__secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .donate__qr-col {
+    flex: 1 1 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .qr {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+  .qr--placeholder {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    padding: 18px;
+  }
+  .qr--placeholder span {
+    border-radius: 3px;
+  }
+  .qr--placeholder span.on {
+    background: var(--text);
+  }
+  .donate__qr-text {
+    font-size: 14px;
+    color: var(--muted);
+    text-align: center;
+    max-width: 220px;
+  }
+  @media (max-width: 600px) {
+    .donate {
+      padding: 28px 20px;
+    }
+    .amount__value {
+      font-size: 26px;
+    }
+  }
+</style>

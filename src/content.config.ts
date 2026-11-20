@@ -63,6 +63,19 @@ const events = defineCollection({
     ctaUrl: link,
     /** Position on the homepage "year" strip (1 = first). */
     order: z.number().int(),
+    /** Price shown on the hero button, e.g. "£2". */
+    price: z.string().optional(),
+    // Homepage hero (used when this is the next event). All optional.
+    /** Big headline, e.g. "The Boxing Day Duck Race". Defaults to the name. */
+    heroTitle: z.string().optional(),
+    /** Part of the headline shown in yellow, e.g. "Duck Race". */
+    heroHighlight: z.string().optional(),
+    /** Paragraph under the headline. Defaults to the summary. */
+    heroText: z.string().optional(),
+    /** Line above the countdown numbers, e.g. "Ducks hit the water in". */
+    countdownLabel: z.string().optional(),
+    /** Small note under the countdown, e.g. prize and where to buy. */
+    heroNote: z.string().optional(),
   }),
 });
 
@@ -148,6 +161,11 @@ const settings = defineCollection({
     meetingInfo: z.string(),
     sharePhotosUrl: link,
     accountsUrl: link,
+    wolfspitEntryUrl: link,
+    wolfspitIntro: z.string(),
+    storyIntro: z.string(),
+    storyImage: uploadPath.optional(),
+    storyImageAlt: z.string().optional(),
     facebookPosts: z
       .array(z.object({ date: z.string(), text: z.string(), url: link, image: uploadPath.optional(), imageAlt: z.string().optional() }))
       .max(3)
