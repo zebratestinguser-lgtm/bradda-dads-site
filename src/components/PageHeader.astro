@@ -1,5 +1,6 @@
 ---
 // Green header band used at the top of inner pages.
+import BrookEdge from './BrookEdge.astro';
 interface Props {
   title: string;
   eyebrow?: string;
@@ -15,13 +16,15 @@ const { title, eyebrow, intro } = Astro.props;
     {intro && <p class="page-header__intro">{intro}</p>}
     <slot />
   </div>
+  <BrookEdge />
 </section>
 
 <style>
   .page-header {
+    position: relative;
     background: var(--green);
     color: var(--white);
-    padding-block: 32px 56px;
+    padding-block: 32px 72px;
   }
   .page-header__inner {
     display: flex;

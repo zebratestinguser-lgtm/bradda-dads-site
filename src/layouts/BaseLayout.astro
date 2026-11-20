@@ -24,7 +24,10 @@ const site = await getSite();
 const { title, description = site.description, ogImage } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name}: ${site.tagline.replace(/\.$/, '')}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImageUrl = ogImage ? new URL(url(ogImage), Astro.site).href : undefined;
+// Pages with their own photo use it; everything else uses the branded share card (public/og-image.jpg,
+// made from scripts/qa/og-image-source.html)
+const ogImageUrl = new URL(url(ogImage ?? '/og-image.jpg'), Astro.site).href;
+const ogIsDefault = !ogImage;
 ---
 
 <!doctype html>
@@ -45,8 +48,11 @@ const ogImageUrl = ogImage ? new URL(url(ogImage), Astro.site).href : undefined;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_GB" />
-    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={ogImageUrl} />
+    {ogIsDefault && <meta property="og:image:width" content="1200" />}
+    {ogIsDefault && <meta property="og:image:height" content="630" />}
+    <meta property="og:image:alt" content={ogIsDefault ? 'Bradda Dads: raising money for Bradwell since 1999' : fullTitle} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

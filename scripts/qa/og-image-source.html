@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: B; src: url(brico.woff2); font-weight: 800; }
+  @font-face { font-family: I; src: url(inter.woff2); font-weight: 500; }
+  html, body { margin: 0; }
+  .card {
+    width: 1200px; height: 630px; box-sizing: border-box; overflow: hidden; position: relative;
+    background: #1D3B2C; color: #fff; display: flex; font-family: I, sans-serif;
+  }
+  .text { flex: 1; padding: 72px 0 72px 80px; display: flex; flex-direction: column; justify-content: center; gap: 26px; position: relative; z-index: 2; }
+  .brand { display: flex; align-items: center; gap: 18px; }
+  .brand span { font-family: B; font-weight: 800; font-size: 46px; letter-spacing: -1px; }
+  h1 { margin: 0; font-family: B; font-weight: 800; font-size: 84px; line-height: 0.95; letter-spacing: -2.5px; }
+  h1 em { font-style: normal; color: #F6C343; }
+  p { margin: 0; font-size: 28px; line-height: 1.35; color: #DFE9E2; max-width: 560px; }
+  .photo {
+    position: absolute; right: -40px; top: 60px; width: 520px; height: 420px; border-radius: 36px; overflow: hidden;
+    transform: rotate(3deg); box-shadow: 0 30px 60px rgba(0,0,0,0.35); z-index: 1;
+  }
+  .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .wave { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; z-index: 3; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="text">
+    <div class="brand">
+      <svg width="64" height="64" viewBox="0 0 64 64"><ellipse cx="30" cy="42" rx="22" ry="14" fill="#F6C343"/><circle cx="40" cy="24" r="12" fill="#F6C343"/><path d="M50 24 L60 27 L50 30 Z" fill="#E8702A"/><circle cx="43" cy="21" r="2.2" fill="#1a1f1c"/><path d="M14 40 Q22 34 30 40" stroke="#D9A21E" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      <span>Bradda Dads</span>
+    </div>
+    <h1>Raising money<br>for <em>Bradwell</em><br>since 1999</h1>
+    <p>Duck race · bonfire · pensioners' lunch · Christmas card · fell races</p>
+  </div>
+  <div class="photo"><img src="ducks.jpg" alt=""></div>
+  <svg class="wave" viewBox="0 0 1200 70" preserveAspectRatio="none"><path d="M0 40 C150 10 300 70 450 40 S750 10 900 40 S1100 70 1200 35 L1200 70 L0 70 Z" fill="#F6C343"/></svg>
+</div>
+</body>
+</html>

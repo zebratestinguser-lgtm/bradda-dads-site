@@ -1,5 +1,6 @@
 ---
 import DuckLogo from '../DuckLogo.astro';
+import BrookEdge from '../BrookEdge.astro';
 import { isPlaceholder, type EventEntry } from '../../lib/events';
 import { formatEventDay, formatTime, inlineBold } from '../../lib/format';
 import { url } from '../../lib/url';
@@ -136,6 +137,7 @@ const pad = (n: number) => String(n);
           </div>
         )}
       </div>
+      <BrookEdge duck />
     </section>
   )
 }
@@ -167,9 +169,10 @@ const pad = (n: number) => String(n);
 
 <style>
   .hero {
+    position: relative;
     background: var(--green);
     color: var(--white);
-    padding-block: 40px 72px;
+    padding-block: 40px 96px;
   }
   .hero__inner {
     display: flex;
