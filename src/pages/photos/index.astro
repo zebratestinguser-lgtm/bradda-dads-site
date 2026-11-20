@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import AlbumCard from '../../components/AlbumCard.astro';
+import { getAlbums, photoYear } from '../../lib/albums';
+import { getSite } from '../../lib/site';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+const albums = await getAlbums();
+const total = albums.reduce((n, a) => n + a.data.photos.length, 0);
+
+// Group by the year the photos were taken
+const groups = new Map<string, typeof albums>();
+for (const a of albums) {
+  const y = photoYear(a);
+  if (!groups.has(y)) groups.set(y, []);
+  groups.get(y)!.push(a);
+}
+// Newest year first; albums without a year ("Various years") last
+const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Other' ? -1 : Number(b) - Number(a)));
+---
+
+<BaseLayout title="Photos" description={`${albums.length} photo albums from Bradda Dads events in Bradwell since 2001.`}>
+  <PageHeader
+    eyebrow="Photos"
+    title="Photo albums"
+    intro={`${albums.length} albums and ${total.toLocaleString('en-GB')} photos from Bradda Dads events, going back to 2001. Every album shows when the photos were taken.`}
+  >
+    <a class="btn btn--yellow btn--md" href={url(site.sharePhotosUrl)}>Share your photos</a>
+  </PageHeader>
+
+  <nav class="container year-jump" aria-label="Jump to year">
+    <ul class="chips" role="list">
+      {years.map((y) => <li><a class="chip" href={`#year-${y}`}>{y === 'Other' ? 'Various years' : y}</a></li>)}
+    </ul>
+  </nav>
+
+  {
+    years.map((y, gi) => (
+      <section class="container year-group" id={`year-${y}`} aria-labelledby={`year-${y}-title`}>
+        <h2 class="subhead" id={`year-${y}-title`}>{y === 'Other' ? 'Various years' : y}</h2>
+        <ul class="card-grid" role="list">
+          {groups.get(y)!.map((a, i) => (
+            <li>
+              <AlbumCard album={a} index={gi + i} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</BaseLayout>
+
+<style>
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+  .year-jump {
+    padding-block: 28px 8px;
+  }
+  .year-jump .chip {
+    min-height: 40px;
+    font-size: 14px;
+  }
+  .year-group {
+    padding-block: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    scroll-margin-top: 16px;
+  }
+  .year-group:last-child {
+    padding-bottom: var(--section-pad);
+  }
+</style>

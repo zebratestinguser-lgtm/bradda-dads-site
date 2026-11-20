@@ -1,0 +1,127 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ResultsYear from '../../components/results/ResultsYear.astro';
+import YearNav from '../../components/results/YearNav.astro';
+import { getWolfspitYears } from '../../lib/results';
+import { getSite } from '../../lib/site';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+const years = await getWolfspitYears();
+const latest = years[0];
+const event = await getEntry('events', 'wolfspit');
+const { Content } = event ? await render(event) : { Content: null };
+// Every runner across all years, for the cross-year search: [year, pos, name, club, time]
+const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.name, r.club, r.time]));
+---
+
+<BaseLayout title="Wolf's Pit Fell Race" description="The Wolf's Pit Fell Race: a 9 km fell race from Shatton, near Bamford. Results from every year since 2022, and a search across all years.">
+  <PageHeader eyebrow="Fell race" title="Wolf's Pit Fell Race" intro={site.wolfspitIntro}>
+    <div class="actions">
+      <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>Enter {latest ? latest.year + 1 : ''}</a>
+      <a class="btn btn--ghost-light btn--md" href="#results">Latest results</a>
+    </div>
+  </PageHeader>
+
+  <section class="container page-section about">
+    <div class="prose">{Content && <Content />}</div>
+  </section>
+
+  <section class="container page-section stack" id="all-years" aria-labelledby="search-title">
+    <h2 class="subhead" id="search-title">Find yourself in any year</h2>
+    <div class="form-field search">
+      <label for="any-year">Runner name</label>
+      <input id="any-year" type="search" placeholder="Start typing a name" autocomplete="off" data-any-year={JSON.stringify(everyone)} data-base={url('/wolfspit/')} />
+    </div>
+    <p class="hint" aria-live="polite" data-any-status>Search {everyone.length.toLocaleString('en-GB')} results from {years.length} years.</p>
+    <ul class="any-results" role="list" data-any-results></ul>
+  </section>
+
+  {
+    latest && (
+      <section class="container page-section stack" id="results" aria-labelledby="latest-title">
+        <h2 class="subhead" id="latest-title">{latest.year} results</h2>
+        <YearNav label="Results year" items={years.map((y) => ({ label: String(y.year), href: url(`/wolfspit/${y.year}/`), current: y.year === latest.year }))} />
+        <ResultsYear year={latest} raceName="Wolf's Pit" csvHref={url(`/wolfspit/${latest.year}.csv`)} />
+        <p class="note">
+          Results for 2009–2019 aren't on the site yet. They were published on the old race website and on RaceTek, and we're working on bringing them across.
+        </p>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-any-year]');
+  const list = document.querySelector<HTMLElement>('[data-any-results]');
+  const status = document.querySelector<HTMLElement>('[data-any-status]');
+  if (input && list && status) {
+    type Row = [number, number, string, string, string];
+    const data: Row[] = JSON.parse(input.dataset.anyYear!);
+    const base = input.dataset.base!;
+    const initial = status.textContent;
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      if (q.length < 2) {
+        list.innerHTML = '';
+        status.textContent = initial;
+        return;
+      }
+      const hits = data.filter((r) => r[2].toLowerCase().includes(q)).sort((a, b) => b[0] - a[0] || a[1] - b[1]);
+      status.textContent = hits.length ? `${hits.length} result${hits.length === 1 ? '' : 's'}${hits.length > 50 ? ' (showing the first 50)' : ''}` : 'No runners found with that name.';
+      list.innerHTML = hits
+        .slice(0, 50)
+        .map(
+          (r) =>
+            `<li><a href="${base}${r[0]}/"><strong>${r[0]}</strong></a> · ${esc(r[2])}${r[3] ? ` <span class="club">(${esc(r[3])})</span>` : ''} · position ${r[1]} · ${esc(r[4])}</li>`,
+        )
+        .join('');
+    });
+  }
+</script>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .search {
+    max-width: 420px;
+  }
+  .hint {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .any-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 15px;
+  }
+  .any-results :global(li) {
+    padding: 8px 12px;
+    background: var(--surface);
+    border-radius: 10px;
+  }
+  .any-results :global(.club) {
+    color: var(--muted);
+  }
+</style>

@@ -4,7 +4,7 @@ date: 2010-10-20
 tag: "Village"
 summary: "The Bradda Dads 2010 Annual General Meeting This year two founding members of Bradda Dads have decided to retire after each serving more than ten years."
 image: /uploads/albums/2010-10-20-its-not-goodbye-its-just-au-revoir/001.jpg
-imageAlt: "Photo 1 of 4 from It's not goodbye, it's just au revoir (2010-10-20)"
+imageAlt: "Photo 1 of 4 from It's not goodbye, it's just au revoir (20 October 2010)"
 album: 2010-10-20-its-not-goodbye-its-just-au-revoir
 source: https://braddadads.blogspot.com/2010/10/its-not-goodbye-its-just-au-revoir.html
 ---

@@ -4,7 +4,7 @@ date: 2014-03-16
 tag: "Wolfspit"
 summary: "The largest ever field of 340 runners took up the challenge of the 2014 Wolf's Pit Fell Race."
 image: /uploads/albums/2014-03-16-2014-wolfs-pit-fell-race/001.jpg
-imageAlt: "Photo 1 of 12 from 2014 Wolf's Pit Fell Race (2014-03-16)"
+imageAlt: "Photo 1 of 12 from 2014 Wolf's Pit Fell Race (16 March 2014)"
 album: 2014-03-16-2014-wolfs-pit-fell-race
 source: https://braddadads.blogspot.com/2014/03/2014-wolfs-pit-fell-race-latest.html
 ---

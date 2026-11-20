@@ -4,7 +4,7 @@ date: 2001-12-12
 tag: "Pensioners' lunch"
 summary: "Archive entry to the blog posted on the 13th of February 2023."
 image: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg
-imageAlt: "Photo 1 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (2001-12-12)"
+imageAlt: "Photo 1 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (12 December 2001)"
 album: 2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday
 source: https://braddadads.blogspot.com/2001/12/first-ever-bradda-dads-pensioners.html
 ---

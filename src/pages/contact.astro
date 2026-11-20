@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
+
+const site = await getSite();
+const hasEmail = !site.contactEmail.startsWith('[');
+---
+
+<BaseLayout title="Contact" description="Get in touch with Bradda Dads, Bradwell.">
+  <PageHeader eyebrow="Contact" title="Get in touch" intro="Questions, ideas, old photos, or want to join? Here's how to reach us." />
+  <section class="container page-section grid">
+    <div class="card">
+      <h2 class="subhead">Facebook</h2>
+      <p>The quickest way to reach us, and where we post day-to-day news.</p>
+      <a class="btn btn--green btn--md" href={site.facebookUrl} rel="noopener">Bradda Dads on Facebook</a>
+    </div>
+    <div class="card">
+      <h2 class="subhead">Email</h2>
+      {hasEmail ? <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p> : <p>{site.contactEmail}</p>}
+    </div>
+    <div class="card">
+      <h2 class="subhead">Meetings</h2>
+      <p>We meet {site.meetingInfo}.</p>
+      <a class="link-arrow" href={url('/get-involved/')}>Get involved →</a>
+    </div>
+    <div class="card">
+      <h2 class="subhead">Wolf's Pit Fell Race</h2>
+      <p>For race entries and questions, see the <a href={url('/wolfspit/')}>Wolf's Pit page</a> for the organiser's contact details.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 18px;
+  }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 17px;
+    color: var(--muted-strong);
+  }
+  .card .subhead {
+    color: var(--text);
+    font-size: 24px;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+    align-self: flex-start;
+  }
+</style>

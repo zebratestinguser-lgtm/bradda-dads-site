@@ -4,7 +4,7 @@ date: 2012-03-11
 tag: "Wolfspit"
 summary: "What a fantastic Spring day for a fell race. We were once again graced with great weather and 227 runners completed this year's race."
 image: /uploads/albums/2012-03-11-wolfs-pit-fell-race/001.jpg
-imageAlt: "Photo 1 of 31 from Wolf's Pit Fell Race (2012-03-11)"
+imageAlt: "Photo 1 of 31 from Wolf's Pit Fell Race (11 March 2012)"
 album: 2012-03-11-wolfs-pit-fell-race
 source: https://braddadads.blogspot.com/2012/03/wolfs-pit-fell-race.html
 ---

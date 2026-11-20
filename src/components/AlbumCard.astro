@@ -1,0 +1,115 @@
+---
+// Album tile: cover + two smaller photos, with the photo date always visible.
+import { type Album, photoDate, photoDateShort } from '../lib/albums';
+import { url } from '../lib/url';
+
+interface Props {
+  album: Album;
+  index?: number;
+  headingLevel?: 'h2' | 'h3';
+}
+const { album, index = 0, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+
+const swatches = [
+  ['#8fb7d6', '#F6C343', '#cfe1ee'],
+  ['#3a2a1c', '#7a4a1f', '#F6C343'],
+  ['#5b7a5a', '#8aa385', '#dfe8df'],
+  ['#b3473a', '#dfe8df', '#fbe9b7'],
+];
+const sw = swatches[index % swatches.length];
+const pics = album.data.photos;
+const coverSrc = album.data.cover ?? pics[0]?.src;
+const rest = pics.filter((p) => p.src !== coverSrc);
+const shown = (coverSrc ? 1 : 0) + Math.min(rest.length, 1);
+const more = Math.max(0, pics.length - shown);
+const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${pics.length === 1 ? '' : 's'}`;
+---
+
+<a class="album" href={url(`/photos/${album.id}/`)}>
+  <div class="album__tiles" aria-hidden="true">
+    {
+      coverSrc ? (
+        <img class="album__tile album__tile--main" src={url(coverSrc)} alt="" loading="lazy" decoding="async" />
+      ) : (
+        <div class="album__tile album__tile--main" style={`background:${sw[0]}`} />
+      )
+    }
+    {
+      rest[0] ? (
+        <img class="album__tile" src={url(rest[0].src)} alt="" loading="lazy" decoding="async" />
+      ) : (
+        <div class="album__tile" style={`background:${sw[1]}`} />
+      )
+    }
+    <div class="album__tile album__tile--more" style={`background:${sw[2]}`}>{more > 0 ? `+${more}` : ''}</div>
+    <span class="album__date-chip">{photoDateShort(album)}</span>
+  </div>
+  <Heading class="album__name">{album.data.title}</Heading>
+  <span class="album__meta">
+    <time datetime={album.data.dateLabel ? undefined : album.data.date.toISOString().slice(0, 10)}>{photoDate(album)}</time> · {count}
+  </span>
+</a>
+
+<style>
+  .album {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .album:hover {
+    color: var(--text);
+  }
+  .album:hover .album__name {
+    text-decoration: underline;
+  }
+  .album__tiles {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    background: var(--surface-green);
+  }
+  .album__tile {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+  }
+  .album__tile--main {
+    grid-column: span 2;
+    height: 150px;
+  }
+  .album__tile--more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .album__date-chip {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(16, 36, 26, 0.85);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .album__name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+  .album__meta {
+    font-size: 14px;
+    color: var(--muted);
+  }
+</style>

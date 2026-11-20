@@ -4,7 +4,7 @@ date: 2011-10-20
 tag: "Social"
 summary: "Mike Thompson has resigned from Bradda Dads. Keith Cooper paid tribute to Mike for his loyal service since the 'Dads was formed in 1999."
 image: /uploads/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea/001.jpg
-imageAlt: "Photo 1 of 16 from Bradda Dads Legend Mike Thompson Retires After Nearly 13 Years (2011-10-20)"
+imageAlt: "Photo 1 of 16 from Bradda Dads Legend Mike Thompson Retires After Nearly 13 Years (20 October 2011)"
 album: 2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea
 source: https://braddadads.blogspot.com/2011/10/bradda-dads-legend-mike-thompson.html
 ---

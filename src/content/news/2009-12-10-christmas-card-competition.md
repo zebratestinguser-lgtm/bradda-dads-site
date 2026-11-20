@@ -4,7 +4,7 @@ date: 2009-12-10
 tag: "Christmas card"
 summary: "Bradwell Infant and Junior schools entered the festive spirit and took part in the design a christmas card competition."
 image: /uploads/albums/2009-12-10-christmas-card-competition/001.jpg
-imageAlt: "Photo 1 of 4 from Christmas Card Competition (2009-12-10)"
+imageAlt: "Photo 1 of 4 from Christmas Card Competition (10 December 2009)"
 album: 2009-12-10-christmas-card-competition
 source: https://braddadads.blogspot.com/2009/12/christmas-card-competition.html
 ---

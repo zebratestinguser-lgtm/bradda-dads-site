@@ -4,7 +4,7 @@ date: 2008-06-08
 tag: "Social"
 summary: "Cottage Farm Caravan Park, Blackwell. Lots of families turned up for barbecues, drinks and games (and a walk). Ummm, the guy in the shop said it was dome tent........"
 image: /uploads/albums/2008-06-08-camping-weekend-2008/001.jpg
-imageAlt: "Photo 1 of 25 from Camping Weekend - 2008 (2008-06-08)"
+imageAlt: "Photo 1 of 25 from Camping Weekend - 2008 (8 June 2008)"
 album: 2008-06-08-camping-weekend-2008
 source: https://braddadads.blogspot.com/2008/06/camping-weekend-2008.html
 ---

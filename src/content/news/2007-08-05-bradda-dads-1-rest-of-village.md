@@ -4,7 +4,7 @@ date: 2007-08-05
 tag: "Village"
 summary: "A hard fought battle this afternoon amid the torrid heat at the Stade de Bradda Sports."
 image: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/001.jpg
-imageAlt: "Photo 1 of 15 from Bradda Dads 1 - Rest of Village 1 (2007-08-05)"
+imageAlt: "Photo 1 of 15 from Bradda Dads 1 - Rest of Village 1 (5 August 2007)"
 album: 2007-08-05-bradda-dads-1-rest-of-village
 source: https://braddadads.blogspot.com/2007/08/bradda-dads-1-rest-of-village-1.html
 ---

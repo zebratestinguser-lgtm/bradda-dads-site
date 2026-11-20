@@ -93,7 +93,10 @@ const albums = defineCollection({
   schema: z.object({
     title: z.string(),
     event: reference('events').optional(),
+    /** When the photos were taken (used for sorting and shown on every photo). */
     date: z.coerce.date(),
+    /** Shown instead of the date when there isn't one exact date, e.g. "2017–2021" or "Summer 2016". */
+    dateLabel: z.string().optional(),
     cover: uploadPath.optional(),
     coverAlt: z.string().optional(),
     photos: z
@@ -195,6 +198,10 @@ const settings = defineCollection({
     storyIntro: z.string(),
     storyImage: uploadPath.optional(),
     storyImageAlt: z.string().optional(),
+    /** Visible caption under the archive photo, including when it was taken. */
+    storyImageCaption: z.string().optional(),
+    /** SumUp payment link for the £5 Christmas card message. */
+    christmasCardPaymentUrl: link,
     facebookPosts: z
       .array(z.object({ date: z.string(), text: z.string(), url: link, image: uploadPath.optional(), imageAlt: z.string().optional() }))
       .max(3)

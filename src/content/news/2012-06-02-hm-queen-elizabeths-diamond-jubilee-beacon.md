@@ -4,7 +4,7 @@ date: 2012-06-02
 tag: "Village"
 summary: "Bradda Dads are proud to have organised one of the 2,012 or more beacons to celebrate HM Queen Elizabeth II Diamond Jubilee."
 image: /uploads/albums/2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon/001.jpg
-imageAlt: "Photo 1 of 24 from HM Queen Elizabeth's Diamond Jubilee Beacon (2012-06-02)"
+imageAlt: "Photo 1 of 24 from HM Queen Elizabeth's Diamond Jubilee Beacon (2 June 2012)"
 album: 2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon
 source: https://braddadads.blogspot.com/2012/06/hm-queen-elizabeths-jubilee-beacon.html
 ---

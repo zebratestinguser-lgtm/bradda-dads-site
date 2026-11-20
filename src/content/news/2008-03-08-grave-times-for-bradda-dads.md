@@ -4,7 +4,7 @@ date: 2008-03-08
 tag: "Village"
 summary: "Following a highly successful campaign for the Methodist Church, Bradda Dads embarked on fixing four graves in the St Barnabas Church graveyard, plus an additional headstone that…"
 image: /uploads/albums/2008-03-08-grave-times-for-bradda-dads/001.jpg
-imageAlt: "Photo 1 of 14 from Grave times for Bradda Dads (2008-03-08)"
+imageAlt: "Photo 1 of 14 from Grave times for Bradda Dads (8 March 2008)"
 album: 2008-03-08-grave-times-for-bradda-dads
 source: https://braddadads.blogspot.com/2008/03/grave-times-for-bradda-dads.html
 ---

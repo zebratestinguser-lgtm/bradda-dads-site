@@ -1,0 +1,47 @@
+---
+// Green header band used at the top of inner pages.
+interface Props {
+  title: string;
+  eyebrow?: string;
+  intro?: string;
+}
+const { title, eyebrow, intro } = Astro.props;
+---
+
+<section class="page-header">
+  <div class="container page-header__inner">
+    {eyebrow && <p class="eyebrow page-header__eyebrow">{eyebrow}</p>}
+    <h1 class="page-header__title">{title}</h1>
+    {intro && <p class="page-header__intro">{intro}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-header {
+    background: var(--green);
+    color: var(--white);
+    padding-block: 32px 56px;
+  }
+  .page-header__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .page-header__eyebrow {
+    color: var(--yellow);
+  }
+  .page-header__title {
+    font-weight: 800;
+    font-size: clamp(36px, 5.5vw, 60px);
+    line-height: 1;
+    letter-spacing: -1.2px;
+    max-width: 22ch;
+  }
+  .page-header__intro {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--on-dark-soft);
+    max-width: 640px;
+  }
+</style>

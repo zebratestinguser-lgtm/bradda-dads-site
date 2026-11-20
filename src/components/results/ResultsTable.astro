@@ -1,0 +1,165 @@
+---
+// Full results table with runner search and category filter (works without JS: shows every row).
+import type { ResultRow } from '../../lib/results';
+import { PODIUM_RULES } from '../../lib/results';
+
+interface Props {
+  rows: ResultRow[];
+  caption: string;
+  id?: string;
+}
+const { rows, caption, id = 'results' } = Astro.props;
+const cats = [...new Set(rows.map((r) => r.category).filter(Boolean))].sort();
+const hasCats = cats.length > 0;
+const hasClubs = rows.some((r) => r.club);
+const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPattern.source };
+---
+
+<div class="rt" data-rt data-rules={JSON.stringify(rules)}>
+  <div class="rt__controls">
+    <div class="form-field rt__search">
+      <label for={`${id}-search`}>Find a runner</label>
+      <input id={`${id}-search`} type="search" placeholder={hasClubs ? 'Name or club' : 'Name'} autocomplete="off" data-rt-search />
+    </div>
+    {
+      hasCats && (
+        <div class="form-field">
+          <label for={`${id}-cat`}>Category</label>
+          <select id={`${id}-cat`} data-rt-cat>
+            <option value="">All runners</option>
+            <option value="@women">Women</option>
+            <option value="@juniors">Juniors</option>
+            {cats.map((c) => <option value={c}>{c}</option>)}
+          </select>
+        </div>
+      )
+    }
+  </div>
+  <p class="rt__status" aria-live="polite" data-rt-status></p>
+  <div class="rt__scroll" tabindex="0" role="region" aria-label={caption}>
+    <table class="rt__table">
+      <caption>{caption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">Pos</th>
+          <th scope="col">Runner</th>
+          {hasClubs && <th scope="col">Club</th>}
+          {hasCats && <th scope="col">Category</th>}
+          <th scope="col" class="num">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((r) => (
+            <tr data-name={r.name.toLowerCase()} data-club={r.club.toLowerCase()} data-cat={r.category}>
+              <td class="pos">{r.position}</td>
+              <td>{r.name}</td>
+              {hasClubs && <td class="muted">{r.club}</td>}
+              {hasCats && <td class="muted">{r.category}</td>}
+              <td class="num">{r.time}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rt]').forEach((root) => {
+    const rules: { women: string[]; junior: string } = JSON.parse(root.dataset.rules!);
+    const junior = new RegExp(rules.junior, 'i');
+    const isWoman = (c: string) => rules.women.some((p) => c.toUpperCase().startsWith(p));
+    const search = root.querySelector<HTMLInputElement>('[data-rt-search]');
+    const cat = root.querySelector<HTMLSelectElement>('[data-rt-cat]');
+    const status = root.querySelector<HTMLElement>('[data-rt-status]')!;
+    const rows = [...root.querySelectorAll<HTMLTableRowElement>('tbody tr')];
+
+    function apply() {
+      const q = (search?.value ?? '').trim().toLowerCase();
+      const f = cat?.value ?? '';
+      let shown = 0;
+      rows.forEach((r) => {
+        const c = r.dataset.cat ?? '';
+        let ok = !q || r.dataset.name!.includes(q) || r.dataset.club!.includes(q);
+        if (ok && f === '@women') ok = isWoman(c);
+        else if (ok && f === '@juniors') ok = junior.test(c);
+        else if (ok && f) ok = c === f;
+        r.hidden = !ok;
+        if (ok) shown++;
+      });
+      status.textContent = q || f ? `${shown} of ${rows.length} runners shown` : '';
+    }
+    search?.addEventListener('input', apply);
+    cat?.addEventListener('change', apply);
+  });
+</script>
+
+<style>
+  .rt {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .rt__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  .rt__search {
+    flex: 1 1 260px;
+    max-width: 420px;
+  }
+  .rt__status {
+    font-size: 14px;
+    color: var(--muted);
+    min-height: 1.2em;
+  }
+  .rt__scroll {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+  }
+  .rt__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    min-width: 520px;
+  }
+  .rt__table caption {
+    text-align: left;
+    font-size: 14px;
+    color: var(--muted);
+    padding: 14px 16px 6px;
+  }
+  .rt__table th {
+    text-align: left;
+    color: var(--muted);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--white);
+  }
+  .rt__table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .rt__table tr:last-child td {
+    border-bottom: 0;
+  }
+  .rt__table .pos {
+    font-weight: 700;
+  }
+  .rt__table .muted {
+    color: var(--muted);
+  }
+  .rt__table .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+</style>

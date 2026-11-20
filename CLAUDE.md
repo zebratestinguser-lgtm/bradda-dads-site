@@ -130,6 +130,9 @@ Header row (exact): `position,name,club,category,time`
 - News tags gained `Carnival`, `Tour of Bradwell`, `Social` (legacy activities). News has optional `album` (reference) and every collection has optional `source` (URL of the original post).
 - Funded pins have `locationConfirmed` (false = guessed position, shown as "to be confirmed").
 - Imported photos have generic alt text; homepage-visible ones should get real descriptions (TODO-content.md).
+- **Photo dates must always be visible** (Peter's request): album `date` = when the photos were taken, `dateLabel` overrides it for ranges/unknowns. Use `photoDate()` / `photoDateShort()` from `src/lib/albums.ts` wherever a photo appears (album cards show a date chip, album pages say "Photos taken …", the lightbox caption starts with the date, news images have a "Photo taken …" caption).
+- Milestone 4 routes: `/news/`, `/news/[id]/`, `/events/[id]/`, `/photos/`, `/photos/[id]/` (native `<dialog>` lightbox, no library), `/wolfspit/` (+ cross-year runner search), `/wolfspit/[year]/`, `/tour-of-bradwell/`, `/tour-of-bradwell/[slug]/` (`long-tour-2017`, `half-tour-2016`, `2019`), CSV endpoints, `/our-story/`, `/where-the-money-goes/`, `/get-involved/`, `/donate/`, `/contact/`, `/privacy/` (draft), `/christmas-card/` (form in M5).
+- Album pages load full 1200px images in the grid (no thumbnails yet). For milestone 6: thumbnails, e.g. a prebuild step with `sharp` (Astro already depends on it, but it would need adding explicitly, so ask first).
 - Windows dev machine needs the Microsoft VC++ runtime (Astro's Markdown engine is native).
 
 ## Phase 2 checklist (do not build yet, but don't block it)

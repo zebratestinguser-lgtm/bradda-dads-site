@@ -1,0 +1,158 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
+
+const site = await getSite();
+const timeline = (await getCollection('timeline')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Our story" description="How Bradda Dads started with a Boxing Day duck race in 1999, and what the group has done for Bradwell since.">
+  <PageHeader eyebrow="Our story" title="It started with a duck race" />
+
+  <section class="container page-section story">
+    <div class="story__intro">
+      <p class="story__text">{site.storyIntro}</p>
+      {
+        site.storyImage && (
+          <figure class="story__figure">
+            <img src={url(site.storyImage)} alt={site.storyImageAlt ?? ''} decoding="async" />
+            {site.storyImageCaption && <figcaption>{site.storyImageCaption}</figcaption>}
+          </figure>
+        )
+      }
+      <p class="note">
+        Much of this history comes from the old Bradda Dads websites. If you remember something differently, or have old photos, <a href={url('/contact/')}>please get in touch</a>.
+      </p>
+    </div>
+
+    <ol class="timeline">
+      {
+        timeline.map((t) => (
+          <li class="timeline__item">
+            <div class="timeline__rail" aria-hidden="true">
+              <span class="timeline__dot" />
+              <span class="timeline__line" />
+            </div>
+            <div class="timeline__body">
+              <span class="timeline__year">{t.data.year}</span>
+              <h2 class="timeline__title">{t.data.title}</h2>
+              <p class="timeline__text">{t.data.text}</p>
+              {t.data.image && <img class="timeline__img" src={url(t.data.image)} alt={t.data.imageAlt ?? ''} loading="lazy" />}
+              {t.data.source && (
+                <a class="timeline__source" href={t.data.source}>
+                  Source: old Bradda Dads website
+                </a>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .story {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+  .story__intro {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .story__text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--muted-strong);
+  }
+  .story__figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .story__figure img {
+    border-radius: var(--radius-card);
+    width: 100%;
+  }
+  .story__figure figcaption {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .timeline {
+    flex: 999 1 520px;
+    min-width: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .timeline__item {
+    display: flex;
+    gap: 20px;
+  }
+  .timeline__rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 22px;
+  }
+  .timeline__dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 4px solid var(--white);
+    box-shadow: 0 0 0 2px var(--green);
+    margin-top: 6px;
+  }
+  .timeline__line {
+    flex-grow: 1;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline__item:last-child .timeline__line {
+    background: transparent;
+  }
+  .timeline__body {
+    padding-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .timeline__year {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--green);
+  }
+  .timeline__title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 19px;
+  }
+  .timeline__text {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+    max-width: 62ch;
+  }
+  .timeline__img {
+    border-radius: var(--radius-sm);
+    max-width: 360px;
+    margin-top: 6px;
+  }
+  .timeline__source {
+    font-size: 14px;
+    align-self: flex-start;
+  }
+</style>

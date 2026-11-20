@@ -4,7 +4,7 @@ date: 2012-12-30
 tag: "Village"
 summary: "***Winner - Richard Patton of Bradwell*** The draw took place at the White Hart on 13 February 2013. Thanks to village celebrity Janet Maskrey for drawing the winning ticket."
 image: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/001.jpg
-imageAlt: "Photo 1 of 6 from *** WIN A UNIQUE NECKLACE AND EARRINGS SET FOR YOUR VALENTINE *** (raffle now finished) (2012-12-30)"
+imageAlt: "Photo 1 of 6 from *** WIN A UNIQUE NECKLACE AND EARRINGS SET FOR YOUR VALENTINE *** (raffle now finished) (30 December 2012)"
 album: 2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine
 source: https://braddadads.blogspot.com/2012/12/win-unique-necklace-and-earrings-set.html
 ---

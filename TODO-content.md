@@ -55,6 +55,7 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 
 124 posts and 1,269 photos were imported from the old sites. Each entry has a `source:` link to the original.
 
+- [ ] **Photo dates.** Every photo shows when it was taken: the album's `date`, or `dateLabel` when there's no single date. For imported albums that's the old post's date, which is usually the event date. Corrected: Ball Race (13 June 2004), Carnival 2005 (30 July 2005), the 'Stig' feature (10 December 2008). Labelled: Carnival photos "2017–2021", Bonfire photos "2017–2019", Wolf's Pit photos "Various years", Summer Duck Race "Summer 2016". That last one starts with the same poster as the 2022 Boxing Day post, so check whether it really is 2016. If you spot a wrong date, change `date:` (or add `dateLabel:`) in the album's `index.md`.
 - [ ] **Alt text.** Imported photos have generic descriptions ("Photo 3 of 12 from …"). Write real ones, at least for album covers and homepage photos.
 - [ ] Captions. Some old posts had a caption above each photo; these are kept as text in the news story, not attached to the photos.
 - [ ] Old posts mention videos that were embedded on the old blog (marked "A video was embedded here on the old site"). Find them on YouTube/Facebook if they still exist.

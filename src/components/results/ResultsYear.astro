@@ -1,0 +1,154 @@
+---
+// One race year: summary, podium, downloads, notes and the full table.
+import ResultsTable from './ResultsTable.astro';
+import { podium, type getRaceYears } from '../../lib/results';
+import { formatDate } from '../../lib/format';
+import { url } from '../../lib/url';
+
+type Year = Awaited<ReturnType<typeof getRaceYears>>[number];
+interface Props {
+  year: Year;
+  raceName: string;
+  csvHref: string;
+}
+const { year, raceName, csvHref } = Astro.props;
+const hasCats = year.rows.some((r) => r.category);
+// Without categories we can't tell first woman/junior, so show only the winner
+const picks = podium(year.rows).filter((_, i) => i === 0 || hasCats);
+---
+
+<div class="ry">
+  <dl class="ry__facts">
+    {year.date && (<div><dt>Date</dt><dd>{formatDate(year.date)}</dd></div>)}
+    <div><dt>Finishers</dt><dd>{year.finishers}</dd></div>
+    {year.courseNotes && (<div class="ry__course"><dt>Course</dt><dd>{year.courseNotes}</dd></div>)}
+  </dl>
+
+  <div class="ry__podium">
+    {
+      picks.map((p) => (
+        <div class="ry__pod">
+          <span class="ry__medal" aria-hidden="true">1</span>
+          <div>
+            <span class="ry__pod-label">{p.label}</span>
+            <span class="ry__pod-name">{p.runner?.name ?? 'Not recorded'}</span>
+            <span class="ry__pod-time">{p.runner?.time ?? '–'}</span>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="ry__downloads">
+    <a class="btn btn--green btn--md" href={csvHref} download>Download results (CSV)</a>
+    {year.original && <a class="btn btn--outline btn--md" href={url(year.original)}>Original results (PDF)</a>}
+  </div>
+
+  {year.notes && <p class="note">{year.notes}</p>}
+
+  <ResultsTable rows={year.rows} caption={`${raceName} ${year.year}: ${year.finishers} finishers`} />
+
+  {year.source && <p class="ry__source">Originally published on the <a href={year.source}>old Bradda Dads website</a>.</p>}
+</div>
+
+<style>
+  .ry {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .ry__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 0;
+  }
+  .ry__facts div {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 14px 18px;
+  }
+  .ry__course {
+    flex: 1 1 320px;
+  }
+  .ry__facts dt {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .ry__facts dd {
+    margin: 4px 0 0;
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .ry__podium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 14px;
+  }
+  .ry__pod {
+    background: var(--green-deep);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .ry__pod > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .ry__medal {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .ry__pod-label {
+    font-size: 13px;
+    color: var(--on-dark-muted);
+  }
+  .ry__pod-name {
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .ry__pod-time {
+    font-size: 15px;
+    color: var(--yellow);
+    font-weight: 600;
+  }
+  .ry__downloads {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+  .btn--outline {
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .btn--outline:hover {
+    background: var(--surface);
+  }
+  .ry__source {
+    font-size: 15px;
+    color: var(--muted);
+  }
+</style>
