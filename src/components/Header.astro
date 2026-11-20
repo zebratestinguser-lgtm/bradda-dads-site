@@ -1,64 +1,124 @@
 ---
+// Site header: stays pinned to the top while scrolling.
+// Wide screens: every link visible. Phones/tablets: logo + a labelled "Menu" button that opens the links.
+// Without JavaScript the links simply show as a wrapped list (nothing is ever hidden).
 import DuckLogo from './DuckLogo.astro';
 import { getSite } from '../lib/site';
 import { url } from '../lib/url';
 
 const site = await getSite();
 const current = Astro.url.pathname;
-
 const home = url('/');
+
 const nav = [
   { label: 'Home', href: home },
   { label: 'Events', href: url('/events/') },
   { label: 'News', href: url('/news/') },
   { label: 'Photos', href: url('/photos/') },
-  { label: 'Wolfspit results', href: url('/wolfspit/') },
+  { label: 'Races', href: url('/races/'), also: [url('/wolfspit/'), url('/tour-of-bradwell/')] },
   { label: 'Our story', href: url('/our-story/') },
 ];
-// Home is only "current" on the homepage itself; other links match their section
-const isCurrent = (href: string) => (href === home ? current === home : current.startsWith(href));
+const cta = { label: 'Get involved', href: url('/get-involved/') };
+// Home is only "current" on the homepage; other links match their whole section
+const isCurrent = (item: { href: string; also?: string[] }) =>
+  item.href === home ? current === home : [item.href, ...(item.also ?? [])].some((h) => current.startsWith(h));
 ---
 
-<header class="site-header">
+<header class="site-header" data-header>
   <div class="container site-header__inner">
-    <a href={url('/')} class="brand">
-      <DuckLogo size={44} />
+    <a href={home} class="brand">
+      <DuckLogo size={40} />
       <span class="brand__name">{site.name}</span>
     </a>
-    <nav aria-label="Main" class="nav">
-      {
-        nav.map((item) => (
-          <a href={item.href} class="nav__link" aria-current={isCurrent(item.href) ? 'page' : undefined}>
-            {item.label}
+
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-nav" data-menu-btn hidden>
+      <span class="menu-btn__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="menu-btn__label" data-menu-label>Menu</span>
+    </button>
+
+    <nav id="site-nav" aria-label="Main" class="nav" data-nav>
+      <ul class="nav__list" role="list">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class="nav__link" aria-current={isCurrent(item) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="nav__cta-item">
+          <a href={cta.href} class="nav__cta" aria-current={current.startsWith(cta.href) ? 'page' : undefined}>
+            {cta.label}
           </a>
-        ))
-      }
-      <a href={url('/get-involved/')} class="nav__cta" aria-current={isCurrent(url('/get-involved/')) ? 'page' : undefined}>
-        Get involved
-      </a>
+        </li>
+      </ul>
     </nav>
   </div>
 </header>
 
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const label = document.querySelector<HTMLElement>('[data-menu-label]');
+  if (header && btn && nav && label) {
+    header.classList.add('is-enhanced'); // switch on the compact phone layout
+    btn.hidden = false;
+    const mq = window.matchMedia('(max-width: 959px)');
+
+    const setOpen = (open: boolean, focusFirst = false) => {
+      btn.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('is-open', open);
+      label.textContent = open ? 'Close' : 'Menu';
+      if (open && focusFirst) nav.querySelector<HTMLElement>('a')?.focus();
+    };
+    btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true', true));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.classList.contains('is-open')) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+    // Close when tapping a link (same-page anchors) or moving focus/clicks outside the header
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener('click', (e) => {
+      if (header.classList.contains('is-open') && !header.contains(e.target as Node)) setOpen(false);
+    });
+    header.addEventListener('focusout', (e) => {
+      if (mq.matches && header.classList.contains('is-open') && !header.contains(e.relatedTarget as Node | null)) setOpen(false);
+    });
+    mq.addEventListener('change', () => setOpen(false));
+  }
+</script>
+
 <style>
   .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
     background: var(--green);
     color: var(--white);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08), 0 6px 18px rgba(0, 0, 0, 0.12);
   }
   .site-header__inner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 12px 16px;
-    padding-block: 18px;
+    gap: 8px 16px;
+    min-height: 72px;
+    padding-block: 10px;
   }
   .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     color: var(--white);
     text-decoration: none;
+    min-height: var(--tap);
   }
   .brand:hover {
     color: var(--white);
@@ -66,21 +126,23 @@ const isCurrent = (href: string) => (href === home ? current === home : current.
   .brand__name {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 26px;
+    font-size: 24px;
     letter-spacing: -0.5px;
   }
-  .nav {
+  .nav__list {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     font-size: 15px;
     font-weight: 500;
   }
   .nav__link {
     color: var(--white);
     text-decoration: none;
-    padding: 12px 0;
     min-height: var(--tap);
     display: inline-flex;
     align-items: center;
@@ -97,7 +159,7 @@ const isCurrent = (href: string) => (href === home ? current === home : current.
     color: var(--text);
     background: var(--yellow);
     text-decoration: none;
-    padding: 12px 18px;
+    padding: 0 18px;
     border-radius: var(--radius-pill);
     font-weight: 600;
     min-height: var(--tap);
@@ -108,11 +170,105 @@ const isCurrent = (href: string) => (href === home ? current === home : current.
     color: var(--text);
     background: #f8cf63;
   }
-  /* Small screens: nav wraps under the logo, as in the design */
-  @media (max-width: 720px) {
-    .nav {
-      gap: 0 16px;
-      font-size: 14px;
+
+  /* Menu button (only shown once JavaScript has enhanced the header, and only on smaller screens) */
+  .menu-btn {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--tap);
+    padding: 0 16px 0 14px;
+    border-radius: var(--radius-pill);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    background: transparent;
+    color: var(--white);
+    font: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .menu-btn:hover {
+    border-color: var(--white);
+  }
+  .menu-btn__icon {
+    width: 18px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .menu-btn__icon span {
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .is-open .menu-btn__icon span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .is-open .menu-btn__icon span:nth-child(2) {
+    opacity: 0;
+  }
+  .is-open .menu-btn__icon span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  @media (max-width: 959px) {
+    .site-header__inner {
+      min-height: 60px;
+      padding-block: 8px;
+    }
+    .brand__name {
+      font-size: 21px;
+    }
+    .brand :global(svg) {
+      width: 34px;
+      height: 34px;
+    }
+    /* Enhanced (JS) phone layout: links live in a drop-down panel */
+    .is-enhanced .menu-btn {
+      display: inline-flex;
+    }
+    .is-enhanced .nav {
+      display: none;
+      flex-basis: 100%;
+      padding: 6px 0 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+    .is-enhanced.is-open .nav {
+      display: block;
+    }
+    .is-enhanced .nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      font-size: 18px;
+    }
+    .is-enhanced .nav__link {
+      width: 100%;
+      min-height: 52px;
+      padding-inline: 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .is-enhanced .nav__link[aria-current='page'] {
+      text-decoration: none;
+      box-shadow: inset 4px 0 0 var(--yellow);
+      padding-left: 14px;
+    }
+    .is-enhanced .nav__cta-item {
+      margin-top: 14px;
+    }
+    .is-enhanced .nav__cta {
+      width: 100%;
+      justify-content: center;
+      min-height: 52px;
+      font-size: 17px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .menu-btn__icon span {
+      transition: none;
     }
   }
 </style>

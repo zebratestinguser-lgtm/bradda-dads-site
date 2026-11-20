@@ -1,6 +1,6 @@
 ---
 import { getSite } from '../../lib/site';
-import { url } from '../../lib/url';
+import { url, thumb } from '../../lib/url';
 
 const site = await getSite();
 ---
@@ -27,7 +27,7 @@ const site = await getSite();
           site.facebookPosts.map((post) => (
             <li class="fb__post">
               {post.image ? (
-                <img class="fb__thumb" src={url(post.image)} alt={post.imageAlt ?? ''} width="64" height="64" loading="lazy" />
+                <img class="fb__thumb" src={thumb(post.image)} alt={post.imageAlt ?? ''} width="64" height="64" loading="lazy" />
               ) : (
                 <div class="fb__thumb fb__thumb--empty" aria-hidden="true">
                   Photo

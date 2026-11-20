@@ -2,6 +2,9 @@
 dist/
 .astro/
 
+# generated photo previews (scripts/make-thumbs.mjs)
+public/uploads/thumbs/
+
 # dependencies
 node_modules/
 

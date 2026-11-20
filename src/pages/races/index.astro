@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getWolfspitYears, getRaceYears } from '../../lib/results';
+import { tourRaces } from '../../lib/tour';
+import { getSite } from '../../lib/site';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+const wolf = await getWolfspitYears();
+const tour = (await Promise.all(tourRaces.map((r) => getRaceYears(r)))).flat();
+const tourYears = [...new Set(tour.map((t) => t.year))].sort((a, b) => b - a);
+const wolfRunners = wolf.reduce((n, y) => n + y.finishers, 0);
+const tourRunners = tour.reduce((n, y) => n + y.finishers, 0);
+---
+
+<BaseLayout title="Races" description="Fell races run by Bradda Dads: the Wolf's Pit Fell Race and the Tour of Bradwell. Results, records and how to enter.">
+  <PageHeader eyebrow="Races" title="Fell races" intro="Bradda Dads run fell races in the hills around Bradwell, with every entry fee going back into the village. Find results from past years, records and how to enter." />
+
+  <section class="container page-section races">
+    <a class="race race--wolf" href={url('/wolfspit/')}>
+      <span class="race__eyebrow">Every March · since 2009</span>
+      <h2 class="race__name">Wolf's Pit Fell Race</h2>
+      <p class="race__text">{site.wolfspitIntro}</p>
+      <ul class="race__facts" role="list">
+        <li><strong>{wolf.length}</strong> years of results on the site</li>
+        <li><strong>{wolfRunners.toLocaleString('en-GB')}</strong> finishes</li>
+        {wolf[0] && <li>Latest: <strong>{wolf[0].year}</strong></li>}
+      </ul>
+      <span class="race__cta">Results, records and entry →</span>
+    </a>
+
+    <a class="race" href={url('/tour-of-bradwell/')}>
+      <span class="race__eyebrow">Long Tour and Half Tour</span>
+      <h2 class="race__name">Tour of Bradwell</h2>
+      <p class="race__text">A fell running and challenge event around Bradwell. The Long Tour is a punishing 33 miles with over 6,000 feet of climb. Bradda Dads helped stage it from 2012 and went on to run it.</p>
+      <ul class="race__facts" role="list">
+        <li><strong>{tourYears.length}</strong> years of results ({tourYears.at(-1)}–{tourYears[0]})</li>
+        <li><strong>{tourRunners.toLocaleString('en-GB')}</strong> finishes</li>
+      </ul>
+      <span class="race__cta">Results →</span>
+    </a>
+  </section>
+</BaseLayout>
+
+<style>
+  .races {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+    gap: 22px;
+  }
+  .race {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 34px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .race:hover {
+    color: var(--text);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+  }
+  .race--wolf {
+    background: var(--green-deep);
+    border-color: var(--green-deep);
+    color: var(--white);
+  }
+  .race--wolf:hover {
+    color: var(--white);
+  }
+  .race__eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+  }
+  .race--wolf .race__eyebrow {
+    color: var(--yellow);
+  }
+  .race__name {
+    font-weight: 800;
+    font-size: clamp(30px, 4vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.8px;
+  }
+  .race__text {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+  }
+  .race--wolf .race__text {
+    color: var(--on-dark-muted);
+  }
+  .race__facts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    font-size: 15px;
+  }
+  .race__cta {
+    margin-top: auto;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .race {
+      transition: none;
+    }
+    .race:hover {
+      transform: none;
+    }
+  }
+  @media (max-width: 600px) {
+    .race {
+      padding: 26px 22px;
+    }
+  }
+</style>

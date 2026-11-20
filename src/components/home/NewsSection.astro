@@ -1,12 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+import NewsTile from '../NewsTile.astro';
+import { photoDate } from '../../lib/albums';
 import { formatDate, formatShortDate } from '../../lib/format';
-import { url } from '../../lib/url';
+import { url, thumb } from '../../lib/url';
 
 const all = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const lead = all.find((n) => n.data.featured) ?? all[0];
 const recent = all.filter((n) => n !== lead).slice(0, 3);
 const href = (id: string) => url(`/news/${id}/`);
+const leadAlbum = lead?.data.album ? await getEntry(lead.data.album) : undefined;
 ---
 
 {
@@ -20,9 +23,14 @@ const href = (id: string) => url(`/news/${id}/`);
         <div class="news__layout">
           <article class="news-lead">
             {lead.data.image ? (
-              <img class="news-lead__img" src={url(lead.data.image)} alt={lead.data.imageAlt ?? ''} width="800" height="260" loading="lazy" decoding="async" />
+              <div class="news-lead__media">
+                <img class="news-lead__img" src={url(lead.data.image)} alt={lead.data.imageAlt ?? ''} width="800" height="260" loading="lazy" decoding="async" />
+                {leadAlbum && <span class="news-lead__date">{photoDate(leadAlbum)}</span>}
+              </div>
             ) : (
-              <div class="news-lead__img news-lead__img--empty" aria-hidden="true">[Lead photo]</div>
+              <div class="news-lead__img">
+                <NewsTile tag={lead.data.tag} size="lead" />
+              </div>
             )}
             <div class="news-lead__body">
               <div class="news-lead__meta">
@@ -42,9 +50,11 @@ const href = (id: string) => url(`/news/${id}/`);
             {recent.map((n) => (
               <article class="news-item">
                 {n.data.image ? (
-                  <img class="news-item__thumb" src={url(n.data.image)} alt="" width="84" height="84" loading="lazy" decoding="async" />
+                  <img class="news-item__thumb" src={thumb(n.data.image)} alt="" width="84" height="84" loading="lazy" decoding="async" />
                 ) : (
-                  <div class="news-item__thumb" aria-hidden="true" />
+                  <div class="news-item__thumb">
+                    <NewsTile tag={n.data.tag} />
+                  </div>
                 )}
                 <div class="news-item__body">
                   <p class="news-item__meta">
@@ -100,12 +110,19 @@ const href = (id: string) => url(`/news/${id}/`);
     object-fit: cover;
     background: var(--surface-green);
   }
-  .news-lead__img--empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 14px;
+  .news-lead__media {
+    position: relative;
+  }
+  .news-lead__date {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(16, 36, 26, 0.85);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
   }
   .news-lead__body {
     padding: 26px;
@@ -165,6 +182,7 @@ const href = (id: string) => url(`/news/${id}/`);
     width: 84px;
     height: 84px;
     border-radius: var(--radius-sm);
+    overflow: hidden;
     background: var(--surface-green);
     flex-shrink: 0;
     object-fit: cover;

@@ -1,7 +1,7 @@
 ---
 // Album tile: cover + two smaller photos, with the photo date always visible.
 import { type Album, photoDate, photoDateShort } from '../lib/albums';
-import { url } from '../lib/url';
+import { url, thumb } from '../lib/url';
 
 interface Props {
   album: Album;
@@ -30,14 +30,14 @@ const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${
   <div class="album__tiles" aria-hidden="true">
     {
       coverSrc ? (
-        <img class="album__tile album__tile--main" src={url(coverSrc)} alt="" loading="lazy" decoding="async" />
+        <img class="album__tile album__tile--main" src={thumb(coverSrc)} alt="" loading="lazy" decoding="async" />
       ) : (
         <div class="album__tile album__tile--main" style={`background:${sw[0]}`} />
       )
     }
     {
       rest[0] ? (
-        <img class="album__tile" src={url(rest[0].src)} alt="" loading="lazy" decoding="async" />
+        <img class="album__tile" src={thumb(rest[0].src)} alt="" loading="lazy" decoding="async" />
       ) : (
         <div class="album__tile" style={`background:${sw[1]}`} />
       )

@@ -3,7 +3,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { photoDate } from '../../lib/albums';
 import { formatDate } from '../../lib/format';
-import { url } from '../../lib/url';
+import { url, thumb } from '../../lib/url';
 
 export async function getStaticPaths() {
   const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -54,7 +54,7 @@ const when = album ? photoDate(album) : undefined;
               {preview.map((p, i) => (
                 <li>
                   <a href={url(`/photos/${album.id}/`)} aria-label={i === 0 ? `See all photos from ${album.data.title}` : undefined} tabindex={i === 0 ? undefined : -1}>
-                    <img src={url(p.src)} alt={p.alt} loading="lazy" decoding="async" />
+                    <img src={thumb(p.src)} alt={p.alt} loading="lazy" decoding="async" />
                   </a>
                 </li>
               ))}

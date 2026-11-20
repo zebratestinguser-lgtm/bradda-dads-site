@@ -17,6 +17,9 @@ heroHighlight: Duck Race
 heroText: Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.
 countdownLabel: Ducks hit the water in
 heroNote: First duck past the finish wins **[PRIZE]**. Ducks on sale online and at [SHOP / VENUE].
+heroImage: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/011.jpg
+heroImageAlt: Hundreds of yellow rubber ducks tumbling over the weir in Bradwell Brook
+heroImageCaption: Boxing Day 2009
 ---
 
 Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.

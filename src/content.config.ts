@@ -85,6 +85,11 @@ const events = defineCollection({
     countdownLabel: z.string().optional(),
     /** Small note under the countdown, e.g. prize and where to buy. */
     heroNote: z.string().optional(),
+    /** Photo shown in the homepage hero when this is the next event. */
+    heroImage: uploadPath.optional(),
+    heroImageAlt: z.string().optional(),
+    /** Visible caption on the photo, including when it was taken, e.g. "Boxing Day 2009". */
+    heroImageCaption: z.string().optional(),
   }),
 });
 
