@@ -1,0 +1,15 @@
+---
+// The Bradda Dads rubber duck, from the design file.
+interface Props {
+  size?: number;
+}
+const { size = 44 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <ellipse cx="30" cy="42" rx="22" ry="14" fill="#F6C343"></ellipse>
+  <circle cx="40" cy="24" r="12" fill="#F6C343"></circle>
+  <path d="M50 24 L60 27 L50 30 Z" fill="#E8702A"></path>
+  <circle cx="43" cy="21" r="2.2" fill="#1a1f1c"></circle>
+  <path d="M14 40 Q22 34 30 40" stroke="#D9A21E" stroke-width="3" fill="none" stroke-linecap="round"></path>
+</svg>

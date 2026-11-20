@@ -1,0 +1,39 @@
+# Site-wide settings. Anything in [SQUARE BRACKETS] is a placeholder still to
+# fill in (see TODO-content.md). Links set to "#" are not live yet.
+site:
+  name: Bradda Dads
+  tagline: Raising money for Bradwell, Derbyshire, since 1999.
+  description: Bradda Dads is a volunteer group of dads raising money for people and organisations in Bradwell, Derbyshire. Duck race, bonfire, Christmas card, pensioners' lunch and the Wolfspit Race.
+  facebookUrl: https://www.facebook.com/BraddaDads/
+  contactEmail: "[CONTACT EMAIL]"
+  cicName: "[CIC NAME]"
+  cicNumber: "[COMPANY NUMBER]"
+  sumupStoreUrl: "#"
+  donationLinks:
+    - amount: 5
+      url: "#"
+      label: "[What £5 pays for]"
+    - amount: 10
+      url: "#"
+      label: "[What £10 pays for]"
+    - amount: 20
+      url: "#"
+      label: "[What £20 pays for]"
+  # donationQr: /uploads/site/sumup-qr.png
+  totalRaised: "[TOTAL]"
+  groupsHelped: "[NUMBER]"
+  meetingInfo: "[MEETING DAY / VENUE]"
+  # Phase 1: "Share your photos" goes to Facebook (or a mailto: link)
+  sharePhotosUrl: https://www.facebook.com/BraddaDads/
+  accountsUrl: "#"
+  # Up to three hand-picked Facebook posts for the homepage
+  facebookPosts:
+    - date: "[DATE]"
+      text: "[PLACEHOLDER: copy of a recent Facebook post]"
+      url: https://www.facebook.com/BraddaDads/
+    - date: "[DATE]"
+      text: "[PLACEHOLDER: e.g. bonfire thank-you and photos]"
+      url: https://www.facebook.com/BraddaDads/
+    - date: "[DATE]"
+      text: "[PLACEHOLDER: e.g. Christmas card reminder]"
+      url: https://www.facebook.com/BraddaDads/

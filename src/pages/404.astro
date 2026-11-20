@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DuckLogo from '../components/DuckLogo.astro';
+import { url } from '../lib/url';
+---
+
+<BaseLayout title="Page not found" description="This page has floated off downstream.">
+  <section class="not-found">
+    <div class="container not-found__inner">
+      <DuckLogo size={96} />
+      <h1>This duck has floated off</h1>
+      <p>We can't find the page you were looking for. It may have moved, or the link might be out of date.</p>
+      <a class="btn btn--green" href={url('/')}>Back to the homepage</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: var(--section-pad);
+  }
+  .not-found__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  h1 {
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+  }
+</style>

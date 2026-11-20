@@ -1,0 +1,69 @@
+---
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
+
+const site = await getSite();
+const links = [
+  { label: 'Contact', href: url('/contact/') },
+  { label: 'Facebook', href: site.facebookUrl },
+  { label: 'Privacy', href: url('/privacy/') },
+  { label: 'Annual accounts', href: site.accountsUrl },
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__about">
+      <span class="site-footer__name">{site.name}</span>
+      <span>{site.tagline}</span>
+      <span>{site.cicName} · Company no. {site.cicNumber}</span>
+    </div>
+    <ul class="site-footer__links" role="list">
+      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--green-deep);
+    color: var(--on-dark-muted);
+    padding-block: 40px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .site-footer__about {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .site-footer__name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--white);
+  }
+  .site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-footer__links a {
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+  }
+  .site-footer__links a:hover {
+    color: var(--yellow);
+  }
+</style>

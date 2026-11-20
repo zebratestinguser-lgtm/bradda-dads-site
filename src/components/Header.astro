@@ -1,0 +1,115 @@
+---
+import DuckLogo from './DuckLogo.astro';
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
+
+const site = await getSite();
+const current = Astro.url.pathname;
+
+const nav = [
+  { label: 'Events', href: url('/#events') },
+  { label: 'News', href: url('/news/') },
+  { label: 'Photos', href: url('/photos/') },
+  { label: 'Wolfspit results', href: url('/wolfspit/') },
+  { label: 'Our story', href: url('/our-story/') },
+];
+const isCurrent = (href: string) => !href.includes('#') && current.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href={url('/')} class="brand">
+      <DuckLogo size={44} />
+      <span class="brand__name">{site.name}</span>
+    </a>
+    <nav aria-label="Main" class="nav">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="nav__link" aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+      <a href={url('/get-involved/')} class="nav__cta" aria-current={isCurrent(url('/get-involved/')) ? 'page' : undefined}>
+        Get involved
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--green);
+    color: var(--white);
+  }
+  .site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 16px;
+    padding-block: 18px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .brand:hover {
+    color: var(--white);
+  }
+  .brand__name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.5px;
+  }
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 22px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .nav__link {
+    color: var(--white);
+    text-decoration: none;
+    padding: 12px 0;
+    min-height: var(--tap);
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav__link:hover,
+  .nav__link[aria-current='page'] {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+  .nav__cta {
+    color: var(--text);
+    background: var(--yellow);
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    min-height: var(--tap);
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav__cta:hover {
+    color: var(--text);
+    background: #f8cf63;
+  }
+  /* Small screens: nav wraps under the logo, as in the design */
+  @media (max-width: 720px) {
+    .nav {
+      gap: 0 16px;
+      font-size: 14px;
+    }
+  }
+</style>

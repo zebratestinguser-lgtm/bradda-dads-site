@@ -1,0 +1,157 @@
+# Bradda Dads website: project brief
+
+This file is the handover for building the new Bradda Dads website. Read it fully before writing code. The visual design is in `design/homepage-mockup.dc.html` (see "The design file" below).
+
+## About the group
+
+- Bradda Dads is a volunteer group of dads in Bradwell, Derbyshire (Peak District), run as a CIC. It raises money for, and helps, people and organisations in the village.
+- First fundraiser: the Boxing Day Duck Race down the brook, 1999.
+- Annual activities: village Bonfire & Fireworks (November), village Christmas card (£5 per family message), free pensioners' Christmas lunch, Boxing Day Duck Race (26 December), and the Wolfspit Race (date TBC).
+- Also funds local projects, e.g. lighting and stage equipment for school productions, grants to local groups.
+- Facebook: https://www.facebook.com/BraddaDads/ (main day-to-day channel)
+- Old site: braddadads.wordpress.com. Parish listing: bradda.org/village_organisation/bradda-dads/
+- Payments are taken through an existing **SumUp** account (online store + payment links).
+
+**Never invent facts** (dates, prices, totals, names, race results, history). Anything unknown stays a visible `[PLACEHOLDER]` and is listed in `TODO-content.md`.
+
+## Decisions already made
+
+1. **Static site, own domain, own hosting.** Not WordPress.
+2. **Stack:** Astro (latest stable), TypeScript, plain CSS (custom properties) or scoped component styles. No heavy UI framework. Minimal client JS (countdown, results search/filter, year tabs, map).
+3. **Hosting:** ~~Netlify~~ **Changed 2026-11-20: GitHub Pages for the concept phase** (Peter has hit Netlify free-tier limits before). Repo: `github.com/zebratestinguser-lgtm/bradda-dads-site`, site at `https://zebratestinguser-lgtm.github.io/bradda-dads-site/`, deployed by `.github/workflows/deploy.yml`. Consequences: no `netlify.toml`; Netlify Forms are unavailable, so the Christmas card form is built but not wired up (later: Formspree/Google Form, or move host); no redirects/headers. Keep the site host-agnostic: always link via `url()` in `src/lib/url.ts` so moving to a custom domain or another host is just `site`/`base` in `astro.config.mjs`. Note: Netlify Identity was deprecated in 2025, so phase 2 logins should plan on DecapBridge (works with GitHub).
+4. **Phasing:**
+   - **Phase 1 (now): Peter maintains it alone.** All content lives as Markdown/YAML/CSV files in the repo. Peter edits files (or asks Claude Code to), commits, GitHub Actions rebuilds.
+   - **Phase 2 (later): other committee members can edit** via Decap CMS at `/admin`, logging in with email through Netlify Identity + Git Gateway (or DecapBridge as fallback). No GitHub accounts needed for editors.
+5. **Phase 1 must be "Decap-ready"** so phase 2 is configuration only, not a restructure (see Content model rules).
+
+## Content model (Astro content collections)
+
+Use the content layer with `glob` loaders. Validate with Zod schemas. Every field below must be something a non-technical editor could fill in a form later.
+
+| Collection | Location | Fields |
+|---|---|---|
+| `news` | `src/content/news/YYYY-MM-DD-slug.md` | `title`, `date`, `tag` (enum: Bonfire, Christmas card, Pensioners' lunch, Duck race, Wolfspit, Village), `image` (optional), `imageAlt`, `summary`, `featured` (bool), body (Markdown) |
+| `events` | `src/content/events/slug.md` | `name`, `start` (datetime, Europe/London), `end` (optional), `location`, `summary`, `status` (upcoming / open / done), `ctaLabel`, `ctaUrl` (usually a SumUp link), `order`, body |
+| `albums` | `src/content/albums/slug/index.md` + images in same folder or `public/uploads/albums/slug/` | `title`, `event` (reference to events), `date`, `cover`, `photos` (list of `{src, alt, caption?}`) |
+| `results` | `src/content/results/wolfspit/YYYY.md` + `YYYY.csv` | md: `year`, `date`, `courseNotes`, `finishers` (computed if absent), `csv` (file path); CSV columns below |
+| `timeline` | `src/content/timeline/YYYY-slug.md` | `year` (string, allows "[YEAR]"), `title`, `text`, `image` (optional) |
+| `funded` | `src/content/funded/slug.md` | `name`, `lat`, `lng`, `year`, `amount` (optional), `summary`, `image` (optional) — drives the "where the money goes" map |
+| settings | `src/data/site.yaml` | site name, Facebook URL, contact email, CIC name/number, SumUp store URL, donation links `{amount, url, label}` ×3, donation QR image, total raised, groups helped, meeting info |
+
+**Content model rules (for Decap later):**
+- One file per entry, front matter + Markdown body. No content hard-coded in components.
+- Images referenced by path in front matter; keep one predictable media folder (`public/uploads/...` or `src/assets/uploads/...` — pick one and stick to it).
+- Dates ISO 8601. Booleans and enums only where a form widget can express them.
+
+### Wolfspit results CSV
+
+Header row (exact): `position,name,club,category,time`
+- `time` as `H:MM:SS`. `category` free text (e.g. MO, FV40, U18). Blank club allowed.
+- The site derives: podium (overall winner, first woman, first junior — category matching rules configurable in one place), finisher count, searchable/filterable table, CSV download link, year tabs from the files present.
+- Add a results page per year (`/wolfspit/2026/`) plus `/wolfspit/` landing that defaults to the latest year. Runner search across all years is a nice-to-have.
+
+## Pages
+
+- `/` homepage (the design file is the spec)
+- `/news/` list + `/news/[slug]/`
+- `/events/[slug]/` (each event: details, last year's photos, CTA)
+- `/christmas-card/` (explains it, links to SumUp payment; see Payments)
+- `/photos/` albums grid + `/photos/[slug]/` with lightbox (keyboard accessible)
+- `/wolfspit/` and `/wolfspit/[year]/`
+- `/our-story/` full timeline
+- `/where-the-money-goes/` full map
+- `/get-involved/`, `/donate/`, `/contact/`, `/privacy/`
+- 404 page
+
+## Homepage sections (top to bottom, per the design)
+
+1. Header: duck logo (original inline SVG in the design file), nav: Events, News, Photos, Wolfspit results, Our story, Get involved (pill button).
+2. Hero: "Next up" event, auto-picked as the next upcoming `events` entry by `start`. Live countdown (days/hours/mins). Primary CTA (SumUp link) + "All events".
+3. "The Bradda Dads year": event cards from `events`, status tag, CTA.
+4. News: one featured story + three recent.
+5. Christmas card banner (only shown while the card event is `open`).
+6. Wolfspit results band (dark): year tabs, podium, search, category filter, table (first 6 rows), "see all", download CSV, "Enter [next year]".
+7. Photos: album grid + "Share your photos" button (phase 1: mailto or Facebook link; phase 2+: an upload form).
+8. Our story: intro + archive photo + timeline.
+9. Where the money goes: map with pins from `funded` + stats from settings.
+10. Donate: £5 / £10 / £20 buttons (SumUp reusable payment links from settings), QR code, link to SumUp store, "Secure payments by SumUp".
+11. Join us + latest Facebook posts (phase 1: link out or 3 manually curated posts; don't add a heavy Facebook embed without asking).
+12. Footer: name, "Raising money for Bradwell, Derbyshire, since 1999", CIC details, links.
+
+## Design tokens (from the mockup)
+
+- Colours: green `#1D3B2C`, deep green (footer/results) `#10241A`, duck yellow `#F6C343`, warm yellow panel `#FBE9B7`, orange accent `#E8702A`, text `#1A1F1C`, muted text `#4B5A51` / `#34413A`, light surface `#F1F4F2`, border `#E3E8E4`, on-dark muted `#C9D6CD` / `#DFE9E2`.
+- Type: headings **Bricolage Grotesque** (500/700/800), body **Inter** (400/500/600). Self-host the fonts (no Google Fonts CDN, for privacy).
+- Shapes: pill buttons (`border-radius: 999px`), cards 18–32px radius, min touch target 44px.
+- Tone: friendly, local, a bit playful. Rubber duck motif. No stock-photo feel.
+
+## Payments (SumUp)
+
+- Phase 1: **links only.** Buttons point to SumUp store product pages or SumUp reusable payment links stored in `site.yaml` / event front matter. No API keys in the repo.
+- Christmas card: needs the family's message as well as £5. Phase 1 approach: a Netlify Form collects name + message, then the thank-you page sends them to the £5 SumUp link. Treasurer reconciles. (Phase 3 option: SumUp Payment Widget with a Netlify Function creating checkouts so message and payment are linked; requires a SumUp API key in Netlify env vars.)
+
+## Map
+
+- Leaflet with OpenStreetMap tiles (correct attribution). Pins from `funded`. Lazy-load the map script. Provide a text list fallback for accessibility.
+
+## Quality bar
+
+- Accessible: semantic HTML, real buttons/links/labels, visible focus, colour contrast ≥ 4.5:1, alt text required in schemas, lightbox and tabs keyboard-operable, `prefers-reduced-motion` respected.
+- Mobile first; the design must work at 360px wide.
+- Performance: Astro `<Image>` for responsive images, compress uploads, no layout shift, Lighthouse ≥ 90 across the board.
+- Privacy: no tracking by default. If analytics are wanted, use a cookieless option and ask first. Privacy page placeholder.
+- SEO basics: titles, descriptions, Open Graph image, sitemap, `robots.txt`.
+
+## Repo layout
+
+```
+/design/homepage-mockup.dc.html   # reference only, not built
+/src/content/...                  # collections above
+/src/data/site.yaml
+/src/components/...
+/src/layouts/...
+/src/pages/...
+/public/uploads/...
+/TODO-content.md                  # every [PLACEHOLDER] still to fill
+/docs/how-to-update.md            # phase 1: Peter's guide; phase 2: editors' guide
+/.github/workflows/deploy.yml     # GitHub Pages build (replaces netlify.toml for now)
+```
+
+## Implementation notes (added during build)
+
+- Astro 7, Zod 4 (`import { z } from 'astro/zod'`). Schemas in `src/content.config.ts`.
+- Uploads folder: **`public/uploads/`**, referenced as `/uploads/...` in front matter (schema enforces this).
+- `site.yaml` sits under a top-level `site:` key (Astro's file loader); read it with `getSite()` from `src/lib/site.ts`.
+- Events: `when` is the display label ("26 December"); `start` is optional; `startTimeConfirmed: false` shows `[START TIME]` instead of a made-up time.
+- Timeline entries have an `order` field (years can be "[YEAR]" so they can't be sorted by year).
+- Wolfspit CSV parsing + podium rules: `src/lib/results.ts` (`PODIUM_RULES`).
+- Windows dev machine needs the Microsoft VC++ runtime (Astro's Markdown engine is native).
+
+## Phase 2 checklist (do not build yet, but don't block it)
+
+- Add `public/admin/index.html` + `public/admin/config.yml` for Decap CMS, collections mirroring the schemas above (folder collections, `media_folder` matching the chosen uploads folder).
+- Enable Netlify Identity (invite-only registration) + Git Gateway; add the Identity widget to `/admin` and the site's `<head>`.
+- Optional: editorial workflow (draft → review → publish) for news.
+- Fallback if Netlify Identity is unsuitable: DecapBridge for auth.
+- Write `docs/how-to-update.md` for editors with screenshots.
+
+## Working agreements
+
+- Ask before adding dependencies beyond Astro, Zod, Leaflet and a small lightbox library.
+- Seed each collection with 1–3 sample entries using `[PLACEHOLDER]` text, never invented facts.
+- Keep components small and named after the homepage sections.
+- After each milestone, update `TODO-content.md` and summarise what changed.
+
+## Milestones
+
+1. Scaffold Astro + Netlify config, design tokens, fonts, base layout, header/footer.
+2. Content collections + schemas + sample content + `site.yaml`.
+3. Homepage sections, matching the design file.
+4. Inner pages (news, events, photos, Wolfspit, story, map, donate, get involved).
+5. Christmas card form flow (form built; submission service TBD since GitHub Pages has no forms).
+6. Accessibility/performance pass, `TODO-content.md`, `docs/how-to-update.md`.
+7. Deploy (GitHub Pages now), then connect the domain.
+
+## The design file
+
+`design/homepage-mockup.dc.html` was made in a design tool that uses its own template syntax: `<x-dc>`, `<helmet>`, `<sc-for list="{{items}}">` loops, `{{hole}}` bindings, and a `renderVals()` script holding sample data (events, news, albums, timeline, pins). Treat it as the **visual and structural spec**: copy layout, spacing, colours, type sizes and copy from it, but rebuild everything as Astro components fed by the content collections. Do not ship that file or its syntax.
