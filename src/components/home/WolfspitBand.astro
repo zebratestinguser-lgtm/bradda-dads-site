@@ -25,9 +25,13 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
         <p class="wolfspit__text">{site.wolfspitIntro}</p>
       </div>
       <div class="wolfspit__actions">
-        <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>
-          Enter {latest ? latest.year + 1 : new Date().getFullYear()}
-        </a>
+        {
+          site.wolfspitEntryUrl !== '#' && (
+            <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>
+              Enter {latest ? latest.year + 1 : new Date().getFullYear()}
+            </a>
+          )
+        }
         {
           latest && (
             <a class="btn btn--ghost-light btn--md" href={url(`/wolfspit/${latest.year}.csv`)} data-csv-link download>

@@ -1,6 +1,7 @@
 ---
 import DuckLogo from './DuckLogo.astro';
 import { getSite } from '../lib/site';
+import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
@@ -45,7 +46,14 @@ const columns = [
         <span>{site.name}</span>
       </a>
       <p>{site.tagline}</p>
-      <p class="site-footer__cic">{site.cicName} · Company no. {site.cicNumber}</p>
+      {
+        !isPlaceholder(site.cicName) && (
+          <p class="site-footer__cic">
+            {site.cicName}
+            {!isPlaceholder(site.cicNumber) && ` · Company no. ${site.cicNumber}`}
+          </p>
+        )
+      }
     </div>
     {
       columns.map((col) => (

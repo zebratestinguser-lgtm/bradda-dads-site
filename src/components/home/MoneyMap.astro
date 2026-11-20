@@ -1,6 +1,7 @@
 ---
 import FundedMap from '../FundedMap.astro';
 import { getSite } from '../../lib/site';
+import { isPlaceholder } from '../../lib/events';
 import { url } from '../../lib/url';
 
 const site = await getSite();
@@ -14,16 +15,24 @@ const site = await getSite();
       <p class="money__text">
         From stage lights at the school to grants for local groups, every pound raised stays in the village. Tap a pin to see what it paid for.
       </p>
-      <div class="stats">
-        <div class="stat">
-          <span class="stat__num">£{site.totalRaised}</span>
-          <span class="stat__label">raised since 1999</span>
-        </div>
-        <div class="stat">
-          <span class="stat__num">{site.groupsHelped}</span>
-          <span class="stat__label">groups and projects helped</span>
-        </div>
-      </div>
+      {
+        (!isPlaceholder(site.totalRaised) || !isPlaceholder(site.groupsHelped)) && (
+          <div class="stats">
+            {!isPlaceholder(site.totalRaised) && (
+              <div class="stat">
+                <span class="stat__num">£{site.totalRaised}</span>
+                <span class="stat__label">raised since 1999</span>
+              </div>
+            )}
+            {!isPlaceholder(site.groupsHelped) && (
+              <div class="stat">
+                <span class="stat__num">{site.groupsHelped}</span>
+                <span class="stat__label">groups and projects helped</span>
+              </div>
+            )}
+          </div>
+        )
+      }
       <a class="link-arrow" href={url('/where-the-money-goes/')}>Open the full map →</a>
     </div>
     <div class="money__map-col">

@@ -68,6 +68,8 @@ const events = defineCollection({
     location: z.string(),
     summary: z.string(),
     status: z.enum(['upcoming', 'open', 'done']),
+    /** When entries/sales close (UK time). After this, "Open now" becomes "Entries closed" and the homepage banner hides. */
+    entriesClose: z.coerce.date().optional(),
     ctaLabel: z.string(),
     ctaUrl: link,
     /** Position on the homepage "year" strip (1 = first). */
@@ -209,6 +211,10 @@ const settings = defineCollection({
     storyImageCaption: z.string().optional(),
     /** SumUp payment link for the £5 Christmas card message. */
     christmasCardPaymentUrl: link,
+    /** Upcoming public dates for the homepage. Past dates are hidden automatically. */
+    diaryDates: z
+      .array(z.object({ date: z.coerce.date(), label: z.string().optional(), text: z.string(), url: link.optional() }))
+      .default([]),
     facebookPosts: z
       .array(z.object({ date: z.string(), text: z.string(), url: link, image: uploadPath.optional(), imageAlt: z.string().optional() }))
       .max(3)

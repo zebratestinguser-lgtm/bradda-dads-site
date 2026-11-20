@@ -8,22 +8,24 @@ site:
   contactEmail: "[CONTACT EMAIL]"
   cicName: "[CIC NAME]"
   cicNumber: "[COMPANY NUMBER]"
-  sumupStoreUrl: "#"
+  # SumUp online store (three items: duck race tickets, community Christmas card, donation)
+  sumupStoreUrl: https://bradda-dads-community-group.sumupstore.com/
+  # All three amounts go to the store's donation item, where the amount is chosen
   donationLinks:
     - amount: 5
-      url: "#"
+      url: https://bradda-dads-community-group.sumupstore.com/product/donation
       label: "[What £5 pays for]"
     - amount: 10
-      url: "#"
+      url: https://bradda-dads-community-group.sumupstore.com/product/donation
       label: "[What £10 pays for]"
     - amount: 20
-      url: "#"
+      url: https://bradda-dads-community-group.sumupstore.com/product/donation
       label: "[What £20 pays for]"
   # donationQr: /uploads/site/sumup-qr.png
   totalRaised: "[TOTAL]"
   groupsHelped: "[NUMBER]"
-  # From the old WordPress site (2018–2022); confirm it's still current
-  meetingInfo: "on the third Wednesday of the month at 8:30pm, usually at the Shoulder of Mutton"
+  # From the 17 November 2026 minutes (Tuesday, 8.30pm, The White Hart)
+  meetingInfo: "on the third Tuesday of the month at 8:30pm, in one of the village pubs"
   # Phase 1: "Share your photos" goes to Facebook (or a mailto: link)
   sharePhotosUrl: https://www.facebook.com/BraddaDads/
   accountsUrl: "#"
@@ -36,8 +38,30 @@ site:
   storyImageAlt: "Pensioners in paper party hats at long tables at the first Bradda Dads Christmas lunch, December 2001"
   storyImageCaption: "The first pensioners' Christmas lunch, 12 December 2001"
   # Christmas card: SumUp link for the £5 message
-  christmasCardPaymentUrl: "#"
-  # Up to three hand-picked Facebook posts for the homepage
+  christmasCardPaymentUrl: https://bradda-dads-community-group.sumupstore.com/product/community-christmas-card
+  # Dates for your diary (homepage). Dates that have passed disappear on the next daily rebuild.
+  # "label" overrides how the date is shown, e.g. "Week of 14 Dec". From the 17 November 2026 minutes.
+  diaryDates:
+    - date: 2026-11-20
+      text: Christmas card entries close at midnight
+      url: https://bradda-dads-community-group.sumupstore.com/product/community-christmas-card
+    - date: 2026-12-04
+      text: Pensioners' Christmas lunch
+      url: /events/pensioners-lunch/
+    - date: 2026-12-12
+      text: Duck race tickets on sale at the Co-op, 10am to 2pm
+      url: /events/duck-race/
+    - date: 2026-12-14
+      label: Week of 14 Dec
+      text: Christmas cards delivered around the village
+      url: /christmas-card/
+    - date: 2026-12-19
+      text: Last chance for duck tickets, at the Co-op (10am to 2pm) or online until midnight
+      url: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
+    - date: 2026-12-26
+      text: Boxing Day Duck Race
+      url: /events/duck-race/
+  # Up to three hand-picked Facebook posts for the homepage (shown instead of the diary once real posts are added)
   facebookPosts:
     - date: "[DATE]"
       text: "[PLACEHOLDER: copy of a recent Facebook post]"

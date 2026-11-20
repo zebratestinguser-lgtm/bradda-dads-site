@@ -1,10 +1,12 @@
 ---
 // Only shown while the Christmas card event's status is "open".
 import { getEntry } from 'astro:content';
+import { isOpen } from '../../lib/events';
 import { url } from '../../lib/url';
 
 const card = await getEntry('events', 'christmas-card');
-const show = card?.data.status === 'open';
+// Shown while entries are open; hides itself after entriesClose (the site rebuilds daily)
+const show = card ? isOpen(card) : false;
 ---
 
 {

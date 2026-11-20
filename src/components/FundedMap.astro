@@ -1,6 +1,7 @@
 ---
 // Leaflet map of funded projects (loads when scrolled near) + text list fallback.
 import { getCollection } from 'astro:content';
+import { isPlaceholder } from '../lib/events';
 
 interface Props {
   tall?: boolean;
@@ -12,7 +13,7 @@ const pins = funded.map((f) => ({
   lat: f.data.lat,
   lng: f.data.lng,
   summary: f.data.summary,
-  year: f.data.year,
+  year: isPlaceholder(f.data.year) ? '' : f.data.year,
   confirmed: f.data.locationConfirmed,
 }));
 ---
@@ -27,7 +28,8 @@ const pins = funded.map((f) => ({
         <li>
           <span class="fmap__dot" aria-hidden="true" />
           <span>
-            <strong>{p.name}</strong> · {p.year}
+            <strong>{p.name}</strong>
+            {!isPlaceholder(p.year) && ` · ${p.year}`}
           </span>
         </li>
       ))
@@ -51,7 +53,7 @@ const pins = funded.map((f) => ({
     const markers = pins.map((p) =>
       L.marker([p.lat, p.lng], { icon, title: p.name, alt: p.name, keyboard: true })
         .bindPopup(
-          `<strong>${esc(p.name)}</strong><br>${esc(p.year)}<br>${esc(p.summary)}` +
+          `<strong>${esc(p.name)}</strong>${p.year ? `<br>${esc(p.year)}` : ''}<br>${esc(p.summary)}` +
             (p.confirmed ? '' : '<br><em>Map position to be confirmed.</em>'),
         )
         .addTo(map),

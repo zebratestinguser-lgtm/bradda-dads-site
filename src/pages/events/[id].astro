@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
-import { getEvents, pickNextEvent } from '../../lib/events';
+import { getEvents, pickNextEvent, statusFor } from '../../lib/events';
 import { getAlbums, EVENT_TAG } from '../../lib/albums';
 import { formatDate, formatEventDay, formatTime } from '../../lib/format';
 import { url } from '../../lib/url';
@@ -17,7 +17,7 @@ const { event } = Astro.props;
 const d = event.data;
 const { Content } = await render(event);
 const next = pickNextEvent(await getEvents());
-const status = event.id === next?.id ? 'Next up' : d.status === 'open' ? 'Open now' : d.status === 'done' ? 'Done for this year' : 'Coming up';
+const status = statusFor(event, event.id === next?.id).label;
 
 const tag = EVENT_TAG[event.id];
 const eventAlbums = (await getAlbums()).filter((a) => a.data.photos.length > 0 && (a.data.event?.id === event.id || (tag && a.data.category === tag)));
@@ -40,7 +40,7 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
       {d.start && (
         <li>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-          {d.startTimeConfirmed ? formatTime(d.start) : '[START TIME]'}
+          {d.startTimeConfirmed ? formatTime(d.start) : 'Time to be confirmed'}
         </li>
       )}
       <li>

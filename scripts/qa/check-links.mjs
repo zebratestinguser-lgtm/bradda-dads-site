@@ -19,6 +19,12 @@ for (const f of files) {
   const html = readFileSync(f, 'utf-8');
   for (const m of html.matchAll(/(?:href|src)="([^"#?]+)/g)) {
     const u = m[1];
+    // A root-relative link without the base path breaks on GitHub Pages (e.g. Markdown "[x](/news/)")
+    if (u.startsWith('/') && !u.startsWith('//') && !u.startsWith(base)) {
+      if (!bad.has(u)) bad.set(u, []);
+      bad.get(u).push(relative(root, f) + ' (missing base path)');
+      continue;
+    }
     if (!u.startsWith(base)) continue;
     const rel = decodeURIComponent(u.slice(base.length));
     let target = join(root, rel);
