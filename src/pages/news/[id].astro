@@ -1,0 +1,191 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { photoDate } from '../../lib/albums';
+import { formatDate } from '../../lib/format';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  return news.map((story, i) => ({ params: { id: story.id }, props: { story, newer: news[i - 1], older: news[i + 1] } }));
+}
+
+const { story, newer, older } = Astro.props;
+const { Content } = await render(story);
+const album = story.data.album ? await getEntry(story.data.album) : undefined;
+const preview = album ? album.data.photos.slice(0, 8) : [];
+const when = album ? photoDate(album) : undefined;
+---
+
+<BaseLayout title={story.data.title} description={story.data.summary} ogImage={story.data.image}>
+  <article class="story">
+    <header class="story__header">
+      <div class="container story__header-inner">
+        <a class="story__back" href={url('/news/')}>← All news</a>
+        <p class="story__meta">
+          <span class="tag">{story.data.tag}</span>
+          <time datetime={story.data.date.toISOString().slice(0, 10)}>{formatDate(story.data.date)}</time>
+        </p>
+        <h1 class="story__title">{story.data.title}</h1>
+      </div>
+    </header>
+
+    <div class="container story__body">
+      {
+        story.data.image && (
+          <figure class="story__figure">
+            <img src={url(story.data.image)} alt={story.data.imageAlt ?? ''} decoding="async" />
+            {when && <figcaption>Photo taken {when}</figcaption>}
+          </figure>
+        )
+      }
+      <div class="prose"><Content /></div>
+
+      {
+        album && preview.length > 0 && (
+          <section class="story__album" aria-labelledby="album-title">
+            <div class="story__album-head">
+              <h2 class="subhead" id="album-title">Photos</h2>
+              <p>
+                {album.data.photos.length} photo{album.data.photos.length === 1 ? '' : 's'} taken <strong>{when}</strong>
+              </p>
+            </div>
+            <ul class="story__thumbs" role="list">
+              {preview.map((p, i) => (
+                <li>
+                  <a href={url(`/photos/${album.id}/`)} aria-label={i === 0 ? `See all photos from ${album.data.title}` : undefined} tabindex={i === 0 ? undefined : -1}>
+                    <img src={url(p.src)} alt={p.alt} loading="lazy" decoding="async" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a class="btn btn--green btn--md" href={url(`/photos/${album.id}/`)}>
+              See all {album.data.photos.length} photos
+            </a>
+          </section>
+        )
+      }
+
+      <nav class="story__nav" aria-label="More stories">
+        {newer ? <a href={url(`/news/${newer.id}/`)}>← Newer: {newer.data.title}</a> : <span />}
+        {older && <a href={url(`/news/${older.id}/`)}>Older: {older.data.title} →</a>}
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .story__header {
+    background: var(--green);
+    color: var(--white);
+    padding-block: 28px 48px;
+  }
+  .story__header-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: calc(68ch + 2 * var(--gutter) + 120px);
+  }
+  .story__back {
+    color: var(--on-dark-soft);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+  }
+  .story__back:hover {
+    color: var(--white);
+  }
+  .story__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--on-dark-soft);
+  }
+  .story__title {
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+  }
+  .story__body {
+    padding-block: 40px var(--section-pad);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: calc(68ch + 2 * var(--gutter) + 120px);
+  }
+  .story__figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .story__figure img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: var(--radius-card);
+    background: var(--surface-green);
+  }
+  .story__figure figcaption {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .story__album {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 8px;
+  }
+  .story__album-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+  .story__album-head p {
+    color: var(--muted);
+  }
+  .story__thumbs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(140px, 30%), 1fr));
+    gap: 8px;
+  }
+  .story__thumbs a {
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface-green);
+  }
+  .story__thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+    align-self: flex-start;
+  }
+  .story__nav {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    font-weight: 600;
+  }
+  .story__nav a {
+    padding-block: 10px;
+    max-width: 48ch;
+  }
+</style>

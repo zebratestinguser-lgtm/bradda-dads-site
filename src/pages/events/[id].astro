@@ -1,0 +1,143 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import AlbumCard from '../../components/AlbumCard.astro';
+import { getEvents, pickNextEvent } from '../../lib/events';
+import { getAlbums, EVENT_TAG } from '../../lib/albums';
+import { formatDate, formatEventDay, formatTime } from '../../lib/format';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const events = await getEvents();
+  return events.map((event) => ({ params: { id: event.id }, props: { event } }));
+}
+
+const { event } = Astro.props;
+const d = event.data;
+const { Content } = await render(event);
+const next = pickNextEvent(await getEvents());
+const status = event.id === next?.id ? 'Next up' : d.status === 'open' ? 'Open now' : d.status === 'done' ? 'Done for this year' : 'Coming up';
+
+const albums = (await getAlbums()).filter((a) => a.data.event?.id === event.id && a.data.photos.length > 0).slice(0, 4);
+const tag = EVENT_TAG[event.id];
+const news = tag
+  ? (await getCollection('news')).filter((n) => n.data.tag === tag).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 5)
+  : [];
+const ctaHref = url(d.ctaUrl);
+const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
+---
+
+<BaseLayout title={d.name} description={d.summary}>
+  <PageHeader eyebrow={status} title={d.name} intro={d.summary}>
+    <ul class="facts" role="list">
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
+        {d.start ? formatEventDay(d.start) + ' ' + d.start.getFullYear() : d.when}
+      </li>
+      {d.start && (
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          {d.startTimeConfirmed ? formatTime(d.start) : '[START TIME]'}
+        </li>
+      )}
+      <li>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+        {d.location}
+      </li>
+    </ul>
+    {!ctaIsSelf && (
+      <a class="btn btn--yellow btn--md" href={ctaHref}>
+        {d.ctaLabel}
+        {d.price && ` · ${d.price}`}
+      </a>
+    )}
+  </PageHeader>
+
+  <section class="container page-section">
+    <div class="prose"><Content /></div>
+  </section>
+
+  {
+    albums.length > 0 && (
+      <section class="container page-section stack" aria-labelledby="photos-title">
+        <h2 class="subhead" id="photos-title">Photos from past years</h2>
+        <ul class="card-grid" role="list">
+          {albums.map((a, i) => (
+            <li>
+              <AlbumCard album={a} index={i} />
+            </li>
+          ))}
+        </ul>
+        <a class="link-arrow" href={url('/photos/')}>All photo albums →</a>
+      </section>
+    )
+  }
+
+  {
+    news.length > 0 && (
+      <section class="container page-section stack" aria-labelledby="news-title">
+        <h2 class="subhead" id="news-title">News</h2>
+        <ul class="related" role="list">
+          {news.map((n) => (
+            <li>
+              <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
+              <a href={url(`/news/${n.id}/`)}>{n.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    font-size: 17px;
+  }
+  .facts li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn--md {
+    min-height: 50px;
+    padding: 0 24px;
+    font-size: 17px;
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .related {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .related li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .related time {
+    color: var(--muted);
+    font-size: 15px;
+    min-width: 150px;
+  }
+  .related a {
+    font-weight: 600;
+  }
+</style>

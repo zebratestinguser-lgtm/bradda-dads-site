@@ -4,7 +4,7 @@ date: 2011-07-10
 tag: "Village"
 summary: "Bradda Dads helped at the opening of the new Multi-use Games Area (MUGA) by erecting a marquee and gazebos, sponsoring the ladies netball competition and running the barbecue."
 image: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/001.jpg
-imageAlt: "Photo 1 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (2011-07-10)"
+imageAlt: "Photo 1 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
 album: 2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga
 source: https://braddadads.blogspot.com/2011/07/9711-opening-of-multi-use-games-area.html
 ---

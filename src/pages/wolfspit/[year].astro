@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ResultsYear from '../../components/results/ResultsYear.astro';
+import YearNav from '../../components/results/YearNav.astro';
+import { getWolfspitYears } from '../../lib/results';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const years = await getWolfspitYears();
+  return years.map((year) => ({ params: { year: String(year.year) }, props: { year, all: years.map((y) => y.year) } }));
+}
+
+const { year, all } = Astro.props;
+---
+
+<BaseLayout title={`Wolf's Pit Fell Race ${year.year} results`} description={`Full results of the ${year.year} Wolf's Pit Fell Race: ${year.finishers} finishers.`}>
+  <PageHeader eyebrow="Race results" title={`Wolf's Pit ${year.year}`}>
+    <a class="back" href={url('/wolfspit/')}>About the race, and every year →</a>
+  </PageHeader>
+  <section class="container page-section stack">
+    <YearNav label="Results year" items={all.map((y) => ({ label: String(y), href: url(`/wolfspit/${y}/`), current: y === year.year }))} />
+    <ResultsYear year={year} raceName="Wolf's Pit" csvHref={url(`/wolfspit/${year.year}.csv`)} />
+  </section>
+</BaseLayout>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .back {
+    color: var(--white);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+  }
+</style>

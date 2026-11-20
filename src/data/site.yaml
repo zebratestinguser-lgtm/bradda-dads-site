@@ -34,6 +34,9 @@ site:
   storyIntro: "Bradda Dads began in 1999, when a group of village dads raced rubber ducks down the brook on Boxing Day to raise money for Bradwell. The pensioners' Christmas lunch followed in 2001, then the village bonfire, carnival floats, the Wolf's Pit Fell Race and plenty more, with everything raised going back into the village. [PLACEHOLDER: who started it and why.]"
   storyImage: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg
   storyImageAlt: "Pensioners in paper party hats at long tables at the first Bradda Dads Christmas lunch, December 2001"
+  storyImageCaption: "The first pensioners' Christmas lunch, 12 December 2001"
+  # Christmas card: SumUp link for the £5 message
+  christmasCardPaymentUrl: "#"
   # Up to three hand-picked Facebook posts for the homepage
   facebookPosts:
     - date: "[DATE]"

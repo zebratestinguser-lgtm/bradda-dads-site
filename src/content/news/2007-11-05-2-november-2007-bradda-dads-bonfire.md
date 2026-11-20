@@ -4,7 +4,7 @@ date: 2007-11-05
 tag: "Bonfire"
 summary: "Another successful bonfire - well done to all"
 image: /uploads/albums/2007-11-05-2-november-2007-bradda-dads-bonfire/001.jpg
-imageAlt: "Photo 1 of 12 from 2 November 2007 - Bradda Dads Bonfire (2007-11-05)"
+imageAlt: "Photo 1 of 12 from 2 November 2007 - Bradda Dads Bonfire (5 November 2007)"
 album: 2007-11-05-2-november-2007-bradda-dads-bonfire
 source: https://braddadads.blogspot.com/2007/11/2-november-2007-bradda-dads-bonfire.html
 ---

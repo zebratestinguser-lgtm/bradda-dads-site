@@ -3,17 +3,17 @@ title: "First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th Dece
 event: pensioners-lunch
 date: 2001-12-12
 cover: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg
-coverAlt: "Photo 1 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (2001-12-12)"
+coverAlt: "Photo 1 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (12 December 2001)"
 source: https://braddadads.blogspot.com/2001/12/first-ever-bradda-dads-pensioners.html
 photos:
   - src: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg
-    alt: "Photo 1 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (2001-12-12)"
+    alt: "Photo 1 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (12 December 2001)"
   - src: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/002.jpg
-    alt: "Photo 2 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (2001-12-12)"
+    alt: "Photo 2 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (12 December 2001)"
   - src: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/003.jpg
-    alt: "Photo 3 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (2001-12-12)"
+    alt: "Photo 3 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (12 December 2001)"
   - src: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/004.jpg
-    alt: "Photo 4 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (2001-12-12)"
+    alt: "Photo 4 of 4 from First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001 (12 December 2001)"
 ---
 
 

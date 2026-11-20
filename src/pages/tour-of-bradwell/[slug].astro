@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ResultsYear from '../../components/results/ResultsYear.astro';
+import { RACES } from '../../content.config';
+import { getRaceYears } from '../../lib/results';
+import { tourRaces, tourSlug } from '../../lib/tour';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const all = (await Promise.all(tourRaces.map((r) => getRaceYears(r)))).flat();
+  return all.map((year) => ({ params: { slug: tourSlug(year.race, year.year) }, props: { year } }));
+}
+
+const { year } = Astro.props;
+const name = RACES[year.race as keyof typeof RACES];
+const slug = tourSlug(year.race, year.year);
+---
+
+<BaseLayout title={`${name} ${year.year} results`} description={`Full results of the ${name} ${year.year}: ${year.finishers} finishers.`}>
+  <PageHeader eyebrow="Race results" title={`${name} ${year.year}`}>
+    <a class="back" href={url('/tour-of-bradwell/')}>All Tour of Bradwell results →</a>
+  </PageHeader>
+  <section class="container page-section">
+    <ResultsYear year={year} raceName={name} csvHref={url(`/tour-of-bradwell/${slug}.csv`)} />
+  </section>
+</BaseLayout>
+
+<style>
+  .back {
+    color: var(--white);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+  }
+</style>

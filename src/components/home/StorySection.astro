@@ -15,7 +15,10 @@ const timeline = (await getCollection('timeline')).sort((a, b) => a.data.order -
       <p class="story__text">{site.storyIntro}</p>
       {
         site.storyImage ? (
-          <img class="story__photo" src={url(site.storyImage)} alt={site.storyImageAlt ?? ''} loading="lazy" decoding="async" width="560" height="220" />
+          <figure class="story__figure">
+            <img class="story__photo" src={url(site.storyImage)} alt={site.storyImageAlt ?? ''} loading="lazy" decoding="async" width="560" height="220" />
+            {site.storyImageCaption && <figcaption>{site.storyImageCaption}</figcaption>}
+          </figure>
         ) : (
           <div class="story__photo story__photo--empty" aria-hidden="true">
             [Archive photo, e.g. the first duck race]
@@ -81,6 +84,16 @@ const timeline = (await getCollection('timeline')).sort((a, b) => a.data.order -
     border-radius: var(--radius-card);
     object-fit: cover;
     background: var(--yellow-panel-strong);
+  }
+  .story__figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .story__figure figcaption {
+    font-size: 14px;
+    color: var(--yellow-ink);
   }
   .story__photo--empty {
     display: flex;

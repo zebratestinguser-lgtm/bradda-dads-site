@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getEvents } from '../lib/events';
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
+
+const site = await getSite();
+const events = await getEvents();
+const hasEmail = !site.contactEmail.startsWith('[');
+---
+
+<BaseLayout title="Get involved" description="Bradda Dads is open to any dad in the parish of Bradwell. No experience needed, just a spare pair of hands for a few events a year.">
+  <PageHeader eyebrow="Get involved" title="Got kids? Live in Bradwell? You're in." intro="Bradda Dads is open to any dad in the parish. No experience needed, just a spare pair of hands for a few events a year." />
+
+  <section class="container page-section grid">
+    <div class="card card--green">
+      <h2 class="subhead">Come to a meeting</h2>
+      <p>We meet {site.meetingInfo}. Just turn up, or message us first if you'd like someone to look out for you.</p>
+      <div class="actions">
+        <a class="btn btn--yellow btn--md" href={site.facebookUrl} rel="noopener">Message us on Facebook</a>
+        {hasEmail && <a class="btn btn--ghost-light btn--md" href={`mailto:${site.contactEmail}`}>Email us</a>}
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="subhead">Help at an event</h2>
+      <p>Not ready to join? Every event needs extra hands: building the bonfire, marshalling the fell race, serving at the pensioners' lunch, or fishing ducks out of the brook.</p>
+      <ul class="event-list" role="list">
+        {events.map((e) => (
+          <li>
+            <a href={url(`/events/${e.id}/`)}>{e.data.name}</a>
+            <span>{e.data.when}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 class="subhead">Not a dad?</h2>
+      <p>You can still help. Families, partners and friends have always pitched in. You can also support us by <a href={url('/donate/')}>donating</a>, buying a duck, or adding your message to the <a href={url('/christmas-card/')}>village Christmas card</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 20px;
+  }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+  }
+  .card .subhead {
+    color: var(--text);
+  }
+  .card--green {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--on-dark-soft);
+  }
+  .card--green .subhead {
+    color: var(--white);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+  .event-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .event-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block: 10px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 16px;
+  }
+  .event-list span {
+    color: var(--muted);
+  }
+  @media (max-width: 600px) {
+    .card {
+      padding: 24px 20px;
+    }
+  }
+</style>

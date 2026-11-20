@@ -1,0 +1,115 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import FundedMap from '../components/FundedMap.astro';
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
+
+const site = await getSite();
+const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const items = await Promise.all(funded.map(async (f) => ({ f, Content: (await render(f)).Content })));
+---
+
+<BaseLayout title="Where the money goes" description="Every pound Bradda Dads raises goes back into Bradwell. See the groups and projects we've helped.">
+  <PageHeader eyebrow="Your money at work" title="Where the money goes" intro="Everything we raise goes back to local good causes in Bradwell: the schools, village groups, and events like the bonfire and the pensioners' Christmas lunch.">
+    <div class="stats">
+      <div><span class="stat__num">£{site.totalRaised}</span><span>raised since 1999</span></div>
+      <div><span class="stat__num">{site.groupsHelped}</span><span>groups and projects helped</span></div>
+    </div>
+  </PageHeader>
+
+  <section class="container page-section">
+    <FundedMap tall />
+  </section>
+
+  <section class="container page-section stack" aria-labelledby="projects-title">
+    <h2 class="subhead" id="projects-title">Groups and projects</h2>
+    <ul class="projects" role="list">
+      {
+        items.map(({ f, Content }) => (
+          <li class="project">
+            {f.data.image && <img src={url(f.data.image)} alt={f.data.imageAlt ?? ''} loading="lazy" />}
+            <h3>{f.data.name}</h3>
+            <p class="project__meta">
+              {f.data.year}
+              {f.data.amount && ` · ${f.data.amount}`}
+            </p>
+            <p>{f.data.summary}</p>
+            <div class="prose project__body">
+              <Content />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <a class="btn btn--green btn--md" href={url('/donate/')}>Help fund the next one</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .stats > div {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    color: var(--on-dark-soft);
+    font-size: 14px;
+  }
+  .stat__num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--yellow);
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 18px;
+  }
+  .project {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .project img {
+    border-radius: var(--radius-sm);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    width: 100%;
+  }
+  .project h3 {
+    font-size: 21px;
+  }
+  .project__meta {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .project__body {
+    font-size: 15px;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+    align-self: flex-start;
+  }
+</style>

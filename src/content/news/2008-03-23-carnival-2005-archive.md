@@ -4,7 +4,7 @@ date: 2008-03-23
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Carnival 2005 (Archive)."
 image: /uploads/albums/2008-03-23-carnival-2005-archive/001.jpg
-imageAlt: "Photo 1 of 8 from Carnival 2005 (Archive) (2008-03-23)"
+imageAlt: "Photo 1 of 8 from Carnival 2005 (Archive) (30 July 2005)"
 album: 2008-03-23-carnival-2005-archive
 source: https://braddadads.blogspot.com/2008/03/carnival-2005-archive.html
 ---

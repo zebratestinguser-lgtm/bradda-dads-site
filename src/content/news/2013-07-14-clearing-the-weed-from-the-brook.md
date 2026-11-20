@@ -4,7 +4,7 @@ date: 2013-07-14
 tag: "Village"
 summary: "The weed in the brook had partly been cleared by the community service people, but there was plenty left to be removed."
 image: /uploads/albums/2013-07-14-clearing-the-weed-from-the-brook/001.jpg
-imageAlt: "Photo 1 of 7 from Clearing the weed from the brook (2013-07-14)"
+imageAlt: "Photo 1 of 7 from Clearing the weed from the brook (14 July 2013)"
 album: 2013-07-14-clearing-the-weed-from-the-brook
 source: https://braddadads.blogspot.com/2013/07/clearing-weed-from-brook.html
 ---

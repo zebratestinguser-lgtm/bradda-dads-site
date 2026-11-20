@@ -4,7 +4,7 @@ date: 2012-08-07
 tag: "Duck race"
 summary: "The carnival duck race was held on it's usual Monday slot on the 6th of August. A large crowd gathered to see the ducks travel down the brook."
 image: /uploads/albums/2012-08-07-duck-race-carnival-2012/001.jpg
-imageAlt: "Photo 1 of 20 from Duck Race - Carnival 2012 (2012-08-07)"
+imageAlt: "Photo 1 of 20 from Duck Race - Carnival 2012 (7 August 2012)"
 album: 2012-08-07-duck-race-carnival-2012
 source: https://braddadads.blogspot.com/2012/08/duck-race-carnival-2012.html
 ---

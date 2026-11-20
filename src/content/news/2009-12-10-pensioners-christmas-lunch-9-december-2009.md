@@ -4,7 +4,7 @@ date: 2009-12-10
 tag: "Pensioners' lunch"
 summary: "124 of Bradwell's finest pensioners, plus one very suspect unidentified 'lady' (see if you can identify her?"
 image: /uploads/albums/2009-12-10-pensioners-christmas-lunch-9-december-2009/001.jpg
-imageAlt: "Photo 1 of 34 from Pensioners Christmas Lunch - 9 December 2009 (2009-12-10)"
+imageAlt: "Photo 1 of 34 from Pensioners Christmas Lunch - 9 December 2009 (10 December 2009)"
 album: 2009-12-10-pensioners-christmas-lunch-9-december-2009
 source: https://braddadads.blogspot.com/2009/12/pensioners-christmas-lunch-9-december.html
 ---

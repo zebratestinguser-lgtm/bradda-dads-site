@@ -1,21 +1,23 @@
 ---
 title: "Wolf's Pit photos"
 event: wolfspit
+# Photo date: Gallery from the old WordPress Wolf’s Pit page; the years aren’t recorded.
 date: 2018-10-17
+dateLabel: "Various years"
 cover: /uploads/albums/2018-10-17-wolfs-pit-photos/001.jpg
-coverAlt: "Photo 1 of 5 from Wolf's Pit photos (2018-10-17)"
+coverAlt: "Photo 1 of 5 from Wolf's Pit photos (Various years)"
 source: https://braddadads.wordpress.com/wolfs-pit/
 photos:
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/001.jpg
-    alt: "Photo 1 of 5 from Wolf's Pit photos (2018-10-17)"
+    alt: "Photo 1 of 5 from Wolf's Pit photos (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/002.png
-    alt: "Photo 2 of 5 from Wolf's Pit photos (2018-10-17)"
+    alt: "Photo 2 of 5 from Wolf's Pit photos (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/003.png
-    alt: "Photo 3 of 5 from Wolf's Pit photos (2018-10-17)"
+    alt: "Photo 3 of 5 from Wolf's Pit photos (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/004.jpg
-    alt: "Photo 4 of 5 from Wolf's Pit photos (2018-10-17)"
+    alt: "Photo 4 of 5 from Wolf's Pit photos (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/005.jpg
-    alt: "Photo 5 of 5 from Wolf's Pit photos (2018-10-17)"
+    alt: "Photo 5 of 5 from Wolf's Pit photos (Various years)"
 ---
 
 ### **Sunday 8th March 2026**

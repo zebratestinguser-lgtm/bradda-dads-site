@@ -4,7 +4,7 @@ date: 2008-12-09
 tag: "Christmas card"
 summary: "Bradda Dads for the first time organised a Christmas card competition with both the infant and junior schools taking part."
 image: /uploads/albums/2008-12-09-christmas-card-competition-2008/001.jpg
-imageAlt: "Photo 1 of 2 from Christmas Card Competition 2008 (2008-12-09)"
+imageAlt: "Photo 1 of 2 from Christmas Card Competition 2008 (9 December 2008)"
 album: 2008-12-09-christmas-card-competition-2008
 source: https://braddadads.blogspot.com/2008/12/christmas-card-competition-2008.html
 ---

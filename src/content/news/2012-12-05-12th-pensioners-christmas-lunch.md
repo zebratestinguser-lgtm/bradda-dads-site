@@ -4,7 +4,7 @@ date: 2012-12-05
 tag: "Pensioners' lunch"
 summary: "The 12th annual pensioners lunch took place on Wednesday 5th December 2012. Around 130 attended and enjoyed cottage pie, carrots, peas and Yorkshire pud."
 image: /uploads/albums/2012-12-05-12th-pensioners-christmas-lunch/001.jpg
-imageAlt: "Photo 1 of 28 from 12th Pensioners'  Christmas Lunch (2012-12-05)"
+imageAlt: "Photo 1 of 28 from 12th Pensioners'  Christmas Lunch (5 December 2012)"
 album: 2012-12-05-12th-pensioners-christmas-lunch
 source: https://braddadads.blogspot.com/2012/12/12th-pensioners-christmas-lunch.html
 ---

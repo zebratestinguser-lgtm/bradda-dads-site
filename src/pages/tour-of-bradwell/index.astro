@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { RACES } from '../../content.config';
+import { getRaceYears } from '../../lib/results';
+import { formatDate } from '../../lib/format';
+import { url } from '../../lib/url';
+import { tourRaces, tourSlug } from '../../lib/tour';
+
+const all = (await Promise.all(tourRaces.map((r) => getRaceYears(r)))).flat().sort((a, b) => b.year - a.year || a.race.localeCompare(b.race));
+const years = [...new Set(all.map((y) => y.year))];
+---
+
+<BaseLayout title="Tour of Bradwell" description="Results from the Tour of Bradwell fell races, 2016–2019.">
+  <PageHeader
+    eyebrow="Fell race"
+    title="Tour of Bradwell"
+    intro="A fell running and challenge event around Bradwell, with a Long Tour and a Half Tour. Bradda Dads helped stage it from 2012 and went on to run it. Here are the results we have."
+  />
+  <section class="container page-section stack">
+    {
+      years.map((y) => (
+        <div class="tour-year">
+          <h2 class="subhead">{y}</h2>
+          <ul class="tour-list" role="list">
+            {all
+              .filter((r) => r.year === y)
+              .map((r) => (
+                <li>
+                  <a class="tour-card" href={url(`/tour-of-bradwell/${tourSlug(r.race, r.year)}/`)}>
+                    <span class="tour-card__name">{RACES[r.race as keyof typeof RACES]}</span>
+                    <span class="tour-card__meta">
+                      {r.date ? formatDate(r.date) : y} · {r.finishers} finishers
+                    </span>
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      ))
+    }
+    <p class="note">
+      For future Tour of Bradwell events, see the official Tour of Bradwell website. Results for 2018 aren't on the site yet.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .tour-year {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .tour-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 14px;
+  }
+  .tour-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    text-decoration: none;
+    color: var(--text);
+  }
+  .tour-card:hover {
+    border-color: var(--green);
+    color: var(--text);
+  }
+  .tour-card__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 21px;
+  }
+  .tour-card__meta {
+    font-size: 15px;
+    color: var(--muted);
+  }
+</style>

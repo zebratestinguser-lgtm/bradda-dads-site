@@ -4,7 +4,7 @@ date: 2009-12-27
 tag: "Duck race"
 summary: "The annual Boxing Day duck race was made more festive by the remains of the recent heavy snow fall."
 image: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/001.jpg
-imageAlt: "Photo 1 of 21 from Boxing Day 2009 Duck Race (2009-12-27)"
+imageAlt: "Photo 1 of 21 from Boxing Day 2009 Duck Race (27 December 2009)"
 album: 2009-12-27-boxing-day-2009-duck-race
 source: https://braddadads.blogspot.com/2009/12/boxing-day-2009-duck-race.html
 ---

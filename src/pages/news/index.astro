@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { NEWS_TAGS } from '../../content.config';
+import { formatDate } from '../../lib/format';
+import { url } from '../../lib/url';
+
+const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const tags = NEWS_TAGS.filter((t) => news.some((n) => n.data.tag === t));
+const byYear = new Map<number, typeof news>();
+for (const n of news) {
+  const y = n.data.date.getFullYear();
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(n);
+}
+---
+
+<BaseLayout title="News" description={`News from Bradda Dads, Bradwell: ${news.length} stories going back to 2001.`}>
+  <PageHeader eyebrow="News" title="News from the Dads" intro={`${news.length} stories, from the latest race results back to the first pensioners' lunch in 2001.`} />
+
+  <section class="container page-section news-page">
+    <div class="filters">
+      <p class="filters__label" id="tag-filter-label">Show:</p>
+      <ul class="chips" role="list" aria-labelledby="tag-filter-label" data-filters>
+        <li><button type="button" class="chip" aria-pressed="true" data-tag="">All</button></li>
+        {tags.map((t) => <li><button type="button" class="chip" aria-pressed="false" data-tag={t}>{t}</button></li>)}
+      </ul>
+      <p class="visually-hidden" aria-live="polite" data-filter-status></p>
+    </div>
+
+    {
+      [...byYear.entries()].map(([year, items]) => (
+        <section class="news-year" data-year-group aria-labelledby={`news-${year}`}>
+          <h2 class="subhead" id={`news-${year}`}>{year}</h2>
+          <ul class="news-list" role="list">
+            {items.map((n) => (
+              <li class="news-row" data-tag={n.data.tag}>
+                {n.data.image ? (
+                  <img class="news-row__thumb" src={url(n.data.image)} alt="" loading="lazy" decoding="async" width="96" height="96" />
+                ) : (
+                  <div class="news-row__thumb news-row__thumb--empty" aria-hidden="true" />
+                )}
+                <div class="news-row__body">
+                  <p class="news-row__meta">
+                    <span class="tag">{n.data.tag}</span>
+                    <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
+                  </p>
+                  <h3 class="news-row__title">
+                    <a href={url(`/news/${n.id}/`)}>{n.data.title}</a>
+                  </h3>
+                  <p class="news-row__summary">{n.data.summary}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </section>
+</BaseLayout>
+
+<script>
+  const filters = document.querySelector('[data-filters]');
+  const status = document.querySelector('[data-filter-status]');
+  if (filters) {
+    const buttons = [...filters.querySelectorAll<HTMLButtonElement>('button[data-tag]')];
+    const rows = [...document.querySelectorAll<HTMLElement>('.news-row')];
+    const groups = [...document.querySelectorAll<HTMLElement>('[data-year-group]')];
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        const tag = b.dataset.tag!;
+        buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        let shown = 0;
+        rows.forEach((r) => {
+          const on = !tag || r.dataset.tag === tag;
+          r.hidden = !on;
+          if (on) shown++;
+        });
+        groups.forEach((g) => (g.hidden = !g.querySelector('.news-row:not([hidden])')));
+        if (status) status.textContent = `${shown} stories shown`;
+      }),
+    );
+  }
+</script>
+
+<style>
+  .news-page {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+  }
+  .filters__label {
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .news-year {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .news-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .news-row {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .news-row__thumb {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--surface-green);
+  }
+  .news-row__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .news-row__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .news-row__title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.3;
+  }
+  .news-row__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .news-row__title a:hover {
+    text-decoration: underline;
+  }
+  .news-row__summary {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted-strong);
+  }
+  @media (max-width: 480px) {
+    .news-row__thumb {
+      width: 64px;
+      height: 64px;
+    }
+  }
+</style>

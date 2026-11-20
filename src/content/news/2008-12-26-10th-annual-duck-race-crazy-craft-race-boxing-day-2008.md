@@ -4,7 +4,7 @@ date: 2008-12-26
 tag: "Duck race"
 summary: "Duck Race Results Click document image to view Crazy Craft Race Results Race Winner: Phoebe Pembleton Best Overall Design of Craft: Sian Marsden Best Design, Under 8s: Alfie Baker…"
 image: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/001.jpg
-imageAlt: "Photo 1 of 12 from 10th Annual Duck Race & Crazy Craft Race - Boxing Day 2008 (2008-12-26)"
+imageAlt: "Photo 1 of 12 from 10th Annual Duck Race & Crazy Craft Race - Boxing Day 2008 (26 December 2008)"
 album: 2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008
 source: https://braddadads.blogspot.com/2008/12/10th-annual-boxing-day-2008-duck-race.html
 ---

@@ -4,7 +4,7 @@ date: 2008-12-10
 tag: "Pensioners' lunch"
 summary: "Excellent pensioners lunch. Very good feedback from our guests (see above). Attendance: 122."
 image: /uploads/albums/2008-12-10-8th-annual-pensioners-christmas-lunch/001.jpg
-imageAlt: "Photo 1 of 37 from 8th Annual Pensioners Christmas Lunch (2008-12-10)"
+imageAlt: "Photo 1 of 37 from 8th Annual Pensioners Christmas Lunch (10 December 2008)"
 album: 2008-12-10-8th-annual-pensioners-christmas-lunch
 source: https://braddadads.blogspot.com/2008/12/8th-annual-pensioners-christmas-lunch.html
 ---

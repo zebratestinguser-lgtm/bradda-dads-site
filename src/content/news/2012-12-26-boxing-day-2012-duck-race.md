@@ -4,7 +4,7 @@ date: 2012-12-26
 tag: "Duck race"
 summary: "Thanks to everyone who bought ducks for this year's annual event, the 14th consecutive year the 'Dads have held the race. The weather was kind to us providing a bright sunny day."
 image: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/001.jpg
-imageAlt: "Photo 1 of 11 from Boxing Day 2012 Duck Race (2012-12-26)"
+imageAlt: "Photo 1 of 11 from Boxing Day 2012 Duck Race (26 December 2012)"
 album: 2012-12-26-boxing-day-2012-duck-race
 source: https://braddadads.blogspot.com/2012/12/boxing-day-2012-duck-race.html
 ---

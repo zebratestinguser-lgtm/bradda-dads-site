@@ -1,0 +1,138 @@
+---
+// Leaflet map of funded projects (loads when scrolled near) + text list fallback.
+import { getCollection } from 'astro:content';
+
+interface Props {
+  tall?: boolean;
+}
+const { tall = false } = Astro.props;
+const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const pins = funded.map((f) => ({
+  name: f.data.name,
+  lat: f.data.lat,
+  lng: f.data.lng,
+  summary: f.data.summary,
+  year: f.data.year,
+  confirmed: f.data.locationConfirmed,
+}));
+---
+
+<div class="fmap">
+  <div class:list={['fmap__map', { 'fmap__map--tall': tall }]} data-map={JSON.stringify(pins)} aria-label="Map of Bradwell with pins marking projects funded by Bradda Dads" role="region">
+    <noscript><p class="fmap__noscript">The map needs JavaScript. The list below shows every project.</p></noscript>
+  </div>
+  <ul class="fmap__list" role="list" aria-label="Projects on the map">
+    {
+      pins.map((p) => (
+        <li>
+          <span class="fmap__dot" aria-hidden="true" />
+          <span>
+            <strong>{p.name}</strong> · {p.year}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  type Pin = { name: string; lat: number; lng: number; summary: string; year: string; confirmed: boolean };
+
+  async function init(el: HTMLElement) {
+    const [{ default: L }] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
+    const pins: Pin[] = JSON.parse(el.dataset.map!);
+    const map = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    const icon = L.divIcon({ className: 'bd-pin', html: '<span></span>', iconSize: [28, 28], iconAnchor: [14, 14], popupAnchor: [0, -14] });
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+    const markers = pins.map((p) =>
+      L.marker([p.lat, p.lng], { icon, title: p.name, alt: p.name, keyboard: true })
+        .bindPopup(
+          `<strong>${esc(p.name)}</strong><br>${esc(p.year)}<br>${esc(p.summary)}` +
+            (p.confirmed ? '' : '<br><em>Map position to be confirmed.</em>'),
+        )
+        .addTo(map),
+    );
+    if (markers.length) map.fitBounds(L.featureGroup(markers).getBounds().pad(0.6), { maxZoom: 16 });
+    else map.setView([53.3286, -1.74], 15); // Bradwell
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-map]').forEach((el) => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          init(el);
+        }
+      },
+      { rootMargin: '300px' },
+    );
+    io.observe(el);
+  });
+</script>
+
+<style>
+  .fmap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .fmap__map {
+    height: 420px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface-green);
+    z-index: 0;
+  }
+  .fmap__map--tall {
+    height: 560px;
+  }
+  .fmap__noscript {
+    padding: 24px;
+    color: var(--muted);
+  }
+  .fmap__map :global(.bd-pin span) {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    border: 3px solid var(--white);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+  .fmap__map :global(.leaflet-popup-content) {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .fmap__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-size: 14px;
+    color: var(--muted-strong);
+  }
+  .fmap__list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fmap__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+  @media (max-width: 600px) {
+    .fmap__map,
+    .fmap__map--tall {
+      height: 340px;
+    }
+  }
+</style>

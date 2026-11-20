@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
+
+const site = await getSite();
+---
+
+<BaseLayout title="Privacy" description="How the Bradda Dads website handles your information.">
+  <PageHeader eyebrow="Privacy" title="Privacy notice" intro="[PLACEHOLDER: draft for the committee to review and approve before launch.]" />
+  <section class="container page-section">
+    <div class="prose">
+      <h2>Who we are</h2>
+      <p>This website is run by Bradda Dads ({site.cicName}, company number {site.cicNumber}), a volunteer group raising money for Bradwell, Derbyshire.</p>
+
+      <h2>No tracking</h2>
+      <p>This website doesn't use cookies, analytics or advertising trackers.</p>
+
+      <h2>Payments</h2>
+      <p>Donations and payments are taken by SumUp. When you pay, you're on SumUp's website and their privacy policy applies. We receive the payment details SumUp shares with sellers (such as your name and the amount) so we can keep our accounts.</p>
+
+      <h2>Christmas card messages</h2>
+      <p>[PLACEHOLDER: once the Christmas card form is live, explain what's collected (name and message), who sees it, how long it's kept, and that the message is printed on the card.]</p>
+
+      <h2>The map</h2>
+      <p>The "where the money goes" map loads map images from OpenStreetMap's servers when you scroll to it, so your browser contacts OpenStreetMap. See the <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap Foundation privacy policy</a>.</p>
+
+      <h2>Photos, news and race results</h2>
+      <p>The site includes photos and stories from Bradda Dads events going back to 2001 (many brought across from our old websites), and fell race results that list runners' names, clubs, categories and times as published at the time.</p>
+      <p>If you'd like a photo, a mention of you or your child, or your race result removed, <a href={url('/contact/')}>contact us</a> and we'll take it down.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about this notice: <a href={url('/contact/')}>get in touch</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

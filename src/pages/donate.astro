@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DonateSection from '../components/home/DonateSection.astro';
+import { url } from '../lib/url';
+---
+
+<BaseLayout title="Donate" description="Donate to Bradda Dads. Every pound goes back into Bradwell: the pensioners' lunch, the bonfire, and grants for local groups.">
+  <PageHeader eyebrow="Donate" title="Chip in for Bradwell" intro="Bradda Dads are volunteers. None of us gain anything from the fundraising: every pound goes back into the village." />
+  <DonateSection />
+  <section class="container page-section more">
+    <p>Want to know what your money pays for? <a href={url('/where-the-money-goes/')}>See where the money goes</a>.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .more {
+    padding-top: 32px;
+    font-size: 17px;
+  }
+</style>

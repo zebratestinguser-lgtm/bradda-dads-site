@@ -4,7 +4,7 @@ date: 2012-11-08
 tag: "Bonfire"
 summary: "In the late evening of Sunday 4th November 2012 the bonfire built the day before was torched by an arsonist(s)."
 image: /uploads/albums/2012-11-08-the-12th-bradda-dads-bonfire-november-2012/001.jpg
-imageAlt: "Photo 1 of 14 from The 12th Bradda Dads Bonfire - November 2012 (2012-11-08)"
+imageAlt: "Photo 1 of 14 from The 12th Bradda Dads Bonfire - November 2012 (8 November 2012)"
 album: 2012-11-08-the-12th-bradda-dads-bonfire-november-2012
 source: https://braddadads.blogspot.com/2012/11/bonfire-2012.html
 ---

@@ -4,7 +4,7 @@ date: 2011-12-07
 tag: "Pensioners' lunch"
 summary: "About 126 Bradwell pensioners came to this year's lunch at the Methodist Hall."
 image: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/001.jpg
-imageAlt: "Photo 1 of 19 from 11th Annual Pensioners Lunch (2011-12-07)"
+imageAlt: "Photo 1 of 19 from 11th Annual Pensioners Lunch (7 December 2011)"
 album: 2011-12-07-11th-annual-pensioners-lunch
 source: https://braddadads.blogspot.com/2011/12/11th-annual-pensioners-lunch.html
 ---
