@@ -2,9 +2,10 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
+import NewsTile from '../../components/NewsTile.astro';
 import { NEWS_TAGS } from '../../content.config';
 import { formatDate } from '../../lib/format';
-import { url } from '../../lib/url';
+import { url, thumb } from '../../lib/url';
 
 const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const tags = NEWS_TAGS.filter((t) => news.some((n) => n.data.tag === t));
@@ -37,9 +38,11 @@ for (const n of news) {
             {items.map((n) => (
               <li class="news-row" data-tag={n.data.tag}>
                 {n.data.image ? (
-                  <img class="news-row__thumb" src={url(n.data.image)} alt="" loading="lazy" decoding="async" width="96" height="96" />
+                  <img class="news-row__thumb" src={thumb(n.data.image)} alt="" loading="lazy" decoding="async" width="96" height="96" />
                 ) : (
-                  <div class="news-row__thumb news-row__thumb--empty" aria-hidden="true" />
+                  <div class="news-row__thumb">
+                    <NewsTile tag={n.data.tag} />
+                  </div>
                 )}
                 <div class="news-row__body">
                   <p class="news-row__meta">
@@ -133,6 +136,7 @@ for (const n of news) {
     width: 96px;
     height: 96px;
     border-radius: var(--radius-sm);
+    overflow: hidden;
     object-fit: cover;
     flex-shrink: 0;
     background: var(--surface-green);

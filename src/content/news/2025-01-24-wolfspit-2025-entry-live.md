@@ -3,9 +3,6 @@ title: "Wolfspit 2025 Entry LIVE"
 date: 2025-01-24
 tag: "Wolfspit"
 summary: "Wolfspit 2025 entry is now live via Fabian4 :"
-image: /uploads/albums/2025-01-24-wolfspit-2025-entry-live/001.png
-imageAlt: "Photo 1 of 1 from Wolfspit 2025 Entry LIVE (24 January 2025)"
-album: 2025-01-24-wolfspit-2025-entry-live
 source: https://braddadads.wordpress.com/2025/01/24/wolfspit-2025-entry-live/
 ---
 

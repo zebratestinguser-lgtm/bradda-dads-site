@@ -1,0 +1,70 @@
+---
+// Stand-in "image" for news stories without a photo: a coloured tile with the duck and the story's tag.
+import DuckLogo from './DuckLogo.astro';
+
+interface Props {
+  tag: string;
+  size?: 'lead' | 'thumb';
+}
+const { tag, size = 'thumb' } = Astro.props;
+// Each tag gets its own colour so the list stays lively
+const tones: Record<string, string> = {
+  Bonfire: 'ember',
+  Carnival: 'sky',
+  'Duck race': 'sky',
+  "Pensioners' lunch": 'cream',
+  'Christmas card': 'cream',
+  Wolfspit: 'green',
+  'Tour of Bradwell': 'green',
+  Social: 'cream',
+  Village: 'green',
+};
+const tone = tones[tag] ?? 'green';
+---
+
+<div class:list={['news-tile', `news-tile--${size}`, `news-tile--${tone}`]} aria-hidden="true">
+  <DuckLogo size={size === 'lead' ? 120 : 44} />
+  {size === 'lead' && <span class="news-tile__tag">{tag}</span>}
+</div>
+
+<style>
+  .news-tile {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: var(--tile-bg);
+    background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12) 0 18%, transparent 19%),
+      radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.08) 0 26%, transparent 27%);
+    color: var(--tile-ink);
+  }
+  .news-tile--green {
+    --tile-bg: var(--green);
+    --tile-ink: var(--white);
+  }
+  .news-tile--sky {
+    --tile-bg: #2f6fa3;
+    --tile-ink: var(--white);
+  }
+  .news-tile--ember {
+    --tile-bg: #8a3b12;
+    --tile-ink: var(--white);
+  }
+  .news-tile--cream {
+    --tile-bg: var(--yellow-panel);
+    --tile-ink: var(--yellow-ink);
+  }
+  .news-tile__tag {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.3px;
+  }
+  .news-tile--thumb :global(svg) {
+    width: 60%;
+    height: auto;
+  }
+</style>

@@ -9,6 +9,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* the header is pinned to the top, so jump links land below it */
+  scroll-padding-top: 84px;
 }
 
 body {

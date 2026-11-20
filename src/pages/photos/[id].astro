@@ -3,7 +3,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import { getAlbums, photoDate } from '../../lib/albums';
-import { url } from '../../lib/url';
+import { url, thumb } from '../../lib/url';
 
 export async function getStaticPaths() {
   const albums = await getAlbums();
@@ -55,7 +55,7 @@ const photos = album.data.photos;
                 data-caption={p.caption ?? ''}
                 aria-label={`Open photo ${i + 1} of ${photos.length}${p.caption ? `: ${p.caption}` : ''}`}
               >
-                <img src={url(p.src)} alt={p.alt} loading={i < 8 ? 'eager' : 'lazy'} decoding="async" />
+                <img src={thumb(p.src)} alt={p.alt} loading={i < 8 ? 'eager' : 'lazy'} decoding="async" />
               </a>
             </li>
           ))}

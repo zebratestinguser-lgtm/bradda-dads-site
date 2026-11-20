@@ -1,26 +1,66 @@
 ---
+import DuckLogo from './DuckLogo.astro';
 import { getSite } from '../lib/site';
 import { url } from '../lib/url';
 
 const site = await getSite();
-const links = [
-  { label: 'Contact', href: url('/contact/') },
-  { label: 'Facebook', href: site.facebookUrl },
-  { label: 'Privacy', href: url('/privacy/') },
-  { label: 'Annual accounts', href: site.accountsUrl },
+const columns = [
+  {
+    title: 'Explore',
+    links: [
+      { label: 'Home', href: url('/') },
+      { label: 'Events', href: url('/events/') },
+      { label: 'News', href: url('/news/') },
+      { label: 'Photos', href: url('/photos/') },
+      { label: 'Races', href: url('/races/') },
+      { label: 'Our story', href: url('/our-story/') },
+    ],
+  },
+  {
+    title: 'Support us',
+    links: [
+      { label: 'Get involved', href: url('/get-involved/') },
+      { label: 'Donate', href: url('/donate/') },
+      { label: 'Village Christmas card', href: url('/christmas-card/') },
+      { label: 'Where the money goes', href: url('/where-the-money-goes/') },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [
+      { label: 'Contact us', href: url('/contact/') },
+      { label: 'Facebook', href: site.facebookUrl },
+      { label: 'Privacy', href: url('/privacy/') },
+      { label: 'Annual accounts', href: url(site.accountsUrl) },
+    ],
+  },
 ];
 ---
 
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div class="site-footer__about">
-      <span class="site-footer__name">{site.name}</span>
-      <span>{site.tagline}</span>
-      <span>{site.cicName} · Company no. {site.cicNumber}</span>
+      <a class="site-footer__brand" href={url('/')}>
+        <DuckLogo size={36} />
+        <span>{site.name}</span>
+      </a>
+      <p>{site.tagline}</p>
+      <p class="site-footer__cic">{site.cicName} · Company no. {site.cicNumber}</p>
     </div>
-    <ul class="site-footer__links" role="list">
-      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
-    </ul>
+    {
+      columns.map((col) => (
+        <nav class="site-footer__col" aria-label={col.title}>
+          <h2 class="site-footer__heading">{col.title}</h2>
+          <ul role="list">
+            {col.links.map((l) => (
+              <li>
+                <a href={l.href}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
   </div>
 </footer>
 
@@ -28,42 +68,73 @@ const links = [
   .site-footer {
     background: var(--green-deep);
     color: var(--on-dark-muted);
-    padding-block: 40px;
-    font-size: 14px;
+    padding-block: 48px 40px;
+    font-size: 15px;
     line-height: 1.6;
   }
   .site-footer__inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: minmax(240px, 1.4fr) repeat(3, minmax(150px, 1fr));
+    gap: 32px 28px;
   }
   .site-footer__about {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
   }
-  .site-footer__name {
+  .site-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 20px;
+    font-size: 22px;
+    color: var(--white);
+    text-decoration: none;
+    align-self: flex-start;
+  }
+  .site-footer__brand:hover {
     color: var(--white);
   }
-  .site-footer__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 24px;
+  .site-footer__cic {
+    font-size: 14px;
+  }
+  .site-footer__heading {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--yellow);
+    margin-bottom: 6px;
+  }
+  .site-footer__col ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .site-footer__links a {
+  .site-footer__col a {
     color: var(--white);
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
-    min-height: var(--tap);
+    min-height: 40px;
   }
-  .site-footer__links a:hover {
+  .site-footer__col a:hover {
     color: var(--yellow);
+    text-decoration: underline;
+  }
+  @media (max-width: 900px) {
+    .site-footer__inner {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .site-footer__about {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 560px) {
+    .site-footer__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 </style>
