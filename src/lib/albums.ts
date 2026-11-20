@@ -19,6 +19,17 @@ export const photoDateShort = (a: Album) =>
 export const photoYear = (a: Album) =>
   a.data.dateLabel ? (a.data.dateLabel.match(/\d{4}(?!.*\d{4})/)?.[0] ?? 'Other') : String(a.data.date.getFullYear()); // ranges file under their last year
 
+/** URL slug for a photo category: "Pensioners' lunch" → "pensioners-lunch" */
+export const categorySlug = (c: string) =>
+  c
+    .toLowerCase()
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+/** Friendly order for photo categories */
+export const CATEGORY_ORDER = ['Carnival', 'Duck race', 'Bonfire', "Pensioners' lunch", 'Christmas card', 'Wolfspit', 'Tour of Bradwell', 'Social', 'Village'];
+
 /** News tag that matches each event, for "related news" on event pages. */
 export const EVENT_TAG: Record<string, string> = {
   'duck-race': 'Duck race',

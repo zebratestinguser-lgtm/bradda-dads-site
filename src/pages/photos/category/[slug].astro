@@ -1,0 +1,164 @@
+---
+// Every photo for one category (e.g. Bonfire), album by album, newest first, with one photo viewer
+// that pages through all of them. URL: /photos/category/bonfire/
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import PhotoGrid from '../../../components/PhotoGrid.astro';
+import Lightbox from '../../../components/Lightbox.astro';
+import { NEWS_TAGS } from '../../../content.config';
+import { getAlbums, photoDate, photoYear, categorySlug, CATEGORY_ORDER } from '../../../lib/albums';
+import { url } from '../../../lib/url';
+
+export async function getStaticPaths() {
+  const albums = await getAlbums();
+  return NEWS_TAGS.map((cat) => ({ cat, albums: albums.filter((a) => a.data.category === cat && a.data.photos.length > 0) }))
+    .filter((c) => c.albums.length > 0)
+    .map((c) => ({ params: { slug: categorySlug(c.cat) }, props: c }));
+}
+
+const { cat, albums } = Astro.props;
+const total = albums.reduce((n, a) => n + a.data.photos.length, 0);
+const news = await getCollection('news');
+const storyFor = (id: string) => news.find((n) => n.data.album?.id === id);
+// Other categories, for switching
+const all = await getAlbums();
+const others = CATEGORY_ORDER.filter((c) => c !== cat && all.some((a) => a.data.category === c && a.data.photos.length > 0));
+const years = [...new Set(albums.map((a) => photoYear(a)))];
+const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
+// First album section for each year, so the year links have somewhere to jump to
+const firstOfYear = new Map<string, string>();
+albums.forEach((a) => {
+  const y = photoYear(a);
+  if (!firstOfYear.has(y)) firstOfYear.set(y, a.id);
+});
+---
+
+<BaseLayout title={`${cat} photos`} description={`Every ${cat.toLowerCase()} photo from Bradda Dads: ${albums.length} albums, ${total} photos.`} ogImage={albums[0]?.data.cover ?? albums[0]?.data.photos[0]?.src}>
+  <PageHeader eyebrow="Photos" title={`${cat} photos`} intro={`${total.toLocaleString('en-GB')} photos from ${albums.length} album${albums.length === 1 ? '' : 's'}, newest first. Tap any photo to view it large, then use the arrows to go through every year.`}>
+    <a class="back" href={url('/photos/')}>← All albums</a>
+  </PageHeader>
+
+  <div class="container cat-nav">
+    <nav class="filter-row" aria-labelledby="year-label">
+      <p class="filter-row__label" id="year-label">Jump to:</p>
+      <ul class="chips chips--small chips--scroll" role="list">
+        {years.map((y) => <li><a class="chip" href={`#album-${firstOfYear.get(y)}`}>{yearName(y)}</a></li>)}
+      </ul>
+    </nav>
+    <nav class="filter-row" aria-labelledby="other-label">
+      <p class="filter-row__label" id="other-label">Other photos:</p>
+      <ul class="chips chips--small chips--scroll" role="list">
+        {others.map((c) => <li><a class="chip" href={url(`/photos/category/${categorySlug(c)}/`)}>{c}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+
+  {
+    albums.map((a, i) => {
+      const story = storyFor(a.id);
+      return (
+        <section class="container album-block" id={`album-${a.id}`} aria-labelledby={`h-${a.id}`}>
+          <header class="album-block__head">
+            <h2 class="album-block__title" id={`h-${a.id}`}>
+              <a href={url(`/photos/${a.id}/`)}>{a.data.title}</a>
+            </h2>
+            <p class="album-block__meta">
+              <span class="album-block__date">{photoDate(a)}</span> · {a.data.photos.length} photo{a.data.photos.length === 1 ? '' : 's'}
+              {story && (
+                <>
+                  {' · '}
+                  <a href={url(`/news/${story.id}/`)}>Read the story</a>
+                </>
+              )}
+            </p>
+          </header>
+          <PhotoGrid album={a} titleInCaption collapseAfter={12} eagerCount={i === 0 ? 6 : 0} />
+        </section>
+      );
+    })
+  }
+
+  <Lightbox />
+</BaseLayout>
+
+<style>
+  .back {
+    color: var(--on-dark-soft);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+    order: -1;
+  }
+  .back:hover {
+    color: var(--white);
+  }
+  .cat-nav {
+    padding-block: 28px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  .filter-row__label {
+    font-weight: 600;
+    color: var(--muted);
+    min-width: 110px;
+  }
+  .filter-row .chips {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .chips--small .chip {
+    min-height: 40px;
+    font-size: 14px;
+  }
+  .album-block {
+    padding-block: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    scroll-margin-top: 90px;
+  }
+  .album-block + .album-block {
+    border-top: 1px solid var(--border);
+  }
+  .album-block:last-of-type {
+    padding-bottom: var(--section-pad);
+  }
+  .album-block__head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .album-block__title {
+    font-size: clamp(22px, 3vw, 28px);
+    line-height: 1.15;
+  }
+  .album-block__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .album-block__title a:hover {
+    text-decoration: underline;
+  }
+  .album-block__meta {
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .album-block__date {
+    font-weight: 700;
+    color: var(--green);
+  }
+  @media (max-width: 600px) {
+    .filter-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

@@ -2,8 +2,10 @@
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import { getAlbums, photoDate } from '../../lib/albums';
-import { url, thumb } from '../../lib/url';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import { getAlbums, photoDate, categorySlug } from '../../lib/albums';
+import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
   const albums = await getAlbums();
@@ -19,6 +21,7 @@ const event = album.data.event ? await getEntry(album.data.event) : undefined;
 const story = (await getCollection('news')).find((n) => n.data.album?.id === album.id);
 const when = photoDate(album);
 const photos = album.data.photos;
+const cat = album.data.category;
 ---
 
 <BaseLayout
@@ -35,33 +38,14 @@ const photos = album.data.photos;
     </p>
     <ul class="album-links" role="list">
       {story && <li><a href={url(`/news/${story.id}/`)}>Read the story →</a></li>}
+      {cat && <li><a href={url(`/photos/category/${categorySlug(cat)}/`)}>All {cat.toLowerCase()} photos →</a></li>}
       {event && <li><a href={url(`/events/${event.id}/`)}>About the {event.data.name} →</a></li>}
       <li><a href={url('/photos/')}>All albums →</a></li>
     </ul>
   </PageHeader>
 
   <section class="container page-section">
-    {
-      photos.length === 0 ? (
-        <p class="note">Photos for this album are coming soon.</p>
-      ) : (
-        <ul class="gallery" role="list" data-gallery data-when={when}>
-          {photos.map((p, i) => (
-            <li>
-              <a
-                class="gallery__item"
-                href={url(p.src)}
-                data-index={i}
-                data-caption={p.caption ?? ''}
-                aria-label={`Open photo ${i + 1} of ${photos.length}${p.caption ? `: ${p.caption}` : ''}`}
-              >
-                <img src={thumb(p.src)} alt={p.alt} loading={i < 8 ? 'eager' : 'lazy'} decoding="async" />
-              </a>
-            </li>
-          ))}
-        </ul>
-      )
-    }
+    {photos.length === 0 ? <p class="note">Photos for this album are coming soon.</p> : <PhotoGrid album={album} eagerCount={8} />}
 
     <div class="prose album-text"><Content /></div>
 
@@ -77,75 +61,8 @@ const photos = album.data.photos;
     </nav>
   </section>
 
-  <!-- Lightbox (progressive enhancement: without JS the photo links open the image) -->
-  <dialog class="lightbox" aria-label="Photo viewer" data-lightbox>
-    <div class="lightbox__frame">
-      <img class="lightbox__img" alt="" data-lb-img />
-      <p class="lightbox__caption" data-lb-caption aria-live="polite"></p>
-    </div>
-    <button type="button" class="lightbox__btn lightbox__close" data-lb-close aria-label="Close photo viewer">✕</button>
-    <button type="button" class="lightbox__btn lightbox__prev" data-lb-prev aria-label="Previous photo">‹</button>
-    <button type="button" class="lightbox__btn lightbox__next" data-lb-next aria-label="Next photo">›</button>
-  </dialog>
+  <Lightbox />
 </BaseLayout>
-
-<script>
-  const gallery = document.querySelector<HTMLElement>('[data-gallery]');
-  const dialog = document.querySelector<HTMLDialogElement>('[data-lightbox]');
-  if (gallery && dialog && typeof dialog.showModal === 'function') {
-    const items = [...gallery.querySelectorAll<HTMLAnchorElement>('.gallery__item')];
-    const img = dialog.querySelector<HTMLImageElement>('[data-lb-img]')!;
-    const caption = dialog.querySelector<HTMLElement>('[data-lb-caption]')!;
-    const when = gallery.dataset.when ?? '';
-    let current = 0;
-    let opener: HTMLElement | null = null;
-
-    function show(i: number) {
-      current = (i + items.length) % items.length;
-      const a = items[current];
-      const thumb = a.querySelector('img')!;
-      img.src = a.href;
-      img.alt = thumb.alt;
-      const extra = a.dataset.caption ? ` · ${a.dataset.caption}` : '';
-      caption.textContent = `${when} · Photo ${current + 1} of ${items.length}${extra}`;
-      // Preload neighbours
-      [current + 1, current - 1].forEach((n) => {
-        const near = items[(n + items.length) % items.length];
-        if (near) new Image().src = near.href;
-      });
-    }
-
-    items.forEach((a, i) =>
-      a.addEventListener('click', (e) => {
-        if (e.metaKey || e.ctrlKey || e.shiftKey) return; // let people open in a new tab
-        e.preventDefault();
-        opener = a;
-        show(i);
-        dialog.showModal();
-      }),
-    );
-    dialog.querySelector('[data-lb-prev]')!.addEventListener('click', () => show(current - 1));
-    dialog.querySelector('[data-lb-next]')!.addEventListener('click', () => show(current + 1));
-    dialog.querySelector('[data-lb-close]')!.addEventListener('click', () => dialog.close());
-    dialog.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
-    });
-    // Click on the dark backdrop closes
-    dialog.addEventListener('click', (e) => {
-      if (e.target === dialog) dialog.close();
-    });
-    dialog.addEventListener('close', () => opener?.focus());
-
-    // Swipe on touch screens
-    let startX = 0;
-    dialog.addEventListener('touchstart', (e) => (startX = e.touches[0].clientX), { passive: true });
-    dialog.addEventListener('touchend', (e) => {
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
-    });
-  }
-</script>
 
 <style>
   .album-when {
@@ -173,30 +90,6 @@ const photos = album.data.photos;
     align-items: center;
     min-height: var(--tap);
   }
-  .gallery {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(200px, 46%), 1fr));
-    gap: 10px;
-  }
-  .gallery__item {
-    display: block;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    background: var(--surface-green);
-    aspect-ratio: 4 / 3;
-  }
-  .gallery__item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.2s ease;
-  }
-  .gallery__item:hover img {
-    transform: scale(1.03);
-  }
   .album-text {
     margin-top: 32px;
   }
@@ -220,95 +113,5 @@ const photos = album.data.photos;
   }
   .album-nav a {
     padding-block: 10px;
-  }
-
-  /* Lightbox */
-  .lightbox {
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: rgba(10, 20, 15, 0.94);
-    color: var(--white);
-  }
-  .lightbox::backdrop {
-    background: rgba(10, 20, 15, 0.94);
-  }
-  .lightbox__frame {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    padding: 64px 64px 24px;
-    pointer-events: none;
-  }
-  .lightbox__img {
-    max-width: 100%;
-    max-height: calc(100vh - 140px);
-    object-fit: contain;
-    border-radius: 6px;
-    pointer-events: auto;
-  }
-  .lightbox__caption {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--on-dark-soft);
-    text-align: center;
-  }
-  .lightbox__btn {
-    position: absolute;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    border: 0;
-    background: rgba(255, 255, 255, 0.14);
-    color: var(--white);
-    font-size: 30px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .lightbox__btn:hover {
-    background: rgba(255, 255, 255, 0.26);
-  }
-  .lightbox__close {
-    top: 14px;
-    right: 14px;
-    font-size: 22px;
-  }
-  .lightbox__prev,
-  .lightbox__next {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .lightbox__prev {
-    left: 10px;
-  }
-  .lightbox__next {
-    right: 10px;
-  }
-  @media (max-width: 600px) {
-    .lightbox__frame {
-      padding: 64px 8px 90px;
-    }
-    .lightbox__prev,
-    .lightbox__next {
-      top: auto;
-      bottom: 20px;
-      transform: none;
-    }
-    .lightbox__prev {
-      left: calc(50% - 64px);
-    }
-    .lightbox__next {
-      right: calc(50% - 64px);
-    }
   }
 </style>
