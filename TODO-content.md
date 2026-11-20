@@ -1,21 +1,23 @@
 # Content still to fill in
 
 Every `[PLACEHOLDER]` or `[SQUARE BRACKET]` value on the site, and where to change it.
-Tick items off as they're done. Updated: content migration (milestone 8).
+Tick items off as they're done. Updated: 20 November 2026 (17 November minutes + SumUp store links).
+
+**The homepage hides anything still in [SQUARE BRACKETS]** (totals, donation labels, venue, Facebook posts, CIC details) so the concept reads as finished. Placeholders stay visible on inner pages as reminders. Fill them in here and they appear automatically.
 
 ## Site settings: `src/data/site.yaml`
 
 - [ ] Contact email (`contactEmail`). The old blog used braddadads@btinternet.com; is it still in use?
-- [ ] CIC name and company number (`cicName`, `cicNumber`)
-- [ ] SumUp store URL (`sumupStoreUrl`)
-- [ ] SumUp payment links for £5 / £10 / £20 (`donationLinks[].url`)
-- [ ] What £5 / £10 / £20 pays for (`donationLinks[].label`)
-- [ ] SumUp donation QR code image → save to `public/uploads/site/` and set `donationQr`
+- [ ] CIC name and company number (`cicName`, `cicNumber`). The SumUp store is called "Bradda Dads Community Group"; is that the registered name?
+- [x] SumUp store URL and the three item links (duck tickets, Christmas card, donation)
+- [ ] What £5 / £10 / £20 pays for (`donationLinks[].label`). If the store's donation item has fixed amounts with their own links, add them here.
+- [ ] SumUp donation QR code image → save to `public/uploads/site/` and set `donationQr` (the QR panel only appears once this is set)
 - [ ] Total raised since 1999 (`totalRaised`)
 - [ ] Number of groups and projects helped (`groupsHelped`)
-- [ ] **Confirm** meeting info: now "third Wednesday of the month at 8:30pm, usually at the Shoulder of Mutton" (from the old WordPress site, 2018–22)
+- [x] Meeting info: third Tuesday of the month, 8:30pm, in a village pub (from the 17 Nov minutes)
+- [ ] `diaryDates`: keep adding upcoming public dates (past ones drop off automatically)
 - [ ] Annual accounts link (`accountsUrl`)
-- [ ] Three recent Facebook posts to show on the homepage (`facebookPosts`)
+- [ ] Three recent Facebook posts to show on the homepage (`facebookPosts`). Until then the homepage shows "Dates for your diary".
 - [ ] Decide: "Share your photos" → Facebook (current) or a `mailto:` address (`sharePhotosUrl`)
 - [ ] Wolf's Pit 2027 entry link (`wolfspitEntryUrl`)
 - [ ] Our story intro: add who started it and why (`storyIntro`)
@@ -24,11 +26,11 @@ Tick items off as they're done. Updated: content migration (milestone 8).
 
 Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all listed at `/events/`). The card text comes from the front matter (`summary`, `when`, `ctaLabel` …). **Anything written below the `---` in the event's `.md` file appears on its page**, so that's the place for fuller details: timings, prices, what to bring, how to help, maps, FAQs.
 
-- [ ] **Duck race** (`duck-race.md`): start time (then set `startTimeConfirmed: true`), start point (`location`), duck price (`price`), prize and where ducks are sold (`heroNote`), SumUp link (`ctaUrl`)
-- [ ] **Bonfire** (`bonfire.md`): venue, date, details. The old WordPress page said "aiming to run again for 2025"; is it running?
-- [ ] **Christmas card** (`christmas-card.md`): closing date (`heroNote`), how the card is shown/delivered
-- [ ] **Pensioners' lunch** (`pensioners-lunch.md`): date, venue, booking (in 2022, slips came in Bradda News and were dropped at the post office)
-- [ ] **Wolf's Pit** (`wolfspit.md`): 2027 date and entry link
+- [ ] **Duck race** (`duck-race.md`): 2026 start time (then set `startTimeConfirmed: true`; it was 11am in 2022), start point (Town Bottom Park in 2022), duck price (`price`), raft age categories. Done: ticket sales (online, Co-op 12 and 19 Dec), cash prizes, raft trophies, SumUp link.
+- [x] **Bonfire** (`bonfire.md`): 2026 thank-you story added (around 600 people, thanks to Breedon). Still to add: photos, and the amount raised **if the committee is happy to publish it** (the minutes say £3,815.05 including £2,500 from Breedon; left off for now).
+- [x] **Christmas card** (`christmas-card.md`): closes midnight Fri 20 Nov (the banner hides itself afterwards via `entriesClose`), delivered week of 14 Dec. Still to add: where paper slips go. Next year, update `entriesClose` and set `status: open` again.
+- [ ] **Pensioners' lunch** (`pensioners-lunch.md`): Friday 4 Dec 2026 done. Still need the time, venue (the hall), and who to contact about deliveries or transport.
+- [ ] **Wolf's Pit** (`wolfspit.md`): 2027 date and entry link (a June evening is being looked into; the site just says "2027 date TBC")
 
 ## Our story: `src/content/timeline/`
 

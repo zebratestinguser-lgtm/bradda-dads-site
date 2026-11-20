@@ -20,7 +20,7 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
 <BaseLayout title="Wolf's Pit Fell Race" description="The Wolf's Pit Fell Race: a 9 km fell race from Shatton, near Bamford. Results from every year since 2022, and a search across all years.">
   <PageHeader eyebrow="Fell race" title="Wolf's Pit Fell Race" intro={site.wolfspitIntro}>
     <div class="actions">
-      <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>Enter {latest ? latest.year + 1 : ''}</a>
+      {site.wolfspitEntryUrl !== '#' && <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>Enter {latest ? latest.year + 1 : ''}</a>}
       <a class="btn btn--ghost-light btn--md" href="#results">Latest results</a>
     </div>
   </PageHeader>

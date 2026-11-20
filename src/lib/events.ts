@@ -2,6 +2,22 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 export type EventEntry = CollectionEntry<'events'>;
 
+/** Is the event taking entries right now? (status "open" and the closing time, if set, hasn't passed) */
+export const isOpen = (e: EventEntry, now = new Date()) =>
+  e.data.status === 'open' && (!e.data.entriesClose || e.data.entriesClose > now);
+
+/** The status pill for an event. */
+export function statusFor(e: EventEntry, isNext: boolean, now = new Date()) {
+  if (isNext) return { label: 'Next up', kind: 'next' };
+  if (isOpen(e, now)) return { label: 'Open now', kind: 'open' };
+  if (e.data.status === 'open') return { label: 'Entries closed', kind: 'done' };
+  if (e.data.status === 'done') return { label: 'Done for this year', kind: 'done' };
+  return { label: 'Coming up', kind: 'upcoming' };
+}
+
+/** True for text that's still a [PLACEHOLDER]. The homepage hides these so the concept reads as finished. */
+export const isPlaceholder = (s?: string) => !s || /\[[^\]]+\]/.test(s);
+
 /** All events in homepage order. */
 export async function getEvents() {
   return (await getCollection('events')).sort((a, b) => a.data.order - b.data.order);

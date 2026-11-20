@@ -1,6 +1,7 @@
 ---
 name: Wolf's Pit Fell Race
-when: March
+# 2027 date not decided (a June evening is being looked at), so the card says TBC
+when: 2027 date TBC
 location: Shatton, near Bamford, Hope Valley
 summary: A 9 km fell race with 450 m of climb, held each March since 2009. Results from every year are on the site.
 status: upcoming
@@ -23,4 +24,4 @@ The Wolf's Pit Fell Race climbs from Shatton to the summit of Shatton Moor befor
 
 **Organiser contact:** wolfspitfellrace@gmail.com · Text/WhatsApp/phone: Stu on 07590 047104
 
-[PLACEHOLDER: date and entry link for 2027.]
+**2027:** the date is still being arranged with the landowners. Check back in the new year, or follow us on Facebook. [PLACEHOLDER: 2027 date and entry link.]
