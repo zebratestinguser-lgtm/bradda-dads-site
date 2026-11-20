@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import MemberAvatar from '../../components/MemberAvatar.astro';
+import { getMembers, memberSince } from '../../lib/members';
+import { url } from '../../lib/url';
+
+const members = await getMembers();
+---
+
+<BaseLayout title="Meet the dads" description="The volunteers behind Bradda Dads: who they are, what they do, and how long they've been part of it.">
+  <PageHeader eyebrow="Meet the dads" title="The people behind the ducks" intro="Every event is run by volunteers. Here's who they are, what they do, and how long they've been part of Bradda Dads.">
+    <a class="join" href={url('/get-involved/')}>Fancy joining them? →</a>
+  </PageHeader>
+
+  <section class="container page-section">
+    <ul class="members" role="list">
+      {
+        members.map((m) => (
+          <li>
+            <a class="member" href={url(`/members/${m.id}/`)}>
+              <MemberAvatar member={m} size={112} />
+              <div class="member__body">
+                <h2 class="member__name">{m.data.name}</h2>
+                {m.data.role && <span class="member__role">{m.data.role}</span>}
+                <span class="member__since">{memberSince(m)}</span>
+                <p class="member__summary">{m.data.summary}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .join {
+    color: var(--white);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+  }
+  .members {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 20px;
+  }
+  .member {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding: 30px 24px 26px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    color: var(--text);
+    text-decoration: none;
+    background: var(--white);
+  }
+  .member:hover {
+    color: var(--text);
+  }
+  .member:hover .member__name {
+    text-decoration: underline;
+  }
+  .member__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .member__name {
+    font-size: 23px;
+    line-height: 1.15;
+  }
+  .member__role {
+    background: var(--green);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+  .member__since {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--yellow-ink);
+  }
+  .member__summary {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted-strong);
+    margin-top: 4px;
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .member {
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .member:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(16, 36, 26, 0.14);
+    }
+  }
+</style>

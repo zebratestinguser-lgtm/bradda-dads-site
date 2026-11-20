@@ -4,11 +4,11 @@ category: "Bonfire"
 event: bonfire
 date: 2008-11-01
 cover: /uploads/albums/2008-11-01-2008-bonfire-building/001.jpg
-coverAlt: "Photo 1 of 18 from 2008 Bonfire Building (1 November 2008)"
+coverAlt: "Aerial map view of the field where the bonfire was built (1 November 2008)"
 source: https://braddadads.blogspot.com/2008/11/2008-bonfire-building.html
 photos:
   - src: /uploads/albums/2008-11-01-2008-bonfire-building/001.jpg
-    alt: "Photo 1 of 18 from 2008 Bonfire Building (1 November 2008)"
+    alt: "Aerial map view of the field where the bonfire was built (1 November 2008)"
   - src: /uploads/albums/2008-11-01-2008-bonfire-building/002.jpg
     alt: "Photo 2 of 18 from 2008 Bonfire Building (1 November 2008)"
   - src: /uploads/albums/2008-11-01-2008-bonfire-building/003.jpg

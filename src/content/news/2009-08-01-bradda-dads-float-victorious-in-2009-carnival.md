@@ -4,7 +4,7 @@ date: 2009-08-01
 tag: "Carnival"
 summary: "A cracking effort by Bradda Dads and a well deserved victory. The 'Dads looked great bedecked in fake chain mail and the wives looked fabulous in those hand-made dresses."
 image: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/001.jpg
-imageAlt: "Photo 1 of 16 from Bradda Dads Float Victorious in 2009 Carnival (1 August 2009)"
+imageAlt: "Newspaper cutting about Bradwell Carnival 2009, with the dads' knights float (1 August 2009)"
 album: 2009-08-01-bradda-dads-float-victorious-in-2009-carnival
 source: https://braddadads.blogspot.com/2009/08/bradda-dads-float-victorius-in-2009.html
 ---

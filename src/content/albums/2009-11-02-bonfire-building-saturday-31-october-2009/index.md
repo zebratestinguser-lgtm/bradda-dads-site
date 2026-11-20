@@ -4,11 +4,11 @@ category: "Bonfire"
 event: bonfire
 date: 2009-11-02
 cover: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/001.jpg
-coverAlt: "Photo 1 of 12 from Bonfire Building - Saturday 31 October 2009 (2 November 2009)"
+coverAlt: "Dads leaning out of the windows of a wooden shed added to the bonfire (2 November 2009)"
 source: https://braddadads.blogspot.com/2009/11/2009-bonfire-building-saturday-31.html
 photos:
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/001.jpg
-    alt: "Photo 1 of 12 from Bonfire Building - Saturday 31 October 2009 (2 November 2009)"
+    alt: "Dads leaning out of the windows of a wooden shed added to the bonfire (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/002.jpg
     alt: "Photo 2 of 12 from Bonfire Building - Saturday 31 October 2009 (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/003.jpg

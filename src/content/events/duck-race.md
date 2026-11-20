@@ -13,6 +13,7 @@ ctaLabel: Buy a duck
 ctaUrl: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
 # price: "£2"   (add the duck price here and it shows on the buttons)
 order: 4
+month: 12
 heroTitle: The Boxing Day Duck Race
 heroHighlight: Duck Race
 heroText: Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.

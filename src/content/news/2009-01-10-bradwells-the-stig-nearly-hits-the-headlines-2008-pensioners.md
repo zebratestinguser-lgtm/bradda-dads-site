@@ -4,7 +4,7 @@ date: 2009-01-10
 tag: "Pensioners' lunch"
 summary: "Clicking the image will open a larger version in a new window. Use back button to return to blog."
 image: /uploads/albums/2009-01-10-bradwells-the-stig-nearly-hits-the-headlines-2008-pensioners/001.jpg
-imageAlt: "Photo 1 of 1 from Bradwell's 'The Stig' nearly hits the headlines - 2008 Pensioners Lunch Special Feature (10 December 2008)"
+imageAlt: "Peak Advertiser cutting about the pensioners' Christmas lunch, with 'The Stig' in a white racing suit and helmet (10 December 2008)"
 album: 2009-01-10-bradwells-the-stig-nearly-hits-the-headlines-2008-pensioners
 source: https://braddadads.blogspot.com/2009/01/bradwells-stig-goes-local.html
 ---

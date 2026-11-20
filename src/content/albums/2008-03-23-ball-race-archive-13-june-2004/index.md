@@ -4,11 +4,11 @@ category: "Village"
 # Photo date: Archive post from 2008; title gives the date 13 June 2004.
 date: 2004-06-13
 cover: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/001.jpg
-coverAlt: "Photo 1 of 10 from Ball Race (Archive 13 June 2004) (13 June 2004)"
+coverAlt: "Dads in yellow T-shirts carrying big bags of yellow balls for the ball race (13 June 2004)"
 source: https://braddadads.blogspot.com/2008/03/ball-race-archive-13-june-2004.html
 photos:
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/001.jpg
-    alt: "Photo 1 of 10 from Ball Race (Archive 13 June 2004) (13 June 2004)"
+    alt: "Dads in yellow T-shirts carrying big bags of yellow balls for the ball race (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/002.jpg
     alt: "Photo 2 of 10 from Ball Race (Archive 13 June 2004) (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/003.jpg

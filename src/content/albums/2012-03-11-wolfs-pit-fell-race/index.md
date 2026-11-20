@@ -4,11 +4,11 @@ category: "Wolfspit"
 event: wolfspit
 date: 2012-03-11
 cover: /uploads/albums/2012-03-11-wolfs-pit-fell-race/001.jpg
-coverAlt: "Photo 1 of 31 from Wolf's Pit Fell Race (11 March 2012)"
+coverAlt: "The results table in a gazebo at the Wolf's Pit race, with a computer and a megaphone (11 March 2012)"
 source: https://braddadads.blogspot.com/2012/03/wolfs-pit-fell-race.html
 photos:
   - src: /uploads/albums/2012-03-11-wolfs-pit-fell-race/001.jpg
-    alt: "Photo 1 of 31 from Wolf's Pit Fell Race (11 March 2012)"
+    alt: "The results table in a gazebo at the Wolf's Pit race, with a computer and a megaphone (11 March 2012)"
   - src: /uploads/albums/2012-03-11-wolfs-pit-fell-race/002.jpg
     alt: "Photo 2 of 31 from Wolf's Pit Fell Race (11 March 2012)"
   - src: /uploads/albums/2012-03-11-wolfs-pit-fell-race/003.jpg

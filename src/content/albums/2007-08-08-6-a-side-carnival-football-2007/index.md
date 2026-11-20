@@ -3,11 +3,11 @@ title: "6-a-side Carnival football - 2007"
 category: "Carnival"
 date: 2007-08-08
 cover: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/001.jpg
-coverAlt: "Photo 1 of 12 from 6-a-side Carnival football - 2007 (8 August 2007)"
+coverAlt: "Six-a-side football on the village field at the carnival (8 August 2007)"
 source: https://braddadads.blogspot.com/2007/08/6-side-carnival-football-2007.html
 photos:
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/001.jpg
-    alt: "Photo 1 of 12 from 6-a-side Carnival football - 2007 (8 August 2007)"
+    alt: "Six-a-side football on the village field at the carnival (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/002.jpg
     alt: "Photo 2 of 12 from 6-a-side Carnival football - 2007 (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/003.jpg

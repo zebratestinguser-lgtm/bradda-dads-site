@@ -1,37 +1,64 @@
 ---
-// Wavy "brook" edge at the bottom of a green band, optionally with a duck bobbing on it.
-// Place as the last child of a section with position: relative.
+// Wavy "brook" edge between two differently coloured sections, with a duck bobbing on it.
+// The duck lands at a random spot (and sometimes faces the other way) on every page load.
+//
+//   <BrookEdge />                                  bottom of a section, next section is white
+//   <BrookEdge position="top" fill="var(--white)" />  top of a section, previous section is white
+//
+// The parent section needs `position: relative` and a little extra padding on that edge (~40px).
 import DuckLogo from './DuckLogo.astro';
 
 interface Props {
-  /** Colour of whatever comes next (default white) */
+  /** Which edge of the section the wave sits on */
+  position?: 'top' | 'bottom';
+  /** Colour of the neighbouring section (the one the wave "spills" into) */
   fill?: string;
   duck?: boolean;
 }
-const { fill = 'var(--white)', duck = false } = Astro.props;
+const { position = 'bottom', fill = 'var(--white)', duck = true } = Astro.props;
 ---
 
-<div class="brook" aria-hidden="true">
-  {
-    duck && (
-      <span class="brook__duck">
-        <DuckLogo size={44} />
-      </span>
-    )
-  }
+<div class:list={['brook', `brook--${position}`]} aria-hidden="true">
   <svg viewBox="0 0 1440 48" preserveAspectRatio="none">
     <path d="M0 26 C180 6 360 44 540 26 S900 6 1080 24 S1320 44 1440 22 L1440 48 L0 48 Z" style={`fill:${fill}`}></path>
   </svg>
+  {
+    duck && (
+      <span class="brook__duck" data-brook-duck>
+        <span class="brook__bob">
+          <DuckLogo size={44} />
+        </span>
+      </span>
+    )
+  }
 </div>
+
+<script>
+  // Scatter the ducks: a random spot along each wave, sometimes facing left
+  document.querySelectorAll<HTMLElement>('[data-brook-duck]').forEach((d) => {
+    d.style.left = `${6 + Math.random() * 82}%`;
+    if (Math.random() < 0.4) d.classList.add('is-flipped');
+    d.style.setProperty('--bob-delay', `${-Math.random() * 3.6}s`);
+  });
+</script>
 
 <style>
   .brook {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1px;
     height: 40px;
     pointer-events: none;
+    z-index: 1;
+  }
+  .brook--bottom {
+    bottom: -1px;
+  }
+  .brook--top {
+    top: -1px;
+  }
+  .brook--top svg {
+    transform: scaleY(-1);
   }
   .brook svg {
     display: block;
@@ -42,10 +69,21 @@ const { fill = 'var(--white)', duck = false } = Astro.props;
     position: absolute;
     left: 12%;
     bottom: 14px;
+    transform: translateX(-50%);
+  }
+  .brook--top .brook__duck {
+    bottom: 16px;
+  }
+  .brook__duck.is-flipped .brook__bob {
+    scale: -1 1;
+  }
+  .brook__bob {
+    display: block;
   }
   @media (prefers-reduced-motion: no-preference) {
-    .brook__duck {
+    .brook__bob {
       animation: brook-bob 3.6s ease-in-out infinite;
+      animation-delay: var(--bob-delay, 0s);
     }
   }
   @keyframes brook-bob {
@@ -63,8 +101,9 @@ const { fill = 'var(--white)', duck = false } = Astro.props;
     }
     .brook__duck {
       bottom: 8px;
-      left: auto;
-      right: 8%;
+    }
+    .brook--top .brook__duck {
+      bottom: 10px;
     }
     .brook__duck :global(svg) {
       width: 34px;

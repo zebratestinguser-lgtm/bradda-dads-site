@@ -3,11 +3,11 @@ title: "The Long Tour of Bradwell 2012"
 category: "Tour of Bradwell"
 date: 2012-08-11
 cover: /uploads/albums/2012-08-11-the-long-tour-of-bradwell-2012/001.jpg
-coverAlt: "Photo 1 of 11 from The Long Tour of Bradwell 2012 (11 August 2012)"
+coverAlt: "Runners coming up a woodland track on the Long Tour of Bradwell (11 August 2012)"
 source: https://braddadads.blogspot.com/2012/08/the-long-tour-of-bradwell-2012.html
 photos:
   - src: /uploads/albums/2012-08-11-the-long-tour-of-bradwell-2012/001.jpg
-    alt: "Photo 1 of 11 from The Long Tour of Bradwell 2012 (11 August 2012)"
+    alt: "Runners coming up a woodland track on the Long Tour of Bradwell (11 August 2012)"
   - src: /uploads/albums/2012-08-11-the-long-tour-of-bradwell-2012/002.jpg
     alt: "Photo 2 of 11 from The Long Tour of Bradwell 2012 (11 August 2012)"
   - src: /uploads/albums/2012-08-11-the-long-tour-of-bradwell-2012/003.jpg

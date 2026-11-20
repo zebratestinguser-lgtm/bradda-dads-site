@@ -4,7 +4,7 @@ date: 2019-01-19
 tag: "Social"
 summary: "On Thursday 17th Jan 2019, eleven intrepid Bradda Dads risked life and limb in the gloomy depths of Bagshawe Cavern."
 image: /uploads/albums/2019-01-19-bagshawe-cavern-trip/001.jpg
-imageAlt: "Photo 1 of 6 from Bagshawe Cavern trip (19 January 2019)"
+imageAlt: "Dads in helmets and head torches deep inside Bagshawe Cavern (19 January 2019)"
 album: 2019-01-19-bagshawe-cavern-trip
 source: https://braddadads.wordpress.com/2019/01/19/bagshawe-cavern-trip/
 ---

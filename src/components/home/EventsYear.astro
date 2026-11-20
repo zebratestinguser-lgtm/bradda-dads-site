@@ -1,6 +1,7 @@
 ---
 // "The Bradda Dads year": a swipeable strip of event cards (scroll-snap).
-// Phones: swipe. Desktop: arrow buttons or trackpad. Starts with the "Next up" event in view.
+// Phones: swipe. Desktop: arrow buttons or trackpad. Events come in rolling-year order from getEvents():
+// whatever is on now first, then upcoming, then this year's finished events (as next year's).
 // No auto-play (moving content is hard to read and an accessibility problem).
 import EventCard from '../EventCard.astro';
 import type { EventEntry } from '../../lib/events';
@@ -85,15 +86,7 @@ const { events, nextId } = Astro.props;
     strip.addEventListener('scrollend', update);
     window.addEventListener('resize', update);
 
-    // Start with the "Next up" event in view (without moving the page itself)
-    const nextItem = strip.querySelector<HTMLElement>('[data-next]');
-    if (nextItem) {
-      // offsetLeft is measured from the strip (it's positioned), so subtract the first card's offset
-      // If two or more cards fit, show a bit of the one before for context; on phones start exactly on it
-      const lead = strip.clientWidth >= step() * 2 ? step() * 0.5 : 0;
-      const target = Math.max(0, nextItem.offsetLeft - items[0].offsetLeft - lead);
-      strip.scrollTo({ left: Math.min(target, strip.scrollWidth - strip.clientWidth), behavior: 'instant' });
-    }
+    // Events are already in rolling-year order (what's on now comes first), so the strip starts at the beginning
     update();
   });
 </script>

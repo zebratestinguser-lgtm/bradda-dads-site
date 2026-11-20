@@ -4,11 +4,11 @@ category: "Wolfspit"
 event: wolfspit
 date: 2011-02-21
 cover: /uploads/albums/2011-02-21-2011-wolfs-pit-fell-race/001.jpg
-coverAlt: "Photo 1 of 44 from 2011 Wolf's Pit Fell Race (21 February 2011)"
+coverAlt: "A race official in hi-vis handing out prizes to runners at the Wolf's Pit race (21 February 2011)"
 source: https://braddadads.blogspot.com/2011/02/2011-wolfs-pit-fell-race.html
 photos:
   - src: /uploads/albums/2011-02-21-2011-wolfs-pit-fell-race/001.jpg
-    alt: "Photo 1 of 44 from 2011 Wolf's Pit Fell Race (21 February 2011)"
+    alt: "A race official in hi-vis handing out prizes to runners at the Wolf's Pit race (21 February 2011)"
   - src: /uploads/albums/2011-02-21-2011-wolfs-pit-fell-race/002.jpg
     alt: "Photo 2 of 44 from 2011 Wolf's Pit Fell Race (21 February 2011)"
   - src: /uploads/albums/2011-02-21-2011-wolfs-pit-fell-race/003.jpg

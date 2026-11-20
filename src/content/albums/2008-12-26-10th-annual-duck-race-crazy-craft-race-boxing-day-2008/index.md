@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2008-12-26
 cover: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/001.jpg
-coverAlt: "Photo 1 of 12 from 10th Annual Duck Race & Crazy Craft Race - Boxing Day 2008 (26 December 2008)"
+coverAlt: "Printed results sheet for the 10th Boxing Day duck race, with duck-shaped winner labels (26 December 2008)"
 source: https://braddadads.blogspot.com/2008/12/10th-annual-boxing-day-2008-duck-race.html
 photos:
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/001.jpg
-    alt: "Photo 1 of 12 from 10th Annual Duck Race & Crazy Craft Race - Boxing Day 2008 (26 December 2008)"
+    alt: "Printed results sheet for the 10th Boxing Day duck race, with duck-shaped winner labels (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/002.jpg
     alt: "Photo 2 of 12 from 10th Annual Duck Race & Crazy Craft Race - Boxing Day 2008 (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/003.jpg

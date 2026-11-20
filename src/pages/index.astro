@@ -1,15 +1,13 @@
 ---
+// Homepage: what's on now and next, the year's events, news, then quick routes into the rest of the site.
+// (Results, photos, history, the map and the full donate/join sections live on their own pages.)
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
 import EventsYear from '../components/home/EventsYear.astro';
 import NewsSection from '../components/home/NewsSection.astro';
 import CardBanner from '../components/home/CardBanner.astro';
-import WolfspitBand from '../components/home/WolfspitBand.astro';
-import PhotosSection from '../components/home/PhotosSection.astro';
-import StorySection from '../components/home/StorySection.astro';
-import MoneyMap from '../components/home/MoneyMap.astro';
-import DonateSection from '../components/home/DonateSection.astro';
-import JoinSection from '../components/home/JoinSection.astro';
+import ExploreRow from '../components/home/ExploreRow.astro';
+import SupportStrip from '../components/home/SupportStrip.astro';
 import { getEvents, pickNextEvent } from '../lib/events';
 
 const events = await getEvents();
@@ -21,10 +19,6 @@ const next = pickNextEvent(events);
   <EventsYear events={events} nextId={next?.id} />
   <NewsSection />
   <CardBanner />
-  <WolfspitBand />
-  <PhotosSection />
-  <StorySection />
-  <MoneyMap />
-  <DonateSection />
-  <JoinSection />
+  <ExploreRow />
+  <SupportStrip />
 </BaseLayout>

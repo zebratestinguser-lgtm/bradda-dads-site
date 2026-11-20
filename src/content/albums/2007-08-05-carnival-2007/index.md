@@ -3,11 +3,11 @@ title: "Carnival 2007"
 category: "Carnival"
 date: 2007-08-05
 cover: /uploads/albums/2007-08-05-carnival-2007/001.jpg
-coverAlt: "Photo 1 of 8 from Carnival 2007 (5 August 2007)"
+coverAlt: "Families in 1920s flapper and gangster costumes waiting for the carnival procession (5 August 2007)"
 source: https://braddadads.blogspot.com/2007/08/carnival-photos.html
 photos:
   - src: /uploads/albums/2007-08-05-carnival-2007/001.jpg
-    alt: "Photo 1 of 8 from Carnival 2007 (5 August 2007)"
+    alt: "Families in 1920s flapper and gangster costumes waiting for the carnival procession (5 August 2007)"
   - src: /uploads/albums/2007-08-05-carnival-2007/002.jpg
     alt: "Photo 2 of 8 from Carnival 2007 (5 August 2007)"
   - src: /uploads/albums/2007-08-05-carnival-2007/003.jpg

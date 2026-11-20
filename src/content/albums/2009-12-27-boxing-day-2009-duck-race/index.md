@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2009-12-27
 cover: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/001.jpg
-coverAlt: "Photo 1 of 21 from Boxing Day 2009 Duck Race (27 December 2009)"
+coverAlt: "Snow on the cars and pavements beside the brook on Boxing Day (27 December 2009)"
 source: https://braddadads.blogspot.com/2009/12/boxing-day-2009-duck-race.html
 photos:
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/001.jpg
-    alt: "Photo 1 of 21 from Boxing Day 2009 Duck Race (27 December 2009)"
+    alt: "Snow on the cars and pavements beside the brook on Boxing Day (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/002.jpg
     alt: "Photo 2 of 21 from Boxing Day 2009 Duck Race (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/003.jpg

@@ -4,7 +4,7 @@ date: 2010-08-04
 tag: "Duck race"
 summary: "A very dry summer meant a serious lack of water in the brook for this year's Carnival duck race."
 image: /uploads/albums/2010-08-04-carnival-duck-race-2-august-2010/001.jpg
-imageAlt: "Photo 1 of 23 from Carnival Duck Race - 2 August 2010 (4 August 2010)"
+imageAlt: "Dads in yellow T-shirts and hi-vis at the brook, keeping the ducks moving (4 August 2010)"
 album: 2010-08-04-carnival-duck-race-2-august-2010
 source: https://braddadads.blogspot.com/2010/08/carnival-duck-race-2-august-2010.html
 ---

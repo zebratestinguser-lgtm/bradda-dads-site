@@ -4,7 +4,7 @@ date: 2008-08-08
 tag: "Carnival"
 summary: "Now carnival Saturday has passed, this is how Bradda Dads built the float."
 image: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/001.jpg
-imageAlt: "Photo 1 of 19 from Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 2008 (8 August 2008)"
+imageAlt: "An empty flatbed trailer in a barn, ready to be built into the 'Oliver' workhouse float (8 August 2008)"
 album: 2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni
 source: https://braddadads.blogspot.com/2008/08/bradda-dads-oliver-workhouse-float.html
 ---

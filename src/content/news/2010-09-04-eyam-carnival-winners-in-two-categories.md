@@ -4,7 +4,7 @@ date: 2010-09-04
 tag: "Carnival"
 summary: "The Mick Dawson Cup for Best Comic Entry in Carnival The Castle Gate Cup for Best Overall Entry in Carnival For the very first time we took the float used at Bradwell carnival to…"
 image: /uploads/albums/2010-09-04-eyam-carnival-winners-in-two-categories/001.jpg
-imageAlt: "Photo 1 of 12 from Eyam Carnival - Winners in two categories! (4 September 2010)"
+imageAlt: "Dads and families dressed as clowns in pink hats and spotty costumes at Eyam Carnival (4 September 2010)"
 album: 2010-09-04-eyam-carnival-winners-in-two-categories
 source: https://braddadads.blogspot.com/2010/09/eyam-carnival-winners-in-two-caregories.html
 ---

@@ -3,11 +3,11 @@ title: "Bradwell Carnival 2011"
 category: "Carnival"
 date: 2011-08-21
 cover: /uploads/albums/2011-08-21-bradwell-carnival-2011/001.jpg
-coverAlt: "Photo 1 of 29 from Bradwell Carnival 2011 (21 August 2011)"
+coverAlt: "Dads dressed as sailors and families in blue sailor dresses in front of a yellow submarine float (21 August 2011)"
 source: https://braddadads.blogspot.com/2011/08/bradwell-carnival-2011.html
 photos:
   - src: /uploads/albums/2011-08-21-bradwell-carnival-2011/001.jpg
-    alt: "Photo 1 of 29 from Bradwell Carnival 2011 (21 August 2011)"
+    alt: "Dads dressed as sailors and families in blue sailor dresses in front of a yellow submarine float (21 August 2011)"
   - src: /uploads/albums/2011-08-21-bradwell-carnival-2011/002.jpg
     alt: "Photo 2 of 29 from Bradwell Carnival 2011 (21 August 2011)"
   - src: /uploads/albums/2011-08-21-bradwell-carnival-2011/003.jpg

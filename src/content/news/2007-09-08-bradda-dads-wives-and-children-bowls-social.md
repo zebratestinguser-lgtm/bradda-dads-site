@@ -4,7 +4,7 @@ date: 2007-09-08
 tag: "Social"
 summary: "The 'Dads and their families enjoyed a sunny afternoon of bowls at Bradwell Bowls Club."
 image: /uploads/albums/2007-09-08-bradda-dads-wives-and-children-bowls-social/001.jpg
-imageAlt: "Photo 1 of 16 from Bradda Dads, Wives and Children Bowls Social (8 September 2007)"
+imageAlt: "Wives and children playing bowls on the bowling green (8 September 2007)"
 album: 2007-09-08-bradda-dads-wives-and-children-bowls-social
 source: https://braddadads.blogspot.com/2007/09/september-8-bradda-dads-wives-and.html
 ---

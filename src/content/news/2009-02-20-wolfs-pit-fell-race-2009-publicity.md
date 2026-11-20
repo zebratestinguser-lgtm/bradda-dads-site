@@ -4,7 +4,7 @@ date: 2009-02-20
 tag: "Wolfspit"
 summary: "Photos from the old Bradda Dads website: Wolf's Pit Fell Race 2009 Publicity."
 image: /uploads/albums/2009-02-20-wolfs-pit-fell-race-2009-publicity/001.jpg
-imageAlt: "Photo 1 of 1 from Wolf's Pit Fell Race 2009 Publicity (20 February 2009)"
+imageAlt: "Peak Advertiser cutting, 'Bradda Dads host the first ever Wolf's Pit Fell Race, 22nd March 2009' (20 February 2009)"
 album: 2009-02-20-wolfs-pit-fell-race-2009-publicity
 source: https://braddadads.blogspot.com/2009/02/wolfs-pit-fell-race-2009-publicity.html
 ---

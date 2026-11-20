@@ -3,11 +3,11 @@ title: "Clearing the weed from the brook"
 category: "Village"
 date: 2013-07-14
 cover: /uploads/albums/2013-07-14-clearing-the-weed-from-the-brook/001.jpg
-coverAlt: "Photo 1 of 7 from Clearing the weed from the brook (14 July 2013)"
+coverAlt: "A child sitting in the small digger used to clear weed from the brook (14 July 2013)"
 source: https://braddadads.blogspot.com/2013/07/clearing-weed-from-brook.html
 photos:
   - src: /uploads/albums/2013-07-14-clearing-the-weed-from-the-brook/001.jpg
-    alt: "Photo 1 of 7 from Clearing the weed from the brook (14 July 2013)"
+    alt: "A child sitting in the small digger used to clear weed from the brook (14 July 2013)"
   - src: /uploads/albums/2013-07-14-clearing-the-weed-from-the-brook/002.jpg
     alt: "Photo 2 of 7 from Clearing the weed from the brook (14 July 2013)"
   - src: /uploads/albums/2013-07-14-clearing-the-weed-from-the-brook/003.jpg

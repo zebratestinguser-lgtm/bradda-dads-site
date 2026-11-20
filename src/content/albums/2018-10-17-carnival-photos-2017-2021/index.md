@@ -5,11 +5,11 @@ category: "Carnival"
 date: 2018-10-17
 dateLabel: "2017–2021"
 cover: /uploads/albums/2018-10-17-carnival-photos-2017-2021/001.jpg
-coverAlt: "Photo 1 of 14 from Carnival photos (2017–2021)"
+coverAlt: "Dads and families in bug costumes in front of a giant spider float (2017–2021)"
 source: https://braddadads.wordpress.com/other-events/carnival/
 photos:
   - src: /uploads/albums/2018-10-17-carnival-photos-2017-2021/001.jpg
-    alt: "Photo 1 of 14 from Carnival photos (2017–2021)"
+    alt: "Dads and families in bug costumes in front of a giant spider float (2017–2021)"
   - src: /uploads/albums/2018-10-17-carnival-photos-2017-2021/002.jpg
     alt: "Photo 2 of 14 from Carnival photos (2017–2021)"
   - src: /uploads/albums/2018-10-17-carnival-photos-2017-2021/003.jpg

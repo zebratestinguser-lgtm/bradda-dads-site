@@ -4,7 +4,7 @@ date: 2008-11-01
 tag: "Bonfire"
 summary: "Above: Malcolm skilfully navigates the lane Above: the pile that greeted us at the gate!"
 image: /uploads/albums/2008-11-01-2008-bonfire-building/001.jpg
-imageAlt: "Photo 1 of 18 from 2008 Bonfire Building (1 November 2008)"
+imageAlt: "Aerial map view of the field where the bonfire was built (1 November 2008)"
 album: 2008-11-01-2008-bonfire-building
 source: https://braddadads.blogspot.com/2008/11/2008-bonfire-building.html
 ---

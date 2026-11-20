@@ -10,6 +10,7 @@ status: upcoming
 ctaLabel: How to book
 ctaUrl: /events/pensioners-lunch/
 order: 3
+month: 12
 # Homepage hero (used while this is the next event)
 heroTitle: The Pensioners' Christmas Lunch
 heroHighlight: Christmas Lunch

@@ -4,11 +4,11 @@ category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2009-12-10
 cover: /uploads/albums/2009-12-10-pensioners-christmas-lunch-9-december-2009/001.jpg
-coverAlt: "Photo 1 of 34 from Pensioners Christmas Lunch - 9 December 2009 (10 December 2009)"
+coverAlt: "A dad in a white shirt and yellow tie among pensioners in paper hats at the Christmas lunch (10 December 2009)"
 source: https://braddadads.blogspot.com/2009/12/pensioners-christmas-lunch-9-december.html
 photos:
   - src: /uploads/albums/2009-12-10-pensioners-christmas-lunch-9-december-2009/001.jpg
-    alt: "Photo 1 of 34 from Pensioners Christmas Lunch - 9 December 2009 (10 December 2009)"
+    alt: "A dad in a white shirt and yellow tie among pensioners in paper hats at the Christmas lunch (10 December 2009)"
   - src: /uploads/albums/2009-12-10-pensioners-christmas-lunch-9-december-2009/002.jpg
     alt: "Photo 2 of 34 from Pensioners Christmas Lunch - 9 December 2009 (10 December 2009)"
   - src: /uploads/albums/2009-12-10-pensioners-christmas-lunch-9-december-2009/003.jpg

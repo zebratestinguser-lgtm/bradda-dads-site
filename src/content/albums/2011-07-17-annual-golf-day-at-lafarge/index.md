@@ -3,11 +3,11 @@ title: "Annual Golf Day at Lafarge"
 category: "Social"
 date: 2011-07-17
 cover: /uploads/albums/2011-07-17-annual-golf-day-at-lafarge/001.jpg
-coverAlt: "Photo 1 of 16 from Annual Golf Day at Lafarge (17 July 2011)"
+coverAlt: "A group of children at the golf day (17 July 2011)"
 source: https://braddadads.blogspot.com/2011/07/annual-golf-day-at-lafarge.html
 photos:
   - src: /uploads/albums/2011-07-17-annual-golf-day-at-lafarge/001.jpg
-    alt: "Photo 1 of 16 from Annual Golf Day at Lafarge (17 July 2011)"
+    alt: "A group of children at the golf day (17 July 2011)"
   - src: /uploads/albums/2011-07-17-annual-golf-day-at-lafarge/002.jpg
     alt: "Photo 2 of 16 from Annual Golf Day at Lafarge (17 July 2011)"
   - src: /uploads/albums/2011-07-17-annual-golf-day-at-lafarge/003.jpg

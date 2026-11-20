@@ -4,7 +4,7 @@ date: 2012-08-11
 tag: "Tour of Bradwell"
 summary: "Bradda Dads, who are always keen to look at alternative sources of fund raising to benefit the village, assisted in staging The Long Tour of Bradwell 2012 with a view to possibly…"
 image: /uploads/albums/2012-08-11-the-long-tour-of-bradwell-2012/001.jpg
-imageAlt: "Photo 1 of 11 from The Long Tour of Bradwell 2012 (11 August 2012)"
+imageAlt: "Runners coming up a woodland track on the Long Tour of Bradwell (11 August 2012)"
 album: 2012-08-11-the-long-tour-of-bradwell-2012
 source: https://braddadads.blogspot.com/2012/08/the-long-tour-of-bradwell-2012.html
 ---

@@ -28,6 +28,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 // made from scripts/qa/og-image-source.html)
 const ogImageUrl = new URL(url(ogImage ?? '/og-image.jpg'), Astro.site).href;
 const ogIsDefault = !ogImage;
+
+// Site search (Pagefind): index each page's main content, tagged with a type for the search filters.
+// The homepage and search page are left out (they only repeat what's on other pages).
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '');
+const noSearch = path === '/' || path.startsWith('/search') || path.startsWith('/404');
+const searchType = path.startsWith('/news/')
+  ? 'News'
+  : path.startsWith('/photos/')
+    ? 'Photos'
+    : /^\/(wolfspit|tour-of-bradwell|races)\//.test(path)
+      ? 'Results'
+      : path.startsWith('/events/')
+        ? 'Events'
+        : path.startsWith('/members/')
+          ? 'Members'
+          : 'Pages';
 ---
 
 <!doctype html>
@@ -57,7 +73,7 @@ const ogIsDefault = !ogImage;
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
-    <main id="main">
+    <main id="main" data-pagefind-body={noSearch ? undefined : ''} data-pagefind-filter={noSearch ? undefined : `type:${searchType}`}>
       <slot />
     </main>
     <Footer />

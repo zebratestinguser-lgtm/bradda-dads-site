@@ -3,11 +3,11 @@ title: "Bradda Dads Float Victorious in 2009 Carnival"
 category: "Carnival"
 date: 2009-08-01
 cover: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/001.jpg
-coverAlt: "Photo 1 of 16 from Bradda Dads Float Victorious in 2009 Carnival (1 August 2009)"
+coverAlt: "Newspaper cutting about Bradwell Carnival 2009, with the dads' knights float (1 August 2009)"
 source: https://braddadads.blogspot.com/2009/08/bradda-dads-float-victorius-in-2009.html
 photos:
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/001.jpg
-    alt: "Photo 1 of 16 from Bradda Dads Float Victorious in 2009 Carnival (1 August 2009)"
+    alt: "Newspaper cutting about Bradwell Carnival 2009, with the dads' knights float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/002.jpg
     alt: "Photo 2 of 16 from Bradda Dads Float Victorious in 2009 Carnival (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/003.jpg

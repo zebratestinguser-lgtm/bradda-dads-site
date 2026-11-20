@@ -4,11 +4,11 @@ category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2007-12-12
 cover: /uploads/albums/2007-12-12-7th-annual-bradda-dads-christmas-lunch/001.jpg
-coverAlt: "Photo 1 of 23 from 7th Annual Bradda Dads Christmas Lunch (12 December 2007)"
+coverAlt: "Dads setting out round tables in the decorated hall before the Christmas lunch (12 December 2007)"
 source: https://braddadads.blogspot.com/2007/12/7th-annual-bradda-dads-christmas-lunch.html
 photos:
   - src: /uploads/albums/2007-12-12-7th-annual-bradda-dads-christmas-lunch/001.jpg
-    alt: "Photo 1 of 23 from 7th Annual Bradda Dads Christmas Lunch (12 December 2007)"
+    alt: "Dads setting out round tables in the decorated hall before the Christmas lunch (12 December 2007)"
   - src: /uploads/albums/2007-12-12-7th-annual-bradda-dads-christmas-lunch/002.jpg
     alt: "Photo 2 of 23 from 7th Annual Bradda Dads Christmas Lunch (12 December 2007)"
   - src: /uploads/albums/2007-12-12-7th-annual-bradda-dads-christmas-lunch/003.jpg

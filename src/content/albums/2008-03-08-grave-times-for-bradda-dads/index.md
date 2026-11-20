@@ -3,11 +3,11 @@ title: "Grave times for Bradda Dads"
 category: "Village"
 date: 2008-03-08
 cover: /uploads/albums/2008-03-08-grave-times-for-bradda-dads/001.jpg
-coverAlt: "Photo 1 of 14 from Grave times for Bradda Dads (8 March 2008)"
+coverAlt: "Dads straightening a fallen headstone in the churchyard (8 March 2008)"
 source: https://braddadads.blogspot.com/2008/03/grave-times-for-bradda-dads.html
 photos:
   - src: /uploads/albums/2008-03-08-grave-times-for-bradda-dads/001.jpg
-    alt: "Photo 1 of 14 from Grave times for Bradda Dads (8 March 2008)"
+    alt: "Dads straightening a fallen headstone in the churchyard (8 March 2008)"
   - src: /uploads/albums/2008-03-08-grave-times-for-bradda-dads/002.jpg
     alt: "Photo 2 of 14 from Grave times for Bradda Dads (8 March 2008)"
   - src: /uploads/albums/2008-03-08-grave-times-for-bradda-dads/003.jpg

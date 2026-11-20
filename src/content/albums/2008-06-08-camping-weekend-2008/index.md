@@ -3,11 +3,11 @@ title: "Camping Weekend - 2008"
 category: "Social"
 date: 2008-06-08
 cover: /uploads/albums/2008-06-08-camping-weekend-2008/001.jpg
-coverAlt: "Photo 1 of 25 from Camping Weekend - 2008 (8 June 2008)"
+coverAlt: "Dads and families on a wooden footbridge on the camping weekend (8 June 2008)"
 source: https://braddadads.blogspot.com/2008/06/camping-weekend-2008.html
 photos:
   - src: /uploads/albums/2008-06-08-camping-weekend-2008/001.jpg
-    alt: "Photo 1 of 25 from Camping Weekend - 2008 (8 June 2008)"
+    alt: "Dads and families on a wooden footbridge on the camping weekend (8 June 2008)"
   - src: /uploads/albums/2008-06-08-camping-weekend-2008/002.jpg
     alt: "Photo 2 of 25 from Camping Weekend - 2008 (8 June 2008)"
   - src: /uploads/albums/2008-06-08-camping-weekend-2008/003.jpg

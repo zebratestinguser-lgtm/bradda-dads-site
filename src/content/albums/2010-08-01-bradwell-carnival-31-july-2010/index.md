@@ -3,11 +3,11 @@ title: "Bradwell Carnival - 31 July 2010"
 category: "Carnival"
 date: 2010-08-01
 cover: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/001.jpg
-coverAlt: "Photo 1 of 19 from Bradwell Carnival - 31 July 2010 (1 August 2010)"
+coverAlt: "A dad having his face painted at a kitchen table before the carnival (1 August 2010)"
 source: https://braddadads.blogspot.com/2010/08/carnival-31710.html
 photos:
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/001.jpg
-    alt: "Photo 1 of 19 from Bradwell Carnival - 31 July 2010 (1 August 2010)"
+    alt: "A dad having his face painted at a kitchen table before the carnival (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/002.jpg
     alt: "Photo 2 of 19 from Bradwell Carnival - 31 July 2010 (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/003.jpg

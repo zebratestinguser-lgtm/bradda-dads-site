@@ -4,11 +4,11 @@ category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2011-12-07
 cover: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/001.jpg
-coverAlt: "Photo 1 of 19 from 11th Annual Pensioners Lunch (7 December 2011)"
+coverAlt: "Dads in white shirts and yellow ties lined up at the pensioners' Christmas lunch (7 December 2011)"
 source: https://braddadads.blogspot.com/2011/12/11th-annual-pensioners-lunch.html
 photos:
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/001.jpg
-    alt: "Photo 1 of 19 from 11th Annual Pensioners Lunch (7 December 2011)"
+    alt: "Dads in white shirts and yellow ties lined up at the pensioners' Christmas lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/002.jpg
     alt: "Photo 2 of 19 from 11th Annual Pensioners Lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/003.jpg

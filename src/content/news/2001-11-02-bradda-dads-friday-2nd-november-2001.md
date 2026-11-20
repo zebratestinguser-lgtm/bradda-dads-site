@@ -4,7 +4,7 @@ date: 2001-11-02
 tag: "Bonfire"
 summary: "Archive entry posted on the 13th of February 2023. Not 100% certain but I think this was the second ever bonfire organised by Bradda Dads. Only one photo from this event."
 image: /uploads/albums/2001-11-02-bradda-dads-friday-2nd-november-2001/001.jpg
-imageAlt: "Photo 1 of 1 from Bradda Dads - Friday, 2nd November 2001 (2 November 2001)"
+imageAlt: "Home-made bonfire guys with painted faces, lined up for the bonfire competition (2 November 2001)"
 album: 2001-11-02-bradda-dads-friday-2nd-november-2001
 source: https://braddadads.blogspot.com/2001/11/bradda-dads-friday-2nd-november-2001.html
 ---

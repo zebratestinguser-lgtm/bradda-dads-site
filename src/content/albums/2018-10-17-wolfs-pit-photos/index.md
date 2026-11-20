@@ -6,11 +6,11 @@ event: wolfspit
 date: 2018-10-17
 dateLabel: "Various years"
 cover: /uploads/albums/2018-10-17-wolfs-pit-photos/001.jpg
-coverAlt: "Photo 1 of 5 from Wolf's Pit photos (Various years)"
+coverAlt: "A big field of runners on the start line of the Wolf's Pit race (Various years)"
 source: https://braddadads.wordpress.com/wolfs-pit/
 photos:
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/001.jpg
-    alt: "Photo 1 of 5 from Wolf's Pit photos (Various years)"
+    alt: "A big field of runners on the start line of the Wolf's Pit race (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/002.png
     alt: "Photo 2 of 5 from Wolf's Pit photos (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/003.png

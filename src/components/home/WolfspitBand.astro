@@ -1,11 +1,21 @@
 ---
+import BrookEdge from '../BrookEdge.astro';
 import { getSite } from '../../lib/site';
 import { getWolfspitYears, podium, PODIUM_RULES } from '../../lib/results';
 import { url } from '../../lib/url';
 
+// Interactive results band (year tabs, podium, search). Used at the top of the Wolf's Pit page.
+interface Props {
+  title?: string;
+  /** Intro paragraph; pass "" to hide it (e.g. when the page header already introduces the race) */
+  intro?: string;
+  /** How many year tabs to show */
+  maxYears?: number;
+}
 const site = await getSite();
+const { title = "Wolf's Pit Fell Race", intro = site.wolfspitIntro, maxYears = 4 } = Astro.props;
 const allYears = await getWolfspitYears();
-const years = allYears.slice(0, 4); // latest four on the homepage
+const years = allYears.slice(0, maxYears);
 const latest = years[0];
 const ROWS = 6;
 
@@ -17,12 +27,13 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
 ---
 
 <section id="wolfspit" class="wolfspit" aria-labelledby="wolfspit-title">
+  <BrookEdge position="top" />
   <div class="container wolfspit__inner">
     <div class="wolfspit__head">
       <div class="wolfspit__intro">
         <p class="eyebrow wolfspit__eyebrow">Race results</p>
-        <h2 id="wolfspit-title" class="wolfspit__title">Wolfspit Race</h2>
-        <p class="wolfspit__text">{site.wolfspitIntro}</p>
+        <h2 id="wolfspit-title" class="wolfspit__title">{title}</h2>
+        {intro && <p class="wolfspit__text">{intro}</p>}
       </div>
       <div class="wolfspit__actions">
         {
@@ -142,6 +153,7 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
       )
     }
   </div>
+  <BrookEdge />
 </section>
 
 <script>
@@ -263,7 +275,8 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
 
 <style>
   .wolfspit {
-    padding-block: 80px;
+    position: relative;
+    padding-block: 104px;
     background: var(--green-deep);
     color: var(--white);
   }
@@ -493,7 +506,7 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
   }
   @media (max-width: 600px) {
     .wolfspit {
-      padding-block: 56px;
+      padding-block: 72px;
     }
     .table-card {
       padding: 18px 14px;

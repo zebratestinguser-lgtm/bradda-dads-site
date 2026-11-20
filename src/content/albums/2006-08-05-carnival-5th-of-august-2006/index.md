@@ -3,11 +3,11 @@ title: "Carnival : 5th of August 2006"
 category: "Carnival"
 date: 2006-08-05
 cover: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/001.jpg
-coverAlt: "Photo 1 of 32 from Carnival : 5th of August 2006 (5 August 2006)"
+coverAlt: "A child dressed as a pirate, with an eye patch and painted moustache, for the carnival (5 August 2006)"
 source: https://braddadads.blogspot.com/2006/08/blog-post.html
 photos:
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/001.jpg
-    alt: "Photo 1 of 32 from Carnival : 5th of August 2006 (5 August 2006)"
+    alt: "A child dressed as a pirate, with an eye patch and painted moustache, for the carnival (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/002.jpg
     alt: "Photo 2 of 32 from Carnival : 5th of August 2006 (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/003.jpg

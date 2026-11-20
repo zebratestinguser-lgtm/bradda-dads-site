@@ -4,11 +4,11 @@ category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2010-12-09
 cover: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/001.jpg
-coverAlt: "Photo 1 of 30 from 10th Anniversary Pensioners Lunch - 8 December 2010 (9 December 2010)"
+coverAlt: "A round table laid with a green cloth, red napkins and crackers for the 10th anniversary lunch (9 December 2010)"
 source: https://braddadads.blogspot.com/2010/12/10th-anniversary-pensioners-lunch-8.html
 photos:
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/001.jpg
-    alt: "Photo 1 of 30 from 10th Anniversary Pensioners Lunch - 8 December 2010 (9 December 2010)"
+    alt: "A round table laid with a green cloth, red napkins and crackers for the 10th anniversary lunch (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/002.jpg
     alt: "Photo 2 of 30 from 10th Anniversary Pensioners Lunch - 8 December 2010 (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/003.jpg

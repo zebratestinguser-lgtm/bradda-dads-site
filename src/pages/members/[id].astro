@@ -1,0 +1,154 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrookEdge from '../../components/BrookEdge.astro';
+import MemberAvatar from '../../components/MemberAvatar.astro';
+import { getMembers, memberSince } from '../../lib/members';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const members = await getMembers();
+  return members.map((member, i) => ({
+    params: { id: member.id },
+    props: { member, prev: members[i - 1], next: members[i + 1] },
+  }));
+}
+
+const { member, prev, next } = Astro.props;
+const d = member.data;
+const { Content } = await render(member);
+---
+
+<BaseLayout title={`${d.name}${d.role ? `, ${d.role}` : ''}`} description={d.summary} ogImage={d.photo}>
+  <section class="profile-head">
+    <div class="container profile-head__inner">
+      <a class="back" href={url('/members/')}>← Meet the dads</a>
+      <div class="profile-head__main">
+        <MemberAvatar member={member} size={168} full />
+        <div class="profile-head__text">
+          {d.role && <span class="role">{d.role}</span>}
+          <h1 class="name">{d.name}</h1>
+          <p class="since">{memberSince(member)}</p>
+          <p class="summary">{d.summary}</p>
+        </div>
+      </div>
+    </div>
+    <BrookEdge />
+  </section>
+
+  <section class="container page-section profile">
+    <dl class="facts">
+      {d.favouriteEvent && (<div><dt>Favourite event</dt><dd>{d.favouriteEvent}</dd></div>)}
+      {d.funFact && (<div><dt>Fun fact</dt><dd>{d.funFact}</dd></div>)}
+    </dl>
+    <div class="prose"><Content /></div>
+
+    <nav class="profile-nav" aria-label="More members">
+      {prev ? <a href={url(`/members/${prev.id}/`)}>← {prev.data.name}</a> : <span />}
+      {next && <a href={url(`/members/${next.id}/`)}>{next.data.name} →</a>}
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .profile-head {
+    position: relative;
+    background: var(--green);
+    color: var(--white);
+    padding-block: 24px 80px;
+  }
+  .profile-head__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .back {
+    color: var(--on-dark-soft);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+  }
+  .back:hover {
+    color: var(--white);
+  }
+  .profile-head__main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px 36px;
+  }
+  .profile-head__main :global(.avatar) {
+    box-shadow: 0 0 0 5px var(--green), 0 0 0 8px var(--yellow);
+  }
+  .profile-head__text {
+    flex: 1 1 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .role {
+    background: var(--yellow);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+  }
+  .name {
+    font-weight: 800;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .since {
+    font-weight: 600;
+    color: var(--yellow);
+  }
+  .summary {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--on-dark-soft);
+    max-width: 60ch;
+  }
+  .profile {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .facts {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 14px;
+  }
+  .facts div {
+    background: var(--yellow-panel);
+    border-radius: var(--radius-card);
+    padding: 18px 22px;
+  }
+  .facts dt {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--yellow-ink);
+  }
+  .facts dd {
+    margin: 6px 0 0;
+    font-size: 17px;
+    color: var(--yellow-body);
+  }
+  .profile-nav {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px 24px;
+    font-weight: 600;
+  }
+  .profile-nav a {
+    padding-block: 10px;
+  }
+</style>

@@ -4,7 +4,7 @@ date: 2008-08-02
 tag: "Carnival"
 summary: "Photograph courtesy of J R Braddock, Photographer, Hyde, Cheshire Photograph courtesy of J R Braddock, Photographer, Hyde, Cheshire"
 image: /uploads/albums/2008-08-02-carnival-2-august-2008/001.jpg
-imageAlt: "Photo 1 of 23 from Carnival - 2 August 2008 (2 August 2008)"
+imageAlt: "A big group in Victorian costume outside the 'Bradda Dads Workhouse' carnival float (2 August 2008)"
 album: 2008-08-02-carnival-2-august-2008
 source: https://braddadads.blogspot.com/2008/08/carnival-2-august-2008.html
 ---

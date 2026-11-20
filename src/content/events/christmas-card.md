@@ -10,6 +10,7 @@ ctaLabel: Add your message
 ctaUrl: /christmas-card/
 price: £5
 order: 2
+month: 11
 # Homepage banner (shown only while entries are open)
 heroTitle: One card for the whole village
 heroText: Skip the stack of cards this year. Add your family's Christmas message to the community card for £5, and every penny goes back into Bradwell.

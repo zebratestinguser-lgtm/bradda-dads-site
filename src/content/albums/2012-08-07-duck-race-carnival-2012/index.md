@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2012-08-07
 cover: /uploads/albums/2012-08-07-duck-race-carnival-2012/001.jpg
-coverAlt: "Photo 1 of 20 from Duck Race - Carnival 2012 (7 August 2012)"
+coverAlt: "A dad wading in the brook by the bridge before the carnival duck race (7 August 2012)"
 source: https://braddadads.blogspot.com/2012/08/duck-race-carnival-2012.html
 photos:
   - src: /uploads/albums/2012-08-07-duck-race-carnival-2012/001.jpg
-    alt: "Photo 1 of 20 from Duck Race - Carnival 2012 (7 August 2012)"
+    alt: "A dad wading in the brook by the bridge before the carnival duck race (7 August 2012)"
   - src: /uploads/albums/2012-08-07-duck-race-carnival-2012/002.jpg
     alt: "Photo 2 of 20 from Duck Race - Carnival 2012 (7 August 2012)"
   - src: /uploads/albums/2012-08-07-duck-race-carnival-2012/003.jpg
