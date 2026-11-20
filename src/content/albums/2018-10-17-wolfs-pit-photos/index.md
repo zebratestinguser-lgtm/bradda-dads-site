@@ -21,13 +21,13 @@ photos:
     alt: "Photo 5 of 5 from Wolf's Pit photos (Various years)"
 ---
 
-### **Sunday 8th March 2026**
+## **Sunday 8th March 2026**
 
-### Results for 2026!
+## Results for 2026!
 
 A huge Thank You to everyone who entered and helped run the event this year! [Wolfs Pit Results 2026](https://braddadads.wordpress.com/wp-content/uploads/2026/03/wolfs-pit-results-2026-wolfs-pit-results-2026.pdf)
 
-### Race Details
+## Race Details
 
 - **IMPORTANT!** No dogs on the field due to Ewes in lamb!
 
@@ -45,19 +45,19 @@ A huge Thank You to everyone who entered and helped run the event this year! [Wo
 
 - **Minimum age:** 18
 
-### [Entry via Fabian4 now LIVE here](https://www.fabian4.co.uk/default.aspx?EventID=4190)
+## [Entry via Fabian4 now LIVE here](https://www.fabian4.co.uk/default.aspx?EventID=4190)
 
 - **Pre-entry fee (members):** £tbc
 
 - **Pre-entry fee (non-members):** £tbc
 
-### Organiser Contact
+## Organiser Contact
 
 Email: wolfspitfellrace@gmail.com
 
 Text/WhatsApp/Phone: Stu on 07590 047104
 
-### Records
+## Records
 
 - **Male record:** F Grant – 00:37:56 – 2022
 
@@ -65,7 +65,7 @@ Text/WhatsApp/Phone: Stu on 07590 047104
 
 ###
 
-### Route map
+## Route map
 
 ###
 

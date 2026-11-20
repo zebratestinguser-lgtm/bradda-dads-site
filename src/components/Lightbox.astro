@@ -49,6 +49,12 @@
     dialog.querySelector('[data-lb-next]')!.addEventListener('click', () => show(current + 1));
     dialog.querySelector('[data-lb-close]')!.addEventListener('click', () => dialog.close());
     dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        const btns = [...dialog.querySelectorAll<HTMLButtonElement>('button')];
+        const i = btns.indexOf(document.activeElement as HTMLButtonElement);
+        e.preventDefault();
+        btns[(i + (e.shiftKey ? -1 : 1) + btns.length) % btns.length].focus();
+      }
       if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
     });

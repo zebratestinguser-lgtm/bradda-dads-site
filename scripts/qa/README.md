@@ -13,3 +13,14 @@ Not part of the site build.
   Headless: `msedge --headless=new --virtual-time-budget=1500000 --dump-dom "http://localhost:4321/bradda-dads-site/layout-audit.html?w=360"`. **Delete it from `public/` afterwards.**
 
 Last full run (2026-11-20): 246 pages × 360/414/768/900/1100/1280px with no layout problems (only deliberate wraps of long URLs and hyphenated names); all functional checks passed.
+
+## Accessibility
+
+Run against the built site (`npm run build && npx astro preview --port 4322`):
+
+- **`a11y-audit.mjs`**: axe-core (WCAG 2.0/2.1/2.2 A and AA plus best practice) on one page of every type, at desktop and phone widths. Also checks heading order, a single h1, page titles, 24px tap targets (WCAG 2.2 2.5.8) and reflow at 320px (1.4.10). axe is loaded from cdnjs at test time. Writes `a11y-report.txt` to the current folder.
+- **`keyboard-check.mjs`**: real key presses. Checks tab order and visible focus, the skip link, the carousel buttons, the phone menu (opens, focus moves in, closes on Esc or tabbing out), the photo viewer (opens, arrows, keeps focus inside, Esc returns focus), arrow-key results tabs, and that hidden things can't take focus.
+- **`contrast.mjs`**: colour pairs against WCAG AA.
+- **`cdp-check.mjs`**: helper. Opens a page in headless Edge/Chrome, waits in real time, and evaluates an expression.
+
+Last full run (2026-11-20, after fixes): axe found 0 issues on 24 pages × 2 widths, reflow at 320px passed, all keyboard checks passed, and all colour pairs met AA.

@@ -26,20 +26,20 @@ heroImageCaption: Boxing Day 2009
 
 Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.
 
-### Buying a duck
+## Buying a duck
 
 - **Online:** from [our SumUp shop](https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1), until midnight on Saturday 19 December. Tickets are numbered after sales close.
 - **At the Co-op:** Saturdays 12 and 19 December, 10am to 2pm (card or cash).
 - **At the pensioners' Christmas lunch** on Friday 4 December.
 
-### Prizes
+## Prizes
 
 Cash prizes for the first ducks past the finish.
 
-### The raft race
+## The raft race
 
 Build a raft and race it down the brook too. Trophies for 1st, 2nd and 3rd, best style, first to sink, and the biggest of all for last place. Everyone who enters gets a treat. [PLACEHOLDER: raft age categories.]
 
-### On the day
+## On the day
 
 In 2022 the ducks went in at 11am from Town Bottom Park. [PLACEHOLDER: confirm the 2026 start time and start point, then set `startTimeConfirmed: true`.]

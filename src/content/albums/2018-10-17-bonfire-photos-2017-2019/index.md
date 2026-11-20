@@ -31,7 +31,7 @@ photos:
     alt: "Photo 10 of 10 from Bonfire photos (2017–2019)"
 ---
 
-### Thank you to everyone who turned out for the Bonfire and Fireworks this year!
+## Thank you to everyone who turned out for the Bonfire and Fireworks this year!
 
 We’re aiming to run this again for 2025, watch this space.
 
