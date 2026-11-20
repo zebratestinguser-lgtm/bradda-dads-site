@@ -1,0 +1,707 @@
+# Pages CMS (https://pagescms.org): the editing screens the team uses at app.pagescms.org.
+# Each block below is one form. Field names must match the schemas in src/content.config.ts.
+# Editors only see these forms, so layout, pages and styling can't be changed from the editor.
+# Saving commits to GitHub; the deploy workflow then resizes any new photos and rebuilds the site.
+
+media:
+  - name: news
+    label: News photos
+    input: public/uploads/news
+    output: /uploads/news
+    categories: [image]
+    rename: safe
+  - name: photos
+    label: Album photos
+    input: public/uploads/photos
+    output: /uploads/photos
+    categories: [image]
+    # Phone photos often share names (IMG_0001.jpg), so give each upload a unique name
+    rename: random
+  - name: images
+    label: Other images
+    input: public/uploads/images
+    output: /uploads/images
+    categories: [image]
+    rename: safe
+
+content:
+  # ───────────────────────── News ─────────────────────────
+  - name: news
+    label: News
+    type: collection
+    path: src/content/news
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.date}-{primary}.md"
+      field: false
+    view:
+      fields: [title, date, tag]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Headline
+        type: string
+        required: true
+      - name: date
+        label: Date posted
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: tag
+        label: Topic
+        type: select
+        required: true
+        options:
+          values: [Bonfire, Christmas card, "Pensioners' lunch", Duck race, "Wolf's Pit", Village, Carnival, Tour of Bradwell, Social]
+      - name: summary
+        label: Summary
+        description: One or two sentences for the news cards and search results.
+        type: text
+        required: true
+      - name: image
+        label: Photo (optional)
+        description: Leave empty and the site shows an older photo from the same kind of event, labelled with its date.
+        type: image
+        options:
+          media: news
+      - name: imageAlt
+        label: Photo description
+        description: Required if you add a photo. Describe what's in it for people who can't see it, e.g. "Crowds watching the bonfire at night".
+        type: string
+      - name: featured
+        label: Feature on the homepage
+        description: Shows this story as the big one on the homepage. Only tick one story at a time.
+        type: boolean
+        default: false
+      - name: album
+        label: Photo album (optional)
+        description: Link this story to a photo album.
+        type: reference
+        options:
+          collection: albums
+          search: title
+          value: "{path}"
+          label: "{title}"
+      - name: body
+        label: Story
+        type: rich-text
+        options:
+          format: markdown
+          media: news
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
+  # ───────────────────────── Photo albums ─────────────────────────
+  - name: albums
+    label: Photo albums
+    type: collection
+    path: src/content/albums
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.date}-{primary}.md"
+      field: false
+    view:
+      fields: [title, date, category]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Album name
+        type: string
+        required: true
+      - name: date
+        label: Date the photos were taken
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: dateLabel
+        label: Date wording (optional)
+        description: Only if there isn't one exact date, e.g. "Summer 2016" or "2017–2021". Shown instead of the date.
+        type: string
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values: [Bonfire, Christmas card, "Pensioners' lunch", Duck race, "Wolf's Pit", Village, Carnival, Tour of Bradwell, Social]
+      - name: photos
+        label: Photos
+        description: Add each photo with a short description. Big phone photos are shrunk automatically when you save.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.alt}"
+        fields:
+          - name: src
+            label: Photo
+            type: image
+            required: true
+            options:
+              media: photos
+          - name: alt
+            label: Description
+            description: What's in the photo, e.g. "Dads in hi-vis keeping the ducks moving under the bridge".
+            type: string
+            required: true
+          - name: caption
+            label: Caption (optional)
+            type: string
+      - name: event
+        label: Event (optional)
+        description: Link the album to one of the yearly events.
+        type: reference
+        options:
+          collection: events
+          search: name
+          value: "{path}"
+          label: "{name}"
+      - name: cover
+        label: Cover photo (optional)
+        description: Leave empty to use the first photo.
+        type: image
+        options:
+          media: photos
+      - name: coverAlt
+        label: Cover photo description
+        type: string
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
+  # ───────────────────────── Events ─────────────────────────
+  - name: events
+    label: Events
+    type: collection
+    path: src/content/events
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [name, when, status]
+      primary: name
+      sort: [order, name]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: name
+        label: Event name
+        type: string
+        required: true
+      - name: status
+        label: Status
+        description: '"open" = taking entries or sales now. "done" = finished for this year.'
+        type: select
+        required: true
+        options:
+          values: [upcoming, open, done]
+      - name: when
+        label: When (short)
+        description: For the event cards, e.g. "26 December" or "November".
+        type: string
+        required: true
+      - name: start
+        label: Date and start time
+        description: Leave empty if this year's date isn't known yet.
+        type: date
+        options:
+          time: true
+      - name: startTimeConfirmed
+        label: Start time confirmed
+        description: Leave unticked until the time (not just the date) is certain; the site then says "Time to be confirmed".
+        type: boolean
+        default: false
+      - name: end
+        label: End (optional)
+        description: Only for events over several days.
+        type: date
+        options:
+          time: true
+      - name: entriesClose
+        label: Entries or sales close (optional)
+        description: After this, "Open now" changes to "Entries closed" automatically.
+        type: date
+        options:
+          time: true
+      - name: location
+        label: Where
+        type: string
+        required: true
+      - name: summary
+        label: Summary
+        type: text
+        required: true
+      - name: price
+        label: Price (optional)
+        description: e.g. "£2". Shown on the buttons.
+        type: string
+      - name: ctaLabel
+        label: Main button text
+        type: string
+        required: true
+      - name: ctaUrl
+        label: Main button link
+        description: Usually a SumUp link.
+        type: string
+        required: true
+      - name: whenWhereNote
+        label: When and where note (optional)
+        description: Practical extra line, e.g. parking or "2027 date to be confirmed".
+        type: text
+      - name: involvement
+        label: How to get involved
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: text
+            label: Text
+            type: text
+            required: true
+          - name: url
+            label: Button link (optional)
+            type: string
+          - name: label
+            label: Button text (optional)
+            type: string
+          - name: onlyWhenOpen
+            label: Hide once entries close
+            type: boolean
+            default: false
+      - name: body
+        label: What's happening
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+      - name: heroTitle
+        label: "Homepage: big headline"
+        type: string
+      - name: heroHighlight
+        label: "Homepage: words in yellow"
+        description: Part of the headline to show in yellow, e.g. "Duck Race".
+        type: string
+      - name: heroText
+        label: "Homepage: paragraph"
+        type: text
+      - name: countdownLabel
+        label: "Homepage: countdown heading"
+        description: e.g. "Ducks hit the water in".
+        type: string
+      - name: heroNote
+        label: "Homepage: note under the countdown"
+        type: text
+      - name: heroImage
+        label: "Homepage and event page: photo"
+        type: image
+        options:
+          media: images
+      - name: heroImageAlt
+        label: Photo description
+        type: string
+      - name: heroImageCaption
+        label: When the photo was taken
+        description: Shown on the photo, e.g. "Boxing Day 2009".
+        type: string
+      - name: order
+        label: Order
+        description: Tie-breaker when two events share a date (1 = first).
+        type: number
+        required: true
+      - name: month
+        label: Usual month (1–12)
+        description: Places the event in the year when there's no date yet.
+        type: number
+        options:
+          min: 1
+          max: 12
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
+  # ───────────────────────── Members ─────────────────────────
+  - name: members
+    label: Meet the dads
+    type: collection
+    path: src/content/members
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: false
+    view:
+      fields: [name, role]
+      primary: name
+      sort: [order, name]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: name
+        label: Name
+        description: Only add someone once they've agreed to appear on the site.
+        type: string
+        required: true
+      - name: role
+        label: Role (optional)
+        description: e.g. "Chair", "Treasurer", "Duck race lead".
+        type: string
+      - name: joined
+        label: Year they joined
+        type: number
+        options:
+          min: 1999
+          max: 2100
+      - name: summary
+        label: Short intro
+        description: One or two sentences for their card.
+        type: text
+        required: true
+      - name: photo
+        label: Photo (optional)
+        type: image
+        options:
+          media: images
+      - name: photoAlt
+        label: Photo description
+        type: string
+      - name: favouriteEvent
+        label: Favourite event
+        type: string
+      - name: funFact
+        label: Fun fact
+        type: string
+      - name: current
+        label: Current member
+        description: Untick for past members (hides them).
+        type: boolean
+        default: true
+      - name: order
+        label: Order on the page
+        description: Lower numbers first; committee roles usually 1–3.
+        type: number
+        default: 100
+      - name: body
+        label: Longer profile
+        type: rich-text
+        options:
+          format: markdown
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
+  # ───────────────────────── Where the money goes ─────────────────────────
+  - name: funded
+    label: Where the money goes
+    type: collection
+    path: src/content/funded
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: false
+    view:
+      fields: [name, year]
+      primary: name
+    fields:
+      - name: name
+        label: Group or project
+        type: string
+        required: true
+      - name: summary
+        label: What the money paid for
+        type: text
+        required: true
+      - name: year
+        label: Year
+        type: string
+        required: true
+      - name: amount
+        label: Amount (optional)
+        description: e.g. "£500".
+        type: string
+      - name: image
+        label: Photo (optional)
+        type: image
+        options:
+          media: images
+      - name: imageAlt
+        label: Photo description
+        type: string
+      - name: lat
+        label: Map position (latitude)
+        description: Right-click the spot in Google Maps to copy its numbers; the first is latitude.
+        type: number
+        required: true
+      - name: lng
+        label: Map position (longitude)
+        type: number
+        required: true
+      - name: locationConfirmed
+        label: Map position is correct
+        type: boolean
+        default: false
+      - name: body
+        label: More detail (optional)
+        type: rich-text
+        options:
+          format: markdown
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
+  # ───────────────────────── Our story ─────────────────────────
+  - name: timeline
+    label: Our story timeline
+    type: collection
+    path: src/content/timeline
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.year}-{primary}.md"
+      field: false
+    view:
+      fields: [year, title]
+      primary: title
+      sort: [order]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: year
+        label: Year
+        type: string
+        required: true
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: text
+        label: Text
+        type: text
+        required: true
+      - name: image
+        label: Photo (optional)
+        type: image
+        options:
+          media: images
+      - name: imageAlt
+        label: Photo description
+        type: string
+      - name: order
+        label: Position on the timeline
+        description: 1 = earliest.
+        type: number
+        required: true
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
+  # ───────────────────────── Site settings ─────────────────────────
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/data/site.yaml
+    format: yaml
+    fields:
+      - name: site
+        label: Settings
+        type: object
+        fields:
+          - name: diaryDates
+            label: Dates for your diary
+            description: Upcoming public dates. Past ones disappear by themselves.
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{fields.text}"
+            fields:
+              - name: date
+                label: Date
+                type: date
+                required: true
+                options:
+                  format: yyyy-MM-dd
+              - name: text
+                label: What's happening
+                type: string
+                required: true
+              - name: label
+                label: Date wording (optional)
+                description: e.g. "Every Saturday in December".
+                type: string
+              - name: url
+                label: Link (optional)
+                type: string
+          - name: totalRaised
+            label: Total raised since 1999
+            description: Number only, e.g. "250,000". Leave as [TOTAL] to hide it.
+            type: string
+            required: true
+          - name: groupsHelped
+            label: Number of groups and projects helped
+            type: string
+            required: true
+          - name: contactEmail
+            label: Contact email
+            type: string
+            required: true
+          - name: meetingInfo
+            label: When we meet
+            description: Completes the sentence "We meet …".
+            type: string
+            required: true
+          - name: joinHeadline
+            label: Join us headline
+            type: string
+            required: true
+          - name: joinText
+            label: Join us text
+            type: text
+            required: true
+          - name: whoWeAre
+            label: Who we are
+            type: text
+            required: true
+          - name: storyIntro
+            label: Our story introduction
+            type: text
+            required: true
+          - name: storyImage
+            label: Our story photo
+            type: image
+            options:
+              media: images
+          - name: storyImageAlt
+            label: Our story photo description
+            type: string
+          - name: storyImageCaption
+            label: Our story photo caption (with when it was taken)
+            type: string
+          - name: wolfspitIntro
+            label: Wolf's Pit introduction
+            type: text
+            required: true
+          - name: wolfspitEntryUrl
+            label: Wolf's Pit entry link
+            type: string
+            required: true
+          - name: sumupStoreUrl
+            label: SumUp store link
+            type: string
+            required: true
+          - name: christmasCardPaymentUrl
+            label: Christmas card payment link
+            type: string
+            required: true
+          - name: donationLinks
+            label: Donation buttons (exactly three)
+            type: object
+            list:
+              min: 3
+              max: 3
+            fields:
+              - name: amount
+                label: Amount (£)
+                type: number
+                required: true
+              - name: url
+                label: Link
+                type: string
+                required: true
+              - name: label
+                label: What it pays for
+                type: string
+                required: true
+          - name: donationQr
+            label: Donation QR code image
+            type: image
+            options:
+              media: images
+          - name: facebookPosts
+            label: Facebook posts on the homepage (up to three)
+            type: object
+            list:
+              max: 3
+            fields:
+              - name: date
+                label: Date
+                type: string
+                required: true
+              - name: text
+                label: Text
+                type: text
+                required: true
+              - name: url
+                label: Link to the post
+                type: string
+                required: true
+              - name: image
+                label: Image (optional)
+                type: image
+                options:
+                  media: images
+              - name: imageAlt
+                label: Image description
+                type: string
+          - name: sharePhotosUrl
+            label: '"Share your photos" link'
+            type: string
+            required: true
+          - name: accountsUrl
+            label: Annual accounts link
+            description: Leave as "#" until there's a real link.
+            type: string
+            required: true
+          - name: name
+            label: Site name
+            type: string
+            required: true
+          - name: tagline
+            label: Tagline
+            type: string
+            required: true
+          - name: description
+            label: Description for search engines
+            type: text
+            required: true
+          - name: facebookUrl
+            label: Facebook page link
+            type: string
+            required: true
+          - name: cicName
+            label: CIC name
+            type: string
+            required: true
+          - name: cicNumber
+            label: Company number
+            type: string
+            required: true
