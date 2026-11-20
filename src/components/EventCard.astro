@@ -23,8 +23,8 @@ const ctaHref = url(e.data.ctaUrl);
 
 <article class:list={['event-card', { 'event-card--next': isNext }]}>
   <div class="event-card__top">
-    <span class="event-card__when">{e.data.when}</span>
     <span class={`event-card__tag event-card__tag--${tag.kind}`}>{tag.label}</span>
+    <span class="event-card__when">{e.data.when}</span>
   </div>
   <Heading class="event-card__name">
     <a href={detailsHref}>{e.data.name}</a>
@@ -62,13 +62,12 @@ const ctaHref = url(e.data.ctaUrl);
     border-color: var(--green);
     color: var(--white);
   }
-  /* Date label and status pill share a row when there's room; the pill drops below when there isn't */
+  /* Status pill always on its own line at the top, date underneath: same place on every card, at every width */
   .event-card__top {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
   .event-card__when {
     font-size: 13px;
