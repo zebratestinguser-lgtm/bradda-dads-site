@@ -70,6 +70,9 @@ const fmtDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', da
   .diary__item a {
     color: var(--text);
     text-decoration: none;
+    display: inline-block;
+    padding-block: 3px;
+    min-height: 28px;
   }
   .diary__item a:hover {
     text-decoration: underline;

@@ -24,7 +24,7 @@ heroImageCaption: December 2012
 
 A free Christmas lunch for Bradwell's pensioners, cooked and served by the dads, with crackers, a decorated Christmas tree and the village children singing.
 
-### 2026
+## 2026
 
 **Friday 4 December.** Look out for the lunch slip in Bradda News to book a place. Meals can be delivered for anyone who can't make it to the hall, and transport can be arranged.
 

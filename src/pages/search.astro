@@ -8,6 +8,7 @@ import { url } from '../lib/url';
   <PageHeader eyebrow="Search" title="Search the site" intro="News going back to 2001, photo albums, race results and events. Try a year, an event or a runner's name." />
   <section class="container page-section">
     <link rel="stylesheet" href={url('/pagefind/pagefind-ui.css')} />
+    <label class="search__label" id="search-label">Search the site</label>
     <div id="search" class="search" data-bundle={url('/pagefind/')} data-base={import.meta.env.BASE_URL}></div>
     <noscript><p class="note">Search needs JavaScript. You can browse <a href={url('/news/')}>news</a>, <a href={url('/photos/')}>photos</a> and <a href={url('/races/')}>race results</a> instead.</p></noscript>
     <p class="note search__dev" hidden data-search-missing>
@@ -44,7 +45,15 @@ import { url } from '../lib/url';
       });
       const q = new URLSearchParams(location.search).get('q');
       if (q) ui.triggerSearch(q);
-      el.querySelector<HTMLInputElement>('input')?.focus();
+      // Pagefind's input only has a placeholder; give it a real, visible label (WCAG 3.3.2 / 4.1.2)
+      const input = el.querySelector<HTMLInputElement>('input');
+      const label = document.getElementById('search-label') as HTMLLabelElement | null;
+      if (input && label) {
+        input.id = 'site-search';
+        label.htmlFor = 'site-search';
+        input.removeAttribute('title');
+      }
+      input?.focus();
     };
     s.onerror = () => {
       const msg = document.querySelector<HTMLElement>('[data-search-missing]');
@@ -79,6 +88,22 @@ import { url } from '../lib/url';
   .search :global(mark) {
     background: var(--yellow-panel);
     color: var(--text);
+  }
+  /* Pagefind's own rule loads later with equal specificity, so these need !important */
+  .search :global(.pagefind-ui__filter-checkbox) {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .search :global(.pagefind-ui__filter-label) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+  }
+  .search__label {
+    display: block;
+    font-weight: 600;
+    color: var(--muted-strong);
+    margin-bottom: 8px;
   }
   .ideas {
     margin-top: 28px;
