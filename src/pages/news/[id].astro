@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrookEdge from '../../components/BrookEdge.astro';
 import { photoDate } from '../../lib/albums';
 import { formatDate } from '../../lib/format';
 import { url, thumb } from '../../lib/url';
@@ -28,6 +29,7 @@ const when = album ? photoDate(album) : undefined;
         </p>
         <h1 class="story__title">{story.data.title}</h1>
       </div>
+      <BrookEdge />
     </header>
 
     <div class="container story__body">
@@ -76,9 +78,10 @@ const when = album ? photoDate(album) : undefined;
 
 <style>
   .story__header {
+    position: relative;
     background: var(--green);
     color: var(--white);
-    padding-block: 28px 48px;
+    padding-block: 28px 64px;
   }
   .story__header-inner {
     display: flex;
