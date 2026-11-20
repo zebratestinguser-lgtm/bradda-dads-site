@@ -247,6 +247,19 @@ a:hover {
   align-items: center;
   text-decoration: none;
 }
+/* On phones, long filter rows become one swipeable line instead of a tall block */
+@media (max-width: 600px) {
+  .chips--scroll {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 2px var(--gutter) 6px;
+    scrollbar-width: thin;
+  }
+  .chips--scroll .chip {
+    white-space: nowrap;
+  }
+}
 .chip:hover {
   border-color: var(--green);
   color: var(--text);

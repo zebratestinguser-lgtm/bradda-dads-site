@@ -1,5 +1,6 @@
 ---
 title: "10th Anniversary Pensioners Lunch - 8 December 2010"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2010-12-09
 cover: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/001.jpg

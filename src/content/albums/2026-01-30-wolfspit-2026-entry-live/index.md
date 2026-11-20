@@ -1,5 +1,6 @@
 ---
 title: "Wolfspit 2026 Entry LIVE"
+category: "Wolfspit"
 event: wolfspit
 date: 2026-01-30
 cover: /uploads/albums/2026-01-30-wolfspit-2026-entry-live/001.png

@@ -1,5 +1,6 @@
 ---
 title: "The 12th Bradda Dads Bonfire - November 2012"
+category: "Bonfire"
 event: bonfire
 date: 2012-11-08
 cover: /uploads/albums/2012-11-08-the-12th-bradda-dads-bonfire-november-2012/001.jpg

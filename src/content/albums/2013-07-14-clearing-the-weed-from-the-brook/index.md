@@ -1,5 +1,6 @@
 ---
 title: "Clearing the weed from the brook"
+category: "Village"
 date: 2013-07-14
 cover: /uploads/albums/2013-07-14-clearing-the-weed-from-the-brook/001.jpg
 coverAlt: "Photo 1 of 7 from Clearing the weed from the brook (14 July 2013)"

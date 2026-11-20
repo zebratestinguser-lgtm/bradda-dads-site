@@ -1,5 +1,6 @@
 ---
 title: "Carnival Duck Race - 4 August 2008"
+category: "Duck race"
 event: duck-race
 date: 2008-08-05
 cover: /uploads/albums/2008-08-05-carnival-duck-race-4-august-2008/001.jpg

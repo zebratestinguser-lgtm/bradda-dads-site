@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads 4th Pensioners Christmas Lunch.  Wednesday, 8th December 2004"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2004-12-08
 cover: /uploads/albums/2004-12-08-bradda-dads-4th-pensioners-christmas-lunch-wednesday-8th-dec/001.jpg

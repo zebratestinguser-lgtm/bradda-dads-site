@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads Float Victorious in 2009 Carnival"
+category: "Carnival"
 date: 2009-08-01
 cover: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/001.jpg
 coverAlt: "Photo 1 of 16 from Bradda Dads Float Victorious in 2009 Carnival (1 August 2009)"

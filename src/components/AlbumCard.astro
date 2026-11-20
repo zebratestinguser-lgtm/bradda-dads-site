@@ -47,6 +47,7 @@ const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${
   </div>
   <Heading class="album__name">{album.data.title}</Heading>
   <span class="album__meta">
+    {album.data.category && <span class="album__cat">{album.data.category}</span>}
     <time datetime={album.data.dateLabel ? undefined : album.data.date.toISOString().slice(0, 10)}>{photoDate(album)}</time> · {count}
   </span>
 </a>
@@ -110,6 +111,15 @@ const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${
   }
   .album__meta {
     font-size: 14px;
+    color: var(--muted);
+  }
+  .album__cat {
+    font-weight: 600;
+    color: var(--green);
+  }
+  .album__cat::after {
+    content: ' · ';
+    font-weight: 400;
     color: var(--muted);
   }
 </style>

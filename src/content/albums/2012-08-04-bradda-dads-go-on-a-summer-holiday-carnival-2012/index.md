@@ -1,5 +1,6 @@
 ---
 title: "Bradda Dads go on a summer holiday - Carnival 2012"
+category: "Carnival"
 date: 2012-08-04
 cover: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/001.jpg
 coverAlt: "Photo 1 of 13 from Bradda Dads go on a summer holiday - Carnival 2012 (4 August 2012)"

@@ -1,5 +1,6 @@
 ---
 title: "Golf Day at Lafarge Golf Club - 13 June 2009"
+category: "Social"
 date: 2009-06-16
 cover: /uploads/albums/2009-06-16-golf-day-at-lafarge-golf-club-13-june-2009/001.jpg
 coverAlt: "Photo 1 of 7 from Golf Day at Lafarge Golf Club - 13 June 2009 (16 June 2009)"

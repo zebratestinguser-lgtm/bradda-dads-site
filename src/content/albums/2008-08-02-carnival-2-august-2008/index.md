@@ -1,5 +1,6 @@
 ---
 title: "Carnival - 2 August 2008"
+category: "Carnival"
 date: 2008-08-02
 cover: /uploads/albums/2008-08-02-carnival-2-august-2008/001.jpg
 coverAlt: "Photo 1 of 23 from Carnival - 2 August 2008 (2 August 2008)"

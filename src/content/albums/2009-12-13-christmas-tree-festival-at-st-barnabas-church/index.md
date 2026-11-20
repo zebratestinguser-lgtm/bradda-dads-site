@@ -1,5 +1,6 @@
 ---
 title: "Christmas Tree Festival at St Barnabas Church"
+category: "Village"
 date: 2009-12-13
 cover: /uploads/albums/2009-12-13-christmas-tree-festival-at-st-barnabas-church/001.jpg
 coverAlt: "Photo 1 of 3 from Christmas Tree Festival at St Barnabas Church (13 December 2009)"

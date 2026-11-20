@@ -1,5 +1,6 @@
 ---
 title: "Bagshawe Cavern trip"
+category: "Social"
 date: 2019-01-19
 cover: /uploads/albums/2019-01-19-bagshawe-cavern-trip/001.jpg
 coverAlt: "Photo 1 of 6 from Bagshawe Cavern trip (19 January 2019)"

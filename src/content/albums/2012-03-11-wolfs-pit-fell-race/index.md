@@ -1,5 +1,6 @@
 ---
 title: "Wolf's Pit Fell Race"
+category: "Wolfspit"
 event: wolfspit
 date: 2012-03-11
 cover: /uploads/albums/2012-03-11-wolfs-pit-fell-race/001.jpg

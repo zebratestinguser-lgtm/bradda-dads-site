@@ -1,5 +1,6 @@
 ---
 title: "Camping Weekend - 2008"
+category: "Social"
 date: 2008-06-08
 cover: /uploads/albums/2008-06-08-camping-weekend-2008/001.jpg
 coverAlt: "Photo 1 of 25 from Camping Weekend - 2008 (8 June 2008)"

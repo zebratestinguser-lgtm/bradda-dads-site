@@ -1,5 +1,6 @@
 ---
 title: "Retired Bradda Dads meet the current Bradda Dads"
+category: "Social"
 date: 2023-02-04
 cover: /uploads/albums/2023-02-04-retired-bradda-dads-meet-the-current-bradda-dads/001.jpg
 coverAlt: "Photo 1 of 3 from Retired Bradda Dads meet the current Bradda Dads (4 February 2023)"

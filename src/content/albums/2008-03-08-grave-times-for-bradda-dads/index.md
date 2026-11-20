@@ -1,5 +1,6 @@
 ---
 title: "Grave times for Bradda Dads"
+category: "Village"
 date: 2008-03-08
 cover: /uploads/albums/2008-03-08-grave-times-for-bradda-dads/001.jpg
 coverAlt: "Photo 1 of 14 from Grave times for Bradda Dads (8 March 2008)"

@@ -1,5 +1,6 @@
 ---
 title: "2008 Bonfire Building"
+category: "Bonfire"
 event: bonfire
 date: 2008-11-01
 cover: /uploads/albums/2008-11-01-2008-bonfire-building/001.jpg

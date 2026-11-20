@@ -1,5 +1,6 @@
 ---
 title: "HM Queen Elizabeth's Diamond Jubilee Beacon"
+category: "Village"
 date: 2012-06-02
 cover: /uploads/albums/2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon/001.jpg
 coverAlt: "Photo 1 of 24 from HM Queen Elizabeth's Diamond Jubilee Beacon (2 June 2012)"

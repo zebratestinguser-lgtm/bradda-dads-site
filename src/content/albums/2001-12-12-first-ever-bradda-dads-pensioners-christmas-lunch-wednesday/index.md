@@ -1,5 +1,6 @@
 ---
 title: "First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2001-12-12
 cover: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg

@@ -1,5 +1,6 @@
 ---
 title: "Long Tour and Half Tour of Bradwell 2013"
+category: "Tour of Bradwell"
 date: 2013-08-11
 cover: /uploads/albums/2013-08-11-long-tour-and-half-tour-of-bradwell-2013/001.jpg
 coverAlt: "Photo 1 of 105 from Long Tour and Half Tour of Bradwell 2013 (11 August 2013)"

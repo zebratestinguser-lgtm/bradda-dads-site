@@ -1,5 +1,6 @@
 ---
 title: "Bradwell Carnival - 31 July 2010"
+category: "Carnival"
 date: 2010-08-01
 cover: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/001.jpg
 coverAlt: "Photo 1 of 19 from Bradwell Carnival - 31 July 2010 (1 August 2010)"

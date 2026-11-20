@@ -1,5 +1,6 @@
 ---
 title: "*** WIN A UNIQUE NECKLACE AND EARRINGS SET FOR YOUR VALENTINE *** (raffle now finished)"
+category: "Village"
 date: 2012-12-30
 cover: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/001.jpg
 coverAlt: "Photo 1 of 6 from *** WIN A UNIQUE NECKLACE AND EARRINGS SET FOR YOUR VALENTINE *** (raffle now finished) (30 December 2012)"

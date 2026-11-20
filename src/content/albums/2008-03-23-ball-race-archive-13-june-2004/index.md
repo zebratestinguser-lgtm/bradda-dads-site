@@ -1,5 +1,6 @@
 ---
 title: "Ball Race (Archive 13 June 2004)"
+category: "Village"
 # Photo date: Archive post from 2008; title gives the date 13 June 2004.
 date: 2004-06-13
 cover: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/001.jpg

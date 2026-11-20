@@ -1,5 +1,6 @@
 ---
 title: "Christmas Card Competition"
+category: "Christmas card"
 event: christmas-card
 date: 2009-12-10
 cover: /uploads/albums/2009-12-10-christmas-card-competition/001.jpg

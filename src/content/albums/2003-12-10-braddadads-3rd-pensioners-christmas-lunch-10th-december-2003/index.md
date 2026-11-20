@@ -1,5 +1,6 @@
 ---
 title: "BraddaDads 3rd Pensioners Christmas Lunch - 10th December 2003"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2003-12-10
 cover: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/001.jpg

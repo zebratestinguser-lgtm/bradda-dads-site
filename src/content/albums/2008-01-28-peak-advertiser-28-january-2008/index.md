@@ -1,5 +1,6 @@
 ---
 title: "Peak Advertiser 28 January 2008"
+category: "Village"
 date: 2008-01-28
 cover: /uploads/albums/2008-01-28-peak-advertiser-28-january-2008/001.jpg
 coverAlt: "Photo 1 of 1 from Peak Advertiser 28 January 2008 (28 January 2008)"

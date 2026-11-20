@@ -1,5 +1,6 @@
 ---
 title: "Retired Bradda Dads Reunion - The White Hart - 11th November 2022"
+category: "Social"
 date: 2022-11-11
 cover: /uploads/albums/2022-11-11-retired-bradda-dads-reunion-the-white-hart-11th-november-202/001.jpg
 coverAlt: "Photo 1 of 3 from Retired Bradda Dads Reunion - The White Hart - 11th November 2022 (11 November 2022)"

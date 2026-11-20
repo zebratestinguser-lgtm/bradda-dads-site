@@ -1,5 +1,6 @@
 ---
 title: "11th Annual Pensioners Lunch"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2011-12-07
 cover: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/001.jpg

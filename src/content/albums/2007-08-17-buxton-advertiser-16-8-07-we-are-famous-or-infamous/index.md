@@ -1,5 +1,6 @@
 ---
 title: "Buxton Advertiser - 16.8.07 - we are famous (or infamous!)"
+category: "Village"
 date: 2007-08-17
 cover: /uploads/albums/2007-08-17-buxton-advertiser-16-8-07-we-are-famous-or-infamous/001.jpg
 coverAlt: "Photo 1 of 1 from Buxton Advertiser - 16.8.07 - we are famous (or infamous!) (17 August 2007)"

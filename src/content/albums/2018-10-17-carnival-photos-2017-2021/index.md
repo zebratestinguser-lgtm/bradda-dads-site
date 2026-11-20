@@ -1,5 +1,6 @@
 ---
 title: "Carnival photos"
+category: "Carnival"
 # Photo date: Gallery from the old WordPress carnival page, mixing several years.
 date: 2018-10-17
 dateLabel: "2017–2021"

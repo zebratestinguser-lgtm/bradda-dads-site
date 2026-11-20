@@ -1,5 +1,6 @@
 ---
 title: "2005 Boxing Day Krazy Kraft/Duck Race"
+category: "Duck race"
 event: duck-race
 date: 2005-12-26
 cover: /uploads/albums/2005-12-26-2005-boxing-day-krazy-kraft-duck-race/001.jpg

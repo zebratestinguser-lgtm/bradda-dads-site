@@ -1,5 +1,6 @@
 ---
 title: "BraddaDads 6th Pensioners Lunch - Wednesday, 6th December 2006"
+category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2006-12-06
 cover: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/001.jpg

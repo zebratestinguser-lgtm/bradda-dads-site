@@ -1,5 +1,6 @@
 ---
 title: "Bonfire photos"
+category: "Bonfire"
 event: bonfire
 # Photo date: Gallery from the old WordPress bonfire page, mixing several years.
 date: 2018-10-17

@@ -1,5 +1,6 @@
 ---
 title: "Bradwell Carnival 2011"
+category: "Carnival"
 date: 2011-08-21
 cover: /uploads/albums/2011-08-21-bradwell-carnival-2011/001.jpg
 coverAlt: "Photo 1 of 29 from Bradwell Carnival 2011 (21 August 2011)"

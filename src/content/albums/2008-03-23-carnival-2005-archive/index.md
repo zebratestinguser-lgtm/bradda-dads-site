@@ -1,5 +1,6 @@
 ---
 title: "Carnival 2005 (Archive)"
+category: "Carnival"
 # Photo date: Archive post from 2008; Bradwell Carnival 2005 was on 30 July 2005 (see the other 2005 carnival post).
 date: 2005-07-30
 cover: /uploads/albums/2008-03-23-carnival-2005-archive/001.jpg

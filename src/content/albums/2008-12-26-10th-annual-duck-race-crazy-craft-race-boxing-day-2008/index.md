@@ -1,5 +1,6 @@
 ---
 title: "10th Annual Duck Race & Crazy Craft Race - Boxing Day 2008"
+category: "Duck race"
 event: duck-race
 date: 2008-12-26
 cover: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/001.jpg

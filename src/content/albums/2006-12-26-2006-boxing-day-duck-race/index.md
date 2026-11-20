@@ -1,5 +1,6 @@
 ---
 title: "2006 Boxing Day Duck Race"
+category: "Duck race"
 event: duck-race
 date: 2006-12-26
 cover: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/001.jpg

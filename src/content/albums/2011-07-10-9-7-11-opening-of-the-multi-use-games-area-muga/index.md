@@ -1,5 +1,6 @@
 ---
 title: "9.7.11 Opening of the Multi-use Games Area (MUGA)"
+category: "Village"
 date: 2011-07-10
 cover: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/001.jpg
 coverAlt: "Photo 1 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"

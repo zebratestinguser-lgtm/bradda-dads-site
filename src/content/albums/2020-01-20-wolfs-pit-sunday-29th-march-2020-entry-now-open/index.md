@@ -1,5 +1,6 @@
 ---
 title: "Wolf’s Pit Sunday 29th March 2020 – Entry now open"
+category: "Wolfspit"
 event: wolfspit
 date: 2020-01-20
 cover: /uploads/albums/2020-01-20-wolfs-pit-sunday-29th-march-2020-entry-now-open/001.gif

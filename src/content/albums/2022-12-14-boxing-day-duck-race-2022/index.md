@@ -1,5 +1,6 @@
 ---
 title: "Boxing Day Duck Race 2022"
+category: "Duck race"
 event: duck-race
 date: 2022-12-14
 cover: /uploads/albums/2022-12-14-boxing-day-duck-race-2022/001.jpg

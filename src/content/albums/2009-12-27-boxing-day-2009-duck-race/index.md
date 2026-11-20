@@ -1,5 +1,6 @@
 ---
 title: "Boxing Day 2009 Duck Race"
+category: "Duck race"
 event: duck-race
 date: 2009-12-27
 cover: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/001.jpg
