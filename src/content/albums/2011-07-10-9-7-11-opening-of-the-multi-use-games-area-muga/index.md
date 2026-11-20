@@ -3,11 +3,11 @@ title: "9.7.11 Opening of the Multi-use Games Area (MUGA)"
 category: "Village"
 date: 2011-07-10
 cover: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/001.jpg
-coverAlt: "Photo 1 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+coverAlt: "Families on the grass at the opening of the new multi-use games area (10 July 2011)"
 source: https://braddadads.blogspot.com/2011/07/9711-opening-of-multi-use-games-area.html
 photos:
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/001.jpg
-    alt: "Photo 1 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+    alt: "Families on the grass at the opening of the new multi-use games area (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/002.jpg
     alt: "Photo 2 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/003.jpg

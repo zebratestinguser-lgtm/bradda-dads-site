@@ -3,9 +3,9 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
-import { getEvents, pickNextEvent, statusFor } from '../../lib/events';
+import { getEvents, pickNextEvent, statusFor, formatEventDates } from '../../lib/events';
 import { getAlbums, EVENT_TAG } from '../../lib/albums';
-import { formatDate, formatEventDay, formatTime } from '../../lib/format';
+import { formatDate, formatTime } from '../../lib/format';
 import { url } from '../../lib/url';
 
 export async function getStaticPaths() {
@@ -35,7 +35,7 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
     <ul class="facts" role="list">
       <li>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
-        {d.start ? formatEventDay(d.start) + ' ' + d.start.getFullYear() : d.when}
+        {formatEventDates(event, true) ?? d.when}
       </li>
       {d.start && (
         <li>

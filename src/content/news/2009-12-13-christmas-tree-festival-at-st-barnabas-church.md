@@ -4,7 +4,7 @@ date: 2009-12-13
 tag: "Village"
 summary: "Bradda Dads were one of various community organisations that were invited by St Barnabas Church to take part in a Christmas Tree Festival."
 image: /uploads/albums/2009-12-13-christmas-tree-festival-at-st-barnabas-church/001.jpg
-imageAlt: "Photo 1 of 3 from Christmas Tree Festival at St Barnabas Church (13 December 2009)"
+imageAlt: "A Christmas tree decorated with little yellow ducks at the St Barnabas Church tree festival (13 December 2009)"
 album: 2009-12-13-christmas-tree-festival-at-st-barnabas-church
 source: https://braddadads.blogspot.com/2009/12/christmas-tree-festival-at-st-barnabas.html
 ---

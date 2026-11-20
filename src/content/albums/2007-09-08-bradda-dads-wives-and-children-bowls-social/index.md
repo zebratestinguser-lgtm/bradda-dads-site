@@ -3,11 +3,11 @@ title: "Bradda Dads, Wives and Children Bowls Social"
 category: "Social"
 date: 2007-09-08
 cover: /uploads/albums/2007-09-08-bradda-dads-wives-and-children-bowls-social/001.jpg
-coverAlt: "Photo 1 of 16 from Bradda Dads, Wives and Children Bowls Social (8 September 2007)"
+coverAlt: "Wives and children playing bowls on the bowling green (8 September 2007)"
 source: https://braddadads.blogspot.com/2007/09/september-8-bradda-dads-wives-and.html
 photos:
   - src: /uploads/albums/2007-09-08-bradda-dads-wives-and-children-bowls-social/001.jpg
-    alt: "Photo 1 of 16 from Bradda Dads, Wives and Children Bowls Social (8 September 2007)"
+    alt: "Wives and children playing bowls on the bowling green (8 September 2007)"
   - src: /uploads/albums/2007-09-08-bradda-dads-wives-and-children-bowls-social/002.jpg
     alt: "Photo 2 of 16 from Bradda Dads, Wives and Children Bowls Social (8 September 2007)"
   - src: /uploads/albums/2007-09-08-bradda-dads-wives-and-children-bowls-social/003.jpg

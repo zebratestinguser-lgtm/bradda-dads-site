@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import DiaryDates from '../components/DiaryDates.astro';
 import { getEvents } from '../lib/events';
 import { getSite } from '../lib/site';
 import { url } from '../lib/url';
@@ -16,7 +17,7 @@ const hasEmail = !site.contactEmail.startsWith('[');
   <section class="container page-section grid">
     <div class="card card--green">
       <h2 class="subhead">Come to a meeting</h2>
-      <p>We meet {site.meetingInfo}. Just turn up, or message us first if you'd like someone to look out for you.</p>
+      <p>We meet {site.meetingInfo}. Just turn up, or message us first if you'd like someone to look out for you. <a class="on-green" href={url('/members/')}>Meet the dads</a> first if you like.</p>
       <div class="actions">
         <a class="btn btn--yellow btn--md" href={site.facebookUrl} rel="noopener">Message us on Facebook</a>
         {hasEmail && <a class="btn btn--ghost-light btn--md" href={`mailto:${site.contactEmail}`}>Email us</a>}
@@ -41,9 +42,15 @@ const hasEmail = !site.contactEmail.startsWith('[');
       <p>You can still help. Families, partners and friends have always pitched in. You can also support us by <a href={url('/donate/')}>donating</a>, buying a duck, or adding your message to the <a href={url('/christmas-card/')}>village Christmas card</a>.</p>
     </div>
   </section>
+  <section class="container page-section">
+    <div class="diary-wrap"><DiaryDates /></div>
+  </section>
 </BaseLayout>
 
 <style>
+  .diary-wrap {
+    max-width: 760px;
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -70,6 +77,10 @@ const hasEmail = !site.contactEmail.startsWith('[');
   }
   .card--green .subhead {
     color: var(--white);
+  }
+  .on-green {
+    color: var(--yellow);
+    font-weight: 600;
   }
   .actions {
     display: flex;

@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2009-08-04
 cover: /uploads/albums/2009-08-04-carnival-duck-race-pics-and-results-3-august-2009/001.jpg
-coverAlt: "Photo 1 of 14 from Carnival Duck Race pics and results - 3 August 2009 (4 August 2009)"
+coverAlt: "Crowds lining the brook as ducks pour over the yellow barrier at the carnival duck race (4 August 2009)"
 source: https://braddadads.blogspot.com/2009/08/carnival-duck-race-3-august-2009.html
 photos:
   - src: /uploads/albums/2009-08-04-carnival-duck-race-pics-and-results-3-august-2009/001.jpg
-    alt: "Photo 1 of 14 from Carnival Duck Race pics and results - 3 August 2009 (4 August 2009)"
+    alt: "Crowds lining the brook as ducks pour over the yellow barrier at the carnival duck race (4 August 2009)"
   - src: /uploads/albums/2009-08-04-carnival-duck-race-pics-and-results-3-august-2009/002.jpg
     alt: "Photo 2 of 14 from Carnival Duck Race pics and results - 3 August 2009 (4 August 2009)"
   - src: /uploads/albums/2009-08-04-carnival-duck-race-pics-and-results-3-august-2009/003.jpg

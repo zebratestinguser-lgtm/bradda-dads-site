@@ -8,6 +8,7 @@ status: upcoming
 ctaLabel: See results
 ctaUrl: /wolfspit/
 order: 5
+month: 3
 ---
 
 The Wolf's Pit Fell Race climbs from Shatton to the summit of Shatton Moor before descending to the Wolf's Pit above the hamlet of Abney. The first race was on 22 March 2009. It has been cancelled once for snow, and in 2020 and 2021 because of Covid.

@@ -3,11 +3,11 @@ title: "Float Building for 2010 Carnival"
 category: "Carnival"
 date: 2010-08-01
 cover: /uploads/albums/2010-08-01-float-building-for-2010-carnival/001.jpg
-coverAlt: "Photo 1 of 23 from Float Building for 2010 Carnival (1 August 2010)"
+coverAlt: "The frame of a carnival float being built on a trailer in a barn (1 August 2010)"
 source: https://braddadads.blogspot.com/2010/08/float-building-for-2010-carnival.html
 photos:
   - src: /uploads/albums/2010-08-01-float-building-for-2010-carnival/001.jpg
-    alt: "Photo 1 of 23 from Float Building for 2010 Carnival (1 August 2010)"
+    alt: "The frame of a carnival float being built on a trailer in a barn (1 August 2010)"
   - src: /uploads/albums/2010-08-01-float-building-for-2010-carnival/002.jpg
     alt: "Photo 2 of 23 from Float Building for 2010 Carnival (1 August 2010)"
   - src: /uploads/albums/2010-08-01-float-building-for-2010-carnival/003.jpg

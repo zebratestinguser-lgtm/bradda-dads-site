@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2010-12-26
 cover: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/001.jpg
-coverAlt: "Photo 1 of 20 from 12th Boxing Day Duck Race (26 December 2010)"
+coverAlt: "Printed results sheet for the 12th Boxing Day duck race, with duck-shaped winner labels (26 December 2010)"
 source: https://braddadads.blogspot.com/2010/12/boxing-day-duck-race.html
 photos:
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/001.jpg
-    alt: "Photo 1 of 20 from 12th Boxing Day Duck Race (26 December 2010)"
+    alt: "Printed results sheet for the 12th Boxing Day duck race, with duck-shaped winner labels (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/002.jpg
     alt: "Photo 2 of 20 from 12th Boxing Day Duck Race (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/003.jpg

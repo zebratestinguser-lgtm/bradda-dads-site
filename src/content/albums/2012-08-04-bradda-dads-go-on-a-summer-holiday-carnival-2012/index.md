@@ -3,11 +3,11 @@ title: "Bradda Dads go on a summer holiday - Carnival 2012"
 category: "Carnival"
 date: 2012-08-04
 cover: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/001.jpg
-coverAlt: "Photo 1 of 13 from Bradda Dads go on a summer holiday - Carnival 2012 (4 August 2012)"
+coverAlt: "A family in striped seaside costumes walking in the 'summer holiday' carnival procession (4 August 2012)"
 source: https://braddadads.blogspot.com/2012/08/bradda-dads-go-on-summer-holiday.html
 photos:
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/001.jpg
-    alt: "Photo 1 of 13 from Bradda Dads go on a summer holiday - Carnival 2012 (4 August 2012)"
+    alt: "A family in striped seaside costumes walking in the 'summer holiday' carnival procession (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/002.jpg
     alt: "Photo 2 of 13 from Bradda Dads go on a summer holiday - Carnival 2012 (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/003.jpg

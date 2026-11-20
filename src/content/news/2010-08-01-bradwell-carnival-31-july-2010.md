@@ -4,7 +4,7 @@ date: 2010-08-01
 tag: "Carnival"
 summary: "Bradda Dads Circus Float wins First Prize for Best Float (click any image to enlarge, see video at the end) Mike and Chris applying face paint Neal seems to have grown a bit!"
 image: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/001.jpg
-imageAlt: "Photo 1 of 19 from Bradwell Carnival - 31 July 2010 (1 August 2010)"
+imageAlt: "A dad having his face painted at a kitchen table before the carnival (1 August 2010)"
 album: 2010-08-01-bradwell-carnival-31-july-2010
 source: https://braddadads.blogspot.com/2010/08/carnival-31710.html
 ---

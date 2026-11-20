@@ -4,11 +4,11 @@ category: "Bonfire"
 event: bonfire
 date: 2010-11-06
 cover: /uploads/albums/2010-11-06-2010-bonfire-building/001.jpg
-coverAlt: "Photo 1 of 14 from 2010 Bonfire Building (6 November 2010)"
+coverAlt: "A red tractor and trailer bringing wood for the bonfire (6 November 2010)"
 source: https://braddadads.blogspot.com/2010/11/2010-bonfire-building.html
 photos:
   - src: /uploads/albums/2010-11-06-2010-bonfire-building/001.jpg
-    alt: "Photo 1 of 14 from 2010 Bonfire Building (6 November 2010)"
+    alt: "A red tractor and trailer bringing wood for the bonfire (6 November 2010)"
   - src: /uploads/albums/2010-11-06-2010-bonfire-building/002.jpg
     alt: "Photo 2 of 14 from 2010 Bonfire Building (6 November 2010)"
   - src: /uploads/albums/2010-11-06-2010-bonfire-building/003.jpg

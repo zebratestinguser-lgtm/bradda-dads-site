@@ -4,11 +4,11 @@ category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2006-12-06
 cover: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/001.jpg
-coverAlt: "Photo 1 of 11 from BraddaDads 6th Pensioners Lunch - Wednesday, 6th December 2006 (6 December 2006)"
+coverAlt: "Printed invitation to the pensioners' Christmas lunch, with a Father Christmas picture (6 December 2006)"
 source: https://braddadads.blogspot.com/2006/12/braddadads-6th-pensioners-lunch.html
 photos:
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/001.jpg
-    alt: "Photo 1 of 11 from BraddaDads 6th Pensioners Lunch - Wednesday, 6th December 2006 (6 December 2006)"
+    alt: "Printed invitation to the pensioners' Christmas lunch, with a Father Christmas picture (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/002.jpg
     alt: "Photo 2 of 11 from BraddaDads 6th Pensioners Lunch - Wednesday, 6th December 2006 (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/003.jpg

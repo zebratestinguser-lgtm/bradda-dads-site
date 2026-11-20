@@ -64,6 +64,8 @@ const events = defineCollection({
     start: z.coerce.date().optional(),
     /** Set true only once the start time (not just the date) is confirmed. */
     startTimeConfirmed: z.boolean().default(false),
+    /** Last day (or end time) for events that run over several days, e.g. a gala weekend.
+     *  A date on its own (2027-07-11) means the whole of that day. */
     end: z.coerce.date().optional(),
     location: z.string(),
     summary: z.string(),
@@ -72,8 +74,11 @@ const events = defineCollection({
     entriesClose: z.coerce.date().optional(),
     ctaLabel: z.string(),
     ctaUrl: link,
-    /** Position on the homepage "year" strip (1 = first). */
+    /** Tie-breaker when two events fall on the same date (1 = first). */
     order: z.number().int(),
+    /** The month this event usually happens (1–12). Events repeat every year, so this places it in the
+     *  rolling calendar when there's no `start` date for the next one yet. */
+    month: z.number().int().min(1).max(12).optional(),
     /** Price shown on the hero button, e.g. "£2". */
     price: z.string().optional(),
     // Homepage hero (used when this is the next event). All optional.
@@ -181,6 +186,33 @@ const funded = defineCollection({
   }),
 });
 
+/**
+ * Members ("Meet the dads"): src/content/members/<name>.md. Only add someone with their OK
+ * to publishing their name and photo. The longer profile goes below the --- line.
+ */
+const members = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/members' }),
+  schema: z
+    .object({
+      name: z.string(),
+      /** e.g. "Chair", "Treasurer", "Duck race lead". Leave out for members without a role. */
+      role: z.string().optional(),
+      photo: uploadPath.optional(),
+      photoAlt: z.string().optional(),
+      /** Year they joined Bradda Dads, e.g. 2015 ("Member since 2015 · 11 years"). */
+      joined: z.number().int().min(1999).max(2100).optional(),
+      /** One or two sentences for the card. */
+      summary: z.string(),
+      favouriteEvent: z.string().optional(),
+      funFact: z.string().optional(),
+      /** false = past member (hidden from the current list) */
+      current: z.boolean().default(true),
+      /** Position on the page; committee roles usually first. */
+      order: z.number().int().default(100),
+    })
+    .refine((d) => !d.photo || (d.photoAlt && d.photoAlt.length > 0), { message: 'photoAlt is required when a photo is set', path: ['photoAlt'] }),
+});
+
 /** Site-wide settings: src/data/site.yaml (everything sits under a top-level `site:` key). */
 const settings = defineCollection({
   loader: file('src/data/site.yaml'),
@@ -222,4 +254,4 @@ const settings = defineCollection({
   }),
 });
 
-export const collections = { news, events, albums, results, timeline, funded, settings };
+export const collections = { news, events, albums, results, timeline, funded, members, settings };

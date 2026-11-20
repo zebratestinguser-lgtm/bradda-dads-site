@@ -3,11 +3,11 @@ title: "HM Queen Elizabeth's Diamond Jubilee Beacon"
 category: "Village"
 date: 2012-06-02
 cover: /uploads/albums/2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon/001.jpg
-coverAlt: "Photo 1 of 24 from HM Queen Elizabeth's Diamond Jubilee Beacon (2 June 2012)"
+coverAlt: "Dads with a tractor and a trailer of pallets, building the Diamond Jubilee beacon (2 June 2012)"
 source: https://braddadads.blogspot.com/2012/06/hm-queen-elizabeths-jubilee-beacon.html
 photos:
   - src: /uploads/albums/2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon/001.jpg
-    alt: "Photo 1 of 24 from HM Queen Elizabeth's Diamond Jubilee Beacon (2 June 2012)"
+    alt: "Dads with a tractor and a trailer of pallets, building the Diamond Jubilee beacon (2 June 2012)"
   - src: /uploads/albums/2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon/002.jpg
     alt: "Photo 2 of 24 from HM Queen Elizabeth's Diamond Jubilee Beacon (2 June 2012)"
   - src: /uploads/albums/2012-06-02-hm-queen-elizabeths-diamond-jubilee-beacon/003.jpg

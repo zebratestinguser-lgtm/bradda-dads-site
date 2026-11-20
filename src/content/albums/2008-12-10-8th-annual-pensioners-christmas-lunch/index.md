@@ -4,11 +4,11 @@ category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2008-12-10
 cover: /uploads/albums/2008-12-10-8th-annual-pensioners-christmas-lunch/001.jpg
-coverAlt: "Photo 1 of 37 from 8th Annual Pensioners Christmas Lunch (10 December 2008)"
+coverAlt: "Round tables laid with red and green cloths and crackers, ready for the Christmas lunch (10 December 2008)"
 source: https://braddadads.blogspot.com/2008/12/8th-annual-pensioners-christmas-lunch.html
 photos:
   - src: /uploads/albums/2008-12-10-8th-annual-pensioners-christmas-lunch/001.jpg
-    alt: "Photo 1 of 37 from 8th Annual Pensioners Christmas Lunch (10 December 2008)"
+    alt: "Round tables laid with red and green cloths and crackers, ready for the Christmas lunch (10 December 2008)"
   - src: /uploads/albums/2008-12-10-8th-annual-pensioners-christmas-lunch/002.jpg
     alt: "Photo 2 of 37 from 8th Annual Pensioners Christmas Lunch (10 December 2008)"
   - src: /uploads/albums/2008-12-10-8th-annual-pensioners-christmas-lunch/003.jpg

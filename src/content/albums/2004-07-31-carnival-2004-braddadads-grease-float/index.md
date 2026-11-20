@@ -3,11 +3,11 @@ title: "Carnival 2004 BraddaDads : 'Grease' float"
 category: "Carnival"
 date: 2004-07-31
 cover: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/001.jpg
-coverAlt: "Photo 1 of 6 from Carnival 2004 BraddaDads : 'Grease' float (31 July 2004)"
+coverAlt: "Dads in white T-shirts and slicked-back hair, dressed for the 'Grease' carnival float (31 July 2004)"
 source: https://braddadads.blogspot.com/2004/07/carnival-2004-braddadads-grease-float.html
 photos:
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/001.jpg
-    alt: "Photo 1 of 6 from Carnival 2004 BraddaDads : 'Grease' float (31 July 2004)"
+    alt: "Dads in white T-shirts and slicked-back hair, dressed for the 'Grease' carnival float (31 July 2004)"
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/002.jpg
     alt: "Photo 2 of 6 from Carnival 2004 BraddaDads : 'Grease' float (31 July 2004)"
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/003.jpg

@@ -60,7 +60,8 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 124 posts and 1,269 photos were imported from the old sites. Each entry has a `source:` link to the original.
 
 - [ ] **Photo dates.** Every photo shows when it was taken: the album's `date`, or `dateLabel` when there's no single date. For imported albums that's the old post's date, which is usually the event date. Corrected: Ball Race (13 June 2004), Carnival 2005 (30 July 2005), the 'Stig' feature (10 December 2008). Labelled: Carnival photos "2017–2021", Bonfire photos "2017–2019", Wolf's Pit photos "Various years", Summer Duck Race "Summer 2016". That last one starts with the same poster as the 2022 Boxing Day post, so check whether it really is 2016. If you spot a wrong date, change `date:` (or add `dateLabel:`) in the album's `index.md`.
-- [ ] **Alt text.** Imported photos have generic descriptions ("Photo 3 of 12 from …"). Write real ones, at least for album covers and homepage photos.
+- [x] **Album covers described.** The first photo of all 94 albums (cover, news image and first photo in the viewer) has a real description plus its date. The other ~1,170 photos still have generic descriptions.
+- [ ] **Alt text (rest).** The remaining imported photos have generic descriptions ("Photo 3 of 12 from …"). Write real ones, at least for album covers and homepage photos.
 - [ ] Captions. Some old posts had a caption above each photo; these are kept as text in the news story, not attached to the photos.
 - [ ] Old posts mention videos that were embedded on the old blog (marked "A video was embedded here on the old site"). Find them on YouTube/Facebook if they still exist.
 - [ ] Facebook photo albums since 2014 have not been imported (Facebook isn't covered by the migration).
@@ -79,6 +80,8 @@ Phone numbers and email addresses copied from the old sites.
 - [ ] [2011 Boxing Day Duck Race](src/content/news/2011-12-27-2011-boxing-day-duck-race.md): braddadads@btinternet.com
 - [ ] [Wolf's Pit photos](src/content/albums/2018-10-17-wolfs-pit-photos/index.md) (album text from the old WordPress page): 07590 047104, wolfspitfellrace@gmail.com
 - [ ] [Wolf's Pit 2020: further info on cancellation](src/content/news/2020-03-26-wolfs-pit-2020-further-info-on-cancellation.md): wolfspitfellrace@gmail.com
+
+- [ ] **Scanned lunch invitations** (photo 1 in the albums [3rd Pensioners Christmas Lunch, 2003](src/content/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/index.md) and [6th Pensioners Lunch, 2006](src/content/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/index.md)) show a member's home address and phone number. Consider removing or cropping them.
 
 ### Posts about named individuals (7)
 

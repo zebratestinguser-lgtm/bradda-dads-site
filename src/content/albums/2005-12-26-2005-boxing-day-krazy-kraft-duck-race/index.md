@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2005-12-26
 cover: /uploads/albums/2005-12-26-2005-boxing-day-krazy-kraft-duck-race/001.jpg
-coverAlt: "Photo 1 of 8 from 2005 Boxing Day Krazy Kraft/Duck Race (26 December 2005)"
+coverAlt: "Crowds lining the brook in the rain to watch the Boxing Day duck race (26 December 2005)"
 source: https://braddadads.blogspot.com/2005/12/2005-boxing-day-duck-race.html
 photos:
   - src: /uploads/albums/2005-12-26-2005-boxing-day-krazy-kraft-duck-race/001.jpg
-    alt: "Photo 1 of 8 from 2005 Boxing Day Krazy Kraft/Duck Race (26 December 2005)"
+    alt: "Crowds lining the brook in the rain to watch the Boxing Day duck race (26 December 2005)"
   - src: /uploads/albums/2005-12-26-2005-boxing-day-krazy-kraft-duck-race/002.jpg
     alt: "Photo 2 of 8 from 2005 Boxing Day Krazy Kraft/Duck Race (26 December 2005)"
   - src: /uploads/albums/2005-12-26-2005-boxing-day-krazy-kraft-duck-race/003.jpg

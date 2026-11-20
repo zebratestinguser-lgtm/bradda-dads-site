@@ -4,11 +4,11 @@ category: "Bonfire"
 event: bonfire
 date: 2012-11-08
 cover: /uploads/albums/2012-11-08-the-12th-bradda-dads-bonfire-november-2012/001.jpg
-coverAlt: "Photo 1 of 14 from The 12th Bradda Dads Bonfire - November 2012 (8 November 2012)"
+coverAlt: "The High Peak Radio logo (8 November 2012)"
 source: https://braddadads.blogspot.com/2012/11/bonfire-2012.html
 photos:
   - src: /uploads/albums/2012-11-08-the-12th-bradda-dads-bonfire-november-2012/001.jpg
-    alt: "Photo 1 of 14 from The 12th Bradda Dads Bonfire - November 2012 (8 November 2012)"
+    alt: "The High Peak Radio logo (8 November 2012)"
   - src: /uploads/albums/2012-11-08-the-12th-bradda-dads-bonfire-november-2012/002.jpg
     alt: "Photo 2 of 14 from The 12th Bradda Dads Bonfire - November 2012 (8 November 2012)"
   - src: /uploads/albums/2012-11-08-the-12th-bradda-dads-bonfire-november-2012/003.jpg

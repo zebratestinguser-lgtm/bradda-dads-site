@@ -3,11 +3,11 @@ title: "Excellence in the Community Awards 2011"
 category: "Village"
 date: 2011-10-20
 cover: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/001.jpg
-coverAlt: "Photo 1 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
+coverAlt: "Programme cover for the Derbyshire Excellence in the Community Awards 2011 (20 October 2011)"
 source: https://braddadads.blogspot.com/2011/10/excellence-in-community-award.html
 photos:
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/001.jpg
-    alt: "Photo 1 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
+    alt: "Programme cover for the Derbyshire Excellence in the Community Awards 2011 (20 October 2011)"
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/002.jpg
     alt: "Photo 2 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/003.jpg

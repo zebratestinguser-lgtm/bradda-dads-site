@@ -4,11 +4,11 @@ category: "Bonfire"
 event: bonfire
 date: 2010-11-07
 cover: /uploads/albums/2010-11-07-2010-bonfire/001.jpg
-coverAlt: "Photo 1 of 19 from 2010 Bonfire (7 November 2010)"
+coverAlt: "Crowds watching the blazing bonfire at night (7 November 2010)"
 source: https://braddadads.blogspot.com/2010/11/2010-bonfire.html
 photos:
   - src: /uploads/albums/2010-11-07-2010-bonfire/001.jpg
-    alt: "Photo 1 of 19 from 2010 Bonfire (7 November 2010)"
+    alt: "Crowds watching the blazing bonfire at night (7 November 2010)"
   - src: /uploads/albums/2010-11-07-2010-bonfire/002.jpg
     alt: "Photo 2 of 19 from 2010 Bonfire (7 November 2010)"
   - src: /uploads/albums/2010-11-07-2010-bonfire/003.jpg

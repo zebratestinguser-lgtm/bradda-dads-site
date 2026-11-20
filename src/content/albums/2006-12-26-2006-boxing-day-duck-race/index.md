@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2006-12-26
 cover: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/001.jpg
-coverAlt: "Photo 1 of 9 from 2006 Boxing Day Duck Race (26 December 2006)"
+coverAlt: "Two children sitting in a giant wooden duck with a sign selling duck race tickets (26 December 2006)"
 source: https://braddadads.blogspot.com/2006/12/2006-boxing-day-duck-race.html
 photos:
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/001.jpg
-    alt: "Photo 1 of 9 from 2006 Boxing Day Duck Race (26 December 2006)"
+    alt: "Two children sitting in a giant wooden duck with a sign selling duck race tickets (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/002.jpg
     alt: "Photo 2 of 9 from 2006 Boxing Day Duck Race (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/003.jpg

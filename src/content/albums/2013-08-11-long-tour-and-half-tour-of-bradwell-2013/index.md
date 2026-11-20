@@ -3,11 +3,11 @@ title: "Long Tour and Half Tour of Bradwell 2013"
 category: "Tour of Bradwell"
 date: 2013-08-11
 cover: /uploads/albums/2013-08-11-long-tour-and-half-tour-of-bradwell-2013/001.jpg
-coverAlt: "Photo 1 of 105 from Long Tour and Half Tour of Bradwell 2013 (11 August 2013)"
+coverAlt: "A marshal in hi-vis at a drinks table on the Long Tour of Bradwell (11 August 2013)"
 source: https://braddadads.blogspot.com/2013/08/long-tour-and-half-tour-of-bradwell-2013.html
 photos:
   - src: /uploads/albums/2013-08-11-long-tour-and-half-tour-of-bradwell-2013/001.jpg
-    alt: "Photo 1 of 105 from Long Tour and Half Tour of Bradwell 2013 (11 August 2013)"
+    alt: "A marshal in hi-vis at a drinks table on the Long Tour of Bradwell (11 August 2013)"
   - src: /uploads/albums/2013-08-11-long-tour-and-half-tour-of-bradwell-2013/002.jpg
     alt: "Photo 2 of 105 from Long Tour and Half Tour of Bradwell 2013 (11 August 2013)"
   - src: /uploads/albums/2013-08-11-long-tour-and-half-tour-of-bradwell-2013/003.jpg

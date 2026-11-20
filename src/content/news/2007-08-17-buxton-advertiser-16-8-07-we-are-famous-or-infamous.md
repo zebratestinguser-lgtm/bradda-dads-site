@@ -4,7 +4,7 @@ date: 2007-08-17
 tag: "Village"
 summary: "Photos from the old Bradda Dads website: Buxton Advertiser - 16.8.07 - we are famous (or infamous!)."
 image: /uploads/albums/2007-08-17-buxton-advertiser-16-8-07-we-are-famous-or-infamous/001.jpg
-imageAlt: "Photo 1 of 1 from Buxton Advertiser - 16.8.07 - we are famous (or infamous!) (17 August 2007)"
+imageAlt: "Buxton Advertiser cutting, 'Fun for all at Bradwell Carnival', with photos of the dads in costume (17 August 2007)"
 album: 2007-08-17-buxton-advertiser-16-8-07-we-are-famous-or-infamous
 source: https://braddadads.blogspot.com/2007/08/buxton-advertiser-16807-we-are-famous.html
 ---

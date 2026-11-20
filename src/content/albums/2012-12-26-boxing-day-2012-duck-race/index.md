@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2012-12-26
 cover: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/001.jpg
-coverAlt: "Photo 1 of 11 from Boxing Day 2012 Duck Race (26 December 2012)"
+coverAlt: "Printed results sheet for the Boxing Day duck race (26 December 2012)"
 source: https://braddadads.blogspot.com/2012/12/boxing-day-2012-duck-race.html
 photos:
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/001.jpg
-    alt: "Photo 1 of 11 from Boxing Day 2012 Duck Race (26 December 2012)"
+    alt: "Printed results sheet for the Boxing Day duck race (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/002.jpg
     alt: "Photo 2 of 11 from Boxing Day 2012 Duck Race (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/003.jpg

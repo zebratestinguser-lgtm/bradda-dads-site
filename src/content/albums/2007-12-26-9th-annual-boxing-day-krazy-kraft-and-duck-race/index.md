@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2007-12-26
 cover: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/001.jpg
-coverAlt: "Photo 1 of 15 from 9th Annual Boxing Day Krazy Kraft and Duck Race (26 December 2007)"
+coverAlt: "Dads in yellow T-shirts by the red phone box and the brook, setting up for the duck race (26 December 2007)"
 source: https://braddadads.blogspot.com/2007/12/boxing-day-duck-race.html
 photos:
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/001.jpg
-    alt: "Photo 1 of 15 from 9th Annual Boxing Day Krazy Kraft and Duck Race (26 December 2007)"
+    alt: "Dads in yellow T-shirts by the red phone box and the brook, setting up for the duck race (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/002.jpg
     alt: "Photo 2 of 15 from 9th Annual Boxing Day Krazy Kraft and Duck Race (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/003.jpg

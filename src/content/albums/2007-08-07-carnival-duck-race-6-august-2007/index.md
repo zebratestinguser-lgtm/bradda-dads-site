@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2007-08-07
 cover: /uploads/albums/2007-08-07-carnival-duck-race-6-august-2007/001.jpg
-coverAlt: "Photo 1 of 15 from Carnival Duck Race - 6 August 2007 (7 August 2007)"
+coverAlt: "Dads in yellow T-shirts with the giant wooden duck, getting ready for the carnival duck race (7 August 2007)"
 source: https://braddadads.blogspot.com/2007/08/carnival-duck-race-6-august-2007.html
 photos:
   - src: /uploads/albums/2007-08-07-carnival-duck-race-6-august-2007/001.jpg
-    alt: "Photo 1 of 15 from Carnival Duck Race - 6 August 2007 (7 August 2007)"
+    alt: "Dads in yellow T-shirts with the giant wooden duck, getting ready for the carnival duck race (7 August 2007)"
   - src: /uploads/albums/2007-08-07-carnival-duck-race-6-august-2007/002.jpg
     alt: "Photo 2 of 15 from Carnival Duck Race - 6 August 2007 (7 August 2007)"
   - src: /uploads/albums/2007-08-07-carnival-duck-race-6-august-2007/003.jpg

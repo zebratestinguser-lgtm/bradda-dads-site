@@ -4,7 +4,7 @@ date: 2022-11-11
 tag: "Social"
 summary: "For a bit of fun I've added the photos from last night's reunion. I know people still look at this blog."
 image: /uploads/albums/2022-11-11-retired-bradda-dads-reunion-the-white-hart-11th-november-202/001.jpg
-imageAlt: "Photo 1 of 3 from Retired Bradda Dads Reunion - The White Hart - 11th November 2022 (11 November 2022)"
+imageAlt: "Retired and current Bradda Dads together in a pub (11 November 2022)"
 album: 2022-11-11-retired-bradda-dads-reunion-the-white-hart-11th-november-202
 source: https://braddadads.blogspot.com/2022/11/retired-braddadads-reunion-whitehart.html
 ---

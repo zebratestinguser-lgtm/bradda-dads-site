@@ -4,11 +4,11 @@ category: "Christmas card"
 event: christmas-card
 date: 2008-12-09
 cover: /uploads/albums/2008-12-09-christmas-card-competition-2008/001.jpg
-coverAlt: "Photo 1 of 2 from Christmas Card Competition 2008 (9 December 2008)"
+coverAlt: "A child's drawing of Father Christmas saying 'Ho ho ho! Happy Christmas!', entered in the card competition (9 December 2008)"
 source: https://braddadads.blogspot.com/2008/12/christmas-card-competition-2008.html
 photos:
   - src: /uploads/albums/2008-12-09-christmas-card-competition-2008/001.jpg
-    alt: "Photo 1 of 2 from Christmas Card Competition 2008 (9 December 2008)"
+    alt: "A child's drawing of Father Christmas saying 'Ho ho ho! Happy Christmas!', entered in the card competition (9 December 2008)"
   - src: /uploads/albums/2008-12-09-christmas-card-competition-2008/002.jpg
     alt: "Photo 2 of 2 from Christmas Card Competition 2008 (9 December 2008)"
 ---

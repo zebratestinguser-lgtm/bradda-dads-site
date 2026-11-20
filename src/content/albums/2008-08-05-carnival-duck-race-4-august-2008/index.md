@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2008-08-05
 cover: /uploads/albums/2008-08-05-carnival-duck-race-4-august-2008/001.jpg
-coverAlt: "Photo 1 of 8 from Carnival Duck Race - 4 August 2008 (5 August 2008)"
+coverAlt: "Dads in yellow T-shirts fixing the yellow duck-shaped finish boards across the brook (5 August 2008)"
 source: https://braddadads.blogspot.com/2008/08/carnival-duck-race-4-august-2008.html
 photos:
   - src: /uploads/albums/2008-08-05-carnival-duck-race-4-august-2008/001.jpg
-    alt: "Photo 1 of 8 from Carnival Duck Race - 4 August 2008 (5 August 2008)"
+    alt: "Dads in yellow T-shirts fixing the yellow duck-shaped finish boards across the brook (5 August 2008)"
   - src: /uploads/albums/2008-08-05-carnival-duck-race-4-august-2008/002.jpg
     alt: "Photo 2 of 8 from Carnival Duck Race - 4 August 2008 (5 August 2008)"
   - src: /uploads/albums/2008-08-05-carnival-duck-race-4-august-2008/003.jpg

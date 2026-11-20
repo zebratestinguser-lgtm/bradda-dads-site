@@ -3,11 +3,11 @@ title: "Bagshawe Cavern trip"
 category: "Social"
 date: 2019-01-19
 cover: /uploads/albums/2019-01-19-bagshawe-cavern-trip/001.jpg
-coverAlt: "Photo 1 of 6 from Bagshawe Cavern trip (19 January 2019)"
+coverAlt: "Dads in helmets and head torches deep inside Bagshawe Cavern (19 January 2019)"
 source: https://braddadads.wordpress.com/2019/01/19/bagshawe-cavern-trip/
 photos:
   - src: /uploads/albums/2019-01-19-bagshawe-cavern-trip/001.jpg
-    alt: "Photo 1 of 6 from Bagshawe Cavern trip (19 January 2019)"
+    alt: "Dads in helmets and head torches deep inside Bagshawe Cavern (19 January 2019)"
   - src: /uploads/albums/2019-01-19-bagshawe-cavern-trip/002.jpg
     alt: "Photo 2 of 6 from Bagshawe Cavern trip (19 January 2019)"
   - src: /uploads/albums/2019-01-19-bagshawe-cavern-trip/003.jpg

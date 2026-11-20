@@ -3,11 +3,11 @@ title: "Float Building - Carnival 2007"
 category: "Carnival"
 date: 2007-08-05
 cover: /uploads/albums/2007-08-05-float-building-carnival-2007/001.jpg
-coverAlt: "Photo 1 of 9 from Float Building - Carnival 2007 (5 August 2007)"
+coverAlt: "Dads building a plywood vehicle for the carnival float (5 August 2007)"
 source: https://braddadads.blogspot.com/2007/08/carnival-2007.html
 photos:
   - src: /uploads/albums/2007-08-05-float-building-carnival-2007/001.jpg
-    alt: "Photo 1 of 9 from Float Building - Carnival 2007 (5 August 2007)"
+    alt: "Dads building a plywood vehicle for the carnival float (5 August 2007)"
   - src: /uploads/albums/2007-08-05-float-building-carnival-2007/002.jpg
     alt: "Photo 2 of 9 from Float Building - Carnival 2007 (5 August 2007)"
   - src: /uploads/albums/2007-08-05-float-building-carnival-2007/003.jpg

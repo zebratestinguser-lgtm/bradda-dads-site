@@ -6,11 +6,11 @@ event: bonfire
 date: 2018-10-17
 dateLabel: "2017–2019"
 cover: /uploads/albums/2018-10-17-bonfire-photos-2017-2019/001.jpg
-coverAlt: "Photo 1 of 10 from Bonfire photos (2017–2019)"
+coverAlt: "A firework bursting over the bonfire at night (2017–2019)"
 source: https://braddadads.wordpress.com/other-events/bonfire-and-fireworks/
 photos:
   - src: /uploads/albums/2018-10-17-bonfire-photos-2017-2019/001.jpg
-    alt: "Photo 1 of 10 from Bonfire photos (2017–2019)"
+    alt: "A firework bursting over the bonfire at night (2017–2019)"
   - src: /uploads/albums/2018-10-17-bonfire-photos-2017-2019/002.jpg
     alt: "Photo 2 of 10 from Bonfire photos (2017–2019)"
   - src: /uploads/albums/2018-10-17-bonfire-photos-2017-2019/003.jpg

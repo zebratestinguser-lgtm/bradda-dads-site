@@ -4,11 +4,11 @@ category: "Wolfspit"
 event: wolfspit
 date: 2009-02-07
 cover: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/001.jpg
-coverAlt: "Photo 1 of 15 from Wolf's Pit Fell Race Walk Around (7 February 2009)"
+coverAlt: "Walkers in hats and coats on a snowy hillside, walking the Wolf's Pit race route (7 February 2009)"
 source: https://braddadads.blogspot.com/2009/02/wolfs-pit-fell-race-walk-around.html
 photos:
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/001.jpg
-    alt: "Photo 1 of 15 from Wolf's Pit Fell Race Walk Around (7 February 2009)"
+    alt: "Walkers in hats and coats on a snowy hillside, walking the Wolf's Pit race route (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/002.jpg
     alt: "Photo 2 of 15 from Wolf's Pit Fell Race Walk Around (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/003.jpg

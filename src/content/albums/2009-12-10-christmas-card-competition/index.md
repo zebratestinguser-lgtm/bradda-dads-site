@@ -4,11 +4,11 @@ category: "Christmas card"
 event: christmas-card
 date: 2009-12-10
 cover: /uploads/albums/2009-12-10-christmas-card-competition/001.jpg
-coverAlt: "Photo 1 of 4 from Christmas Card Competition (10 December 2009)"
+coverAlt: "A child's drawing of Father Christmas's sleigh flying over Bradwell's shops, for the card competition (10 December 2009)"
 source: https://braddadads.blogspot.com/2009/12/christmas-card-competition.html
 photos:
   - src: /uploads/albums/2009-12-10-christmas-card-competition/001.jpg
-    alt: "Photo 1 of 4 from Christmas Card Competition (10 December 2009)"
+    alt: "A child's drawing of Father Christmas's sleigh flying over Bradwell's shops, for the card competition (10 December 2009)"
   - src: /uploads/albums/2009-12-10-christmas-card-competition/002.jpg
     alt: "Photo 2 of 4 from Christmas Card Competition (10 December 2009)"
   - src: /uploads/albums/2009-12-10-christmas-card-competition/003.jpg

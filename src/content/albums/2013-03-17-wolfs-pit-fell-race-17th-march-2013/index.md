@@ -4,11 +4,11 @@ category: "Wolfspit"
 event: wolfspit
 date: 2013-03-17
 cover: /uploads/albums/2013-03-17-wolfs-pit-fell-race-17th-march-2013/001.jpg
-coverAlt: "Photo 1 of 20 from Wolf's Pit Fell Race - 17th March 2013 (17 March 2013)"
+coverAlt: "A muddy farm track and field gate on the Wolf's Pit race course (17 March 2013)"
 source: https://braddadads.blogspot.com/2013/03/wolfs-pit-fell-race-17th-march-2013.html
 photos:
   - src: /uploads/albums/2013-03-17-wolfs-pit-fell-race-17th-march-2013/001.jpg
-    alt: "Photo 1 of 20 from Wolf's Pit Fell Race - 17th March 2013 (17 March 2013)"
+    alt: "A muddy farm track and field gate on the Wolf's Pit race course (17 March 2013)"
   - src: /uploads/albums/2013-03-17-wolfs-pit-fell-race-17th-march-2013/002.jpg
     alt: "Photo 2 of 20 from Wolf's Pit Fell Race - 17th March 2013 (17 March 2013)"
   - src: /uploads/albums/2013-03-17-wolfs-pit-fell-race-17th-march-2013/003.jpg

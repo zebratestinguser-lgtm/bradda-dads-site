@@ -3,11 +3,11 @@ title: "Carnival 30th July 2005"
 category: "Carnival"
 date: 2005-07-30
 cover: /uploads/albums/2005-07-30-carnival-30th-july-2005/001.jpg
-coverAlt: "Photo 1 of 34 from Carnival 30th July 2005 (30 July 2005)"
+coverAlt: "A child in a white boiler suit and grey face paint, dressed up for the carnival (30 July 2005)"
 source: https://braddadads.blogspot.com/2005/08/carnival-august-2005.html
 photos:
   - src: /uploads/albums/2005-07-30-carnival-30th-july-2005/001.jpg
-    alt: "Photo 1 of 34 from Carnival 30th July 2005 (30 July 2005)"
+    alt: "A child in a white boiler suit and grey face paint, dressed up for the carnival (30 July 2005)"
   - src: /uploads/albums/2005-07-30-carnival-30th-july-2005/002.jpg
     alt: "Photo 2 of 34 from Carnival 30th July 2005 (30 July 2005)"
   - src: /uploads/albums/2005-07-30-carnival-30th-july-2005/003.jpg

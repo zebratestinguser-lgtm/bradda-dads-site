@@ -2,8 +2,7 @@
 import { getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import ResultsYear from '../../components/results/ResultsYear.astro';
-import YearNav from '../../components/results/YearNav.astro';
+import WolfspitBand from '../../components/home/WolfspitBand.astro';
 import { getWolfspitYears } from '../../lib/results';
 import { getSite } from '../../lib/site';
 import { url } from '../../lib/url';
@@ -21,9 +20,17 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
   <PageHeader eyebrow="Fell race" title="Wolf's Pit Fell Race" intro={site.wolfspitIntro}>
     <div class="actions">
       {site.wolfspitEntryUrl !== '#' && <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>Enter {latest ? latest.year + 1 : ''}</a>}
-      <a class="btn btn--ghost-light btn--md" href="#results">Latest results</a>
+      <a class="btn btn--ghost-light btn--md" href="#wolfspit">Results</a>
     </div>
   </PageHeader>
+
+  <!-- Results by year: tabs, podium and search (the band that used to be on the homepage) -->
+  <WolfspitBand title="Results by year" intro="" maxYears={years.length} />
+  <div class="container">
+    <p class="note older">
+      Results for 2009–2019 aren't on the site yet. They were published on the old race website and on RaceTek, and we're working on bringing them across.
+    </p>
+  </div>
 
   <section class="container page-section about">
     <div class="prose">{Content && <Content />}</div>
@@ -39,18 +46,6 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
     <ul class="any-results" role="list" data-any-results></ul>
   </section>
 
-  {
-    latest && (
-      <section class="container page-section stack" id="results" aria-labelledby="latest-title">
-        <h2 class="subhead" id="latest-title">{latest.year} results</h2>
-        <YearNav label="Results year" items={years.map((y) => ({ label: String(y.year), href: url(`/wolfspit/${y.year}/`), current: y.year === latest.year }))} />
-        <ResultsYear year={latest} raceName="Wolf's Pit" csvHref={url(`/wolfspit/${latest.year}.csv`)} />
-        <p class="note">
-          Results for 2009–2019 aren't on the site yet. They were published on the old race website and on RaceTek, and we're working on bringing them across.
-        </p>
-      </section>
-    )
-  }
 </BaseLayout>
 
 <script>
@@ -94,6 +89,9 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
     min-height: 48px;
     padding: 0 22px;
     font-size: 16px;
+  }
+  .older {
+    margin-top: 24px;
   }
   .stack {
     display: flex;

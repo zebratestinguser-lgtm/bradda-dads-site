@@ -3,11 +3,11 @@ title: "Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 20
 category: "Carnival"
 date: 2008-08-08
 cover: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/001.jpg
-coverAlt: "Photo 1 of 19 from Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 2008 (8 August 2008)"
+coverAlt: "An empty flatbed trailer in a barn, ready to be built into the 'Oliver' workhouse float (8 August 2008)"
 source: https://braddadads.blogspot.com/2008/08/bradda-dads-oliver-workhouse-float.html
 photos:
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/001.jpg
-    alt: "Photo 1 of 19 from Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 2008 (8 August 2008)"
+    alt: "An empty flatbed trailer in a barn, ready to be built into the 'Oliver' workhouse float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/002.jpg
     alt: "Photo 2 of 19 from Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 2008 (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/003.jpg

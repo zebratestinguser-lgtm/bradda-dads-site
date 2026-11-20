@@ -4,11 +4,11 @@ category: "Wolfspit"
 event: wolfspit
 date: 2010-03-14
 cover: /uploads/albums/2010-03-14-wolfs-pit-fell-race-14-march-2010/001.jpg
-coverAlt: "Photo 1 of 29 from Wolf's Pit Fell Race - 14 March 2010 (14 March 2010)"
+coverAlt: "Marshals in hi-vis jackets by a gazebo, holding a 'Fell race' direction sign (14 March 2010)"
 source: https://braddadads.blogspot.com/2010/03/wolfs-pit-fell-race.html
 photos:
   - src: /uploads/albums/2010-03-14-wolfs-pit-fell-race-14-march-2010/001.jpg
-    alt: "Photo 1 of 29 from Wolf's Pit Fell Race - 14 March 2010 (14 March 2010)"
+    alt: "Marshals in hi-vis jackets by a gazebo, holding a 'Fell race' direction sign (14 March 2010)"
   - src: /uploads/albums/2010-03-14-wolfs-pit-fell-race-14-march-2010/002.jpg
     alt: "Photo 2 of 29 from Wolf's Pit Fell Race - 14 March 2010 (14 March 2010)"
   - src: /uploads/albums/2010-03-14-wolfs-pit-fell-race-14-march-2010/003.jpg

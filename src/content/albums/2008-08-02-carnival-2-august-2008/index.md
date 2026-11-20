@@ -3,11 +3,11 @@ title: "Carnival - 2 August 2008"
 category: "Carnival"
 date: 2008-08-02
 cover: /uploads/albums/2008-08-02-carnival-2-august-2008/001.jpg
-coverAlt: "Photo 1 of 23 from Carnival - 2 August 2008 (2 August 2008)"
+coverAlt: "A big group in Victorian costume outside the 'Bradda Dads Workhouse' carnival float (2 August 2008)"
 source: https://braddadads.blogspot.com/2008/08/carnival-2-august-2008.html
 photos:
   - src: /uploads/albums/2008-08-02-carnival-2-august-2008/001.jpg
-    alt: "Photo 1 of 23 from Carnival - 2 August 2008 (2 August 2008)"
+    alt: "A big group in Victorian costume outside the 'Bradda Dads Workhouse' carnival float (2 August 2008)"
   - src: /uploads/albums/2008-08-02-carnival-2-august-2008/002.jpg
     alt: "Photo 2 of 23 from Carnival - 2 August 2008 (2 August 2008)"
   - src: /uploads/albums/2008-08-02-carnival-2-august-2008/003.jpg

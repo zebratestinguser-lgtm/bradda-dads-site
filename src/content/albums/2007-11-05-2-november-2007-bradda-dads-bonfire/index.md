@@ -4,11 +4,11 @@ category: "Bonfire"
 event: bonfire
 date: 2007-11-05
 cover: /uploads/albums/2007-11-05-2-november-2007-bradda-dads-bonfire/001.jpg
-coverAlt: "Photo 1 of 12 from 2 November 2007 - Bradda Dads Bonfire (5 November 2007)"
+coverAlt: "A firework shooting up above the blazing bonfire at night (5 November 2007)"
 source: https://braddadads.blogspot.com/2007/11/2-november-2007-bradda-dads-bonfire.html
 photos:
   - src: /uploads/albums/2007-11-05-2-november-2007-bradda-dads-bonfire/001.jpg
-    alt: "Photo 1 of 12 from 2 November 2007 - Bradda Dads Bonfire (5 November 2007)"
+    alt: "A firework shooting up above the blazing bonfire at night (5 November 2007)"
   - src: /uploads/albums/2007-11-05-2-november-2007-bradda-dads-bonfire/002.jpg
     alt: "Photo 2 of 12 from 2 November 2007 - Bradda Dads Bonfire (5 November 2007)"
   - src: /uploads/albums/2007-11-05-2-november-2007-bradda-dads-bonfire/003.jpg

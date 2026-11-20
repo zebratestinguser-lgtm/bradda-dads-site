@@ -4,11 +4,11 @@ category: "Wolfspit"
 event: wolfspit
 date: 2014-03-16
 cover: /uploads/albums/2014-03-16-2014-wolfs-pit-fell-race/001.jpg
-coverAlt: "Photo 1 of 12 from 2014 Wolf's Pit Fell Race (16 March 2014)"
+coverAlt: "A runner crossing the finish line at the Wolf's Pit race, watched by a marshal (16 March 2014)"
 source: https://braddadads.blogspot.com/2014/03/2014-wolfs-pit-fell-race-latest.html
 photos:
   - src: /uploads/albums/2014-03-16-2014-wolfs-pit-fell-race/001.jpg
-    alt: "Photo 1 of 12 from 2014 Wolf's Pit Fell Race (16 March 2014)"
+    alt: "A runner crossing the finish line at the Wolf's Pit race, watched by a marshal (16 March 2014)"
   - src: /uploads/albums/2014-03-16-2014-wolfs-pit-fell-race/002.jpg
     alt: "Photo 2 of 12 from 2014 Wolf's Pit Fell Race (16 March 2014)"
   - src: /uploads/albums/2014-03-16-2014-wolfs-pit-fell-race/003.jpg

@@ -4,7 +4,7 @@ date: 2007-08-08
 tag: "Carnival"
 summary: "The 'Dads acquitted themselves well against some younger, fitter and better players."
 image: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/001.jpg
-imageAlt: "Photo 1 of 12 from 6-a-side Carnival football - 2007 (8 August 2007)"
+imageAlt: "Six-a-side football on the village field at the carnival (8 August 2007)"
 album: 2007-08-08-6-a-side-carnival-football-2007
 source: https://braddadads.blogspot.com/2007/08/6-side-carnival-football-2007.html
 ---

@@ -1,6 +1,6 @@
 // Calendar feed of every event that has a start date: /events.ics
 import type { APIRoute } from 'astro';
-import { getEvents } from '../lib/events';
+import { getEvents, endsAt } from '../lib/events';
 
 const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 const dateOnly = (d: Date) =>
@@ -19,9 +19,10 @@ export const GET: APIRoute = async ({ site }) => {
       lines.push(`DTSTART:${stamp(start)}`);
       lines.push(`DTEND:${stamp(d.end ?? new Date(start.getTime() + 2 * 3600e3))}`);
     } else {
-      // Time not confirmed yet: add as an all-day event
-      const next = new Date(start.getTime() + 24 * 3600e3);
-      lines.push(`DTSTART;VALUE=DATE:${dateOnly(start)}`, `DTEND;VALUE=DATE:${dateOnly(next)}`);
+      // Time not confirmed yet: add as all-day, spanning every day for multi-day events (DTEND is the day after)
+      const last = endsAt(e) ?? start;
+      const dayAfter = new Date(last.getTime() + 12 * 3600e3);
+      lines.push(`DTSTART;VALUE=DATE:${dateOnly(start)}`, `DTEND;VALUE=DATE:${dateOnly(dayAfter)}`);
     }
     lines.push(`SUMMARY:${esc(d.name)}`, `LOCATION:${esc(d.location)}`, `DESCRIPTION:${esc(d.summary)}`);
     if (site) lines.push(`URL:${new URL(import.meta.env.BASE_URL, site).href}`);

@@ -4,11 +4,11 @@ category: "Duck race"
 event: duck-race
 date: 2010-08-04
 cover: /uploads/albums/2010-08-04-carnival-duck-race-2-august-2010/001.jpg
-coverAlt: "Photo 1 of 23 from Carnival Duck Race - 2 August 2010 (4 August 2010)"
+coverAlt: "Dads in yellow T-shirts and hi-vis at the brook, keeping the ducks moving (4 August 2010)"
 source: https://braddadads.blogspot.com/2010/08/carnival-duck-race-2-august-2010.html
 photos:
   - src: /uploads/albums/2010-08-04-carnival-duck-race-2-august-2010/001.jpg
-    alt: "Photo 1 of 23 from Carnival Duck Race - 2 August 2010 (4 August 2010)"
+    alt: "Dads in yellow T-shirts and hi-vis at the brook, keeping the ducks moving (4 August 2010)"
   - src: /uploads/albums/2010-08-04-carnival-duck-race-2-august-2010/002.jpg
     alt: "Photo 2 of 23 from Carnival Duck Race - 2 August 2010 (4 August 2010)"
   - src: /uploads/albums/2010-08-04-carnival-duck-race-2-august-2010/003.jpg

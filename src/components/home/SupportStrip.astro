@@ -1,0 +1,71 @@
+---
+// Slim join/donate strip that closes the homepage (the full versions live on /get-involved/ and /donate/).
+import { getSite } from '../../lib/site';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+---
+
+<section class="support" aria-labelledby="support-title">
+  <div class="container">
+    <div class="support__inner">
+      <div class="support__copy">
+        <h2 id="support-title" class="support__title">Got kids? Live in Bradwell? You're in.</h2>
+        <p>No experience needed, just a spare pair of hands for a few events a year. We meet {site.meetingInfo}.</p>
+      </div>
+      <div class="support__actions">
+        <a class="btn btn--yellow btn--sm" href={url('/get-involved/')}>Join the dads</a>
+        <a class="btn btn--ghost-light btn--sm" href={url('/donate/')}>Donate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .support {
+    padding-bottom: var(--section-pad);
+  }
+  .support__inner {
+    background: var(--green);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 32px 36px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+  }
+  .support__copy {
+    flex: 1 1 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .support__title {
+    font-weight: 800;
+    font-size: clamp(24px, 3vw, 30px);
+    line-height: 1.1;
+    letter-spacing: -0.4px;
+  }
+  .support__copy p {
+    color: var(--on-dark-soft);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .support__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn--sm {
+    min-height: 50px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+  @media (max-width: 600px) {
+    .support__inner {
+      padding: 26px 22px;
+    }
+  }
+</style>

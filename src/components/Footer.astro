@@ -1,5 +1,6 @@
 ---
 import DuckLogo from './DuckLogo.astro';
+import BrookEdge from './BrookEdge.astro';
 import { getSite } from '../lib/site';
 import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
@@ -15,6 +16,7 @@ const columns = [
       { label: 'Photos', href: url('/photos/') },
       { label: 'Races', href: url('/races/') },
       { label: 'Our story', href: url('/our-story/') },
+      { label: 'Meet the dads', href: url('/members/') },
     ],
   },
   {
@@ -39,6 +41,7 @@ const columns = [
 ---
 
 <footer class="site-footer">
+  <BrookEdge position="top" />
   <div class="container site-footer__inner">
     <div class="site-footer__about">
       <a class="site-footer__brand" href={url('/')}>
@@ -74,9 +77,10 @@ const columns = [
 
 <style>
   .site-footer {
+    position: relative;
     background: var(--green-deep);
     color: var(--on-dark-muted);
-    padding-block: 48px 40px;
+    padding-block: 80px 40px;
     font-size: 15px;
     line-height: 1.6;
   }
