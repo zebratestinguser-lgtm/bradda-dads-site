@@ -1,6 +1,6 @@
 ---
 title: "Wolf’s Pit Fell Race 2022"
-category: "Wolfspit"
+category: "Wolf's Pit"
 event: wolfspit
 # Photo date: posted in February 2022 to promote that year's race, so taken at an earlier race.
 date: 2022-02-08

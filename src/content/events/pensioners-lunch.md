@@ -20,14 +20,18 @@ heroNote: "Book with the slip in **Bradda News**. Meals can be delivered, and tr
 heroImage: /uploads/albums/2012-12-05-12th-pensioners-christmas-lunch/011.jpg
 heroImageAlt: A line of Bradda Dads in white shirts and yellow ties under the Christmas decorations, ready to serve lunch
 heroImageCaption: December 2012
+whenWhereNote: "[PLACEHOLDER: time and venue (the hall).]"
+involvement:
+  - title: Book a place
+    text: Fill in the lunch slip in Bradda News to book. It's free for village pensioners.
+  - title: Need a lift or a meal at home?
+    text: "Meals can be delivered for anyone who can't make it, and transport to the hall can be arranged. [PLACEHOLDER: who to contact.]"
+  - title: Help on the day
+    text: The dads cook and serve, and partners and families are welcome to come and help or watch the children sing.
+    url: /get-involved/
+    label: Volunteer
 ---
 
-A free Christmas lunch for Bradwell's pensioners, cooked and served by the dads, with crackers, a decorated Christmas tree and the village children singing.
-
-## 2026
-
-**Friday 4 December.** Look out for the lunch slip in Bradda News to book a place. Meals can be delivered for anyone who can't make it to the hall, and transport can be arranged.
+A free Christmas lunch for Bradwell's pensioners, cooked and served by the dads, with crackers, a decorated Christmas tree and the village children singing. It has run every December since 2001.
 
 Duck race tickets will be on sale on the day too.
-
-[PLACEHOLDER: time, venue, where to hand in slips, and who to contact about deliveries or transport.]

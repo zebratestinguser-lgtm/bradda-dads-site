@@ -1,6 +1,6 @@
 ---
 title: "Wolf's Pit Fell Race 2009 Publicity"
-category: "Wolfspit"
+category: "Wolf's Pit"
 event: wolfspit
 date: 2009-02-20
 cover: /uploads/albums/2009-02-20-wolfs-pit-fell-race-2009-publicity/001.jpg

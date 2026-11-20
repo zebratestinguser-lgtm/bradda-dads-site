@@ -1,0 +1,174 @@
+---
+// Homepage introduction: who Bradda Dads are, plus the community impact.
+// Shows the total raised / groups helped once those are filled in (site.yaml); until then it lists
+// the real groups and projects from src/content/funded/.
+import { getCollection } from 'astro:content';
+import DuckLogo from '../DuckLogo.astro';
+import { getSite } from '../../lib/site';
+import { isPlaceholder } from '../../lib/events';
+import { url } from '../../lib/url';
+
+const site = await getSite();
+const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const facts = [
+  { big: '1999', small: 'the year it all started' },
+  { big: '5', small: 'big events every year' },
+  { big: '100%', small: 'run by volunteers' },
+];
+if (!isPlaceholder(site.totalRaised)) facts.unshift({ big: `£${site.totalRaised}`, small: 'raised for the village' });
+if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, small: 'groups and projects helped' });
+---
+
+<section class="who" aria-labelledby="who-title">
+  <div class="container who__inner">
+    <div class="who__intro">
+      <p class="eyebrow who__eyebrow">Who we are</p>
+      <h2 id="who-title" class="section-title">Volunteer dads, raising money for Bradwell</h2>
+      <p class="who__text">{site.whoWeAre}</p>
+      <a class="link-arrow" href={url('/our-story/')}>Our story →</a>
+    </div>
+    <ul class="who__facts" role="list">
+      {
+        facts.slice(0, 4).map((f) => (
+          <li class="fact">
+            <span class="fact__big">{f.big}</span>
+            <span class="fact__small">{f.small}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  {
+    funded.length > 0 && (
+      <div class="container">
+        <div class="impact">
+          <span class="impact__duck" aria-hidden="true">
+            <DuckLogo size={48} />
+          </span>
+          <div class="impact__body">
+            <h3 class="impact__title">Where the money goes</h3>
+            <p class="impact__text">Everything raised goes back into the village. Recently that's included:</p>
+            <ul class="impact__list" role="list">
+              {funded.map((f) => (
+                <li>{f.data.name}</li>
+              ))}
+            </ul>
+          </div>
+          <a class="btn btn--green btn--sm impact__btn" href={url('/where-the-money-goes/')}>
+            See where the money goes
+          </a>
+        </div>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .who {
+    padding-bottom: var(--section-pad);
+  }
+  .who__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 48px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+  .who__intro {
+    flex: 999 1 460px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .who__eyebrow {
+    color: var(--green);
+  }
+  .who__text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--muted-strong);
+    max-width: 62ch;
+  }
+  .who__facts {
+    flex: 1 1 320px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(104px, 100%), 1fr));
+    gap: 12px;
+  }
+  .fact {
+    background: var(--yellow-panel);
+    border-radius: var(--radius-card);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .fact__big {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--green);
+  }
+  .fact__small {
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--yellow-body);
+  }
+  .impact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px 24px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 26px 30px;
+  }
+  .impact__duck {
+    flex-shrink: 0;
+  }
+  .impact__body {
+    flex: 999 1 380px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .impact__title {
+    font-size: 24px;
+  }
+  .impact__text {
+    color: var(--muted-strong);
+  }
+  .impact__list {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .impact__list li {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 5px 14px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .btn--sm {
+    min-height: 50px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+  @media (max-width: 600px) {
+    .impact {
+      padding: 22px 20px;
+    }
+  }
+</style>

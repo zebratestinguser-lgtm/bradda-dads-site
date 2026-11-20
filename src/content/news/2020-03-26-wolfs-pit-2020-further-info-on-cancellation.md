@@ -1,7 +1,7 @@
 ---
 title: "Wolf’s Pit 2020 – further info on cancellation"
 date: 2020-03-26
-tag: "Wolfspit"
+tag: "Wolf's Pit"
 summary: "As I’m sure you are all aware, we have had to cancel this years race due to the corona virus outbreak."
 source: https://braddadads.wordpress.com/2020/03/26/wolfs-pit-further-info-on-cancellation/
 ---

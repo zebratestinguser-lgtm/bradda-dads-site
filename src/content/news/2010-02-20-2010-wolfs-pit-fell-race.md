@@ -1,7 +1,7 @@
 ---
 title: "2010 Wolf's Pit Fell Race"
 date: 2010-02-20
-tag: "Wolfspit"
+tag: "Wolf's Pit"
 summary: "The second Wolf's Pit Fell Race will take place on 14 March 2010. Follow the link shown on the right for full details."
 image: /uploads/albums/2010-02-20-2010-wolfs-pit-fell-race/001.jpg
 imageAlt: "Newspaper cutting, 'Wolf's Pit Fell Race, 14th March 2010', with runners on the moor (20 February 2010)"

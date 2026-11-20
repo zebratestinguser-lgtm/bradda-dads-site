@@ -11,8 +11,8 @@ const events = await getEvents();
 const hasEmail = !site.contactEmail.startsWith('[');
 ---
 
-<BaseLayout title="Get involved" description="Bradda Dads is open to any dad in the parish of Bradwell. No experience needed, just a spare pair of hands for a few events a year.">
-  <PageHeader eyebrow="Get involved" title="Got kids? Live in Bradwell? You're in." intro="Bradda Dads is open to any dad in the parish. No experience needed, just a spare pair of hands for a few events a year." />
+<BaseLayout title="Get involved" description={site.joinText}>
+  <PageHeader eyebrow="Get involved" title={site.joinHeadline} intro={site.joinText} />
 
   <section class="container page-section grid">
     <div class="card card--green">

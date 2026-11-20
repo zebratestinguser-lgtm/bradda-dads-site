@@ -1,6 +1,6 @@
 ---
 title: "2011 Wolf's Pit Fell Race"
-category: "Wolfspit"
+category: "Wolf's Pit"
 event: wolfspit
 date: 2011-02-21
 cover: /uploads/albums/2011-02-21-2011-wolfs-pit-fell-race/001.jpg

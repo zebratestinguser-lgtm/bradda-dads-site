@@ -76,7 +76,7 @@ Race results name every runner. That's normal for published fell race results, b
 
 Phone numbers and email addresses copied from the old sites.
 
-- [ ] [events/wolfspit.md](src/content/events/wolfspit.md) (from the old WordPress Wolf's Pit page): 07590 047104, wolfspitfellrace@gmail.com
+- [x] [events/wolfspit.md](src/content/events/wolfspit.md): the organiser's mobile number has been taken off the event page (an "Email the organiser" button remains). It's still in the imported Wolf's Pit photos album text below.
 - [ ] [2011 Boxing Day Duck Race](src/content/news/2011-12-27-2011-boxing-day-duck-race.md): braddadads@btinternet.com
 - [ ] [Wolf's Pit photos](src/content/albums/2018-10-17-wolfs-pit-photos/index.md) (album text from the old WordPress page): 07590 047104, wolfspitfellrace@gmail.com
 - [ ] [Wolf's Pit 2020: further info on cancellation](src/content/news/2020-03-26-wolfs-pit-2020-further-info-on-cancellation.md): wolfspitfellrace@gmail.com

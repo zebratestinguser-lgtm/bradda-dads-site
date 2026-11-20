@@ -1,7 +1,7 @@
 ---
 title: "Wolf’s Pit Entries Open via Fabian4"
 date: 2023-01-30
-tag: "Wolfspit"
+tag: "Wolf's Pit"
 summary: "Enter the Wolf’s Pit Fell Race on Mother’s Day via Fabian4"
 source: https://braddadads.wordpress.com/2023/01/30/wolfs-pit-entries-open-via-fabian4/
 ---

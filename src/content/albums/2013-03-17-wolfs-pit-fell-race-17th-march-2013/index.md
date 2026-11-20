@@ -1,6 +1,6 @@
 ---
 title: "Wolf's Pit Fell Race - 17th March 2013"
-category: "Wolfspit"
+category: "Wolf's Pit"
 event: wolfspit
 date: 2013-03-17
 cover: /uploads/albums/2013-03-17-wolfs-pit-fell-race-17th-march-2013/001.jpg

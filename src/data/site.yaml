@@ -3,7 +3,7 @@
 site:
   name: Bradda Dads
   tagline: Raising money for Bradwell, Derbyshire, since 1999.
-  description: Bradda Dads is a volunteer group of dads raising money for people and organisations in Bradwell, Derbyshire. Duck race, bonfire, Christmas card, pensioners' lunch and the Wolfspit Race.
+  description: Bradda Dads is a volunteer group of dads raising money for people and organisations in Bradwell, Derbyshire. Duck race, bonfire, Christmas card, pensioners' lunch and the Wolf's Pit Race.
   facebookUrl: https://www.facebook.com/BraddaDads/
   contactEmail: "[CONTACT EMAIL]"
   cicName: "[CIC NAME]"
@@ -29,9 +29,17 @@ site:
   # Phase 1: "Share your photos" goes to Facebook (or a mailto: link)
   sharePhotosUrl: https://www.facebook.com/BraddaDads/
   accountsUrl: "#"
-  # Wolfspit Race: entry link for next year's race, and the intro on the results band
+  # Wolf's Pit Race: entry link for next year's race, and the intro on the results band
   wolfspitEntryUrl: "#"
   wolfspitIntro: "A 9 km fell race with 450 m of climb from Shatton, near Bamford, held each March since 2009. Find your time, see who took the podium, and compare years."
+  # Who we are (homepage introduction)
+  whoWeAre: "We're a group of volunteer dads in Bradwell, Derbyshire. Since 1999 we've run the village duck race, bonfire, pensioners' Christmas lunch, Christmas card and the Wolf's Pit Fell Race, and everything we raise goes back into the village."
+  # Joining wording (homepage strip, Get involved page). Accurate to the current constitution (members are dads).
+  # After the February 2027 vote, if membership opens up, swap in the commented lines below.
+  joinHeadline: "Dads, grandads, partners, neighbours: everyone helps."
+  joinText: "Bradda Dads members are dads from the parish, and everyone is welcome to help at our events. No experience needed, just a spare pair of hands for a few events a year."
+  # joinHeadline: "Live in Bradwell? You're in."
+  # joinText: "Bradda Dads is open to anyone in the parish who wants to help. No experience needed, just a spare pair of hands for a few events a year."
   # Our story (homepage)
   storyIntro: "Bradda Dads began in 1999, when a group of village dads raced rubber ducks down the brook on Boxing Day to raise money for Bradwell. The pensioners' Christmas lunch followed in 2001, then the village bonfire, carnival floats, the Wolf's Pit Fell Race and plenty more, with everything raised going back into the village. [PLACEHOLDER: who started it and why.]"
   storyImage: /uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg

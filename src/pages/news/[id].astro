@@ -25,7 +25,7 @@ const when = album ? photoDate(album) : undefined;
         <a class="story__back" href={url('/news/')}>← All news</a>
         <p class="story__meta">
           <span class="tag">{story.data.tag}</span>
-          <time datetime={story.data.date.toISOString().slice(0, 10)}>{formatDate(story.data.date)}</time>
+          <time datetime={story.data.date.toISOString().slice(0, 10)}>Posted {formatDate(story.data.date)}</time>
         </p>
         <h1 class="story__title">{story.data.title}</h1>
       </div>

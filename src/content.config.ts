@@ -23,7 +23,7 @@ export const NEWS_TAGS = [
   'Christmas card',
   "Pensioners' lunch",
   'Duck race',
-  'Wolfspit',
+  "Wolf's Pit",
   'Village',
   'Carnival',
   'Tour of Bradwell',
@@ -97,6 +97,21 @@ const events = defineCollection({
     heroImageAlt: z.string().optional(),
     /** Visible caption on the photo, including when it was taken, e.g. "Boxing Day 2009". */
     heroImageCaption: z.string().optional(),
+    /** Practical line shown under "When and where", e.g. parking or "2027 date to be confirmed". */
+    whenWhereNote: z.string().optional(),
+    /** "How to get involved": ways to take part, shown as cards on the event page. */
+    involvement: z
+      .array(
+        z.object({
+          title: z.string(),
+          text: z.string(),
+          url: link.optional(),
+          label: z.string().optional(),
+          /** Hide this card once entries have closed (e.g. "Pay £5" for the Christmas card) */
+          onlyWhenOpen: z.boolean().default(false),
+        }),
+      )
+      .default([]),
   }),
 });
 
@@ -236,6 +251,9 @@ const settings = defineCollection({
     accountsUrl: link,
     wolfspitEntryUrl: link,
     wolfspitIntro: z.string(),
+    whoWeAre: z.string(),
+    joinHeadline: z.string(),
+    joinText: z.string(),
     storyIntro: z.string(),
     storyImage: uploadPath.optional(),
     storyImageAlt: z.string().optional(),

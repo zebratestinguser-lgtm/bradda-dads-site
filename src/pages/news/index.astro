@@ -1,4 +1,6 @@
 ---
+// News: search, the latest stories as cards, then the archive folded by year.
+// Topic filters work across both (choosing one shows every matching story from all years).
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -7,18 +9,30 @@ import { NEWS_TAGS } from '../../content.config';
 import { formatDate } from '../../lib/format';
 import { url, thumb } from '../../lib/url';
 
+const LATEST = 6;
 const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const latest = news.slice(0, LATEST);
+const archive = news.slice(LATEST);
 const tags = NEWS_TAGS.filter((t) => news.some((n) => n.data.tag === t));
 const byYear = new Map<number, typeof news>();
-for (const n of news) {
+for (const n of archive) {
   const y = n.data.date.getFullYear();
   if (!byYear.has(y)) byYear.set(y, []);
   byYear.get(y)!.push(n);
 }
+const href = (id: string) => url(`/news/${id}/`);
 ---
 
 <BaseLayout title="News" description={`News from Bradda Dads, Bradwell: ${news.length} stories going back to 2001.`}>
-  <PageHeader eyebrow="News" title="News from the Dads" intro={`${news.length} stories, from the latest race results back to the first pensioners' lunch in 2001.`} />
+  <PageHeader eyebrow="News" title="News from the Dads" intro={`The latest from Bradda Dads, and an archive of ${news.length} stories going back to the first pensioners' lunch in 2001.`}>
+    <form class="news-search" action={url('/search/')} method="get" role="search">
+      <label for="news-q" class="news-search__label">Search the news and photos</label>
+      <div class="news-search__row">
+        <input id="news-q" name="q" type="search" placeholder="e.g. duck race 2008" autocomplete="off" />
+        <button type="submit" class="btn btn--yellow btn--md">Search</button>
+      </div>
+    </form>
+  </PageHeader>
 
   <section class="container page-section news-page">
     <div class="filters">
@@ -30,46 +44,87 @@ for (const n of news) {
       <p class="visually-hidden" aria-live="polite" data-filter-status></p>
     </div>
 
-    {
-      [...byYear.entries()].map(([year, items]) => (
-        <section class="news-year" data-year-group aria-labelledby={`news-${year}`}>
-          <h2 class="subhead" id={`news-${year}`}>{year}</h2>
-          <ul class="news-list" role="list">
-            {items.map((n) => (
-              <li class="news-row" data-tag={n.data.tag}>
-                {n.data.image ? (
-                  <img class="news-row__thumb" src={thumb(n.data.image)} alt="" loading="lazy" decoding="async" width="96" height="96" />
-                ) : (
-                  <div class="news-row__thumb">
-                    <NewsTile tag={n.data.tag} />
-                  </div>
-                )}
-                <div class="news-row__body">
-                  <p class="news-row__meta">
-                    <span class="tag">{n.data.tag}</span>
-                    <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
-                  </p>
-                  <h3 class="news-row__title">
-                    <a href={url(`/news/${n.id}/`)}>{n.data.title}</a>
-                  </h3>
-                  <p class="news-row__summary">{n.data.summary}</p>
+    <section aria-labelledby="latest-title" data-group>
+      <h2 class="subhead" id="latest-title">Latest news</h2>
+      <ul class="latest" role="list">
+        {
+          latest.map((n) => (
+            <li class="card" data-row data-tag={n.data.tag}>
+              {n.data.image ? (
+                <a class="card__media" href={href(n.id)} tabindex="-1" aria-hidden="true">
+                  <img src={thumb(n.data.image)} alt="" loading="lazy" decoding="async" width="480" height="300" />
+                </a>
+              ) : (
+                <div class="card__strip">
+                  <NewsTile tag={n.data.tag} />
                 </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))
-    }
+              )}
+              <div class="card__body">
+                <p class="meta">
+                  <span class="tag">{n.data.tag}</span>
+                  <time datetime={n.data.date.toISOString().slice(0, 10)}>Posted {formatDate(n.data.date)}</time>
+                </p>
+                <h3 class="card__title">
+                  <a href={href(n.id)}>{n.data.title}</a>
+                </h3>
+                <p class="card__summary">{n.data.summary}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="archive" aria-labelledby="archive-title" data-group>
+      <h2 class="subhead" id="archive-title">From the archive</h2>
+      <p class="archive__intro">Older stories, year by year. Tap a year to open it.</p>
+      {
+        [...byYear.entries()].map(([year, items]) => (
+          <details class="year" data-year>
+            <summary class="year__summary">
+              <span class="year__name">{year}</span>
+              <span class="year__count">
+                {items.length} {items.length === 1 ? 'story' : 'stories'}
+              </span>
+            </summary>
+            <ul class="year__list" role="list">
+              {items.map((n) => (
+                <li class="row" data-row data-tag={n.data.tag}>
+                  {n.data.image ? (
+                    <img class="row__thumb" src={thumb(n.data.image)} alt="" loading="lazy" decoding="async" width="72" height="72" />
+                  ) : (
+                    <div class="row__thumb">
+                      <NewsTile tag={n.data.tag} />
+                    </div>
+                  )}
+                  <div class="row__body">
+                    <p class="meta">
+                      <span class="tag">{n.data.tag}</span>
+                      <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
+                    </p>
+                    <h3 class="row__title">
+                      <a href={href(n.id)}>{n.data.title}</a>
+                    </h3>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))
+      }
+    </section>
   </section>
 </BaseLayout>
 
 <script>
+  // Topic filter across the latest cards and every archive year
   const filters = document.querySelector('[data-filters]');
   const status = document.querySelector('[data-filter-status]');
   if (filters) {
     const buttons = [...filters.querySelectorAll<HTMLButtonElement>('button[data-tag]')];
-    const rows = [...document.querySelectorAll<HTMLElement>('.news-row')];
-    const groups = [...document.querySelectorAll<HTMLElement>('[data-year-group]')];
+    const rows = [...document.querySelectorAll<HTMLElement>('[data-row]')];
+    const years = [...document.querySelectorAll<HTMLDetailsElement>('[data-year]')];
+    const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
     buttons.forEach((b) =>
       b.addEventListener('click', () => {
         const tag = b.dataset.tag!;
@@ -80,18 +135,58 @@ for (const n of news) {
           r.hidden = !on;
           if (on) shown++;
         });
-        groups.forEach((g) => (g.hidden = !g.querySelector('.news-row:not([hidden])')));
-        if (status) status.textContent = `${shown} stories shown`;
+        years.forEach((y) => {
+          const any = !!y.querySelector('[data-row]:not([hidden])');
+          y.hidden = !any;
+          y.open = Boolean(tag) && any; // with a topic chosen, show every matching story at once
+        });
+        groups.forEach((g) => (g.hidden = !g.querySelector('[data-row]:not([hidden])')));
+        if (status) status.textContent = tag ? `${shown} ${tag} stories shown` : 'All stories shown';
       }),
     );
   }
 </script>
 
 <style>
+  .news-search {
+    margin-top: 8px;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .news-search__label {
+    font-weight: 600;
+    color: var(--on-dark-soft);
+  }
+  .news-search__row {
+    display: flex;
+    gap: 8px;
+  }
+  .news-search input {
+    flex: 1;
+    min-width: 0;
+    min-height: 48px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    padding: 0 18px;
+    font: inherit;
+    font-size: 16px;
+  }
+  .btn--md {
+    min-height: 48px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
   .news-page {
     display: flex;
     flex-direction: column;
     gap: 36px;
+  }
+  .news-page > section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   .filters {
     display: flex;
@@ -107,76 +202,159 @@ for (const n of news) {
     min-width: 0;
     max-width: 100%;
   }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .latest {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 18px;
+  }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+  }
+  .card__media {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--surface-green);
+  }
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Stories without a photo get a short coloured strip rather than a big empty tile */
+  .card__strip {
+    height: 64px;
+  }
+  .card__strip :global(svg) {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .card__body {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card__title {
+    font-size: 21px;
+    line-height: 1.2;
+  }
+  .card__title a,
+  .row__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .card__title a:hover,
+  .row__title a:hover {
+    text-decoration: underline;
+  }
+  .card__summary {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted-strong);
+  }
+  .archive__intro {
+    color: var(--muted);
+  }
+  .year {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--white);
+  }
+  .year__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 56px;
+    padding: 8px 20px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .year__summary::-webkit-details-marker {
+    display: none;
+  }
+  .year__summary::after {
+    content: '+';
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--green);
+  }
+  .year[open] > .year__summary::after {
+    content: '–';
+  }
+  .year__name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--green);
+  }
+  .year__count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .year__list {
+    list-style: none;
+    margin: 0;
+    padding: 0 20px 8px;
+  }
+  .row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding-block: 14px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .row__thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: var(--surface-green);
+  }
+  .row__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .row__title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.3;
+  }
+  .row__title a {
+    display: inline-block;
+    padding-block: 2px;
+  }
   @media (max-width: 600px) {
     .filters {
       flex-direction: column;
       align-items: stretch;
     }
-  }
-  .news-year {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .news-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .news-row {
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-    padding-block: 18px;
-    border-bottom: 1px solid var(--border);
-  }
-  .news-row__thumb {
-    width: 96px;
-    height: 96px;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    object-fit: cover;
-    flex-shrink: 0;
-    background: var(--surface-green);
-  }
-  .news-row__body {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 0;
-  }
-  .news-row__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .news-row__title {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 19px;
-    line-height: 1.3;
-  }
-  .news-row__title a {
-    color: var(--text);
-    text-decoration: none;
-  }
-  .news-row__title a:hover {
-    text-decoration: underline;
-  }
-  .news-row__summary {
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--muted-strong);
-  }
-  @media (max-width: 480px) {
-    .news-row__thumb {
-      width: 64px;
-      height: 64px;
+    .news-search__row {
+      flex-direction: column;
     }
   }
 </style>
