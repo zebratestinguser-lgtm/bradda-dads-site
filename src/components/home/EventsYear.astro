@@ -2,7 +2,8 @@
 // "The Bradda Dads year": a swipeable strip of event cards (scroll-snap).
 // Phones: swipe. Desktop: arrow buttons or trackpad. Events come in rolling-year order from getEvents():
 // whatever is on now first, then upcoming, then this year's finished events (as next year's).
-// No auto-play (moving content is hard to read and an accessibility problem).
+// It loops endlessly (after the last event comes the first again). No auto-play (moving content is hard
+// to read and an accessibility problem).
 import EventCard from '../EventCard.astro';
 import type { EventEntry } from '../../lib/events';
 import { url } from '../../lib/url';
@@ -57,37 +58,82 @@ const { events, nextId } = Astro.props;
 </section>
 
 <script>
+  // Endless loop: the cards are copied once before and once after the real ones, and the strip quietly
+  // jumps back to the matching real card whenever it drifts into a copy. So "next" after the last event
+  // comes round to the first again, like the year itself. The copies are hidden from screen readers
+  // and skipped by the Tab key, so keyboard and screen reader users meet each event once.
   document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
     const section = strip.closest('section')!;
     const btns = section.querySelector<HTMLElement>('[data-carousel-btns]');
-    const [prev, next] = [...section.querySelectorAll<HTMLButtonElement>('.carousel-btn')];
+    const buttons = [...section.querySelectorAll<HTMLButtonElement>('.carousel-btn')];
     const dots = [...section.querySelectorAll<HTMLElement>('.strip-dot')];
-    const items = [...strip.querySelectorAll<HTMLElement>('.strip__item')];
+    const originals = [...strip.querySelectorAll<HTMLElement>('.strip__item')];
+    const n = originals.length;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Everything fits on screen (or a single card): no need to scroll, loop or show buttons
+    if (n < 2 || strip.scrollWidth <= strip.clientWidth + 2) return;
     if (btns) btns.hidden = false;
 
-    const step = () => (items[1] ? items[1].offsetLeft - items[0].offsetLeft : strip.clientWidth);
-    const update = () => {
-      const max = strip.scrollWidth - strip.clientWidth - 2;
-      if (prev) prev.disabled = strip.scrollLeft <= 2;
-      if (next) next.disabled = strip.scrollLeft >= max;
-      // Highlight the dot for the left-most fully visible card
-      const i = Math.round(strip.scrollLeft / step());
-      dots.forEach((d, n) => d.classList.toggle('is-active', n === Math.min(i, dots.length - 1)));
-      if (btns) btns.hidden = max <= 0; // everything fits: no buttons needed
+    const copy = (item: HTMLElement) => {
+      const c = item.cloneNode(true) as HTMLElement;
+      c.setAttribute('aria-hidden', 'true');
+      // Still clickable (a copy can be the card on screen), but skipped by Tab and screen readers
+      c.querySelectorAll('a, button').forEach((el) => el.setAttribute('tabindex', '-1'));
+      c.removeAttribute('data-next');
+      return c;
     };
-    [prev, next].forEach((b) =>
-      b?.addEventListener('click', () => {
+    strip.prepend(...originals.map(copy));
+    strip.append(...originals.map(copy));
+
+    const step = () => originals[1].offsetLeft - originals[0].offsetLeft;
+    const setWidth = () => step() * n;
+    // Scroll position of the first real card (the copies before it are exactly one set wide)
+    const home = () => setWidth();
+
+    const jump = (to: number) => {
+      strip.style.scrollSnapType = 'none'; // stop snapping fighting the instant jump
+      strip.scrollLeft = to;
+      strip.style.scrollSnapType = '';
+    };
+    // Back into the real set if we've drifted half a set into either copy
+    const recentre = () => {
+      const x = strip.scrollLeft;
+      const w = setWidth();
+      if (x < w * 0.5) jump(x + w);
+      else if (x > w * 1.5) jump(x - w);
+    };
+    const updateDots = () => {
+      const i = (((Math.round((strip.scrollLeft - home()) / step())) % n) + n) % n;
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+    };
+
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        recentre();
         strip.scrollBy({ left: Number(b.dataset.dir) * step(), behavior: reduce ? 'auto' : 'smooth' });
-        setTimeout(update, 450); // in case the browser doesn't send a final scroll event
       }),
     );
-    strip.addEventListener('scroll', update, { passive: true });
-    strip.addEventListener('scrollend', update);
-    window.addEventListener('resize', update);
+    let settle: number | undefined;
+    strip.addEventListener(
+      'scroll',
+      () => {
+        updateDots();
+        // Fallback for browsers without "scrollend": recentre once scrolling pauses
+        clearTimeout(settle);
+        settle = window.setTimeout(recentre, 160);
+      },
+      { passive: true },
+    );
+    strip.addEventListener('scrollend', recentre);
+    window.addEventListener('resize', () => {
+      jump(home());
+      updateDots();
+    });
 
-    // Events are already in rolling-year order (what's on now comes first), so the strip starts at the beginning
-    update();
+    // Events are already in rolling-year order (what's on now first), so start on the first real card
+    jump(home());
+    updateDots();
   });
 </script>
 

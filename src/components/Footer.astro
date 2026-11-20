@@ -1,4 +1,5 @@
 ---
+// Footer: name and tagline, then one line of links that aren't in the header menu.
 import DuckLogo from './DuckLogo.astro';
 import BrookEdge from './BrookEdge.astro';
 import { getSite } from '../lib/site';
@@ -6,26 +7,12 @@ import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
-// Only pages that aren't already in the header menu (Header.astro), so nothing is listed twice
 const hasAccounts = Boolean(site.accountsUrl) && site.accountsUrl !== '#' && !isPlaceholder(site.accountsUrl);
-const columns = [
-  {
-    title: 'More from us',
-    links: [
-      { label: 'Meet the dads', href: url('/members/') },
-      { label: 'Where the money goes', href: url('/where-the-money-goes/') },
-      { label: 'Village Christmas card', href: url('/christmas-card/') },
-    ],
-  },
-  {
-    title: 'Contact',
-    links: [
-      { label: 'Contact us', href: url('/contact/') },
-      { label: 'Facebook', href: site.facebookUrl },
-      { label: 'Privacy', href: url('/privacy/') },
-      ...(hasAccounts ? [{ label: 'Annual accounts', href: url(site.accountsUrl) }] : []),
-    ],
-  },
+const links = [
+  { label: 'Contact us', href: url('/contact/') },
+  { label: 'Facebook', href: site.facebookUrl },
+  { label: 'Privacy', href: url('/privacy/') },
+  ...(hasAccounts ? [{ label: 'Annual accounts', href: url(site.accountsUrl) }] : []),
 ];
 ---
 
@@ -47,20 +34,17 @@ const columns = [
         )
       }
     </div>
-    {
-      columns.map((col) => (
-        <nav class="site-footer__col" aria-label={col.title}>
-          <h2 class="site-footer__heading">{col.title}</h2>
-          <ul role="list">
-            {col.links.map((l) => (
-              <li>
-                <a href={l.href}>{l.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      ))
-    }
+    <nav aria-label="Contact and information">
+      <ul class="site-footer__links" role="list">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </div>
 </footer>
 
@@ -69,19 +53,21 @@ const columns = [
     position: relative;
     background: var(--green-deep);
     color: var(--on-dark-muted);
-    padding-block: 48px 40px;
+    padding-block: 40px 36px;
     font-size: 15px;
     line-height: 1.6;
   }
   .site-footer__inner {
-    display: grid;
-    grid-template-columns: minmax(240px, 2fr) repeat(2, minmax(170px, 1fr));
-    gap: 32px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 40px;
   }
   .site-footer__about {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
   .site-footer__brand {
     display: inline-flex;
@@ -100,42 +86,25 @@ const columns = [
   .site-footer__cic {
     font-size: 14px;
   }
-  .site-footer__heading {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--yellow);
-    margin-bottom: 6px;
-  }
-  .site-footer__col ul {
+  .site-footer__links {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 28px;
   }
-  .site-footer__col a {
+  .site-footer__links a {
     color: var(--white);
     text-decoration: none;
+    font-weight: 500;
     display: inline-flex;
     align-items: center;
-    min-height: 40px;
+    min-height: var(--tap);
   }
-  .site-footer__col a:hover {
+  .site-footer__links a:hover {
     color: var(--yellow);
     text-decoration: underline;
-  }
-  @media (max-width: 900px) {
-    .site-footer__inner {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .site-footer__about {
-      grid-column: 1 / -1;
-    }
-  }
-  @media (max-width: 560px) {
-    .site-footer__inner {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
   }
 </style>

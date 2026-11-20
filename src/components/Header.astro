@@ -1,28 +1,47 @@
 ---
 // Site header: stays pinned to the top while scrolling.
 // Wide screens: every link visible. Phones/tablets: logo + a labelled "Menu" button that opens the links.
+// "Events" and "About us" open small drop-down lists (accordions inside the phone menu).
 // Without JavaScript the links simply show as a wrapped list (nothing is ever hidden).
 import DuckLogo from './DuckLogo.astro';
 import { getSite } from '../lib/site';
+import { getEvents } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
 const current = Astro.url.pathname;
 const home = url('/');
+const events = await getEvents();
 
-const nav = [
+type Link = { label: string; href: string; also?: string[]; icon?: boolean };
+type Item = Link & { children?: Link[] };
+const nav: Item[] = [
   { label: 'Home', href: home },
-  { label: 'Events', href: url('/events/') },
+  {
+    label: 'Events',
+    href: url('/events/'),
+    also: [url('/christmas-card/')],
+    children: [{ label: 'All events', href: url('/events/') }, ...events.map((e) => ({ label: e.data.name, href: url(`/events/${e.id}/`) }))],
+  },
   { label: 'News', href: url('/news/') },
   { label: 'Photos', href: url('/photos/') },
   { label: 'Races', href: url('/races/'), also: [url('/wolfspit/'), url('/tour-of-bradwell/')] },
-  { label: 'Our story', href: url('/our-story/') },
+  {
+    label: 'About us',
+    href: url('/our-story/'),
+    also: [url('/members/'), url('/where-the-money-goes/')],
+    children: [
+      { label: 'Our story', href: url('/our-story/') },
+      { label: 'Meet the dads', href: url('/members/') },
+      { label: 'Where the money goes', href: url('/where-the-money-goes/') },
+    ],
+  },
   { label: 'Donate', href: url('/donate/') },
   { label: 'Search', href: url('/search/'), icon: true },
 ];
 const cta = { label: 'Get involved', href: url('/get-involved/') };
 // Home is only "current" on the homepage; other links match their whole section
-const isCurrent = (item: { href: string; also?: string[] }) =>
+const isCurrent = (item: Link) =>
   item.href === home ? current === home : [item.href, ...(item.also ?? [])].some((h) => current.startsWith(h));
 ---
 
@@ -41,7 +60,26 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
     <nav id="site-nav" aria-label="Main" class="nav" data-nav>
       <ul class="nav__list" role="list">
         {
-          nav.map((item) => (
+          nav.map((item, i) =>
+            item.children ? (
+              <li class="nav__group" data-group>
+                <button type="button" class:list={['nav__link', 'nav__toggle', { 'is-current': isCurrent(item) }]} aria-expanded="false" aria-controls={`subnav-${i}`} data-toggle>
+                  {item.label}
+                  <svg class="nav__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+                <ul id={`subnav-${i}`} class="subnav" role="list" data-subnav>
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={c.href} class="subnav__link" aria-current={current === c.href ? 'page' : undefined}>
+                        {c.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
             <li>
               <a href={item.href} class="nav__link" aria-current={isCurrent(item) ? 'page' : undefined}>
                 {item.icon && (
@@ -53,7 +91,8 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
                 {item.label}
               </a>
             </li>
-          ))
+            ),
+          )
         }
         <li class="nav__cta-item">
           <a href={cta.href} class="nav__cta" aria-current={current.startsWith(cta.href) ? 'page' : undefined}>
@@ -73,7 +112,7 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
   if (header && btn && nav && label) {
     header.classList.add('is-enhanced'); // switch on the compact phone layout
     btn.hidden = false;
-    const mq = window.matchMedia('(max-width: 959px)');
+    const mq = window.matchMedia('(max-width: 1079px)');
 
     const setOpen = (open: boolean, focusFirst = false) => {
       btn.setAttribute('aria-expanded', String(open));
@@ -100,6 +139,48 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
     });
     mq.addEventListener('change', () => setOpen(false));
   }
+
+  // Drop-downs ("Events", "About us"): a button that shows or hides its list of links
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')].map((g) => ({
+    g,
+    btn: g.querySelector<HTMLButtonElement>('[data-toggle]')!,
+    list: g.querySelector<HTMLElement>('[data-subnav]')!,
+  }));
+  type Group = (typeof groups)[number];
+  const setGroup = (grp: Group, open: boolean) => {
+    grp.btn.setAttribute('aria-expanded', String(open));
+    grp.list.hidden = !open;
+  };
+  const wide = window.matchMedia('(min-width: 1080px)');
+  groups.forEach((grp) => {
+    setGroup(grp, false);
+    grp.btn.addEventListener('click', () => {
+      const open = grp.btn.getAttribute('aria-expanded') !== 'true';
+      groups.forEach((o) => o !== grp && setGroup(o, false)); // one open at a time
+      setGroup(grp, open);
+    });
+    // Wide screens: close when focus moves out of the drop-down (e.g. tabbing past it)
+    grp.g.addEventListener('focusout', (e) => {
+      if (wide.matches && !grp.g.contains(e.relatedTarget as Node | null)) setGroup(grp, false);
+    });
+  });
+  // Esc closes an open drop-down first (and returns focus to its button) before closing the phone menu
+  document.addEventListener(
+    'keydown',
+    (e) => {
+      if (e.key !== 'Escape') return;
+      const open = groups.find((grp) => grp.btn.getAttribute('aria-expanded') === 'true');
+      if (open) {
+        setGroup(open, false);
+        open.btn.focus();
+        e.stopImmediatePropagation();
+      }
+    },
+    true,
+  );
+  document.addEventListener('click', (e) => {
+    groups.forEach((grp) => !grp.g.contains(e.target as Node) && setGroup(grp, false));
+  });
 </script>
 
 <style>
@@ -166,6 +247,71 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
     text-decoration-thickness: 2px;
     text-underline-offset: 6px;
   }
+  /* Drop-down toggles look like the other links */
+  .nav__toggle {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    gap: 6px;
+  }
+  .nav__toggle.is-current {
+    text-decoration: underline;
+    text-decoration-color: var(--yellow);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+  .nav__chev {
+    transition: transform 0.15s ease;
+  }
+  .nav__toggle[aria-expanded='true'] .nav__chev {
+    transform: rotate(180deg);
+  }
+  .subnav {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 16px;
+  }
+  .subnav__link {
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+  }
+  /* Wide screens (with JavaScript): a white panel under the toggle */
+  @media (min-width: 1080px) {
+    .nav__group {
+      position: relative;
+    }
+    .is-enhanced .subnav {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: -18px;
+      min-width: 240px;
+      padding: 8px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+      z-index: 60;
+    }
+    .is-enhanced .subnav__link {
+      display: flex;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0 12px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .is-enhanced .subnav__link:hover,
+    .is-enhanced .subnav__link[aria-current='page'] {
+      background: var(--surface);
+      color: var(--text);
+    }
+    .is-enhanced .subnav__link[aria-current='page'] {
+      box-shadow: inset 3px 0 0 var(--yellow);
+    }
+  }
   .nav__cta {
     color: var(--text);
     background: var(--yellow);
@@ -223,7 +369,7 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
     transform: translateY(-6px) rotate(-45deg);
   }
 
-  @media (max-width: 959px) {
+  @media (max-width: 1079px) {
     .site-header__inner {
       min-height: 60px;
       padding-block: 8px;
@@ -262,6 +408,26 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
       padding-inline: 4px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
+    .is-enhanced .nav__toggle {
+      justify-content: space-between;
+      text-align: left;
+    }
+    .is-enhanced .subnav {
+      padding: 0 0 6px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .is-enhanced .subnav__link {
+      width: 100%;
+      min-height: 46px;
+      font-size: 17px;
+      text-decoration: none;
+      color: var(--on-dark-soft);
+    }
+    .is-enhanced .subnav__link[aria-current='page'] {
+      color: var(--white);
+      box-shadow: inset 4px 0 0 var(--yellow);
+      padding-left: 12px;
+    }
     .is-enhanced .nav__link[aria-current='page'] {
       text-decoration: none;
       box-shadow: inset 4px 0 0 var(--yellow);
@@ -278,6 +444,7 @@ const isCurrent = (item: { href: string; also?: string[] }) =>
     }
   }
   @media (prefers-reduced-motion: reduce) {
+    .nav__chev,
     .menu-btn__icon span {
       transition: none;
     }
