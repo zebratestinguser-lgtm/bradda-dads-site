@@ -180,7 +180,10 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
   const ducks = [...document.querySelectorAll<HTMLElement>('.brook__duck')];
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (ducks.length && !still.matches && 'IntersectionObserver' in window) {
-    const MAX = 140; // furthest a duck strays either side of its spot, in px (less if the screen edge is closer)
+    // Furthest a duck strays either side of its spot: about a third of the screen width (so it looks the
+    // same on a phone and a wide desktop), less if the screen edge is closer
+    const SHARE = 0.35;
+    let MAX = document.documentElement.clientWidth * SHARE;
     const EDGE = 8; // ducks stop this far from the edge of the screen
 
     type Duck = {
@@ -254,6 +257,7 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
     // (measured from where the ducks sit at rest; a family shares one range so it keeps its line-up)
     const measure = () => {
       const w = document.documentElement.clientWidth;
+      MAX = w * SHARE;
       for (const g of groups) {
         let lo = -MAX;
         let hi = MAX;
