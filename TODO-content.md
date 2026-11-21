@@ -41,9 +41,11 @@ Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all l
 
 ## Our story: `src/content/timeline/`
 
+- [ ] **Read [docs/history-from-bradwell-news.md](docs/history-from-bradwell-news.md)**: 20+ years of Bradwell News mentions, including that the group began as **"Bradda Ten"** (ask the committee for the story), the first community Christmas card in **2006**, and years and amounts for several "Where the money goes" entries. Nothing has been added to the site yet.
+
 - [ ] **Confirm the first bonfire year.** The 2012 post calls it the "12th annual" bonfire (so 2001), but a 2023 archive note thinks 2001 may have been the second.
 - [ ] Year Bradda Dads became a CIC
-- [ ] Year the £5-a-message village Christmas card started (different from the 2008 schools card competition)
+- [ ] Year the £5-a-message village Christmas card started (different from the 2008 schools card competition). **Bradwell News suggests 2006** (Issue 65, Nov 2007: "Following last year's very successful Christmas card campaign…").
 
 ## Where the money goes: `src/content/funded/`
 
