@@ -127,3 +127,11 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 - [ ] **You:** install the Pages CMS GitHub app on the repo (sign in at https://app.pagescms.org with GitHub as zebratestinguser-lgtm, then follow the prompt to install it on bradda-dads-site only).
 - [ ] **You:** add a test story and album through the editor to check it all works end to end, then delete them.
 - [ ] **You:** invite each editor by email (Pages CMS → the repo → Collaborators) and send them `docs/how-to-update.md`.
+
+## Parked site improvements (suggested 21 Nov 2026)
+
+- [ ] **Facebook share previews:** event and news pages use their own photo and summary instead of the default image.
+- [ ] **Speed on phones:** mid-sized photo versions with srcset for headers and cards; run Lighthouse before and after (target 90+).
+- [ ] **Event dates in Google:** Event structured data on event pages; an "Add to calendar" link per event.
+- [ ] **Photo descriptions:** write real descriptions for the ~1,170 photos still described as "Photo N from…", in batches by event.
+- [ ] **Duck race winners archive:** turn the old prize-winner sheets into a searchable winners page, like the Wolf's Pit results.

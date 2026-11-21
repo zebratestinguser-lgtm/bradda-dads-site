@@ -319,4 +319,23 @@ const { events, nextId } = Astro.props;
     width: 22px;
     border-radius: 999px;
   }
+  /* Phones: swipe instead of arrow buttons (the next card peeks in, and the dots show where you are) */
+  @media (max-width: 600px) {
+    .carousel-btns {
+      display: none !important;
+    }
+    .events__links {
+      gap: 8px 18px;
+      font-size: 15px;
+    }
+    .strip {
+      gap: 14px;
+    }
+    .strip__item {
+      flex-basis: 82vw;
+    }
+    .strip__loop {
+      flex-basis: 128px;
+    }
+  }
 </style>

@@ -93,6 +93,20 @@ const cat = album.data.category;
   .album-text {
     margin-top: 32px;
   }
+  /* Phones: the four links sit as compact pills two to a row rather than four long lines */
+  @media (max-width: 600px) {
+    .album-links {
+      gap: 8px;
+    }
+    .album-links a {
+      font-size: 14px;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+  }
   .album-text:empty {
     display: none;
   }
