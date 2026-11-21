@@ -15,10 +15,15 @@
   --text: #1a1f1c;
   --muted: #4b5a51;
   --muted-strong: #34413a;
-  --surface: #f1f4f2;
+  /* Brook water: the page background is pale water blue, alternate sections a little deeper.
+     Both pass WCAG AA with every text colour (checked by scripts/qa/contrast.mjs). */
+  --water: #e6f0f5;
+  --water-deep: #cfe3ee;
+  --brook: #8fb7d6; /* decoration only (lines, water under ducks): not dark enough for text */
+  --surface: #eef5f9; /* tinted boxes inside white cards */
   --surface-green: #e4ece3;
-  --border: #e3e8e4;
-  --border-soft: #eef1ef;
+  --border: #d6e4ec;
+  --border-soft: #e8f0f5;
   --input-border: #c9d2cc;
   --on-dark-muted: #c9d6cd;
   --on-dark-soft: #dfe9e2;

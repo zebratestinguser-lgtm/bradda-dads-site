@@ -8,6 +8,9 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* No rubber-band overscroll; if a browser still shows past the edges, it's the header/footer green, not white */
+  overscroll-behavior-y: none;
+  background: var(--green-deep);
   scroll-behavior: smooth;
   /* the header is pinned to the top, so jump links land below it */
   scroll-padding-top: 84px;
@@ -19,7 +22,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--text);
-  background: var(--white);
+  background: var(--water);
   /* Long URLs (common in imported posts) wrap instead of overflowing. "break-word" only breaks a
      word when it genuinely can't fit, so short labels like "NOVEMBER" are never split. */
   overflow-wrap: break-word;
@@ -54,9 +57,32 @@ a:hover {
   color: var(--green-hover);
 }
 
-/* Visible keyboard focus everywhere */
+/* Visible keyboard focus everywhere. Dark orange on the light blue/white parts of the page, yellow on
+   the green parts, so the outline always has at least 3:1 contrast with what's around it. */
+:root {
+  --focus: #c4511a;
+}
+.site-header,
+.site-footer,
+.hero,
+.page-header,
+.profile-head,
+.story__header,
+.wolfspit,
+.support__inner,
+.card--green,
+.event-card--next,
+.cta {
+  --focus: var(--yellow);
+}
+@media (min-width: 1080px) {
+  /* the header's drop-down lists are white panels */
+  .subnav {
+    --focus: #c4511a;
+  }
+}
 :focus-visible {
-  outline: 3px solid var(--orange);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -65,18 +91,21 @@ a:hover {
    --panel is the colour for tinted boxes inside a band, so they show on either background. */
 .band {
   position: relative;
-  background: var(--band-bg, var(--white));
-  --panel: var(--surface);
+  background: var(--band-bg, var(--water));
 }
 .band--mist {
-  --band-bg: var(--surface);
-  --panel: var(--white);
+  --band-bg: var(--water-deep);
 }
 .band--wave {
   padding-top: 24px;
 }
 .band--wave > .page-section {
   padding-top: 32px;
+}
+
+/* Boxes sitting straight on the blue page are white */
+:root {
+  --panel: var(--white);
 }
 
 /* Layout helpers */

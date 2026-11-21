@@ -2,11 +2,11 @@
 // A full-width page section with its own background, joined to the section above by a wave and duck.
 // Alternate tones down the page so every join shows:
 //
-//   <Band first><section class="container page-section">…</section></Band>   straight after a green header (white, no wave)
-//   <Band tone="mist">…</Band>                                                 pale grey, wave above
-//   <Band>…</Band>                                                             white, wave above
+//   <Band first><section class="container page-section">…</section></Band>   straight after a green header (water blue, no wave)
+//   <Band tone="mist">…</Band>                                                 deeper blue, wave above
+//   <Band>…</Band>                                                             water blue, wave above
 //
-// Inside a band, use var(--panel) for tinted boxes so they stay visible on either tone.
+// Boxes inside a band use var(--panel) (white), so they stand out on either blue.
 import BrookEdge from './BrookEdge.astro';
 
 interface Props {
@@ -17,7 +17,8 @@ interface Props {
   class?: string;
 }
 const { tone = 'white', first = false, class: extra } = Astro.props;
-const fills = { white: 'var(--white)', mist: 'var(--surface)' };
+// "white" is the page's main water blue, "mist" the deeper one (names kept so pages don't need changing)
+const fills = { white: 'var(--water)', mist: 'var(--water-deep)' };
 
 // Number the bands on this page so each wave's duck lands in its own spot (same spot on every visit)
 const locals = Astro.locals as { bandCount?: number };
