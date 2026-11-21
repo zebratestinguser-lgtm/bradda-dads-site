@@ -169,21 +169,22 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
 </style>
 
 <script>
-  // Swimming ducks: while the page scrolls, each duck on screen paddles along its wave in the direction of
-  // scrolling (down = to the right, up = to the left), facing the way it's going. When the page stops they
-  // glide to a halt and just bob. A family turns round together, and its ducks swap places as they turn so
-  // the big duck is always at the front. Nothing moves if the device asks for reduced motion.
+  // Swimming ducks. Each duck's place along its wave follows where the wave is on the screen: as the wave
+  // travels from the bottom of the screen to the top (scrolling down), its ducks swim from one end of their
+  // range to the other, and scrolling up brings them back. So on any screen they keep moving the whole time
+  // the page moves, and reach the end of their range just as the wave leaves the screen. They face the way
+  // they're swimming, turning the moment the scroll changes direction, and glide to a halt when the page
+  // stops. A family turns as one and swaps places so the biggest duck always leads.
+  // Nothing moves if the device asks for reduced motion.
   const ducks = [...document.querySelectorAll<HTMLElement>('.brook__duck')];
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (ducks.length && !still.matches && 'IntersectionObserver' in window) {
-    const MAX = 120; // furthest a duck strays from its spot, in px (less if the screen edge is closer)
+    const MAX = 140; // furthest a duck strays either side of its spot, in px (less if the screen edge is closer)
     const EDGE = 8; // ducks stop this far from the edge of the screen
-    const GAIN = 0.9; // px of paddling per px scrolled (the same for every duck, so they never bump)
-    const TURN = 60; // px of scrolling the other way before turning round (stops twitchy turning on phones)
 
     type Duck = {
       el: HTMLElement;
-      pos: number; // paddling: where it is now…
+      pos: number; // swimming: where it is now…
       target: number; // …and where it's heading
       form: number; // family formation shift: where it is now…
       formTarget: number; // …and where it's heading (0 = the order it was laid out in)
@@ -191,8 +192,8 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       nudge: number; // place in the family, in px from the first duck
       visible: boolean;
     };
-    // A "group" is one duck on its own, or a whole family; groups turn round as one
-    type Group = { ducks: Duck[]; facingRight: boolean; startRight: boolean; span: number; push: number; lo: number; hi: number };
+    // A "group" is one duck on its own, or a whole family; a group swims and turns as one
+    type Group = { ducks: Duck[]; facingRight: boolean; startRight: boolean; span: number; lo: number; hi: number };
 
     const byFamily = new Map<string, Group>();
     const groups: Group[] = [];
@@ -205,7 +206,7 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
         target: 0,
         form: 0,
         formTarget: 0,
-        ease: 0.06 + (52 - size) * 0.002, // small ducks react a little quicker, so they don't move in lockstep
+        ease: 0.1 + (52 - size) * 0.002, // small ducks react a little quicker, so they don't move in lockstep
         nudge: Number(el.dataset.nudge) || 0,
         visible: false,
       };
@@ -215,18 +216,21 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       if (fam && byFamily.has(fam)) {
         byFamily.get(fam)!.ducks.push(d);
       } else {
-        const g: Group = { ducks: [d], facingRight, startRight: facingRight, span: Number(el.dataset.span) || 0, push: 0, lo: -MAX, hi: MAX };
+        const g: Group = { ducks: [d], facingRight, startRight: facingRight, span: Number(el.dataset.span) || 0, lo: -MAX, hi: MAX };
         groups.push(g);
         if (fam) byFamily.set(fam, g);
       }
     }
 
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        const d = all.find((x) => x.el === e.target);
-        if (d) d.visible = e.isIntersecting;
-      }
-    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const d = all.find((x) => x.el === e.target);
+          if (d) d.visible = e.isIntersecting;
+        }
+      },
+      { rootMargin: '80px 0px' },
+    );
     all.forEach((d) => io.observe(d.el));
 
     // How far each group can swim each way before a duck would reach the edge of the screen
@@ -246,11 +250,20 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
         g.hi = Math.max(0, hi);
       }
     };
-    measure();
-    window.addEventListener('resize', measure);
+
+    // Where a group should be for the wave's current place on screen: the left end of its range when the
+    // wave is at the bottom of the screen, its resting spot halfway up, the right end at the top
+    const place = (g: Group) => {
+      const r = g.ducks[0].el.getBoundingClientRect();
+      const h = window.innerHeight;
+      const p = Math.max(0, Math.min(1, (h - r.top) / (h + r.height))); // 0 = bottom of the screen, 1 = top
+      const x = p >= 0.5 ? (2 * p - 1) * g.hi : (1 - 2 * p) * g.lo;
+      for (const d of g.ducks) d.target = x;
+    };
 
     // Turning a family round mirrors its line-up, so the leader moves from one end to the other
     const turn = (g: Group, right: boolean) => {
+      if (g.facingRight === right) return;
       g.facingRight = right;
       const mirrored = right !== g.startRight;
       for (const d of g.ducks) {
@@ -259,14 +272,13 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       }
     };
 
-    let lastY = window.scrollY;
     let running = false;
     const tick = () => {
       let moving = false;
       for (const d of all) {
         if (!d.visible) continue;
         d.pos += (d.target - d.pos) * d.ease;
-        d.form += (d.formTarget - d.form) * 0.08; // swapping places is a gentle glide
+        d.form += (d.formTarget - d.form) * 0.1; // swapping places is a quick glide
         if (Math.abs(d.target - d.pos) > 0.15 || Math.abs(d.formTarget - d.form) > 0.15) moving = true;
         else {
           d.pos = d.target;
@@ -284,28 +296,37 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       }
     };
 
+    // Start: put every duck straight into place for where the page is (no swim on load)
+    measure();
+    for (const g of groups) {
+      place(g);
+      for (const d of g.ducks) {
+        d.pos = d.target;
+        d.el.style.setProperty('--swim', d.pos.toFixed(2) + 'px');
+      }
+    }
+
+    let lastY = window.scrollY;
     window.addEventListener(
       'scroll',
       () => {
         const dy = window.scrollY - lastY;
         lastY = window.scrollY;
         if (!dy) return;
-        const wantsRight = dy > 0;
         for (const g of groups) {
           if (!g.ducks.some((d) => d.visible)) continue;
-          for (const d of g.ducks) d.target = Math.max(g.lo, Math.min(g.hi, d.target + dy * GAIN));
-          if (wantsRight !== g.facingRight) {
-            g.push += Math.abs(dy);
-            if (g.push > TURN) {
-              turn(g, wantsRight);
-              g.push = 0;
-            }
-          } else g.push = 0;
+          place(g);
+          turn(g, dy > 0); // down = swimming right, up = swimming left, from the very first pixel
         }
         kick();
       },
       { passive: true },
     );
+    window.addEventListener('resize', () => {
+      measure();
+      groups.forEach(place);
+      kick();
+    });
 
     // If the setting changes while the page is open, settle the ducks back on their spots
     still.addEventListener('change', () => {
