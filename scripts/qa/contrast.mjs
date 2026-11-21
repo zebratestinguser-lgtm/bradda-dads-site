@@ -23,6 +23,8 @@ const pairs = [
   ['#6b4b00', '#cfe3ee', 'yellow-ink on deep water'],
   ['#4b5a51', '#eef5f9', 'muted on light surface (boxes in cards)'],
   ['#34413a', '#e8f0f5', 'pill "Coming up"'],
+  ['#4b5a51', '#dfe7ec', 'muted text on a closed event card'],
+  ['#34413a', '#dfe7ec', 'event name on a closed event card'],
   ['#4b5a51', '#e8f0f5', 'pill "Done"'],
   ['#ffffff', '#2f6fa3', 'white on sky news tile', true],
   ['#ffffff', '#8a3b12', 'white on ember news tile', true],

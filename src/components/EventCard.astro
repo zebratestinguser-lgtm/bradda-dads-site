@@ -13,11 +13,30 @@ const Heading = headingLevel;
 const tag = statusFor(e, isNext);
 const detailsHref = url(`/events/${e.id}/`);
 const ctaHref = url(e.data.ctaUrl);
+// Closed for this year (entries closed, or the event's done): the card looks "closed", and a sign-up
+// button for something that's closed (e.g. "Add your message") is hidden; "See the photos" etc. stay
+const closed = tag.kind === 'done';
+const showCta = !(closed && e.data.status === 'open');
 ---
 
-<article class:list={['event-card', { 'event-card--next': isNext }]}>
+<article class:list={['event-card', { 'event-card--next': isNext, 'event-card--closed': closed }]}>
   <div class="event-card__top">
-    <span class={`event-card__tag event-card__tag--${tag.kind}`}>{tag.label}</span>
+    <span class={`event-card__tag event-card__tag--${tag.kind}`}>
+      {
+        closed &&
+          (e.data.status === 'open' ? (
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="11" width="14" height="10" rx="2" />
+              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+            </svg>
+          ) : (
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12.5l4.5 4.5L19 7.5" />
+            </svg>
+          ))
+      }
+      {tag.label}
+    </span>
     <span class="event-card__when">{e.data.when}</span>
   </div>
   <Heading class="event-card__name">
@@ -25,12 +44,16 @@ const ctaHref = url(e.data.ctaUrl);
   </Heading>
   <p class="event-card__summary">{e.data.summary}</p>
   <div class="event-card__links">
-    <a class="event-card__cta" href={ctaHref}>
-      {e.data.ctaLabel} <span aria-hidden="true">→</span>
-      <span class="visually-hidden">: {e.data.name}</span>
-    </a>
     {
-      ctaHref !== detailsHref && (
+      showCta && (
+        <a class="event-card__cta" href={ctaHref}>
+          {e.data.ctaLabel} <span aria-hidden="true">→</span>
+          <span class="visually-hidden">: {e.data.name}</span>
+        </a>
+      )
+    }
+    {
+      (ctaHref !== detailsHref || !showCta) && (
         <a class="event-card__more" href={detailsHref}>
           More details<span class="visually-hidden"> about the {e.data.name}</span>
         </a>
@@ -59,6 +82,21 @@ const ctaHref = url(e.data.ctaUrl);
     color: var(--white);
   }
   /* Status pill always on its own line at the top, date underneath: same place on every card, at every width */
+  /* Closed for this year: a quieter blue-grey card with a dashed edge */
+  .event-card--closed {
+    background: #dfe7ec;
+    border: 1.5px dashed #9fb4c1;
+  }
+  .event-card--closed .event-card__name {
+    color: var(--muted-strong);
+  }
+  .event-card--closed .event-card__tag--done {
+    background: var(--white);
+    color: var(--muted-strong);
+  }
+  .event-card__tag svg {
+    flex-shrink: 0;
+  }
   .event-card__top {
     display: flex;
     flex-direction: column;
@@ -80,6 +118,9 @@ const ctaHref = url(e.data.ctaUrl);
     background: var(--border-soft);
     color: var(--muted-strong);
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
   }
   .event-card__tag--open {
     background: var(--yellow-panel);
