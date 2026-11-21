@@ -18,7 +18,7 @@ const PAGES = [
   '/photos/', '/photos/2007-12-12-7th-annual-bradda-dads-christmas-lunch/', '/photos/category/bonfire/',
   '/races/', '/wolfspit/', '/wolfspit/2026/', '/tour-of-bradwell/', '/tour-of-bradwell/long-tour-2017/',
   '/our-story/', '/where-the-money-goes/', '/get-involved/', '/donate/', '/contact/', '/privacy/',
-  '/christmas-card/', '/members/', '/accessibility/', '/search/?q=bonfire', '/this-page-does-not-exist/',
+  '/christmas-card/', '/members/', '/accessibility/', '/game/', '/search/?q=bonfire', '/this-page-does-not-exist/',
 ];
 const VIEWPORTS = [
   { name: 'desktop', width: 1280, height: 900, mobile: false },

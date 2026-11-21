@@ -1,0 +1,637 @@
+---
+// Duck Dash: a little game. Steer a duck down Bradwell Brook between its stone walls, dodging branches and
+// rocks and rescuing lost ducklings, which join your line. Everything is drawn on a canvas; no libraries.
+// Controls: drag or tap (touch), arrow keys or A/D (keyboard), or the on-screen buttons.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { url } from '../lib/url';
+---
+
+<BaseLayout title="Duck Dash" description="A little game: steer a duck down Bradwell Brook, dodge the branches and rescue the lost ducklings.">
+  <PageHeader eyebrow="Just for fun" title="Duck Dash" intro="Steer your duck down Bradwell Brook. Dodge the branches and rocks, and rescue the lost ducklings on the way." />
+
+  <Band first>
+    <section class="container page-section game-wrap" aria-labelledby="game-title">
+      <h2 class="visually-hidden" id="game-title">The game</h2>
+      <div class="game" data-game>
+        <canvas class="game__canvas" data-canvas tabindex="0" role="img" aria-label="Duck Dash game. Use the arrow keys or the buttons below to steer."></canvas>
+        <div class="game__hud" aria-hidden="true">
+          <span class="hud__pill">Score <strong data-score>0</strong></span>
+          <span class="hud__pill">Ducklings <strong data-chicks>0</strong></span>
+          <span class="hud__pill">Best <strong data-best>0</strong></span>
+        </div>
+        <div class="game__overlay" data-overlay>
+          <p class="overlay__title" data-overlay-title>Ready?</p>
+          <p class="overlay__text" data-overlay-text>Drag, tap or use the arrow keys to steer.</p>
+          <button type="button" class="btn btn--yellow overlay__btn" data-start>Start swimming</button>
+        </div>
+        <p class="visually-hidden" aria-live="polite" data-announce></p>
+      </div>
+      <div class="controls">
+        <button type="button" class="ctrl" data-dir="-1" aria-label="Steer left">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+        </button>
+        <div class="ctrl-stack">
+          <button type="button" class="ctrl ctrl--small" data-diry="-1" aria-label="Swim up">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6" /></svg>
+          </button>
+          <button type="button" class="ctrl ctrl--small" data-diry="1" aria-label="Swim down">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+          </button>
+        </div>
+        <button type="button" class="ctrl" data-dir="1" aria-label="Steer right">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+        </button>
+      </div>
+      <button type="button" class="ctrl ctrl--pause" data-pause>Pause</button>
+    </section>
+  </Band>
+
+  <Band tone="mist">
+    <section class="container page-section how" aria-labelledby="how-title">
+      <h2 class="subhead" id="how-title">How to play</h2>
+      <ul class="how__list">
+        <li><strong>Steer</strong> left, right, up and down by dragging your finger, using the arrow keys (or W, A, S and D), or the buttons under the game. Swim up the brook to get ahead, or drop back to make room.</li>
+        <li><strong>Dodge</strong> the branches hanging over the water and the rocks in the brook. Bump into one and it's game over.</li>
+        <li><strong>Rescue ducklings</strong> by swimming into them. They follow you in a line and each one is worth 10 points.</li>
+        <li>The brook gets faster the further you go. Press <strong>Space</strong> or <strong>P</strong> to pause.</li>
+      </ul>
+      <p class="how__more">
+        Want to see the real thing? Come to the <a href={url('/events/duck-race/')}>Boxing Day Duck Race</a>.
+      </p>
+    </section>
+  </Band>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-game]');
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-canvas]');
+  if (root && canvas) {
+    const ctx = canvas.getContext('2d')!;
+    const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel)!;
+    const scoreEl = $('[data-score]');
+    const chicksEl = $('[data-chicks]');
+    const bestEl = $('[data-best]');
+    const overlay = $('[data-overlay]');
+    const overlayTitle = $('[data-overlay-title]');
+    const overlayText = $('[data-overlay-text]');
+    const startBtn = $<HTMLButtonElement>('[data-start]');
+    const pauseBtn = $<HTMLButtonElement>('[data-pause]');
+    const announce = $('[data-announce]');
+
+    // The game is worked out on a fixed 360 × 560 "board", then scaled to fit the screen
+    const W = 360;
+    const H = 560;
+    const WALL = 30; // stone walls each side of the brook
+    const LEFT = WALL;
+    const RIGHT = W - WALL;
+    const TOP_Y = 170; // how far up the brook the duck can swim…
+    const BOTTOM_Y = H - 40; // …and how far back
+    const DUCK_R = 14;
+
+    // Colours from the site
+    const C = {
+      water: '#8fb7d6',
+      waterDeep: '#6f9fc4',
+      ripple: 'rgba(255,255,255,0.45)',
+      wall: '#9b9384',
+      wallDark: '#7d7566',
+      grass: '#5b7a3c',
+      yellow: '#f6c343',
+      yellowDark: '#d9a21e',
+      orange: '#e8702a',
+      ink: '#1a1f1c',
+      bark: '#6b4a2b',
+      barkDark: '#4f361f',
+      leaf: '#3f6b2f',
+      rock: '#8a8f8c',
+      rockDark: '#6c716e',
+    };
+
+    let best = 0;
+    try {
+      best = Number(localStorage.getItem('duckDashBest')) || 0;
+    } catch {}
+    bestEl.textContent = String(best);
+
+    type Branch = { kind: 'branch'; y: number; fromLeft: boolean; len: number; thick: number };
+    type Rock = { kind: 'rock'; y: number; x: number; r: number };
+    type Chick = { kind: 'chick'; y: number; x: number; phase: number };
+    type Thing = Branch | Rock | Chick;
+
+    let duckX = W / 2;
+    let targetX = W / 2;
+    let duckY = H - 120;
+    let targetY = H - 120;
+    let steer = 0; // -1, 0 or 1 while a left/right key or button is held
+    let steerY = 0; // -1 (up), 0 or 1 (down)
+    let speed = 0;
+    let distance = 0;
+    let chicks = 0;
+    let trail: { x: number; y: number }[] = []; // rescued ducklings following behind
+    let things: Thing[] = [];
+    let ripples: { x: number; y: number; len: number }[] = [];
+    let stones: { y: number; side: number; w: number; h: number }[] = [];
+    let nextSpawn = 0;
+    let state: 'ready' | 'playing' | 'paused' | 'over' = 'ready';
+    let last = 0;
+    let wallOffset = 0;
+
+    const reset = () => {
+      duckX = targetX = W / 2;
+      duckY = targetY = H - 120;
+      steer = steerY = 0;
+      speed = 150;
+      distance = 0;
+      chicks = 0;
+      trail = [];
+      things = [];
+      nextSpawn = 120;
+      ripples = Array.from({ length: 26 }, () => ({ x: LEFT + Math.random() * (RIGHT - LEFT), y: Math.random() * H, len: 10 + Math.random() * 22 }));
+      stones = [];
+      for (let y = -40; y < H + 40; y += 22) {
+        stones.push({ y, side: 0, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
+        stones.push({ y: y + 11, side: 1, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
+      }
+      updateHud();
+    };
+
+    const score = () => Math.floor(distance / 20) + chicks * 10;
+    const updateHud = () => {
+      scoreEl.textContent = String(score());
+      chicksEl.textContent = String(chicks);
+    };
+
+    // ---- New obstacles and ducklings, always leaving a way through ----
+    const spawn = () => {
+      const roll = Math.random();
+      const gapNeeded = 92; // the duck always has at least this much room to get past
+      if (roll < 0.5) {
+        const fromLeft = Math.random() < 0.5;
+        const len = 90 + Math.random() * (RIGHT - LEFT - gapNeeded - 90);
+        things.push({ kind: 'branch', y: -30, fromLeft, len, thick: 16 + Math.random() * 6 });
+        if (Math.random() < 0.45) {
+          // a duckling waiting in the clear water beside the branch
+          const freeFrom = fromLeft ? LEFT + len + 24 : LEFT + 24;
+          const freeTo = fromLeft ? RIGHT - 24 : RIGHT - len - 24;
+          if (freeTo > freeFrom) things.push({ kind: 'chick', y: -30, x: freeFrom + Math.random() * (freeTo - freeFrom), phase: Math.random() * 6 });
+        }
+      } else if (roll < 0.85) {
+        const r = 14 + Math.random() * 12;
+        things.push({ kind: 'rock', y: -30, x: LEFT + r + 6 + Math.random() * (RIGHT - LEFT - 2 * r - 12), r });
+        if (Math.random() < 0.3) things.push({ kind: 'chick', y: -90, x: LEFT + 30 + Math.random() * (RIGHT - LEFT - 60), phase: Math.random() * 6 });
+      } else {
+        things.push({ kind: 'chick', y: -30, x: LEFT + 30 + Math.random() * (RIGHT - LEFT - 60), phase: Math.random() * 6 });
+      }
+      // gaps shrink a little as the brook speeds up
+      nextSpawn = Math.max(110, 190 - (speed - 150) * 0.35) + Math.random() * 60;
+    };
+
+    // ---- Collisions ----
+    const hitsBranch = (b: Branch) => {
+      const x0 = b.fromLeft ? LEFT - 10 : RIGHT - b.len;
+      const x1 = b.fromLeft ? LEFT + b.len : RIGHT + 10;
+      const cx = Math.max(x0, Math.min(duckX, x1));
+      const cy = Math.max(b.y - b.thick / 2, Math.min(duckY, b.y + b.thick / 2));
+      return (duckX - cx) ** 2 + (duckY - cy) ** 2 < (DUCK_R - 2) ** 2;
+    };
+    const near = (x: number, y: number, r: number) => (duckX - x) ** 2 + (duckY - y) ** 2 < (DUCK_R + r) ** 2;
+
+    // ---- Drawing ----
+    const drawDuck = (x: number, y: number, s: number, t: number) => {
+      // seen from above, swimming up the screen: body, wing, head, beak (the site's duck colours)
+      const wob = Math.sin(t * 6 + x) * 0.06;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(wob);
+      ctx.scale(s, s);
+      ctx.fillStyle = 'rgba(16,36,26,0.18)';
+      ctx.beginPath();
+      ctx.ellipse(2, 4, 14, 18, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = C.yellow;
+      ctx.beginPath();
+      ctx.ellipse(0, 4, 13, 17, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = C.yellowDark;
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(0, 8, 8, Math.PI * 1.1, Math.PI * 1.9);
+      ctx.stroke();
+      ctx.fillStyle = C.yellow;
+      ctx.beginPath();
+      ctx.arc(0, -12, 8.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = C.orange;
+      ctx.beginPath();
+      ctx.moveTo(-4, -18);
+      ctx.lineTo(0, -26);
+      ctx.lineTo(4, -18);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = C.ink;
+      ctx.beginPath();
+      ctx.arc(-3.5, -14, 1.6, 0, Math.PI * 2);
+      ctx.arc(3.5, -14, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    };
+
+    const drawBranch = (b: Branch) => {
+      const x0 = b.fromLeft ? 0 : RIGHT - b.len;
+      const len = b.fromLeft ? LEFT + b.len : b.len + WALL;
+      ctx.save();
+      ctx.translate(x0, b.y);
+      ctx.fillStyle = 'rgba(16,36,26,0.2)';
+      ctx.fillRect(0, b.thick / 2 - 2, len, 6);
+      ctx.fillStyle = C.bark;
+      ctx.beginPath();
+      ctx.roundRect(0, -b.thick / 2, len, b.thick, b.thick / 2);
+      ctx.fill();
+      ctx.strokeStyle = C.barkDark;
+      ctx.lineWidth = 2;
+      for (let i = 14; i < len - 8; i += 26) {
+        ctx.beginPath();
+        ctx.moveTo(i, -b.thick / 4);
+        ctx.lineTo(i + 10, -b.thick / 4);
+        ctx.stroke();
+      }
+      // twigs and leaves at the tip, over the water
+      const tip = b.fromLeft ? len : 0;
+      ctx.fillStyle = C.leaf;
+      for (const [dx, dy, r] of [
+        [0, -10, 9],
+        [b.fromLeft ? -12 : 12, 9, 8],
+        [b.fromLeft ? -26 : 26, -8, 7],
+      ]) {
+        ctx.beginPath();
+        ctx.arc(tip + dx, dy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    };
+
+    const drawRock = (r: Rock) => {
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.beginPath();
+      ctx.ellipse(r.x, r.y - r.r * 0.9, r.r * 0.9, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = C.rockDark;
+      ctx.beginPath();
+      ctx.ellipse(r.x + 2, r.y + 3, r.r, r.r * 0.85, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = C.rock;
+      ctx.beginPath();
+      ctx.ellipse(r.x, r.y, r.r, r.r * 0.82, 0, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    const draw = (t: number) => {
+      // water
+      ctx.fillStyle = C.water;
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = C.waterDeep;
+      ctx.fillRect(LEFT + 40, 0, RIGHT - LEFT - 80, H);
+      ctx.fillStyle = C.water;
+      ctx.globalAlpha = 0.6;
+      ctx.fillRect(LEFT + 60, 0, RIGHT - LEFT - 120, H);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = C.ripple;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      for (const r of ripples) {
+        ctx.beginPath();
+        ctx.moveTo(r.x, r.y);
+        ctx.lineTo(r.x, r.y + r.len);
+        ctx.stroke();
+      }
+      // stone walls with a strip of grass on top
+      for (const side of [0, 1]) {
+        const x = side === 0 ? 0 : RIGHT;
+        ctx.fillStyle = C.wallDark;
+        ctx.fillRect(x, 0, WALL, H);
+        ctx.fillStyle = C.grass;
+        ctx.fillRect(side === 0 ? 0 : W - 8, 0, 8, H);
+      }
+      for (const st of stones) {
+        const y = ((st.y + wallOffset) % (H + 80)) - 40;
+        const x = st.side === 0 ? 9 : RIGHT + 1;
+        ctx.fillStyle = C.wall;
+        ctx.beginPath();
+        ctx.roundRect(x, y, Math.min(st.w, WALL - 10), st.h, 4);
+        ctx.fill();
+      }
+      // things in the brook
+      for (const th of things) {
+        if (th.kind === 'branch') drawBranch(th);
+        else if (th.kind === 'rock') drawRock(th);
+        else {
+          drawDuck(th.x + Math.sin(t * 2 + th.phase) * 3, th.y, 0.55, t + th.phase);
+        }
+      }
+      // ducklings following, then our duck
+      for (let i = trail.length - 1; i >= 0; i--) drawDuck(trail[i].x, trail[i].y, 0.55, t + i);
+      drawDuck(duckX, duckY, 1, t);
+    };
+
+    // ---- Game loop ----
+    const step = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000 || 0);
+      last = now;
+      const t = now / 1000;
+      if (state === 'playing') {
+        speed = Math.min(380, speed + dt * 5); // the brook speeds up
+        const dy = speed * dt;
+        distance += dy;
+        wallOffset = (wallOffset + dy) % (H + 80);
+        // steering: keys/buttons push, a drag sets a target
+        if (steer) targetX = duckX + steer * 40;
+        if (steerY) targetY = duckY + steerY * 40;
+        targetX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, targetX));
+        targetY = Math.max(TOP_Y, Math.min(BOTTOM_Y, targetY));
+        duckX += (targetX - duckX) * Math.min(1, dt * 10);
+        duckY += (targetY - duckY) * Math.min(1, dt * 10);
+        for (const r of ripples) {
+          r.y += dy * 1.1;
+          if (r.y > H) {
+            r.y = -r.len;
+            r.x = LEFT + Math.random() * (RIGHT - LEFT);
+          }
+        }
+        nextSpawn -= dy;
+        if (nextSpawn <= 0) spawn();
+        for (const th of things) th.y += dy;
+        // collect ducklings, check for bumps
+        for (const th of things) {
+          if (th.kind === 'chick' && near(th.x, th.y, 8)) {
+            th.y = H + 999;
+            chicks++;
+            trail.push({ x: duckX, y: duckY + 30 });
+            announce.textContent = `Duckling rescued. ${chicks} so far.`;
+          } else if ((th.kind === 'branch' && hitsBranch(th)) || (th.kind === 'rock' && near(th.x, th.y, th.r - 3))) {
+            gameOver();
+          }
+        }
+        things = things.filter((th) => th.y < H + 60);
+        // the ducklings follow in a line, each chasing the one in front
+        let lx = duckX;
+        let ly = duckY;
+        for (const c of trail) {
+          c.x += (lx - c.x) * Math.min(1, dt * 7);
+          c.y += (ly + 24 - c.y) * Math.min(1, dt * 7);
+          lx = c.x;
+          ly = c.y;
+        }
+        trail = trail.slice(0, 8); // a long line would run off the bottom
+        updateHud();
+      }
+      draw(t);
+      requestAnimationFrame(step);
+    };
+
+    const show = (title: string, text: string, button: string) => {
+      overlayTitle.textContent = title;
+      overlayText.textContent = text;
+      startBtn.textContent = button;
+      overlay.hidden = false;
+      startBtn.focus({ preventScroll: true });
+    };
+    const start = () => {
+      if (state === 'over' || state === 'ready') reset();
+      state = 'playing';
+      overlay.hidden = true;
+      pauseBtn.textContent = 'Pause';
+      canvas.focus({ preventScroll: true });
+    };
+    const pause = () => {
+      if (state !== 'playing') return;
+      state = 'paused';
+      pauseBtn.textContent = 'Resume';
+      show('Paused', 'Take a breather.', 'Keep swimming');
+    };
+    const gameOver = () => {
+      state = 'over';
+      const s = score();
+      const isBest = s > best;
+      if (isBest) {
+        best = s;
+        bestEl.textContent = String(best);
+        try {
+          localStorage.setItem('duckDashBest', String(best));
+        } catch {}
+      }
+      const msg = `You scored ${s}${chicks ? ` and rescued ${chicks} duckling${chicks === 1 ? '' : 's'}` : ''}.${isBest ? ' A new best!' : ''}`;
+      announce.textContent = `Bump! ${msg}`;
+      show(isBest ? 'New best!' : 'Bump!', msg, 'Swim again');
+    };
+
+    // ---- Controls ----
+    startBtn.addEventListener('click', start);
+    pauseBtn.addEventListener('click', () => (state === 'playing' ? pause() : state === 'paused' ? start() : undefined));
+    document.querySelectorAll<HTMLButtonElement>('.ctrl[data-dir], .ctrl[data-diry]').forEach((b) => {
+      const vertical = b.dataset.diry !== undefined;
+      const dir = Number(vertical ? b.dataset.diry : b.dataset.dir);
+      const on = (e: Event) => {
+        e.preventDefault();
+        if (vertical) steerY = dir;
+        else steer = dir;
+      };
+      const off = () => (vertical ? (steerY = 0) : (steer = 0));
+      b.addEventListener('pointerdown', on);
+      b.addEventListener('pointerup', off);
+      b.addEventListener('pointerleave', off);
+      b.addEventListener('pointercancel', off);
+      b.addEventListener('keydown', (e) => (e.key === 'Enter' || e.key === ' ') && on(e));
+      b.addEventListener('keyup', off);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (['ArrowLeft', 'a', 'A'].includes(e.key)) steer = -1;
+      else if (['ArrowRight', 'd', 'D'].includes(e.key)) steer = 1;
+      else if (['ArrowUp', 'w', 'W'].includes(e.key)) steerY = -1;
+      else if (['ArrowDown', 's', 'S'].includes(e.key)) steerY = 1;
+      else if ((e.key === ' ' || e.key === 'p' || e.key === 'P') && (state === 'playing' || state === 'paused')) {
+        if (document.activeElement?.closest('.ctrl, [data-start]')) return;
+        e.preventDefault();
+        state === 'playing' ? pause() : start();
+        return;
+      } else return;
+      if (state === 'playing') e.preventDefault(); // arrows steer instead of scrolling the page
+    });
+    document.addEventListener('keyup', (e) => {
+      if (['ArrowLeft', 'a', 'A', 'ArrowRight', 'd', 'D'].includes(e.key)) steer = 0;
+      if (['ArrowUp', 'w', 'W', 'ArrowDown', 's', 'S'].includes(e.key)) steerY = 0;
+    });
+    // Touch / mouse: the duck follows your finger across the brook
+    const toBoard = (clientX: number, clientY: number) => {
+      const r = canvas.getBoundingClientRect();
+      return [((clientX - r.left) / r.width) * W, ((clientY - r.top) / r.height) * H];
+    };
+    const follow = (e: PointerEvent) => ([targetX, targetY] = toBoard(e.clientX, e.clientY - 40)); // aim just above your finger so you can see the duck
+    let dragging = false;
+    canvas.addEventListener('pointerdown', (e) => {
+      if (state !== 'playing') return;
+      dragging = true;
+      follow(e);
+      canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointermove', (e) => dragging && follow(e));
+    canvas.addEventListener('pointerup', () => (dragging = false));
+    canvas.addEventListener('pointercancel', () => (dragging = false));
+    // Pause if the page is hidden (switching apps, another tab)
+    document.addEventListener('visibilitychange', () => document.hidden && pause());
+
+    // ---- Size the canvas sharply for the screen ----
+    const fit = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const cssW = canvas.clientWidth;
+      canvas.width = Math.round(cssW * ratio);
+      canvas.height = Math.round(((cssW * H) / W) * ratio);
+      ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    reset();
+    requestAnimationFrame((now) => {
+      last = now;
+      step(now);
+    });
+  }
+</script>
+
+<style>
+  .game-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .game {
+    position: relative;
+    width: min(100%, 420px, calc((100svh - 220px) * 360 / 560));
+    min-width: 260px;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(16, 36, 26, 0.25);
+    background: #8fb7d6;
+    touch-action: none; /* dragging steers the duck instead of scrolling the page */
+    user-select: none;
+  }
+  .game__canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 360 / 560;
+  }
+  .game__canvas:focus-visible {
+    outline-offset: -4px;
+  }
+  .game__hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 6px;
+    pointer-events: none;
+  }
+  .hud__pill {
+    background: rgba(16, 36, 26, 0.82);
+    color: var(--white);
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .hud__pill strong {
+    color: var(--yellow);
+  }
+  .game__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+    text-align: center;
+    background: rgba(16, 36, 26, 0.72);
+    color: var(--white);
+  }
+  .overlay__title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--yellow);
+  }
+  .overlay__text {
+    font-size: 17px;
+    max-width: 26ch;
+    color: var(--on-dark-soft);
+  }
+  .overlay__btn {
+    margin-top: 6px;
+  }
+  .controls {
+    display: flex;
+    gap: 12px;
+    width: min(100%, 420px);
+  }
+  .ctrl {
+    flex: 1;
+    min-height: 56px;
+    border: 0;
+    border-radius: var(--radius-card);
+    background: var(--green);
+    color: var(--white);
+    font: inherit;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+  }
+  .ctrl:active {
+    background: var(--green-hover);
+  }
+  .ctrl-stack {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ctrl--small {
+    min-height: 48px;
+  }
+  .ctrl--pause {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 0 28px;
+    background: var(--white);
+    color: var(--green);
+    border: 2px solid var(--green);
+  }
+  .how {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 72ch;
+  }
+  .how__list {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+  }
+  .how__more {
+    font-size: 17px;
+  }
+</style>

@@ -9,7 +9,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   /* No rubber-band overscroll; if a browser still shows past the edges, it's the header/footer green, not white */
-  overscroll-behavior-y: none;
+  overscroll-behavior: none; /* both directions */
   background: var(--green-deep);
   scroll-behavior: smooth;
   /* the header is pinned to the top, so jump links land below it */
@@ -26,6 +26,9 @@ body {
   /* Long URLs (common in imported posts) wrap instead of overflowing. "break-word" only breaks a
      word when it genuinely can't fit, so short labels like "NOVEMBER" are never split. */
   overflow-wrap: break-word;
+  /* never let anything make the page scroll sideways ("clip" keeps the sticky header working) */
+  overflow-x: clip;
+  overscroll-behavior: none;
 }
 
 /* Make the hidden attribute win over component display rules (used by filters and search) */
