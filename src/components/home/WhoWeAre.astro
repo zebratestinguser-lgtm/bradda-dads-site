@@ -173,4 +173,18 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
       padding: 22px 20px;
     }
   }
+  @media (max-width: 600px) {
+    .who__facts {
+      gap: 8px;
+    }
+    .fact {
+      padding: 12px 12px;
+    }
+    .fact__big {
+      font-size: clamp(22px, 7vw, 28px); /* three tiles across a phone: the numbers must fit */
+    }
+    .impact__duck {
+      display: none; /* saves a row on phones; the waves have plenty of ducks */
+    }
+  }
 </style>

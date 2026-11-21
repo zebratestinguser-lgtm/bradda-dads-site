@@ -61,12 +61,12 @@ async function functional(f) {
   // News filter
   await load('/bradda-dads-site/news/'); await wait(300);
   let d = f.contentDocument, w = f.contentWindow;
-  const vis = () => [...d.querySelectorAll('.news-row')].filter((r) => r.offsetParent !== null).length;
+  const vis = () => [...d.querySelectorAll('[data-row]')].filter((r) => r.offsetParent !== null).length;
   const total = vis();
   const btn = [...d.querySelectorAll('[data-filters] button')].find((b) => b.dataset.tag === 'Bonfire');
   btn.click(); await wait(100);
-  const bon = vis(); const expected = d.querySelectorAll('.news-row[data-tag="Bonfire"]').length;
-  const groupsShown = [...d.querySelectorAll('[data-year-group]')].filter((g) => g.offsetParent !== null).length;
+  const bon = vis(); const expected = d.querySelectorAll('[data-row][data-tag="Bonfire"]').length;
+  const groupsShown = [...d.querySelectorAll('[data-year]')].filter((g) => g.offsetParent !== null).length;
   res.push(`news filter: all=${total}, Bonfire shown=${bon} (expected ${expected}), year groups shown=${groupsShown}, pressed=${btn.getAttribute('aria-pressed')}`);
   d.querySelector('[data-filters] button[data-tag=""]').click(); await wait(100);
   res.push(`news filter reset: shown=${vis()}`);
@@ -85,19 +85,19 @@ async function functional(f) {
   d = f.contentDocument; w = f.contentWindow;
   const a = d.querySelector('[data-any-year]'); a.value = 'kneen'; a.dispatchEvent(new w.Event('input')); await wait(100);
   res.push(`any-year "kneen": ${d.querySelectorAll('[data-any-results] li').length} hits, first="${(d.querySelector('[data-any-results] li')||{}).textContent}"`);
-  // Homepage band tabs
-  await load('/bradda-dads-site/'); await wait(300);
+  // Results band year tabs (on the Wolf's Pit page)
+  await load('/bradda-dads-site/wolfspit/'); await wait(300);
   d = f.contentDocument; w = f.contentWindow;
   const tab = [...d.querySelectorAll('.year-tab[role=tab]')].find((t) => t.dataset.year === '2023');
   tab.click(); await wait(100);
-  res.push(`home tabs: 2023 selected=${tab.getAttribute('aria-selected')}, caption="${d.querySelector('[data-caption]').textContent.trim()}", winner="${d.querySelector('[data-podium] .podium__name').textContent}"`);
+  res.push(`results tabs: 2023 selected=${tab.getAttribute('aria-selected')}, caption="${d.querySelector('[data-caption]').textContent.trim()}", winner="${d.querySelector('[data-podium] .podium__name').textContent}"`);
   // Lightbox
   await load('/bradda-dads-site/photos/2007-12-12-7th-annual-bradda-dads-christmas-lunch/'); await wait(300);
   d = f.contentDocument; w = f.contentWindow;
-  d.querySelectorAll('.gallery__item')[2].click(); await wait(100);
-  const dlg = d.querySelector('[data-lightbox]'); const cap1 = d.querySelector('[data-lb-caption]').textContent;
+  d.querySelectorAll('[data-lb]')[2].click(); await wait(100);
+  const dlg = d.querySelector('[data-lightbox]'); const capEl = () => dlg.querySelector('[class*=caption]'); const cap1 = capEl().textContent;
   dlg.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); await wait(50);
-  const cap2 = d.querySelector('[data-lb-caption]').textContent;
+  const cap2 = capEl().textContent;
   d.querySelector('[data-lb-close]').click(); await wait(50);
   res.push(`lightbox: open=${cap1 ? 'yes' : 'no'} caption1="${cap1}", after → "${cap2}", closed=${!dlg.open}, focus back="${d.activeElement && d.activeElement.getAttribute('aria-label')}"`);
   return res;

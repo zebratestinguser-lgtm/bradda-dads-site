@@ -43,8 +43,8 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
         <tr>
           <th scope="col">Pos</th>
           <th scope="col">Runner</th>
-          {hasClubs && <th scope="col">Club</th>}
-          {hasCats && <th scope="col">Category</th>}
+          {hasClubs && <th scope="col" class="col-club">Club</th>}
+          {hasCats && <th scope="col" class="col-cat">Category</th>}
           <th scope="col" class="num">Time</th>
         </tr>
       </thead>
@@ -53,9 +53,12 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
           rows.map((r) => (
             <tr data-name={r.name.toLowerCase()} data-club={r.club.toLowerCase()} data-cat={r.category}>
               <td class="pos">{r.position}</td>
-              <td>{r.name}</td>
-              {hasClubs && <td class="muted">{r.club}</td>}
-              {hasCats && <td class="muted">{r.category}</td>}
+              <td>
+                {r.name}
+                {(r.club || r.category) && <span class="club-inline">{[r.club, r.category].filter(Boolean).join(' · ')}</span>}
+              </td>
+              {hasClubs && <td class="muted col-club">{r.club}</td>}
+              {hasCats && <td class="muted col-cat">{r.category}</td>}
               <td class="num">{r.time}</td>
             </tr>
           ))

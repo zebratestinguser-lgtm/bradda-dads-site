@@ -399,12 +399,72 @@ const dates = event ? formatEventDates(event) : undefined;
     line-height: 1.45;
     color: var(--muted-strong);
   }
-  @media (max-width: 480px) {
-    .countdown {
-      padding: 24px 20px;
+  /* Phones: get to the point within about one screen. Tighter type, a wide short photo instead of a tall
+     one, and a compact countdown card tucked over its lower edge. */
+  @media (max-width: 600px) {
+    .hero {
+      padding-block: 20px 64px;
+    }
+    .hero__inner {
+      gap: 26px;
+    }
+    .hero__copy {
+      gap: 14px;
+    }
+    .hero__badge {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+    .hero__title {
+      font-size: clamp(36px, 10.5vw, 44px);
+    }
+    .hero__text {
+      font-size: 16.5px;
+      line-height: 1.5;
+    }
+    .hero__meta {
+      font-size: 15px;
+      gap: 6px 16px;
+    }
+    .hero__actions :global(.btn) {
+      flex: 1 1 0;
+      justify-content: center;
+    }
+    .hero__photo {
+      aspect-ratio: 16 / 9;
+      max-width: none;
+      transform: none;
+      border-radius: var(--radius-card);
+    }
+    .hero__side--photo .countdown {
+      margin: -28px 12px 0;
+      max-width: none;
+      padding: 16px 18px;
+      gap: 10px;
+      transform: none;
+    }
+    .countdown__label {
+      font-size: 12px;
+    }
+    .countdown__cell {
+      padding: 8px 6px;
     }
     .countdown__num {
-      font-size: 36px;
+      font-size: 30px;
+    }
+    .countdown__tbc {
+      font-size: 13px;
+    }
+    .countdown__note {
+      gap: 12px;
+    }
+    .countdown__note :global(svg) {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+    .countdown__note p {
+      font-size: 13.5px;
     }
   }
 </style>

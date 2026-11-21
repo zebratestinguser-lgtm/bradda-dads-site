@@ -39,6 +39,8 @@ const raceYears = raceAll.map((y) => y.year).sort((a, b) => a - b);
 const latestRace = raceAll[0];
 // Header photo: the event's own heroImage if set, else the latest real photo from its albums
 const photo = d.heroImage ? { src: d.heroImage, label: d.heroImageCaption } : await eventPhoto(event.id);
+// The main action shows in the header, and again in a slim bar at the bottom of phone screens
+const showCta = () => !ctaIsSelf && (d.status !== 'open' || open);
 const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
 ---
 
@@ -61,8 +63,8 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
         {isPlaceholder(d.location) ? 'Place to be confirmed' : d.location}
       </li>
     </ul>
-    {!ctaIsSelf && (d.status !== 'open' || open) && (
-      <a class="btn btn--yellow btn--md" href={ctaHref}>
+    {showCta() && (
+      <a class="btn btn--yellow btn--md" href={ctaHref} data-header-cta>
         {d.ctaLabel}
         {d.price && ` · ${d.price}`}
       </a>
@@ -165,9 +167,80 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
       </section></Band>
     )
   }
+  {
+    showCta() && (
+      <div class="sticky-cta" data-sticky-cta hidden>
+        <span class="sticky-cta__name">{d.name}</span>
+        <a class="btn btn--yellow sticky-cta__btn" href={ctaHref} tabindex="-1">
+          {d.ctaLabel}
+          {d.price && ` · ${d.price}`}
+        </a>
+      </div>
+    )
+  }
 </BaseLayout>
 
+<script>
+  // Phones: once the header's main button has scrolled away, keep it handy in a bar at the bottom of the
+  // screen; hide it again near the footer. (Tab skips the copy; the header button is the one in the order.)
+  const bar = document.querySelector<HTMLElement>('[data-sticky-cta]');
+  const headerCta = document.querySelector<HTMLElement>('[data-header-cta]');
+  const footer = document.querySelector('footer');
+  if (bar && headerCta && footer && 'IntersectionObserver' in window) {
+    let ctaVisible = true;
+    let footerVisible = false;
+    const update = () => bar.classList.toggle('is-shown', !ctaVisible && !footerVisible);
+    bar.hidden = false;
+    new IntersectionObserver(([e]) => ((ctaVisible = e.isIntersecting), update())).observe(headerCta);
+    new IntersectionObserver(([e]) => ((footerVisible = e.isIntersecting), update())).observe(footer);
+  }
+</script>
+
 <style>
+  .sticky-cta {
+    display: none;
+  }
+  @media (max-width: 600px) {
+    .sticky-cta {
+      position: fixed;
+      left: 10px;
+      right: 10px;
+      bottom: calc(10px + env(safe-area-inset-bottom));
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 10px 10px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--green-deep);
+      color: var(--white);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(160%);
+      transition: transform 0.25s ease;
+    }
+    .sticky-cta.is-shown {
+      transform: none;
+    }
+    .sticky-cta__name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 15px;
+      line-height: 1.15;
+      min-width: 0;
+    }
+    .sticky-cta__btn {
+      flex-shrink: 0;
+      min-height: 44px;
+      padding: 0 18px;
+      font-size: 15px;
+    }
+  }
+  @media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+    .sticky-cta {
+      transition: none;
+    }
+  }
   .ev-section {
     display: flex;
     flex-direction: column;

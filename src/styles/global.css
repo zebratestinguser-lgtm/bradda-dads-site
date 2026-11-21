@@ -407,3 +407,68 @@ a:hover {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Results tables on phones: club and category move under the runner's name, so the time always fits */
+.club-inline {
+  display: none;
+}
+@media (max-width: 600px) {
+  .col-club,
+  .col-cat {
+    display: none;
+  }
+  .club-inline {
+    display: block;
+    font-size: 13px;
+    line-height: 1.3;
+    color: var(--muted);
+  }
+}
+
+/* Album grids on event pages: two to a row on phones */
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+}
+
+/* Touch screens: a gentle press when a card or tile is tapped, instead of the browser's grey flash */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .album,
+  .tile,
+  .race,
+  .rcard,
+  .member,
+  .event-card,
+  .news-item,
+  .news-lead,
+  .card,
+  .project,
+  .way,
+  .entry__card {
+    transition: transform 0.12s ease;
+  }
+  .album:active,
+  .tile:active,
+  .race:active,
+  .rcard:active,
+  .member:active,
+  .event-card:active,
+  .news-item:active,
+  .news-lead:active,
+  .card:active,
+  .project:active {
+    transform: scale(0.98);
+  }
+}
+@media (max-width: 600px) {
+  /* With club and category tucked under the name, the results tables fit a phone without sideways scrolling */
+  .rt__table,
+  .results-table {
+    min-width: 0 !important;
+  }
+}

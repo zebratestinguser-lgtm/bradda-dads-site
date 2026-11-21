@@ -7,8 +7,10 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const NOTE = /\s*\[PLACEHOLDER[^\]<]*\]/g;
-// Paragraphs or list items left empty once a note is removed
-const EMPTY = /<(p|li|span|dd)(\s[^>]*)?>\s*<\/\1>/g;
+// Notes are first swapped for a marker, so only elements that held nothing but a note get removed.
+// (Decorative empty elements elsewhere, like the lines of the menu icon, are left alone.)
+const MARK = '@@PLACEHOLDER-REMOVED@@';
+const EMPTIED = /<(p|li|span|dd)(\s[^>]*)?>\s*@@PLACEHOLDER-REMOVED@@\s*<\/\1>/g;
 
 async function* htmlFiles(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -31,7 +33,7 @@ export default function hidePlaceholders() {
           if (!found) continue;
           notes += found.length;
           pages++;
-          await writeFile(file, html.replace(NOTE, '').replace(EMPTY, ''));
+          await writeFile(file, html.replace(NOTE, MARK).replace(EMPTIED, '').split(MARK).join(''));
         }
         logger.info(`Hid ${notes} placeholder notes on ${pages} pages (see TODO-content.md)`);
       },

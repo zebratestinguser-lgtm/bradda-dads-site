@@ -122,4 +122,40 @@ const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${
     font-weight: 400;
     color: var(--muted);
   }
+  /* Phones: albums sit two to a row, so each shows just its cover (square), with smaller text */
+  @media (max-width: 600px) {
+    .album__tiles {
+      display: block;
+      border-radius: 14px;
+    }
+    .album__tile:not(.album__tile--main) {
+      display: none;
+    }
+    .album__tile--main,
+    .album__tile--solo {
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+    .album__date-chip {
+      top: 8px;
+      left: 8px;
+      font-size: 12px;
+      padding: 3px 8px;
+    }
+    .album__name {
+      font-size: 15px;
+      line-height: 1.25;
+      /* very long imported titles stop at three lines */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .album__meta {
+      font-size: 13px;
+    }
+    .album__cat {
+      display: none; /* the category is clear from where the album appears */
+    }
+  }
 </style>

@@ -149,4 +149,24 @@ const tiles = [
       transform: scale(1.05);
     }
   }
+  /* Phones: two tiles per row, so the four fit in about one screen */
+  @media (max-width: 600px) {
+    .explore__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .tile__media {
+      aspect-ratio: 1 / 1;
+    }
+    .tile__body {
+      padding: 12px 14px 14px;
+    }
+    .tile__name {
+      font-size: 18px;
+    }
+    .tile__text {
+      font-size: 13px;
+      line-height: 1.35;
+    }
+  }
 </style>
