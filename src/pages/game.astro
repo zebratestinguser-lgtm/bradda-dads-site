@@ -65,9 +65,10 @@ import { url } from '../lib/url';
         <li><strong>Rescue ducklings</strong> by swimming into them: 10 points each, and they follow you in a line. They're your lives too.</li>
         <li><strong>Bump</strong> a branch or rock and ducklings at the back of your line scatter. Bump with no ducklings left and it's game over.</li>
         <li><strong>Avoid whirlpools.</strong> They pull you in, and their middle spins a duckling away.</li>
-        <li><strong>Numbered race ducks</strong> drift down the brook too. Bump one and you both bounce apart, which might send you towards a branch.</li>
+        <li><strong>Each season has its own challenge:</strong> slippery ice patches in winter, blossom clumps that slow you in spring, sandy shallows that drag you back in summer, and leaf piles in autumn that sometimes hide a rock.</li>
+        <li><strong>Numbered race ducks</strong> drift down the brook in all sizes. Bump one and you bounce apart: little ones give you a nudge, big ones a real shove, and the rare giant sends you flying.</li>
         <li>Catch the rare <strong>golden duck</strong> for double points for 10 seconds.</li>
-        <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs faster. Bumps cost more ducklings each season too: one in the first season, then two, three and four. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year as it keeps getting faster (and lose that bonus if you're knocked out).</li>
+        <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs faster. Bumps cost more ducklings each season too: one in the first season, then two, three and four. Get through a whole season without a bump for 20 bonus points. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year as it keeps getting faster (and lose that bonus if you're knocked out).</li>
         <li><strong>Space</strong> or <strong>P</strong> pauses. Quacks and phone buzzes are off until you switch them on.</li>
       </ul>
       <p class="how__more">
@@ -107,42 +108,35 @@ import { url } from '../lib/url';
     const BOTTOM_Y = H - 40; // …and how far back
     const DUCK_R = 14;
     const MAX_LINE = 8; // longest line of ducklings that fits on screen
-    // ?test in the address makes the duck unbumpable, so automated checks can play long enough to meet everything
-    const TEST = new URLSearchParams(location.search).has('test');
-
-    // ---------- Seasons: the brook follows the calendar ----------
-    const month = new Date().getMonth();
-    type Season = 'winter' | 'spring' | 'summer' | 'autumn';
-    const fromDate: Season = month === 11 || month <= 1 ? 'winter' : month <= 4 ? 'spring' : month <= 7 ? 'summer' : 'autumn';
-    // ?season=winter (etc.) previews another season, for checking the look
-    const asked = new URLSearchParams(location.search).get('season') as Season | null;
-    const startSeason: Season = asked && ['winter', 'spring', 'summer', 'autumn'].includes(asked) ? asked : fromDate;
-    // Four levels, one per season: start in today's season and swim through the year in order
-    const ORDER: Season[] = ['winter', 'spring', 'summer', 'autumn'];
     const LEVEL_TIME = 30; // seconds per season
-    const LOOKS = {
-      winter: { name: 'Winter', label: 'Winter on the brook', grass: '#dfe9ee', water: '#93b9d3', deep: '#7aa6c6', bar: '#ffffff' },
-      spring: { name: 'Spring', label: 'Spring on the brook', grass: '#6f9a45', water: '#8fb7d6', deep: '#6f9fc4', bar: '#f3a6c2' },
-      summer: { name: 'Summer', label: 'Summer on the brook', grass: '#5b8a34', water: '#88b8d8', deep: '#679ec7', bar: '#5f9c45' },
-      autumn: { name: 'Autumn', label: 'Autumn on the brook', grass: '#8a7a3a', water: '#8db2cf', deep: '#6d9bbd', bar: '#d9822b' },
-    };
+    const CHICK_GAP = 700; // at least this far between ducklings (about four seconds at the start)
+    const CLEAN_BONUS = 20; // for getting through a season without a bump
+    // ?test in the address: no game over with an empty line, so automated checks can play long enough
+    const params = new URLSearchParams(location.search);
+    const TEST = params.has('test');
+
+    // ---------- Seasons: four levels, starting in today's season ----------
+    type Season = 'winter' | 'spring' | 'summer' | 'autumn';
+    const ORDER: Season[] = ['winter', 'spring', 'summer', 'autumn'];
+    const month = new Date().getMonth();
+    const fromDate: Season = month === 11 || month <= 1 ? 'winter' : month <= 4 ? 'spring' : month <= 7 ? 'summer' : 'autumn';
+    const asked = params.get('season') as Season | null; // ?season=winter previews a season
+    const startSeason: Season = asked && ORDER.includes(asked) ? asked : fromDate;
     const yearOrder = Array.from({ length: 4 }, (_, i) => ORDER[(ORDER.indexOf(startSeason) + i) % 4]);
-    let season: Season = startSeason;
-    let SEASON = LOOKS[season];
-    let level = 0; // 0–3
-    let year = 1;
-    let seasonsDone = 0; // seasons completed in this game, across years: every one makes the brook faster…
-    const baseSpeed = () => Math.min(720, 150 + seasonsDone * 55);
-    const bumpCost = () => Math.min(4, seasonsDone + 1); // …and bumps cost more ducklings: 1, 2, 3, then 4
-    let levelTime = 0;
-    let banner: { text: string; sub: string; t: number } | null = null;
+    const LOOKS = {
+      winter: { name: 'Winter', grass: '#dfe9ee', water: '#93b9d3', deep: '#7aa6c6', bar: '#ffffff', leaf: '#e8eef2', hazard: 'ice patches make steering slippery' },
+      spring: { name: 'Spring', grass: '#6f9a45', water: '#8fb7d6', deep: '#6f9fc4', bar: '#f3a6c2', leaf: '#7fb25a', hazard: 'blossom clumps slow you down' },
+      summer: { name: 'Summer', grass: '#5b8a34', water: '#88b8d8', deep: '#679ec7', bar: '#5f9c45', leaf: '#3f6b2f', hazard: 'sandy shallows drag you back' },
+      autumn: { name: 'Autumn', grass: '#8a7a3a', water: '#8db2cf', deep: '#6d9bbd', bar: '#d9822b', leaf: '#c9702a', hazard: 'leaf piles can hide rocks' },
+    };
     seasonEl.textContent = `Starting in ${LOOKS[startSeason].name.toLowerCase()}` + (month === 11 ? ' · Merry Christmas!' : '');
 
-    // Colours from the site
     const C = {
       ripple: 'rgba(255,255,255,0.45)',
       wall: '#9b9384',
       wallDark: '#7d7566',
+      bridge: '#a39a8a',
+      bridgeDark: '#857c6c',
       yellow: '#f6c343',
       yellowDark: '#d9a21e',
       gold: '#ffd84d',
@@ -150,12 +144,11 @@ import { url } from '../lib/url';
       ink: '#1a1f1c',
       bark: '#6b4a2b',
       barkDark: '#4f361f',
-      leaf: '#3f6b2f',
       rock: '#8a8f8c',
       rockDark: '#6c716e',
     };
 
-    // ---------- Sound & buzz (off until switched on; sounds are synthesised, no files) ----------
+    // ---------- Sound & buzz (off until switched on; synthesised, no files) ----------
     let soundOn = false;
     try {
       soundOn = localStorage.getItem('duckDashSound') === 'on';
@@ -210,8 +203,9 @@ import { url } from '../lib/url';
         splash();
         if (soundOn) navigator.vibrate?.(120);
       },
-      gold: () => [880, 1109, 1319, 1760].forEach((f, i) => tone(f, 0.18, 'triangle', f, 0.12, i * 0.07)),
-      boing: () => tone(220, 0.16, 'sine', 520, 0.12),
+      chime: () => [880, 1109, 1319, 1760].forEach((f, i) => tone(f, 0.18, 'triangle', f, 0.12, i * 0.07)),
+      season: () => [523, 659, 784].forEach((f, i) => tone(f, 0.22, 'sine', f, 0.1, i * 0.1)),
+      boing: (big: number) => tone(260 / big, 0.16, 'sine', 600 / big, 0.12),
       over: () => {
         splash();
         tone(400, 0.5, 'triangle', 120, 0.12, 0.1);
@@ -238,32 +232,37 @@ import { url } from '../lib/url';
     } catch {}
     bestEl.textContent = String(best);
 
-    // ---------- Things in the brook ----------
-    type Branch = { kind: 'branch'; y: number; fromLeft: boolean; len: number; thick: number };
-    type Rock = { kind: 'rock'; y: number; x: number; r: number };
-    type Chick = { kind: 'chick'; y: number; x: number; phase: number };
-    type Whirl = { kind: 'whirl'; y: number; x: number; r: number; spun: boolean };
-    type Gold = { kind: 'gold'; y: number; x: number; phase: number };
-    type Racer = { kind: 'race'; y: number; x: number; num: number; cool: number };
-    type Thing = Branch | Rock | Chick | Whirl | Gold | Racer;
+    // ---------- Things in the brook (each remembers the season it appeared in, for its look) ----------
+    type Base = { y: number; s: Season };
+    type Branch = Base & { kind: 'branch'; fromLeft: boolean; len: number; thick: number };
+    type Rock = Base & { kind: 'rock'; x: number; r: number };
+    type Chick = Base & { kind: 'chick'; x: number; phase: number };
+    type Whirl = Base & { kind: 'whirl'; x: number; r: number; spun: boolean };
+    type Gold = Base & { kind: 'gold'; x: number; phase: number };
+    type Racer = Base & { kind: 'race'; x: number; num: number; cool: number; size: number }; // size: 0.55 small … 1.5 giant
+    type Ice = Base & { kind: 'ice'; x: number; w: number; h: number };
+    type Blossom = Base & { kind: 'blossom'; x: number; r: number };
+    type Shallow = Base & { kind: 'shallow'; fromLeft: boolean; w: number; h: number };
+    type Pile = Base & { kind: 'pile'; x: number; r: number; rock: boolean; done: boolean };
+    type Thing = Branch | Rock | Chick | Whirl | Gold | Racer | Ice | Blossom | Shallow | Pile;
     type Leaver = { x: number; y: number; vx: number; vy: number; life: number }; // ducklings leaving the line
-    type Bit = { x: number; y: number; vx: number; vy: number; rot: number; size: number; tint: string }; // seasonal snow, leaves, petals
+    type Bit = { x: number; y: number; vx: number; vy: number; rot: number; size: number; tint: string; s: Season }; // snow, petals, lily pads, leaves
 
     let duckX = W / 2;
     let targetX = W / 2;
     let duckY = H - 120;
     let targetY = H - 120;
-    let steer = 0; // -1, 0 or 1 while a left/right key or button is held
-    let steerY = 0; // -1 (up), 0 or 1 (down)
+    let steer = 0;
+    let steerY = 0;
     let speed = 0;
     let distance = 0;
     let points = 0;
     let rescued = 0;
     let kickX = 0; // a knock from a race duck, fading away
     let kickY = 0;
-    let goldTime = 0; // seconds of double points left
-    let safeTime = 0; // seconds of bump protection left after losing a duckling
-    let trail: { x: number; y: number }[] = []; // ducklings following behind (your lives)
+    let goldTime = 0;
+    let safeTime = 0;
+    let trail: { x: number; y: number }[] = [];
     let leavers: Leaver[] = [];
     let things: Thing[] = [];
     let ripples: { x: number; y: number; len: number }[] = [];
@@ -271,55 +270,43 @@ import { url } from '../lib/url';
     let stones: { y: number; side: number; w: number; h: number }[] = [];
     let nextSpawn = 0;
     let raceNum = 1;
+    let lastChick = -9999;
     let state: 'ready' | 'playing' | 'paused' | 'over' = 'ready';
     let last = 0;
     let wallOffset = 0;
 
+    // Seasons and years
+    let season: Season = startSeason; // the season the duck is in (rules and hazards)
+    let level = 0; // 0–3 within the year
+    let year = 1;
+    let seasonsDone = 0; // completed seasons this game: each makes the brook faster and bumps costlier
+    let levelTime = 0;
+    let bumpedThisSeason = false;
+    // A season change flows down the brook: a footbridge appears at the top and travels down with the water;
+    // above it the brook already looks like the new season. The rules change as the duck swims under it.
+    let change: { y: number; from: Season; to: Season; newYear: boolean; crossed: boolean } | null = null;
+    let label: { text: string; sub: string; t: number } | null = null; // the little label that slides in at the top
+    let atYearEnd = false;
+
     const mult = () => (goldTime > 0 ? 2 : 1);
     const score = () => Math.floor(points);
+    const baseSpeed = () => Math.min(720, 150 + seasonsDone * 55);
+    const bumpCost = () => Math.min(4, seasonsDone + 1);
+    const spawnSeason = () => (change ? change.to : season); // new things appear at the top, in the coming season
 
-    const makeBit = (anywhere: boolean): Bit => {
-      const tints =
-        season === 'winter' ? ['#ffffff'] : season === 'autumn' ? ['#d9822b', '#c2452d', '#e0b13a', '#9c5a24'] : season === 'spring' ? ['#f7c6d9', '#ffffff', '#f3a6c2'] : ['#4f8a3a', '#5f9c45'];
+    const BIT_COUNT = { winter: 40, spring: 14, summer: 5, autumn: 14 };
+    const makeBit = (anywhere: boolean, s: Season = spawnSeason()): Bit => {
+      const tints = s === 'winter' ? ['#ffffff'] : s === 'autumn' ? ['#d9822b', '#c2452d', '#e0b13a', '#9c5a24'] : s === 'spring' ? ['#f7c6d9', '#ffffff', '#f3a6c2'] : ['#4f8a3a', '#5f9c45'];
       return {
-        x: (season === 'winter' ? 0 : LEFT) + Math.random() * (season === 'winter' ? W : RIGHT - LEFT),
+        x: (s === 'winter' ? 0 : LEFT) + Math.random() * (s === 'winter' ? W : RIGHT - LEFT),
         y: anywhere ? Math.random() * H : -10,
         vx: (Math.random() - 0.5) * 12,
-        vy: season === 'winter' ? 25 + Math.random() * 25 : 0,
+        vy: s === 'winter' ? 25 + Math.random() * 25 : 0,
         rot: Math.random() * 6,
-        size: season === 'summer' ? 9 + Math.random() * 5 : season === 'winter' ? 1.5 + Math.random() * 2 : 3 + Math.random() * 3,
+        size: s === 'summer' ? 9 + Math.random() * 5 : s === 'winter' ? 1.5 + Math.random() * 2 : 3 + Math.random() * 3,
         tint: tints[Math.floor(Math.random() * tints.length)],
+        s,
       };
-    };
-
-    const reset = () => {
-      duckX = targetX = W / 2;
-      duckY = targetY = H - 120;
-      steer = steerY = 0;
-      speed = 150;
-      level = 0;
-      year = 1;
-      seasonsDone = 0;
-      lastChick = -9999;
-      levelTime = 0;
-      season = startSeason;
-      SEASON = LOOKS[season];
-      banner = { text: SEASON.name, sub: 'Season 1 of 4 · bumps cost 1 duckling', t: 2.4 };
-      distance = points = rescued = kickX = kickY = 0;
-      goldTime = safeTime = 0;
-      trail = [];
-      leavers = [];
-      things = [];
-      nextSpawn = 120;
-      raceNum = 1 + Math.floor(Math.random() * 400);
-      ripples = Array.from({ length: 26 }, () => ({ x: LEFT + Math.random() * (RIGHT - LEFT), y: Math.random() * H, len: 10 + Math.random() * 22 }));
-      bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
-      stones = [];
-      for (let y = -40; y < H + 40; y += 22) {
-        stones.push({ y, side: 0, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
-        stones.push({ y: y + 11, side: 1, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
-      }
-      updateHud();
     };
 
     const updateHud = () => {
@@ -329,47 +316,95 @@ import { url } from '../lib/url';
       if (goldTime > 0) goldEl.textContent = `Golden duck ×2 · ${Math.ceil(goldTime)}s`;
     };
 
+    const reset = () => {
+      duckX = targetX = W / 2;
+      duckY = targetY = H - 120;
+      steer = steerY = 0;
+      speed = 150;
+      distance = points = rescued = kickX = kickY = 0;
+      goldTime = safeTime = 0;
+      trail = [];
+      leavers = [];
+      things = [];
+      nextSpawn = 120;
+      raceNum = 1 + Math.floor(Math.random() * 400);
+      lastChick = -9999;
+      season = startSeason;
+      level = 0;
+      year = 1;
+      seasonsDone = 0;
+      levelTime = 0;
+      bumpedThisSeason = false;
+      change = null;
+      atYearEnd = false;
+      label = { text: LOOKS[season].name, sub: `Season 1 of 4 · ${LOOKS[season].hazard}`, t: 3.2 };
+      ripples = Array.from({ length: 26 }, () => ({ x: LEFT + Math.random() * (RIGHT - LEFT), y: Math.random() * H, len: 10 + Math.random() * 22 }));
+      bits = Array.from({ length: BIT_COUNT[season] }, () => makeBit(true, season));
+      stones = [];
+      for (let y = -40; y < H + 40; y += 22) {
+        stones.push({ y, side: 0, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
+        stones.push({ y: y + 11, side: 1, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
+      }
+      updateHud();
+    };
+
     // ---------- New things, always leaving a way through ----------
     const randX = (margin: number) => LEFT + margin + Math.random() * (RIGHT - LEFT - 2 * margin);
-    let lastChick = -9999;
-    const CHICK_GAP = 700; // at least this far between ducklings (about four seconds at the start)
     const chickOk = () => distance - lastChick > CHICK_GAP * (speed / 150); // the same time apart at any speed
     const addChick = (x: number, y: number) => {
-      things.push({ kind: 'chick', y, x, phase: Math.random() * 6 });
+      things.push({ kind: 'chick', y, x, phase: Math.random() * 6, s: spawnSeason() });
       lastChick = distance;
     };
+    const spawnHazard = (s: Season) => {
+      if (s === 'winter') {
+        const w = 70 + Math.random() * 60;
+        things.push({ kind: 'ice', y: -40, x: LEFT + 10 + Math.random() * (RIGHT - LEFT - w - 20), w, h: 46 + Math.random() * 30, s });
+      } else if (s === 'spring') {
+        things.push({ kind: 'blossom', y: -40, x: randX(34), r: 24 + Math.random() * 8, s });
+      } else if (s === 'summer') {
+        things.push({ kind: 'shallow', y: -60, fromLeft: Math.random() < 0.5, w: 55 + Math.random() * 35, h: 90 + Math.random() * 60, s });
+      } else {
+        things.push({ kind: 'pile', y: -40, x: randX(30), r: 22 + Math.random() * 6, rock: Math.random() < 0.4, done: false, s });
+      }
+    };
     const spawn = () => {
+      const s = spawnSeason();
       const roll = Math.random();
       const gapNeeded = 92; // the duck always has at least this much room to get past
-      if (roll < 0.4) {
+      if (roll < 0.34) {
         const fromLeft = Math.random() < 0.5;
         const len = 90 + Math.random() * (RIGHT - LEFT - gapNeeded - 90);
-        things.push({ kind: 'branch', y: -30, fromLeft, len, thick: 16 + Math.random() * 6 });
+        things.push({ kind: 'branch', y: -30, fromLeft, len, thick: 16 + Math.random() * 6, s });
         if (Math.random() < 0.3 && chickOk()) {
           const freeFrom = fromLeft ? LEFT + len + 24 : LEFT + 24;
           const freeTo = fromLeft ? RIGHT - 24 : RIGHT - len - 24;
           if (freeTo > freeFrom) addChick(freeFrom + Math.random() * (freeTo - freeFrom), -30);
         }
-      } else if (roll < 0.66) {
+      } else if (roll < 0.54) {
         const r = 14 + Math.random() * 12;
-        things.push({ kind: 'rock', y: -30, x: randX(r + 6), r });
+        things.push({ kind: 'rock', y: -30, x: randX(r + 6), r, s });
         if (Math.random() < 0.2 && chickOk()) addChick(randX(30), -90);
-      } else if (roll < 0.76 && distance > 600) {
-        things.push({ kind: 'whirl', y: -40, x: randX(44), r: 30, spun: false });
-      } else if (roll < 0.88) {
-        things.push({ kind: 'race', y: -30, x: randX(24), num: raceNum++, cool: 0 });
-      } else if (roll < 0.91 && distance > 400) {
-        things.push({ kind: 'gold', y: -30, x: randX(30), phase: Math.random() * 6 });
+      } else if (roll < 0.66 && distance > 300) {
+        spawnHazard(s);
+      } else if (roll < 0.74 && distance > 600) {
+        things.push({ kind: 'whirl', y: -40, x: randX(44), r: 30, spun: false, s });
+      } else if (roll < 0.86) {
+        // race ducks come in sizes; now and then a giant one
+        const pick = Math.random();
+        const size = pick < 0.04 ? 1.5 : pick < 0.38 ? 0.55 : pick < 0.72 ? 0.75 : 0.95;
+        things.push({ kind: 'race', y: -40, x: randX(22 * size + 8), num: raceNum++, cool: 0, size, s });
+      } else if (roll < 0.89 && distance > 400) {
+        things.push({ kind: 'gold', y: -30, x: randX(30), phase: Math.random() * 6, s });
       } else if (chickOk()) {
         addChick(randX(30), -30);
       } else {
         const r = 14 + Math.random() * 10;
-        things.push({ kind: 'rock', y: -30, x: randX(r + 6), r });
+        things.push({ kind: 'rock', y: -30, x: randX(r + 6), r, s });
       }
       nextSpawn = Math.max(105, 185 - (speed - 150) * 0.35) + Math.random() * 60; // gaps shrink as the brook speeds up
     };
 
-    // ---------- Collisions ----------
+    // ---------- Collisions and rules ----------
     const hitsBranch = (b: Branch) => {
       const x0 = b.fromLeft ? LEFT - 10 : RIGHT - b.len;
       const x1 = b.fromLeft ? LEFT + b.len : RIGHT + 10;
@@ -379,13 +414,12 @@ import { url } from '../lib/url';
     };
     const dist2 = (ax: number, ay: number, bx: number, by: number) => (ax - bx) ** 2 + (ay - by) ** 2;
     const near = (x: number, y: number, r: number) => dist2(duckX, duckY, x, y) < (DUCK_R + r) ** 2;
+    const inRect = (x: number, y: number, w: number, h: number) => duckX > x && duckX < x + w && duckY > y - h / 2 && duckY < y + h / 2;
 
-    // Losing the duckling at the back of the line: it swims off to the bank
     const loseDuckling = () => {
       const c = trail.pop();
       if (!c) return false;
-      const toLeft = c.x > W / 2;
-      leavers.push({ x: c.x, y: c.y, vx: toLeft ? -150 : 150, vy: -40, life: 1.2 });
+      leavers.push({ x: c.x, y: c.y, vx: c.x > W / 2 ? -150 : 150, vy: -40, life: 1.2 });
       return true;
     };
     const bump = () => {
@@ -394,19 +428,19 @@ import { url } from '../lib/url';
       let lost = 0;
       while (lost < bumpCost() && loseDuckling()) lost++;
       safeTime = 1.4;
+      bumpedThisSeason = true;
       sfx.bump();
       announce.textContent = `Bump! ${lost} duckling${lost === 1 ? '' : 's'} swam off. ${trail.length} left in your line.`;
     };
 
     // ---------- Drawing ----------
-    const drawDuck = (x: number, y: number, s: number, t: number, body = C.yellow, alpha = 1) => {
-      // seen from above, swimming up the screen: body, wing, head, beak (the site's duck colours)
+    const drawDuck = (x: number, y: number, sc: number, t: number, body = C.yellow, alpha = 1) => {
       const wob = Math.sin(t * 6 + x) * 0.06;
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.translate(x, y);
       ctx.rotate(wob);
-      ctx.scale(s, s);
+      ctx.scale(sc, sc);
       ctx.fillStyle = 'rgba(16,36,26,0.18)';
       ctx.beginPath();
       ctx.ellipse(2, 4, 14, 18, 0, 0, Math.PI * 2);
@@ -441,16 +475,17 @@ import { url } from '../lib/url';
     };
 
     const drawRacer = (r: Racer, t: number) => {
-      drawDuck(r.x, r.y, 0.75, t + r.num);
+      drawDuck(r.x, r.y, r.size, t + r.num);
+      const rr = 10 * r.size;
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.arc(r.x, r.y + 4, 7.5, 0, Math.PI * 2);
+      ctx.arc(r.x, r.y + 4 * r.size, rr, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = C.ink;
-      ctx.font = 'bold 8px Inter, system-ui, sans-serif';
+      ctx.font = `bold ${Math.round(11 * r.size)}px Inter, system-ui, sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(String(r.num), r.x, r.y + 4.5);
+      ctx.fillText(String(r.num), r.x, r.y + 4.5 * r.size);
     };
 
     const drawGold = (g: Gold, t: number) => {
@@ -463,7 +498,6 @@ import { url } from '../lib/url';
       ctx.fill();
       ctx.restore();
       drawDuck(g.x, g.y, 0.7, t + g.phase, C.gold);
-      // sparkles
       ctx.fillStyle = '#ffffff';
       for (let i = 0; i < 3; i++) {
         const a = t * 3 + i * 2.1;
@@ -508,7 +542,7 @@ import { url } from '../lib/url';
       ctx.beginPath();
       ctx.roundRect(0, -b.thick / 2, len, b.thick, b.thick / 2);
       ctx.fill();
-      if (season === 'winter') {
+      if (b.s === 'winter') {
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
         ctx.roundRect(4, -b.thick / 2 - 2, len - 8, 5, 3);
@@ -523,8 +557,7 @@ import { url } from '../lib/url';
         ctx.stroke();
       }
       const tip = b.fromLeft ? len : 0;
-      const leafColour = season === 'autumn' ? '#c9702a' : season === 'winter' ? '#e8eef2' : season === 'spring' ? '#7fb25a' : C.leaf;
-      ctx.fillStyle = leafColour;
+      ctx.fillStyle = LOOKS[b.s].leaf;
       for (const [dx, dy, r] of [
         [0, -10, 9],
         [b.fromLeft ? -12 : 12, 9, 8],
@@ -537,7 +570,7 @@ import { url } from '../lib/url';
       ctx.restore();
     };
 
-    const drawRock = (r: Rock) => {
+    const drawRock = (r: { x: number; y: number; r: number; s: Season }) => {
       ctx.fillStyle = 'rgba(255,255,255,0.35)';
       ctx.beginPath();
       ctx.ellipse(r.x, r.y - r.r * 0.9, r.r * 0.9, 4, 0, 0, Math.PI * 2);
@@ -550,10 +583,67 @@ import { url } from '../lib/url';
       ctx.beginPath();
       ctx.ellipse(r.x, r.y, r.r, r.r * 0.82, 0, 0, Math.PI * 2);
       ctx.fill();
-      if (season === 'winter') {
+      if (r.s === 'winter') {
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
         ctx.ellipse(r.x - 2, r.y - r.r * 0.35, r.r * 0.7, r.r * 0.38, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+
+    // Season challenges
+    const drawIce = (i: Ice, t: number) => {
+      ctx.fillStyle = 'rgba(235,246,252,0.85)';
+      ctx.beginPath();
+      ctx.roundRect(i.x, i.y - i.h / 2, i.w, i.h, 14);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(160,200,225,0.9)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); // cracks
+      ctx.moveTo(i.x + i.w * 0.2, i.y - i.h * 0.3);
+      ctx.lineTo(i.x + i.w * 0.45, i.y);
+      ctx.lineTo(i.x + i.w * 0.4, i.y + i.h * 0.3);
+      ctx.moveTo(i.x + i.w * 0.45, i.y);
+      ctx.lineTo(i.x + i.w * 0.75, i.y - i.h * 0.1);
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.beginPath();
+      ctx.arc(i.x + i.w * 0.8 + Math.sin(t * 3) * 2, i.y - i.h * 0.25, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    };
+    const drawBlossom = (b: Blossom, t: number) => {
+      for (let k = 0; k < 14; k++) {
+        const a = k * 2.4 + t * 0.3;
+        const d = (k % 5) * (b.r / 5);
+        ctx.fillStyle = k % 3 ? '#f7c6d9' : '#ffffff';
+        ctx.beginPath();
+        ctx.ellipse(b.x + Math.cos(a) * d, b.y + Math.sin(a) * d, 6, 4, a, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+    const drawShallow = (sh: Shallow) => {
+      const x = sh.fromLeft ? LEFT : RIGHT - sh.w;
+      ctx.fillStyle = 'rgba(214,190,130,0.75)';
+      ctx.beginPath();
+      ctx.roundRect(x - 6, sh.y - sh.h / 2, sh.w + 6, sh.h, 24);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(190,165,105,0.6)';
+      for (let k = 0; k < 6; k++) {
+        ctx.beginPath();
+        ctx.arc(x + 8 + ((k * 23) % (sh.w - 10)), sh.y - sh.h / 3 + ((k * 31) % (sh.h * 0.66)), 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+    const drawPile = (p: Pile) => {
+      if (p.done && p.rock) return drawRock({ x: p.x, y: p.y, r: p.r * 0.8, s: p.s });
+      if (p.done) return;
+      const cols = ['#d9822b', '#c2452d', '#e0b13a', '#9c5a24'];
+      for (let k = 0; k < 16; k++) {
+        const a = k * 2.3;
+        const d = (k % 4) * (p.r / 4);
+        ctx.fillStyle = cols[k % 4];
+        ctx.beginPath();
+        ctx.ellipse(p.x + Math.cos(a) * d, p.y + Math.sin(a) * d, 7, 4.5, a, 0, Math.PI * 2);
         ctx.fill();
       }
     };
@@ -563,20 +653,18 @@ import { url } from '../lib/url';
       ctx.translate(b.x, b.y);
       ctx.rotate(b.rot);
       ctx.fillStyle = b.tint;
-      if (season === 'winter') {
+      if (b.s === 'winter') {
         ctx.globalAlpha = 0.9;
         ctx.beginPath();
         ctx.arc(0, 0, b.size, 0, Math.PI * 2);
         ctx.fill();
-      } else if (season === 'summer') {
-        // lily pad with a notch
+      } else if (b.s === 'summer') {
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.arc(0, 0, b.size, 0.4, Math.PI * 2 - 0.1);
         ctx.closePath();
         ctx.fill();
       } else {
-        // a leaf or petal
         ctx.beginPath();
         ctx.ellipse(0, 0, b.size * 1.6, b.size, 0, 0, Math.PI * 2);
         ctx.fill();
@@ -584,32 +672,26 @@ import { url } from '../lib/url';
       ctx.restore();
     };
 
-    const draw = (t: number) => {
-      ctx.fillStyle = SEASON.water;
+    // The brook itself (water, walls, grass, snow on the walls) for one season, between two heights
+    const drawBrook = (s: Season, y0: number, y1: number) => {
+      if (y1 <= y0) return;
+      const look = LOOKS[s];
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, y0, W, y1 - y0);
+      ctx.clip();
+      ctx.fillStyle = look.water;
       ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = SEASON.deep;
+      ctx.fillStyle = look.deep;
       ctx.fillRect(LEFT + 40, 0, RIGHT - LEFT - 80, H);
-      ctx.fillStyle = SEASON.water;
+      ctx.fillStyle = look.water;
       ctx.globalAlpha = 0.6;
       ctx.fillRect(LEFT + 60, 0, RIGHT - LEFT - 120, H);
       ctx.globalAlpha = 1;
-      ctx.strokeStyle = C.ripple;
-      ctx.lineWidth = 2;
-      ctx.lineCap = 'round';
-      for (const r of ripples) {
-        ctx.beginPath();
-        ctx.moveTo(r.x, r.y);
-        ctx.lineTo(r.x, r.y + r.len);
-        ctx.stroke();
-      }
-      // things floating on the water (leaves, petals, lily pads) go under everything else
-      if (season !== 'winter') bits.forEach(drawBit);
-      // stone walls with grass (or snow) on top
       for (const side of [0, 1]) {
-        const x = side === 0 ? 0 : RIGHT;
         ctx.fillStyle = C.wallDark;
-        ctx.fillRect(x, 0, WALL, H);
-        ctx.fillStyle = SEASON.grass;
+        ctx.fillRect(side === 0 ? 0 : RIGHT, 0, WALL, H);
+        ctx.fillStyle = look.grass;
         ctx.fillRect(side === 0 ? 0 : W - 8, 0, 8, H);
       }
       for (const st of stones) {
@@ -620,26 +702,81 @@ import { url } from '../lib/url';
         ctx.beginPath();
         ctx.roundRect(x, y, w, st.h, 4);
         ctx.fill();
-        if (season === 'winter') {
+        if (s === 'winter') {
           ctx.fillStyle = '#ffffff';
           ctx.beginPath();
           ctx.roundRect(x, y, w, 5, 3);
           ctx.fill();
         }
       }
+      ctx.restore();
+    };
+
+    // The footbridge that marks a change of season, with the new season's name on it
+    const drawBridge = (y: number, to: Season) => {
+      ctx.save();
+      ctx.fillStyle = 'rgba(16,36,26,0.25)'; // its shadow on the water
+      ctx.fillRect(LEFT, y + 14, RIGHT - LEFT, 10);
+      ctx.fillStyle = C.bridgeDark;
+      ctx.fillRect(0, y - 16, W, 32);
+      ctx.fillStyle = C.bridge;
+      ctx.fillRect(0, y - 13, W, 26);
+      ctx.fillStyle = C.bridgeDark; // parapets
+      ctx.fillRect(0, y - 16, W, 4);
+      ctx.fillRect(0, y + 12, W, 4);
+      ctx.strokeStyle = 'rgba(0,0,0,0.12)'; // stone joints
+      ctx.lineWidth = 1;
+      for (let x = 12; x < W; x += 24) {
+        ctx.beginPath();
+        ctx.moveTo(x, y - 12);
+        ctx.lineTo(x, y + 12);
+        ctx.stroke();
+      }
+      if (to === 'winter') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, y - 17, W, 4);
+      }
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 15px "Bricolage Grotesque", Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(LOOKS[to].name.toUpperCase(), W / 2, y + 1);
+      ctx.restore();
+    };
+
+    const draw = (t: number) => {
+      // the brook: the coming season above the bridge, the current one below it
+      if (change) {
+        drawBrook(change.to, 0, change.y);
+        drawBrook(change.from, change.y, H);
+      } else drawBrook(season, 0, H);
+      ctx.strokeStyle = C.ripple;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      for (const r of ripples) {
+        ctx.beginPath();
+        ctx.moveTo(r.x, r.y);
+        ctx.lineTo(r.x, r.y + r.len);
+        ctx.stroke();
+      }
+      bits.forEach((b) => b.s !== 'winter' && drawBit(b)); // leaves, petals and lily pads float under everything
+      // flat things on the water first, then things that stick up
       for (const th of things) {
         if (th.kind === 'whirl') drawWhirl(th, t);
+        else if (th.kind === 'ice') drawIce(th, t);
+        else if (th.kind === 'shallow') drawShallow(th);
+        else if (th.kind === 'blossom') drawBlossom(th, t);
       }
       for (const th of things) {
         if (th.kind === 'branch') drawBranch(th);
         else if (th.kind === 'rock') drawRock(th);
+        else if (th.kind === 'pile') drawPile(th);
         else if (th.kind === 'chick') drawDuck(th.x + Math.sin(t * 2 + th.phase) * 3, th.y, 0.55, t + th.phase);
         else if (th.kind === 'race') drawRacer(th, t);
         else if (th.kind === 'gold') drawGold(th, t);
       }
       for (const l of leavers) drawDuck(l.x, l.y, 0.55, t, C.yellow, Math.max(0, l.life / 1.2));
       for (let i = trail.length - 1; i >= 0; i--) drawDuck(trail[i].x, trail[i].y, 0.55, t + i);
-      // our duck blinks while it's protected after a bump, and glows when golden
       const blink = safeTime > 0 && Math.floor(t * 10) % 2 === 0;
       if (goldTime > 0) {
         ctx.save();
@@ -651,7 +788,9 @@ import { url } from '../lib/url';
         ctx.restore();
       }
       drawDuck(duckX, duckY, 1, t, goldTime > 0 ? C.gold : C.yellow, blink ? 0.35 : 1);
-      if (season === 'winter') bits.forEach(drawBit); // snow falls over everything
+      if (change) drawBridge(change.y, change.to); // the duck swims under the bridge
+      bits.forEach((b) => b.s === 'winter' && drawBit(b)); // snow falls over everything
+
       // progress through the year: four segments, one per season
       const segW = (W - 24) / 4;
       for (let i = 0; i < 4; i++) {
@@ -662,24 +801,64 @@ import { url } from '../lib/url';
         ctx.fillStyle = LOOKS[yearOrder[i]].bar;
         ctx.fillRect(x + 1, H - 12, (segW - 2) * done, 6);
       }
-      // "Spring · Season 2 of 4" as each season begins
-      if (banner && banner.t > 0 && state === 'playing') {
+
+      // the season label slides down from the top, stays a moment, then slides away
+      if (label && label.t > 0 && state === 'playing') {
+        const total = 3.2;
+        const age = total - label.t;
+        const slide = Math.min(1, age / 0.4, label.t / 0.4);
+        const y = -30 + slide * 78;
         ctx.save();
-        ctx.globalAlpha = Math.min(1, banner.t / 0.5);
-        ctx.fillStyle = 'rgba(16,36,26,0.78)';
+        ctx.font = '800 17px "Bricolage Grotesque", Inter, sans-serif';
+        const w1 = ctx.measureText(label.text).width;
+        ctx.font = '600 11.5px Inter, system-ui, sans-serif';
+        const w2 = ctx.measureText(label.sub).width;
+        const w = Math.min(W - 24, Math.max(w1, w2) + 32);
+        ctx.fillStyle = 'rgba(16,36,26,0.85)';
         ctx.beginPath();
-        ctx.roundRect(W / 2 - 110, H / 2 - 50, 220, 90, 18);
+        ctx.roundRect(W / 2 - w / 2, y - 20, w, 44, 14);
         ctx.fill();
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#f6c343';
-        ctx.font = '800 34px "Bricolage Grotesque", Inter, sans-serif';
-        ctx.fillText(banner.text, W / 2, H / 2 - 14);
+        ctx.font = '800 17px "Bricolage Grotesque", Inter, sans-serif';
+        ctx.fillText(label.text, W / 2, y - 6);
         ctx.fillStyle = '#dfe9e2';
-        ctx.font = '600 14px Inter, system-ui, sans-serif';
-        ctx.fillText(banner.sub, W / 2, H / 2 + 20);
+        ctx.font = '600 11.5px Inter, system-ui, sans-serif';
+        ctx.fillText(label.sub, W / 2, y + 12, W - 40);
         ctx.restore();
       }
+    };
+
+    // ---------- Seasons: starting a change, and the duck swimming into the next season ----------
+    const startChange = (to: Season, newYear: boolean) => {
+      change = { y: -20, from: season, to, newYear, crossed: false };
+    };
+    const completeSeason = () => {
+      seasonsDone++;
+      if (!bumpedThisSeason) {
+        points += CLEAN_BONUS * mult();
+        return ` Clean season, +${CLEAN_BONUS * mult()}!`;
+      }
+      return '';
+    };
+    const enterSeason = (to: Season, newYear: boolean) => {
+      let clean = '';
+      if (newYear) {
+        year++;
+        level = 0;
+      } else {
+        clean = completeSeason();
+        level++;
+      }
+      season = to;
+      levelTime = 0;
+      bumpedThisSeason = false;
+      speed = Math.max(speed, baseSpeed());
+      const cost = `bumps cost ${bumpCost()} duckling${bumpCost() === 1 ? '' : 's'}`;
+      label = { text: newYear ? `Year ${year} · ${LOOKS[to].name}` : LOOKS[to].name, sub: `${LOOKS[to].hazard} · ${cost}`, t: 3.2 };
+      sfx.season();
+      announce.textContent = `${newYear ? `Year ${year}. ` : ''}${LOOKS[to].name}, season ${level + 1} of 4. Faster, ${LOOKS[to].hazard}, and ${cost}.${clean}`;
     };
 
     // ---------- Game loop ----------
@@ -689,22 +868,47 @@ import { url } from '../lib/url';
       const t = now / 1000;
       if (state === 'playing') {
         speed = Math.min(baseSpeed() + 40, speed + dt * 2); // a step faster each season, creeping up a little within it
-        levelTime += dt;
-        if (banner) banner.t -= dt;
-        if (levelTime >= LEVEL_TIME) nextSeason();
         const dy = speed * dt;
         distance += dy;
         points += (dy / 20) * mult();
         wallOffset = (wallOffset + dy) % (H + 80);
         goldTime = Math.max(0, goldTime - dt);
         safeTime = Math.max(0, safeTime - dt);
+        if (label) label.t -= dt;
 
-        // steering: keys/buttons push, a drag sets a target
+        // seasons: after 30 seconds the next season's bridge appears and flows down; the year ends after four
+        if (!change) {
+          levelTime += dt;
+          if (levelTime >= LEVEL_TIME) {
+            if (level >= 3) finishYear();
+            else startChange(yearOrder[level + 1], false);
+          }
+        } else {
+          change.y += dy;
+          if (!change.crossed && change.y >= duckY) {
+            change.crossed = true;
+            enterSeason(change.to, change.newYear);
+          }
+          if (change.y > H + 30) change = null;
+        }
+        if (state !== 'playing') {
+          draw(t);
+          requestAnimationFrame(step);
+          return;
+        }
+
+        // the season's challenges change how the duck handles
+        let grip = 10; // how quickly the duck answers the steering
+        let drag = 0; // being pushed back down the brook
+        for (const th of things) {
+          if (th.kind === 'ice' && inRect(th.x, th.y, th.w, th.h)) grip = 1.6;
+          else if (th.kind === 'blossom' && near(th.x, th.y, th.r - 6)) drag = Math.max(drag, 110);
+          else if (th.kind === 'shallow' && inRect(th.fromLeft ? LEFT : RIGHT - th.w, th.y, th.w, th.h)) drag = Math.max(drag, 140);
+        }
+
         if (steer) targetX = duckX + steer * 40;
         if (steerY) targetY = duckY + steerY * 40;
-        targetX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, targetX));
-        targetY = Math.max(TOP_Y, Math.min(BOTTOM_Y, targetY));
-        // a knock from a race duck pushes the duck (and where it's heading) and fades quickly
+        if (drag) targetY += drag * dt;
         if (kickX || kickY) {
           duckX += kickX * dt;
           duckY += kickY * dt;
@@ -713,12 +917,12 @@ import { url } from '../lib/url';
           const fade = Math.pow(0.02, dt);
           kickX = Math.abs(kickX * fade) < 2 ? 0 : kickX * fade;
           kickY = Math.abs(kickY * fade) < 2 ? 0 : kickY * fade;
-          targetX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, targetX));
-          targetY = Math.max(TOP_Y, Math.min(BOTTOM_Y, targetY));
         }
-        duckX += (targetX - duckX) * Math.min(1, dt * 10);
-        duckY += (targetY - duckY) * Math.min(1, dt * 10);
-        duckX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, duckX)); // never into the walls
+        targetX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, targetX));
+        targetY = Math.max(TOP_Y, Math.min(BOTTOM_Y, targetY));
+        duckX += (targetX - duckX) * Math.min(1, dt * grip);
+        duckY += (targetY - duckY) * Math.min(1, dt * grip) + drag * dt * 0.5;
+        duckX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, duckX));
         duckY = Math.max(TOP_Y, Math.min(BOTTOM_Y, duckY));
 
         for (const r of ripples) {
@@ -728,17 +932,24 @@ import { url } from '../lib/url';
             r.x = LEFT + Math.random() * (RIGHT - LEFT);
           }
         }
-        for (let i = 0; i < bits.length; i++) {
+        // floating bits drift with the water (snow falls); new ones arrive in the coming season, gradually
+        // changing the mix as the new season flows in
+        const want = BIT_COUNT[spawnSeason()];
+        for (let i = bits.length - 1; i >= 0; i--) {
           const b = bits[i];
-          b.y += season === 'winter' ? b.vy * dt : dy;
+          b.y += b.s === 'winter' ? b.vy * dt : dy;
           b.x += b.vx * dt;
-          b.rot += dt * (season === 'winter' ? 0 : 0.6);
-          if (b.y > H + 12) bits[i] = makeBit(false);
+          b.rot += dt * (b.s === 'winter' ? 0 : 0.6);
+          if (b.y > H + 12) {
+            if (bits.length > want) bits.splice(i, 1);
+            else bits[i] = makeBit(false);
+          }
         }
+        if (bits.length < want && Math.random() < dt * 8) bits.push(makeBit(false));
 
         nextSpawn -= dy;
         if (nextSpawn <= 0) spawn();
-        for (const th of things) th.y += th.kind === 'race' ? dy * 0.55 : dy; // race ducks drift a little slower than the current
+        for (const th of things) th.y += th.kind === 'race' ? dy * (th.size > 1.2 ? 0.4 : 0.55) : dy; // race ducks drift slower; giants slowest
 
         for (const th of things) {
           if (th.kind === 'chick' && near(th.x, th.y, 8)) {
@@ -751,26 +962,28 @@ import { url } from '../lib/url';
           } else if (th.kind === 'gold' && near(th.x, th.y, 12)) {
             th.y = H + 999;
             goldTime = 10;
-            sfx.gold();
+            sfx.chime();
             announce.textContent = 'Golden duck! Double points for 10 seconds.';
           } else if (th.kind === 'race') {
-            // Bump a race duck and you both bounce apart (no harm, but it can push you somewhere awkward)
+            // bump a race duck and you both bounce apart: big ones shove you hard and barely move,
+            // small ones give a nudge and pinball away
             th.cool = Math.max(0, th.cool - dt);
-            if (th.cool <= 0 && near(th.x, th.y, 11)) {
+            const reach = 13 * th.size;
+            if (th.cool <= 0 && near(th.x, th.y, reach)) {
               const dx = duckX - th.x;
               const dyy = duckY - th.y;
               const len = Math.hypot(dx, dyy) || 1;
-              kickX = (dx / len) * 260;
-              kickY = (dyy / len) * 180;
-              th.x -= (dx / len) * 16;
+              const shove = 140 + 240 * (th.size - 0.55); // small ≈ 140, medium ≈ 190, large ≈ 240, giant ≈ 360
+              kickX = (dx / len) * shove;
+              kickY = (dyy / len) * shove * 0.7;
+              th.x -= (dx / len) * (22 / th.size);
               th.cool = 0.5;
-              sfx.boing();
+              sfx.boing(th.size);
             }
-            th.x = Math.max(LEFT + 14, Math.min(RIGHT - 14, th.x));
+            th.x = Math.max(LEFT + 12 * th.size, Math.min(RIGHT - 12 * th.size, th.x));
           } else if (th.kind === 'whirl') {
             const d = Math.sqrt(dist2(duckX, duckY, th.x, th.y));
             if (d < th.r + 24) {
-              // pulled towards the middle
               const pull = (1 - d / (th.r + 24)) * dt * 3;
               duckX += (th.x - duckX) * pull;
               duckY += (th.y - duckY) * pull;
@@ -784,14 +997,16 @@ import { url } from '../lib/url';
                 announce.textContent = `The whirlpool spun a duckling away. ${trail.length} left.`;
               }
             }
+          } else if (th.kind === 'pile' && !th.done && near(th.x, th.y, th.r - 8)) {
+            th.done = true; // the leaves scatter: sometimes there was a rock underneath
+            if (th.rock) bump();
           } else if ((th.kind === 'branch' && hitsBranch(th)) || (th.kind === 'rock' && near(th.x, th.y, th.r - 3))) {
             bump();
-            if (state !== 'playing') break;
           }
+          if (state !== 'playing') break;
         }
-        things = things.filter((th) => th.y < H + 60);
+        things = things.filter((th) => th.y < H + 80);
 
-        // ducklings leaving the line swim off (or are carried away) and fade
         for (const l of leavers) {
           l.x += l.vx * dt;
           l.y += l.vy * dt + dy;
@@ -799,7 +1014,6 @@ import { url } from '../lib/url';
         }
         leavers = leavers.filter((l) => l.life > 0);
 
-        // the ducklings follow in a line, each chasing the one in front
         let lx = duckX;
         let ly = duckY;
         for (const c of trail) {
@@ -814,6 +1028,7 @@ import { url } from '../lib/url';
       requestAnimationFrame(step);
     };
 
+    // ---------- Screens ----------
     const show = (title: string, text: string, button: string, finish?: string) => {
       overlayTitle.textContent = title;
       overlayText.textContent = text;
@@ -825,8 +1040,8 @@ import { url } from '../lib/url';
     };
     const start = () => {
       if (state === 'over' || state === 'ready') reset();
-      finishBtn.hidden = true;
       if (soundOn) ensureAudio();
+      finishBtn.hidden = true;
       state = 'playing';
       overlay.hidden = true;
       pauseBtn.textContent = 'Pause';
@@ -838,43 +1053,35 @@ import { url } from '../lib/url';
       pauseBtn.textContent = 'Resume';
       show('Paused', 'Take a breather.', 'Keep swimming');
     };
-    // Into the next season (or, after the fourth, the end of the year)
-    function nextSeason() {
-      level++;
-      levelTime = 0;
-      seasonsDone++;
-      if (level >= 4) return finishYear();
-      season = yearOrder[level];
-      SEASON = LOOKS[season];
-      speed = Math.max(speed, baseSpeed());
-      bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
-      const cost = `bumps cost ${bumpCost()} duckling${bumpCost() === 1 ? '' : 's'}`;
-      banner = { text: SEASON.name, sub: `Season ${level + 1} of 4 · ${cost}`, t: 2.4 };
-      sfx.gold();
-      announce.textContent = `${SEASON.name}. Season ${level + 1} of 4. Faster, and ${cost}.`;
-    }
-    let atYearEnd = false;
+    const where = () => `You reached ${LOOKS[season].name.toLowerCase()} of year ${year}`;
+    const saveBest = () => {
+      const s = score();
+      const isBest = s > best;
+      if (isBest) {
+        best = s;
+        bestEl.textContent = String(best);
+        try {
+          localStorage.setItem('duckDashBest', String(best));
+        } catch {}
+      }
+      return isBest;
+    };
+    // End of a year: carry on (it keeps getting faster) or finish and bank the duckling bonus
     function finishYear() {
+      const clean = completeSeason();
       state = 'paused';
       atYearEnd = true;
-      sfx.gold();
+      sfx.chime();
+      updateHud();
       const kept = trail.length;
       const bonus = kept * 25;
-      const msg = `Score so far: ${score()}. Finish now to bank it${bonus ? ` with ${bonus} bonus points for your ${kept} duckling${kept === 1 ? '' : 's'}` : ''}, or keep swimming into another year: every season gets faster still, and bumps cost ${bumpCost()} ducklings. Get knocked out and you lose the duckling bonus.`;
+      const msg = `${clean ? clean.trim() + ' ' : ''}Score so far: ${score()}. Finish now to bank it${bonus ? ` with ${bonus} bonus points for your ${kept} duckling${kept === 1 ? '' : 's'}` : ''}, or keep swimming into another year: every season gets faster still, and bumps cost ${bumpCost()} ducklings. Get knocked out and you lose the duckling bonus.`;
       announce.textContent = `You made it through year ${year}! ${msg}`;
       show(`Year ${year} done!`, msg, 'Keep swimming', 'Finish');
     }
     function keepSwimming() {
       atYearEnd = false;
-      year++;
-      level = 0;
-      levelTime = 0;
-      season = yearOrder[0];
-      SEASON = LOOKS[season];
-      speed = Math.max(speed, baseSpeed());
-      bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
-      banner = { text: `Year ${year}`, sub: `${SEASON.name} · bumps cost ${bumpCost()} ducklings`, t: 2.6 };
-      announce.textContent = `Year ${year}. ${SEASON.name}, faster still. Bumps cost ${bumpCost()} ducklings.`;
+      startChange(yearOrder[0], true);
       start();
     }
     function finishNow() {
@@ -882,36 +1089,17 @@ import { url } from '../lib/url';
       state = 'over';
       const bonus = trail.length * 25;
       points += bonus;
-      const s = score();
-      const isBest = s > best;
-      if (isBest) {
-        best = s;
-        bestEl.textContent = String(best);
-        try {
-          localStorage.setItem('duckDashBest', String(best));
-        } catch {}
-      }
+      const isBest = saveBest();
       updateHud();
-      const msg = `You swam ${year === 1 ? 'the whole year' : `${year} years`} and scored ${s}${bonus ? `, including ${bonus} for the ${trail.length} duckling${trail.length === 1 ? '' : 's'} still with you` : ''}.${isBest ? ' A new best!' : ''}`;
-      announce.textContent = `You made it through the year! ${msg}`;
+      const msg = `You swam ${year === 1 ? 'the whole year' : `${year} years`} and scored ${score()}${bonus ? `, including ${bonus} for the ${trail.length} duckling${trail.length === 1 ? '' : 's'} still with you` : ''}.${isBest ? ' A new best!' : ''}`;
+      announce.textContent = `You made it! ${msg}`;
       show('You made it!', msg, 'Play again');
     }
     function gameOver() {
       state = 'over';
-      const s = score();
-      const isBest = s > best;
-      if (isBest) {
-        best = s;
-        bestEl.textContent = String(best);
-        try {
-          localStorage.setItem('duckDashBest', String(best));
-        } catch {}
-      }
+      const isBest = saveBest();
       sfx.over();
-      const extras = [
-        rescued ? `rescued ${rescued} duckling${rescued === 1 ? '' : 's'}` : '',
-      ].filter(Boolean);
-      const msg = `You scored ${s}${extras.length ? ', ' + extras.join(' and ') : ''}.${isBest ? ' A new best!' : ''}`;
+      const msg = `${where()} and scored ${score()}${rescued ? `, rescuing ${rescued} duckling${rescued === 1 ? '' : 's'}` : ''}.${isBest ? ' A new best!' : ''}`;
       announce.textContent = `Game over. ${msg}`;
       show(isBest ? 'New best!' : 'Game over', msg, 'Swim again');
     }
@@ -942,23 +1130,22 @@ import { url } from '../lib/url';
       else if (['ArrowUp', 'w', 'W'].includes(e.key)) steerY = -1;
       else if (['ArrowDown', 's', 'S'].includes(e.key)) steerY = 1;
       else if ((e.key === ' ' || e.key === 'p' || e.key === 'P') && (state === 'playing' || state === 'paused') && !atYearEnd) {
-        if (document.activeElement?.closest('.ctrl, [data-start]')) return;
+        if (document.activeElement?.closest('.ctrl, [data-start], [data-finish]')) return;
         e.preventDefault();
         state === 'playing' ? pause() : start();
         return;
       } else return;
-      if (state === 'playing') e.preventDefault(); // arrows steer instead of scrolling the page
+      if (state === 'playing') e.preventDefault();
     });
     document.addEventListener('keyup', (e) => {
       if (['ArrowLeft', 'a', 'A', 'ArrowRight', 'd', 'D'].includes(e.key)) steer = 0;
       if (['ArrowUp', 'w', 'W', 'ArrowDown', 's', 'S'].includes(e.key)) steerY = 0;
     });
-    // Touch / mouse: the duck follows your finger
     const toBoard = (clientX: number, clientY: number) => {
       const r = canvas.getBoundingClientRect();
       return [((clientX - r.left) / r.width) * W, ((clientY - r.top) / r.height) * H];
     };
-    const follow = (e: PointerEvent) => ([targetX, targetY] = toBoard(e.clientX, e.clientY - 40)); // aim just above your finger so you can see the duck
+    const follow = (e: PointerEvent) => ([targetX, targetY] = toBoard(e.clientX, e.clientY - 40)); // aim just above your finger
     let dragging = false;
     canvas.addEventListener('pointerdown', (e) => {
       if (state !== 'playing') return;
@@ -970,9 +1157,7 @@ import { url } from '../lib/url';
     canvas.addEventListener('pointerup', () => (dragging = false));
     canvas.addEventListener('pointercancel', () => (dragging = false));
     document.addEventListener('visibilitychange', () => document.hidden && pause());
-    // (a new game also clears any pending year-end choice)
 
-    // ---------- Size the canvas sharply for the screen ----------
     const fit = () => {
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
       const cssW = canvas.clientWidth;
