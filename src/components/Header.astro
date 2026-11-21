@@ -20,8 +20,12 @@ const nav: Item[] = [
   {
     label: 'Events',
     href: url('/events/'),
-    also: [url('/christmas-card/')],
-    children: [{ label: 'All events', href: url('/events/') }, ...events.map((e) => ({ label: e.data.name, href: url(`/events/${e.id}/`) }))],
+    also: [url('/christmas-card/'), url('/game/')],
+    children: [
+      { label: 'All events', href: url('/events/') },
+      ...events.map((e) => ({ label: e.data.name, href: url(`/events/${e.id}/`) })),
+      { label: 'Play Duck Dash (game)', href: url('/game/') },
+    ],
   },
   { label: 'News', href: url('/news/') },
   { label: 'Photos', href: url('/photos/') },
