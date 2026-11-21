@@ -1,5 +1,5 @@
 ---
-title: "Bagshawe Cavern trip"
+title: "Trip to Bagshawe Cavern"
 date: 2019-01-19
 tag: "Social"
 summary: "On Thursday 17th Jan 2019, eleven intrepid Bradda Dads risked life and limb in the gloomy depths of Bagshawe Cavern."

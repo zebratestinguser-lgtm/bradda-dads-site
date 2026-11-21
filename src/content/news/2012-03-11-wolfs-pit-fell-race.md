@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit Fell Race"
+title: "Wolf's Pit Fell Race 2012"
 date: 2012-03-11
 tag: "Wolf's Pit"
 summary: "What a fantastic Spring day for a fell race. We were once again graced with great weather and 227 runners completed this year's race."

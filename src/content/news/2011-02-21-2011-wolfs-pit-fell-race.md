@@ -1,5 +1,5 @@
 ---
-title: "2011 Wolf's Pit Fell Race"
+title: "Wolf's Pit Fell Race 2011"
 date: 2011-02-21
 tag: "Wolf's Pit"
 summary: "Photos from the old Bradda Dads website: 2011 Wolf's Pit Fell Race."

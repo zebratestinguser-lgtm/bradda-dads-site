@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit 2022 Entry via Fabian4"
+title: "Wolf's Pit 2022: entries open"
 date: 2022-02-18
 tag: "Wolf's Pit"
 summary: "Entry is now open via Fabian4 for the Wolf’s Pit Fell Race 2022 at: https://www.fabian4.co.uk/default.aspx?EventID=3084"

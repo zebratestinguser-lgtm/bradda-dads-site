@@ -1,5 +1,5 @@
 ---
-title: "12th Pensioners'  Christmas Lunch"
+title: "The 12th pensioners' Christmas lunch"
 date: 2012-12-05
 tag: "Pensioners' lunch"
 summary: "The 12th annual pensioners lunch took place on Wednesday 5th December 2012. Around 130 attended and enjoyed cottage pie, carrots, peas and Yorkshire pud."

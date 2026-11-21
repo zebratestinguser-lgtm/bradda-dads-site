@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit Fell Race Walk Around"
+title: "Walking the Wolf's Pit course"
 date: 2009-02-07
 tag: "Wolf's Pit"
 summary: "On a cold but sunny Saturday morning, Malcolm Sowerby, John Boyle, Keith Cooper, Mick Taylor, Mike and Viv Thompson (and Joe!), Jonathan and Caroline Morgan, Jaak Ojari and Mark…"

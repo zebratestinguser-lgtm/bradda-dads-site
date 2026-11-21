@@ -1,5 +1,5 @@
 ---
-title: "Bradwell News - January 2009"
+title: "In Bradwell News, January 2009"
 date: 2009-01-06
 tag: "Village"
 summary: "Bradda Dads on the last page of the January 2009 Bradwell News, also online."

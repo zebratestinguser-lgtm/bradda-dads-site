@@ -1,5 +1,5 @@
 ---
-title: "Bonfire Building - Saturday 31 October 2009"
+title: "Building the bonfire 2009"
 date: 2009-11-02
 tag: "Bonfire"
 summary: "Bradda Dads acquire a new clubhouse. \"Too good to burn\" Neal eyes up a possible new addition to the Seymour furniture collection..."

@@ -6,28 +6,28 @@ when: 26 December
 start: 2026-12-26T00:00:00+00:00
 startTimeConfirmed: false
 location: Bradwell Brook
-summary: Where it all started in 1999. Buy a duck and race it down the brook.
+summary: Where it all started in 1999. Buy a numbered entry and cheer your duck down the brook.
 status: upcoming
-ctaLabel: Buy a duck
-# SumUp store: Boxing Day Duck Race tickets
+ctaLabel: Buy an entry
+# SumUp store: Boxing Day Duck Race entries. People buy a numbered entry (each duck is numbered), not a duck.
 ctaUrl: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
-# price: "£2"   (add the duck price here and it shows on the buttons)
+# price: "£2"   (add the entry price here and it shows on the buttons)
 order: 4
 month: 12
 heroTitle: The Boxing Day Duck Race
 heroHighlight: Duck Race
-heroText: Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.
+heroText: Hundreds of numbered rubber ducks, one brook, and a village-wide cheer. Buy an entry, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.
 countdownLabel: Ducks hit the water in
-heroNote: "**Cash prizes** for the first ducks home. Ducks on sale online, and at the Co-op on Saturdays 12 and 19 December, 10am to 2pm."
+heroNote: "**Cash prizes** for the first ducks home. Entries on sale online, and at the Co-op on Saturdays 12 and 19 December, 10am to 2pm."
 heroImage: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/011.jpg
 heroImageAlt: Hundreds of yellow rubber ducks tumbling over the weir in Bradwell Brook
 heroImageCaption: Boxing Day 2009
 whenWhereNote: "In 2022 the ducks went in at 11am from Town Bottom Park. [PLACEHOLDER: confirm the 2026 start time and place.]"
 involvement:
-  - title: Buy a duck
+  - title: Buy an entry
     text: "Online until midnight on Saturday 19 December, at the Co-op on Saturdays 12 and 19 December (10am to 2pm, card or cash), or at the pensioners' lunch."
     url: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
-    label: Buy a duck online
+    label: Buy an entry online
   - title: Race a raft
     text: "Build a raft and race it down the brook. Trophies for 1st, 2nd and 3rd, best style, first to sink and, biggest of all, last place. Everyone who enters gets a treat. [PLACEHOLDER: age categories.]"
   - title: Help on the day
@@ -36,6 +36,6 @@ involvement:
     label: Volunteer
 ---
 
-Hundreds of rubber ducks, one brook, and a village-wide cheer. Grab a duck, pick your spot on the bank, and help raise money for Bradwell. It's where Bradda Dads started, in 1999.
+Hundreds of numbered rubber ducks, one brook, and a village-wide cheer. Buy an entry, pick your spot on the bank, and help raise money for Bradwell. It's where Bradda Dads started, in 1999.
 
-**Prizes:** cash prizes for the first ducks past the finish. Tickets are numbered after online sales close.
+**How it works:** every entry is a numbered duck, and cash prizes go to the entries whose ducks are first past the finish. Online entries are given their numbers after online sales close.

@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads - Friday, 2nd November 2001"
+title: "Bonfire and guy competition 2001"
 date: 2001-11-02
 tag: "Bonfire"
 summary: "Archive entry posted on the 13th of February 2023. Not 100% certain but I think this was the second ever bonfire organised by Bradda Dads. Only one photo from this event."

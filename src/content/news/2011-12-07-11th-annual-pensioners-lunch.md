@@ -1,5 +1,5 @@
 ---
-title: "11th Annual Pensioners Lunch"
+title: "The 11th pensioners' Christmas lunch"
 date: 2011-12-07
 tag: "Pensioners' lunch"
 summary: "About 126 Bradwell pensioners came to this year's lunch at the Methodist Hall."

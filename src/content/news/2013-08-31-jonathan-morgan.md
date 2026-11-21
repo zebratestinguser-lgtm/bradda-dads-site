@@ -1,5 +1,5 @@
 ---
-title: "Jonathan Morgan"
+title: "Farewell from Jonathan Morgan"
 date: 2013-08-31
 tag: "Village"
 summary: "It's goodbye and farewell from me after 14 years of being part of Bradda Dads. My family and I have moved on to pastures new."

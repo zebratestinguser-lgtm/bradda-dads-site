@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit Entries Open via Fabian4"
+title: "Wolf's Pit 2023: entries open"
 date: 2023-01-30
 tag: "Wolf's Pit"
 summary: "Enter the Wolf’s Pit Fell Race on Mother’s Day via Fabian4"

@@ -1,5 +1,5 @@
 ---
-title: "Ball Race (Archive 13 June 2004)"
+title: "The ball race, June 2004"
 date: 2008-03-23
 tag: "Village"
 summary: "Photos from the old Bradda Dads website: Ball Race (Archive 13 June 2004)."

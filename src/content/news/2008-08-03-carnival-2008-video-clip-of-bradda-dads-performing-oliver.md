@@ -1,5 +1,5 @@
 ---
-title: "Carnival 2008 - video clip of Bradda Dads performing 'Oliver'"
+title: "Video: Bradda Dads perform Oliver at the 2008 carnival"
 date: 2008-08-03
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Carnival 2008 - video clip of Bradda Dads performing 'Oliver'."

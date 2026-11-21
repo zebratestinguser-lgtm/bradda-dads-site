@@ -1,5 +1,5 @@
 ---
-title: "Carnival 2004 BraddaDads : 'Grease' float"
+title: "Carnival 2004: the Grease float"
 date: 2004-07-31
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Carnival 2004 BraddaDads : 'Grease' float."

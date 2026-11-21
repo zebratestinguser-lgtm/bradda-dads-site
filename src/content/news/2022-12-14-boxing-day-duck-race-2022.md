@@ -1,5 +1,5 @@
 ---
-title: "Boxing Day Duck Race 2022"
+title: "Boxing Day duck race 2022"
 date: 2022-12-14
 tag: "Duck race"
 summary: "Photos from the old Bradda Dads website: Boxing Day Duck Race 2022."

@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit Fell Race 2009 Publicity"
+title: "Spreading the word about the first Wolf's Pit Fell Race"
 date: 2009-02-20
 tag: "Wolf's Pit"
 summary: "Photos from the old Bradda Dads website: Wolf's Pit Fell Race 2009 Publicity."

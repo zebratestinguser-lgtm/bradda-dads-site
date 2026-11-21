@@ -1,5 +1,5 @@
 ---
-title: "Carnival Duck Race pics and results - 3 August 2009"
+title: "Carnival duck race 2009: photos and results"
 date: 2009-08-04
 tag: "Duck race"
 summary: "Thanks to Julie Sambridge who won a prize last year and kindly donated this year's prize back to Bradda Dads Photos courtesy of Peter Kobayashi (click to enlarge, use back button…"

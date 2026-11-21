@@ -1,5 +1,5 @@
 ---
-title: "Boxing Day Duck Race 2022"
+title: "Boxing Day duck race 2022"
 category: "Duck race"
 event: duck-race
 date: 2022-12-14

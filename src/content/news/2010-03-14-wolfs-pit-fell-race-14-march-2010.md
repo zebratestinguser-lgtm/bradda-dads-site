@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit Fell Race - 14 March 2010"
+title: "Wolf's Pit Fell Race 2010"
 date: 2010-03-14
 tag: "Wolf's Pit"
 summary: "Bradda Dad and Wolf's Pit Fell Race organiser John Boyle takes 6th place. Very well done! Photos contributed by June and Vic Poke, Jaak and Chris Ojari."

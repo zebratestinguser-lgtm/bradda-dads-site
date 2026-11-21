@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads, Wives and Children Bowls Social"
+title: "Bowls social with wives and children"
 date: 2007-09-08
 tag: "Social"
 summary: "The 'Dads and their families enjoyed a sunny afternoon of bowls at Bradwell Bowls Club."

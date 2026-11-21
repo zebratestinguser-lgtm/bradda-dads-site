@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit Fell Race - 17th March 2013"
+title: "Wolf's Pit Fell Race 2013"
 date: 2013-03-17
 tag: "Wolf's Pit"
 summary: "A huge thank you to everyone who took part in this year's Wolf's Pit Fell Race. The turn out was close to the highest number of entrants we have ever had."

@@ -1,5 +1,5 @@
 ---
-title: "Duck Race - Carnival 2012"
+title: "Carnival duck race 2012"
 date: 2012-08-07
 tag: "Duck race"
 summary: "The carnival duck race was held on it's usual Monday slot on the 6th of August. A large crowd gathered to see the ducks travel down the brook."

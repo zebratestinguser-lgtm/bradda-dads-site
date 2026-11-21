@@ -8,7 +8,7 @@ site:
   contactEmail: "[CONTACT EMAIL]"
   cicName: "[CIC NAME]"
   cicNumber: "[COMPANY NUMBER]"
-  # SumUp online store (three items: duck race tickets, community Christmas card, donation)
+  # SumUp online store (three items: duck race entries, community Christmas card, donation)
   sumupStoreUrl: https://bradda-dads-community-group.sumupstore.com/
   # All three amounts go to the store's donation item, where the amount is chosen
   donationLinks:
@@ -58,14 +58,14 @@ site:
       text: Pensioners' Christmas lunch
       url: /events/pensioners-lunch/
     - date: 2026-12-12
-      text: Duck race tickets on sale at the Co-op, 10am to 2pm
+      text: Duck race entries on sale at the Co-op, 10am to 2pm
       url: /events/duck-race/
     - date: 2026-12-14
       label: Week of 14 Dec
       text: Christmas cards delivered around the village
       url: /christmas-card/
     - date: 2026-12-19
-      text: Last chance for duck tickets, at the Co-op (10am to 2pm) or online until midnight
+      text: Last chance for duck race entries, at the Co-op (10am to 2pm) or online until midnight
       url: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
     - date: 2026-12-26
       text: Boxing Day Duck Race

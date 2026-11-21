@@ -1,5 +1,5 @@
 ---
-title: "Christmas Tree Festival at St Barnabas Church"
+title: "Christmas tree festival at St Barnabas Church"
 date: 2009-12-13
 tag: "Village"
 summary: "Bradda Dads were one of various community organisations that were invited by St Barnabas Church to take part in a Christmas Tree Festival."

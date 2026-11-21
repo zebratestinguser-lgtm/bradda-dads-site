@@ -1,5 +1,5 @@
 ---
-title: "Float Building - Carnival 2007"
+title: "Building the carnival float 2007"
 date: 2007-08-05
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Float Building - Carnival 2007."

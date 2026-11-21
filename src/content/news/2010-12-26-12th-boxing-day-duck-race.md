@@ -1,5 +1,5 @@
 ---
-title: "12th Boxing Day Duck Race"
+title: "The 12th Boxing Day duck race"
 date: 2010-12-26
 tag: "Duck race"
 summary: "Krazy kraft race best design of kraft was awarded to Georgia and Beth Frost Joint winners of the kraft race: Samuel Cooper and Ben Ollerenshaw and third place went to Jack…"

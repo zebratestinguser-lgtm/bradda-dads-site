@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dad Lee Bradbury's 40th Birthday Party - 16.8.08"
+title: "Lee Bradbury's 40th birthday party"
 date: 2008-08-17
 tag: "Social"
 summary: "Lee put on a great party at Sicklehome Golf Club. If anyone has any photos that they think would be good added to the site, then email them over, especially if there is one of…"

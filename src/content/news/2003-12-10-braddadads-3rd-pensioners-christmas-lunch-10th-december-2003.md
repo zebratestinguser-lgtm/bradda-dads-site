@@ -1,5 +1,5 @@
 ---
-title: "BraddaDads 3rd Pensioners Christmas Lunch - 10th December 2003"
+title: "The 3rd pensioners' Christmas lunch"
 date: 2003-12-10
 tag: "Pensioners' lunch"
 summary: "Photos from the old Bradda Dads website: BraddaDads 3rd Pensioners Christmas Lunch - 10th December 2003."

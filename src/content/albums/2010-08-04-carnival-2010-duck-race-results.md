@@ -1,5 +1,5 @@
 ---
-title: "Carnival 2010 - Duck Race Results"
+title: "Carnival duck race 2010 results"
 category: "Duck race"
 event: duck-race
 date: 2010-08-04

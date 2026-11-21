@@ -1,5 +1,5 @@
 ---
-title: "2010 Wolf's Pit Fell Race"
+title: "The second Wolf's Pit Fell Race"
 category: "Wolf's Pit"
 event: wolfspit
 date: 2010-02-20

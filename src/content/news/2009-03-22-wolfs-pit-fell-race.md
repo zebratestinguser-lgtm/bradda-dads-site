@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit Fell Race"
+title: "Wolf's Pit Fell Race 2009"
 date: 2009-03-22
 tag: "Wolf's Pit"
 summary: "Full details of the race are on the Wolf's Pit Fell Race website."

@@ -1,5 +1,5 @@
 ---
-title: "Retired Bradda Dads meet the current Bradda Dads"
+title: "Retired Bradda Dads meet today's dads"
 date: 2023-02-04
 tag: "Social"
 summary: "Former members of Bradda Dads met with current members for a social and for them to get to know about the 'Dads' history."

@@ -1,5 +1,5 @@
 ---
-title: "8th Annual Pensioners Christmas Lunch"
+title: "The 8th pensioners' Christmas lunch"
 date: 2008-12-10
 tag: "Pensioners' lunch"
 summary: "Excellent pensioners lunch. Very good feedback from our guests (see above). Attendance: 122."

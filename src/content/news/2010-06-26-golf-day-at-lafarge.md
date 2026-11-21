@@ -1,5 +1,5 @@
 ---
-title: "Golf Day at Lafarge"
+title: "Golf day at Lafarge 2010"
 date: 2010-06-26
 tag: "Social"
 summary: "Warm sunny weather provided a great day out at Lafarge Golf Club. Congratulations to Mark's team who won for the second year running."

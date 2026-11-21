@@ -1,5 +1,5 @@
 ---
-title: "2005 Boxing Day Krazy Kraft/Duck Race"
+title: "Boxing Day duck race and Krazy Kraft race 2005"
 date: 2005-12-26
 tag: "Duck race"
 summary: "Photos from the old Bradda Dads website: 2005 Boxing Day Krazy Kraft/Duck Race."

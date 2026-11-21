@@ -1,5 +1,5 @@
 ---
-title: "Carnival 2002  : BraddaDads Army Float"
+title: "Carnival 2002: the BraddaDads Army float"
 date: 2002-07-06
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Carnival 2002  : BraddaDads Army Float."

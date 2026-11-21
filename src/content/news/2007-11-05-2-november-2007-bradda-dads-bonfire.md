@@ -1,5 +1,5 @@
 ---
-title: "2 November 2007 - Bradda Dads Bonfire"
+title: "Bonfire night 2007"
 date: 2007-11-05
 tag: "Bonfire"
 summary: "Another successful bonfire. Well done to all!"

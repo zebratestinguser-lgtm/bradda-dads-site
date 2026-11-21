@@ -1,5 +1,5 @@
 ---
-title: "Summer Duck Race 2016"
+title: "Summer duck race 2016"
 category: "Duck race"
 event: duck-race
 # Photo date: From the old WordPress duck races page.
@@ -12,7 +12,7 @@ photos:
   - src: /uploads/albums/2018-10-17-summer-duck-race-2016/001.jpg
     alt: "Poster for the Great Bradwell Boxing Day Duck Race: ducks away 11am from Town Bottom Park (Summer 2016)"
   - src: /uploads/albums/2018-10-17-summer-duck-race-2016/002.jpg
-    alt: "Photo 2 of 2 from Summer Duck Race 2016 (Summer 2016)"
+    alt: "Photo 2 of 2 from Summer duck race 2016 (Summer 2016)"
 ---
 
 **[Duck Race summer 2016](https://www.youtube.com/watch?v=pwB5Hz5x0_k)**

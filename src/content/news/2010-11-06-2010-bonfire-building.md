@@ -1,5 +1,5 @@
 ---
-title: "2010 Bonfire Building"
+title: "Building the bonfire 2010"
 date: 2010-11-06
 tag: "Bonfire"
 summary: "A warm crisp sunny November day and Bradda Dads collect firewood for the bonfire. Malcolm lent us his tractor/trailer combo and rookie driver Martin did a great job."

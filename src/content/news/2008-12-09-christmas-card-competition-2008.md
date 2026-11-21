@@ -1,5 +1,5 @@
 ---
-title: "Christmas Card Competition 2008"
+title: "Christmas card competition 2008"
 date: 2008-12-09
 tag: "Christmas card"
 summary: "Bradda Dads for the first time organised a Christmas card competition with both the infant and junior schools taking part."

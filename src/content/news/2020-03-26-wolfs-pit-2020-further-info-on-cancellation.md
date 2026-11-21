@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit 2020 – further info on cancellation"
+title: "Wolf's Pit 2020: more about the cancellation"
 date: 2020-03-26
 tag: "Wolf's Pit"
 summary: "As I’m sure you are all aware, we have had to cancel this years race due to the corona virus outbreak."

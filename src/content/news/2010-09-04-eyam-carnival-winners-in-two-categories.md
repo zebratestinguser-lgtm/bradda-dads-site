@@ -1,5 +1,5 @@
 ---
-title: "Eyam Carnival - Winners in two categories!"
+title: "Winners in two categories at Eyam Carnival"
 date: 2010-09-04
 tag: "Carnival"
 summary: "The Mick Dawson Cup for Best Comic Entry in Carnival The Castle Gate Cup for Best Overall Entry in Carnival For the very first time we took the float used at Bradwell carnival to…"

@@ -1,5 +1,5 @@
 ---
-title: "Pensioners Lunch 2022"
+title: "Pensioners' Christmas lunch 2022"
 date: 2022-11-11
 tag: "Pensioners' lunch"
 summary: "Please get your slips from Bradda News completed and dropped at the post office, ready for Friday 2nd December!"

@@ -1,5 +1,5 @@
 ---
-title: "Buxton Advertiser - 16.8.07 - we are famous (or infamous!)"
+title: "In the Buxton Advertiser: we're famous (or infamous!)"
 category: "Village"
 date: 2007-08-17
 cover: /uploads/albums/2007-08-17-buxton-advertiser-16-8-07-we-are-famous-or-infamous/001.jpg

@@ -1,5 +1,5 @@
 ---
-title: "Praise indeed - pensioners lunch poem"
+title: "Praise indeed: a poem about the pensioners' lunch"
 category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2008-12-16

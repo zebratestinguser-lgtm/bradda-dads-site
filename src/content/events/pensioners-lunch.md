@@ -34,4 +34,4 @@ involvement:
 
 A free Christmas lunch for Bradwell's pensioners, cooked and served by the dads, with crackers, a decorated Christmas tree and the village children singing. It has run every December since 2001.
 
-Duck race tickets will be on sale on the day too.
+Duck race entries will be on sale on the day too.
