@@ -2,11 +2,15 @@
 // Four photo tiles leading to the main sections (replaces the long homepage sections).
 // Photos always show when they were taken.
 import { url, thumb } from '../../lib/url';
+import { getAlbums } from '../../lib/albums';
+
+// Counted from the albums at every build, so it stays right as albums are added
+const albumCount = (await getAlbums()).length;
 
 const tiles = [
   {
     title: 'Photos',
-    text: '94 albums going back to 2001',
+    text: `${albumCount} albums going back to 2001`,
     href: '/photos/',
     img: '/uploads/albums/2012-08-07-duck-race-carnival-2012/010.jpg',
     when: 'Aug 2012',

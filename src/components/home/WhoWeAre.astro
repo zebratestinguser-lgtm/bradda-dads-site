@@ -9,10 +9,11 @@ import { isPlaceholder } from '../../lib/events';
 import { url } from '../../lib/url';
 
 const site = await getSite();
+const eventCount = (await getCollection('events')).length; // counted, so adding an event updates it
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const facts = [
   { big: '1999', small: 'the year it all started' },
-  { big: '5', small: 'big events every year' },
+  { big: String(eventCount), small: 'big events every year' },
   { big: '100%', small: 'run by volunteers' },
 ];
 if (!isPlaceholder(site.totalRaised)) facts.unshift({ big: `£${site.totalRaised}`, small: 'raised for the village' });
