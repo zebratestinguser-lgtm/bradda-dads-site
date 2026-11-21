@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads 1 - Rest of Village 1"
+title: "Football: Bradda Dads 1, Rest of the Village 1"
 date: 2007-08-05
 tag: "Village"
 summary: "A hard fought battle this afternoon amid the torrid heat at the Stade de Bradda Sports."

@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit Fell Race 2022"
+title: "Wolf's Pit Fell Race 2022"
 date: 2022-02-08
 tag: "Wolf's Pit"
 summary: "The Wolf’s Pit is back on for 2022 after a 2 year hiatus! Get training for Sunday 20th March 2022. https://braddadads.wordpress.com/wolfs-pit/"

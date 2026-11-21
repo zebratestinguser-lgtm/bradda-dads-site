@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit Results 2026"
+title: "Wolf's Pit 2026 results"
 date: 2026-03-10
 tag: "Wolf's Pit"
 summary: "The 2026 Wolf's Pit Fell Race results are in. Thank you to every runner, marshal and helper. Search the full results on our results page."

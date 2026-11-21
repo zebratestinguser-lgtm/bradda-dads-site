@@ -1,5 +1,5 @@
 ---
-title: "*** WIN A UNIQUE NECKLACE AND EARRINGS SET FOR YOUR VALENTINE *** (raffle now finished)"
+title: "Valentine's raffle: a necklace and earrings set (now finished)"
 date: 2012-12-30
 tag: "Village"
 summary: "***Winner - Richard Patton of Bradwell*** The draw took place at the White Hart on 13 February 2013. Thanks to village celebrity Janet Maskrey for drawing the winning ticket."

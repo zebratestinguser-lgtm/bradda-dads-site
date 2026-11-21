@@ -1,5 +1,5 @@
 ---
-title: "2014 Wolf's Pit Fell Race"
+title: "Wolf's Pit Fell Race 2014"
 date: 2014-03-16
 tag: "Wolf's Pit"
 summary: "The largest ever field of 340 runners took up the challenge of the 2014 Wolf's Pit Fell Race."

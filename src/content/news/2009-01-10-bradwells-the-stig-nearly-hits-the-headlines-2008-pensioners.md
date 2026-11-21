@@ -1,5 +1,5 @@
 ---
-title: "Bradwell's 'The Stig' nearly hits the headlines - 2008 Pensioners Lunch Special Feature"
+title: "Bradwell's 'Stig' nearly hits the headlines at the pensioners' lunch"
 date: 2009-01-10
 tag: "Pensioners' lunch"
 summary: "Clicking the image will open a larger version in a new window. Use back button to return to blog."

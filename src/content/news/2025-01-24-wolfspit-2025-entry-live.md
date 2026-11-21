@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit 2025 Entry LIVE"
+title: "Wolf's Pit 2025: entries open"
 date: 2025-01-24
 tag: "Wolf's Pit"
 summary: "Wolf's Pit 2025 entry is now live via Fabian4."

@@ -1,5 +1,5 @@
 ---
-title: "Carnival - 2 August 2008"
+title: "Carnival 2008"
 date: 2008-08-02
 tag: "Carnival"
 summary: "Photographs from the 2008 carnival, courtesy of J R Braddock, Photographer, Hyde, Cheshire."

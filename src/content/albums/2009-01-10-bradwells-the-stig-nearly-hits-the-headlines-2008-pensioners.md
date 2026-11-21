@@ -1,5 +1,5 @@
 ---
-title: "Bradwell's 'The Stig' nearly hits the headlines - 2008 Pensioners Lunch Special Feature"
+title: "Bradwell's 'Stig' nearly hits the headlines at the pensioners' lunch"
 category: "Pensioners' lunch"
 event: pensioners-lunch
 # Photo date: Feature posted January 2009 about the pensioners’ lunch on 10 December 2008.

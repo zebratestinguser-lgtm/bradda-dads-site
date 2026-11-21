@@ -1,5 +1,5 @@
 ---
-title: "It's not goodbye, it's just au revoir"
+title: "It's not goodbye, it's au revoir"
 date: 2010-10-20
 tag: "Social"
 summary: "The Bradda Dads 2010 Annual General Meeting This year two founding members of Bradda Dads have decided to retire after each serving more than ten years."

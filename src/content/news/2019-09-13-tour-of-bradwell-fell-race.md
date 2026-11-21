@@ -1,5 +1,5 @@
 ---
-title: "Tour of Bradwell Fell Race"
+title: "Tour of Bradwell fell race: entries on the day"
 date: 2019-09-13
 tag: "Tour of Bradwell"
 summary: "Entry on the day tomorrow is £21 and open from 8am. See you there!"

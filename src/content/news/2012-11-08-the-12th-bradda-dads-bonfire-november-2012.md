@@ -1,5 +1,5 @@
 ---
-title: "The 12th Bradda Dads Bonfire - November 2012"
+title: "The 12th Bradda Dads bonfire"
 date: 2012-11-08
 tag: "Bonfire"
 summary: "In the late evening of Sunday 4th November 2012 the bonfire built the day before was torched by an arsonist(s)."

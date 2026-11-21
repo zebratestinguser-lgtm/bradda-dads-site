@@ -1,5 +1,5 @@
 ---
-title: "Pensioners Christmas Lunch - 9 December 2009"
+title: "Pensioners' Christmas lunch 2009"
 date: 2009-12-10
 tag: "Pensioners' lunch"
 summary: "124 of Bradwell's finest pensioners, plus one very suspect unidentified 'lady' (see if you can identify her?"

@@ -11,6 +11,9 @@ type Photo = { src: string; alt?: string };
 /** Descriptions that mean "this is a document or graphic, not a photo of people or places" */
 const NOT_A_SCENE = /poster|invitation|printed|cutting|newspaper|page of|drawing|poem|map view|logo|programme cover|list of|empty flatbed/i;
 
+/** Imported photos without a real description yet: "Photo 3 of 23 from …" */
+export const GENERIC = /^photo \d+ (of \d+ )?from /i;
+
 /** True if a photo's description suggests a real scene rather than a scanned document */
 export const isScene = (alt?: string) => Boolean(alt) && !NOT_A_SCENE.test(alt!);
 
@@ -23,7 +26,7 @@ export function displayCover(album: Album): Photo | undefined {
   if (isScene(cover.alt)) return cover;
   // Imported photos other than the cover mostly have generic descriptions ("Photo 3 from …"), so only
   // swap to one that has been properly described
-  const better = pics.find((p) => p.src !== coverSrc && isScene(p.alt) && !/^photo \d+ from/i.test(p.alt ?? ''));
+  const better = pics.find((p) => p.src !== coverSrc && isScene(p.alt) && !GENERIC.test(p.alt ?? ''));
   return better ?? cover;
 }
 

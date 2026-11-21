@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads Float Victorious in 2009 Carnival"
+title: "Our float wins the 2009 carnival"
 date: 2009-08-01
 tag: "Carnival"
 summary: "A cracking effort by Bradda Dads and a well deserved victory. The 'Dads looked great bedecked in fake chain mail and the wives looked fabulous in those hand-made dresses."

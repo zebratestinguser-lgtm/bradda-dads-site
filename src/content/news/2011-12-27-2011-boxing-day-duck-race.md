@@ -1,5 +1,5 @@
 ---
-title: "2011 Boxing Day Duck Race"
+title: "Boxing Day duck race 2011"
 date: 2011-12-27
 tag: "Duck race"
 summary: "Mild weather and a good crowd contributed to this year's Boxing Day duck race."

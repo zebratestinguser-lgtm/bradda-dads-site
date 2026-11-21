@@ -1,5 +1,5 @@
 ---
-title: "2006 Boxing Day Duck Race"
+title: "Boxing Day duck race 2006"
 date: 2006-12-26
 tag: "Duck race"
 summary: "Photos from the old Bradda Dads website: 2006 Boxing Day Duck Race."

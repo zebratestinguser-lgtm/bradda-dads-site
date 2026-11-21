@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit 2025 Results"
+title: "Wolf's Pit 2025 results"
 date: 2025-03-17
 tag: "Wolf's Pit"
 summary: "The 2025 Wolf's Pit Fell Race results are in. Thank you to every runner, marshal and helper. Search the full results on our results page."

@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads - Friday, 2nd November 2001"
+title: "Bonfire and guy competition 2001"
 category: "Bonfire"
 date: 2001-11-02
 cover: /uploads/albums/2001-11-02-bradda-dads-friday-2nd-november-2001/001.jpg

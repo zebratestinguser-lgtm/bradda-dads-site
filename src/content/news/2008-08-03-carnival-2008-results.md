@@ -1,5 +1,5 @@
 ---
-title: "Carnival 2008 - results"
+title: "Carnival 2008 results"
 date: 2008-08-03
 tag: "Carnival"
 summary: "Just for the record...... The Carnival Committee awarded us with 3rd place for our Oliver workhouse float."

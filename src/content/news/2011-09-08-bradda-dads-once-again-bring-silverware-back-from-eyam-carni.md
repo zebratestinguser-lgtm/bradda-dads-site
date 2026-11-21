@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads once again bring silverware back from Eyam carnival - 3 September 2011"
+title: "More silverware from Eyam Carnival"
 date: 2011-09-08
 tag: "Carnival"
 summary: "The Bradda Dad's float travelled to Eyam carnival, and, one again, we came home with some silverware. Best music on a float!"

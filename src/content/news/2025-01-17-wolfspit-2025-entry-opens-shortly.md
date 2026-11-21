@@ -1,5 +1,5 @@
 ---
-title: "Wolf's Pit 2025 – Entry opens shortly"
+title: "Wolf's Pit 2025: entries open soon"
 date: 2025-01-17
 tag: "Wolf's Pit"
 summary: "The Wolf's Pit Fell Race 2025 will be held on Sunday 9th March 2025, keep an eye on our event page where the Fabian4 entry link will be published shortly."

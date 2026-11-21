@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads go on a summer holiday - Carnival 2012"
+title: "Carnival 2012: Bradda Dads go on a summer holiday"
 date: 2012-08-04
 tag: "Carnival"
 summary: "Carnival 2012 and Bradda Dads Routemaster London double decker bus. Neal Seymour's fantastic Carnival 2012 video - see it at:- http://www.youtube.com/watch?v=7rwTtCx6-aM"

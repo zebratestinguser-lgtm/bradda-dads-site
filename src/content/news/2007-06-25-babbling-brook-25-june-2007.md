@@ -1,5 +1,5 @@
 ---
-title: "Babbling Brook.......... - 25 June 2007"
+title: "The babbling brook"
 date: 2007-06-25
 tag: "Village"
 summary: "Not a Bradda Dads item, but interesting anyway. (I wanted to see how video worked on the blog)"

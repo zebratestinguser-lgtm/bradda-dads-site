@@ -1,5 +1,5 @@
 ---
-title: "10th Anniversary Pensioners Lunch - 8 December 2010"
+title: "The 10th anniversary pensioners' Christmas lunch"
 date: 2010-12-09
 tag: "Pensioners' lunch"
 summary: "118 of Bradwell's finest pensioners enjoyed lunch served by Bradda Dads and once again ably assisted by their wives."

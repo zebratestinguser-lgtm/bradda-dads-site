@@ -1,5 +1,5 @@
 ---
-title: "Carnival 2005 (Archive)"
+title: "Carnival 2005: from the archive"
 date: 2008-03-23
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Carnival 2005 (Archive)."

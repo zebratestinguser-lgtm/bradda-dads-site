@@ -1,5 +1,5 @@
 ---
-title: "Golf Day at Lafarge Golf Club - 13 June 2009"
+title: "Golf day at Lafarge Golf Club 2009"
 date: 2009-06-16
 tag: "Social"
 summary: "Photos from the old Bradda Dads website: Golf Day at Lafarge Golf Club - 13 June 2009."

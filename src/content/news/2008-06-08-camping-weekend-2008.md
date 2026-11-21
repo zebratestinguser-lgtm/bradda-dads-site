@@ -1,5 +1,5 @@
 ---
-title: "Camping Weekend - 2008"
+title: "Camping weekend 2008"
 date: 2008-06-08
 tag: "Social"
 summary: "Cottage Farm Caravan Park, Blackwell. Lots of families turned up for barbecues, drinks and games (and a walk). Ummm, the guy in the shop said it was dome tent........"

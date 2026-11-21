@@ -1,5 +1,5 @@
 ---
-title: "Christmas Card Competition"
+title: "Christmas card competition 2009"
 date: 2009-12-10
 tag: "Christmas card"
 summary: "Bradwell Infant and Junior schools entered the festive spirit and took part in the design a christmas card competition."

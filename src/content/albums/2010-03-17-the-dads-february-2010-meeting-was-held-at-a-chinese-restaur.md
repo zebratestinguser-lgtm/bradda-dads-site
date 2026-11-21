@@ -1,5 +1,5 @@
 ---
-title: "The 'Dads February 2010 meeting was held at a Chinese restaurant in Chapel.  What a happy looking bunch!"
+title: "February meeting at a Chinese restaurant in Chapel"
 category: "Social"
 date: 2010-03-17
 cover: /uploads/albums/2010-03-17-the-dads-february-2010-meeting-was-held-at-a-chinese-restaur/001.jpg

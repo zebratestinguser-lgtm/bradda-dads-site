@@ -1,5 +1,5 @@
 ---
-title: "10th Annual Duck Race & Crazy Craft Race - Boxing Day 2008"
+title: "The 10th Boxing Day duck race and Crazy Craft race"
 date: 2008-12-26
 tag: "Duck race"
 summary: "Duck Race Results Click document image to view Crazy Craft Race Results Race Winner: Phoebe Pembleton Best Overall Design of Craft: Sian Marsden Best Design, Under 8s: Alfie Baker…"

@@ -1,5 +1,5 @@
 ---
-title: "Carnival Duck Race - 6 August 2007"
+title: "Carnival duck race 2007"
 date: 2007-08-07
 tag: "Duck race"
 summary: "Another successful duck race. Well done to everyone!"

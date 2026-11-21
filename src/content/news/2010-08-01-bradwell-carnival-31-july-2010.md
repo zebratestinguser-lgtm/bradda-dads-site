@@ -1,5 +1,5 @@
 ---
-title: "Bradwell Carnival - 31 July 2010"
+title: "Carnival 2010"
 date: 2010-08-01
 tag: "Carnival"
 summary: "Bradda Dads Circus Float wins First Prize for Best Float (click any image to enlarge, see video at the end) Mike and Chris applying face paint Neal seems to have grown a bit!"

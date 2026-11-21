@@ -1,5 +1,5 @@
 ---
-title: "6-a-side Carnival football - 2007"
+title: "Six-a-side carnival football 2007"
 date: 2007-08-08
 tag: "Carnival"
 summary: "The 'Dads acquitted themselves well against some younger, fitter and better players."

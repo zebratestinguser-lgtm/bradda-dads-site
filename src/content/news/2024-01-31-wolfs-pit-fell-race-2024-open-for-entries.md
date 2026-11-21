@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit Fell Race 2024 open for entries"
+title: "Wolf's Pit 2024: entries open"
 date: 2024-01-31
 tag: "Wolf's Pit"
 summary: "Sunday 10th March 2024. Entries are now open via Fabian4: see the event page for more details."

@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit Fell Race 2020 Cancelled"
+title: "Wolf's Pit 2020 cancelled"
 date: 2020-03-17
 tag: "Wolf's Pit"
 summary: "After advice from the FRA, the Wolf’s Pit fell race 2020 won’t be going ahead. Please accept our apologies and watch this space for more info."

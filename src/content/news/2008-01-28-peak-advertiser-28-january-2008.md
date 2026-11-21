@@ -1,5 +1,5 @@
 ---
-title: "Peak Advertiser 28 January 2008"
+title: "In the Peak Advertiser, January 2008"
 date: 2008-01-28
 tag: "Village"
 summary: "To view more easily (IE7), click to open picture, click 'Page' on tool bar, click 'Zoom', scroll to 'Custom', change to 40%, click OK."

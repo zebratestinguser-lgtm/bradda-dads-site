@@ -1,5 +1,5 @@
 ---
-title: "Float Building for 2010 Carnival"
+title: "Building the carnival float 2010"
 date: 2010-08-01
 tag: "Carnival"
 summary: "The moment Viv realises she's the tattooed girl!!"

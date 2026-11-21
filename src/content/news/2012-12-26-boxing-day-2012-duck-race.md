@@ -1,5 +1,5 @@
 ---
-title: "Boxing Day 2012 Duck Race"
+title: "Boxing Day duck race 2012"
 date: 2012-12-26
 tag: "Duck race"
 summary: "Thanks to everyone who bought ducks for this year's annual event, the 14th consecutive year the 'Dads have held the race. The weather was kind to us providing a bright sunny day."

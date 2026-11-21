@@ -1,5 +1,5 @@
 ---
-title: "2008 Bonfire Building"
+title: "Building the bonfire 2008"
 date: 2008-11-01
 tag: "Bonfire"
 summary: "Above: Malcolm skilfully navigates the lane Above: the pile that greeted us at the gate!"

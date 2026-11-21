@@ -1,5 +1,5 @@
 ---
-title: "The Long Tour of Bradwell 2012"
+title: "Long Tour of Bradwell 2012"
 date: 2012-08-11
 tag: "Tour of Bradwell"
 summary: "Bradda Dads, who are always keen to look at alternative sources of fund raising to benefit the village, assisted in staging The Long Tour of Bradwell 2012 with a view to possibly…"

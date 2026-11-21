@@ -1,5 +1,5 @@
 ---
-title: "Carnival Duck Race - 2 August 2010"
+title: "Carnival duck race 2010"
 date: 2010-08-04
 tag: "Duck race"
 summary: "A very dry summer meant a serious lack of water in the brook for this year's Carnival duck race."

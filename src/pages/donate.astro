@@ -11,7 +11,7 @@ import { url } from '../lib/url';
 const header = await photoMatching(/two children sitting in a giant wooden duck/i, /giant wooden duck/i);
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const ways = [
-  { title: 'Buy a duck', text: 'Race a rubber duck down the brook on Boxing Day, with cash prizes for the first ducks home.', href: '/events/duck-race/', label: 'Duck race details' },
+  { title: 'Enter the duck race', text: 'Buy a numbered entry for the Boxing Day duck race, with cash prizes for the first ducks home.', href: '/events/duck-race/', label: 'Duck race details' },
   { title: 'Add to the Christmas card', text: "Put your family's message on the village Christmas card for £5 instead of sending lots of cards.", href: '/events/christmas-card/', label: 'About the card' },
   { title: 'Lend a hand', text: 'Every event needs helpers, from building the bonfire to serving at the pensioners’ lunch.', href: '/get-involved/', label: 'Get involved' },
   { title: 'Come along', text: 'Coming along to our events and joining in is one of the best ways to help.', href: '/events/', label: 'See the events' },

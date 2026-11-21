@@ -1,5 +1,5 @@
 ---
-title: "First ever Bradda Dads Pensioners Christmas Lunch - Wednesday, 12th December 2001"
+title: "The first pensioners' Christmas lunch"
 date: 2001-12-12
 tag: "Pensioners' lunch"
 summary: "Archive entry to the blog posted on the 13th of February 2023."

@@ -1,5 +1,5 @@
 ---
-title: "BraddaDads 6th Pensioners Lunch - Wednesday, 6th December 2006"
+title: "The 6th pensioners' Christmas lunch"
 date: 2006-12-06
 tag: "Pensioners' lunch"
 summary: "Photos from the old Bradda Dads website: BraddaDads 6th Pensioners Lunch - Wednesday, 6th December 2006."

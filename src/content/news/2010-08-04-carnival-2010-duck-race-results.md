@@ -1,5 +1,5 @@
 ---
-title: "Carnival 2010 - Duck Race Results"
+title: "Carnival duck race 2010 results"
 date: 2010-08-04
 tag: "Duck race"
 summary: "Photos from the old Bradda Dads website: Carnival 2010 - Duck Race Results."

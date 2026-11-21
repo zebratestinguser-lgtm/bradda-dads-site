@@ -1,5 +1,5 @@
 ---
-title: "Buxton Advertiser - 16.8.07 - we are famous (or infamous!)"
+title: "In the Buxton Advertiser: we're famous (or infamous!)"
 date: 2007-08-17
 tag: "Village"
 summary: "Photos from the old Bradda Dads website: Buxton Advertiser - 16.8.07 - we are famous (or infamous!)."

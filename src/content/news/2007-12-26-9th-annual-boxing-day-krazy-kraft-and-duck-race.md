@@ -1,5 +1,5 @@
 ---
-title: "9th Annual Boxing Day Krazy Kraft and Duck Race"
+title: "The 9th Boxing Day duck race and Krazy Kraft race"
 date: 2007-12-26
 tag: "Duck race"
 summary: "As 2007 draws to a close, Bradda Dads complete their year of events with the 9th annual Boxing Day krazy kraft and duck races."

@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit 2022 Results"
+title: "Wolf's Pit 2022 results"
 date: 2022-03-26
 tag: "Wolf's Pit"
 summary: "The 2022 Wolf's Pit Fell Race results are in. Thank you to every runner, marshal and helper. Search the full results on our results page."

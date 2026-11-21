@@ -1,5 +1,5 @@
 ---
-title: "Carnival : 5th of August 2006"
+title: "Carnival 2006"
 date: 2006-08-05
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Carnival : 5th of August 2006."

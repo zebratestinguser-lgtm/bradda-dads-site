@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit 2023 Results"
+title: "Wolf's Pit 2023 results"
 date: 2023-03-23
 tag: "Wolf's Pit"
 summary: "The 2023 Wolf's Pit Fell Race results are in. Thank you to every runner, marshal and helper. Search the full results on our results page."

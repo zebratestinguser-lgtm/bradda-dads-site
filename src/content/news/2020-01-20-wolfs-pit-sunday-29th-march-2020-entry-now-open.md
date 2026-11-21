@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit Sunday 29th March 2020 – Entry now open"
+title: "Wolf's Pit 2020: entries open"
 date: 2020-01-20
 tag: "Wolf's Pit"
 summary: "Entry for 2020 via Fabian4 is now open!"

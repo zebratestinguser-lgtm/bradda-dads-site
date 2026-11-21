@@ -1,5 +1,5 @@
 ---
-title: "Wolf’s Pit results 2019"
+title: "Wolf's Pit 2019 results"
 date: 2019-03-18
 tag: "Wolf's Pit"
 summary: "Results from March 2019 are now up on RaceTek Live. Thanks to everyone for your support this year!"

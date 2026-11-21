@@ -1,5 +1,5 @@
 ---
-title: "Bradwell Carnival Video"
+title: "Video: Carnival 2011"
 date: 2011-08-21
 tag: "Carnival"
 summary: "Photos from the old Bradda Dads website: Bradwell Carnival Video."

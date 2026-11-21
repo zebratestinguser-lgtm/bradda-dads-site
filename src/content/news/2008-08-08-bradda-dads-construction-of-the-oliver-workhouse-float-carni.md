@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads - Construction of the 'Oliver Workhouse' Float - Carnival 2008"
+title: "Building the Oliver workhouse float for the 2008 carnival"
 date: 2008-08-08
 tag: "Carnival"
 summary: "Now carnival Saturday has passed, this is how Bradda Dads built the float."

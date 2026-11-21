@@ -1,5 +1,5 @@
 ---
-title: "Retired Bradda Dads Reunion - The White Hart - 11th November 2022"
+title: "Retired Bradda Dads reunion at the White Hart"
 category: "Social"
 date: 2022-11-11
 cover: /uploads/albums/2022-11-11-retired-bradda-dads-reunion-the-white-hart-11th-november-202/001.jpg
@@ -9,9 +9,9 @@ photos:
   - src: /uploads/albums/2022-11-11-retired-bradda-dads-reunion-the-white-hart-11th-november-202/001.jpg
     alt: "Retired and current Bradda Dads together in a pub (11 November 2022)"
   - src: /uploads/albums/2022-11-11-retired-bradda-dads-reunion-the-white-hart-11th-november-202/002.jpg
-    alt: "Photo 2 of 3 from Retired Bradda Dads Reunion - The White Hart - 11th November 2022 (11 November 2022)"
+    alt: "Photo 2 of 3 from Retired Bradda Dads reunion at the White Hart (11 November 2022)"
   - src: /uploads/albums/2022-11-11-retired-bradda-dads-reunion-the-white-hart-11th-november-202/003.jpg
-    alt: "Photo 3 of 3 from Retired Bradda Dads Reunion - The White Hart - 11th November 2022 (11 November 2022)"
+    alt: "Photo 3 of 3 from Retired Bradda Dads reunion at the White Hart (11 November 2022)"
 ---
 
 

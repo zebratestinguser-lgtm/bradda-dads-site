@@ -1,5 +1,5 @@
 ---
-title: "2010 Wolf's Pit Fell Race"
+title: "The second Wolf's Pit Fell Race"
 date: 2010-02-20
 tag: "Wolf's Pit"
 summary: "The second Wolf's Pit Fell Race will take place on 14 March 2010. Follow the link shown on the right for full details."

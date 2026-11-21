@@ -1,5 +1,5 @@
 ---
-title: "9.7.11 Opening of the Multi-use Games Area (MUGA)"
+title: "Opening the multi-use games area (MUGA)"
 category: "Village"
 date: 2011-07-10
 cover: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/001.jpg
@@ -9,17 +9,17 @@ photos:
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/001.jpg
     alt: "Families on the grass at the opening of the new multi-use games area (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/002.jpg
-    alt: "Photo 2 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+    alt: "Photo 2 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/003.jpg
-    alt: "Photo 3 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+    alt: "Photo 3 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/004.jpg
-    alt: "Photo 4 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+    alt: "Photo 4 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/005.jpg
-    alt: "Photo 5 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+    alt: "Photo 5 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/006.jpg
-    alt: "Photo 6 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+    alt: "Photo 6 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/007.jpg
-    alt: "Photo 7 of 7 from 9.7.11 Opening of the Multi-use Games Area (MUGA) (10 July 2011)"
+    alt: "Photo 7 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
 ---
 
 

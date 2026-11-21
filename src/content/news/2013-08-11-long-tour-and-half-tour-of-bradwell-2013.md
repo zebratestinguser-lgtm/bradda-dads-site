@@ -1,5 +1,5 @@
 ---
-title: "Long Tour and Half Tour of Bradwell 2013"
+title: "Long and Half Tour of Bradwell 2013"
 date: 2013-08-11
 tag: "Tour of Bradwell"
 summary: "Photos from the old Bradda Dads website: Long Tour and Half Tour of Bradwell 2013."

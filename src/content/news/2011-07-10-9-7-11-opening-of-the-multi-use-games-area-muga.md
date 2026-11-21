@@ -1,5 +1,5 @@
 ---
-title: "9.7.11 Opening of the Multi-use Games Area (MUGA)"
+title: "Opening the multi-use games area (MUGA)"
 date: 2011-07-10
 tag: "Village"
 summary: "Bradda Dads helped at the opening of the new Multi-use Games Area (MUGA) by erecting a marquee and gazebos, sponsoring the ladies netball competition and running the barbecue."

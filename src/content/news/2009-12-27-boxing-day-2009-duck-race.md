@@ -1,5 +1,5 @@
 ---
-title: "Boxing Day 2009 Duck Race"
+title: "Boxing Day duck race 2009"
 date: 2009-12-27
 tag: "Duck race"
 summary: "The annual Boxing Day duck race was made more festive by the remains of the recent heavy snow fall."

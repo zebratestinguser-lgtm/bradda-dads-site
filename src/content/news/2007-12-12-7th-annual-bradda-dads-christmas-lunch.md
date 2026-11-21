@@ -1,5 +1,5 @@
 ---
-title: "7th Annual Bradda Dads Christmas Lunch"
+title: "The 7th pensioners' Christmas lunch"
 date: 2007-12-12
 tag: "Pensioners' lunch"
 summary: "Here are some photos and video clips from the 2007 Christmas Lunch."

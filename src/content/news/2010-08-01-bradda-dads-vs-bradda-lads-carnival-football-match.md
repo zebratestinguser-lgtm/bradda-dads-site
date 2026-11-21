@@ -1,5 +1,5 @@
 ---
-title: "Bradda Dads vs Bradda Lads Carnival Football Match"
+title: "Carnival football: Bradda Dads vs Bradda Lads"
 date: 2010-08-01
 tag: "Carnival"
 summary: "Bradda Dads 2 - Bradda Lads 0 After years of nil-nil and 1-1 draws, Bradda Dads finally won a Carnival football match, despite playing a team with youngsters in it!"
