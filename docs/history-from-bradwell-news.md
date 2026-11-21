@@ -2,18 +2,54 @@
 
 Research notes from every back issue of the *Bradwell News* on [bradda.org](https://bradda.org/bradwell-news/) (313 PDFs: issues 1–294 plus supplements), searched for "Bradda Dads", "BraddaDads", "Bradda Ten" and similar. Every fact links to the issue it came from so it can be checked. **Nothing here has been added to the website yet.** Items marked ✅ answer an open question in `TODO-content.md`.
 
-**Not yet covered:** issues 1–30 (July 2002 – December 2004) and the carnival supplements are scanned images with no searchable text. Issue 6 (December 2002) was read by eye and has no Bradda Dads mention (not even the Boxing Day duck race in the events list). The rest of 2002–2004 can be read page by page if wanted (about 110 pages).
+**How the early issues were checked:** issues 1–30 (July 2002 – December 2004) are scanned images with no searchable text, so they were read by eye. Read in full: issues 1–7, 15–19, 28–30 (every autumn/winter issue, plus the 2002 summer issues). Partly read: 13, 14 and 27 (front pages and carnival reports). **Not read yet:** issues 8–12 and 20–26 (February–June 2003 and 2004, plus July–August 2004), and the carnival supplements.
+
+## In the group's own words (November 2002)
+
+The earliest description of the group found anywhere. Bradda Dads wrote this piece themselves for [Issue 5, November 2002](https://bradda.org/wp-content/uploads/2021/03/Issue_5.pdf), under the heading "So what is Bradda Dads all about then?":
+
+> Bradda Dads is an organisation open to fathers having sons or daughters living in the Parish of Bradwell, and our objective is to raise funds for and provide assistance to people or organisations within the village for the benefit of the residents of Bradwell. We currently have eleven members and are always open to more.
+>
+> One of our first fund raising events was held on Boxing Day 1999. This is the now familiar duck race and a crazy craft race where children were asked to design and race a homemade boat down the brook.
+>
+> We helped with the highly successful Junior School production of 'Around the World in 1000 years' by providing stage, lighting and sound equipment. We have also made cash donations to other organisations within the village from fund raising events held throughout the year.
+>
+> This year will see the repeat of two previous events, the community bonfire and firework display and the pensioners Christmas lunch. The bonfire, organised by Bradda Dads for the people of the village, is to be held on Friday 1 November … Once again the Parish Council will be sponsoring the firework display.
+>
+> Last Christmas, together with the White Hart, we provided a Christmas lunch for the pensioners of the village, who were entertained by the Junior School choir.
+
+What this confirms or adds:
+- ✅ **1999 first fundraiser**: the Boxing Day duck race, with the **crazy craft race alongside it from the start** (children's homemade boats).
+- ✅ **First pensioners' lunch, Christmas 2001**, run with the White Hart, with the Junior School choir. (Matches the site's 12 December 2001.)
+- **Bonfire before 2002:** 2002 was a "repeat", and the Parish Council was sponsoring the fireworks "once again", so there was a bonfire in 2001 at least. It still doesn't say whether 2001 was the first.
+- **Eleven members in 2002.** (Interesting next to the name "Bradda Ten".)
+- **The membership rule in 2002:** fathers with sons or daughters living in the parish. Useful background for the February 2027 membership vote.
+- The school production is probably the "lighting and stage equipment for school productions" the site already mentions; now it has a name.
+- The secretary in 2002–2004 was Jonathan Morgan (named as the contact in issues 5 and 29).
 
 ## Origins: "Bradda Ten"
 
 - **The group seems to have started as "Bradda Ten".** The obituary of **David James Wilson** (born Christmas Day 1931, died early 2018) says he was "a founder member of 'Bradda Ten' (now Bradda Dads)". He was also Cub Akela for many years, Chair of the Parish Council, and served on the Memorial Hall, Junior Football Club, Historical Society, Gala Week and British Legion committees. [Issue 190, April 2018](https://bradda.org/wp-content/uploads/2021/03/Issue_190.pdf)
   - *Worth asking the committee:* when did Bradda Ten become Bradda Dads, and who else founded it? This could become the opening of "Our story".
-- **First mention found in the searchable issues:** January 2005, a thank-you from Bradwell's senior citizens for the Christmas lunch "Bradda Dads served us" on 8 December 2004. [Issue 31](https://bradda.org/wp-content/uploads/2021/03/Issue_31.pdf)
+- **First mention in the News:** October 2002, an advert for the bonfire ([Issue 4](https://bradda.org/wp-content/uploads/2021/03/Issue_4.pdf)), followed by the group's own article in November 2002 (above).
 
 ## Events through the years
 
 | Year | What the News says | Source |
 |---|---|---|
+| 1999 | First fundraiser: Boxing Day duck race and crazy craft race (the group's own account) | [Issue 5](https://bradda.org/wp-content/uploads/2021/03/Issue_5.pdf) |
+| 2001 | First pensioners' Christmas lunch, with the White Hart; Junior School choir sang | [Issue 5](https://bradda.org/wp-content/uploads/2021/03/Issue_5.pdf) |
+| 2002 | "Bradda Dads – Next Event": the Bradwell Community Bonfire and Fireworks Display, off Michlow Lane, Friday 1 November, 7pm, "in association with Bradwell Parish Council" | [Issue 4](https://bradda.org/wp-content/uploads/2021/03/Issue_4.pdf) |
+| 2002 | Pensioners' lunch: "Thank you to Bradda Dads for the pensioners' lunch" | [Issue 7](https://bradda.org/wp-content/uploads/2021/03/Issue_7.pdf) |
+| 2003 | **Summer duck race in carnival week:** "During Carnival week BRADDA DADS held their summer duck race, which was **once again** very well supported" (so it ran before 2003 too) | [Issue 15](https://bradda.org/wp-content/uploads/2021/03/Issue_15.pdf) |
+| 2003 | Carnival week: "Bradda Dads have raised quite a lot of money – over £1,000 distributed to local organisations" | [Issue 15](https://bradda.org/wp-content/uploads/2021/03/Issue_15.pdf) |
+| 2003 | Bradda Dads AGM, Wednesday 17 September, 9pm, White Hart | [Issue 15](https://bradda.org/wp-content/uploads/2021/03/Issue_15.pdf) |
+| 2003 | Bonfire, Friday 7 November, Michlow Lane. "Bradda dads begin building the bonfire on Saturday 1st November" and collected things to burn; best guy competition for children. New insurance rules meant hiring a professional firework company for the first time | [Issue 17](https://bradda.org/wp-content/uploads/2021/03/Issue_17.pdf) |
+| 2003 | Parish Council: "Stringent insurance constraints obliged 'Bradda Dads' to employ a professional team this year and we agreed to increase our contribution to cover half the cost. It was a hugely successful and well-attended event, and congratulations to the 'Dads'" | [Issue 19](https://bradda.org/wp-content/uploads/2021/03/Issue_19.pdf) |
+| 2003 | **"Bradda Dads Duck Race"** on Boxing Day, Friday 26 December: the first time the duck race appears in the News's events list | [Issue 18](https://bradda.org/wp-content/uploads/2021/03/Issue_18.pdf) |
+| 2003 | Pensioners' lunch, 10 December, Methodist Hall: "yet again a resounding success … very much appreciated by all the senior citizens" | [Issue 19](https://bradda.org/wp-content/uploads/2021/03/Issue_19.pdf) |
+| 2004 | Bonfire with the Parish Council, Friday 12 November, field along Michlow Lane above Michlow Drive; fire lit 6.30pm, fireworks 7pm by "Big Bang" again; the Dads collected burnable rubbish on 6 November for a small donation | [Issue 29](https://bradda.org/wp-content/uploads/2021/03/Issue_29.pdf) |
+| 2004 | Parish Council grants: "Projects we are sponsoring include Bradda Dads' Pensioners' Christmas Lunch; their Childrens' Bonfire and Fireworks display" | [Issue 30](https://bradda.org/wp-content/uploads/2021/03/Issue_30.pdf) |
 | 2004 | Pensioners' Christmas lunch on 8 December, served by Bradda Dads | [Issue 31](https://bradda.org/wp-content/uploads/2021/03/Issue_31.pdf) |
 | 2005 | Bradda Dads sponsor a shuttle minibus (Bakewell & Eyam Community Transport) to take pensioners to the carnival on the sports field | [Issue 36](https://bradda.org/wp-content/uploads/2021/03/Issue_36.pdf) |
 | 2005 | Parish Council agrees to "sponsor the children's bonfire **again** this year and thank the Dads for organising this very popular event" (so the bonfire ran before 2005) | [Issue 41](https://bradda.org/wp-content/uploads/2021/03/Issue_41.pdf) |
@@ -42,6 +78,9 @@ Useful for "Where the money goes". Amounts are only given where the News prints 
 
 | Year | Who | What | Source |
 |---|---|---|---|
+| By 2002 | Bradwell Junior School | Stage, lighting and sound equipment for the production "Around the World in 1000 years" | [Issue 5](https://bradda.org/wp-content/uploads/2021/03/Issue_5.pdf) |
+| 2003 | Local organisations | "Over £1,000 distributed" after carnival week | [Issue 15](https://bradda.org/wp-content/uploads/2021/03/Issue_15.pdf) |
+| 2003 | Bradwell Methodist Church | Listed among sponsors of the church's £30,000 appeal for its hall | [Issue 15](https://bradda.org/wp-content/uploads/2021/03/Issue_15.pdf) |
 | 2005 | Bradwell Rainbows | £100 donation for the new Rainbow programme | [Issue 40](https://bradda.org/wp-content/uploads/2021/03/Issue_40.pdf) |
 | 2005 | Junior football (boys and girls) | New training equipment | [Issue 40](https://bradda.org/wp-content/uploads/2021/03/Issue_40.pdf) |
 | 2005 | Pensioners | Shuttle minibus to the carnival | [Issue 36](https://bradda.org/wp-content/uploads/2021/03/Issue_36.pdf) |
@@ -62,10 +101,11 @@ Also: help at church events (gazebos, chairs, clearing the churchyard), prizes a
 
 ## Suggested updates for the site (for the committee to OK)
 
-1. **Our story:** add Bradda Ten as the group's origin, once the committee confirms the details. Add the 2006 Christmas card, the 2011 award, the 2017 hydro lights, the 2024 torchlit procession and Carnival Eve, and Bradda Rocks.
+1. **Our story:** add Bradda Ten as the group's origin, once the committee confirms the details. The 1999 entry can mention the crazy craft race from day one; the 2001 lunch entry can add "with the White Hart"; add the summer carnival duck race (by 2002–03) and the move to professional fireworks in 2003. Add the 2006 Christmas card, the 2011 award, the 2017 hydro lights, the 2024 torchlit procession and Carnival Eve, and Bradda Rocks.
 2. **Where the money goes:**
    - Centenary Players: year **2008**, amount **£350**, for the Memorial Hall piano.
    - Hydro-power Christmas lights: year **2017**.
    - Bradwell Youth Activities programme: **2017–18**.
    - Possible new entries: Rainbows, junior football, Pre-School, Scout Hut, Memorial Hall, Town Bottom benches.
-3. **TODO answers:** the £5 community Christmas card started in **2006**. The first bonfire was before 2005 (still unconfirmed whether 2001). No mention found of when the group became a CIC.
+3. **TODO answers:** the £5 community Christmas card started in **2006**. There was a bonfire in 2001 at least (2002 was a "repeat"), but nothing yet says 2001 was the first. No mention found of when the group became a CIC.
+4. **Questions for the committee:** when did the summer carnival duck race start? Was the 2001 bonfire the first? Is "Bradda Ten" the group before 1999, or the name in its first years (there were eleven members by 2002)?
