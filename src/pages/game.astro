@@ -6,7 +6,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { getEntry } from 'astro:content';
 import { url } from '../lib/url';
+import { formatEventDates, isOpen } from '../lib/events';
+
+// The end screens invite players to the real Boxing Day Duck Race (date and entry link from the event)
+const race = await getEntry('events', 'duck-race');
+const raceWhen = race ? (formatEventDates(race) ?? race.data.when) : undefined;
+// Offer the entry link unless entries are known to have closed for this year
+const entriesOpen = race ? race.data.status !== 'done' && (race.data.status !== 'open' || isOpen(race)) : false;
+const entryUrl = race && entriesOpen && race.data.ctaUrl !== `/events/${race.id}/` ? url(race.data.ctaUrl) : undefined;
 ---
 
 <BaseLayout title="Duck Dash" description="A little game: steer a duck down Bradwell Brook, dodge the branches and whirlpools, and rescue the lost ducklings.">
@@ -35,6 +44,25 @@ import { url } from '../lib/url';
             <button type="button" class="btn btn--ghost-light overlay__btn" data-full aria-pressed="false">Full screen</button>
           </div>
           <p class="overlay__shared" data-shared aria-live="polite"></p>
+          {
+            race && (
+              <div class="overlay__promo" data-promo hidden>
+                <p class="promo__text">
+                  <strong>Fancy the real thing?</strong> Race a numbered duck down the brook at the Boxing Day Duck Race{raceWhen && `, ${raceWhen}`}.
+                </p>
+                <div class="promo__links">
+                  {entryUrl && (
+                    <a class="btn btn--yellow promo__btn" href={entryUrl}>
+                      Buy an entry
+                    </a>
+                  )}
+                  <a class="promo__more" href={url(`/events/${race.id}/`)}>
+                    Duck race details →
+                  </a>
+                </div>
+              </div>
+            )
+          }
         </div>
         <p class="visually-hidden" aria-live="polite" data-announce></p>
       </div>
@@ -1565,6 +1593,9 @@ import { url } from '../lib/url';
       finishBtn.hidden = !finish;
       if (finish) finishBtn.textContent = finish;
       shareBtn.hidden = state !== 'over'; // only on the end screens
+      document.querySelector<HTMLElement>('[data-promo]')?.toggleAttribute('hidden', state !== 'over'); // invite to the real duck race
+      overlay.classList.toggle('is-end', state === 'over'); // a more compact layout for the end screens
+      seasonEl.hidden = state === 'over';
       sharedEl.textContent = '';
       overlay.hidden = false;
       startBtn.focus({ preventScroll: true });
@@ -1943,6 +1974,67 @@ import { url } from '../lib/url';
   .overlay__btn.btn--ghost-light:focus-visible {
     background: rgba(255, 255, 255, 0.15);
     border-color: var(--white);
+  }
+  /* End screens hold more, so they're more compact (and can scroll on very small screens) */
+  .game__overlay {
+    overflow-y: auto;
+  }
+  .game__overlay.is-end {
+    gap: 8px;
+    justify-content: safe center;
+  }
+  .game__overlay.is-end .overlay__title {
+    font-size: 30px;
+  }
+  .game__overlay.is-end .overlay__text {
+    font-size: 15px;
+  }
+  .game__overlay.is-end .overlay__btn.btn--ghost-light {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+  .game__overlay.is-end .overlay__buttons {
+    gap: 8px;
+  }
+  .game__overlay.is-end [data-start] {
+    flex-basis: 100%;
+    max-width: 220px;
+  }
+  .overlay__promo {
+    margin-top: 6px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 300px;
+  }
+  .promo__text {
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--on-dark-soft);
+  }
+  .promo__text strong {
+    color: var(--yellow);
+  }
+  .promo__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 14px;
+  }
+  .promo__btn {
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+  .promo__more {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 14px;
   }
   .overlay__shared {
     font-size: 14px;
