@@ -72,7 +72,9 @@ import { url } from '../lib/url';
         <li><strong>Avoid whirlpools.</strong> They pull you in, and their middle spins a duckling away.</li>
         <li><strong>Each season has its own challenge:</strong> slippery ice in winter, blossom clumps that slow you in spring, sandbanks that drag you back in summer, and leaf piles in autumn that sometimes hide a rock (look for a grey edge peeking out).</li>
         <li><strong>Numbered race ducks</strong> drift down the brook in all sizes. Bump one and you bounce apart: little ones give you a nudge, big ones a real shove, and the rare giant sends you flying.</li>
-        <li>Catch the rare <strong>golden duck</strong> for double points for 10 seconds.</li>
+        <li>Catch the rare <strong>golden duck</strong> for double points for 10 seconds, and the even rarer <strong>red duck</strong> for a shield: nothing can hurt you for 8 seconds.</li>
+        <li>The ducks dress for the season: Christmas hats in winter, fell runners' headbands in spring, carnival party hats in summer, and witch and wizard hats in autumn for bonfire night.</li>
+        <li><strong>Watch out for the black duck.</strong> Now and then it hunts your line and takes a duckling if it reaches you. It's slower than you, so keep swimming out of its way and it soon gives up.</li>
         <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs faster. Bumps cost more ducklings each season too: one in the first season, then two, three and four. Get through a whole season without a bump for 20 bonus points. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year as it keeps getting faster (and lose that bonus if you're knocked out).</li>
         <li><strong>Space</strong> or <strong>P</strong> pauses. Quacks and phone buzzes are off until you switch them on.</li>
       </ul>
@@ -253,7 +255,10 @@ import { url } from '../lib/url';
     type Blossom = Base & { kind: 'blossom'; x: number; r: number };
     type Shallow = Base & { kind: 'shallow'; fromLeft: boolean; w: number; h: number };
     type Pile = Base & { kind: 'pile'; x: number; r: number; rock: boolean; done: boolean };
-    type Thing = Branch | Rock | Chick | Whirl | Gold | Racer | Ice | Blossom | Shallow | Pile;
+    type Shield = Base & { kind: 'shield'; x: number; phase: number }; // rare red duck: 8 seconds of shield
+    // The black duck: hunts your line for a while, takes the last duckling if it reaches you, then swims off
+    type Black = Base & { kind: 'black'; x: number; vx: number; vy: number; life: number; leaving: boolean; carrying: boolean };
+    type Thing = Branch | Rock | Chick | Whirl | Gold | Racer | Ice | Blossom | Shallow | Pile | Shield | Black;
     type Leaver = { x: number; y: number; vx: number; vy: number; life: number }; // ducklings leaving the line
     type Bit = { x: number; y: number; vx: number; vy: number; rot: number; size: number; tint: string; s: Season }; // snow, petals, lily pads, leaves
 
@@ -271,6 +276,9 @@ import { url } from '../lib/url';
     let kickY = 0;
     let knock = 0; // seconds after a knock when finger-steering is ignored, so the shove can play out
     let goldTime = 0;
+    let shieldTime = 0; // seconds of the red duck's shield left
+    const SHIELD_TIME = 8;
+    let nextBlack = 0; // distance at which the black duck next turns up
     let safeTime = 0;
     let trail: { x: number; y: number }[] = [];
     let leavers: Leaver[] = [];
@@ -304,6 +312,8 @@ import { url } from '../lib/url';
       race: ['Race duck', 'Bump one and you get knocked back. Big ones shove harder.'],
       whirl: ['Whirlpool', 'It pulls you in, and the middle spins a duckling away.'],
       gold: ['Golden duck', 'Catch it for double points for 10 seconds!'],
+      shield: ['Red shield duck', 'Catch it and nothing can hurt you for 8 seconds.'],
+      black: ['Black duck', 'It hunts your ducklings. Keep swimming out of its way!'],
       ice: ['Ice', 'Slippery! Steering is hard while you are on it.'],
       blossom: ['Blossom', 'It slows you down and drags you back.'],
       shallow: ['Sandbank', 'Shallow sand drags you back down the brook.'],
@@ -349,8 +359,10 @@ import { url } from '../lib/url';
     const updateHud = () => {
       scoreEl.textContent = String(score());
       chicksEl.textContent = String(trail.length);
-      goldEl.hidden = goldTime <= 0;
-      if (goldTime > 0) goldEl.textContent = `Golden duck ×2 · ${Math.ceil(goldTime)}s`;
+      const powers = [goldTime > 0 ? `Golden ×2 · ${Math.ceil(goldTime)}s` : '', shieldTime > 0 ? `Shield · ${Math.ceil(shieldTime)}s` : ''].filter(Boolean);
+      goldEl.hidden = powers.length === 0;
+      goldEl.textContent = powers.join('  ·  ');
+      goldEl.classList.toggle('is-shield', shieldTime > 0 && goldTime <= 0);
     };
 
     const reset = () => {
@@ -359,7 +371,8 @@ import { url } from '../lib/url';
       steer = steerY = 0;
       speed = 150;
       distance = points = rescued = kickX = kickY = knock = 0;
-      goldTime = safeTime = 0;
+      goldTime = safeTime = shieldTime = 0;
+      nextBlack = 2200 + Math.random() * 1500;
       trail = [];
       leavers = [];
       things = [];
@@ -383,6 +396,12 @@ import { url } from '../lib/url';
       for (let y = -40; y < H + 40; y += 22) {
         stones.push({ y, side: 0, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
         stones.push({ y: y + 11, side: 1, w: 14 + Math.random() * 10, h: 16 + Math.random() * 6 });
+      }
+      if (TEST) {
+        // test aids: ?test&lives=3 starts with ducklings, and the black duck comes sooner
+        nextBlack = 500;
+        const n = Math.min(MAX_LINE, Number(params.get('lives')) || 0);
+        for (let i = 0; i < n; i++) trail.push({ x: W / 2, y: H - 90 + i * 24 });
       }
       updateHud();
     };
@@ -418,7 +437,7 @@ import { url } from '../lib/url';
         case 'ice':
           return { x0: th.x, x1: th.x + th.w, y0: th.y - th.h / 2, y1: th.y + th.h / 2 };
         default: {
-          const r = th.kind === 'chick' ? 12 : th.kind === 'gold' ? 16 : th.kind === 'race' ? 13 * th.size : th.r;
+          const r = th.kind === 'chick' ? 12 : th.kind === 'gold' || th.kind === 'shield' || th.kind === 'black' ? 16 : th.kind === 'race' ? 13 * th.size : th.r;
           return { x0: th.x - r, x1: th.x + r, y0: th.y - r, y1: th.y + r };
         }
       }
@@ -436,10 +455,10 @@ import { url } from '../lib/url';
       for (const th of fresh) {
         if (!clashes(th, things)) continue;
         if ('x' in th && th.kind !== 'ice') {
-          const r = th.kind === 'chick' ? 12 : th.kind === 'gold' ? 16 : th.kind === 'race' ? 13 * th.size : th.r;
+          const r = th.kind === 'chick' ? 12 : th.kind === 'gold' || th.kind === 'shield' || th.kind === 'black' ? 16 : th.kind === 'race' ? 13 * th.size : th.r;
           for (let tries = 0; tries < 8 && clashes(th, things); tries++) th.x = randX(r + 6);
         }
-        if (clashes(th, things) && (th.kind === 'chick' || th.kind === 'gold' || th.kind === 'race' || th.kind === 'rock')) {
+        if (clashes(th, things) && (th.kind === 'chick' || th.kind === 'gold' || th.kind === 'shield' || th.kind === 'race' || th.kind === 'rock')) {
           things = things.filter((x) => x !== th);
           if (th.kind === 'chick') lastChick = -9999; // let the next one come sooner instead
         }
@@ -472,6 +491,8 @@ import { url } from '../lib/url';
         const pick = Math.random();
         const size = pick < 0.04 ? 1.5 : pick < 0.38 ? 0.55 : pick < 0.72 ? 0.75 : 0.95;
         things.push({ kind: 'race', y: -40, x: randX(22 * size + 8), vx: 0, num: raceNum++, cool: 0, size, s });
+      } else if (roll < 0.905 && roll >= 0.89 && distance > 800 && shieldTime <= 0) {
+        things.push({ kind: 'shield', y: -30, x: randX(30), phase: Math.random() * 6, s });
       } else if (roll < 0.89 && distance > 400) {
         things.push({ kind: 'gold', y: -30, x: randX(30), phase: Math.random() * 6, s });
       } else if (chickOk()) {
@@ -502,6 +523,7 @@ import { url } from '../lib/url';
       return true;
     };
     const bump = () => {
+      if (shieldTime > 0) return sfx.boing(0.6); // the shield takes it
       if (safeTime > 0 || (TEST && trail.length === 0)) return;
       if (!trail.length) return gameOver();
       let lost = 0;
@@ -513,7 +535,97 @@ import { url } from '../lib/url';
     };
 
     // ---------- Drawing ----------
-    const drawDuck = (x: number, y: number, sc: number, t: number, body = C.yellow, alpha = 1) => {
+    // Seasonal hats, matched to the Bradda Dads year: Christmas hats in winter (card, lunch, Boxing Day),
+    // fell runners' headbands in spring (Wolf's Pit), carnival party hats in summer, and witch and wizard
+    // hats in autumn (bonfire night). v picks a colour so each duck looks a bit different.
+    type Hat = { s: Season; v: number };
+    const pickOf = <T,>(list: T[], v: number) => list[Math.abs(Math.floor(v)) % list.length];
+    const drawHat = (hat: Hat) => {
+      if (hat.s === 'winter') {
+        ctx.fillStyle = '#d63a2f';
+        ctx.beginPath();
+        ctx.moveTo(-7.5, -9);
+        ctx.lineTo(7.5, -9);
+        ctx.quadraticCurveTo(6, 2, 4, 11); // flops back over the duck's back
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.roundRect(-9, -11, 18, 5, 2.5); // furry trim
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(4, 12, 3.2, 0, Math.PI * 2); // pom-pom
+        ctx.fill();
+      } else if (hat.s === 'autumn') {
+        const colour = pickOf(['#6b3fa0', '#22252a', '#2f7d4a', '#23407a'], hat.v);
+        ctx.fillStyle = colour;
+        ctx.beginPath();
+        ctx.ellipse(0, -8, 12, 6.5, 0, 0, Math.PI * 2); // brim
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(-6.5, -9);
+        ctx.lineTo(6.5, -9);
+        ctx.lineTo(3, 15); // tall pointy crown, tipping back
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = '#e0b13a';
+        ctx.fillRect(-6.2, -8.5, 12.4, 2.6); // band
+        if (Math.floor(hat.v) % 2 === 0) {
+          ctx.beginPath(); // a little star
+          ctx.arc(2, 4, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else if (hat.s === 'spring') {
+        const colour = pickOf(['#e8473a', '#2f9ad6', '#3fb36b', '#f39c12', '#8e44ad'], hat.v);
+        ctx.strokeStyle = colour;
+        ctx.lineWidth = 3.2;
+        ctx.lineCap = 'round';
+        ctx.beginPath(); // headband across the head…
+        ctx.moveTo(-8.2, -15.5);
+        ctx.quadraticCurveTo(0, -19, 8.2, -15.5);
+        ctx.stroke();
+        ctx.lineWidth = 2.4;
+        ctx.beginPath(); // …with its tails flying out behind, like a fell runner's
+        ctx.moveTo(7.5, -14);
+        ctx.quadraticCurveTo(12, -9, 11, -2);
+        ctx.moveTo(7, -13);
+        ctx.quadraticCurveTo(9, -6, 13, -5);
+        ctx.stroke();
+      } else {
+        const [a, b] = pickOf(
+          [
+            ['#e8473a', '#f6c343'],
+            ['#2f9ad6', '#ffffff'],
+            ['#3fb36b', '#f39c12'],
+            ['#8e44ad', '#f7c6d9'],
+          ],
+          hat.v,
+        );
+        ctx.save();
+        ctx.beginPath(); // a carnival party hat, tipped back, with stripes
+        ctx.moveTo(-6, -11);
+        ctx.lineTo(6, -11);
+        ctx.lineTo(1, 5);
+        ctx.closePath();
+        ctx.fillStyle = a;
+        ctx.fill();
+        ctx.clip();
+        ctx.strokeStyle = b;
+        ctx.lineWidth = 2.4;
+        for (let k = -8; k < 6; k += 5) {
+          ctx.beginPath();
+          ctx.moveTo(-8, k);
+          ctx.lineTo(8, k - 4);
+          ctx.stroke();
+        }
+        ctx.restore();
+        ctx.fillStyle = b;
+        ctx.beginPath();
+        ctx.arc(1, 6, 2.8, 0, Math.PI * 2); // pom-pom
+        ctx.fill();
+      }
+    };
+    const drawDuck = (x: number, y: number, sc: number, t: number, body = C.yellow, alpha = 1, hat?: Hat) => {
       const wob = Math.sin(t * 6 + x) * 0.06;
       ctx.save();
       ctx.globalAlpha = alpha;
@@ -550,11 +662,19 @@ import { url } from '../lib/url';
       ctx.arc(-3.5, -14, 1.6, 0, Math.PI * 2);
       ctx.arc(3.5, -14, 1.6, 0, Math.PI * 2);
       ctx.fill();
+      if (hat) {
+        drawHat(hat);
+        ctx.fillStyle = body === '#2b2f2c' ? '#ff5a4f' : C.ink; // eyes back on top (the black duck's are red)
+        ctx.beginPath();
+        ctx.arc(-3.5, -14, 1.6, 0, Math.PI * 2);
+        ctx.arc(3.5, -14, 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
       ctx.restore();
     };
 
     const drawRacer = (r: Racer, t: number) => {
-      drawDuck(r.x, r.y, r.size, t + r.num);
+      drawDuck(r.x, r.y, r.size, t + r.num, C.yellow, 1, { s: r.s, v: r.num });
       const rr = 10 * r.size;
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
@@ -576,7 +696,7 @@ import { url } from '../lib/url';
       ctx.arc(g.x, g.y, 20 * pulse, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
-      drawDuck(g.x, g.y, 0.7, t + g.phase, C.gold);
+      drawDuck(g.x, g.y, 0.7, t + g.phase, C.gold, 1, { s: g.s, v: 2 });
       ctx.fillStyle = '#ffffff';
       for (let i = 0; i < 3; i++) {
         const a = t * 3 + i * 2.1;
@@ -586,6 +706,32 @@ import { url } from '../lib/url';
       }
     };
 
+    const drawShieldDuck = (sh: Shield, t: number) => {
+      ctx.save();
+      ctx.globalAlpha = 0.45 + Math.sin(t * 6) * 0.15;
+      ctx.strokeStyle = '#e8473a';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(sh.x, sh.y, 21, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+      drawDuck(sh.x, sh.y, 0.7, t + sh.phase, '#e8473a', 1, { s: sh.s, v: 3 });
+    };
+    const drawBlack = (b: Black, t: number) => {
+      ctx.save();
+      ctx.fillStyle = 'rgba(16,36,26,0.25)'; // a dark wake behind it
+      ctx.beginPath();
+      ctx.ellipse(b.x, b.y + 14, 10, 18, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      drawDuck(b.x, b.y, 0.85, t * 1.6, '#2b2f2c', 1, { s: season, v: 1 });
+      ctx.fillStyle = '#ff5a4f'; // glinting red eyes
+      ctx.beginPath();
+      ctx.arc(b.x - 3, b.y - 12, 1.6, 0, Math.PI * 2);
+      ctx.arc(b.x + 3, b.y - 12, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+      if (b.carrying) drawDuck(b.x, b.y - 26, 0.45, t, C.yellow, 1, { s: season, v: 4 }); // the duckling it's taking
+    };
     const drawWhirl = (w: Whirl, t: number) => {
       ctx.save();
       ctx.translate(w.x, w.y);
@@ -975,12 +1121,14 @@ import { url } from '../lib/url';
         if (th.kind === 'branch') drawBranch(th);
         else if (th.kind === 'rock') drawRock(th);
         else if (th.kind === 'pile') drawPile(th);
-        else if (th.kind === 'chick') drawDuck(th.x + Math.sin(t * 2 + th.phase) * 3, th.y, 0.55, t + th.phase);
+        else if (th.kind === 'chick') drawDuck(th.x + Math.sin(t * 2 + th.phase) * 3, th.y, 0.55, t + th.phase, C.yellow, 1, { s: th.s, v: th.phase * 10 });
         else if (th.kind === 'race') drawRacer(th, t);
         else if (th.kind === 'gold') drawGold(th, t);
+        else if (th.kind === 'shield') drawShieldDuck(th, t);
+        else if (th.kind === 'black') drawBlack(th, t);
       }
-      for (const l of leavers) drawDuck(l.x, l.y, 0.55, t, C.yellow, Math.max(0, l.life / 1.2));
-      for (let i = trail.length - 1; i >= 0; i--) drawDuck(trail[i].x, trail[i].y, 0.55, t + i);
+      for (const l of leavers) drawDuck(l.x, l.y, 0.55, t, C.yellow, Math.max(0, l.life / 1.2), { s: season, v: 5 });
+      for (let i = trail.length - 1; i >= 0; i--) drawDuck(trail[i].x, trail[i].y, 0.55, t + i, C.yellow, 1, { s: season, v: i + 1 });
       const blink = safeTime > 0 && Math.floor(t * 10) % 2 === 0;
       if (goldTime > 0) {
         ctx.save();
@@ -991,7 +1139,21 @@ import { url } from '../lib/url';
         ctx.fill();
         ctx.restore();
       }
-      drawDuck(duckX, duckY, 1, t, goldTime > 0 ? C.gold : C.yellow, blink ? 0.35 : 1);
+      drawDuck(duckX, duckY, 1, t, goldTime > 0 ? C.gold : C.yellow, blink ? 0.35 : 1, { s: season, v: 0 });
+      if (shieldTime > 0) {
+        // the shield: a glowing red bubble that flickers in its last two seconds
+        const ending = shieldTime < 2 && Math.floor(t * 8) % 2 === 0;
+        ctx.save();
+        ctx.globalAlpha = ending ? 0.3 : 0.75;
+        ctx.strokeStyle = '#e8473a';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(duckX, duckY, 28 + Math.sin(t * 6) * 2, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(232,71,58,0.14)';
+        ctx.fill();
+        ctx.restore();
+      }
       if (change) drawBridge(change.y, change.to); // the duck swims under the bridge
       bits.forEach((b) => b.s === 'winter' && drawBit(b)); // snow falls over everything
 
@@ -1139,6 +1301,14 @@ import { url } from '../lib/url';
         points += (dy / 20) * mult();
         wallOffset = (wallOffset + dy) % (H + 80);
         goldTime = Math.max(0, goldTime - dt);
+        shieldTime = Math.max(0, shieldTime - dt);
+        // the black duck turns up now and then, but only when you have ducklings to lose
+        if (distance > nextBlack && trail.length > 0 && !things.some((th) => th.kind === 'black')) {
+          things.push({ kind: 'black', y: -30, x: randX(40), vx: 0, vy: 0, life: 7, leaving: false, carrying: false, s: season });
+          nextBlack = distance + 3500 + Math.random() * 2500;
+          tone(200, 0.25, 'square', 140, 0.06);
+          announce.textContent = 'A black duck is after your ducklings! Keep moving.';
+        } else if (distance > nextBlack && trail.length === 0) nextBlack = distance + 600; // try again later
         safeTime = Math.max(0, safeTime - dt);
         knock = Math.max(0, knock - dt);
         if (label) label.t -= realDt;
@@ -1221,7 +1391,48 @@ import { url } from '../lib/url';
 
         nextSpawn -= dy;
         if (nextSpawn <= 0) spawn();
-        for (const th of things) th.y += th.kind === 'race' ? dy * (th.size > 1.2 ? 0.4 : 0.55) : dy; // race ducks drift slower; giants slowest
+        for (const th of things) {
+          if (th.kind === 'black') continue; // the black duck swims under its own steam (below)
+          th.y += th.kind === 'race' ? dy * (th.size > 1.2 ? 0.4 : 0.55) : dy; // race ducks drift slower; giants slowest
+        }
+        // The black duck: heads for the back of your line, slower than you and slow to turn, so steady
+        // swimming dodges it. After a while it gives up; if it reaches you it takes the last duckling and leaves.
+        for (const b of things) {
+          if (b.kind !== 'black') continue;
+          b.life -= dt;
+          if (!b.leaving) {
+            const tail = trail[trail.length - 1] ?? { x: duckX, y: duckY };
+            const dx = tail.x - b.x;
+            const dyy = tail.y - b.y;
+            const len = Math.hypot(dx, dyy) || 1;
+            const SPEED = 95; // you can swim faster than this
+            b.vx += ((dx / len) * SPEED - b.vx) * Math.min(1, dt * 1.6); // slow to change direction
+            b.vy += ((dyy / len) * SPEED - b.vy) * Math.min(1, dt * 1.6);
+            if (b.life <= 0 || trail.length === 0) b.leaving = true;
+            // reaching your duck or any duckling
+            const touches = dist2(b.x, b.y, duckX, duckY) < 26 * 26 || trail.some((c) => dist2(b.x, b.y, c.x, c.y) < 18 * 18);
+            if (touches) {
+              b.leaving = true;
+              if (shieldTime > 0) {
+                b.vx = (b.x - duckX) * 6; // bounced off the shield
+                b.vy = -160;
+                sfx.boing(1.2);
+                announce.textContent = 'Your shield sent the black duck packing!';
+              } else if (loseDuckling()) {
+                leavers.pop(); // it carries this one off instead of it swimming away
+                b.carrying = true;
+                bumpedThisSeason = true;
+                sfx.bump();
+                announce.textContent = `The black duck took a duckling! ${trail.length} left.`;
+              }
+            }
+          } else {
+            b.vy += (-180 - b.vy) * Math.min(1, dt * 2); // swims off upstream
+          }
+          b.x = Math.max(LEFT + 14, Math.min(RIGHT - 14, b.x + b.vx * dt));
+          b.y += b.vy * dt;
+          if (b.leaving && b.y < -60) b.y = H + 999; // gone
+        }
         if (!callout && hintGap <= 0 && !(label && label.t > 0)) {
           // wait until the season label has gone, and until the thing is clear of the top of the brook
           const fresh = things.find((th) => INTRO[th.kind] && !seen.has(th.kind) && th.y > 150 && th.y < H * 0.6);
@@ -1251,6 +1462,11 @@ import { url } from '../lib/url';
               label = { text: 'Line full!', sub: `+${25 * mult()} points for that duckling`, t: 1.6, total: 1.6 };
               announce.textContent = `Your line is full. +${25 * mult()} points.`;
             }
+          } else if (th.kind === 'shield' && near(th.x, th.y, 12)) {
+            th.y = H + 999;
+            shieldTime = SHIELD_TIME;
+            sfx.chime();
+            announce.textContent = 'Shield! Nothing can hurt you for 8 seconds.';
           } else if (th.kind === 'gold' && near(th.x, th.y, 12)) {
             th.y = H + 999;
             goldTime = 10;
@@ -1294,7 +1510,7 @@ import { url } from '../lib/url';
             }
             if (d < 12 && !th.spun) {
               th.spun = true;
-              if (loseDuckling()) {
+              if (shieldTime <= 0 && loseDuckling()) {
                 sfx.bump();
                 announce.textContent = `The whirlpool spun a duckling away. ${trail.length} left.`;
               }
@@ -1307,7 +1523,7 @@ import { url } from '../lib/url';
           }
           if (state !== 'playing') break;
         }
-        things = things.filter((th) => th.y < H + 80);
+        things = things.filter((th) => th.y < H + 80 || (th.kind === 'black' && th.y < H + 500));
 
         for (const l of leavers) {
           l.x += l.vx * dt;
@@ -1747,6 +1963,10 @@ import { url } from '../lib/url';
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+  }
+  .hud__gold.is-shield {
+    background: #e8473a;
+    color: var(--white);
   }
   .overlay__season {
     font-size: 13px;
