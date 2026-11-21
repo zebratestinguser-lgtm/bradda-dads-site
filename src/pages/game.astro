@@ -315,6 +315,9 @@ import { url } from '../lib/url';
     } catch {}
     let slowmo = 0; // real seconds of slow motion left
     let callout: { th: Thing; title: string; body: string; t: number } | null = null;
+    let hintGap = 0; // a short breather between one hint ending and the next starting
+    let hintBox = { x: 0, y: 0, w: 0, h: 0 }; // where the hint is drawn (board units), so tapping it can dismiss it
+    const HINT_TIME = 4.5;
     const anchorOf = (th: Thing) => {
       if (th.kind === 'shallow') return { x: th.fromLeft ? LEFT + th.w * 0.45 : RIGHT - th.w * 0.45, y: th.y };
       if (th.kind === 'ice') return { x: th.x + th.w / 2, y: th.y };
@@ -1030,6 +1033,7 @@ import { url } from '../lib/url';
         const bx = Math.max(12, Math.min(W - bw - 12, a.x - bw / 2));
         ctx.fillStyle = 'rgba(16,36,26,0.92)';
         ctx.beginPath();
+        hintBox = { x: bx, y: by, w: bw, h: bh };
         ctx.roundRect(bx, by, bw, bh, 12);
         ctx.fill();
         ctx.strokeStyle = 'rgba(16,36,26,0.92)'; // pointer to the thing
@@ -1048,7 +1052,7 @@ import { url } from '../lib/url';
         lines.forEach((l, n) => ctx.fillText(l, bx + 12, by + 28 + n * 16));
         ctx.fillStyle = 'rgba(223,233,226,0.75)';
         ctx.font = '600 10.5px Inter, system-ui, sans-serif';
-        ctx.fillText('Tap or press a key to carry on', bx + 12, by + 30 + lines.length * 16);
+        ctx.fillText('Tap here or press Enter to carry on', bx + 12, by + 30 + lines.length * 16);
         ctx.restore();
       }
 
@@ -1119,7 +1123,12 @@ import { url } from '../lib/url';
         slowmo = Math.max(0, slowmo - realDt);
         if (callout) {
           callout.t -= realDt;
-          if (callout.t <= 0) callout = null;
+          if (callout.t <= 0) {
+            callout = null;
+            hintGap = 0.8;
+          }
+        } else {
+          hintGap = Math.max(0, hintGap - realDt);
         }
       }
       const t = now / 1000;
@@ -1213,12 +1222,12 @@ import { url } from '../lib/url';
         nextSpawn -= dy;
         if (nextSpawn <= 0) spawn();
         for (const th of things) th.y += th.kind === 'race' ? dy * (th.size > 1.2 ? 0.4 : 0.55) : dy; // race ducks drift slower; giants slowest
-        if (!callout && !(label && label.t > 0)) {
+        if (!callout && hintGap <= 0 && !(label && label.t > 0)) {
           // wait until the season label has gone, and until the thing is clear of the top of the brook
           const fresh = things.find((th) => INTRO[th.kind] && !seen.has(th.kind) && th.y > 150 && th.y < H * 0.6);
           if (fresh) {
             const [title, body] = INTRO[fresh.kind]!;
-            callout = { th: fresh, title, body, t: 4.5 };
+            callout = { th: fresh, title, body, t: HINT_TIME };
             slowmo = 4.5;
             seen.add(fresh.kind);
             try {
@@ -1474,14 +1483,22 @@ import { url } from '../lib/url';
     let dragging = false;
     // dismiss a first-time hint early
     const skipHint = () => {
-      if (!callout) return false;
+      if (!callout || HINT_TIME - callout.t < 1) return false; // can't be dismissed in its first second
       callout = null;
       slowmo = 0;
+      hintGap = 0.8;
       return true;
     };
-    document.addEventListener('keydown', () => state === 'playing' && skipHint(), true);
+    // Only a deliberate action dismisses a hint: Enter, or tapping the hint itself. Steering never does.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && state === 'playing' && skipHint()) e.preventDefault();
+    });
     canvas.addEventListener('pointerdown', (e) => {
-      if (state === 'playing' && skipHint()) return;
+      if (state === 'playing' && callout) {
+        const [bx, by] = toBoard(e.clientX, e.clientY);
+        const hb = hintBox;
+        if (bx >= hb.x && bx <= hb.x + hb.w && by >= hb.y && by <= hb.y + hb.h && skipHint()) return;
+      }
       if (state !== 'playing') return;
       dragging = true;
       follow(e);
