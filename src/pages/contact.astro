@@ -1,58 +1,178 @@
 ---
+// Contact: a message form (Formspree, free plan) once contactFormUrl is set in site.yaml, plus the other ways
+// to reach us. Without JavaScript the form still works: Formspree shows its own thank-you page.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getSite } from '../lib/site';
+import { photoMatching } from '../lib/photos';
 import { url } from '../lib/url';
 
 const site = await getSite();
 const hasEmail = !site.contactEmail.startsWith('[');
+const hasForm = site.contactFormUrl.startsWith('https://');
+const header = await photoMatching(/two dads shaking hands/i, /dads round a long table/i);
 ---
 
 <BaseLayout title="Contact" description="Get in touch with Bradda Dads, Bradwell.">
-  <PageHeader eyebrow="Contact" title="Get in touch" intro="Questions, ideas, old photos, or want to join? Here's how to reach us." />
-  <section class="container page-section grid">
-    <div class="card">
-      <h2 class="subhead">Facebook</h2>
-      <p>The quickest way to reach us, and where we post day-to-day news.</p>
-      <a class="btn btn--green btn--md" href={site.facebookUrl} rel="noopener">Bradda Dads on Facebook</a>
-    </div>
-    {hasEmail && (
-      <div class="card">
-        <h2 class="subhead">Email</h2>
-        <p><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>
+  <PageHeader eyebrow="Contact" title="Get in touch" intro="Questions, ideas, old photos, or want to join? Here's how to reach us." image={header?.src} imageLabel={header?.label} />
+
+  <Band first>
+    <section class:list={['container', 'page-section', 'layout', { 'layout--form': hasForm }]}>
+      {
+        hasForm && (
+          <div class="form-card">
+            <h2 class="subhead">Send us a message</h2>
+            <form class="form" action={site.contactFormUrl} method="POST" data-contact-form>
+              <input type="hidden" name="subject" value="Message from the Bradda Dads website" />
+              <div class="form-field">
+                <label for="c-name">Your name</label>
+                <input id="c-name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label for="c-email">Your email</label>
+                <input id="c-email" name="email" type="email" autocomplete="email" required />
+                <p class="hint">So we can reply. We won't use it for anything else.</p>
+              </div>
+              <div class="form-field">
+                <label for="c-message">Message</label>
+                <textarea id="c-message" name="message" rows="6" required />
+              </div>
+              <button class="btn btn--green btn--md" type="submit" data-submit>
+                Send message
+              </button>
+              <p class="status" role="status" aria-live="polite" data-status />
+              <p class="small">
+                Sent securely via Formspree. See our <a href={url('/privacy/')}>privacy notice</a>.
+              </p>
+            </form>
+          </div>
+        )
+      }
+
+      <div class="cards">
+        <div class="card">
+          <h2 class="card__title">Facebook</h2>
+          <p>The quickest way to reach us, and where we post day-to-day news.</p>
+          <a class="btn btn--green btn--md" href={site.facebookUrl} rel="noopener">
+            Bradda Dads on Facebook
+          </a>
+        </div>
+        {
+          hasEmail && (
+            <div class="card">
+              <h2 class="card__title">Email</h2>
+              <p>
+                <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+              </p>
+            </div>
+          )
+        }
+        <div class="card">
+          <h2 class="card__title">Meetings</h2>
+          <p>We meet {site.meetingInfo}.</p>
+          <a class="link-arrow" href={url('/get-involved/')}>Get involved →</a>
+        </div>
+        <div class="card">
+          <h2 class="card__title">Wolf's Pit Fell Race</h2>
+          <p>
+            For race entries and questions, see the <a href={url('/wolfspit/')}>Wolf's Pit page</a> for the organiser's contact details.
+          </p>
+        </div>
       </div>
-    )}
-    <div class="card">
-      <h2 class="subhead">Meetings</h2>
-      <p>We meet {site.meetingInfo}.</p>
-      <a class="link-arrow" href={url('/get-involved/')}>Get involved →</a>
-    </div>
-    <div class="card">
-      <h2 class="subhead">Wolf's Pit Fell Race</h2>
-      <p>For race entries and questions, see the <a href={url('/wolfspit/')}>Wolf's Pit page</a> for the organiser's contact details.</p>
-    </div>
-  </section>
+    </section>
+  </Band>
 </BaseLayout>
 
+<script>
+  // Send in the background and show the result here, instead of leaving for Formspree's page
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  if (form) {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      button.disabled = true; // avoid sending twice
+      status.className = 'status';
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        status.classList.add('status--ok');
+        status.textContent = "Thanks, your message has been sent. We'll get back to you soon.";
+      } catch {
+        status.classList.add('status--error');
+        status.textContent = "Sorry, that didn't send. Please try again, or message us on Facebook.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>
+
 <style>
-  .grid {
+  .layout {
+    display: grid;
+    gap: 24px;
+  }
+  .layout--form {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .layout--form {
+      grid-template-columns: 1fr;
+    }
+  }
+  .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
-    gap: 18px;
+    gap: 16px;
   }
-  .card {
+  .layout--form .cards {
+    grid-template-columns: 1fr;
+  }
+  .card,
+  .form-card {
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
-    padding: 26px;
+    padding: 24px 26px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     font-size: 17px;
     color: var(--muted-strong);
+    background: var(--white);
   }
-  .card .subhead {
+  .form-card {
+    gap: 18px;
+  }
+  .card__title {
     color: var(--text);
-    font-size: 24px;
+    font-size: 22px;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hint,
+  .small {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .status:empty {
+    display: none;
+  }
+  .status {
+    font-weight: 600;
+  }
+  .status--ok {
+    color: var(--green);
+  }
+  .status--error {
+    color: #a3361b;
   }
   .btn--md {
     min-height: 48px;

@@ -253,6 +253,8 @@ const settings = defineCollection({
     meetingInfo: z.string(),
     sharePhotosUrl: link,
     accountsUrl: link,
+    /** Formspree form address for the contact form (https://formspree.io/f/…). "#" hides the form. */
+    contactFormUrl: link.default('#'),
     wolfspitEntryUrl: link,
     wolfspitIntro: z.string(),
     whoWeAre: z.string(),

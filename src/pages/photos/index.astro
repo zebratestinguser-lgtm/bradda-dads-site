@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
 import { NEWS_TAGS } from '../../content.config';
 import { getAlbums, photoYear, categorySlug, CATEGORY_ORDER } from '../../lib/albums';
 import { getSite } from '../../lib/site';
-import { url } from '../../lib/url';
+import { url, thumb } from '../../lib/url';
+import { categoryPhoto, photoMatching } from '../../lib/photos';
 
 const site = await getSite();
 const albums = await getAlbums();
@@ -16,6 +18,9 @@ const categories = [...NEWS_TAGS]
   .sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b))
   .map((c) => ({ name: c, photos: albums.filter((a) => a.data.category === c).reduce((n, a) => n + a.data.photos.length, 0) }))
   .filter((c) => c.photos > 0);
+// A photo for each category tile, and one for the page header
+const tiles = await Promise.all(categories.map(async (c) => ({ ...c, photo: await categoryPhoto(c.name) })));
+const header = await photoMatching(/ducks pour over the yellow barrier/i, /ducks tumbling over the weir/i);
 
 // Group by the year the photos were taken; newest first, "Various years" last
 const groups = new Map<string, typeof albums>();
@@ -33,47 +38,59 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
     eyebrow="Photos"
     title="Photo albums"
     intro={`${albums.length} albums and ${total.toLocaleString('en-GB')} photos from Bradda Dads events, going back to 2001. Every album shows when the photos were taken.`}
+    image={header?.src}
+    imageLabel={header?.label}
   >
     <a class="btn btn--yellow btn--md" href={url(site.sharePhotosUrl)}>Share your photos</a>
   </PageHeader>
 
-  <div class="container filters">
-    <nav class="filter-row" aria-labelledby="cat-label">
-      <p class="filter-row__label" id="cat-label">All photos of:</p>
-      <ul class="chips chips--scroll" role="list">
+  <!-- Browse by event: one big photo tile per category -->
+  <Band first>
+    <section class="container page-section stack" aria-labelledby="browse-title">
+      <h2 class="subhead" id="browse-title">Browse by event</h2>
+      <ul class="tiles" role="list">
         {
-          categories.map((c) => (
+          tiles.map((c) => (
             <li>
-              <a class="chip" href={url(`/photos/category/${categorySlug(c.name)}/`)}>
-                {c.name} <span class="count">{c.photos}</span>
+              <a class="tile" href={url(`/photos/category/${categorySlug(c.name)}/`)}>
+                {c.photo && <img class="tile__img" src={thumb(c.photo.src)} alt="" loading="lazy" decoding="async" />}
+                <span class="tile__shade" aria-hidden="true" />
+                <span class="tile__text">
+                  <span class="tile__name">{c.name}</span>
+                  <span class="tile__count">{c.photos.toLocaleString('en-GB')} photos</span>
+                </span>
               </a>
             </li>
           ))
         }
       </ul>
-    </nav>
-    <nav class="filter-row" aria-labelledby="year-label">
-      <p class="filter-row__label" id="year-label">Year:</p>
-      <ul class="chips chips--small chips--scroll" role="list">
-        {years.map((y) => <li data-year-chip={y}><a class="chip" href={`#year-${y}`}>{yearName(y)}</a></li>)}
-      </ul>
-    </nav>
-  </div>
+    </section>
+  </Band>
 
-  {
-    years.map((y, gi) => (
-      <section class="container year-group" id={`year-${y}`} aria-labelledby={`year-${y}-title`} data-year-group={y}>
-        <h2 class="subhead" id={`year-${y}-title`}>{yearName(y)}</h2>
-        <ul class="card-grid" role="list">
-          {groups.get(y)!.map((a, i) => (
-            <li data-album-cat={a.data.category ?? ''}>
-              <AlbumCard album={a} index={gi + i} />
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))
-  }
+  <!-- Every album, newest first, in one continuous grid; the year buttons jump to each year's first album -->
+  <Band tone="mist">
+    <section class="container page-section stack" aria-labelledby="all-title">
+      <div class="all-head">
+        <h2 class="subhead" id="all-title">Every album</h2>
+        <nav aria-label="Jump to a year">
+          <ul class="chips chips--small chips--scroll" role="list">
+            {years.map((y) => <li><a class="chip" href={`#year-${y}`}>{yearName(y)}</a></li>)}
+          </ul>
+        </nav>
+      </div>
+      <ul class="albums" role="list">
+        {
+          years.map((y, gi) =>
+            groups.get(y)!.map((a, i) => (
+              <li id={i === 0 ? `year-${y}` : undefined} class:list={{ 'year-start': i === 0 }}>
+                <AlbumCard album={a} index={gi + i} />
+              </li>
+            )),
+          )
+        }
+      </ul>
+    </section>
+  </Band>
 </BaseLayout>
 
 <script>
@@ -93,50 +110,88 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
     align-self: flex-start;
     margin-top: 6px;
   }
-  .filters {
-    padding-block: 28px 8px;
+  .stack {
     display: flex;
     flex-direction: column;
+    gap: 22px;
+  }
+  .tiles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(210px, 100%), 1fr));
     gap: 14px;
   }
-  .filter-row {
+  .tile {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--green);
+    color: var(--white);
+    text-decoration: none;
+  }
+  .tile:hover {
+    color: var(--white);
+  }
+  .tile__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .tile__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(16, 36, 26, 0) 35%, rgba(16, 36, 26, 0.88) 100%);
+  }
+  .tile__text {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 14px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
+    flex-direction: column;
   }
-  .filter-row__label {
-    font-weight: 600;
-    color: var(--muted);
-    min-width: 110px;
+  .tile__name {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.1;
   }
-  .filter-row .chips {
-    min-width: 0;
-    max-width: 100%;
+  .tile__count {
+    font-size: 14px;
+    color: var(--on-dark-soft);
   }
-  @media (max-width: 600px) {
-    .filter-row {
-      flex-direction: column;
-      align-items: stretch;
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .tile__img {
+      transition: transform 0.3s ease;
+    }
+    .tile:hover .tile__img {
+      transform: scale(1.05);
     }
   }
-  .chip .count {
-    font-size: 13px;
-    opacity: 0.7;
-    margin-left: 6px;
+  .all-head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
   .chips--small .chip {
     min-height: 40px;
     font-size: 14px;
   }
-  .year-group {
-    padding-block: 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    scroll-margin-top: 90px;
+  .albums {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+    gap: 24px 18px;
   }
-  .year-group:last-child {
-    padding-bottom: var(--section-pad);
+  .year-start {
+    scroll-margin-top: 96px;
   }
 </style>

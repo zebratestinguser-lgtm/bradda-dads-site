@@ -32,19 +32,14 @@ const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${
   <div class="album__tiles" aria-hidden="true">
     {
       coverSrc ? (
-        <img class="album__tile album__tile--main" src={thumb(coverSrc)} alt="" loading="lazy" decoding="async" />
+        <img class:list={['album__tile', 'album__tile--main', { 'album__tile--solo': !rest[0] }]} src={thumb(coverSrc)} alt="" loading="lazy" decoding="async" />
       ) : (
-        <div class="album__tile album__tile--main" style={`background:${sw[0]}`} />
+        <div class="album__tile album__tile--main album__tile--solo" style={`background:${sw[0]}`} />
       )
     }
-    {
-      rest[0] ? (
-        <img class="album__tile" src={thumb(rest[0].src)} alt="" loading="lazy" decoding="async" />
-      ) : (
-        <div class="album__tile" style={`background:${sw[1]}`} />
-      )
-    }
-    <div class="album__tile album__tile--more" style={`background:${sw[2]}`}>{more > 0 ? `+${more}` : ''}</div>
+    {/* Albums with a single photo show it full size rather than next to empty coloured blocks */}
+    {rest[0] && <img class="album__tile" src={thumb(rest[0].src)} alt="" loading="lazy" decoding="async" />}
+    {rest[0] && <div class="album__tile album__tile--more" style={`background:${sw[2]}`}>{more > 0 ? `+${more}` : ''}</div>}
     <span class="album__date-chip">{photoDateShort(album)}</span>
   </div>
   <Heading class="album__name">{album.data.title}</Heading>
@@ -86,6 +81,9 @@ const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${
   .album__tile--main {
     grid-column: span 2;
     height: 150px;
+  }
+  .album__tile--solo {
+    height: 236px;
   }
   .album__tile--more {
     display: flex;

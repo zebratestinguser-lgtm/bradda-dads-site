@@ -9,6 +9,7 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 ## Site settings: `src/data/site.yaml`
 
+- [ ] **Contact form:** make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.
 - [ ] Contact email (`contactEmail`). The old blog used braddadads@btinternet.com; is it still in use?
 - [ ] CIC name and company number (`cicName`, `cicNumber`). The SumUp store is called "Bradda Dads Community Group"; is that the registered name?
 - [x] SumUp store URL and the three item links (duck tickets, Christmas card, donation)
@@ -117,6 +118,7 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 ## Pages still to write (milestone 4)
 
 - [ ] Privacy notice (mention race results, photos, and OpenStreetMap map tiles)
+- [ ] Privacy notice: once the Christmas card form is live, add what's collected (name and message), who sees it, how long it's kept, and that the message is printed on the card.
 - [ ] Get involved / Contact copy
 
 ## Team editing (next up)

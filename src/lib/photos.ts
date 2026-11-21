@@ -49,7 +49,8 @@ async function sceneAlbums(filter: (a: Album) => boolean) {
  */
 export async function storyPhoto(story: NewsEntry, avoid = new Set<string>()): Promise<(PickedPhoto & { own: boolean }) | undefined> {
   const albums = await getAlbums();
-  if (story.data.image) {
+  // Use the story's own picture only when it's a real photo (not a logo, poster or press cutting)
+  if (story.data.image && isScene(story.data.imageAlt)) {
     const album = story.data.album ? albums.find((a) => a.id === story.data.album!.id) : undefined;
     return {
       src: story.data.image,
@@ -90,6 +91,37 @@ export async function dadsGroupPhoto(): Promise<PickedPhoto | undefined> {
   // Best first: the dads lined up together, then the dads in their yellow T-shirts, then any get-together
   const wanted = [/dads in white shirts and yellow ties lined up/i, /bradda dads team lined up|dads .*lined up/i, /current bradda dads together|current members/i];
   const album = wanted.map((re) => albums.find((a) => re.test(displayCover(a)?.alt ?? ''))).find(Boolean);
+  const photo = album && displayCover(album);
+  return album && photo ? asPicked(album, photo) : undefined;
+}
+
+/**
+ * A specific photo for a page header, found by its description (album cover descriptions are real).
+ * Tries each pattern in turn, so list the favourite first. Falls back to the first real scene.
+ */
+export async function photoMatching(...patterns: RegExp[]): Promise<PickedPhoto | undefined> {
+  const albums = (await getAlbums()).filter((a) => a.data.photos.length > 0);
+  for (const re of patterns) {
+    for (const album of albums) {
+      const photo = album.data.photos.find((p) => re.test(p.alt ?? '')) ?? (re.test(displayCover(album)?.alt ?? '') ? displayCover(album) : undefined);
+      if (photo) return asPicked(album, photo);
+    }
+  }
+  const album = albums.find((a) => isScene(displayCover(a)?.alt));
+  return album ? asPicked(album, displayCover(album)!) : undefined;
+}
+
+/** Best photo to represent a whole category (newest album whose lead photo is a real scene) */
+export async function categoryPhoto(category: string): Promise<PickedPhoto | undefined> {
+  const [album] = await sceneAlbums((a) => a.data.category === category);
+  const photo = album && displayCover(album);
+  return album && photo ? asPicked(album, photo) : undefined;
+}
+
+/** A photo from a given year, preferring albums whose category matches one of the hints */
+export async function yearPhoto(year: string, hints: string[] = []): Promise<PickedPhoto | undefined> {
+  const albums = (await getAlbums()).filter((a) => a.data.photos.length > 0 && !a.data.dateLabel && String(a.data.date.getFullYear()) === year && isScene(displayCover(a)?.alt));
+  const album = albums.find((a) => hints.includes(a.data.category ?? '')) ?? (hints.length ? undefined : albums[0]);
   const photo = album && displayCover(album);
   return album && photo ? asPicked(album, photo) : undefined;
 }

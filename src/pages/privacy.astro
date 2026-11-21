@@ -6,6 +6,7 @@ import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
+const hasForm = site.contactFormUrl.startsWith('https://');
 ---
 
 <BaseLayout title="Privacy" description="How the Bradda Dads website handles your information.">
@@ -21,8 +22,17 @@ const site = await getSite();
       <h2>Payments</h2>
       <p>Donations and payments are taken by SumUp. When you pay, you're on SumUp's website and their privacy policy applies. We receive the payment details SumUp shares with sellers (such as your name and the amount) so we can keep our accounts.</p>
 
-      <h2>Christmas card messages</h2>
-      <p>[PLACEHOLDER: once the Christmas card form is live, explain what's collected (name and message), who sees it, how long it's kept, and that the message is printed on the card.]</p>
+      {
+        hasForm && (
+          <>
+            <h2>Messages you send us</h2>
+            <p>
+              The contact form is run by Formspree, which passes your name, email address and message to us by email. Formspree keeps submissions for 30 days. We only use your details to reply, and
+              don't add you to any mailing list. See <a href="https://formspree.io/legal/privacy-policy/">Formspree's privacy policy</a>.
+            </p>
+          </>
+        )
+      }
 
       <h2>The map</h2>
       <p>The "where the money goes" map loads map images from OpenStreetMap's servers when you scroll to it, so your browser contacts OpenStreetMap. See the <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap Foundation privacy policy</a>.</p>
