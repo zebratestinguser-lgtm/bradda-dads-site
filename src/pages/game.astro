@@ -1,6 +1,6 @@
 ---
 // Duck Dash: a little game. Steer a duck down Bradwell Brook between its stone walls. Dodge branches, rocks,
-// whirlpools and the heron; rescue ducklings (they follow in a line and act as lives); overtake numbered
+// and whirlpools; rescue ducklings (they follow in a line and act as lives); overtake numbered
 // race ducks; catch the golden duck for double points. The brook changes with the seasons. Optional quacks
 // and vibration. Everything is drawn on a canvas; no libraries, no sound files (sounds are synthesised).
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -9,8 +9,8 @@ import PageHeader from '../components/PageHeader.astro';
 import { url } from '../lib/url';
 ---
 
-<BaseLayout title="Duck Dash" description="A little game: steer a duck down Bradwell Brook, dodge the branches and the heron, and rescue the lost ducklings.">
-  <PageHeader eyebrow="Just for fun" title="Duck Dash" intro="Steer your duck down Bradwell Brook. Dodge the branches, rocks, whirlpools and the heron, rescue the lost ducklings, and overtake the race ducks." />
+<BaseLayout title="Duck Dash" description="A little game: steer a duck down Bradwell Brook, dodge the branches and whirlpools, and rescue the lost ducklings.">
+  <PageHeader eyebrow="Just for fun" title="Duck Dash" intro="Steer your duck down Bradwell Brook. Dodge the branches, rocks and whirlpools, rescue the lost ducklings, and overtake the race ducks." />
 
   <Band first>
     <section class="container page-section game-wrap" aria-labelledby="game-title">
@@ -61,7 +61,6 @@ import { url } from '../lib/url';
         <li><strong>Steer</strong> left, right, up and down by dragging your finger, using the arrow keys (or W, A, S and D), or the buttons under the game.</li>
         <li><strong>Rescue ducklings</strong> by swimming into them: 10 points each, and they follow you in a line. They're your lives too.</li>
         <li><strong>Bump</strong> a branch or rock and the duckling at the back of your line scatters. Bump with no ducklings left and it's game over.</li>
-        <li><strong>Watch for the heron.</strong> When its shadow appears, get your family out of the way before it swoops, or it takes a duckling.</li>
         <li><strong>Avoid whirlpools.</strong> They pull you in, and their middle spins a duckling away.</li>
         <li><strong>Overtake the numbered race ducks</strong> for 5 points each, and catch the rare <strong>golden duck</strong> for double points for 10 seconds.</li>
         <li>The brook changes with the seasons and gets faster the further you go. <strong>Space</strong> or <strong>P</strong> pauses. Quacks and phone buzzes are off until you switch them on.</li>
@@ -193,7 +192,6 @@ import { url } from '../lib/url';
         if (soundOn) navigator.vibrate?.(120);
       },
       gold: () => [880, 1109, 1319, 1760].forEach((f, i) => tone(f, 0.18, 'triangle', f, 0.12, i * 0.07)),
-      heron: () => tone(330, 0.35, 'square', 180, 0.06),
       overtake: () => tone(740, 0.06, 'sine', 990, 0.08),
       over: () => {
         splash();
@@ -229,7 +227,7 @@ import { url } from '../lib/url';
     type Gold = { kind: 'gold'; y: number; x: number; phase: number };
     type Racer = { kind: 'race'; y: number; x: number; num: number; passed: boolean };
     type Thing = Branch | Rock | Chick | Whirl | Gold | Racer;
-    type Leaver = { x: number; y: number; vx: number; vy: number; life: number; up: boolean }; // ducklings leaving the line
+    type Leaver = { x: number; y: number; vx: number; vy: number; life: number }; // ducklings leaving the line
     type Bit = { x: number; y: number; vx: number; vy: number; rot: number; size: number; tint: string }; // seasonal snow, leaves, petals
 
     let duckX = W / 2;
@@ -253,9 +251,6 @@ import { url } from '../lib/url';
     let stones: { y: number; side: number; w: number; h: number }[] = [];
     let nextSpawn = 0;
     let raceNum = 1;
-    // The heron: a shadow appears (warning), then it strikes where the shadow is, then flies off
-    let heron: { phase: 'none' | 'warn' | 'strike' | 'leave'; x: number; y: number; t: number } = { phase: 'none', x: 0, y: 0, t: 0 };
-    let nextHeron = 0;
     let state: 'ready' | 'playing' | 'paused' | 'over' = 'ready';
     let last = 0;
     let wallOffset = 0;
@@ -289,8 +284,6 @@ import { url } from '../lib/url';
       things = [];
       nextSpawn = 120;
       raceNum = 1 + Math.floor(Math.random() * 400);
-      heron = { phase: 'none', x: 0, y: 0, t: 0 };
-      nextHeron = 1400 + Math.random() * 800;
       ripples = Array.from({ length: 26 }, () => ({ x: LEFT + Math.random() * (RIGHT - LEFT), y: Math.random() * H, len: 10 + Math.random() * 22 }));
       bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
       stones = [];
@@ -349,17 +342,17 @@ import { url } from '../lib/url';
     const dist2 = (ax: number, ay: number, bx: number, by: number) => (ax - bx) ** 2 + (ay - by) ** 2;
     const near = (x: number, y: number, r: number) => dist2(duckX, duckY, x, y) < (DUCK_R + r) ** 2;
 
-    // Losing the duckling at the back of the line: it swims off to the bank (or is carried up by the heron)
-    const loseDuckling = (how: 'scatter' | 'heron' | 'spin') => {
+    // Losing the duckling at the back of the line: it swims off to the bank
+    const loseDuckling = () => {
       const c = trail.pop();
       if (!c) return false;
       const toLeft = c.x > W / 2;
-      leavers.push({ x: c.x, y: c.y, vx: how === 'heron' ? 0 : toLeft ? -150 : 150, vy: how === 'heron' ? -260 : -40, life: 1.2, up: how === 'heron' });
+      leavers.push({ x: c.x, y: c.y, vx: toLeft ? -150 : 150, vy: -40, life: 1.2 });
       return true;
     };
     const bump = () => {
       if (safeTime > 0 || (TEST && trail.length === 0)) return;
-      if (loseDuckling('scatter')) {
+      if (loseDuckling()) {
         safeTime = 1.4;
         sfx.bump();
         announce.textContent = `Bump! A duckling swam off. ${trail.length} left in your line.`;
@@ -526,57 +519,6 @@ import { url } from '../lib/url';
       }
     };
 
-    const drawHeron = (t: number) => {
-      if (heron.phase === 'none') return;
-      const { x, y } = heron;
-      if (heron.phase === 'warn') {
-        const k = Math.min(1, heron.t / 1.6); // grows as the heron gets closer
-        ctx.fillStyle = `rgba(16,36,26,${0.12 + k * 0.25})`;
-        ctx.beginPath();
-        ctx.ellipse(x, y, 20 + k * 22, 10 + k * 12, -0.3, 0, Math.PI * 2);
-        ctx.fill();
-        // flashing warning ring
-        ctx.strokeStyle = Math.floor(t * 6) % 2 ? '#e8702a' : '#ffffff';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.arc(x, y, 38, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.fillStyle = '#e8702a';
-        ctx.font = 'bold 22px Inter, system-ui, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('!', x, y - 52);
-      } else {
-        // the heron's head and long beak, stabbing down, then lifting away
-        const lift = heron.phase === 'leave' ? heron.t * 260 : 0;
-        ctx.save();
-        ctx.translate(x, y - lift);
-        ctx.fillStyle = '#7f8b92';
-        ctx.beginPath();
-        ctx.ellipse(-30, -40, 34, 16, -0.4, 0, Math.PI * 2); // wing/body
-        ctx.fill();
-        ctx.strokeStyle = '#7f8b92';
-        ctx.lineWidth = 7;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(-14, -34);
-        ctx.quadraticCurveTo(-4, -26, -6, -14); // neck
-        ctx.stroke();
-        ctx.fillStyle = '#c9d2d6';
-        ctx.beginPath();
-        ctx.arc(-6, -12, 7, 0, Math.PI * 2); // head
-        ctx.fill();
-        ctx.fillStyle = '#e0a42b';
-        ctx.beginPath();
-        ctx.moveTo(-3, -10);
-        ctx.lineTo(10, 6);
-        ctx.lineTo(-8, -6);
-        ctx.closePath();
-        ctx.fill(); // beak
-        ctx.restore();
-      }
-    };
-
     const drawBit = (b: Bit) => {
       ctx.save();
       ctx.translate(b.x, b.y);
@@ -670,7 +612,6 @@ import { url } from '../lib/url';
         ctx.restore();
       }
       drawDuck(duckX, duckY, 1, t, goldTime > 0 ? C.gold : C.yellow, blink ? 0.35 : 1);
-      drawHeron(t);
       if (season === 'winter') bits.forEach(drawBit); // snow falls over everything
     };
 
@@ -749,7 +690,7 @@ import { url } from '../lib/url';
             }
             if (d < 12 && !th.spun) {
               th.spun = true;
-              if (loseDuckling('spin')) {
+              if (loseDuckling()) {
                 sfx.bump();
                 announce.textContent = `The whirlpool spun a duckling away. ${trail.length} left.`;
               }
@@ -761,40 +702,10 @@ import { url } from '../lib/url';
         }
         things = things.filter((th) => th.y < H + 60);
 
-        // The heron: appears every so often once you've swum a way
-        if (heron.phase === 'none' && distance > nextHeron) {
-          const tail = trail[trail.length - 1] ?? { x: duckX, y: duckY };
-          heron = { phase: 'warn', x: tail.x, y: Math.min(BOTTOM_Y - 10, tail.y), t: 0 };
-          sfx.heron();
-          announce.textContent = 'Heron! Get out of its shadow.';
-        } else if (heron.phase !== 'none') {
-          heron.t += dt;
-          if (heron.phase === 'warn' && heron.t > 1.6) {
-            heron.phase = 'strike';
-            heron.t = 0;
-            const R = 34;
-            const inReach = trail.some((c) => dist2(c.x, c.y, heron.x, heron.y) < R * R) || dist2(duckX, duckY, heron.x, heron.y) < R * R;
-            if (inReach) {
-              if (loseDuckling('heron')) {
-                sfx.bump();
-                announce.textContent = `The heron took a duckling! ${trail.length} left.`;
-              } else if (dist2(duckX, duckY, heron.x, heron.y) < R * R && safeTime <= 0 && !TEST) {
-                gameOver();
-              }
-            }
-          } else if (heron.phase === 'strike' && heron.t > 0.35) {
-            heron.phase = 'leave';
-            heron.t = 0;
-          } else if (heron.phase === 'leave' && heron.t > 0.8) {
-            heron.phase = 'none';
-            nextHeron = distance + 1800 + Math.random() * 1600;
-          }
-        }
-
         // ducklings leaving the line swim off (or are carried away) and fade
         for (const l of leavers) {
           l.x += l.vx * dt;
-          l.y += l.vy * dt + (l.up ? 0 : dy);
+          l.y += l.vy * dt + dy;
           l.life -= dt;
         }
         leavers = leavers.filter((l) => l.life > 0);
