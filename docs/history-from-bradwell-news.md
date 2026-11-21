@@ -2,7 +2,7 @@
 
 Research notes from every back issue of the *Bradwell News* on [bradda.org](https://bradda.org/bradwell-news/) (313 PDFs: issues 1–294 plus supplements), searched for "Bradda Dads", "BraddaDads", "Bradda Ten" and similar. Every fact links to the issue it came from so it can be checked. **Nothing here has been added to the website yet.** Items marked ✅ answer an open question in `TODO-content.md`.
 
-**How the early issues were checked:** issues 1–30 (July 2002 – December 2004) are scanned images with no searchable text, so every page was read by eye. Gaps: **Issue 21 (March 2004) isn't online**, because the "Issue 21" file on bradda.org is another copy of Issue 22. Issue 22's file also has no page 3. The separate carnival supplements weren't checked.
+**How the early issues were checked:** issues 1–30 (July 2002 – December 2004) are scanned images with no searchable text, so every page was read by eye. Gaps: **Issue 21 (March 2004) isn't online**, because the "Issue 21" file on bradda.org is another copy of Issue 22. Issue 22's file also has no page 3. All 19 supplements have been checked too (see "Carnival floats" below).
 
 ## In the group's own words (November 2002)
 
@@ -75,6 +75,28 @@ What this confirms or adds:
 | 2024 | First torchlit procession before the bonfire, from the Brook Café to the bonfire field ("well over 100 children") | [Issue 270](https://bradda.org/wp-content/uploads/2024/11/Issue_270.pdf) |
 | 2026 | "Bradda Rocks" on Carnival Eve, the Ball Race in Gala Week, the bar on Carnival Day and a float in the parade | [Issue 291](https://bradda.org/wp-content/uploads/2026/08/Bradwell-News-September-2026-4-pages.pdf) |
 | 2026 | Bonfire funded by Breedon | [Issue 294](https://bradda.org/wp-content/uploads/2026/11/Bradwell-News-Dec-2026-4-pages.pdf) |
+
+## Carnival floats in the photo supplements (2009–2026)
+
+The supplements (Centenary 2010, Carnival 2009–2026 except 2020, Panto memories) are photo collages with almost no captions, so the only evidence is lettering on the floats. Where that wasn't enough, the photos were compared with the site's own albums and posts.
+
+| Year | Float | How we know | Source |
+|---|---|---|---|
+| 2010 | Circus: "Roll up! Braddas Circus" | Matches the old blog: "Bradda Dads Circus Float wins First Prize for Best Float" | [Carnival 2010](https://bradda.org/wp-content/uploads/2021/03/Carnival_2010.pdf) |
+| 2011 | Yellow submarine, dads as sailors | Matches the site's Carnival 2011 album | [Carnival 2011](https://bradda.org/wp-content/uploads/2021/03/Carnival_2011.pdf) |
+| 2012 | Red double-decker "Bradda Transport": "A Summer Holiday presented by Bradda Dads with guest driver Sir Cliff Richard", "22 Bradda Brook" on the front, and a "Bradda Dads World Famous Duck Race" advert on the back | Lettering on the float; matches the site's 2012 "summer holiday" post | [Carnival 2012](https://bradda.org/wp-content/uploads/2021/03/Carnival_2012.pdf) |
+| 2013 | Probably the Cat in the Hat (big group in red-and-white hats) | The same photo is in the site's carnival album | [Carnival 2013](https://bradda.org/wp-content/uploads/2021/03/Carnival_2013.pdf) |
+| 2015 | Probably "Bradda Sister Act" (nuns, with a yellow duck on the float; theme "musicals") | Partial lettering "…DDA"; a group of nuns is in the site's carnival album | [Carnival 2015](https://bradda.org/wp-content/uploads/2021/03/Carnival_2015.pdf) |
+| 2018 | Lancaster bomber, "BR…" on the side and a duck by the cockpit; dads as airmen | The site's 2018 bonfire post mentions "the burning of the Lancaster bomber" | [Carnival 2018](https://bradda.org/wp-content/uploads/2021/03/Carnival_2018.pdf) |
+| 2019 | Giant Day of the Dead skull | Matches the site's photos of it being built and burned on the bonfire | [Carnival 2019](https://bradda.org/wp-content/uploads/2021/03/Carnival_Supplement_2019.pdf) |
+| 2021 | "Bug Busters", giant spider | Matches the site's spider float photos; duck sticker on the van | [Carnival 2021](https://bradda.org/wp-content/uploads/2021/08/Carnival_Supplement_2021.pdf) |
+| 2024 | Probably "Bradda County Council" roadworks ("Expect delays", "Diversion", hard hats and hi-vis) | Lettering only; not on the site, so worth confirming | [Carnival 2024](https://bradda.org/wp-content/uploads/2024/08/Carnival_Supplement_2024.pdf) |
+| 2025 | "Bradda Dads Live Aid" van with a duck, "Feed the Ducks" | Lettering on the float | [Carnival 2025](https://bradda.org/wp-content/uploads/2025/08/Carnival_Supplement_2025.pdf) |
+| 2026 | Rocket "F'Artemis II – Bradda Dads 2026", with aliens and astronauts | Lettering on the float | [Carnival 2026](https://bradda.org/wp-content/uploads/2026/08/Carnival-supplement-2026.pdf) |
+
+Nothing identifiable as Bradda Dads in 2009, 2014, 2016, 2017, 2022 or 2023 (no lettering, and no match with the site). Nothing in the Centenary or Panto supplements.
+
+**Site fix to check:** the album "Carnival photos 2017–2021" also holds photos that match 2012 (the bus), 2013 (Cat in the Hat) and probably 2015 (the nuns), so its date label is too narrow.
 
 ## Groups and projects Bradda Dads funded or supported
 
