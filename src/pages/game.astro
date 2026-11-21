@@ -27,7 +27,10 @@ import { url } from '../lib/url';
           <p class="overlay__season" data-season></p>
           <p class="overlay__title" data-overlay-title>Ready?</p>
           <p class="overlay__text" data-overlay-text>Drag, tap or use the arrow keys to steer.</p>
-          <button type="button" class="btn btn--yellow overlay__btn" data-start>Start swimming</button>
+          <div class="overlay__buttons">
+            <button type="button" class="btn btn--yellow overlay__btn" data-start>Start swimming</button>
+            <button type="button" class="btn btn--ghost-light overlay__btn" data-finish hidden>Finish</button>
+          </div>
         </div>
         <p class="visually-hidden" aria-live="polite" data-announce></p>
       </div>
@@ -64,7 +67,7 @@ import { url } from '../lib/url';
         <li><strong>Avoid whirlpools.</strong> They pull you in, and their middle spins a duckling away.</li>
         <li><strong>Numbered race ducks</strong> drift down the brook too. Bump one and you both bounce apart, which might send you towards a branch.</li>
         <li>Catch the rare <strong>golden duck</strong> for double points for 10 seconds.</li>
-        <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs a little faster. Make it through all four seasons to finish the game, with 25 bonus points for every duckling still in your line.</li>
+        <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs a little faster. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year at double the speed (and lose that bonus if you're knocked out).</li>
         <li><strong>Space</strong> or <strong>P</strong> pauses. Quacks and phone buzzes are off until you switch them on.</li>
       </ul>
       <p class="how__more">
@@ -89,6 +92,7 @@ import { url } from '../lib/url';
     const overlayText = $('[data-overlay-text]');
     const seasonEl = $('[data-season]');
     const startBtn = $<HTMLButtonElement>('[data-start]');
+    const finishBtn = $<HTMLButtonElement>('[data-finish]');
     const pauseBtn = $<HTMLButtonElement>('[data-pause]');
     const soundBtn = $<HTMLButtonElement>('[data-sound]');
     const announce = $('[data-announce]');
@@ -126,6 +130,8 @@ import { url } from '../lib/url';
     let season: Season = startSeason;
     let SEASON = LOOKS[season];
     let level = 0; // 0–3
+    let year = 1; // a second year (if you keep swimming) runs at double speed, a third at quadruple…
+    const pace = () => 2 ** (year - 1);
     let levelTime = 0;
     let banner: { text: string; sub: string; t: number } | null = null;
     seasonEl.textContent = `Starting in ${LOOKS[startSeason].name.toLowerCase()}` + (month === 11 ? ' · Merry Christmas!' : '');
@@ -290,6 +296,8 @@ import { url } from '../lib/url';
       steer = steerY = 0;
       speed = 150;
       level = 0;
+      year = 1;
+      lastChick = -9999;
       levelTime = 0;
       season = startSeason;
       SEASON = LOOKS[season];
@@ -320,6 +328,13 @@ import { url } from '../lib/url';
 
     // ---------- New things, always leaving a way through ----------
     const randX = (margin: number) => LEFT + margin + Math.random() * (RIGHT - LEFT - 2 * margin);
+    let lastChick = -9999;
+    const CHICK_GAP = 700; // at least this far between ducklings (about four seconds at the start)
+    const chickOk = () => distance - lastChick > CHICK_GAP * pace();
+    const addChick = (x: number, y: number) => {
+      things.push({ kind: 'chick', y, x, phase: Math.random() * 6 });
+      lastChick = distance;
+    };
     const spawn = () => {
       const roll = Math.random();
       const gapNeeded = 92; // the duck always has at least this much room to get past
@@ -327,23 +342,26 @@ import { url } from '../lib/url';
         const fromLeft = Math.random() < 0.5;
         const len = 90 + Math.random() * (RIGHT - LEFT - gapNeeded - 90);
         things.push({ kind: 'branch', y: -30, fromLeft, len, thick: 16 + Math.random() * 6 });
-        if (Math.random() < 0.45) {
+        if (Math.random() < 0.3 && chickOk()) {
           const freeFrom = fromLeft ? LEFT + len + 24 : LEFT + 24;
           const freeTo = fromLeft ? RIGHT - 24 : RIGHT - len - 24;
-          if (freeTo > freeFrom) things.push({ kind: 'chick', y: -30, x: freeFrom + Math.random() * (freeTo - freeFrom), phase: Math.random() * 6 });
+          if (freeTo > freeFrom) addChick(freeFrom + Math.random() * (freeTo - freeFrom), -30);
         }
       } else if (roll < 0.66) {
         const r = 14 + Math.random() * 12;
         things.push({ kind: 'rock', y: -30, x: randX(r + 6), r });
-        if (Math.random() < 0.3) things.push({ kind: 'chick', y: -90, x: randX(30), phase: Math.random() * 6 });
+        if (Math.random() < 0.2 && chickOk()) addChick(randX(30), -90);
       } else if (roll < 0.76 && distance > 600) {
         things.push({ kind: 'whirl', y: -40, x: randX(44), r: 30, spun: false });
       } else if (roll < 0.88) {
         things.push({ kind: 'race', y: -30, x: randX(24), num: raceNum++, cool: 0 });
       } else if (roll < 0.91 && distance > 400) {
         things.push({ kind: 'gold', y: -30, x: randX(30), phase: Math.random() * 6 });
+      } else if (chickOk()) {
+        addChick(randX(30), -30);
       } else {
-        things.push({ kind: 'chick', y: -30, x: randX(30), phase: Math.random() * 6 });
+        const r = 14 + Math.random() * 10;
+        things.push({ kind: 'rock', y: -30, x: randX(r + 6), r });
       }
       nextSpawn = Math.max(105, 185 - (speed - 150) * 0.35) + Math.random() * 60; // gaps shrink as the brook speeds up
     };
@@ -666,7 +684,7 @@ import { url } from '../lib/url';
       last = now;
       const t = now / 1000;
       if (state === 'playing') {
-        speed = Math.min(150 + level * 55 + 60, speed + dt * 2.5); // faster each season, creeping up within it
+        speed = Math.min((150 + level * 55 + 60) * pace(), speed + dt * 2.5 * pace()); // faster each season (and year), creeping up within it
         levelTime += dt;
         if (banner) banner.t -= dt;
         if (levelTime >= LEVEL_TIME) nextSeason();
@@ -792,15 +810,18 @@ import { url } from '../lib/url';
       requestAnimationFrame(step);
     };
 
-    const show = (title: string, text: string, button: string) => {
+    const show = (title: string, text: string, button: string, finish?: string) => {
       overlayTitle.textContent = title;
       overlayText.textContent = text;
       startBtn.textContent = button;
+      finishBtn.hidden = !finish;
+      if (finish) finishBtn.textContent = finish;
       overlay.hidden = false;
       startBtn.focus({ preventScroll: true });
     };
     const start = () => {
       if (state === 'over' || state === 'ready') reset();
+      finishBtn.hidden = true;
       if (soundOn) ensureAudio();
       state = 'playing';
       overlay.hidden = true;
@@ -820,13 +841,38 @@ import { url } from '../lib/url';
       if (level >= 4) return finishYear();
       season = yearOrder[level];
       SEASON = LOOKS[season];
-      speed = Math.max(speed, 150 + level * 55);
+      speed = Math.max(speed, (150 + level * 55) * pace());
       bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
       banner = { text: SEASON.name, sub: `Season ${level + 1} of 4`, t: 2.2 };
       sfx.gold();
       announce.textContent = `${SEASON.name}. Season ${level + 1} of 4.`;
     }
+    let atYearEnd = false;
     function finishYear() {
+      state = 'paused';
+      atYearEnd = true;
+      sfx.gold();
+      const kept = trail.length;
+      const bonus = kept * 25;
+      const msg = `Score so far: ${score()}. Finish now to bank it${bonus ? ` with ${bonus} bonus points for your ${kept} duckling${kept === 1 ? '' : 's'}` : ''}, or keep swimming into another year at ${pace() * 2 === 2 ? 'double' : pace() * 2 + ' times the'} speed. Get knocked out and you lose the duckling bonus.`;
+      announce.textContent = `You made it through year ${year}! ${msg}`;
+      show(`Year ${year} done!`, msg, 'Keep swimming', 'Finish');
+    }
+    function keepSwimming() {
+      atYearEnd = false;
+      year++;
+      level = 0;
+      levelTime = 0;
+      season = yearOrder[0];
+      SEASON = LOOKS[season];
+      speed = 150 * pace();
+      bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
+      banner = { text: `Year ${year}`, sub: `${SEASON.name} · ${pace()}× speed`, t: 2.6 };
+      announce.textContent = `Year ${year}, ${pace()} times the speed.`;
+      start();
+    }
+    function finishNow() {
+      atYearEnd = false;
       state = 'over';
       const bonus = trail.length * 25;
       points += bonus;
@@ -839,11 +885,10 @@ import { url } from '../lib/url';
           localStorage.setItem('duckDashBest', String(best));
         } catch {}
       }
-      sfx.gold();
       updateHud();
-      const msg = `You swam the whole year and scored ${s}${bonus ? `, including ${bonus} for the ${trail.length} duckling${trail.length === 1 ? '' : 's'} still with you` : ''}.${isBest ? ' A new best!' : ''}`;
+      const msg = `You swam ${year === 1 ? 'the whole year' : `${year} years`} and scored ${s}${bonus ? `, including ${bonus} for the ${trail.length} duckling${trail.length === 1 ? '' : 's'} still with you` : ''}.${isBest ? ' A new best!' : ''}`;
       announce.textContent = `You made it through the year! ${msg}`;
-      show('You made it!', msg, 'Swim another year');
+      show('You made it!', msg, 'Play again');
     }
     function gameOver() {
       state = 'over';
@@ -866,8 +911,9 @@ import { url } from '../lib/url';
     }
 
     // ---------- Controls ----------
-    startBtn.addEventListener('click', start);
-    pauseBtn.addEventListener('click', () => (state === 'playing' ? pause() : state === 'paused' ? start() : undefined));
+    startBtn.addEventListener('click', () => (atYearEnd ? keepSwimming() : start()));
+    finishBtn.addEventListener('click', finishNow);
+    pauseBtn.addEventListener('click', () => (state === 'playing' ? pause() : state === 'paused' && !atYearEnd ? start() : undefined));
     document.querySelectorAll<HTMLButtonElement>('.ctrl[data-dir], .ctrl[data-diry]').forEach((b) => {
       const vertical = b.dataset.diry !== undefined;
       const dir = Number(vertical ? b.dataset.diry : b.dataset.dir);
@@ -889,7 +935,7 @@ import { url } from '../lib/url';
       else if (['ArrowRight', 'd', 'D'].includes(e.key)) steer = 1;
       else if (['ArrowUp', 'w', 'W'].includes(e.key)) steerY = -1;
       else if (['ArrowDown', 's', 'S'].includes(e.key)) steerY = 1;
-      else if ((e.key === ' ' || e.key === 'p' || e.key === 'P') && (state === 'playing' || state === 'paused')) {
+      else if ((e.key === ' ' || e.key === 'p' || e.key === 'P') && (state === 'playing' || state === 'paused') && !atYearEnd) {
         if (document.activeElement?.closest('.ctrl, [data-start]')) return;
         e.preventDefault();
         state === 'playing' ? pause() : start();
@@ -918,6 +964,7 @@ import { url } from '../lib/url';
     canvas.addEventListener('pointerup', () => (dragging = false));
     canvas.addEventListener('pointercancel', () => (dragging = false));
     document.addEventListener('visibilitychange', () => document.hidden && pause());
+    // (a new game also clears any pending year-end choice)
 
     // ---------- Size the canvas sharply for the screen ----------
     const fit = () => {
@@ -1081,6 +1128,12 @@ import { url } from '../lib/url';
     color: var(--text);
     font-weight: 700;
     white-space: nowrap;
+  }
+  .overlay__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
   .overlay__season {
     font-size: 13px;
