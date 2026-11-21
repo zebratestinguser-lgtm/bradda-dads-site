@@ -141,6 +141,11 @@ import { url } from '../lib/url';
       autumn: { name: 'Autumn', grass: '#8a7a3a', water: '#8db2cf', deep: '#6d9bbd', bar: '#d9822b', leaf: '#c9702a', hazard: 'leaf piles can hide rocks' },
     };
     seasonEl.textContent = `Starting in ${LOOKS[startSeason].name.toLowerCase()}` + (month === 11 ? ' · Merry Christmas!' : '');
+    let firstGame = true;
+    try {
+      firstGame = !localStorage.getItem('duckDashSeen');
+    } catch {}
+    if (firstGame) overlayText.textContent = "First time? The game will slow down and explain each new thing as you meet it. Drag, tap or use the arrow keys to steer.";
 
     const C = {
       ripple: 'rgba(255,255,255,0.45)',
@@ -337,7 +342,13 @@ import { url } from '../lib/url';
 
     const mult = () => (goldTime > 0 ? 2 : 1);
     const score = () => Math.floor(points);
-    const baseSpeed = () => Math.min(720, 150 + seasonsDone * 55);
+    // The year: each season about 25% faster than the last (summer ≈ twice the start). Bonus years
+    // creep up only 4% a season, up to a speed limit; their extra challenge is more hazards, a busier
+    // black duck and fewer ducklings, not raw speed.
+    const SPEED_LIMIT = 320;
+    const baseSpeed = () => (seasonsDone < 4 ? 150 * 1.25 ** seasonsDone : Math.min(SPEED_LIMIT, 150 * 1.25 ** 3 * 1.04 ** (seasonsDone - 3)));
+    const bonusYears = () => Math.max(0, year - 1); // 0 in the main year
+    const busier = () => 1 + bonusYears() * 0.18; // how much busier each bonus year is
     const bumpCost = () => Math.min(4, seasonsDone + 1);
     const spawnSeason = () => (change ? change.to : season); // new things appear at the top, in the coming season
 
@@ -408,7 +419,7 @@ import { url } from '../lib/url';
 
     // ---------- New things, always leaving a way through ----------
     const randX = (margin: number) => LEFT + margin + Math.random() * (RIGHT - LEFT - 2 * margin);
-    const chickOk = () => distance - lastChick > CHICK_GAP * (speed / 150); // the same time apart at any speed
+    const chickOk = () => distance - lastChick > CHICK_GAP * (speed / 150) * busier(); // the same time apart at any speed; rarer in bonus years
     const addChick = (x: number, y: number) => {
       things.push({ kind: 'chick', y, x, phase: Math.random() * 6, s: spawnSeason() });
       lastChick = distance;
@@ -502,7 +513,7 @@ import { url } from '../lib/url';
         things.push({ kind: 'rock', y: -30, x: randX(r + 6), r, s });
       }
       settle(things.slice(before));
-      nextSpawn = Math.max(105, 185 - (speed - 150) * 0.35) + Math.random() * 60; // gaps shrink as the brook speeds up
+      nextSpawn = (Math.max(105, 185 - (speed - 150) * 0.35) + Math.random() * 60) / busier(); // gaps shrink as the brook speeds up, and in bonus years
     };
 
     // ---------- Collisions and rules ----------
@@ -1271,9 +1282,9 @@ import { url } from '../lib/url';
       bumpedThisSeason = false;
       speed = Math.max(speed, baseSpeed());
       const cost = `bumps cost ${bumpCost()} duckling${bumpCost() === 1 ? '' : 's'}`;
-      label = { text: newYear ? `Year ${year} · ${LOOKS[to].name}` : LOOKS[to].name, sub: `${LOOKS[to].hazard} · ${cost}`, t: 3.2, total: 3.2 };
+      label = { text: newYear ? `Bonus year ${bonusYears()} · ${LOOKS[to].name}` : LOOKS[to].name, sub: `${LOOKS[to].hazard} · ${cost}`, t: 3.2, total: 3.2 };
       sfx.season();
-      announce.textContent = `${newYear ? `Year ${year}. ` : ''}${LOOKS[to].name}, season ${level + 1} of 4. Faster, ${LOOKS[to].hazard}, and ${cost}.${clean}`;
+      announce.textContent = `${newYear ? `Bonus year ${bonusYears()}. ` : ''}${LOOKS[to].name}, season ${level + 1} of 4. Faster, ${LOOKS[to].hazard}, and ${cost}.${clean}`;
     };
 
     // ---------- Game loop ----------
@@ -1295,7 +1306,7 @@ import { url } from '../lib/url';
       }
       const t = now / 1000;
       if (state === 'playing') {
-        speed = Math.min(baseSpeed() + 40, speed + dt * 2); // a step faster each season, creeping up a little within it
+        speed = Math.min(baseSpeed() * 1.08, speed + dt * 1.2); // a step faster each season, creeping up a little within it
         const dy = speed * dt;
         distance += dy;
         points += (dy / 20) * mult();
@@ -1305,7 +1316,7 @@ import { url } from '../lib/url';
         // the black duck turns up now and then, but only when you have ducklings to lose
         if (distance > nextBlack && trail.length > 0 && !things.some((th) => th.kind === 'black')) {
           things.push({ kind: 'black', y: -30, x: randX(40), vx: 0, vy: 0, life: 7, leaving: false, carrying: false, s: season });
-          nextBlack = distance + 3500 + Math.random() * 2500;
+          nextBlack = distance + (3500 + Math.random() * 2500) / busier(); // more often in bonus years
           tone(200, 0.25, 'square', 140, 0.06);
           announce.textContent = 'A black duck is after your ducklings! Keep moving.';
         } else if (distance > nextBlack && trail.length === 0) nextBlack = distance + 600; // try again later
@@ -1315,7 +1326,7 @@ import { url } from '../lib/url';
 
         // seasons: after 30 seconds the next season's bridge appears and flows down; the year ends after four
         if (!change) {
-          levelTime += dt;
+          if (!callout) levelTime += dt; // reading a hint never eats into the season
           if (levelTime >= LEVEL_TIME) {
             if (level >= 3) finishYear();
             else startChange(yearOrder[level + 1], false);
@@ -1575,7 +1586,7 @@ import { url } from '../lib/url';
       pauseBtn.textContent = 'Resume';
       show('Paused', 'Take a breather.', 'Keep swimming');
     };
-    const where = () => `You reached ${LOOKS[season].name.toLowerCase()} of year ${year}`;
+    const where = () => (bonusYears() ? `You completed the year and reached ${LOOKS[season].name.toLowerCase()} of bonus year ${bonusYears()}` : `You reached ${LOOKS[season].name.toLowerCase()}`);
     const saveBest = () => {
       const s = score();
       const isBest = s > best;
@@ -1598,9 +1609,9 @@ import { url } from '../lib/url';
       updateHud();
       const kept = trail.length;
       const bonus = kept * 25;
-      const msg = `${clean ? clean.trim() + ' ' : ''}Score so far: ${score()}. Finish now to bank it${bonus ? ` with ${bonus} bonus points for your ${kept} duckling${kept === 1 ? '' : 's'}` : ''}, or keep swimming into another year: every season gets faster still, and bumps cost ${bumpCost()} ducklings. Get knocked out and you lose the duckling bonus.`;
+      const msg = `${clean ? clean.trim() + ' ' : ''}Score so far: ${score()}. Finish now to bank it${bonus ? ` with ${bonus} bonus points for your ${kept} duckling${kept === 1 ? '' : 's'}` : ''}, or keep swimming into a bonus year for a bigger score: busier water, a hungrier black duck and fewer ducklings. Get knocked out and you lose the duckling bonus.`;
       announce.textContent = `You made it through year ${year}! ${msg}`;
-      show(`Year ${year} done!`, msg, 'Keep swimming', 'Finish');
+      show(year === 1 ? "You've completed Duck Dash!" : `Bonus year ${bonusYears()} done!`, msg, 'Keep swimming (bonus)', 'Finish');
     }
     function keepSwimming() {
       atYearEnd = false;
@@ -1615,7 +1626,7 @@ import { url } from '../lib/url';
       points += bonus;
       const isBest = saveBest();
       updateHud();
-      const msg = `You swam ${year === 1 ? 'the whole year' : `${year} years`} and scored ${score()}${bonus ? `, including ${bonus} for the ${trail.length} duckling${trail.length === 1 ? '' : 's'} still with you` : ''}.${isBest ? ' A new best!' : ''}`;
+      const msg = `You swam ${year === 1 ? 'the whole year' : `the whole year and ${bonusYears()} bonus year${bonusYears() === 1 ? '' : 's'}`} and scored ${score()}${bonus ? `, including ${bonus} for the ${trail.length} duckling${trail.length === 1 ? '' : 's'} still with you` : ''}.${isBest ? ' A new best!' : ''}`;
       announce.textContent = `You made it! ${msg}`;
       shareText = `I swam ${year === 1 ? 'a whole year' : `${year} years`} down Bradwell Brook in Duck Dash and scored ${score()}! 🦆 Can you beat it?`;
       show('You made it!', msg, 'Play again');
