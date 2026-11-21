@@ -29,6 +29,7 @@ site:
   # Phase 1: "Share your photos" goes to Facebook (or a mailto: link)
   sharePhotosUrl: https://www.facebook.com/BraddaDads/
   accountsUrl: "#"
+  contactFormUrl: "#"
   # Wolf's Pit Race: entry link for next year's race, and the intro on the results band
   wolfspitEntryUrl: "#"
   wolfspitIntro: "A 9 km fell race with 450 m of climb from Shatton, near Bamford, held each March since 2009. Find your time, see who took the podium, and compare years."

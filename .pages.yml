@@ -676,6 +676,11 @@ content:
             label: '"Share your photos" link'
             type: string
             required: true
+          - name: contactFormUrl
+            label: Contact form address (Formspree)
+            description: The form's address from formspree.io, e.g. https://formspree.io/f/abcd1234. Leave as "#" to hide the form.
+            type: string
+            required: true
           - name: accountsUrl
             label: Annual accounts link
             description: Leave as "#" until there's a real link.

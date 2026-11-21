@@ -1,162 +1,226 @@
 ---
+// Our story: introduction, then a timeline running down the page with a duck on each year and a photo
+// from that year's albums where there is one. Entries whose year isn't known yet are listed at the end.
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
+import DuckLogo from '../components/DuckLogo.astro';
 import { getSite } from '../lib/site';
 import { isPlaceholder } from '../lib/events';
-import { url } from '../lib/url';
+import { yearPhoto, type PickedPhoto } from '../lib/photos';
+import { url, thumb } from '../lib/url';
 
 const site = await getSite();
 const timeline = (await getCollection('timeline')).sort((a, b) => a.data.order - b.data.order);
+
+// Which photo categories suit an entry, from words in its title
+const HINTS: [RegExp, string][] = [
+  [/duck/i, 'Duck race'],
+  [/lunch|pensioner/i, "Pensioners' lunch"],
+  [/bonfire|beacon/i, 'Bonfire'],
+  [/carnival|float/i, 'Carnival'],
+  [/wolf/i, "Wolf's Pit"],
+  [/tour/i, 'Tour of Bradwell'],
+  [/card/i, 'Christmas card'],
+];
+const hintsFor = (title: string) => HINTS.filter(([re]) => re.test(title)).map(([, c]) => c);
+
+const dated = timeline.filter((t) => !isPlaceholder(t.data.year));
+const undated = timeline.filter((t) => isPlaceholder(t.data.year));
+const photos: (PickedPhoto | { src: string; alt: string; label?: string } | undefined)[] = await Promise.all(
+  dated.map(async (t) =>
+    t.data.image ? { src: t.data.image, alt: t.data.imageAlt ?? '' } : yearPhoto(t.data.year.slice(0, 4), hintsFor(t.data.title)),
+  ),
+);
 ---
 
 <BaseLayout title="Our story" description="How Bradda Dads started with a Boxing Day duck race in 1999, and what the group has done for Bradwell since.">
-  <PageHeader eyebrow="Our story" title="It started with a duck race" />
+  <PageHeader eyebrow="Our story" title="It started with a duck race" intro={site.storyIntro} image={site.storyImage} imageLabel={site.storyImageCaption} />
 
-  <section class="container page-section story">
-    <div class="story__intro">
-      <p class="story__text">{site.storyIntro}</p>
-      {
-        site.storyImage && (
-          <figure class="story__figure">
-            <img src={url(site.storyImage)} alt={site.storyImageAlt ?? ''} decoding="async" />
-            {site.storyImageCaption && <figcaption>{site.storyImageCaption}</figcaption>}
-          </figure>
-        )
-      }
-      <p class="note">
-        Much of this history comes from the old Bradda Dads websites. If you remember something differently, or have old photos, <a href={url('/contact/')}>please get in touch</a>. You can also <a href={url('/members/')}>meet today's dads</a>.
+  <Band first>
+    <section class="container page-section stack" aria-labelledby="timeline-title">
+      <h2 class="subhead" id="timeline-title">Through the years</h2>
+      <ol class="timeline" role="list">
+        {
+          dated.map((t, i) => {
+            const photo = photos[i];
+            return (
+              <li class="entry">
+                <span class="entry__duck" aria-hidden="true">
+                  <DuckLogo size={34} />
+                </span>
+                <div class="entry__card">
+                  <p class="entry__year">{t.data.year}</p>
+                  <h3 class="entry__title">{t.data.title}</h3>
+                  <p class="entry__text">{t.data.text}</p>
+                  {photo && (
+                    <figure class="entry__photo">
+                      <img src={thumb(photo.src)} alt={photo.alt} loading="lazy" decoding="async" />
+                      {'label' in photo && photo.label && <figcaption>Photo taken {photo.label}</figcaption>}
+                    </figure>
+                  )}
+                </div>
+              </li>
+            );
+          })
+        }
+      </ol>
+    </section>
+  </Band>
+
+  <Band tone="mist">
+    <section class="container page-section more" aria-labelledby="more-title">
+      <div class="more__col">
+        {
+          undated.length > 0 && (
+            <>
+              <h2 class="subhead" id="more-title">Also part of the story</h2>
+              <ul class="undated" role="list">
+                {undated.map((t) => (
+                  <li>
+                    <strong>{t.data.title}.</strong> {!isPlaceholder(t.data.text) && t.data.text}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+        {undated.length === 0 && <h2 class="subhead" id="more-title">Help us fill the gaps</h2>}
+      </div>
+      <p class="note more__note">
+        Much of this history comes from the old Bradda Dads websites. If you remember something differently, or have old photos, <a href={url('/contact/')}>please get in touch</a>. You can also <a href={url('/members/')}>meet today's dads</a> or <a href={url('/photos/')}>browse every photo album</a>.
       </p>
-    </div>
-
-    <ol class="timeline">
-      {
-        timeline.map((t) => (
-          <li class="timeline__item">
-            <div class="timeline__rail" aria-hidden="true">
-              <span class="timeline__dot" />
-              <span class="timeline__line" />
-            </div>
-            <div class="timeline__body">
-              {!isPlaceholder(t.data.year) && <span class="timeline__year">{t.data.year}</span>}
-              <h2 class="timeline__title">{t.data.title}</h2>
-              <p class="timeline__text">{t.data.text}</p>
-              {t.data.image && <img class="timeline__img" src={url(t.data.image)} alt={t.data.imageAlt ?? ''} loading="lazy" />}
-              {t.data.source && (
-                <a class="timeline__source" href={t.data.source}>
-                  Source: old Bradda Dads website
-                </a>
-              )}
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
+    </section>
+  </Band>
 </BaseLayout>
 
 <style>
-  .story {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 48px;
-  }
-  .story__intro {
-    flex: 1 1 320px;
-    min-width: 0;
+  .stack {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 28px;
   }
-  .story__text {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--muted-strong);
-  }
-  .story__figure {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .story__figure img {
-    border-radius: var(--radius-card);
-    width: 100%;
-  }
-  .story__figure figcaption {
-    font-size: 14px;
-    color: var(--muted);
-  }
+  /* A dotted "brook" line down the left with a duck on each year; text and photo side by side in each card */
   .timeline {
-    flex: 999 1 520px;
-    min-width: 0;
+    position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-  }
-  .timeline__item {
-    display: flex;
     gap: 20px;
   }
-  .timeline__rail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-    width: 22px;
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 19px;
+    width: 4px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: repeating-linear-gradient(180deg, #8fb7d6 0 14px, #cfe1ee 14px 24px);
   }
-  .timeline__dot {
-    width: 18px;
-    height: 18px;
+  .entry {
+    position: relative;
+    padding-left: 56px;
+  }
+  .entry__duck {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: var(--green);
-    border: 4px solid var(--white);
-    box-shadow: 0 0 0 2px var(--green);
-    margin-top: 6px;
+    background: var(--white);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 4px var(--white);
   }
-  .timeline__line {
-    flex-grow: 1;
-    width: 2px;
-    background: var(--border);
+  .entry__card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--white);
+    padding: 20px 22px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+    grid-template-areas: 'year photo' 'title photo' 'text photo' '. photo';
+    grid-template-rows: auto auto auto 1fr;
+    gap: 8px 28px;
   }
-  .timeline__item:last-child .timeline__line {
-    background: transparent;
-  }
-  .timeline__body {
-    padding-bottom: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .timeline__year {
+  .entry__year {
+    grid-area: year;
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 26px;
+    font-size: 30px;
+    line-height: 1;
     color: var(--green);
   }
-  .timeline__title {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 19px;
+  .entry__title {
+    grid-area: title;
+    font-size: 21px;
+    line-height: 1.2;
   }
-  .timeline__text {
+  .entry__text {
+    grid-area: text;
     font-size: 16px;
     line-height: 1.55;
     color: var(--muted-strong);
     max-width: 62ch;
   }
-  .timeline__img {
-    border-radius: var(--radius-sm);
-    max-width: 360px;
-    margin-top: 6px;
+  .entry__photo {
+    grid-area: photo;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
-  .timeline__source {
-    font-size: 14px;
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    min-height: 32px;
+  .entry__photo img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  .entry__photo figcaption {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  @media (max-width: 760px) {
+    .entry {
+      padding-left: 50px;
+    }
+    .entry__card {
+      grid-template-columns: 1fr;
+      grid-template-areas: 'year' 'title' 'text' 'photo';
+      grid-template-rows: none;
+    }
+  }
+  .more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 48px;
+    align-items: flex-start;
+  }
+  .more__col {
+    flex: 1 1 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .undated {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted-strong);
+  }
+  .more__note {
+    flex: 1 1 320px;
+    font-size: 16px;
+    line-height: 1.6;
   }
 </style>

@@ -1,21 +1,119 @@
 ---
+// Donate: the online giving box, other ways to help, and a pointer to where the money goes.
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
 import DonateSection from '../components/home/DonateSection.astro';
+import { photoMatching } from '../lib/photos';
 import { url } from '../lib/url';
+
+const header = await photoMatching(/two children sitting in a giant wooden duck/i, /giant wooden duck/i);
+const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const ways = [
+  { title: 'Buy a duck', text: 'Race a rubber duck down the brook on Boxing Day, with cash prizes for the first ducks home.', href: '/events/duck-race/', label: 'Duck race details' },
+  { title: 'Add to the Christmas card', text: "Put your family's message on the village Christmas card for £5 instead of sending lots of cards.", href: '/events/christmas-card/', label: 'About the card' },
+  { title: 'Lend a hand', text: 'Every event needs helpers, from building the bonfire to serving at the pensioners’ lunch.', href: '/get-involved/', label: 'Get involved' },
+  { title: 'Come along', text: 'Coming along to our events and joining in is one of the best ways to help.', href: '/events/', label: 'See the events' },
+];
 ---
 
 <BaseLayout title="Donate" description="Donate to Bradda Dads. Every pound goes back into Bradwell: the pensioners' lunch, the bonfire, and grants for local groups.">
-  <PageHeader eyebrow="Donate" title="Chip in for Bradwell" intro="Bradda Dads are volunteers. None of us gain anything from the fundraising: every pound goes back into the village." />
-  <DonateSection />
-  <section class="container page-section more">
-    <p>Want to know what your money pays for? <a href={url('/where-the-money-goes/')}>See where the money goes</a>.</p>
-  </section>
+  <PageHeader
+    eyebrow="Donate"
+    title="Chip in for Bradwell"
+    intro="Bradda Dads are volunteers. None of us gain anything from the fundraising: every pound goes back into the village."
+    image={header?.src}
+    imageLabel={header?.label}
+  />
+
+  <Band first>
+    <DonateSection />
+    <div class="container page-section money">
+      <p class="money__text">Where it goes, recently:</p>
+      <ul class="money__list" role="list">
+        {funded.map((f) => <li>{f.data.name}</li>)}
+      </ul>
+      <a class="link-arrow" href={url('/where-the-money-goes/')}>See where the money goes →</a>
+    </div>
+  </Band>
+
+  <Band tone="mist">
+    <section class="container page-section stack" aria-labelledby="ways-title">
+      <h2 class="subhead" id="ways-title">Other ways to help</h2>
+      <ul class="ways" role="list">
+        {
+          ways.map((w) => (
+            <li class="way">
+              <h3 class="way__title">{w.title}</h3>
+              <p class="way__text">{w.text}</p>
+              <a class="link-arrow" href={url(w.href)}>
+                {w.label} →
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </Band>
 </BaseLayout>
 
 <style>
-  .more {
-    padding-top: 32px;
-    font-size: 17px;
+  .money {
+    padding-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+  }
+  .money__text {
+    font-weight: 600;
+    color: var(--muted-strong);
+  }
+  .money__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .money__list li {
+    background: var(--yellow-panel);
+    color: var(--yellow-ink);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .ways {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 16px;
+  }
+  .way {
+    background: var(--panel);
+    border-radius: var(--radius-card);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .way__title {
+    font-size: 21px;
+  }
+  .way__text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted-strong);
+    flex-grow: 1;
   }
 </style>

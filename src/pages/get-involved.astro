@@ -6,14 +6,16 @@ import DiaryDates from '../components/DiaryDates.astro';
 import { getEvents } from '../lib/events';
 import { getSite } from '../lib/site';
 import { url } from '../lib/url';
+import { photoMatching } from '../lib/photos';
 
 const site = await getSite();
 const events = await getEvents();
 const hasEmail = !site.contactEmail.startsWith('[');
+const header = await photoMatching(/dads in yellow t-shirts and hi-vis at the brook/i, /dads in yellow t-shirts/i);
 ---
 
 <BaseLayout title="Get involved" description={site.joinText}>
-  <PageHeader eyebrow="Get involved" title={site.joinHeadline} intro={site.joinText} />
+  <PageHeader eyebrow="Get involved" title={site.joinHeadline} intro={site.joinText} image={header?.src} imageLabel={header?.label} />
 
   <Band first><section class="container page-section grid">
     <div class="card card--green">
@@ -55,6 +57,7 @@ const hasEmail = !site.contactEmail.startsWith('[');
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    align-items: start; /* cards keep their own height rather than stretching into empty boxes */
     gap: 20px;
   }
   .card {

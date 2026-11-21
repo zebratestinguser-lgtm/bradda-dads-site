@@ -2,25 +2,56 @@
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrookEdge from '../../components/BrookEdge.astro';
+import Band from '../../components/Band.astro';
+import { storyPhoto, storyPhotos } from '../../lib/photos';
 import { photoDate } from '../../lib/albums';
-import { formatDate } from '../../lib/format';
+import { formatDate, formatShortDate } from '../../lib/format';
 import { url, thumb } from '../../lib/url';
 
 export async function getStaticPaths() {
   const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-  return news.map((story, i) => ({ params: { id: story.id }, props: { story, newer: news[i - 1], older: news[i + 1] } }));
+  return news.map((story, i) => ({ params: { id: story.id }, props: { story, newer: news[i - 1], older: news[i + 1], all: news } }));
 }
 
-const { story, newer, older } = Astro.props;
+const { story, newer, older, all } = Astro.props;
 const { Content } = await render(story);
 const album = story.data.album ? await getEntry(story.data.album) : undefined;
 const preview = album ? album.data.photos.slice(0, 8) : [];
 const when = album ? photoDate(album) : undefined;
+// Header photo: the story's own, or a dated archive photo from the same kind of event
+const header = await storyPhoto(story);
+// "More about …": the three stories on the same topic closest in date
+const related = all
+  .filter((n) => n.id !== story.id && n.data.tag === story.data.tag)
+  .sort((a, b) => Math.abs(a.data.date.getTime() - story.data.date.getTime()) - Math.abs(b.data.date.getTime() - story.data.date.getTime()))
+  .slice(0, 3)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const relatedPhotos = await storyPhotos(related);
+const TOPIC: Record<string, string> = {
+  Bonfire: 'More about the bonfire',
+  'Christmas card': 'More about the Christmas card',
+  "Pensioners' lunch": "More about the pensioners' lunch",
+  'Duck race': 'More about the duck race',
+  "Wolf's Pit": "More about Wolf's Pit",
+  Village: 'More village news',
+  Carnival: 'More about the carnival',
+  'Tour of Bradwell': 'More about the Tour of Bradwell',
+  Social: 'More get-togethers',
+};
+const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
 ---
 
 <BaseLayout title={story.data.title} description={story.data.summary} ogImage={story.data.image}>
   <article class="story">
-    <header class="story__header">
+    <header class:list={['story__header', { 'story__header--photo': header }]}>
+      {
+        header && (
+          <div class="story__header-photo" aria-hidden="true">
+            <img src={url(header.src)} alt="" decoding="async" fetchpriority="high" />
+          </div>
+        )
+      }
+      {header?.label && <p class="story__header-chip">{header.own ? 'Photo' : 'Archive photo'}: {header.label}</p>}
       <div class="container story__header-inner">
         <a class="story__back" href={url('/news/')}>← All news</a>
         <p class="story__meta">
@@ -29,7 +60,7 @@ const when = album ? photoDate(album) : undefined;
         </p>
         <h1 class="story__title">{story.data.title}</h1>
       </div>
-      <BrookEdge />
+      <BrookEdge seed="story" />
     </header>
 
     <div class="container story__body">
@@ -74,6 +105,37 @@ const when = album ? photoDate(album) : undefined;
       </nav>
     </div>
   </article>
+
+  {
+    related.length > 0 && (
+      <Band tone="mist">
+        <section class="container page-section related" aria-labelledby="related-title">
+          <div class="related__head">
+            <h2 class="subhead" id="related-title">{relatedHeading}</h2>
+            <a class="link-arrow" href={url('/news/')}>All news →</a>
+          </div>
+          <ul class="related__list" role="list">
+            {related.map((n, i) => (
+              <li class="rcard">
+                {relatedPhotos[i] && (
+                  <div class="rcard__media" aria-hidden="true">
+                    <img src={thumb(relatedPhotos[i]!.src)} alt="" loading="lazy" decoding="async" />
+                    {relatedPhotos[i]!.label && <span class="rcard__chip">{relatedPhotos[i]!.own ? relatedPhotos[i]!.label : `Archive photo · ${relatedPhotos[i]!.label}`}</span>}
+                  </div>
+                )}
+                <div class="rcard__body">
+                  <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatShortDate(n.data.date)} {n.data.date.getFullYear()}</time>
+                  <h3 class="rcard__title">
+                    <a href={url(`/news/${n.id}/`)}>{n.data.title}</a>
+                  </h3>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </Band>
+    )
+  }
 </BaseLayout>
 
 <style>
@@ -83,7 +145,52 @@ const when = album ? photoDate(album) : undefined;
     color: var(--white);
     padding-block: 28px 64px;
   }
+  .story__header--photo {
+    overflow: hidden;
+    padding-bottom: 88px;
+  }
+  .story__header-photo {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 58%;
+  }
+  .story__header-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .story__header-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--green) 0%, rgba(29, 59, 44, 0.78) 40%, rgba(29, 59, 44, 0.2) 100%);
+  }
+  .story__header-chip {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 50px;
+    z-index: 2;
+    background: rgba(16, 36, 26, 0.85);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  @media (max-width: 800px) {
+    .story__header-photo {
+      width: 100%;
+    }
+    .story__header-photo::after {
+      background: rgba(29, 59, 44, 0.86);
+    }
+    .story__header-chip {
+      bottom: 36px;
+    }
+  }
   .story__header-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -190,5 +297,82 @@ const when = album ? photoDate(album) : undefined;
   .story__nav a {
     padding-block: 10px;
     max-width: 48ch;
+  }
+  .related {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .related__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+  .related__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 18px;
+  }
+  .rcard {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .rcard__media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--surface-green);
+  }
+  .rcard__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .rcard__chip {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(16, 36, 26, 0.85);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .rcard__body {
+    padding: 16px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rcard__body time {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .rcard__title {
+    font-size: 19px;
+    line-height: 1.25;
+  }
+  /* The whole card is clickable via the title link */
+  .rcard__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .rcard__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .rcard:hover .rcard__title a {
+    text-decoration: underline;
   }
 </style>

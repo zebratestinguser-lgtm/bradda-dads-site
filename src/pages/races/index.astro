@@ -1,10 +1,13 @@
 ---
+import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Band from '../../components/Band.astro';
+import { photoMatching } from '../../lib/photos';
 import PageHeader from '../../components/PageHeader.astro';
 import { getWolfspitYears, getRaceYears } from '../../lib/results';
 import { tourRaces } from '../../lib/tour';
 import { getSite } from '../../lib/site';
-import { url } from '../../lib/url';
+import { url, thumb } from '../../lib/url';
 
 const site = await getSite();
 const wolf = await getWolfspitYears();
@@ -12,13 +15,24 @@ const tour = (await Promise.all(tourRaces.map((r) => getRaceYears(r)))).flat();
 const tourYears = [...new Set(tour.map((t) => t.year))].sort((a, b) => b - a);
 const wolfRunners = wolf.reduce((n, y) => n + y.finishers, 0);
 const tourRunners = tour.reduce((n, y) => n + y.finishers, 0);
+const wolfEvent = await getEntry('events', 'wolfspit');
+// Photos: page header, and one on each race card (with when it was taken)
+const header = await photoMatching(/fell runners climbing a grassy hillside under a rainbow/i, /runners on the start line/i);
+const wolfPhoto = await photoMatching(/big field of runners on the start line/i, /runner crossing the finish line/i);
+const tourPhoto = await photoMatching(/runners coming up a woodland track on the long tour/i, /tour of bradwell/i);
 ---
 
 <BaseLayout title="Races" description="Fell races run by Bradda Dads: the Wolf's Pit Fell Race and the Tour of Bradwell. Results, records and how to enter.">
-  <PageHeader eyebrow="Races" title="Fell races" intro="Bradda Dads run fell races in the hills around Bradwell, with every entry fee going back into the village. Find results from past years, records and how to enter." />
+  <PageHeader eyebrow="Races" title="Fell races" intro="Bradda Dads run fell races in the hills around Bradwell, with every entry fee going back into the village. Find results from past years, records and how to enter." image={header?.src} imageLabel={header?.label} />
 
-  <section class="container page-section races">
+  <Band first><section class="container page-section races">
     <a class="race race--wolf" href={url('/wolfspit/')}>
+      {wolfPhoto && (
+        <span class="race__photo" aria-hidden="true">
+          <img src={thumb(wolfPhoto.src)} alt="" loading="lazy" decoding="async" />
+          <span class="race__chip">{wolfPhoto.label}</span>
+        </span>
+      )}
       <span class="race__eyebrow">Since 2009</span>
       <h2 class="race__name">Wolf's Pit Fell Race</h2>
       <p class="race__text">{site.wolfspitIntro}</p>
@@ -27,10 +41,17 @@ const tourRunners = tour.reduce((n, y) => n + y.finishers, 0);
         <li><strong>{wolfRunners.toLocaleString('en-GB')}</strong> finishes</li>
         {wolf[0] && <li>Latest: <strong>{wolf[0].year}</strong></li>}
       </ul>
+      {wolfEvent && <p class="race__next">Next race: <strong>{wolfEvent.data.when}</strong></p>}
       <span class="race__cta">Results, records and entry →</span>
     </a>
 
     <a class="race" href={url('/tour-of-bradwell/')}>
+      {tourPhoto && (
+        <span class="race__photo" aria-hidden="true">
+          <img src={thumb(tourPhoto.src)} alt="" loading="lazy" decoding="async" />
+          <span class="race__chip">{tourPhoto.label}</span>
+        </span>
+      )}
       <span class="race__eyebrow">Long Tour and Half Tour</span>
       <h2 class="race__name">Tour of Bradwell</h2>
       <p class="race__text">A fell running and challenge event around Bradwell. The Long Tour is a punishing 33 miles with over 6,000 feet of climb. Bradda Dads helped stage it from 2012 and went on to run it.</p>
@@ -40,7 +61,7 @@ const tourRunners = tour.reduce((n, y) => n + y.finishers, 0);
       </ul>
       <span class="race__cta">Results →</span>
     </a>
-  </section>
+  </section></Band>
 </BaseLayout>
 
 <style>
@@ -59,6 +80,36 @@ const tourRunners = tour.reduce((n, y) => n + y.finishers, 0);
     color: var(--text);
     text-decoration: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+  .race__photo {
+    position: relative;
+    display: block;
+    margin: -34px -34px 6px;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+  }
+  .race__photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .race__chip {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(16, 36, 26, 0.85);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+  .race__next {
+    font-size: 15px;
+    color: var(--on-dark-soft);
   }
   .race:hover {
     color: var(--text);
@@ -123,6 +174,9 @@ const tourRunners = tour.reduce((n, y) => n + y.finishers, 0);
   @media (max-width: 600px) {
     .race {
       padding: 26px 22px;
+    }
+    .race__photo {
+      margin: -26px -22px 4px;
     }
   }
 </style>
