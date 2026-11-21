@@ -174,7 +174,8 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
   // range to the other, and scrolling up brings them back. So on any screen they keep moving the whole time
   // the page moves, and reach the end of their range just as the wave leaves the screen. They face the way
   // they're swimming, turning the moment the scroll changes direction, and glide to a halt when the page
-  // stops. A family turns as one and swaps places so the biggest duck always leads.
+  // stops. In a family the leader turns first and the ducklings follow in order, trailing behind and
+  // catching up at their own pace; they swap places as they turn so the biggest duck always leads.
   // Nothing moves if the device asks for reduced motion.
   const ducks = [...document.querySelectorAll<HTMLElement>('.brook__duck')];
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -188,12 +189,15 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       target: number; // …and where it's heading
       form: number; // family formation shift: where it is now…
       formTarget: number; // …and where it's heading (0 = the order it was laid out in)
-      ease: number;
+      vel: number; // swimming speed (each duck follows like a spring, so ducklings lag, catch up and overshoot a little)
+      fvel: number; // speed of the formation shift
+      k: number; // how strongly it's pulled towards where it's heading
+      damp: number; // how quickly it settles (lower = snappier, higher = more overshoot)
       nudge: number; // place in the family, in px from the first duck
       visible: boolean;
     };
     // A "group" is one duck on its own, or a whole family; a group swims and turns as one
-    type Group = { ducks: Duck[]; facingRight: boolean; startRight: boolean; span: number; lo: number; hi: number };
+    type Group = { ducks: Duck[]; facingRight: boolean; startRight: boolean; span: number; lo: number; hi: number; timers: number[] };
 
     const byFamily = new Map<string, Group>();
     const groups: Group[] = [];
@@ -206,7 +210,10 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
         target: 0,
         form: 0,
         formTarget: 0,
-        ease: 0.1 + (52 - size) * 0.002, // small ducks react a little quicker, so they don't move in lockstep
+        vel: 0,
+        fvel: 0,
+        k: 0.12,
+        damp: 0.62,
         nudge: Number(el.dataset.nudge) || 0,
         visible: false,
       };
@@ -216,10 +223,20 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       if (fam && byFamily.has(fam)) {
         byFamily.get(fam)!.ducks.push(d);
       } else {
-        const g: Group = { ducks: [d], facingRight, startRight: facingRight, span: Number(el.dataset.span) || 0, lo: -MAX, hi: MAX };
+        const g: Group = { ducks: [d], facingRight, startRight: facingRight, span: Number(el.dataset.span) || 0, lo: -MAX, hi: MAX, timers: [] };
         groups.push(g);
         if (fam) byFamily.set(fam, g);
       }
+    }
+
+    // Leaders and lone ducks respond briskly; each duckling has its own, slower pace, so the little ones
+    // trail behind, then paddle to catch up (sometimes overshooting a touch), like real ducklings
+    for (const g of groups) {
+      g.ducks.forEach((d, i) => {
+        if (i === 0) return;
+        d.k = 0.022 + Math.random() * 0.025;
+        d.damp = 0.8 + Math.random() * 0.07;
+      });
     }
 
     const io = new IntersectionObserver(
@@ -261,15 +278,23 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       for (const d of g.ducks) d.target = x;
     };
 
-    // Turning a family round mirrors its line-up, so the leader moves from one end to the other
+    // Turning round: the leader turns first, then each duckling in order a moment later. A family's line-up
+    // mirrors as they turn, so the leader moves from one end to the other and the ducklings fall in behind.
     const turn = (g: Group, right: boolean) => {
       if (g.facingRight === right) return;
       g.facingRight = right;
+      g.timers.forEach(clearTimeout); // a change of mind cancels turns still waiting to happen
+      g.timers = [];
       const mirrored = right !== g.startRight;
-      for (const d of g.ducks) {
-        d.el.classList.toggle('is-flipped', !right);
-        d.formTarget = mirrored ? g.span - 2 * d.nudge : 0;
-      }
+      g.ducks.forEach((d, i) => {
+        const go = () => {
+          d.el.classList.toggle('is-flipped', !right);
+          d.formTarget = mirrored ? g.span - 2 * d.nudge : 0;
+          kick();
+        };
+        if (i === 0) go();
+        else g.timers.push(window.setTimeout(go, i * 140 + Math.random() * 80));
+      });
     };
 
     let running = false;
@@ -277,12 +302,16 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       let moving = false;
       for (const d of all) {
         if (!d.visible) continue;
-        d.pos += (d.target - d.pos) * d.ease;
-        d.form += (d.formTarget - d.form) * 0.1; // swapping places is a quick glide
-        if (Math.abs(d.target - d.pos) > 0.15 || Math.abs(d.formTarget - d.form) > 0.15) moving = true;
+        d.vel = (d.vel + (d.target - d.pos) * d.k) * d.damp;
+        d.pos += d.vel;
+        d.fvel = (d.fvel + (d.formTarget - d.form) * d.k) * d.damp;
+        d.form += d.fvel;
+        const busy = Math.abs(d.target - d.pos) > 0.15 || Math.abs(d.vel) > 0.05 || Math.abs(d.formTarget - d.form) > 0.15 || Math.abs(d.fvel) > 0.05;
+        if (busy) moving = true;
         else {
           d.pos = d.target;
           d.form = d.formTarget;
+          d.vel = d.fvel = 0;
         }
         d.el.style.setProperty('--swim', (d.pos + d.form).toFixed(2) + 'px');
       }
