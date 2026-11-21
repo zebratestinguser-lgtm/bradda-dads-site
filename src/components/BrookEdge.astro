@@ -272,12 +272,20 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       }
     };
 
-    // Where a group should be for the wave's current place on screen: the left end of its range when the
-    // wave is at the bottom of the screen, its resting spot halfway up, the right end at the top
+    // Where a group should be for the wave's current place on screen. Each wave's journey runs from where
+    // it first sits fully on screen (low down) to the highest it can get: just under the sticky header, or
+    // wherever the end of the page stops it. Over that journey its ducks swim from the left end of their
+    // range to the right end, passing their resting spot halfway, so every wave uses its whole range
+    // while you can see it.
+    const header = document.querySelector<HTMLElement>('[data-header]');
     const place = (g: Group) => {
       const r = g.ducks[0].el.getBoundingClientRect();
       const h = window.innerHeight;
-      const p = Math.max(0, Math.min(1, (h - r.top) / (h + r.height))); // 0 = bottom of the screen, 1 = top
+      const absTop = r.top + window.scrollY; // where the duck is on the page
+      const maxScroll = document.documentElement.scrollHeight - h;
+      const lowest = Math.min(h - r.height, absTop); // fully on screen at the bottom (or where it starts, near the top of the page)
+      const highest = Math.max((header?.offsetHeight ?? 0) + 8, absTop - maxScroll); // under the header (or as far as the page lets it go)
+      const p = lowest - highest > 40 ? Math.max(0, Math.min(1, (lowest - r.top) / (lowest - highest))) : 0.5;
       const x = p >= 0.5 ? (2 * p - 1) * g.hi : (1 - 2 * p) * g.lo;
       for (const d of g.ducks) d.target = x;
     };
