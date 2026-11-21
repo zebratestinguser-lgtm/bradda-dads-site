@@ -53,6 +53,7 @@ import { url } from '../lib/url';
       <div class="controls-row">
         <button type="button" class="ctrl ctrl--pause" data-pause>Pause</button>
         <button type="button" class="ctrl ctrl--pause" data-sound aria-pressed="false">Sound &amp; buzz: off</button>
+        <button type="button" class="ctrl ctrl--pause" data-full aria-pressed="false">Full screen</button>
       </div>
     </section>
   </Band>
@@ -62,10 +63,10 @@ import { url } from '../lib/url';
       <h2 class="subhead" id="how-title">How to play</h2>
       <ul class="how__list">
         <li><strong>Steer</strong> left, right, up and down by dragging your finger, using the arrow keys (or W, A, S and D), or the buttons under the game.</li>
-        <li><strong>Rescue ducklings</strong> by swimming into them: 10 points each, and they follow you in a line. They're your lives too.</li>
+        <li><strong>Rescue ducklings</strong> by swimming into them: 10 points each, and they follow you in a line (up to 8; after that each one is worth 25 points). They're your lives too, and they can't be bumped themselves: only your duck can.</li>
         <li><strong>Bump</strong> a branch or rock and ducklings at the back of your line scatter. Bump with no ducklings left and it's game over.</li>
         <li><strong>Avoid whirlpools.</strong> They pull you in, and their middle spins a duckling away.</li>
-        <li><strong>Each season has its own challenge:</strong> slippery ice patches in winter, blossom clumps that slow you in spring, sandy shallows that drag you back in summer, and leaf piles in autumn that sometimes hide a rock.</li>
+        <li><strong>Each season has its own challenge:</strong> slippery ice in winter, blossom clumps that slow you in spring, sandbanks that drag you back in summer, and leaf piles in autumn that sometimes hide a rock (look for a grey edge peeking out).</li>
         <li><strong>Numbered race ducks</strong> drift down the brook in all sizes. Bump one and you bounce apart: little ones give you a nudge, big ones a real shove, and the rare giant sends you flying.</li>
         <li>Catch the rare <strong>golden duck</strong> for double points for 10 seconds.</li>
         <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs faster. Bumps cost more ducklings each season too: one in the first season, then two, three and four. Get through a whole season without a bump for 20 bonus points. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year as it keeps getting faster (and lose that bonus if you're knocked out).</li>
@@ -286,8 +287,32 @@ import { url } from '../lib/url';
     // A season change flows down the brook: a footbridge appears at the top and travels down with the water;
     // above it the brook already looks like the new season. The rules change as the duck swims under it.
     let change: { y: number; from: Season; to: Season; newYear: boolean; crossed: boolean } | null = null;
-    let label: { text: string; sub: string; t: number } | null = null; // the little label that slides in at the top
+    let label: { text: string; sub: string; t: number; total: number } | null = null; // the little label that slides in at the top
     let atYearEnd = false;
+    // The first time a player ever meets each kind of thing, the game slows right down for a moment and a
+    // label points at it. Remembered on the device, so it only happens once per kind.
+    const INTRO: Partial<Record<Thing['kind'], [string, string]>> = {
+      chick: ['Duckling', 'Swim into it to rescue it. Ducklings are your lives.'],
+      race: ['Race duck', 'Bump one and you get knocked back. Big ones shove harder.'],
+      whirl: ['Whirlpool', 'It pulls you in, and the middle spins a duckling away.'],
+      gold: ['Golden duck', 'Catch it for double points for 10 seconds!'],
+      ice: ['Ice', 'Slippery! Steering is hard while you are on it.'],
+      blossom: ['Blossom', 'It slows you down and drags you back.'],
+      shallow: ['Sandbank', 'Shallow sand drags you back down the brook.'],
+      pile: ['Leaf pile', 'Sometimes there is a rock hiding underneath.'],
+    };
+    let seen = new Set<string>();
+    try {
+      seen = new Set(JSON.parse(localStorage.getItem('duckDashSeen') || '[]'));
+    } catch {}
+    let slowmo = 0; // real seconds of slow motion left
+    let callout: { th: Thing; title: string; body: string; t: number } | null = null;
+    const anchorOf = (th: Thing) => {
+      if (th.kind === 'shallow') return { x: th.fromLeft ? LEFT + th.w * 0.45 : RIGHT - th.w * 0.45, y: th.y };
+      if (th.kind === 'ice') return { x: th.x + th.w / 2, y: th.y };
+      if (th.kind === 'branch') return { x: th.fromLeft ? LEFT + th.len / 2 : RIGHT - th.len / 2, y: th.y };
+      return { x: th.x, y: th.y };
+    };
 
     const mult = () => (goldTime > 0 ? 2 : 1);
     const score = () => Math.floor(points);
@@ -338,7 +363,9 @@ import { url } from '../lib/url';
       bumpedThisSeason = false;
       change = null;
       atYearEnd = false;
-      label = { text: LOOKS[season].name, sub: `Season 1 of 4 · ${LOOKS[season].hazard}`, t: 3.2 };
+      callout = null;
+      slowmo = 0;
+      label = { text: LOOKS[season].name, sub: `Season 1 of 4 · ${LOOKS[season].hazard}`, t: 3.2, total: 3.2 };
       ripples = Array.from({ length: 26 }, () => ({ x: LEFT + Math.random() * (RIGHT - LEFT), y: Math.random() * H, len: 10 + Math.random() * 22 }));
       bits = Array.from({ length: BIT_COUNT[season] }, () => makeBit(true, season));
       stones = [];
@@ -370,7 +397,45 @@ import { url } from '../lib/url';
         things.push({ kind: 'pile', y: -40, x: randX(30), r: 22 + Math.random() * 6, rock: Math.random() < 0.4, done: false, s });
       }
     };
+    // The space a thing takes up, as a box, for keeping new things apart
+    const box = (th: Thing) => {
+      switch (th.kind) {
+        case 'branch':
+          return th.fromLeft ? { x0: LEFT, x1: LEFT + th.len, y0: th.y - 18, y1: th.y + 18 } : { x0: RIGHT - th.len, x1: RIGHT, y0: th.y - 18, y1: th.y + 18 };
+        case 'shallow':
+          return th.fromLeft ? { x0: LEFT, x1: LEFT + th.w, y0: th.y - th.h / 2, y1: th.y + th.h / 2 } : { x0: RIGHT - th.w, x1: RIGHT, y0: th.y - th.h / 2, y1: th.y + th.h / 2 };
+        case 'ice':
+          return { x0: th.x, x1: th.x + th.w, y0: th.y - th.h / 2, y1: th.y + th.h / 2 };
+        default: {
+          const r = th.kind === 'chick' ? 12 : th.kind === 'gold' ? 16 : th.kind === 'race' ? 13 * th.size : th.r;
+          return { x0: th.x - r, x1: th.x + r, y0: th.y - r, y1: th.y + r };
+        }
+      }
+    };
+    const clashes = (a: Thing, others: Thing[]) => {
+      const A = box(a);
+      return others.some((o) => {
+        if (o === a) return false;
+        const B = box(o);
+        return A.x0 < B.x1 + 12 && B.x0 < A.x1 + 12 && A.y0 < B.y1 + 12 && B.y0 < A.y1 + 12;
+      });
+    };
+    // After spawning: nudge anything that landed on something else; drop ducklings and golden ducks that won't fit
+    const settle = (fresh: Thing[]) => {
+      for (const th of fresh) {
+        if (!clashes(th, things)) continue;
+        if ('x' in th && th.kind !== 'ice') {
+          const r = th.kind === 'chick' ? 12 : th.kind === 'gold' ? 16 : th.kind === 'race' ? 13 * th.size : th.r;
+          for (let tries = 0; tries < 8 && clashes(th, things); tries++) th.x = randX(r + 6);
+        }
+        if (clashes(th, things) && (th.kind === 'chick' || th.kind === 'gold' || th.kind === 'race' || th.kind === 'rock')) {
+          things = things.filter((x) => x !== th);
+          if (th.kind === 'chick') lastChick = -9999; // let the next one come sooner instead
+        }
+      }
+    };
     const spawn = () => {
+      const before = things.length;
       const s = spawnSeason();
       const roll = Math.random();
       const gapNeeded = 92; // the duck always has at least this much room to get past
@@ -404,6 +469,7 @@ import { url } from '../lib/url';
         const r = 14 + Math.random() * 10;
         things.push({ kind: 'rock', y: -30, x: randX(r + 6), r, s });
       }
+      settle(things.slice(before));
       nextSpawn = Math.max(105, 185 - (speed - 150) * 0.35) + Math.random() * 60; // gaps shrink as the brook speeds up
     };
 
@@ -757,6 +823,13 @@ import { url } from '../lib/url';
     const drawPile = (p: Pile) => {
       if (p.done && p.rock) return drawRock({ x: p.x, y: p.y, r: p.r * 0.8, s: p.s });
       if (p.done) return;
+      if (p.rock) {
+        // a grey edge peeking out: a sharp-eyed swimmer can tell this pile hides a rock
+        ctx.fillStyle = C.rockDark;
+        ctx.beginPath();
+        ctx.ellipse(p.x + p.r * 0.55, p.y + p.r * 0.35, p.r * 0.45, p.r * 0.3, 0.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
       const cols = ['#d9822b', '#c2452d', '#e0b13a', '#9c5a24'];
       for (let k = 0; k < 16; k++) {
         const a = k * 2.3;
@@ -922,12 +995,57 @@ import { url } from '../lib/url';
         ctx.fillRect(x + 1, H - 12, (segW - 2) * done, 6);
       }
 
+      // a first-time introduction: a ring around the thing and a label pointing at it, kept clear of the scores
+      if (callout && state === 'playing') {
+        const a = anchorOf(callout.th);
+        const fade = Math.min(1, callout.t / 0.3);
+        ctx.save();
+        ctx.globalAlpha = fade;
+        ctx.strokeStyle = '#f6c343';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, 28 + Math.sin(t * 8) * 3, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.font = '600 12px Inter, system-ui, sans-serif';
+        // wrap the explanation onto up to two lines
+        const words = callout.body.split(' ');
+        const lines: string[] = [''];
+        for (const w of words) {
+          const tryLine = (lines[lines.length - 1] + ' ' + w).trim();
+          if (ctx.measureText(tryLine).width > 210 && lines[lines.length - 1]) lines.push(w);
+          else lines[lines.length - 1] = tryLine;
+        }
+        const bw = 236;
+        const bh = 30 + lines.length * 16;
+        const above = a.y - 44 - bh > 130; // room above the thing (below the scores)?
+        const by = above ? a.y - 44 - bh : Math.min(H - bh - 24, a.y + 44);
+        const bx = Math.max(12, Math.min(W - bw - 12, a.x - bw / 2));
+        ctx.fillStyle = 'rgba(16,36,26,0.92)';
+        ctx.beginPath();
+        ctx.roundRect(bx, by, bw, bh, 12);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(16,36,26,0.92)'; // pointer to the thing
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(Math.max(bx + 16, Math.min(bx + bw - 16, a.x)), above ? by + bh : by);
+        ctx.lineTo(a.x, above ? a.y - 30 : a.y + 30);
+        ctx.stroke();
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = '#f6c343';
+        ctx.font = '800 15px "Bricolage Grotesque", Inter, sans-serif';
+        ctx.fillText(callout.title, bx + 12, by + 9);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '600 12px Inter, system-ui, sans-serif';
+        lines.forEach((l, n) => ctx.fillText(l, bx + 12, by + 28 + n * 16));
+        ctx.restore();
+      }
+
       // the season label slides down from the top, stays a moment, then slides away
       if (label && label.t > 0 && state === 'playing') {
-        const total = 3.2;
-        const age = total - label.t;
+        const age = label.total - label.t;
         const slide = Math.min(1, age / 0.4, label.t / 0.4);
-        const y = -30 + slide * 78;
+        const y = -30 + slide * 132; // ends up below the scores and the golden-duck badge
         ctx.save();
         ctx.font = '800 17px "Bricolage Grotesque", Inter, sans-serif';
         const w1 = ctx.measureText(label.text).width;
@@ -976,15 +1094,23 @@ import { url } from '../lib/url';
       bumpedThisSeason = false;
       speed = Math.max(speed, baseSpeed());
       const cost = `bumps cost ${bumpCost()} duckling${bumpCost() === 1 ? '' : 's'}`;
-      label = { text: newYear ? `Year ${year} · ${LOOKS[to].name}` : LOOKS[to].name, sub: `${LOOKS[to].hazard} · ${cost}`, t: 3.2 };
+      label = { text: newYear ? `Year ${year} · ${LOOKS[to].name}` : LOOKS[to].name, sub: `${LOOKS[to].hazard} · ${cost}`, t: 3.2, total: 3.2 };
       sfx.season();
       announce.textContent = `${newYear ? `Year ${year}. ` : ''}${LOOKS[to].name}, season ${level + 1} of 4. Faster, ${LOOKS[to].hazard}, and ${cost}.${clean}`;
     };
 
     // ---------- Game loop ----------
     const step = (now: number) => {
-      const dt = Math.min(0.05, (now - last) / 1000 || 0);
+      const realDt = Math.min(0.05, (now - last) / 1000 || 0);
       last = now;
+      const dt = slowmo > 0 && state === 'playing' ? realDt * 0.25 : realDt; // game time (slowed while introducing something)
+      if (state === 'playing') {
+        slowmo = Math.max(0, slowmo - realDt);
+        if (callout) {
+          callout.t -= realDt;
+          if (callout.t <= 0) callout = null;
+        }
+      }
       const t = now / 1000;
       if (state === 'playing') {
         speed = Math.min(baseSpeed() + 40, speed + dt * 2); // a step faster each season, creeping up a little within it
@@ -995,7 +1121,7 @@ import { url } from '../lib/url';
         goldTime = Math.max(0, goldTime - dt);
         safeTime = Math.max(0, safeTime - dt);
         knock = Math.max(0, knock - dt);
-        if (label) label.t -= dt;
+        if (label) label.t -= realDt;
 
         // seasons: after 30 seconds the next season's bridge appears and flows down; the year ends after four
         if (!change) {
@@ -1023,13 +1149,17 @@ import { url } from '../lib/url';
         let drag = 0; // being pushed back down the brook
         for (const th of things) {
           if (th.kind === 'ice' && ((duckX - (th.x + th.w / 2)) / (th.w * 0.45)) ** 2 + ((duckY - th.y) / (th.h * 0.45)) ** 2 < 1) grip = 1.6;
-          else if (th.kind === 'blossom' && near(th.x, th.y, th.r - 6)) drag = Math.max(drag, 110);
-          else if (th.kind === 'shallow' && Math.abs(duckX - (th.fromLeft ? LEFT : RIGHT)) < bankWidth(th, duckY) + 6) drag = Math.max(drag, 140);
+          else if (th.kind === 'blossom' && near(th.x, th.y, th.r - 6)) {
+            drag = Math.max(drag, 190);
+            grip = Math.min(grip, 5);
+          } else if (th.kind === 'shallow' && Math.abs(duckX - (th.fromLeft ? LEFT : RIGHT)) < bankWidth(th, duckY) + 6) {
+            drag = Math.max(drag, 260); // stronger than you can swim against, so it really pulls you back
+            grip = Math.min(grip, 4);
+          }
         }
 
         if (steer) targetX = duckX + steer * 40;
         if (steerY) targetY = duckY + steerY * 40;
-        if (drag) targetY += drag * dt;
         if (kickX || kickY) {
           duckX += kickX * dt;
           duckY += kickY * dt;
@@ -1042,7 +1172,8 @@ import { url } from '../lib/url';
         targetX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, targetX));
         targetY = Math.max(TOP_Y, Math.min(BOTTOM_Y, targetY));
         duckX += (targetX - duckX) * Math.min(1, dt * grip);
-        duckY += (targetY - duckY) * Math.min(1, dt * grip) + drag * dt * 0.5;
+        duckY += (targetY - duckY) * Math.min(1, dt * grip) + drag * dt;
+        if (drag) targetY = Math.max(targetY, duckY - 30); // the pull wins over steering up
         duckX = Math.max(LEFT + DUCK_R + 2, Math.min(RIGHT - DUCK_R - 2, duckX));
         duckY = Math.max(TOP_Y, Math.min(BOTTOM_Y, duckY));
 
@@ -1071,15 +1202,35 @@ import { url } from '../lib/url';
         nextSpawn -= dy;
         if (nextSpawn <= 0) spawn();
         for (const th of things) th.y += th.kind === 'race' ? dy * (th.size > 1.2 ? 0.4 : 0.55) : dy; // race ducks drift slower; giants slowest
+        if (!callout && !(label && label.t > 0)) {
+          // wait until the season label has gone, and until the thing is clear of the top of the brook
+          const fresh = things.find((th) => INTRO[th.kind] && !seen.has(th.kind) && th.y > 150 && th.y < H * 0.6);
+          if (fresh) {
+            const [title, body] = INTRO[fresh.kind]!;
+            callout = { th: fresh, title, body, t: 2.2 };
+            slowmo = 1.8;
+            seen.add(fresh.kind);
+            try {
+              localStorage.setItem('duckDashSeen', JSON.stringify([...seen]));
+            } catch {}
+            announce.textContent = `${title}: ${body}`;
+          }
+        }
 
         for (const th of things) {
           if (th.kind === 'chick' && near(th.x, th.y, 8)) {
             th.y = H + 999;
             rescued++;
-            points += 10 * mult();
-            if (trail.length < MAX_LINE) trail.push({ x: duckX, y: duckY + 30 });
             sfx.quack();
-            announce.textContent = `Duckling rescued. ${trail.length} in your line.`;
+            if (trail.length < MAX_LINE) {
+              trail.push({ x: duckX, y: duckY + 30 });
+              points += 10 * mult();
+              announce.textContent = `Duckling rescued. ${trail.length} in your line.`;
+            } else {
+              points += 25 * mult(); // your line's full: this one's worth more points instead
+              label = { text: 'Line full!', sub: `+${25 * mult()} points for that duckling`, t: 1.6, total: 1.6 };
+              announce.textContent = `Your line is full. +${25 * mult()} points.`;
+            }
           } else if (th.kind === 'gold' && near(th.x, th.y, 12)) {
             th.y = H + 999;
             goldTime = 10;
@@ -1292,6 +1443,32 @@ import { url } from '../lib/url';
     canvas.addEventListener('pointercancel', () => (dragging = false));
     document.addEventListener('visibilitychange', () => document.hidden && pause());
 
+    // Full screen: the browser's real full-screen mode where it's allowed; otherwise (iPhone) the game
+    // simply fills the window
+    const wrap = root.closest<HTMLElement>('.game-wrap')!;
+    const fullBtn = $<HTMLButtonElement>('[data-full]');
+    const isFull = () => wrap.classList.contains('is-full');
+    const setFull = (on: boolean) => {
+      wrap.classList.toggle('is-full', on);
+      document.documentElement.classList.toggle('game-full', on);
+      fullBtn.textContent = on ? 'Exit full screen' : 'Full screen';
+      fullBtn.setAttribute('aria-pressed', String(on));
+      requestAnimationFrame(fit);
+    };
+    fullBtn.addEventListener('click', async () => {
+      if (isFull()) {
+        if (document.fullscreenElement) await document.exitFullscreen().catch(() => {});
+        setFull(false);
+      } else {
+        setFull(true);
+        await wrap.requestFullscreen?.().catch(() => {}); // not available on iPhone: the CSS fills the window instead
+      }
+    });
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement && isFull()) setFull(false); // left with Esc or the back gesture
+    });
+    document.addEventListener('keydown', (e) => e.key === 'Escape' && isFull() && !document.fullscreenElement && setFull(false));
+
     const fit = () => {
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
       const cssW = canvas.clientWidth;
@@ -1466,6 +1643,30 @@ import { url } from '../lib/url';
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: var(--on-dark-soft);
+  }
+  /* Full screen (or "fill the window" where real full screen isn't allowed) */
+  .game-wrap.is-full {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    max-width: none;
+    margin: 0;
+    padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+    background: var(--green-deep);
+    justify-content: center;
+    gap: 10px;
+    overflow: auto;
+  }
+  .game-wrap.is-full .game {
+    width: min(100%, calc((100svh - 190px) * 360 / 560));
+  }
+  /* on the dark full-screen background the steering buttons get a light outline so they stand out */
+  .game-wrap.is-full .ctrl:not(.ctrl--pause) {
+    background: #24493a;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+  }
+  :global(html.game-full) {
+    overflow: hidden;
   }
   .controls-row {
     display: flex;
