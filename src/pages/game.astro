@@ -15,6 +15,7 @@ import { url } from '../lib/url';
   <Band first>
     <section class="container page-section game-wrap" aria-labelledby="game-title">
       <h2 class="visually-hidden" id="game-title">The game</h2>
+      <p class="rotate-hint">Turn your phone upright for the best view of the brook.</p>
       <div class="game" data-game>
         <canvas class="game__canvas" data-canvas tabindex="0" role="img" aria-label="Duck Dash game. Use the arrow keys or the buttons below to steer."></canvas>
         <div class="game__hud" aria-hidden="true">
@@ -30,7 +31,10 @@ import { url } from '../lib/url';
           <div class="overlay__buttons">
             <button type="button" class="btn btn--yellow overlay__btn" data-start>Start swimming</button>
             <button type="button" class="btn btn--ghost-light overlay__btn" data-finish hidden>Finish</button>
+            <button type="button" class="btn btn--ghost-light overlay__btn" data-share hidden>Share score</button>
+            <button type="button" class="btn btn--ghost-light overlay__btn" data-full aria-pressed="false">Full screen</button>
           </div>
+          <p class="overlay__shared" data-shared aria-live="polite"></p>
         </div>
         <p class="visually-hidden" aria-live="polite" data-announce></p>
       </div>
@@ -53,7 +57,7 @@ import { url } from '../lib/url';
       <div class="controls-row">
         <button type="button" class="ctrl ctrl--pause" data-pause>Pause</button>
         <button type="button" class="ctrl ctrl--pause" data-sound aria-pressed="false">Sound &amp; buzz: off</button>
-        <button type="button" class="ctrl ctrl--pause" data-full aria-pressed="false">Full screen</button>
+        <button type="button" class="ctrl ctrl--pause" data-full-exit hidden>Exit full screen</button>
       </div>
     </section>
   </Band>
@@ -84,6 +88,7 @@ import { url } from '../lib/url';
   const canvas = document.querySelector<HTMLCanvasElement>('[data-canvas]');
   if (root && canvas) {
     const ctx = canvas.getContext('2d')!;
+    const gameWrap = root.closest<HTMLElement>('.game-wrap')!; // gets .is-playing while a game runs (stops the page scrolling under your finger)
     const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel)!;
     const scoreEl = $('[data-score]');
     const chicksEl = $('[data-chicks]');
@@ -95,6 +100,9 @@ import { url } from '../lib/url';
     const seasonEl = $('[data-season]');
     const startBtn = $<HTMLButtonElement>('[data-start]');
     const finishBtn = $<HTMLButtonElement>('[data-finish]');
+    const shareBtn = $<HTMLButtonElement>('[data-share]');
+    const sharedEl = $('[data-shared]');
+    let shareText = ''; // what the Share button posts, set on the end screens
     const pauseBtn = $<HTMLButtonElement>('[data-pause]');
     const soundBtn = $<HTMLButtonElement>('[data-sound]');
     const announce = $('[data-announce]');
@@ -1016,7 +1024,7 @@ import { url } from '../lib/url';
           else lines[lines.length - 1] = tryLine;
         }
         const bw = 236;
-        const bh = 30 + lines.length * 16;
+        const bh = 46 + lines.length * 16;
         const above = a.y - 44 - bh > 130; // room above the thing (below the scores)?
         const by = above ? a.y - 44 - bh : Math.min(H - bh - 24, a.y + 44);
         const bx = Math.max(12, Math.min(W - bw - 12, a.x - bw / 2));
@@ -1038,6 +1046,9 @@ import { url } from '../lib/url';
         ctx.fillStyle = '#ffffff';
         ctx.font = '600 12px Inter, system-ui, sans-serif';
         lines.forEach((l, n) => ctx.fillText(l, bx + 12, by + 28 + n * 16));
+        ctx.fillStyle = 'rgba(223,233,226,0.75)';
+        ctx.font = '600 10.5px Inter, system-ui, sans-serif';
+        ctx.fillText('Tap or press a key to carry on', bx + 12, by + 30 + lines.length * 16);
         ctx.restore();
       }
 
@@ -1103,7 +1114,7 @@ import { url } from '../lib/url';
     const step = (now: number) => {
       const realDt = Math.min(0.05, (now - last) / 1000 || 0);
       last = now;
-      const dt = slowmo > 0 && state === 'playing' ? realDt * 0.25 : realDt; // game time (slowed while introducing something)
+      const dt = slowmo > 0 && state === 'playing' ? realDt * 0.12 : realDt; // game time (nearly still while introducing something)
       if (state === 'playing') {
         slowmo = Math.max(0, slowmo - realDt);
         if (callout) {
@@ -1207,8 +1218,8 @@ import { url } from '../lib/url';
           const fresh = things.find((th) => INTRO[th.kind] && !seen.has(th.kind) && th.y > 150 && th.y < H * 0.6);
           if (fresh) {
             const [title, body] = INTRO[fresh.kind]!;
-            callout = { th: fresh, title, body, t: 2.2 };
-            slowmo = 1.8;
+            callout = { th: fresh, title, body, t: 4.5 };
+            slowmo = 4.5;
             seen.add(fresh.kind);
             try {
               localStorage.setItem('duckDashSeen', JSON.stringify([...seen]));
@@ -1317,11 +1328,14 @@ import { url } from '../lib/url';
       startBtn.textContent = button;
       finishBtn.hidden = !finish;
       if (finish) finishBtn.textContent = finish;
+      shareBtn.hidden = state !== 'over'; // only on the end screens
+      sharedEl.textContent = '';
       overlay.hidden = false;
       startBtn.focus({ preventScroll: true });
     };
     const start = () => {
       if (state === 'over' || state === 'ready') reset();
+      gameWrap.classList.add('is-playing');
       if (soundOn) ensureAudio();
       finishBtn.hidden = true;
       state = 'playing';
@@ -1332,6 +1346,7 @@ import { url } from '../lib/url';
     const pause = () => {
       if (state !== 'playing') return;
       state = 'paused';
+      gameWrap.classList.remove('is-playing');
       pauseBtn.textContent = 'Resume';
       show('Paused', 'Take a breather.', 'Keep swimming');
     };
@@ -1350,6 +1365,7 @@ import { url } from '../lib/url';
     };
     // End of a year: carry on (it keeps getting faster) or finish and bank the duckling bonus
     function finishYear() {
+      gameWrap.classList.remove('is-playing');
       const clean = completeSeason();
       state = 'paused';
       atYearEnd = true;
@@ -1367,6 +1383,7 @@ import { url } from '../lib/url';
       start();
     }
     function finishNow() {
+      gameWrap.classList.remove('is-playing');
       atYearEnd = false;
       state = 'over';
       const bonus = trail.length * 25;
@@ -1375,16 +1392,39 @@ import { url } from '../lib/url';
       updateHud();
       const msg = `You swam ${year === 1 ? 'the whole year' : `${year} years`} and scored ${score()}${bonus ? `, including ${bonus} for the ${trail.length} duckling${trail.length === 1 ? '' : 's'} still with you` : ''}.${isBest ? ' A new best!' : ''}`;
       announce.textContent = `You made it! ${msg}`;
+      shareText = `I swam ${year === 1 ? 'a whole year' : `${year} years`} down Bradwell Brook in Duck Dash and scored ${score()}! 🦆 Can you beat it?`;
       show('You made it!', msg, 'Play again');
     }
     function gameOver() {
+      gameWrap.classList.remove('is-playing');
       state = 'over';
       const isBest = saveBest();
       sfx.over();
       const msg = `${where()} and scored ${score()}${rescued ? `, rescuing ${rescued} duckling${rescued === 1 ? '' : 's'}` : ''}.${isBest ? ' A new best!' : ''}`;
       announce.textContent = `Game over. ${msg}`;
+      shareText = `I reached ${LOOKS[season].name.toLowerCase()}${year > 1 ? ` of year ${year}` : ''} on Bradwell Brook in Duck Dash and scored ${score()}${rescued ? `, rescuing ${rescued} duckling${rescued === 1 ? '' : 's'}` : ''}! 🦆 Can you beat it?`;
       show(isBest ? 'New best!' : 'Game over', msg, 'Swim again');
     }
+
+    // Share: the phone's share menu where there is one (Facebook, WhatsApp, Messages…), otherwise copy
+    // the message and link so it can be pasted into a post
+    shareBtn.addEventListener('click', async () => {
+      const link = location.origin + location.pathname; // the game page, without any test settings
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: 'Duck Dash', text: shareText, url: link });
+          return;
+        } catch (e) {
+          if ((e as Error).name === 'AbortError') return; // they closed the share menu
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(`${shareText} ${link}`);
+        sharedEl.textContent = 'Copied! Paste it into a post or message.';
+      } catch {
+        sharedEl.textContent = `Copy this: ${shareText} ${link}`;
+      }
+    });
 
     // ---------- Controls ----------
     startBtn.addEventListener('click', () => (atYearEnd ? keepSwimming() : start()));
@@ -1432,7 +1472,16 @@ import { url } from '../lib/url';
       [targetX, targetY] = toBoard(e.clientX, e.clientY - 40); // aim just above your finger
     };
     let dragging = false;
+    // dismiss a first-time hint early
+    const skipHint = () => {
+      if (!callout) return false;
+      callout = null;
+      slowmo = 0;
+      return true;
+    };
+    document.addEventListener('keydown', () => state === 'playing' && skipHint(), true);
     canvas.addEventListener('pointerdown', (e) => {
+      if (state === 'playing' && skipHint()) return;
       if (state !== 'playing') return;
       dragging = true;
       follow(e);
@@ -1447,14 +1496,20 @@ import { url } from '../lib/url';
     // simply fills the window
     const wrap = root.closest<HTMLElement>('.game-wrap')!;
     const fullBtn = $<HTMLButtonElement>('[data-full]');
+    const exitBtn = $<HTMLButtonElement>('[data-full-exit]');
     const isFull = () => wrap.classList.contains('is-full');
     const setFull = (on: boolean) => {
       wrap.classList.toggle('is-full', on);
       document.documentElement.classList.toggle('game-full', on);
       fullBtn.textContent = on ? 'Exit full screen' : 'Full screen';
+      exitBtn.hidden = !on;
       fullBtn.setAttribute('aria-pressed', String(on));
       requestAnimationFrame(fit);
     };
+    exitBtn.addEventListener('click', async () => {
+      if (document.fullscreenElement) await document.exitFullscreen().catch(() => {});
+      setFull(false);
+    });
     fullBtn.addEventListener('click', async () => {
       if (isFull()) {
         if (document.fullscreenElement) await document.exitFullscreen().catch(() => {});
@@ -1501,8 +1556,12 @@ import { url } from '../lib/url';
     overflow: hidden;
     box-shadow: 0 16px 40px rgba(16, 36, 26, 0.25);
     background: #8fb7d6;
-    touch-action: none; /* dragging steers the duck instead of scrolling the page */
+    touch-action: pan-y; /* the page scrolls normally before and after a game… */
     user-select: none;
+  }
+  .is-playing .game,
+  .is-playing .ctrl {
+    touch-action: none; /* …and while playing, dragging steers the duck instead of scrolling the page */
   }
   .game__canvas {
     display: block;
@@ -1578,7 +1637,7 @@ import { url } from '../lib/url';
     display: grid;
     place-items: center;
     cursor: pointer;
-    touch-action: none;
+    touch-action: manipulation;
     user-select: none;
   }
   .ctrl:active {
@@ -1630,6 +1689,41 @@ import { url } from '../lib/url';
     color: var(--text);
     font-weight: 700;
     white-space: nowrap;
+  }
+  .overlay__btn.btn--ghost-light {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    color: var(--white);
+  }
+  .overlay__btn.btn--ghost-light:hover,
+  .overlay__btn.btn--ghost-light:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--white);
+  }
+  .overlay__shared {
+    font-size: 14px;
+    color: var(--on-dark-soft);
+    max-width: 30ch;
+    min-height: 1em;
+  }
+  .overlay__shared:empty {
+    display: none;
+  }
+  /* Only on phones held sideways (short, wide screens) */
+  .rotate-hint {
+    display: none;
+  }
+  @media (orientation: landscape) and (max-height: 520px) {
+    .rotate-hint {
+      display: block;
+      background: var(--yellow-panel);
+      color: var(--yellow-ink);
+      font-weight: 700;
+      font-size: 15px;
+      text-align: center;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+    }
   }
   .overlay__buttons {
     display: flex;
