@@ -63,11 +63,11 @@ import { url } from '../lib/url';
       <ul class="how__list">
         <li><strong>Steer</strong> left, right, up and down by dragging your finger, using the arrow keys (or W, A, S and D), or the buttons under the game.</li>
         <li><strong>Rescue ducklings</strong> by swimming into them: 10 points each, and they follow you in a line. They're your lives too.</li>
-        <li><strong>Bump</strong> a branch or rock and the duckling at the back of your line scatters. Bump with no ducklings left and it's game over.</li>
+        <li><strong>Bump</strong> a branch or rock and ducklings at the back of your line scatter. Bump with no ducklings left and it's game over.</li>
         <li><strong>Avoid whirlpools.</strong> They pull you in, and their middle spins a duckling away.</li>
         <li><strong>Numbered race ducks</strong> drift down the brook too. Bump one and you both bounce apart, which might send you towards a branch.</li>
         <li>Catch the rare <strong>golden duck</strong> for double points for 10 seconds.</li>
-        <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs a little faster. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year at double the speed (and lose that bonus if you're knocked out).</li>
+        <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs faster. Bumps cost more ducklings each season too: one in the first season, then two, three and four. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year as it keeps getting faster (and lose that bonus if you're knocked out).</li>
         <li><strong>Space</strong> or <strong>P</strong> pauses. Quacks and phone buzzes are off until you switch them on.</li>
       </ul>
       <p class="how__more">
@@ -130,8 +130,10 @@ import { url } from '../lib/url';
     let season: Season = startSeason;
     let SEASON = LOOKS[season];
     let level = 0; // 0–3
-    let year = 1; // a second year (if you keep swimming) runs at double speed, a third at quadruple…
-    const pace = () => 2 ** (year - 1);
+    let year = 1;
+    let seasonsDone = 0; // seasons completed in this game, across years: every one makes the brook faster…
+    const baseSpeed = () => Math.min(720, 150 + seasonsDone * 55);
+    const bumpCost = () => Math.min(4, seasonsDone + 1); // …and bumps cost more ducklings: 1, 2, 3, then 4
     let levelTime = 0;
     let banner: { text: string; sub: string; t: number } | null = null;
     seasonEl.textContent = `Starting in ${LOOKS[startSeason].name.toLowerCase()}` + (month === 11 ? ' · Merry Christmas!' : '');
@@ -297,11 +299,12 @@ import { url } from '../lib/url';
       speed = 150;
       level = 0;
       year = 1;
+      seasonsDone = 0;
       lastChick = -9999;
       levelTime = 0;
       season = startSeason;
       SEASON = LOOKS[season];
-      banner = { text: SEASON.name, sub: 'Season 1 of 4', t: 2.2 };
+      banner = { text: SEASON.name, sub: 'Season 1 of 4 · bumps cost 1 duckling', t: 2.4 };
       distance = points = rescued = kickX = kickY = 0;
       goldTime = safeTime = 0;
       trail = [];
@@ -330,7 +333,7 @@ import { url } from '../lib/url';
     const randX = (margin: number) => LEFT + margin + Math.random() * (RIGHT - LEFT - 2 * margin);
     let lastChick = -9999;
     const CHICK_GAP = 700; // at least this far between ducklings (about four seconds at the start)
-    const chickOk = () => distance - lastChick > CHICK_GAP * pace();
+    const chickOk = () => distance - lastChick > CHICK_GAP * (speed / 150); // the same time apart at any speed
     const addChick = (x: number, y: number) => {
       things.push({ kind: 'chick', y, x, phase: Math.random() * 6 });
       lastChick = distance;
@@ -387,11 +390,12 @@ import { url } from '../lib/url';
     };
     const bump = () => {
       if (safeTime > 0 || (TEST && trail.length === 0)) return;
-      if (loseDuckling()) {
-        safeTime = 1.4;
-        sfx.bump();
-        announce.textContent = `Bump! A duckling swam off. ${trail.length} left in your line.`;
-      } else gameOver();
+      if (!trail.length) return gameOver();
+      let lost = 0;
+      while (lost < bumpCost() && loseDuckling()) lost++;
+      safeTime = 1.4;
+      sfx.bump();
+      announce.textContent = `Bump! ${lost} duckling${lost === 1 ? '' : 's'} swam off. ${trail.length} left in your line.`;
     };
 
     // ---------- Drawing ----------
@@ -684,7 +688,7 @@ import { url } from '../lib/url';
       last = now;
       const t = now / 1000;
       if (state === 'playing') {
-        speed = Math.min((150 + level * 55 + 60) * pace(), speed + dt * 2.5 * pace()); // faster each season (and year), creeping up within it
+        speed = Math.min(baseSpeed() + 40, speed + dt * 2); // a step faster each season, creeping up a little within it
         levelTime += dt;
         if (banner) banner.t -= dt;
         if (levelTime >= LEVEL_TIME) nextSeason();
@@ -838,14 +842,16 @@ import { url } from '../lib/url';
     function nextSeason() {
       level++;
       levelTime = 0;
+      seasonsDone++;
       if (level >= 4) return finishYear();
       season = yearOrder[level];
       SEASON = LOOKS[season];
-      speed = Math.max(speed, (150 + level * 55) * pace());
+      speed = Math.max(speed, baseSpeed());
       bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
-      banner = { text: SEASON.name, sub: `Season ${level + 1} of 4`, t: 2.2 };
+      const cost = `bumps cost ${bumpCost()} duckling${bumpCost() === 1 ? '' : 's'}`;
+      banner = { text: SEASON.name, sub: `Season ${level + 1} of 4 · ${cost}`, t: 2.4 };
       sfx.gold();
-      announce.textContent = `${SEASON.name}. Season ${level + 1} of 4.`;
+      announce.textContent = `${SEASON.name}. Season ${level + 1} of 4. Faster, and ${cost}.`;
     }
     let atYearEnd = false;
     function finishYear() {
@@ -854,7 +860,7 @@ import { url } from '../lib/url';
       sfx.gold();
       const kept = trail.length;
       const bonus = kept * 25;
-      const msg = `Score so far: ${score()}. Finish now to bank it${bonus ? ` with ${bonus} bonus points for your ${kept} duckling${kept === 1 ? '' : 's'}` : ''}, or keep swimming into another year at ${pace() * 2 === 2 ? 'double' : pace() * 2 + ' times the'} speed. Get knocked out and you lose the duckling bonus.`;
+      const msg = `Score so far: ${score()}. Finish now to bank it${bonus ? ` with ${bonus} bonus points for your ${kept} duckling${kept === 1 ? '' : 's'}` : ''}, or keep swimming into another year: every season gets faster still, and bumps cost ${bumpCost()} ducklings. Get knocked out and you lose the duckling bonus.`;
       announce.textContent = `You made it through year ${year}! ${msg}`;
       show(`Year ${year} done!`, msg, 'Keep swimming', 'Finish');
     }
@@ -865,10 +871,10 @@ import { url } from '../lib/url';
       levelTime = 0;
       season = yearOrder[0];
       SEASON = LOOKS[season];
-      speed = 150 * pace();
+      speed = Math.max(speed, baseSpeed());
       bits = Array.from({ length: season === 'winter' ? 40 : season === 'summer' ? 5 : 14 }, () => makeBit(true));
-      banner = { text: `Year ${year}`, sub: `${SEASON.name} · ${pace()}× speed`, t: 2.6 };
-      announce.textContent = `Year ${year}, ${pace()} times the speed.`;
+      banner = { text: `Year ${year}`, sub: `${SEASON.name} · bumps cost ${bumpCost()} ducklings`, t: 2.6 };
+      announce.textContent = `Year ${year}. ${SEASON.name}, faster still. Bumps cost ${bumpCost()} ducklings.`;
       start();
     }
     function finishNow() {
