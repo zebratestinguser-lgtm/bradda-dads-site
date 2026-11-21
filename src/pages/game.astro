@@ -621,18 +621,90 @@ import { url } from '../lib/url';
         ctx.fill();
       }
     };
-    const drawShallow = (sh: Shallow) => {
-      const x = sh.fromLeft ? LEFT : RIGHT - sh.w;
-      ctx.fillStyle = 'rgba(214,190,130,0.75)';
+    // A sandbank: a natural, lumpy curve of sand bulging out from the wall, widest in the middle,
+    // with darker wet sand at the edge, a line of foam where it meets the water, pebbles and a tuft of reeds
+    const bankWidth = (sh: Shallow, y: number) => {
+      const p = (y - (sh.y - sh.h / 2)) / sh.h; // 0 at the top of the bank, 1 at the bottom
+      if (p <= 0 || p >= 1) return 0;
+      return sh.w * Math.sin(Math.PI * p) ** 0.8 * (1 + 0.08 * Math.sin(p * 9 + sh.w)); // lumpy, not a perfect arc
+    };
+    const bankPath = (sh: Shallow, grow: number) => {
+      const top = sh.y - sh.h / 2;
+      const wall = sh.fromLeft ? LEFT : RIGHT;
+      const dir = sh.fromLeft ? 1 : -1;
       ctx.beginPath();
-      ctx.roundRect(x - 6, sh.y - sh.h / 2, sh.w + 6, sh.h, 24);
+      ctx.moveTo(wall - dir * 4, top - grow);
+      for (let i = 0; i <= 24; i++) {
+        const y = top + (sh.h * i) / 24;
+        const w = bankWidth(sh, Math.min(sh.y + sh.h / 2 - 0.01, Math.max(top + 0.01, y)));
+        ctx.lineTo(wall + dir * (w + grow), y);
+      }
+      ctx.lineTo(wall - dir * 4, top + sh.h + grow);
+      ctx.closePath();
+    };
+    const drawShallow = (sh: Shallow) => {
+      ctx.save();
+      // foam where the sand meets the water
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      bankPath(sh, 4);
       ctx.fill();
-      ctx.fillStyle = 'rgba(190,165,105,0.6)';
-      for (let k = 0; k < 6; k++) {
+      // wet sand edge, then dry sand
+      ctx.fillStyle = '#b89c66';
+      bankPath(sh, 0);
+      ctx.fill();
+      const wall = sh.fromLeft ? LEFT : RIGHT;
+      const dir = sh.fromLeft ? 1 : -1;
+      const g = ctx.createLinearGradient(wall, 0, wall + dir * sh.w, 0);
+      g.addColorStop(0, '#e6d29c');
+      g.addColorStop(1, '#cdb47c');
+      ctx.fillStyle = g;
+      ctx.save();
+      ctx.translate(0, 0);
+      ctx.scale(1, 1);
+      ctx.beginPath();
+      const top = sh.y - sh.h / 2;
+      ctx.moveTo(wall - dir * 4, top + 6);
+      for (let i = 0; i <= 24; i++) {
+        const y = top + 6 + ((sh.h - 12) * i) / 24;
+        ctx.lineTo(wall + dir * Math.max(0, bankWidth(sh, y) - 7), y);
+      }
+      ctx.lineTo(wall - dir * 4, top + sh.h - 6);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      // ripple marks in the sand
+      ctx.strokeStyle = 'rgba(150,120,70,0.35)';
+      ctx.lineWidth = 1.5;
+      ctx.lineCap = 'round';
+      for (let k = 1; k <= 4; k++) {
+        const y = top + (sh.h * k) / 5;
+        const w = bankWidth(sh, y) - 12;
+        if (w < 12) continue;
         ctx.beginPath();
-        ctx.arc(x + 8 + ((k * 23) % (sh.w - 10)), sh.y - sh.h / 3 + ((k * 31) % (sh.h * 0.66)), 2.5, 0, Math.PI * 2);
+        ctx.moveTo(wall + dir * 6, y);
+        ctx.quadraticCurveTo(wall + dir * (w / 2), y - 5, wall + dir * w, y);
+        ctx.stroke();
+      }
+      // pebbles
+      ctx.fillStyle = '#9b927f';
+      for (let k = 0; k < 5; k++) {
+        const y = top + sh.h * (0.2 + 0.15 * k);
+        const w = bankWidth(sh, y);
+        ctx.beginPath();
+        ctx.ellipse(wall + dir * (w * (0.3 + ((k * 37) % 50) / 100)), y + ((k * 13) % 9) - 4, 3, 2.2, k, 0, Math.PI * 2);
         ctx.fill();
       }
+      // a tuft of reeds against the wall
+      ctx.strokeStyle = '#6f8f3a';
+      ctx.lineWidth = 2;
+      for (let k = 0; k < 4; k++) {
+        const y = sh.y + 8 - k * 4;
+        ctx.beginPath();
+        ctx.moveTo(wall + dir * 4, y);
+        ctx.quadraticCurveTo(wall + dir * (8 + k * 3), y - 10, wall + dir * (12 + k * 4), y - 16 - k * 2);
+        ctx.stroke();
+      }
+      ctx.restore();
     };
     const drawPile = (p: Pile) => {
       if (p.done && p.rock) return drawRock({ x: p.x, y: p.y, r: p.r * 0.8, s: p.s });
@@ -903,7 +975,7 @@ import { url } from '../lib/url';
         for (const th of things) {
           if (th.kind === 'ice' && inRect(th.x, th.y, th.w, th.h)) grip = 1.6;
           else if (th.kind === 'blossom' && near(th.x, th.y, th.r - 6)) drag = Math.max(drag, 110);
-          else if (th.kind === 'shallow' && inRect(th.fromLeft ? LEFT : RIGHT - th.w, th.y, th.w, th.h)) drag = Math.max(drag, 140);
+          else if (th.kind === 'shallow' && Math.abs(duckX - (th.fromLeft ? LEFT : RIGHT)) < bankWidth(th, duckY) + 6) drag = Math.max(drag, 140);
         }
 
         if (steer) targetX = duckX + steer * 40;
