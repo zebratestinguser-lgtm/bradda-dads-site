@@ -5,7 +5,8 @@
 // (same source file size as last time, recorded in thumbs/.manifest.json, so it also works after a fresh
 // git checkout, where every file looks new). The copies are generated, not committed (see .gitignore).
 // Use thumb() / srcset() from src/lib/url.ts to link to them.
-import { readdirSync, statSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, statSync, existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync, rmdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, dirname, relative, extname } from 'node:path';
 import sharp from 'sharp';
 
@@ -27,6 +28,20 @@ const files = [];
     else if (EXT.test(name)) files.push(p);
   }
 })(ROOT);
+
+// Never publish blocked content (scripts/blocked-content.json): stop the build if any of it is back,
+// whether under its old path or uploaded again under a new name (matched by file fingerprint).
+const BLOCKED = JSON.parse(readFileSync(join(import.meta.dirname, 'blocked-content.json'), 'utf8'));
+const PROJECT = join(import.meta.dirname, '..');
+const blockedFound = BLOCKED.paths.filter((p) => existsSync(join(PROJECT, p)));
+const blockedHashes = new Set(BLOCKED.sha256);
+for (const f of files) {
+  if (blockedHashes.has(createHash('sha256').update(readFileSync(f)).digest('hex'))) blockedFound.push(relative(PROJECT, f));
+}
+if (blockedFound.length) {
+  console.error(`\nBLOCKED CONTENT FOUND. These must never be published (see scripts/blocked-content.json):\n  ${blockedFound.join('\n  ')}\n`);
+  process.exit(1);
+}
 
 let manifest = {};
 try {
@@ -67,6 +82,21 @@ await Promise.all(
     }
   }),
 );
+// Remove copies whose original has gone (deleted photos must not linger in the build cache)
+let pruned = 0;
+const wanted = new Set(Object.keys(next).flatMap((rel) => SIZES.map((s) => join(s.dir, rel.slice(0, -extname(rel).length) + '.webp'))));
+(function prune(dir) {
+  if (!existsSync(dir)) return;
+  for (const name of readdirSync(dir)) {
+    const p = join(dir, name);
+    if (statSync(p).isDirectory()) prune(p);
+    else if (name.endsWith('.webp') && !wanted.has(p)) {
+      unlinkSync(p);
+      pruned++;
+    }
+  }
+  if (dir !== OUT && readdirSync(dir).length === 0) rmdirSync(dir);
+})(OUT);
 mkdirSync(OUT, { recursive: true });
 writeFileSync(MANIFEST, JSON.stringify(next));
-console.log(`thumbs: ${made} made, ${skipped} up to date, ${failed} failed (${((Date.now() - started) / 1000).toFixed(1)}s)`);
+console.log(`thumbs: ${made} made, ${skipped} up to date, ${pruned} removed, ${failed} failed (${((Date.now() - started) / 1000).toFixed(1)}s)`);

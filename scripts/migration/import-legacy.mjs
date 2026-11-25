@@ -169,7 +169,14 @@ const manifest = [];
 let totalBytes = 0;
 const failures = [];
 
+// Posts that must never be imported again (see scripts/blocked-content.json)
+const BLOCKED = JSON.parse(readFileSync(join(import.meta.dirname, '..', 'blocked-content.json'), 'utf-8'));
+
 for (const it of items) {
+  if (BLOCKED.sourceUrls.includes(it.url)) {
+    console.log('skipped (blocked):', it.url);
+    continue;
+  }
   const isPage = it.kind === 'page';
   if (isPage && !PAGE_ALBUMS[it.title]) continue;
   const title = isPage ? PAGE_ALBUMS[it.title] : it.title;

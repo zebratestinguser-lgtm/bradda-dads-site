@@ -76,9 +76,11 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 - [ ] Old posts mention videos that were embedded on the old blog (marked "A video was embedded here on the old site"). Find them on YouTube/Facebook if they still exist.
 - [ ] Facebook photo albums since 2014 have not been imported (Facebook isn't covered by the migration).
 
-## ⚠️ Remove before publicising: blackface photos
+## Blackface photos: removed, never to be published again
 
-- [ ] **[Lee Bradbury's 40th birthday party (2008)](src/content/albums/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md)**: 8 photos show party guests in blackface make-up and afro wigs. One of them also appears as photo 3 in **[Mike Thompson retires (2011)](src/content/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea.md)**. These are live on the public site now. Recommendation: unpublish the 2008 album and its news story, and take that one photo out of the 2011 album. (They were left without descriptions on purpose.) **25 Nov 2026: Peter has asked the chair for his view; waiting on the decision.** Also listed in the committee's facts-to-check doc.
+- [x] **Removed 25 Nov 2026:** the 2008 "Lee Bradbury's 40th birthday party" news story and its 9-photo album, and photo 16 of the 2011 Mike Thompson retirement album, all showing party guests in blackface make-up. **These must never be published again.** `scripts/blocked-content.json` stops the build if any of them come back (even under a different file name) and stops the old-site import from bringing the post back.
+- [ ] Older copies are still in the GitHub repository's history (the repo is public). Decide whether to have the history cleaned. It's a one-off technical job that rewrites the repository.
+- [ ] The original post is still on the old Blogspot site (braddadads.blogspot.com/2008/08/…). Whoever has the Blogspot login could delete it there too.
 
 ## Privacy review of imported content
 
@@ -99,7 +101,6 @@ Phone numbers and email addresses copied from the old sites.
 
 ### Posts about named individuals (7)
 
-- [ ] [Lee Bradbury's 40th Birthday Party (2008)](src/content/news/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md)
 - [ ] [Bradwell's 'The Stig' (2009)](src/content/news/2009-01-10-bradwells-the-stig-nearly-hits-the-headlines-2008-pensioners.md)
 - [ ] [It's not goodbye, it's just au revoir (2010 AGM, retirements)](src/content/news/2010-10-20-its-not-goodbye-its-just-au-revoir.md)
 - [ ] [Mike Thompson retires (2011)](src/content/news/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea.md)

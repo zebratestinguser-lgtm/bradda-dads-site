@@ -36,8 +36,6 @@ photos:
     alt: "A dad relaxing in an old armchair on the bonfire field (20 October 2011)"
   - src: /uploads/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea/015.jpg
     alt: "Two men by a barbecue at the camping weekend (20 October 2011)"
-  - src: /uploads/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea/016.jpg
-    alt: "Photo 16 of 16 from Bradda Dads legend Mike Thompson retires after nearly 13 years (20 October 2011)"
 ---
 
 
