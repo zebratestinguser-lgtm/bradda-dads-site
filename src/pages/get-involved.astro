@@ -14,7 +14,7 @@ const hasEmail = !site.contactEmail.startsWith('[');
 const header = await photoMatching(/dads in yellow t-shirts and hi-vis at the brook/i, /dads in yellow t-shirts/i);
 ---
 
-<BaseLayout title="Get involved" description={site.joinText}>
+<BaseLayout title="Get involved" description={site.joinText} ogImage={header?.src} ogImageAlt={header?.alt}>
   <PageHeader eyebrow="Get involved" title={site.joinHeadline} intro={site.joinText} image={header?.src} imageLabel={header?.label} />
 
   <Band first><section class="container page-section grid">

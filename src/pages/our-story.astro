@@ -35,7 +35,7 @@ const photos: (PickedPhoto | { src: string; alt: string; label?: string } | unde
 );
 ---
 
-<BaseLayout title="Our story" description="How Bradda Dads started with a Boxing Day duck race in 1999, and what the group has done for Bradwell since.">
+<BaseLayout ogImage={site.storyImage} ogImageAlt={site.storyImageAlt} title="Our story" description="How Bradda Dads started with a Boxing Day duck race in 1999, and what the group has done for Bradwell since.">
   <PageHeader eyebrow="Our story" title="It started with a duck race" intro={site.storyIntro} image={site.storyImage} imageLabel={site.storyImageCaption} />
 
   <Band first>

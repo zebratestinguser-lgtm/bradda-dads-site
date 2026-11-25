@@ -6,7 +6,7 @@ import Band from '../../components/Band.astro';
 import { storyPhoto, storyPhotos } from '../../lib/photos';
 import { photoDate } from '../../lib/albums';
 import { formatDate, formatShortDate } from '../../lib/format';
-import { url, thumb } from '../../lib/url';
+import { url, thumb, srcset } from '../../lib/url';
 
 export async function getStaticPaths() {
   const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -41,13 +41,13 @@ const TOPIC: Record<string, string> = {
 const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
 ---
 
-<BaseLayout title={story.data.title} description={story.data.summary} ogImage={story.data.image}>
+<BaseLayout title={story.data.title} description={story.data.summary} ogImage={header?.own ? header.src : undefined} ogImageAlt={header?.own ? header.alt : undefined} ogType="article" publishedTime={story.data.date}>
   <article class="story">
     <header class:list={['story__header', { 'story__header--photo': header }]}>
       {
         header && (
           <div class="story__header-photo" aria-hidden="true">
-            <img src={url(header.src)} alt="" decoding="async" fetchpriority="high" />
+            <img src={url(header.src)} srcset={srcset(header.src)} sizes="100vw" alt="" decoding="async" fetchpriority="high" />
           </div>
         )
       }
@@ -67,7 +67,7 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
       {
         story.data.image && (
           <figure class="story__figure">
-            <img src={url(story.data.image)} alt={story.data.imageAlt ?? ''} decoding="async" />
+            <img src={url(story.data.image)} srcset={srcset(story.data.image)} sizes="(max-width: 800px) 100vw, 760px" alt={story.data.imageAlt ?? ''} decoding="async" />
             {when && <figcaption>Photo taken {when}</figcaption>}
           </figure>
         )

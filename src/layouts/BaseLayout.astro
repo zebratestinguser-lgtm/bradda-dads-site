@@ -18,16 +18,34 @@ interface Props {
   description?: string;
   /** Path under /uploads/ for the social share image */
   ogImage?: string;
+  /** Description of the share image (for screen readers on social sites) */
+  ogImageAlt?: string;
+  /** 'article' for news stories (adds the published date) */
+  ogType?: 'website' | 'article';
+  publishedTime?: Date;
 }
 
 const site = await getSite();
-const { title, description = site.description, ogImage } = Astro.props;
+const { title, description: rawDescription, ogImage, ogImageAlt, ogType = 'website', publishedTime } = Astro.props;
+// Never let a [PLACEHOLDER] note leak into Google or a Facebook preview
+const description = (rawDescription ?? site.description).replace(/\s*\[[^\]]*\]\s*/g, ' ').trim() || site.description;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name}: ${site.tagline.replace(/\.$/, '')}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 // Pages with their own photo use it; everything else uses the branded share card (public/og-image.jpg,
 // made from scripts/qa/og-image-source.html)
 const ogImageUrl = new URL(url(ogImage ?? '/og-image.jpg'), Astro.site).href;
 const ogIsDefault = !ogImage;
+// Real pixel size of the share photo, so Facebook can show the preview on the very first share
+let ogSize: { width: number; height: number } | undefined = ogIsDefault ? { width: 1200, height: 630 } : undefined;
+if (ogImage?.startsWith('/uploads/')) {
+  try {
+    const sharp = (await import('sharp')).default;
+    const meta = await sharp(`public${decodeURI(ogImage)}`).metadata();
+    if (meta.width && meta.height) ogSize = (meta.orientation ?? 1) >= 5 ? { width: meta.height, height: meta.width } : { width: meta.width, height: meta.height };
+  } catch {
+    /* missing file: leave the size out */
+  }
+}
 
 // Site search (Pagefind): index each page's main content, tagged with a type for the search filters.
 // The homepage and search page are left out (they only repeat what's on other pages).
@@ -61,17 +79,19 @@ const searchType = path.startsWith('/news/')
     <link rel="sitemap" href={url('/sitemap-index.xml')} />
     <meta name="theme-color" content="#1D3B2C" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:image" content={ogImageUrl} />
-    {ogIsDefault && <meta property="og:image:width" content="1200" />}
-    {ogIsDefault && <meta property="og:image:height" content="630" />}
-    <meta property="og:image:alt" content={ogIsDefault ? 'Bradda Dads: raising money for Bradwell since 1999' : fullTitle} />
+    {ogSize && <meta property="og:image:width" content={String(ogSize.width)} />}
+    {ogSize && <meta property="og:image:height" content={String(ogSize.height)} />}
+    <meta property="og:image:alt" content={ogIsDefault ? 'Bradda Dads: raising money for Bradwell since 1999' : ogImageAlt || fullTitle} />
     <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

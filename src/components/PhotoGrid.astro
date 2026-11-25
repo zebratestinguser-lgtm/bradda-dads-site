@@ -3,7 +3,7 @@
 // (album, date, position) so one viewer can page through several albums on the same page.
 import type { Album } from '../lib/albums';
 import { photoDate } from '../lib/albums';
-import { url, thumb } from '../lib/url';
+import { url, thumb, srcset } from '../lib/url';
 
 interface Props {
   album: Album;
@@ -26,7 +26,7 @@ const extra = collapseAfter && photos.length > collapseAfter + 2 ? photos.length
         const cap = [titleInCaption ? album.data.title : '', when, `Photo ${i + 1} of ${photos.length}`, p.caption ?? ''].filter(Boolean).join(' · ');
         return (
           <li class="pg__item" data-extra={extra && i >= collapseAfter! ? '' : undefined}>
-            <a class="pg__link" href={url(p.src)} data-lb data-lb-caption={cap} aria-label={`Open photo ${i + 1} of ${photos.length}${titleInCaption ? ` from ${album.data.title}` : ''}${p.caption ? `: ${p.caption}` : ''}`}>
+            <a class="pg__link" href={url(p.src)} data-lb-srcset={srcset(p.src)} data-lb data-lb-caption={cap} aria-label={`Open photo ${i + 1} of ${photos.length}${titleInCaption ? ` from ${album.data.title}` : ''}${p.caption ? `: ${p.caption}` : ''}`}>
               <img src={thumb(p.src)} alt={p.alt} loading={i < eagerCount ? 'eager' : 'lazy'} decoding="async" width="480" height="360" />
             </a>
           </li>

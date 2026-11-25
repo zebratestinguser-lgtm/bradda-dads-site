@@ -17,6 +17,17 @@ export function thumb(src: string): string {
   return m && !src.startsWith('/uploads/thumbs/') ? url(`/uploads/thumbs/${m[1]}.webp`) : url(src);
 }
 
+/**
+ * Responsive image sources for an uploaded photo: the 480px and 960px WebP copies plus the original
+ * (up to 1200px). Pair with a `sizes` attribute so phones download the smaller copies.
+ *   <img src={url(src)} srcset={srcset(src)} sizes="100vw" />
+ */
+export function srcset(src: string): string | undefined {
+  const m = src.match(/^\/uploads\/(.+)\.(jpe?g|png|webp|avif|gif)$/i);
+  if (!m || src.startsWith('/uploads/thumbs/')) return undefined;
+  return `${url(`/uploads/thumbs/${m[1]}.webp`)} 480w, ${url(`/uploads/thumbs/960/${m[1]}.webp`)} 960w, ${url(src)} 1200w`;
+}
+
 export function url(path = '/'): string {
   if (/^([a-z]+:|#)/i.test(path)) return path; // external, mailto:, tel:, #anchor
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');

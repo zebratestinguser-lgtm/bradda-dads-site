@@ -10,6 +10,8 @@ import { getAlbums, EVENT_TAG, categorySlug } from '../../lib/albums';
 import { formatDate, formatTime } from '../../lib/format';
 import { url } from '../../lib/url';
 import { eventPhoto } from '../../lib/photos';
+import { getSite } from '../../lib/site';
+import { canAddToCalendar, googleCalendarUrl, eventJsonLd } from '../../lib/calendar';
 
 export async function getStaticPaths() {
   const events = await getEvents();
@@ -42,9 +44,18 @@ const photo = d.heroImage ? { src: d.heroImage, label: d.heroImageCaption } : aw
 // The main action shows in the header, and again in a slim bar at the bottom of phone screens
 const showCta = () => !ctaIsSelf && (d.status !== 'open' || open);
 const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
+// Add to calendar (only while this year's date is still to come) and the Event details Google reads
+const site = await getSite();
+const siteUrl = new URL(import.meta.env.BASE_URL, Astro.site).href;
+const pageUrl = new URL(`events/${event.id}/`, siteUrl).href;
+const addToCalendar = canAddToCalendar(event);
+const jsonLd = addToCalendar
+  ? eventJsonLd(event, { pageUrl, siteUrl, siteName: site.name, imageUrl: photo ? new URL(url(photo.src), Astro.site).href : undefined, ctaUrl: d.ctaUrl })
+  : undefined;
 ---
 
-<BaseLayout title={d.name} description={d.summary}>
+<BaseLayout title={d.name} description={d.summary} ogImage={photo?.src} ogImageAlt={d.heroImage ? d.heroImageAlt : photo && 'alt' in photo ? photo.alt : undefined}>
+  {jsonLd && <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   <PageHeader eyebrow={status} title={d.name} intro={d.summary} image={photo?.src} imageLabel={photo?.label}>
     <a class="back" href={url('/events/')}>← All events</a>
     <ul class="facts" role="list">
@@ -95,7 +106,20 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
       </div>
     </dl>
     {d.whenWhereNote && <p class="ww__note">{d.whenWhereNote}</p>}
-    {d.start && <a class="link-arrow" href={url('/events.ics')}>Add our events to your calendar →</a>}
+    {
+      addToCalendar ? (
+        <div class="cal">
+          <p class="cal__label" id="cal-label">Add {d.name} to your calendar{!d.startTimeConfirmed && ' (as an all-day event until the time is confirmed)'}:</p>
+          <ul class="cal__links" role="list" aria-labelledby="cal-label">
+            <li><a class="btn btn--green btn--md" href={googleCalendarUrl(event, pageUrl)} rel="noopener" target="_blank">Google Calendar<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a class="btn btn--outline btn--md" href={url(`/events/${event.id}.ics`)} download={`${event.id}.ics`}>Apple, Outlook and others</a></li>
+          </ul>
+          <a class="link-arrow" href={url('/events.ics')}>Or add every Bradda Dads event →</a>
+        </div>
+      ) : (
+        d.start && <a class="link-arrow" href={url('/events.ics')}>Add our events to your calendar →</a>
+      )
+    }
   </section></Band>
 
   <!-- 3. How to get involved -->
@@ -272,6 +296,21 @@ const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
     font-weight: 600;
     font-size: 18px;
     color: var(--text);
+  }
+  .cal {
+    margin-top: 22px;
+  }
+  .cal__label {
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .cal__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
   .ww__note {
     font-size: 16px;

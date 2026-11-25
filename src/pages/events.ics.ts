@@ -1,33 +1,11 @@
 // Calendar feed of every event that has a start date: /events.ics
 import type { APIRoute } from 'astro';
-import { getEvents, endsAt } from '../lib/events';
-
-const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-const dateOnly = (d: Date) =>
-  d.toLocaleDateString('en-CA', { timeZone: 'Europe/London' }).replace(/-/g, ''); // YYYYMMDD
-const esc = (s: string) => s.replace(/\\/g, '\\\\').replace(/[,;]/g, (c) => `\\${c}`).replace(/\n/g, '\\n');
+import { getEvents } from '../lib/events';
+import { icsEvent, icsCalendar } from '../lib/calendar';
 
 export const GET: APIRoute = async ({ site }) => {
+  const base = new URL(import.meta.env.BASE_URL, site ?? 'http://localhost/');
   const events = (await getEvents()).filter((e) => e.data.start);
-  const now = stamp(new Date());
-  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Bradda Dads//Events//EN', 'X-WR-CALNAME:Bradda Dads', 'CALSCALE:GREGORIAN'];
-  for (const e of events) {
-    const d = e.data;
-    const start = d.start!;
-    lines.push('BEGIN:VEVENT', `UID:${e.id}-${start.getFullYear()}@braddadads`, `DTSTAMP:${now}`);
-    if (d.startTimeConfirmed) {
-      lines.push(`DTSTART:${stamp(start)}`);
-      lines.push(`DTEND:${stamp(d.end ?? new Date(start.getTime() + 2 * 3600e3))}`);
-    } else {
-      // Time not confirmed yet: add as all-day, spanning every day for multi-day events (DTEND is the day after)
-      const last = endsAt(e) ?? start;
-      const dayAfter = new Date(last.getTime() + 12 * 3600e3);
-      lines.push(`DTSTART;VALUE=DATE:${dateOnly(start)}`, `DTEND;VALUE=DATE:${dateOnly(dayAfter)}`);
-    }
-    lines.push(`SUMMARY:${esc(d.name)}`, `LOCATION:${esc(d.location)}`, `DESCRIPTION:${esc(d.summary)}`);
-    if (site) lines.push(`URL:${new URL(import.meta.env.BASE_URL, site).href}`);
-    lines.push('END:VEVENT');
-  }
-  lines.push('END:VCALENDAR');
-  return new Response(lines.join('\r\n') + '\r\n', { headers: { 'Content-Type': 'text/calendar; charset=utf-8' } });
+  const body = icsCalendar(events.map((e) => icsEvent(e, new URL(`events/${e.id}/`, base).href)));
+  return new Response(body, { headers: { 'Content-Type': 'text/calendar; charset=utf-8' } });
 };

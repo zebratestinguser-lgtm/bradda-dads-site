@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import NewsTile from '../NewsTile.astro';
 import { storyPhotos } from '../../lib/photos';
 import { formatDate, formatShortDate } from '../../lib/format';
-import { url, thumb } from '../../lib/url';
+import { url, thumb, srcset } from '../../lib/url';
 
 const all = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const lead = all.find((n) => n.data.featured) ?? all[0];
@@ -25,7 +25,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
           <article class="news-lead">
             {leadPhoto ? (
               <div class="news-lead__media">
-                <img class="news-lead__img" src={url(leadPhoto.src)} alt={leadPhoto.own ? leadPhoto.alt : ''} width="800" height="260" loading="lazy" decoding="async" />
+                <img class="news-lead__img" src={url(leadPhoto.src)} srcset={srcset(leadPhoto.src)} sizes="(max-width: 800px) 100vw, 60vw" alt={leadPhoto.own ? leadPhoto.alt : ''} width="800" height="260" loading="lazy" decoding="async" />
                 {leadPhoto.label && <span class="news-lead__date">{leadPhoto.own ? leadPhoto.label : `Archive photo · ${leadPhoto.label}`}</span>}
               </div>
             ) : (

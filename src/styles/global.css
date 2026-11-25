@@ -193,6 +193,15 @@ a:hover {
   color: var(--white);
   background: var(--green-hover);
 }
+.btn--outline {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--panel, var(--white));
+}
+.btn--outline:hover {
+  color: var(--green);
+  background: var(--surface);
+}
 .btn--ghost-light {
   border-color: rgba(255, 255, 255, 0.5);
   color: var(--white);

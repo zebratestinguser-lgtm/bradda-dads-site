@@ -41,6 +41,12 @@ jobs:
             git commit -m "Resize uploaded photos to web size"
             git push || echo "Couldn't push resized photos (a newer change arrived); the next build will retry."
           fi
+      # Keep the generated 480px/960px photo copies between builds (make-thumbs.mjs only makes missing ones)
+      - uses: actions/cache@v4
+        with:
+          path: public/uploads/thumbs
+          key: thumbs-${{ github.run_id }}
+          restore-keys: thumbs-
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
