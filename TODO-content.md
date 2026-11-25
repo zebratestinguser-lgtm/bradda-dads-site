@@ -138,6 +138,8 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 
 ## Parked site improvements (suggested 21 Nov 2026)
 
+- [ ] **Facebook posts on the site, automatically (chosen 25 Nov 2026, for later):** the daily rebuild fetches the latest few posts from the Bradda Dads Facebook page (https://www.facebook.com/BraddaDads) and shows them as normal site content, with no Facebook code or tracking for visitors. Needs Peter (a Page admin) to create a free Meta developer app and a long-lived Page access token, stored as a GitHub secret; about an hour together. Until then, the three hand-picked posts in Site settings → Facebook posts can be used.
+
 - [ ] **Facebook share previews:** event and news pages use their own photo and summary instead of the default image.
 - [ ] **Speed on phones:** mid-sized photo versions with srcset for headers and cards; run Lighthouse before and after (target 90+).
 - [ ] **Event dates in Google:** Event structured data on event pages; an "Add to calendar" link per event.
