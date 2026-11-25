@@ -13,7 +13,7 @@ The largest ever field of 340 runners took up the challenge of the 2014 Wolf's P
 
 March 2009 saw the inaugural event making this year's race the sixth consecutive year the event has been held. The numbers of competitors continues to increase year-on-year and we hope this is testament to the quality of the course and the high standard of organisation. We are very grateful to all the runners for taking part and to the sponsors and helpers, especially the Bradda Dads wives and partners, who all contribute to making this a cracking event.
 
-Full results now available at [www.wolfspitfellrace.org.uk/](http://www.wolfspitfellrace.org.uk/)
+Full results now available on the [2014 results page](../../wolfspit/2014/)
 
 1st - Simon Bailey
 

@@ -1,0 +1,399 @@
+position,name,club,category,time
+1,Greg Hopkinson,Beeston AC,MOpen,0:43:24
+2,Harvey Martin,Ripley RC,MU23,0:43:46
+3,Lockett Sandy,Bowland Fell Runners,MOpen,0:44:05
+4,Oliver Matharu,Holme Pierrepont,MOpen,0:44:12
+5,Jacob Winfield,Buxton AC,MU23,0:44:24
+6,Rob James,Royton Road Runners,MOpen,0:44:32
+7,Aiden Linskill,Totley AC,MOpen,0:45:09
+8,Ben cartwright,Matlock AC,MOpen,0:45:23
+9,Bob Templeman,Vegan Runners UK,MOpen,0:45:55
+10,Luke Beresford,Ripley RC,MOpen,0:45:57
+11,Neil Halliday,Unattached,MV40,0:46:14
+12,Joel Paisley,Belper Harriers,MU23,0:46:16
+13,Luke Cook,Pennine,MOpen,0:46:22
+14,Chris Perry,Matlock,MOpen,0:46:39
+15,Dave Taylor,Dark Peak,MV50,0:46:57
+16,Jake Fearn,Buxton AC,MOpen,0:47:01
+17,Tom Mitchell,Marsden Racers,MOpen,0:47:08
+18,Chris Jones,Steel City Striders RC,MOpen,0:47:39
+19,Malcolm Fowler,Cheshire Hill Racers,MV50,0:47:51
+20,Austin Frost,Dark Peak FR,MV40,0:47:57
+21,Matt Brennan,Erewash Valley RC,MOpen,0:48:02
+22,Sam Tierney,Hallamshire Harriers,MU17,0:48:09
+23,John Wadeum,Erewash Valley,MV40,0:48:10
+24,Josh Ring,Unattached,MOpen,0:48:17
+25,Paul Butcher,Southwell RC,MV50,0:48:22
+26,Rob Pilling,Steel City Striders RC,MV40,0:48:30
+27,Colin Brearley,Holme Pierrepont,MV40,0:48:38
+28,Daniel Wheat,Southwell RC,MOpen,0:48:41
+29,Ryan Anderson,Unattached,MOpen,0:48:49
+30,Edward James,Belper Harriers,MOpen,0:49:03
+31,Mark Whitworth,DPFR,MV40,0:49:18
+32,Richard Houghton,Pennine,MV50,0:49:20
+33,Graham Moffatt,Dark Peak,MV50,0:49:24
+34,Robin Hope,Dark Peak,MV40,0:49:31
+35,Caitlin Rice,Ribble Valley Harriers,FOpen,0:49:47
+36,Matt Waterfield,Icarus,MOpen,0:49:55
+37,Martin Hunt,Long Eaton Running Club,MOpen,0:50:00
+38,Bevan Adams,Retford AC,MV40,0:50:32
+39,Gareth Little,Notts AC,MOpen,0:50:34
+40,Christopher Bell,Beeston AC,MV40,0:50:38
+41,Carl Bradford,Dark Peak,MV40,0:50:42
+42,Kieran Smith,SHUOC,MU23,0:50:44
+43,Jonathon Sewell,Buxton AC,MV40,0:50:46
+44,Simon Browne,Denby Dale AC,MV40,0:50:47
+45,Adam Mickletwaite,Dark Peak,MV40,0:50:49
+46,Matt Jones,Ripley RC,MV40,0:50:49
+47,Philip Montgomery,Todmorden Harriers,MOpen,0:50:50
+48,Patrick Dowton,U/A,MOpen,0:50:52
+49,Paul Grogan,Southwell,MV50,0:50:55
+50,Matt Lewis,Macclesfield Harriers,MV50,0:51:07
+51,Mike Gradwell,Saddleworth Runners Club,MOpen,0:51:12
+52,Paul Stephenson,Totley AC,MV40,0:51:16
+53,Tom Shelton,Denny Dale AC,MOpen,0:51:25
+54,Mick Archer,Dark Peak,MV50,0:51:38
+55,Dan Cook,Steel City Striders,MV40,0:51:41
+56,Richard Mackie,Penistone Footpath Runners,MV40,0:51:56
+57,David Miller,Dark Peak,MV40,0:51:59
+58,George Hill,Unattached,MU23,0:52:05
+59,Leigh Stubbs,Redhill Road Runners,MOpen,0:52:09
+60,Steven Gascoyne,North Derbyshire RC,MV40,0:52:16
+61,Remy Dupuy,SHUOC,MOpen,0:52:20
+62,Jason Brannan,Steel City Striders RC,MV40,0:52:22
+63,Rob Lucas,u/a,MOpen,0:52:27
+64,Joe Travis,Glossopdale Harriers,MOpen,0:52:28
+65,Jonathan Morgan,Unattached,MOpen,0:52:41
+66,Kate Davies,Unattached,FOpen,0:52:50
+67,Andy Paisley,Belper Harriers,MV40,0:52:53
+68,Paul Stuart,Steel City Striders,MV50,0:52:56
+69,Pez Holda,Dark Peak,MV40,0:52:58
+70,Tim Gleeson,handsworth Roadhogs,MV40,0:53:00
+71,Harry Hawkins,Glossopdale,MU23,0:53:02
+72,Stephen Kenworthy,Dark Peak,MV50,0:53:08
+73,Paul Lewis,Long Eaton Running Club,MV40,0:53:14
+74,Joseph Mallinshaw,Steel City Striders,MOpen,0:53:15
+75,Paul Skuse,Glossopdale Harriers,MV40,0:53:18
+76,Bryan Lomas,Congleton Harriers,MV40,0:53:20
+77,Ronnie Turner,Rossendale Harriers,MV50,0:53:23
+78,Robert Webster,U/A,MOpen,0:53:25
+79,Daniel Stanley,Unattached,MOpen,0:53:29
+80,Andrew Lake,Esk Valley Fell Club,MV40,0:53:38
+81,Andy Poole,Saddleworth Runners,MV50,0:53:51
+82,Mike Taylor,Fatboys,MV40,0:53:54
+83,Ian Drage,Stilton Striders,MV40,0:53:55
+84,Richard Gee,Saddleworth Runners,MV40,0:53:57
+85,Dan Colebourn,Unattached,MOpen,0:53:59
+86,Eleanor Lunt,Long Eaton RC,FOpen,0:54:02
+87,Ashley Flint,Belper Harriers,MOpen,0:54:09
+88,Andrew Case,Unattached,MOpen,0:54:15
+89,Ben Allen,Handsworth Roadhogs,MV40,0:54:17
+90,Rosie Walwyn,Dark Peak,FOpen,0:54:19
+91,Nick Kirk,Steel City Striders RC,MV50,0:54:23
+92,Thornton Taylor,Rossendale,MV60,0:54:25
+93,David Horton,Belper Harriers,MV50,0:54:35
+94,Andrew Reid,PVP,MV40,0:54:38
+95,Judith Jepson,Dark Peak,FV50,0:54:40
+96,Ian Haigh,Southwell RC,MV40,0:54:46
+97,Ronald Allott,North Derbyshire,MOpen,0:54:49
+98,David Edmunds,Fatboys,MV40,0:54:50
+99,Tomos King,SHUOC,MU23,0:54:52
+100,Dale Foster,Unattached,MV40,0:54:59
+101,Ed Poulter,Unattached,MOpen,0:55:00
+102,Tim Sterland,Unattached,MOpen,0:55:00
+103,Carl Mikray,Astley & Tyldesley Road Runners,MOpen,0:55:05
+104,Nick Jones,Buxton AC,MV40,0:55:08
+105,William Lowe,Rossendale,MV60,0:55:09
+106,Craig Baird,Steel City Striders,MV40,0:55:12
+107,Kevin Jones,Saddleworth Runners Club,MV50,0:55:13
+108,Mark A Platton,Steel City Striders RC,MV50,0:55:15
+109,Simeon Cotterill,Steel City Striders,MOpen,0:55:18
+110,Andrew Charlesworth,Penistone Footpath Runners & AC,MOpen,0:55:21
+111,Peter Cobley,Saddleworth Runners,MV40,0:55:26
+112,Toby Miles,Barrow Runners,MV40,0:55:29
+113,Bernie Cook,unattached,MV40,0:55:41
+114,Oliver Rowarth,Unattached,MU23,0:55:54
+115,Paul Hulbert,Fat Boys,MV50,0:55:56
+116,Barry Greaves,Royton,MV60,0:55:58
+117,Andrew Hunter,Beeston AC,MV40,0:56:03
+118,Richard Hyde,Erewash Valley RC,MV50,0:56:08
+119,David Walters,Unattached,MOpen,0:56:11
+120,Simon Limbert,Unattached,MOpen,0:56:14
+121,Andy Sheppard,Steel City Striders RC,MV40,0:56:18
+122,Ian Lambert,Long Eaton RC,MOpen,0:56:19
+123,Aron Spall,North Derbyshire Running Club,MV40,0:56:20
+124,Alan Renfree,U/A,MV60,0:56:26
+125,Chris Hodgson,PFRAC,MV40,0:56:27
+126,Alex Frost,Rochdale Harriers & AC,MV50,0:56:28
+127,Jason Ball,Sinfin RC,MV40,0:56:28
+128,Paul Orton,Southwell RC,MV40,0:56:29
+129,Lee Szypusz,Unattached,MOpen,0:56:34
+130,Marcel  Darling,Shelton Striders,MV40,0:56:38
+131,Stephen Ellison,Mounts Bay Harriers,MV40,0:56:43
+132,Alan Maplethorpe,Long Eaton RC,MV50,0:56:45
+133,Shaun Walker,Penistone,MV50,0:56:48
+134,Pete Dalt,Pennine,MV50,0:56:51
+135,Gillian Allen,Steel City Striders RC,FOpen,0:56:53
+136,Daniel Pincott,,MOpen,0:57:01
+137,Matthew Pink,Pennine Fell Runners,MV40,0:57:04
+138,Ruth Keeley,Belper Harriers,FOpen,0:57:15
+139,Simon Allen,Dark Peak Fell Runners,MV40,0:57:16
+140,David Veryard,Bakewell,MV50,0:57:18
+141,Emily Barnett,Dark Peak Fell Runners,FU17,0:57:19
+142,Russell Stevenson,Steel City Striders,MV40,0:57:21
+143,Fiona Williams,Rochdale Harriers & AC,FOpen,0:57:22
+144,David Wass,Worksop Harriers,MV50,0:57:23
+145,Tim Raynor,Redhill Road Runners,MV50,0:57:25
+146,James Norton,Steel City Striders RC,MV40,0:57:31
+147,Nick Burns,Steel City Striders RC,MV40,0:57:33
+148,Kathleen O'Donnell,Macclesfield Harriers,FV40,0:57:52
+149,Will Day,Steel City Striders RC,MV50,0:58:00
+150,Roderick Royce,Unattached,MOpen,0:58:05
+151,Chris Charlesworth,Penistone,MV40,0:58:11
+152,John Haigh,Saddleworth Runners,MV40,0:58:17
+153,Rob Sheldon,Glossopdale Harriers,MV40,0:58:21
+154,Martin Carter,Hay Hotfooter,MV50,0:58:25
+155,Graham Jordan,Middleton Harriers,MV40,0:58:27
+156,Julie Darigala,Penistone FRAC,FV40,0:58:30
+157,Mark Ramsell,Steel City Striders RC,MV40,0:58:33
+158,Adi Baker,Dark Peak,MV50,0:58:40
+159,Addy Carter,Hay Hotfooter,FU23,0:58:41
+160,Sabi Roman,U/A,MOpen,0:58:41
+161,Joanna Adamson,Middleton Harriers,FV40,0:58:43
+162,Chris Hough,,MV40,0:58:48
+163,Adam Samuel,Dark Peak Fell Runners,MOpen,0:58:54
+164,Martha Hart,Dark Peak,FOpen,0:58:58
+165,Nigel Barnes,Steel City Striders,MV40,0:59:05
+166,Andrew Chaverley,kingstone Runners,MV50,0:59:06
+167,Alex Lewis,Southwell RC,MV50,0:59:13
+168,Michael Griffin,Middleton Harriers,MV40,0:59:14
+169,Stephanie Harrison,Rochdale Harriers & AC,FOpen,0:59:18
+170,Tom Fryers,Penistone,MU17,0:59:19
+171,Michael Atton,Stilton Striders,MV40,0:59:20
+172,Richard Hind,Clowne Road Runners Club,MV50,0:59:27
+173,Paul Hudson,Unattached,MV40,0:59:34
+174,Rachael Lawrance,Macclesfield Harriers,FV40,0:59:36
+175,Gemma Cox,Unattached,FOpen,0:59:37
+176,Rosa Sampson,Steel City Striders,FOpen,0:59:40
+177,Toby Smith,,MOpen,0:59:51
+178,Stuart Reece,Unattached,MOpen,0:59:58
+179,Esther Broughton,Ripley RC,FV40,1:00:01
+180,Victoria King,Dark Peak,FV40,1:00:09
+181,Mark Jelbert,Unattached,MOpen,1:00:10
+182,Richard Hickling,Belper harriers,MV50,1:00:12
+183,Colin Price,,MV40,1:00:19
+184,Kate Mackenzie,Pennine,FOpen,1:00:26
+185,Ann Wallace,Unattached,FOpen,1:00:29
+186,Pete Wallroth,Glossopdale Harriers,MOpen,1:00:31
+187,Neil Blatherwick,LERC,MV40,1:00:32
+188,Dom Hewins,Fat Boys,MV50,1:00:33
+189,Jamie Whittaker,Erewash valley RC,FOpen,1:00:37
+190,James Riley,Todmorden Harriers,MV40,1:00:41
+191,Mark Glaister,Skelmersdale Boundary Harriers,MV50,1:00:46
+192,C Day,Totley,MV40,1:00:47
+193,Reg Cooper,Unattached,MV60,1:00:49
+194,Lesley Parker,Penistone Footpath Runners & AC,FV40,1:00:55
+195,Ken Taylor,Rossendale,MV70,1:00:58
+196,Joseph Wall,Handsworth Roadhogs,MV50,1:01:00
+197,Abi Thompson,Rossendale,FOpen,1:01:01
+198,Steve Wickham,Erewash Valley RC,MV60,1:01:02
+199,Gary Fox,Beeston AC,MV50,1:01:04
+200,Phil Howson,Steel City Striders,MV50,1:01:07
+201,David Barnes,Horwich RMI Harriers,MV60,1:01:08
+202,Keith Morgan,Ashbourne RC,MV50,1:01:12
+203,Jason Yeast,Royton Road Runners,MV50,1:01:14
+204,Robert Kos,Unattached,MOpen,1:01:18
+205,Rob Moore,Dark Peak,MV50,1:01:20
+206,Paul Geeson,Stilton Striders,MV50,1:01:21
+207,Stu Marshall,Unattached,MOpen,1:01:29
+208,Brandon Greene,Saddleworth Runners,MV40,1:01:41
+209,Simon Bray,Sinfin RC,MV40,1:01:44
+210,Simon Bottrill,Stilton Striders,MV40,1:01:46
+211,Matt Killingley,Fatboys,MV40,1:01:53
+212,William Chang,Long Eaton Running Club,MV40,1:01:54
+213,Adam Close,Steel City Striders,MOpen,1:01:55
+214,Trevor Hibbert,Sinfin RC,MV40,1:01:57
+215,Estelle McGuire,Stockport Harriers & AC,FV50,1:01:58
+216,Peter Bailey,Buxton AC,MV50,1:02:02
+217,Michelle Needham,Clowne Road Runners,FV40,1:02:12
+218,Helena Butler,Saddleworth Runnrs,FOpen,1:02:13
+219,Caroline Burrell,,FV40,1:02:14
+220,Debbie Hope,Buxton ac,FV40,1:02:24
+221,Cat Johnson,Belper Harriers,FOpen,1:02:27
+222,Rebecca Day,Buxton,FV40,1:02:33
+223,Alex Critcher,Glossopdale Harriers,MV40,1:02:35
+224,Tom Silcocks,Unattached,MOpen,1:02:37
+225,Stephanie Watts,Unattached,FOpen,1:02:40
+226,Anton Newell,Sutton in Ashfield Harriers,MV50,1:02:45
+227,Emma Ball,Middleton Harriers,FV40,1:03:02
+228,Anthony Hart,Astley & Tyldesley Road Runners,MV50,1:03:03
+229,Anthony Marchant,Belper Warriers,MV40,1:03:05
+230,Spence Wright,Macclesfield Harriers,MV50,1:03:21
+231,Steve Willis,,MV50,1:03:27
+232,George Katarin,Sinfin RC,MV50,1:03:31
+233,Sarah Walch,Penistone Footpath Runners & AC,FOpen,1:03:36
+234,Lizzie Rawson,Fat Boys,FU23,1:03:39
+235,Rebecca Lineker,Ripley RC,FOpen,1:03:39
+236,Chris Horsfall,Handsworth Roadhogs,MV60,1:03:40
+237,Joanne Howett,Ripley RC,FV40,1:03:48
+238,Brendan Devlin,Sinfin RC,MV40,1:03:53
+239,Brian Sherras,Ripley RC,MV60,1:04:08
+240,Christopher Allen,Holme Pierrepoint,MV50,1:04:09
+241,Christopher Page,Unattached,MOpen,1:04:09
+242,Carmel Stanford,,FV40,1:04:25
+243,Jo Ray,Unattached,FV40,1:04:31
+244,Yulia Ravenhill,Ilkeston RC,FV40,1:04:34
+245,Lucy Broom,Steel City Striders,FV40,1:04:36
+246,Nick Ham,Glossopdale Harriers,MV50,1:04:38
+247,Mark MacFarlane,Saddleworth Runners,MOpen,1:04:48
+248,Kevin McGiluray,Rossendale Harriers,MV60,1:04:49
+249,Margaret Duncan,Smiley Paces,FV50,1:04:50
+250,John Heathcote,Saddleworth Runners Club,MV60,1:04:51
+251,Paul Burchell,Long Eaton Running Club,MV50,1:04:53
+252,Caroline Scott,Sinfin RC,FV40,1:05:01
+253,Michael Richardson,Handsworth Roadhogs,MV50,1:05:02
+254,Carol basu,u/a,FOpen,1:05:04
+255,Julian Brealey,Erewash Valley RC,MV40,1:05:08
+256,Mark Wood,Unattached,MV50,1:05:10
+257,Oscar Travena,Macclesfield Harriers,MOpen,1:05:11
+258,Abigale Hathway,Smiley Paces,FOpen,1:05:16
+259,Jonathan Hutton,Southwell RC,MOpen,1:05:18
+260,Kevin Rowles,Killamarsh Kestrels,MV50,1:05:23
+261,Emily Saunders,Ashbourne,FV50,1:05:24
+262,David Walker,Unattached,MV50,1:05:26
+263,Brent Lindsay,Penistone FRAC,MV50,1:05:28
+264,Steve Brandreth,Porter Valley,MV50,1:05:31
+265,Darso Perez,Unattached,MOpen,1:05:32
+266,Andrew Essex,Saddleworth Runners Club,MV60,1:05:35
+267,Helen Young,Totley AC,FV40,1:05:37
+268,Jed Finnigan,Saddleworth Runners Club,MV50,1:05:41
+269,Samantha Ward,Southwell RC,FOpen,1:05:50
+270,Chris Duro,Derwent Runners (Derby),MV50,1:06:15
+271,Ray Poynter,Redhill Road Runners,MV60,1:06:18
+272,Holly McCain,Beeston AC,FOpen,1:06:21
+273,James Staveley,Worksop Harriers,MV40,1:06:22
+274,Andy Stubbs,,MOpen,1:06:23
+275,Helen Barnett,,FV50,1:06:36
+276,Cathy Cresswell,Ripley running club,FV40,1:06:39
+277,Emily Tomlinson,Ripley running club,FOpen,1:06:40
+278,Melvin McCart,Unattached,MV50,1:06:40
+279,Peter Henley,Redhill Road Runners,MV40,1:06:44
+280,Katie Poulter,Unattached,FOpen,1:06:50
+281,Sharon Bartlett,Unattached,FV40,1:06:59
+282,Nick Hall,u/a,MV40,1:07:09
+283,Gary Smith,Royton Road Runners,MV50,1:07:19
+284,Alex Fielden,u/a,MOpen,1:07:30
+285,Helen Calder,Steel City Striders RC,FV40,1:07:31
+286,Hannah Warrener,Unattached,FOpen,1:07:32
+287,Shaun Chadwick,Worksop Harriers,MOpen,1:07:35
+288,Richard Tomlinson,Sinfin RC,MV40,1:07:41
+289,John Stephenson,Glossopdale Harriers,MV60,1:07:59
+290,Rachel Haslam,Astley & Tyldesley Road Runners,FOpen,1:08:05
+291,Rachel Lee,Erewash Valley RC,FOpen,1:08:12
+292,Rachel Limbert,Unattached,FOpen,1:08:26
+293,Bob Hartley,u/a,MV50,1:08:41
+294,Colette Cooke,Rochdale Harriers & AC,FOpen,1:08:53
+295,Pete Briggs,UA,MOpen,1:08:57
+296,Graham Barnes,Unattached,MV60,1:09:05
+297,Harriet Davies,,FOpen,1:09:19
+298,Helen James,Belper Harriers,FOpen,1:09:23
+299,Paul Stevenson,Sinfin running club,MV60,1:09:33
+300,Tracy Hamilton,Worksop Harriers,FV50,1:09:46
+301,Kate Saville,Saddleworth Runners Club,FV40,1:09:57
+302,Paul Horsfall,Handsworth Roadhogs,MV60,1:10:01
+303,Celine Pagnier,GoodGym Sheffield,FV40,1:10:03
+304,jOHN bRAMWELL,Rochdale Harriers,MV40,1:10:04
+305,Ian Lowe,Unattached,MV50,1:10:08
+306,Craig Wellens,Rochdale Harriers & AC,MV40,1:10:14
+307,Wendy Trelease,Glossopdale Harriers,FV40,1:10:14
+308,Craig Sutherland,Middleton Harriers,MV60,1:10:15
+309,Richard Knowles,Totley AC,MV40,1:10:16
+310,Carl Rawson,U/A,MV40,1:10:25
+311,Helen Smith,Team Derby Runner,FOpen,1:10:52
+312,Sean Orchard,,MV50,1:11:02
+313,Emily Edwards,Unattached,FOpen,1:11:17
+314,David Richards,Formula One Circuit Crew,MV50,1:11:27
+315,Michael Stubbs,,MV40,1:11:34
+316,Heather Fryer-Winder,Buxton AC,FV50,1:11:42
+317,Jill Davies,Steel City Striders RC,FV50,1:11:54
+318,Peter Macfarlane,Dark Peak,MV60,1:11:56
+319,Stuart Whittaker,Erewash Valley RC,MV70,1:12:03
+320,Rachel Dowle,Buxton AC,FV40,1:12:08
+321,Malin Hewins,Fat Boys,FV40,1:12:20
+322,Gemma Phipps,Unattached,FOpen,1:12:22
+323,Samuel Lightfoot,Unattached,MOpen,1:12:23
+324,Susan Ward,Totley AC,FV50,1:12:23
+325,Ruth Hutchison,Saddleworth Runners Club,FV40,1:12:52
+326,Steve Dewick,Dark Peak,MV50,1:13:01
+327,Michael Horn,Redhill Road Runners,MV70,1:13:32
+328,Jessie McGuire,U/A,FU23,1:13:33
+329,Julie White,U/A,FV40,1:13:35
+330,Angie Astbury,,FV40,1:13:41
+331,Simon McCormick,Unattacher,MV40,1:13:47
+332,Jane Hodgson,Saddleworth,FV40,1:13:58
+333,Jeanette leston-Jones,u/a,FV40,1:14:10
+334,Natasha Blackburn,Totley AC,MV40,1:14:10
+335,Sally Hook,Unattached,FV40,1:14:11
+336,Paul Neal,Fylde Coast Runners,MV50,1:14:17
+337,Tim Rolfe,Buxton AC,MV40,1:14:19
+338,Paul Page,Beeston AC,MV50,1:14:30
+339,Richard Ainley,Macclesfield AC,MV40,1:14:35
+340,Richard Broadhead,Ashbourne,MV50,1:14:39
+341,Elizabeth Lakin,Long Eaton RC,FV40,1:14:46
+342,Barry Mercer,Worksop Harriers,MOpen,1:14:57
+343,Willis Meredith,Pennine Fell Runners,MV40,1:15:12
+344,Kelly Knight,U/A,FV40,1:15:23
+345,Sarah Edwards,Erewash Valley RC,FV40,1:15:23
+346,Nicola Sewell,Smiley Paces,FV50,1:16:13
+347,Clare Thompson,Smiley Pacers,FV40,1:16:14
+348,Michelle Hall,Southwell RC,FV40,1:16:41
+349,Claire Noonan,Erewash Valley RC,FOpen,1:16:49
+350,Heather Cameron-Whytock,Southwell RC,FOpen,1:16:52
+351,Julie Heithus,Sinfin RC,FV50,1:16:59
+352,Monica Boland,Saddleworth Runners,FV40,1:17:26
+353,Jordon Lane,N/A,MOpen,1:17:34
+354,Rachael McCurrie,U/A,FOpen,1:17:41
+355,Angela Bent,Buxton AC,FV60,1:17:42
+356,Colin Bostock,Long Eaton RC,MV60,1:17:51
+357,Mark Beard,,MV50,1:17:57
+358,Joan Waller,Unattached,FV50,1:18:24
+359,Diane Clewes,Totley AC,FV50,1:18:28
+360,Frances Wadeun,Erewash valley RC,MV40,1:18:32
+361,Catherine Murphy,Middleton Harriers,FV50,1:18:33
+362,John Richardson,Handsworth Roadhogs,MV50,1:19:07
+363,Joanne Stocks,Redhill Road Runners,FV40,1:19:40
+364,Lindsay Evans,Totley AC,FV40,1:19:43
+365,Gemma Hind,Clowne Road Runners Club,FOpen,1:20:06
+366,Alicia Sewell,Vegan Runners,FOpen,1:20:29
+367,Angela Burley,NWR,FV60,1:20:35
+368,Madeline Gibson,,FU23,1:21:18
+369,Heather Thornley,Redhill Road Runners,FOpen,1:21:33
+370,Sally Staveley,Worksop Harriers,FV50,1:21:40
+371,Caroline Wickkham,Erewash Valley RC,FV60,1:22:03
+372,Charlotte Wright,Unattached,FOpen,1:23:49
+373,Tony GREENE,SADDLEWORTH,MV70,1:24:12
+374,Fiona MacSweeney,UA,FOpen,1:24:26
+375,Sue Jeff,Buxton AC,FV50,1:26:40
+376,Lesley Willis,,FV50,1:26:41
+377,Fiona Corden,Shelton Striders,FV40,1:27:02
+378,Debbie McCart,Unattached,FV50,1:27:32
+379,Kerry Dickinson,Worksop Harriers,FV40,1:27:40
+380,David Adams,Steel City Striders RC,MV40,1:27:59
+381,Sallyann Winslow,Steel City Striders RC,FV40,1:28:19
+382,Matthew Winslow,Steel City Striders,MV40,1:28:27
+383,Jonathan Ogden,MLC Gladiators,MV40,1:29:41
+384,Demelza Whitbread,,FOpen,1:30:22
+385,Tamzin Yates,Redhill Road Runners,FV40,1:30:24
+386,Paul Shelton,Steel City Striders RC,MV60,1:31:11
+387,Jane McCart,Unattached,FOpen,1:31:55
+388,Brenda Roberts,Saddleworth Runners,FV70,1:33:13
+389,Nicola Photiou,Erewash Valley RC,FV40,1:34:07
+390,Alison Hollett,,FV50,1:34:50
+391,Martyn Newton,Redhill Road Runners,MV60,1:37:32
+392,Natalie Peters,u/a,FOpen,1:37:49
+393,Nicola Walker,u/a,FV40,1:37:52
+394,Jane Lewis,Beeston AC,FV40,1:41:59
+395,Laviola Marianna,Unattached,FOpen,1:42:03
+396,Penny Page,Beeston AC,FV40,1:42:04
+397,Karen Hodgson,Erewash Valley RC,MV50,1:42:51
+398,Robert Stewart,Bradda Dads,MV40,1:42:55

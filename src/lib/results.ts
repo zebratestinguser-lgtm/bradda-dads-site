@@ -16,7 +16,7 @@ export const PODIUM_RULES = {
   /** A runner counts as a woman if their category starts with one of these. */
   womenPrefixes: ['F', 'W', 'L'],
   /** A runner counts as a junior if their category matches this pattern. */
-  juniorPattern: /^(U\d+|J|JUN|JUNIOR|[MF]?U\d+|[MF]J)/i,
+  juniorPattern: /^(U\d+|J|JUN|JUNIOR|[MF]?U\d+|[MF]J)|\*$/i, // "MS*" = under 18 (2013 results)
 };
 
 export interface ResultRow {

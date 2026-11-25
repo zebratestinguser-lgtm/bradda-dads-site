@@ -55,11 +55,12 @@ Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all l
 
 ## Results: `src/content/results/`
 
-Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 2016, 2017 (long and half) and 2019. The original PDFs are kept in `public/uploads/results/`.
+Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 2016, 2017 (long and half) and 2019. The original PDFs are kept in `public/uploads/results/`. **Added 25 Nov 2026:** Wolf's Pit 2009, 2013, 2014, 2015 and 2016 from Internet Archive copies of the old race website, and 2019 from RaceTek Live (each year's `.md` says exactly where it came from and what was tidied).
 
-- [ ] Wolf's Pit 2009–2014 full results were on wolfspitfellrace.org.uk (now gone). Try the Internet Archive (web.archive.org).
-- [ ] Wolf's Pit 2019 results are on RaceTek Live (racetek-live.co.uk, event 834): download and add.
-- [ ] Wolf's Pit 2015–2018: results not found on either old site.
+- [ ] **Wolf's Pit 2010, 2011, 2012, 2017 and 2018 are still missing.** The Internet Archive didn't save those results pages. Ask the race organiser or the timing company for copies. (One year was cancelled for snow: which?)
+- [ ] Wolf's Pit 2015 and 2016: race dates not known (add `date:` to 2015.md / 2016.md).
+- [x] Wolf's Pit 2009, 2013–2016 and 2019 added.
+- [ ] **wolfspitfellrace.org.uk now belongs to a betting spam site.** The three old news posts that linked to it now link to archived copies or the site's own results page instead. Don't link to that domain again.
 - [ ] 2022 results have no clubs or categories, and 2025 only has them for the first 53 runners. If the organiser has the full spreadsheets, swap them in.
 - [ ] Decide what "First junior" means for the podium (`src/lib/results.ts`, `PODIUM_RULES`). Wolf's Pit is 18+, so at the moment it picks the first MU19/MU21/MU23 runner.
 - [ ] Tour of Bradwell 2018 results (not found on the old site)

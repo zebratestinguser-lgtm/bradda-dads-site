@@ -13,10 +13,16 @@ const latest = years[0];
 const event = await getEntry('events', 'wolfspit');
 const { Content } = event ? await render(event) : { Content: null };
 // Every runner across all years, for the cross-year search: [year, pos, name, club, time]
+// Years with no results on the site yet (2020 and 2021 were cancelled for Covid)
+const NO_RACE = [2020, 2021];
+const have = new Set(years.map((y) => y.year));
+const first = years.at(-1)?.year ?? 2009;
+const missing = latest ? Array.from({ length: latest.year - first + 1 }, (_, i) => first + i).filter((y) => !have.has(y) && !NO_RACE.includes(y)) : [];
+const listYears = (ys: number[]) => (ys.length > 1 ? `${ys.slice(0, -1).join(', ')} and ${ys.at(-1)}` : String(ys[0]));
 const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.name, r.club, r.time]));
 ---
 
-<BaseLayout title="Wolf's Pit Fell Race" description="The Wolf's Pit Fell Race: a 9 km fell race from Shatton, near Bamford. Results from every year since 2022, and a search across all years.">
+<BaseLayout title="Wolf's Pit Fell Race" description={`The Wolf's Pit Fell Race: a 9 km fell race from Shatton, near Bamford. Results from ${years.length} years since ${first}, and a search across all years.`}>
   <PageHeader eyebrow="Fell race" title="Wolf's Pit Fell Race" intro={site.wolfspitIntro}>
     <div class="actions">
       {site.wolfspitEntryUrl !== '#' && <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>Enter {latest ? latest.year + 1 : ''}</a>}
@@ -27,9 +33,13 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
   <!-- Results by year: tabs, podium and search (the band that used to be on the homepage) -->
   <WolfspitBand title="Results by year" intro="" maxYears={years.length} />
   <div class="container">
-    <p class="note older">
-      Results for 2009–2019 aren't on the site yet. They were published on the old race website and on RaceTek, and we're working on bringing them across.
-    </p>
+    {
+      missing.length > 0 && (
+        <p class="note older">
+          Results for {listYears(missing)} aren't on the site yet (there was no race in 2020 or 2021). If you have a copy, <a href={url('/contact/')}>please get in touch</a>.
+        </p>
+      )
+    }
   </div>
 
   <section class="container page-section about">
@@ -40,7 +50,7 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
     <h2 class="subhead" id="search-title">Find yourself in any year</h2>
     <div class="form-field search">
       <label for="any-year">Runner name</label>
-      <input id="any-year" type="search" placeholder="Start typing a name" autocomplete="off" data-any-year={JSON.stringify(everyone)} data-base={url('/wolfspit/')} />
+      <input id="any-year" type="search" placeholder="Start typing a name" autocomplete="off" data-any-year data-base={url('/wolfspit/')} />
     </div>
     <p class="hint" aria-live="polite" data-any-status>Search {everyone.length.toLocaleString('en-GB')} results from {years.length} years.</p>
     <ul class="any-results" role="list" data-any-results></ul>
@@ -54,7 +64,9 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
   const status = document.querySelector<HTMLElement>('[data-any-status]');
   if (input && list && status) {
     type Row = [number, number, string, string, string];
-    const data: Row[] = JSON.parse(input.dataset.anyYear!);
+    // Same data as the results band above (every year), flattened: [year, pos, name, club, time]
+    const byYear: Record<string, [number, string, string, string, string][]> = JSON.parse(document.querySelector<HTMLElement>('[data-results]')?.dataset.results ?? '{}');
+    const data: Row[] = Object.entries(byYear).flatMap(([y, rows]) => rows.map((r): Row => [Number(y), r[0], r[1], r[2], r[4]]));
     const base = input.dataset.base!;
     const initial = status.textContent;
     const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
