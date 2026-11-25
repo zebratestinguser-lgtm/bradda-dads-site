@@ -138,6 +138,8 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 
 ## Parked site improvements (suggested 21 Nov 2026)
 
+- [ ] **Move hosting to Cloudflare when the site gets its own web address (decided 25 Nov 2026: wait until then).** Keep building on GitHub Actions and upload the finished site to Cloudflare (free): browsers can then keep photos and fonts for a year instead of 10 minutes, and old WordPress addresses can be redirected. Limits to watch: Cloudflare free = 20,000 files per site (now ~9,400; each photo adds 7), GitHub Pages = 1 GB (now ~430 MB). Needs a Cloudflare account and one API token stored as a GitHub secret (~20 minutes).
+
 - [ ] **Facebook posts on the site, automatically (chosen 25 Nov 2026, for later):** the daily rebuild fetches the latest few posts from the Bradda Dads Facebook page (https://www.facebook.com/BraddaDads) and shows them as normal site content, with no Facebook code or tracking for visitors. Needs Peter (a Page admin) to create a free Meta developer app and a long-lived Page access token, stored as a GitHub secret; about an hour together. Until then, the three hand-picked posts in Site settings → Facebook posts can be used.
 
 - [ ] **Facebook share previews:** event and news pages use their own photo and summary instead of the default image.
