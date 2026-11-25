@@ -67,13 +67,8 @@ content:
           path: public/uploads/news
       - name: imageAlt
         label: Photo description
-        description: Required if you add a photo. Describe what's in it for people who can't see it, e.g. "Crowds watching the bonfire at night".
+        description: Please fill this in if you add a photo. Describe what's in it for people who can't see it, e.g. "Crowds watching the bonfire at night".
         type: string
-      - name: featured
-        label: Feature on the homepage
-        description: Shows this story as the big one on the homepage. Only tick one story at a time.
-        type: boolean
-        default: false
       - name: album
         label: Photo album (optional)
         description: Link this story to a photo album.

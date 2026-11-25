@@ -24,7 +24,7 @@ When you press **Save**, the website updates by itself in about **2 to 3 minutes
 4. Write the story in the **Story** box.
 5. Press **Save**.
 
-**Feature on the homepage** makes your story the big one on the homepage. Untick it on the previous featured story so only one story has it.
+The newest story is always the big one on the homepage.
 
 ## Add a photo album
 

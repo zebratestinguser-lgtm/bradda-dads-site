@@ -3,7 +3,6 @@ title: "Thank you for a fantastic bonfire night"
 date: 2026-11-20
 tag: "Bonfire"
 summary: "Around 600 of you came along to this year's bonfire and fireworks. Thank you, and a big thank you to Breedon for their support."
-featured: true
 ---
 
 What a night! Around 600 people came along to this year's village bonfire and fireworks, the weather was kind to us, and the feedback, in person and online, has been brilliant.

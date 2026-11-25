@@ -39,23 +39,20 @@ const source = z.url().optional();
 
 const news = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/news' }),
-  schema: z
-    .object({
-      title: z.string(),
-      date: z.coerce.date(),
-      tag: z.enum(NEWS_TAGS),
-      image: uploadPath.optional(),
-      imageAlt: z.string().optional(),
-      summary: z.string(),
-      featured: z.boolean().default(false),
-      /** Photo album for this story, if there is one. */
-      album: z.preprocess(entryId, reference('albums')).optional(),
-      source,
-    })
-    .refine((d) => !d.image || (d.imageAlt && d.imageAlt.length > 0), {
-      message: 'imageAlt is required when an image is set',
-      path: ['imageAlt'],
-    }),
+  // The newest story is always the homepage lead (no "featured" flag).
+  // imageAlt should be filled in with a photo, but a missing one mustn't stop the site updating
+  // (the editor can't make it required only when a photo is added).
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    tag: z.enum(NEWS_TAGS),
+    image: uploadPath.optional(),
+    imageAlt: z.string().optional(),
+    summary: z.string(),
+    /** Photo album for this story, if there is one. */
+    album: z.preprocess(entryId, reference('albums')).optional(),
+    source,
+  }),
 });
 
 const events = defineCollection({

@@ -33,7 +33,7 @@ Use the content layer with `glob` loaders. Validate with Zod schemas. Every fiel
 
 | Collection | Location | Fields |
 |---|---|---|
-| `news` | `src/content/news/YYYY-MM-DD-slug.md` | `title`, `date`, `tag` (enum: Bonfire, Christmas card, Pensioners' lunch, Duck race, Wolfspit, Village), `image` (optional), `imageAlt`, `summary`, `featured` (bool), body (Markdown) |
+| `news` | `src/content/news/YYYY-MM-DD-slug.md` | `title`, `date`, `tag` (enum: Bonfire, Christmas card, Pensioners' lunch, Duck race, Wolfspit, Village), `image` (optional), `imageAlt`, `summary`, body (Markdown) |
 | `events` | `src/content/events/slug.md` | `name`, `start` (datetime, Europe/London), `end` (optional), `location`, `summary`, `status` (upcoming / open / done), `ctaLabel`, `ctaUrl` (usually a SumUp link), `order`, body |
 | `albums` | `src/content/albums/slug.md` + images in same folder or `public/uploads/albums/slug/` | `title`, `event` (reference to events), `date`, `cover`, `photos` (list of `{src, alt, caption?}`) |
 | `results` | `src/content/results/wolfspit/YYYY.md` + `YYYY.csv` | md: `year`, `date`, `courseNotes`, `finishers` (computed if absent), `csv` (file path); CSV columns below |
@@ -71,7 +71,7 @@ Header row (exact): `position,name,club,category,time`
 1. Header: duck logo (original inline SVG in the design file), nav: Events, News, Photos, Wolfspit results, Our story, Get involved (pill button).
 2. Hero: "Next up" event, auto-picked as the next upcoming `events` entry by `start`. Live countdown (days/hours/mins). Primary CTA (SumUp link) + "All events".
 3. "The Bradda Dads year": event cards from `events`, status tag, CTA.
-4. News: one featured story + three recent.
+4. News: the newest story as the lead + three recent (no "featured" flag; newest is always the lead, Peter 25 Nov 2026).
 5. Christmas card banner (only shown while the card event is `open`).
 6. Wolfspit results band (dark): year tabs, podium, search, category filter, table (first 6 rows), "see all", download CSV, "Enter [next year]".
 7. Photos: album grid + "Share your photos" button (phase 1: mailto or Facebook link; phase 2+: an upload form).

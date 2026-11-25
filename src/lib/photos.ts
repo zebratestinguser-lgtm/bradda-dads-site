@@ -51,7 +51,8 @@ async function sceneAlbums(filter: (a: Album) => boolean) {
  * always belongs to its story. (The avoid set is kept so callers don't need to change.)
  */
 export async function storyPhoto(story: NewsEntry, _avoid = new Set<string>()): Promise<(PickedPhoto & { own: boolean }) | undefined> {
-  if (!story.data.image || !isScene(story.data.imageAlt)) return undefined;
+  // A photo uploaded without a description still counts; one described as a poster, logo or cutting doesn't
+  if (!story.data.image || (story.data.imageAlt && !isScene(story.data.imageAlt))) return undefined;
   const albums = await getAlbums();
   const album = story.data.album ? albums.find((a) => a.id === story.data.album!.id) : undefined;
   return {
