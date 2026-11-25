@@ -41,6 +41,8 @@ When you press **Save**, the website updates by itself in about **2 to 3 minutes
 
 To link an album to a news story, open the story and pick the album under **Photo album**.
 
+To see how an album looks on the website, open it on the live site: https://zebratestinguser-lgtm.github.io/bradda-dads-site/photos/ (every album is listed there). Links inside the editor that open GitHub are for checking files only, and you can ignore them.
+
 ## Update an event
 
 1. Click **Events** and open the event.

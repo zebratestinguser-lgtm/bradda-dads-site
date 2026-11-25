@@ -4,25 +4,15 @@
 # Saving commits to GitHub; the deploy workflow then resizes any new photos and rebuilds the site.
 
 media:
-  - name: news
-    label: News photos
-    input: public/uploads/news
-    output: /uploads/news
+  # One source for every photo, so the editor can show any image on the site: the 1,265 imported
+  # photos live in public/uploads/albums/, new uploads go to news/, photos/ or images/ (set per field
+  # with options.path). Unique random names, because phone photos often share names (IMG_0001.jpg).
+  - name: uploads
+    label: Photos
+    input: public/uploads
+    output: /uploads
     categories: [image]
-    rename: safe
-  - name: photos
-    label: Album photos
-    input: public/uploads/photos
-    output: /uploads/photos
-    categories: [image]
-    # Phone photos often share names (IMG_0001.jpg), so give each upload a unique name
     rename: random
-  - name: images
-    label: Other images
-    input: public/uploads/images
-    output: /uploads/images
-    categories: [image]
-    rename: safe
   - name: results
     label: Race results files
     input: public/uploads/results
@@ -73,7 +63,8 @@ content:
         description: Leave empty and the site shows an older photo from the same kind of event, labelled with its date.
         type: image
         options:
-          media: news
+          media: uploads
+          path: public/uploads/news
       - name: imageAlt
         label: Photo description
         description: Required if you add a photo. Describe what's in it for people who can't see it, e.g. "Crowds watching the bonfire at night".
@@ -97,7 +88,8 @@ content:
         type: rich-text
         options:
           format: markdown
-          media: news
+          media: uploads
+          path: public/uploads/news
 
       - name: source
         label: Imported from (old site)
@@ -155,7 +147,8 @@ content:
             type: image
             required: true
             options:
-              media: photos
+              media: uploads
+              path: public/uploads/photos
           - name: alt
             label: Description
             description: What's in the photo, e.g. "Dads in hi-vis keeping the ducks moving under the bridge".
@@ -178,7 +171,8 @@ content:
         description: Leave empty to use the first photo.
         type: image
         options:
-          media: photos
+          media: uploads
+          path: public/uploads/photos
       - name: coverAlt
         label: Cover photo description
         type: string
@@ -300,7 +294,8 @@ content:
         type: rich-text
         options:
           format: markdown
-          media: images
+          media: uploads
+          path: public/uploads/images
       - name: heroTitle
         label: "Homepage: big headline"
         type: string
@@ -322,7 +317,8 @@ content:
         label: "Homepage and event page: photo"
         type: image
         options:
-          media: images
+          media: uploads
+          path: public/uploads/images
       - name: heroImageAlt
         label: Photo description
         type: string
@@ -389,7 +385,8 @@ content:
         label: Photo (optional)
         type: image
         options:
-          media: images
+          media: uploads
+          path: public/uploads/images
       - name: photoAlt
         label: Photo description
         type: string
@@ -453,7 +450,8 @@ content:
         label: Photo (optional)
         type: image
         options:
-          media: images
+          media: uploads
+          path: public/uploads/images
       - name: imageAlt
         label: Photo description
         type: string
@@ -544,7 +542,8 @@ content:
         label: Photo of the results sheet (optional)
         type: image
         options:
-          media: images
+          media: uploads
+          path: public/uploads/images
       - name: notes
         label: Notes (optional)
         type: text
@@ -669,7 +668,8 @@ content:
         label: Photo (optional)
         type: image
         options:
-          media: images
+          media: uploads
+          path: public/uploads/images
       - name: imageAlt
         label: Photo description
         type: string
@@ -759,7 +759,8 @@ content:
             label: Our story photo
             type: image
             options:
-              media: images
+              media: uploads
+              path: public/uploads/images
           - name: storyImageAlt
             label: Our story photo description
             type: string
@@ -805,7 +806,8 @@ content:
             label: Donation QR code image
             type: image
             options:
-              media: images
+              media: uploads
+              path: public/uploads/images
           - name: facebookPosts
             label: Facebook posts on the homepage (up to three)
             type: object
@@ -828,7 +830,8 @@ content:
                 label: Image (optional)
                 type: image
                 options:
-                  media: images
+                  media: uploads
+                  path: public/uploads/images
               - name: imageAlt
                 label: Image description
                 type: string
