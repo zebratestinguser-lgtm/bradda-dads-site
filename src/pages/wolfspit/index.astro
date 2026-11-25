@@ -65,8 +65,14 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
   if (input && list && status) {
     type Row = [number, number, string, string, string];
     // Same data as the results band above (every year), flattened: [year, pos, name, club, time]
-    const byYear: Record<string, [number, string, string, string, string][]> = JSON.parse(document.querySelector<HTMLElement>('[data-results]')?.dataset.results ?? '{}');
-    const data: Row[] = Object.entries(byYear).flatMap(([y, rows]) => rows.map((r): Row => [Number(y), r[0], r[1], r[2], r[4]]));
+    type Compact = [number, string, string, string, string];
+    const w = window as unknown as { wolfspitResults?: Promise<Record<string, Compact[]>> };
+    w.wolfspitResults ??= fetch(document.querySelector<HTMLElement>('[data-results-url]')!.dataset.resultsUrl!).then((r) => r.json());
+    let data: Row[] = [];
+    w.wolfspitResults.then((byYear) => {
+      data = Object.entries(byYear).flatMap(([y, rows]) => rows.map((r): Row => [Number(y), r[0], r[1], r[2], r[4]]));
+      if (input.value.trim().length >= 2) input.dispatchEvent(new Event('input')); // someone typed before it arrived
+    });
     const base = input.dataset.base!;
     const initial = status.textContent;
     const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);

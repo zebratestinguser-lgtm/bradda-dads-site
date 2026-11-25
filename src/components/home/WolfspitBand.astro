@@ -19,10 +19,6 @@ const years = allYears.slice(0, maxYears);
 const latest = years[0];
 const ROWS = 6;
 
-// Compact data for client-side search/filter: [pos, name, club, category, time]
-const data = Object.fromEntries(
-  years.map((y) => [y.year, y.rows.map((r) => [r.position, r.name, r.club, r.category, r.time])]),
-);
 const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPattern.source };
 ---
 
@@ -58,7 +54,7 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
 
     {
       latest ? (
-        <div class="results" data-results={JSON.stringify(data)} data-rules={JSON.stringify(rules)} data-rows={ROWS} data-base={url('/wolfspit/')}>
+        <div class="results" data-results data-results-url={url('/wolfspit/results.json')} data-rules={JSON.stringify(rules)} data-rows={ROWS} data-base={url('/wolfspit/')}>
           <div role="tablist" aria-label="Race year" class="year-tabs">
             {years.map((y, i) => (
               <button
@@ -163,7 +159,12 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
   type Row = [number, string, string, string, string];
 
   document.querySelectorAll<HTMLElement>('[data-results]').forEach((root) => {
-    const data: Record<string, Row[]> = JSON.parse(root.dataset.results!);
+    // The full results load after the page appears (the first rows and podium are already on the page).
+    // Shared with the all-years search on /wolfspit/, so it's only fetched once.
+    const w = window as unknown as { wolfspitResults?: Promise<Record<string, Row[]>> };
+    w.wolfspitResults ??= fetch(root.dataset.resultsUrl!).then((r) => r.json());
+    let data: Record<string, Row[]> = {};
+    const ready = w.wolfspitResults.then((d) => (data = d));
     const rules: { women: string[]; junior: string } = JSON.parse(root.dataset.rules!);
     const junior = new RegExp(rules.junior, 'i');
     const isWoman = (c: string) => rules.women.some((p) => c.toUpperCase().startsWith(p));
@@ -251,10 +252,12 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
       allLink.href = `${base}${year}/`;
       allLink.textContent = `See all ${year} finishers →`;
       if (csvLink) csvLink.href = `${base}${year}.csv`;
-      renderPodium();
-      renderCategories();
-      renderTable();
       if (focus) tab.focus();
+      ready.then(() => {
+        renderPodium();
+        renderCategories();
+        renderTable();
+      });
     }
 
     tabs.forEach((tab, i) => {
@@ -271,8 +274,8 @@ const rules = { women: PODIUM_RULES.womenPrefixes, junior: PODIUM_RULES.juniorPa
         }
       });
     });
-    search.addEventListener('input', renderTable);
-    filter.addEventListener('change', renderTable);
+    search.addEventListener('input', () => ready.then(renderTable));
+    filter.addEventListener('change', () => ready.then(renderTable));
   });
 </script>
 

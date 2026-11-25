@@ -109,6 +109,22 @@ const isCurrent = (item: Link) =>
   </div>
 </header>
 
+<!-- Speed: switch on the compact phone menu the moment the header arrives, rather than after the whole
+     page has downloaded (on slow phones the full no-JavaScript menu used to flash up first). The script
+     below then adds the opening and closing. Must stay tiny, plain and inline. -->
+<script is:inline>
+  (function () {
+    var h = document.querySelector('[data-header]');
+    var b = document.querySelector('[data-menu-btn]');
+    if (!h || !b || !document.querySelector('[data-nav]')) return;
+    h.classList.add('is-enhanced');
+    b.hidden = false;
+    document.querySelectorAll('[data-nav-group] [data-subnav]').forEach(function (l) {
+      l.hidden = true;
+    });
+  })();
+</script>
+
 <script>
   const header = document.querySelector<HTMLElement>('[data-header]');
   const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]');
