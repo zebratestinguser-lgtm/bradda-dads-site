@@ -3,7 +3,6 @@
 // and skip scans of posters, invitations, results sheets and press cuttings where a real scene exists.
 import type { CollectionEntry } from 'astro:content';
 import { getAlbums, photoDateShort, EVENT_TAG, type Album } from './albums';
-import { pick } from './seed';
 
 type NewsEntry = CollectionEntry<'news'>;
 type Photo = { src: string; alt?: string };
@@ -47,28 +46,21 @@ async function sceneAlbums(filter: (a: Album) => boolean) {
 }
 
 /**
- * Photo for a news story: its own photo if it has one, otherwise an archive photo from the same kind
- * of event (labelled with when it was taken, so nobody mistakes it for this year's).
+ * Photo for a news story: its own photo, when it's a real scene (not a logo, poster or press cutting).
+ * Stories without one get the duck tile (NewsTile), never a borrowed archive photo, so a picture
+ * always belongs to its story. (The avoid set is kept so callers don't need to change.)
  */
-export async function storyPhoto(story: NewsEntry, avoid = new Set<string>()): Promise<(PickedPhoto & { own: boolean }) | undefined> {
+export async function storyPhoto(story: NewsEntry, _avoid = new Set<string>()): Promise<(PickedPhoto & { own: boolean }) | undefined> {
+  if (!story.data.image || !isScene(story.data.imageAlt)) return undefined;
   const albums = await getAlbums();
-  // Use the story's own picture only when it's a real photo (not a logo, poster or press cutting)
-  if (story.data.image && isScene(story.data.imageAlt)) {
-    const album = story.data.album ? albums.find((a) => a.id === story.data.album!.id) : undefined;
-    return {
-      src: story.data.image,
-      alt: story.data.imageAlt ?? '',
-      album: album!,
-      label: album ? photoDateShort(album) : '',
-      own: true,
-    };
-  }
-  const all = await sceneAlbums((a) => a.data.category === story.data.tag);
-  const fresh = all.filter((a) => !avoid.has(a.id));
-  const album = pick(fresh.length ? fresh : all, story.id);
-  if (album) avoid.add(album.id);
-  const photo = album && displayCover(album);
-  return album && photo ? { ...asPicked(album, photo), own: false } : undefined;
+  const album = story.data.album ? albums.find((a) => a.id === story.data.album!.id) : undefined;
+  return {
+    src: story.data.image,
+    alt: story.data.imageAlt ?? '',
+    album: album!,
+    label: album ? photoDateShort(album) : '',
+    own: true,
+  };
 }
 
 /** Photos for a list of stories, using a different archive album for each where possible */

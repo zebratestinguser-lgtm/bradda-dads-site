@@ -1,27 +1,24 @@
 ---
+// Privacy notice. The wording lives in src/content/pages/privacy.md so the team can edit it in
+// Pages CMS ("Privacy notice"). The contact form section is added automatically once the form is live.
+import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getSite } from '../lib/site';
-import { isPlaceholder } from '../lib/events';
-import { url } from '../lib/url';
+import { formatDate } from '../lib/format';
 
 const site = await getSite();
 const hasForm = site.contactFormUrl.startsWith('https://');
+const page = await getEntry('pages', 'privacy');
+if (!page) throw new Error('src/content/pages/privacy.md is missing');
+const { Content } = await render(page);
 ---
 
 <BaseLayout title="Privacy" description="How the Bradda Dads website handles your information.">
-  <PageHeader eyebrow="Privacy" title="Privacy notice" intro="[PLACEHOLDER: draft for the committee to review and approve before launch.]" />
+  <PageHeader eyebrow="Privacy" title={page.data.title} intro={page.data.intro} />
   <section class="container page-section">
     <div class="prose">
-      <h2>Who we are</h2>
-      <p>This website is run by Bradda Dads{!isPlaceholder(site.cicName) && ` (${site.cicName}${isPlaceholder(site.cicNumber) ? '' : `, company number ${site.cicNumber}`})`}, a volunteer group raising money for Bradwell, Derbyshire.</p>
-
-      <h2>No tracking</h2>
-      <p>This website doesn't use cookies, analytics or advertising trackers.</p>
-
-      <h2>Payments</h2>
-      <p>Donations and payments are taken by SumUp. When you pay, you're on SumUp's website and their privacy policy applies. We receive the payment details SumUp shares with sellers (such as your name and the amount) so we can keep our accounts.</p>
-
+      <Content />
       {
         hasForm && (
           <>
@@ -33,16 +30,14 @@ const hasForm = site.contactFormUrl.startsWith('https://');
           </>
         )
       }
-
-      <h2>The map</h2>
-      <p>The "where the money goes" map loads map images from OpenStreetMap's servers when you scroll to it, so your browser contacts OpenStreetMap. See the <a href="https://osmfoundation.org/wiki/Privacy_Policy">OpenStreetMap Foundation privacy policy</a>.</p>
-
-      <h2>Photos, news and race results</h2>
-      <p>The site includes photos and stories from Bradda Dads events going back to 2001 (many brought across from our old websites), and fell race results that list runners' names, clubs, categories and times as published at the time.</p>
-      <p>If you'd like a photo, a mention of you or your child, or your race result removed, <a href={url('/contact/')}>contact us</a> and we'll take it down.</p>
-
-      <h2>Contact</h2>
-      <p>Questions about this notice: <a href={url('/contact/')}>get in touch</a>.</p>
+      {page.data.updated && <p class="updated">Last updated {formatDate(page.data.updated)}.</p>}
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .updated {
+    color: var(--muted);
+    font-size: 15px;
+  }
+</style>

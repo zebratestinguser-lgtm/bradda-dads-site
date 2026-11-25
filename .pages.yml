@@ -23,6 +23,11 @@ media:
     output: /uploads/images
     categories: [image]
     rename: safe
+  - name: results
+    label: Race results files
+    input: public/uploads/results
+    output: /uploads/results
+    rename: safe
 
 content:
   # ───────────────────────── News ─────────────────────────
@@ -548,6 +553,88 @@ content:
         label: Imported from (old site)
         type: string
         hidden: true
+
+  # ───────────────────────── Wolf's Pit results ─────────────────────────
+  - name: wolfspitResults
+    label: Wolf's Pit results
+    type: collection
+    path: src/content/results/wolfspit
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.year}.md"
+      field: false
+    view:
+      fields: [year, date]
+      primary: year
+      sort: [year]
+      default:
+        sort: year
+        order: desc
+    fields:
+      - name: year
+        label: Year
+        type: number
+        required: true
+      - name: date
+        label: Race date
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: csv
+        label: Results file (.csv)
+        description: "A CSV file whose first line is exactly: position,name,club,category,time (time as 0:41:23). In Excel: File, Save As, CSV."
+        type: file
+        required: true
+        options:
+          media: results
+      - name: original
+        label: Original results (PDF, optional)
+        type: file
+        options:
+          media: results
+      - name: notes
+        label: Notes (optional)
+        description: Shown under the results, e.g. "Course shortened because of snow".
+        type: text
+      - name: courseNotes
+        label: Course notes
+        type: text
+        hidden: true
+      - name: finishers
+        label: Number of finishers
+        type: number
+        hidden: true
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
+  # ───────────────────────── Privacy notice ─────────────────────────
+  - name: privacy
+    label: Privacy notice
+    type: file
+    path: src/content/pages/privacy.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Heading
+        type: string
+        required: true
+      - name: intro
+        label: Introduction (optional)
+        type: string
+      - name: updated
+        label: Last checked (date)
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: body
+        label: Notice
+        description: The contact form section is added automatically once the form is switched on.
+        type: rich-text
+        options:
+          format: markdown
 
   # ───────────────────────── Our story ─────────────────────────
   - name: timeline

@@ -84,7 +84,8 @@ export async function getRaceYears(race: string) {
   const entries = (await getCollection('results')).filter((e) => e.id.startsWith(`${race}/`));
   return entries
     .map((entry) => {
-      const rel = `src/content/results/${race}/${entry.data.csv}`;
+      // The CSV sits next to the .md, or (uploaded through the editor) in public/uploads/results/
+      const rel = entry.data.csv.startsWith('/uploads/') ? `public${entry.data.csv}` : `src/content/results/${race}/${entry.data.csv}`;
       const rows = parseResultsCsv(readFileSync(join(process.cwd(), rel), 'utf-8'), rel);
       return { ...entry.data, race, rows, finishers: entry.data.finishers ?? rows.length, csvPath: rel };
     })

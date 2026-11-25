@@ -163,8 +163,8 @@ const results = defineCollection({
     courseNotes: z.string().optional(),
     /** Leave out and it is counted from the CSV. */
     finishers: z.number().int().optional(),
-    /** CSV file next to this one, e.g. "2026.csv". */
-    csv: z.string().regex(/\.csv$/),
+    /** CSV file next to this one ("2026.csv"), or one uploaded through the editor ("/uploads/results/x.csv"). */
+    csv: z.string().regex(/\.csv$/i, 'The results file must be a .csv (in Excel: File → Save As → CSV)'),
     /** Original results document (PDF) in /uploads/results/, if there is one. */
     original: z.string().startsWith('/uploads/').optional(),
     /** Notes shown with the results, e.g. how the original was converted. */
@@ -201,6 +201,17 @@ const duckWinners = defineCollection({
     sheet: uploadPath.optional(),
     notes: z.string().optional(),
     source,
+  }),
+});
+
+/** Pages whose wording the team edits in the editor (e.g. src/content/pages/privacy.md). */
+const pages = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string(),
+    intro: z.string().optional(),
+    /** When the wording was last checked, e.g. for the privacy notice */
+    updated: z.coerce.date().optional(),
   }),
 });
 
@@ -309,4 +320,4 @@ const settings = defineCollection({
   }),
 });
 
-export const collections = { news, events, albums, results, duckWinners, timeline, funded, members, settings };
+export const collections = { news, events, albums, results, duckWinners, pages, timeline, funded, members, settings };

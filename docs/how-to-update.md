@@ -20,7 +20,7 @@ When you press **Save**, the website updates by itself in about **2 to 3 minutes
    - **Summary:** one or two sentences, shown on the news cards.
 3. **Photo** is optional.
    - If you add one, fill in **Photo description**: say what's in the photo, for people who can't see it.
-   - If you don't add one, the site shows an older photo from the same event, clearly labelled with its date.
+   - If you don't add one, the story gets a coloured tile with the Bradda Dads duck instead.
 4. Write the story in the **Story** box.
 5. Press **Save**.
 
@@ -64,6 +64,20 @@ After each duck race:
 
 Only put names on the website if the winners are happy for them to appear.
 
+## Add a year's Wolf's Pit results
+
+1. Get the results as a spreadsheet. Make sure the first row is exactly these five headings: **position, name, club, category, time**, with times written like **0:41:23**. Leave club or category empty if you don't have them.
+2. Save it as a **CSV** file (in Excel: File → Save As → CSV).
+3. Click **Wolf's Pit results**, then **Add an entry**.
+4. Fill in the **Year** and **Race date**, and upload the CSV under **Results file**. If you have the original PDF, upload that too.
+5. Press **Save**. The results, podium and search update by themselves.
+
+If the results don't appear after 5 minutes, the file probably isn't quite right (often the headings or the time format). Tell Peter.
+
+## Privacy notice
+
+Click **Privacy notice** to change its wording. Set **Last checked** to today's date when the committee has approved it. The part about the contact form is added automatically once the form is switched on.
+
 ## Dates for your diary, totals and contact details
 
 Open **Site settings**:
@@ -80,6 +94,6 @@ Open **Meet the dads**. Only add someone **once they've agreed** to appear on th
 
 ## If something goes wrong
 
-- **Nothing changed after 5 minutes:** something in the entry wasn't accepted, often a missing required box such as a photo description. The website stays as it was, so nothing breaks. Check the entry, or ask Peter.
+- **Nothing changed after 5 minutes:** something in the entry wasn't accepted, often a missing required box such as a photo description, or a results file in the wrong format. The website stays as it was, so nothing breaks. Check the entry, or ask Peter.
 - **Made a mistake:** just edit it again and save. Every change is recorded, so anything can be undone. Ask Peter if you need an old version back.
 - **Deleting:** please ask Peter before deleting anything.
