@@ -7,6 +7,7 @@ import '@fontsource/bricolage-grotesque/latin-800.css';
 import '../styles/global.css';
 // Speed: the two fonts every first screen needs (body text and the big headings), fetched straight away
 import interRegular from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import interSemibold from '@fontsource/inter/files/inter-latin-600-normal.woff2?url'; // menu, buttons, labels: a late swap moved the page (layout shift)
 import bricolageHeavy from '@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff2?url';
 
 import Header from '../components/Header.astro';
@@ -71,6 +72,7 @@ const searchType = path.startsWith('/news/')
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preload" href={interRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interSemibold} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={bricolageHeavy} as="font" type="font/woff2" crossorigin />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
