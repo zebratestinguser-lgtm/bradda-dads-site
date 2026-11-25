@@ -144,3 +144,4 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 - [x] **Photo descriptions:** done (25 Nov 2026), except the 9 blackface photos.
 - [x] **Duck race winners archive:** /events/duck-race/winners/ (7 races, 2008–2012, from the old results sheets and posts; `src/content/duck-winners/`, editable in Pages CMS). Krazy Kraft (children's raft race) winners were left off because they're children; they're still in the old posts.
 - [ ] Duck race winners: add results from other years if anyone has them (2013 onwards weren't on the old sites). Check the committee is happy for winners' names to be shown.
+- [ ] **Committee decision: include the children's raft race (Krazy Kraft) winners or not?** Named in the old posts for 2007, 2008, 2010 and 2011; left off the winners page for now. If they're kept off, consider also removing the children's names from those old news stories. (Also in the committee's facts-to-check doc.)
