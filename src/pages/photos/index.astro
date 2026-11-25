@@ -1,4 +1,6 @@
 ---
+import { url } from '../../lib/url';
+import Img from '../../components/Img.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -6,7 +8,6 @@ import AlbumCard from '../../components/AlbumCard.astro';
 import { NEWS_TAGS } from '../../content.config';
 import { getAlbums, photoYear, categorySlug, CATEGORY_ORDER } from '../../lib/albums';
 import { getSite } from '../../lib/site';
-import { url, thumb, thumbSet } from '../../lib/url';
 import { categoryPhoto, photoMatching } from '../../lib/photos';
 
 const site = await getSite();
@@ -53,7 +54,7 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
           tiles.map((c) => (
             <li>
               <a class="tile" href={url(`/photos/category/${categorySlug(c.name)}/`)}>
-                {c.photo && <img class="tile__img" src={thumb(c.photo.src)} srcset={thumbSet(c.photo.src)} sizes="(max-width: 600px) 50vw, 320px" alt="" loading="lazy" decoding="async" />}
+                {c.photo && <Img kind="grid" class="tile__img" src={c.photo.src} sizes="(max-width: 600px) 50vw, 320px" alt="" loading="lazy" decoding="async" />}
                 <span class="tile__shade" aria-hidden="true" />
                 <span class="tile__text">
                   <span class="tile__name">{c.name}</span>

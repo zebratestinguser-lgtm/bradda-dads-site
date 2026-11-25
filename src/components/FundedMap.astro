@@ -1,6 +1,8 @@
 ---
 // Leaflet map of funded projects (loads when scrolled near) + text list fallback.
 import { getCollection } from 'astro:content';
+// The map's styles are part of the page (stylesheets are inlined), so they're ready when the map script loads
+import 'leaflet/dist/leaflet.css';
 import { isPlaceholder } from '../lib/events';
 
 interface Props {
@@ -41,7 +43,7 @@ const pins = funded.map((f) => ({
   type Pin = { name: string; lat: number; lng: number; summary: string; year: string; confirmed: boolean };
 
   async function init(el: HTMLElement) {
-    const [{ default: L }] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
+    const [{ default: L }] = await Promise.all([import('leaflet')]);
     const pins: Pin[] = JSON.parse(el.dataset.map!);
     const map = L.map(el, { scrollWheelZoom: false });
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

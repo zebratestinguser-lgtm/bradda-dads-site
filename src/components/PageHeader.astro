@@ -1,8 +1,8 @@
 ---
+import Img from './Img.astro';
 // Green header band used at the top of inner pages.
 // Optional photo: fades in from the right behind the text, with its date always shown.
 import BrookEdge from './BrookEdge.astro';
-import { url, srcset } from '../lib/url';
 interface Props {
   title: string;
   eyebrow?: string;
@@ -19,7 +19,7 @@ const { title, eyebrow, intro, image, imageLabel } = Astro.props;
   {
     image && (
       <div class="page-header__photo" aria-hidden="true">
-        <img src={url(image)} srcset={srcset(image)} sizes="(max-width: 600px) 100vw, 62vw" alt="" decoding="async" fetchpriority="high" />
+        <Img kind="large" src={image} sizes="(max-width: 600px) 100vw, 62vw" alt="" decoding="async" fetchpriority="high" />
       </div>
     )
   }

@@ -1,4 +1,6 @@
 ---
+import { url } from '../lib/url';
+import Img from '../components/Img.astro';
 // Our story: introduction, then a timeline running down the page with a duck on each year and a photo
 // from that year's albums where there is one. Entries whose year isn't known yet are listed at the end.
 import { getCollection } from 'astro:content';
@@ -9,7 +11,6 @@ import DuckLogo from '../components/DuckLogo.astro';
 import { getSite } from '../lib/site';
 import { isPlaceholder } from '../lib/events';
 import { yearPhoto, type PickedPhoto } from '../lib/photos';
-import { url, thumb, thumbSet } from '../lib/url';
 
 const site = await getSite();
 const timeline = (await getCollection('timeline')).sort((a, b) => a.data.order - b.data.order);
@@ -56,7 +57,7 @@ const photos: (PickedPhoto | { src: string; alt: string; label?: string } | unde
                   <p class="entry__text">{t.data.text}</p>
                   {photo && (
                     <figure class="entry__photo">
-                      <img src={thumb(photo.src)} srcset={thumbSet(photo.src)} sizes="(max-width: 600px) 100vw, 400px" alt={photo.alt} loading="lazy" decoding="async" />
+                      <Img kind="grid" src={photo.src} sizes="(max-width: 600px) 100vw, 400px" alt={photo.alt} loading="lazy" decoding="async" />
                       {'label' in photo && photo.label && <figcaption>Photo taken {photo.label}</figcaption>}
                     </figure>
                   )}

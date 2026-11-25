@@ -14,10 +14,15 @@ import sharp from 'sharp';
 const ROOT = join(import.meta.dirname, '..', 'public', 'uploads');
 const OUT = join(ROOT, 'thumbs');
 const MANIFEST = join(OUT, '.manifest.json');
+// Each size is made as WebP (works everywhere) and AVIF (about a third smaller; offered first to browsers
+// that support it, via <picture> in src/components/Img.astro). AVIF is slow to make, but only once.
 const SIZES = [
-  { width: 480, quality: 68, dir: OUT },
-  { width: 960, quality: 70, dir: join(OUT, '960') },
-  { width: 320, quality: 66, dir: join(OUT, '320') },
+  { width: 480, quality: 68, dir: OUT, format: 'webp' },
+  { width: 960, quality: 70, dir: join(OUT, '960'), format: 'webp' },
+  { width: 320, quality: 66, dir: join(OUT, '320'), format: 'webp' },
+  { width: 480, quality: 50, dir: OUT, format: 'avif' },
+  { width: 960, quality: 52, dir: join(OUT, '960'), format: 'avif' },
+  { width: 320, quality: 48, dir: join(OUT, '320'), format: 'avif' },
 ];
 const EXT = /\.(jpe?g|png|webp|avif|gif)$/i;
 
@@ -64,7 +69,7 @@ await Promise.all(
       const src = queue.shift();
       const rel = relative(ROOT, src).replace(/\\/g, '/');
       const { size } = statSync(src);
-      const dests = SIZES.map((s) => ({ ...s, path: join(s.dir, rel.slice(0, -extname(rel).length) + '.webp') }));
+      const dests = SIZES.map((s) => ({ ...s, path: join(s.dir, rel.slice(0, -extname(rel).length) + '.' + s.format) }));
       if (manifest[rel] === size && dests.every((d) => existsSync(d.path))) {
         next[rel] = size;
         skipped++;
@@ -73,7 +78,8 @@ await Promise.all(
       try {
         for (const d of dests) {
           mkdirSync(dirname(d.path), { recursive: true });
-          await sharp(src).rotate().resize({ width: d.width, withoutEnlargement: true }).webp({ quality: d.quality }).toFile(d.path);
+          const img = sharp(src).rotate().resize({ width: d.width, withoutEnlargement: true });
+          await (d.format === 'avif' ? img.avif({ quality: d.quality, effort: 4 }) : img.webp({ quality: d.quality })).toFile(d.path);
         }
         next[rel] = size;
         made++;
@@ -86,13 +92,13 @@ await Promise.all(
 );
 // Remove copies whose original has gone (deleted photos must not linger in the build cache)
 let pruned = 0;
-const wanted = new Set(Object.keys(next).flatMap((rel) => SIZES.map((s) => join(s.dir, rel.slice(0, -extname(rel).length) + '.webp'))));
+const wanted = new Set(Object.keys(next).flatMap((rel) => SIZES.map((s) => join(s.dir, rel.slice(0, -extname(rel).length) + '.' + s.format))));
 (function prune(dir) {
   if (!existsSync(dir)) return;
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
     if (statSync(p).isDirectory()) prune(p);
-    else if (name.endsWith('.webp') && !wanted.has(p)) {
+    else if (/\.(webp|avif)$/.test(name) && !wanted.has(p)) {
       unlinkSync(p);
       pruned++;
     }

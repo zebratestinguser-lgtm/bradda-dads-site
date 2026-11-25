@@ -1,4 +1,5 @@
 ---
+import { url, small } from '../../../lib/url';
 // Duck race winners: every prize list we have from past Boxing Day and carnival duck races
 // (src/content/duck-winners/), newest first, with a search by name or duck number.
 import { getCollection } from 'astro:content';
@@ -6,7 +7,6 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import Band from '../../../components/Band.astro';
 import { formatDate } from '../../../lib/format';
-import { url, thumb, small } from '../../../lib/url';
 import { photoMatching } from '../../../lib/photos';
 
 const races = (await getCollection('duckWinners')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());

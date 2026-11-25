@@ -139,6 +139,11 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
   @media (prefers-reduced-motion: no-preference) {
     .brook__bob {
       transition: scale 0.3s ease; /* turning round looks like a quick spin rather than a jump */
+    }
+    /* Speed: the ducks start bobbing once the visitor scrolls, moves the mouse, touches or uses the
+       keyboard, so the page counts as fully drawn straight away (an endless animation from the start
+       makes speed tests think the page never finishes) */
+    :global(html.ducks-awake) .brook__bob {
       animation: brook-bob 3.6s ease-in-out infinite;
       animation-delay: var(--bob-delay, 0s);
     }
@@ -180,6 +185,9 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
   // Speed: the ducks only start once the page has loaded and the browser is idle, so they never hold up
   // the first view. Every measurement is done before anything moves (reading sizes straight after a
   // change forces the browser to lay the whole page out again).
+  const wake = () => document.documentElement.classList.add('ducks-awake');
+  for (const ev of ['scroll', 'pointermove', 'touchstart', 'keydown']) window.addEventListener(ev, wake, { once: true, passive: true });
+
   const startDucks = () => {
   const ducks = [...document.querySelectorAll<HTMLElement>('.brook__duck')];
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -210,7 +218,6 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
     const groups: Group[] = [];
     const all: Duck[] = [];
     for (const el of ducks) {
-      const size = Number(el.dataset.duckSize) || 44;
       const d: Duck = {
         el,
         pos: 0,

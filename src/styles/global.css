@@ -302,7 +302,7 @@ a:hover {
   color: var(--text);
   font: inherit;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -483,4 +483,9 @@ html {
   .results-table {
     min-width: 0 !important;
   }
+}
+
+/* <picture> (src/components/Img.astro) only chooses the file; it shouldn't affect layout */
+picture {
+  display: contents;
 }

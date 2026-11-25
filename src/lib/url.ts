@@ -46,3 +46,14 @@ export function url(path = '/'): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   return `${base}/${path.replace(/^\//, '')}`;
 }
+
+/**
+ * AVIF versions of the preview images (made by scripts/make-thumbs.mjs next to the WebP ones), for a
+ * <picture> <source type="image/avif">. 'grid' = 320/480px (cards, grids), 'large' = 480/960px (headers).
+ */
+export function avifSet(src: string, kind: 'grid' | 'large'): string | undefined {
+  const m = src.match(/^\/uploads\/(.+)\.(jpe?g|png|webp|gif)$/i);
+  if (!m || src.startsWith('/uploads/thumbs/')) return undefined;
+  const a = (dir: string) => url(`/uploads/thumbs/${dir}${m[1]}.avif`);
+  return kind === 'grid' ? `${a('320/')} 320w, ${a('')} 480w` : `${a('')} 480w, ${a('960/')} 960w`;
+}

@@ -22,6 +22,12 @@
     // All photos on the page, including ones in collapsed ("Show all") sections
     const items = () => [...document.querySelectorAll<HTMLAnchorElement>('a[data-lb]')];
     let current = 0;
+    // Use the smaller AVIF copies when the browser can show them (checked once with a tiny test image)
+    let avif = false;
+    const probe = new Image();
+    probe.onload = () => (avif = probe.width > 0);
+    probe.src = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=';
+    const sourcesFor = (a: HTMLAnchorElement) => (avif && a.dataset.lbAvif) || a.dataset.lbSrcset;
     let opener: HTMLElement | null = null;
 
     function show(i: number) {
@@ -30,9 +36,10 @@
       const a = list[current];
       img.removeAttribute('srcset');
       img.src = a.href;
-      if (a.dataset.lbSrcset) {
+      const set = sourcesFor(a);
+      if (set) {
         img.sizes = '100vw';
-        img.srcset = a.dataset.lbSrcset;
+        img.srcset = set;
       }
       img.alt = a.querySelector('img')?.alt ?? '';
       caption.textContent = a.dataset.lbCaption ?? '';
@@ -40,9 +47,10 @@
         const near = list[(n + list.length) % list.length];
         if (!near) return;
         const pre = new Image();
-        if (near.dataset.lbSrcset) {
+        const nearSet = sourcesFor(near);
+        if (nearSet) {
           pre.sizes = '100vw';
-          pre.srcset = near.dataset.lbSrcset;
+          pre.srcset = nearSet;
         }
         pre.src = near.href;
       });
@@ -122,7 +130,7 @@
   }
   .lightbox__caption {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--on-dark-soft);
     text-align: center;
     max-width: 70ch;

@@ -150,6 +150,7 @@ export const RACES = {
   wolfspit: "Wolf's Pit Fell Race",
   'tour-of-bradwell-long': 'Long Tour of Bradwell',
   'tour-of-bradwell-half': 'Half Tour of Bradwell',
+  'tour-of-bradwell': 'Tour of Bradwell',
 } as const;
 
 const results = defineCollection({

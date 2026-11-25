@@ -1,0 +1,21 @@
+---
+// A photo from /uploads/ offered as AVIF first (about a third smaller) with the WebP previews as the
+// fallback. Layout is unaffected: <picture> is display: contents (global.css), so CSS that styles the
+// <img> keeps working. 'grid' for cards and grids (320/480px), 'large' for headers (480/960/1200px).
+import type { HTMLAttributes } from 'astro/types';
+import { url, thumb, thumbSet, srcset, avifSet } from '../lib/url';
+
+interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'srcset'> {
+  src: string;
+  kind: 'grid' | 'large';
+  sizes: string;
+}
+const { src, kind, sizes, ...rest } = Astro.props;
+const avif = avifSet(src, kind);
+const fallback = kind === 'grid' ? { src: thumb(src), srcset: thumbSet(src) } : { src: url(src), srcset: srcset(src) };
+---
+
+<picture>
+  {avif && <source type="image/avif" srcset={avif} sizes={sizes} />}
+  <img src={fallback.src} srcset={fallback.srcset} sizes={sizes} {...rest} />
+</picture>

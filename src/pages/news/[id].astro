@@ -1,4 +1,6 @@
 ---
+import { url } from '../../lib/url';
+import Img from '../../components/Img.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrookEdge from '../../components/BrookEdge.astro';
@@ -6,7 +8,6 @@ import Band from '../../components/Band.astro';
 import { storyPhoto, storyPhotos } from '../../lib/photos';
 import { photoDate } from '../../lib/albums';
 import { formatDate, formatShortDate } from '../../lib/format';
-import { url, thumb, srcset, thumbSet } from '../../lib/url';
 
 export async function getStaticPaths() {
   const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -47,7 +48,7 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
       {
         header && (
           <div class="story__header-photo" aria-hidden="true">
-            <img src={url(header.src)} srcset={srcset(header.src)} sizes="100vw" alt="" decoding="async" fetchpriority="high" />
+            <Img kind="large" src={header.src} sizes="100vw" alt="" decoding="async" fetchpriority="high" />
           </div>
         )
       }
@@ -67,7 +68,7 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
       {
         story.data.image && (
           <figure class="story__figure">
-            <img src={url(story.data.image)} srcset={srcset(story.data.image)} sizes="(max-width: 800px) 100vw, 760px" alt={story.data.imageAlt ?? ''} decoding="async" />
+            <Img kind="large" src={story.data.image} sizes="(max-width: 800px) 100vw, 760px" alt={story.data.imageAlt ?? ''} decoding="async" />
             {when && <figcaption>Photo taken {when}</figcaption>}
           </figure>
         )
@@ -87,7 +88,7 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
               {preview.map((p, i) => (
                 <li>
                   <a href={url(`/photos/${album.id}/`)} aria-label={i === 0 ? `See all photos from ${album.data.title}` : undefined} tabindex={i === 0 ? undefined : -1}>
-                    <img src={thumb(p.src)} srcset={thumbSet(p.src)} sizes="(max-width: 600px) 50vw, 320px" alt={p.alt} loading="lazy" decoding="async" />
+                    <Img kind="grid" src={p.src} sizes="(max-width: 600px) 50vw, 320px" alt={p.alt} loading="lazy" decoding="async" />
                   </a>
                 </li>
               ))}
@@ -119,7 +120,7 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
               <li class="rcard">
                 {relatedPhotos[i] && (
                   <div class="rcard__media" aria-hidden="true">
-                    <img src={thumb(relatedPhotos[i]!.src)} srcset={thumbSet(relatedPhotos[i]!.src)} sizes="(max-width: 600px) 100vw, 400px" alt="" loading="lazy" decoding="async" />
+                    <Img kind="grid" src={relatedPhotos[i]!.src} sizes="(max-width: 600px) 100vw, 400px" alt="" loading="lazy" decoding="async" />
                     {relatedPhotos[i]!.label && <span class="rcard__chip">{relatedPhotos[i]!.own ? relatedPhotos[i]!.label : `Archive photo · ${relatedPhotos[i]!.label}`}</span>}
                   </div>
                 )}

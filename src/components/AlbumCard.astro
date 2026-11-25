@@ -1,7 +1,8 @@
 ---
+import Img from './Img.astro';
 // Album tile: cover + two smaller photos, with the photo date always visible.
 import { type Album, photoDate, photoDateShort } from '../lib/albums';
-import { url, thumb, small, thumbSet } from '../lib/url';
+import { url, small } from '../lib/url';
 import { displayCover } from '../lib/photos';
 
 interface Props {
@@ -32,7 +33,7 @@ const count = pics.length === 0 ? 'Photos coming soon' : `${pics.length} photo${
   <div class="album__tiles" aria-hidden="true">
     {
       coverSrc ? (
-        <img class:list={['album__tile', 'album__tile--main', { 'album__tile--solo': !rest[0] }]} src={thumb(coverSrc)} srcset={thumbSet(coverSrc)} sizes="(max-width: 600px) 50vw, 320px" alt="" loading="lazy" decoding="async" />
+        <Img kind="grid" class:list={['album__tile', 'album__tile--main', { 'album__tile--solo': !rest[0] }]} src={coverSrc} sizes="(max-width: 600px) 50vw, 320px" alt="" loading="lazy" decoding="async" />
       ) : (
         <div class="album__tile album__tile--main album__tile--solo" style={`background:${sw[0]}`} />
       )

@@ -1,9 +1,10 @@
 ---
+import { url } from '../../lib/url';
+import Img from '../Img.astro';
 import DuckLogo from '../DuckLogo.astro';
 import BrookEdge from '../BrookEdge.astro';
 import { isPlaceholder, isHappening, formatEventDates, type EventEntry } from '../../lib/events';
 import { formatTime, inlineBold } from '../../lib/format';
-import { url, srcset } from '../../lib/url';
 
 interface Props {
   event?: EventEntry;
@@ -100,7 +101,7 @@ const dates = event ? formatEventDates(event) : undefined;
           <div class:list={['hero__side', { 'hero__side--photo': event.data.heroImage }]}>
             {event.data.heroImage && (
               <figure class="hero__photo">
-                <img src={url(event.data.heroImage)} srcset={srcset(event.data.heroImage)} sizes="(max-width: 600px) 100vw, 45vw" alt={event.data.heroImageAlt ?? ''} width="640" height="480" fetchpriority="high" decoding="async" />
+                <Img kind="large" src={event.data.heroImage} sizes="(max-width: 600px) 100vw, 45vw" alt={event.data.heroImageAlt ?? ''} width="640" height="480" fetchpriority="high" decoding="async" />
                 {event.data.heroImageCaption && <figcaption class="hero__photo-date">{event.data.heroImageCaption}</figcaption>}
               </figure>
             )}
