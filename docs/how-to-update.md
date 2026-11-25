@@ -66,6 +66,10 @@ After each duck race:
 
 Only put names on the website if the winners are happy for them to appear.
 
+## Our supporters
+
+Click **Our supporters** to thank a business or organisation that helps. Fill in their name and one sentence about what they help with; add their website and logo only if they're happy for you to. Untick **Current supporter** when they stop, and they move to the "past" list.
+
 ## Add a year's Wolf's Pit results
 
 1. Get the results as a spreadsheet. Make sure the first row is exactly these five headings: **position, name, club, category, time**, with times written like **0:41:23**. Leave club or category empty if you don't have them.

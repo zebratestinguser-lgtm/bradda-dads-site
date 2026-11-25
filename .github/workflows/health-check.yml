@@ -1,0 +1,44 @@
+# Weekly health check. If anything fails, GitHub emails the repository owner (Actions notifications).
+# 1. The site still builds and has no broken internal links or images.
+# 2. The latest deploy to GitHub Pages succeeded.
+# 3. The live site's main pages answer, and the payment/entry links still work (scripts/qa/health-check.mjs).
+# Run it by hand any time: Actions → Weekly health check → Run workflow.
+name: Weekly health check
+
+on:
+  schedule:
+    - cron: '0 7 * * 1' # Mondays, 7am UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: public/uploads/thumbs
+          key: thumbs-health-${{ github.run_id }}
+          restore-keys: thumbs-
+      - name: Build the site
+        run: npm run build
+      - name: Broken internal links and images
+        run: node scripts/qa/check-links.mjs .
+      - name: Latest deploy succeeded
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          result=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow deploy.yml --limit 1 --json conclusion --jq '.[0].conclusion')
+          echo "Latest deploy: $result"
+          test "$result" = "success"
+      - name: Live site and outside links
+        run: node scripts/qa/health-check.mjs

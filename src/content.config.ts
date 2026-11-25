@@ -201,6 +201,24 @@ const duckWinners = defineCollection({
   }),
 });
 
+/** Businesses and organisations that support Bradda Dads: src/content/supporters/<name>.md → /supporters/ */
+const supporters = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/supporters' }),
+  schema: z
+    .object({
+      name: z.string(),
+      /** What they support, e.g. "The bonfire and fireworks" */
+      summary: z.string(),
+      url: z.union([z.url(), z.literal('')]).optional(),
+      /** Their logo (only with their permission) */
+      logo: uploadPath.optional(),
+      logoAlt: z.string().optional(),
+      /** Untick for past supporters (listed separately) */
+      current: z.boolean().default(true),
+      order: z.number().int().default(10),
+    }),
+});
+
 /** Pages whose wording the team edits in the editor (e.g. src/content/pages/privacy.md). */
 const pages = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/pages' }),
@@ -317,4 +335,4 @@ const settings = defineCollection({
   }),
 });
 
-export const collections = { news, events, albums, results, duckWinners, pages, timeline, funded, members, settings };
+export const collections = { news, events, albums, results, duckWinners, supporters, pages, timeline, funded, members, settings };

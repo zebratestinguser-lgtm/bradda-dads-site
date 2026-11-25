@@ -37,3 +37,5 @@ for (const f of files) {
 }
 console.log(`pages checked: ${files.length}, broken targets: ${bad.size}`);
 for (const [u, from] of [...bad].slice(0, 25)) console.log(`${u}  <- ${from.length} page(s), e.g. ${from[0]}`);
+// Fail (for the weekly health check) when anything is broken
+if (bad.size) process.exitCode = 1;

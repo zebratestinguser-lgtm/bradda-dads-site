@@ -548,6 +548,55 @@ content:
         type: string
         hidden: true
 
+  # ───────────────────────── Our supporters ─────────────────────────
+  - name: supporters
+    label: Our supporters
+    type: collection
+    path: src/content/supporters
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: false
+    view:
+      fields: [name, current]
+      primary: name
+      sort: [order]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: name
+        label: Business or organisation
+        type: string
+        required: true
+      - name: summary
+        label: What they help with
+        description: One sentence, e.g. "Sponsors the fireworks at the village bonfire."
+        type: text
+        required: true
+      - name: url
+        label: Their website (optional)
+        type: string
+      - name: logo
+        label: Logo (optional, only with their permission)
+        type: image
+        options:
+          media: uploads
+          path: public/uploads/images
+      - name: logoAlt
+        label: Logo description
+        type: string
+      - name: current
+        label: Current supporter
+        description: Untick for past supporters; they're listed lower down the page.
+        type: boolean
+        default: true
+      - name: order
+        label: Position on the page
+        description: 1 = first.
+        type: number
+        default: 10
+
   # ───────────────────────── Wolf's Pit results ─────────────────────────
   - name: wolfspitResults
     label: Wolf's Pit results

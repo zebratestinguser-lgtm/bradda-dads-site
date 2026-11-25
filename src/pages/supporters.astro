@@ -1,0 +1,127 @@
+---
+// Our supporters: businesses and organisations that help Bradda Dads (src/content/supporters/, editable
+// in Pages CMS as "Our supporters"). Current supporters first, then past ones, then how to get involved.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Band from '../components/Band.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { photoMatching } from '../lib/photos';
+import { url, thumb } from '../lib/url';
+
+const all = (await getCollection('supporters')).sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
+const current = all.filter((s) => s.data.current);
+const past = all.filter((s) => !s.data.current);
+const header = await photoMatching(/fireworks/i, /bonfire blazing/i);
+---
+
+<BaseLayout title="Our supporters" description="The local businesses and organisations that help Bradda Dads raise money for Bradwell." ogImage={header?.src} ogImageAlt={header?.alt}>
+  <PageHeader
+    eyebrow="About us"
+    title="Our supporters"
+    intro="Bradda Dads couldn't do it alone. These local businesses and organisations help make our events happen. Thank you."
+    image={header?.src}
+    imageLabel={header?.label}
+  />
+
+  <Band first>
+    <section class="container page-section" aria-labelledby="current-title">
+      <h2 class="subhead" id="current-title">Thank you to</h2>
+      {
+        current.length > 0 ? (
+          <ul class="supporters" role="list">
+            {current.map((s) => (
+              <li class="supporter">
+                {s.data.logo && <img class="supporter__logo" src={thumb(s.data.logo)} alt={s.data.logoAlt ?? `${s.data.name} logo`} loading="lazy" decoding="async" />}
+                <h3 class="supporter__name">{s.data.url ? <a href={s.data.url} rel="noopener">{s.data.name}</a> : s.data.name}</h3>
+                <p class="supporter__text">{s.data.summary}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>We're adding our supporters here soon.</p>
+        )
+      }
+      {
+        past.length > 0 && (
+          <>
+            <h3 class="past-title">Who has helped in the past</h3>
+            <ul class="past" role="list">
+              {past.map((s) => (
+                <li>
+                  <strong>{s.data.url ? <a href={s.data.url} rel="noopener">{s.data.name}</a> : s.data.name}</strong>: {s.data.summary}
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+    </section>
+  </Band>
+
+  <Band tone="mist">
+    <section class="container page-section support" aria-labelledby="support-title">
+      <h2 class="subhead" id="support-title">Could your business help?</h2>
+      <p>
+        Sponsoring the fireworks, donating raffle prizes or lending equipment all make a real difference, and everything raised goes back into Bradwell. We'll thank you here and at the event.
+      </p>
+      <a class="btn btn--green btn--md" href={url('/contact/')}>Get in touch</a>
+    </section>
+  </Band>
+</BaseLayout>
+
+<style>
+  .supporters {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 16px;
+  }
+  .supporter {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .supporter__logo {
+    max-height: 64px;
+    max-width: 180px;
+    width: auto;
+    object-fit: contain;
+    align-self: flex-start;
+  }
+  .supporter__name {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    margin: 0;
+  }
+  .supporter__text {
+    margin: 0;
+    color: var(--muted-strong);
+  }
+  .past-title {
+    margin: 32px 0 10px;
+    font-size: 18px;
+  }
+  .past {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .support {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    max-width: 68ch;
+  }
+  .support p {
+    margin: 0;
+  }
+</style>
