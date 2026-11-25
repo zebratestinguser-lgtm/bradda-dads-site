@@ -173,6 +173,37 @@ const results = defineCollection({
   }),
 });
 
+/**
+ * Duck race prize winners, one file per race: src/content/duck-winners/YYYY-boxing-day.md (or -carnival).
+ * Names exactly as published at the time. Each duck is numbered; several people can hold the same number.
+ */
+const duckWinners = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/duck-winners' }),
+  schema: z.object({
+    race: z.enum(['Boxing Day', 'Carnival']),
+    /** Day of the race */
+    date: z.coerce.date(),
+    prizes: z
+      .array(
+        z.object({
+          /** e.g. "1st", "2nd", "Runner-up", "Last duck home" */
+          place: z.string(),
+          /** The winning duck's number (leave empty if the sheet doesn't show it) */
+          number: z.coerce.string().optional(),
+          winners: z.array(z.string()).min(1),
+          /** e.g. "£50 each" (only if published) */
+          amount: z.string().optional(),
+          note: z.string().optional(),
+        }),
+      )
+      .min(1),
+    /** Photo or scan of the printed results sheet */
+    sheet: uploadPath.optional(),
+    notes: z.string().optional(),
+    source,
+  }),
+});
+
 const timeline = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/timeline' }),
   schema: z.object({
@@ -278,4 +309,4 @@ const settings = defineCollection({
   }),
 });
 
-export const collections = { news, events, albums, results, timeline, funded, members, settings };
+export const collections = { news, events, albums, results, duckWinners, timeline, funded, members, settings };

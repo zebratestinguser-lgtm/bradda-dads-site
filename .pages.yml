@@ -476,6 +476,79 @@ content:
         type: string
         hidden: true
 
+  # ───────────────────────── Duck race winners ─────────────────────────
+  - name: duckWinners
+    label: Duck race winners
+    type: collection
+    path: src/content/duck-winners
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.date}-{primary}.md"
+      field: false
+    view:
+      fields: [race, date]
+      primary: race
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: race
+        label: Which race
+        type: select
+        required: true
+        options:
+          values: [Boxing Day, Carnival]
+      - name: date
+        label: Date of the race
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: prizes
+        label: Prizes
+        description: One line per winning duck. Several people can share a duck number.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.place} · duck {fields.number}"
+        fields:
+          - name: place
+            label: Prize
+            description: e.g. 1st, 2nd, Runner-up, Last duck home
+            type: string
+            required: true
+          - name: number
+            label: Duck number
+            type: string
+          - name: winners
+            label: Winners
+            description: One name per line, as you'd like it shown.
+            type: string
+            list: true
+            required: true
+          - name: amount
+            label: Prize money (optional)
+            description: e.g. £50 each
+            type: string
+          - name: note
+            label: Note (optional)
+            type: string
+      - name: sheet
+        label: Photo of the results sheet (optional)
+        type: image
+        options:
+          media: images
+      - name: notes
+        label: Notes (optional)
+        type: text
+
+      - name: source
+        label: Imported from (old site)
+        type: string
+        hidden: true
+
   # ───────────────────────── Our story ─────────────────────────
   - name: timeline
     label: Our story timeline

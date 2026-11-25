@@ -1,0 +1,302 @@
+---
+// Duck race winners: every prize list we have from past Boxing Day and carnival duck races
+// (src/content/duck-winners/), newest first, with a search by name or duck number.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Band from '../../../components/Band.astro';
+import { formatDate } from '../../../lib/format';
+import { url, thumb } from '../../../lib/url';
+import { photoMatching } from '../../../lib/photos';
+
+const races = (await getCollection('duckWinners')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const news = await getCollection('news');
+// The old blog post each list came from, if it's on this site too
+const storyFor = (src?: string) => (src ? news.find((n) => n.data.source === src) : undefined);
+const header = await photoMatching(/ducks tumbling over the weir/i, /ducks pour over the yellow barrier/i);
+const years = races.map((r) => r.data.date.getFullYear());
+const span = years.length ? `${Math.min(...years)}–${Math.max(...years)}` : '';
+const prizeCount = races.reduce((n, r) => n + r.data.prizes.length, 0);
+const anchor = (r: (typeof races)[number]) => `race-${r.id}`;
+---
+
+<BaseLayout
+  title="Duck race winners"
+  description={`Prize winners from ${races.length} Bradda Dads duck races (${span}): Boxing Day and carnival. Search by name or duck number.`}
+  ogImage={header?.src}
+  ogImageAlt={header?.alt}
+>
+  <PageHeader eyebrow="Duck race" title="Duck race winners" intro={`Who won what in ${races.length} past duck races (${span}), typed up from the old results sheets and blog posts. Every duck is numbered, and often several people held the same number.`} image={header?.src} imageLabel={header?.label}>
+    <a class="back" href={url('/events/duck-race/')}>← Boxing Day Duck Race</a>
+  </PageHeader>
+
+  <Band first>
+    <section class="container page-section stack" aria-labelledby="find-title">
+      <h2 class="subhead" id="find-title">Find a winner</h2>
+      <div class="finder">
+        <label for="dw-search">Name or duck number</label>
+        <input id="dw-search" type="search" placeholder="e.g. Naylor or 476" autocomplete="off" data-dw-search />
+        <p class="hint" aria-live="polite" data-dw-status>{prizeCount} prizes from {races.length} races.</p>
+      </div>
+      <nav aria-label="Jump to a race">
+        <ul class="jump" role="list">
+          {races.map((r) => (
+            <li><a href={`#${anchor(r)}`}>{r.data.race} {r.data.date.getFullYear()}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </section>
+  </Band>
+
+  <Band tone="mist">
+    <section class="container page-section races" aria-label="Winners by race">
+      {
+        races.map((r) => {
+          const story = storyFor(r.data.source);
+          return (
+            <article class="race" id={anchor(r)} data-dw-race>
+              <header class="race__head">
+                <h2 class="race__title">{r.data.race} duck race {r.data.date.getFullYear()}</h2>
+                <p class="race__date">{formatDate(r.data.date)}</p>
+              </header>
+              <div class="table-scroll" tabindex="0" role="region" aria-label={`Winners, ${r.data.race} ${r.data.date.getFullYear()} (scrolls sideways)`}>
+                <table class="dw-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Prize</th>
+                      <th scope="col">Duck no.</th>
+                      <th scope="col">Winners</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {r.data.prizes.map((p) => (
+                      <tr data-dw-row data-dw-text={`${p.number ?? ''} ${p.winners.join(' ')}`.toLowerCase()}>
+                        <td class="dw-place">
+                          {p.place}
+                          {p.amount && <span class="dw-amount">{p.amount}</span>}
+                        </td>
+                        <td class="dw-number">{p.number ?? '–'}</td>
+                        <td>
+                          {p.winners.join(', ')}
+                          {p.note && <span class="dw-note">{p.note}</span>}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div class="race__foot">
+                {r.data.sheet && (
+                  <a class="sheet" href={url(r.data.sheet)}>
+                    <img src={thumb(r.data.sheet)} alt="" width="60" height="84" loading="lazy" decoding="async" />
+                    <span>See the original results sheet</span>
+                  </a>
+                )}
+                {story ? <a href={url(`/news/${story.id}/`)}>Read the story and see the photos →</a> : r.data.source && <a href={r.data.source}>The original post →</a>}
+              </div>
+              {r.data.notes && <p class="race__notes">{r.data.notes}</p>}
+            </article>
+          );
+        })
+      }
+      <p class="hint none" data-dw-none hidden>No winners found. Try part of a surname, or just the duck number.</p>
+    </section>
+  </Band>
+
+  <Band>
+    <section class="container page-section more">
+      <p>
+        These are the prize lists we've found from the old Bradda Dads websites. Names are as they were published at the time. If you'd like your name taken off, or you have results from other years, <a href={url('/contact/')}>please get in touch</a>.
+      </p>
+      <a class="btn btn--green btn--md" href={url('/events/duck-race/')}>This year's duck race</a>
+    </section>
+  </Band>
+</BaseLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-dw-search]');
+  const status = document.querySelector<HTMLElement>('[data-dw-status]');
+  const none = document.querySelector<HTMLElement>('[data-dw-none]');
+  if (input && status && none) {
+    const initial = status.textContent;
+    const races = [...document.querySelectorAll<HTMLElement>('[data-dw-race]')];
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      let hits = 0;
+      for (const race of races) {
+        let raceHits = 0;
+        for (const row of race.querySelectorAll<HTMLElement>('[data-dw-row]')) {
+          const text = row.dataset.dwText ?? '';
+          // A number matches the duck number exactly; words match anywhere in the names
+          const match = !q || (/^\d+$/.test(q) ? text.split(' ')[0] === q : text.includes(q));
+          row.hidden = !match;
+          if (match) raceHits++;
+        }
+        race.hidden = raceHits === 0;
+        hits += raceHits;
+      }
+      status.textContent = q ? (hits ? `${hits} prize${hits === 1 ? '' : 's'} found` : 'No winners found') : initial;
+      none.hidden = !q || hits > 0;
+    });
+  }
+</script>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .finder {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 420px;
+  }
+  .finder label {
+    font-weight: 600;
+  }
+  .finder input {
+    min-height: 48px;
+    padding: 0 16px;
+    border: 2px solid var(--border-strong, var(--border));
+    border-radius: 12px;
+    font: inherit;
+    background: var(--white);
+  }
+  .hint {
+    color: var(--muted);
+    margin: 0;
+  }
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: var(--radius-pill);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .races {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .race {
+    background: var(--panel);
+    border-radius: var(--radius-card);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .race__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+  }
+  .race__title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    margin: 0;
+  }
+  .race__date {
+    margin: 0;
+    color: var(--muted);
+  }
+  .dw-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  .dw-table th,
+  .dw-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .dw-table th {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .dw-place {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .dw-number {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+  .dw-amount,
+  .dw-note {
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .race__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+  }
+  .sheet {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+  }
+  .sheet img {
+    width: 60px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .race__notes {
+    margin: 0;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .more {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    max-width: 68ch;
+  }
+  .back {
+    color: var(--on-dark-soft);
+    font-weight: 600;
+    align-self: flex-start;
+    padding-block: 10px;
+    order: -1;
+  }
+  .back:hover {
+    color: var(--white);
+  }
+  @media (max-width: 600px) {
+    .race {
+      padding: 16px;
+    }
+    .dw-table th,
+    .dw-table td {
+      padding: 8px 6px;
+    }
+  }
+</style>

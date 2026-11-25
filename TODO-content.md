@@ -137,4 +137,5 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 - [ ] **Speed on phones:** mid-sized photo versions with srcset for headers and cards; run Lighthouse before and after (target 90+).
 - [ ] **Event dates in Google:** Event structured data on event pages; an "Add to calendar" link per event.
 - [ ] **Photo descriptions:** write real descriptions for the ~1,170 photos still described as "Photo N from…", in batches by event.
-- [ ] **Duck race winners archive:** turn the old prize-winner sheets into a searchable winners page, like the Wolf's Pit results.
+- [x] **Duck race winners archive:** /events/duck-race/winners/ (7 races, 2008–2012, from the old results sheets and posts; `src/content/duck-winners/`, editable in Pages CMS). Krazy Kraft (children's raft race) winners were left off because they're children; they're still in the old posts.
+- [ ] Duck race winners: add results from other years if anyone has them (2013 onwards weren't on the old sites). Check the committee is happy for winners' names to be shown.

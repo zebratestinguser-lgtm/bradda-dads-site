@@ -39,6 +39,8 @@ const isRace = event.id === 'wolfspit';
 const raceAll = isRace ? await getWolfspitYears() : [];
 const raceYears = raceAll.map((y) => y.year).sort((a, b) => a - b);
 const latestRace = raceAll[0];
+// Past prize winners (duck race only)
+const duckWinners = event.id === 'duck-race' ? (await getCollection('duckWinners')).sort((a, b) => a.data.date.getTime() - b.data.date.getTime()) : [];
 // Header photo: the event's own heroImage if set, else the latest real photo from its albums
 const photo = d.heroImage ? { src: d.heroImage, label: d.heroImageCaption } : await eventPhoto(event.id);
 // The main action shows in the header, and again in a slim bar at the bottom of phone screens
@@ -158,6 +160,13 @@ const jsonLd = addToCalendar
             <span class="race-link__label">Race results</span>
             <span class="race-link__title">Wolf's Pit results from {raceYears[0]} to {latestRace.year}</span>
             <span class="race-link__meta">{latestRace.year}: {latestRace.finishers} finishers · search any runner →</span>
+          </a>
+        )}
+        {duckWinners.length > 0 && (
+          <a class="race-link" href={url('/events/duck-race/winners/')}>
+            <span class="race-link__label">Past winners</span>
+            <span class="race-link__title">Duck race winners from {duckWinners[0].data.date.getFullYear()} to {duckWinners.at(-1)!.data.date.getFullYear()}</span>
+            <span class="race-link__meta">{duckWinners.length} races · search for your name or duck number →</span>
           </a>
         )}
         {albums.length > 0 && (

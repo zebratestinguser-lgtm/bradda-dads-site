@@ -52,6 +52,18 @@ To link an album to a news story, open the story and pick the album under **Phot
    - **Main button link:** usually the SumUp link.
 3. Press **Save**.
 
+## Add the duck race winners
+
+After each duck race:
+
+1. Click **Duck race winners**, then **Add an entry**.
+2. Choose **Boxing Day** or **Carnival** and set the date of the race.
+3. Under **Prizes**, add one line per winning duck: the prize (1st, 2nd, Runner-up, Last duck home), the duck number, and each winner's name on its own line. Add the prize money if you want it shown.
+4. If you have a photo of the printed results sheet, add it.
+5. Press **Save**. The winners appear at the top of the Duck race winners page.
+
+Only put names on the website if the winners are happy for them to appear.
+
 ## Dates for your diary, totals and contact details
 
 Open **Site settings**:
