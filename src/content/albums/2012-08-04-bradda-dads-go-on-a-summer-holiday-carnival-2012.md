@@ -9,29 +9,29 @@ photos:
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/001.jpg
     alt: "A family in striped seaside costumes walking in the 'summer holiday' carnival procession (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/002.jpg
-    alt: "Photo 2 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "The red tractor with a Bradda Dads duck on the front, ready for the carnival (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/003.jpg
-    alt: "Photo 3 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "The red double-decker bus float for 'Summer Holiday', with a 1960s film star poster on the front (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/004.jpg
-    alt: "Photo 4 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "Close-up of the black-and-white film star picture on the front of the bus float (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/005.jpg
-    alt: "Photo 5 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "The back of the red bus float with a Bradda Dads 'World Famous Duck Race' sign (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/006.jpg
-    alt: "Photo 6 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "Children climbing aboard the red bus float (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/007.jpg
-    alt: "Photo 7 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "The red 'A Summer Holiday' bus float parked on the grass (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/008.jpg
-    alt: "Photo 8 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "Dads and a girl in 1960s holiday outfits beside the bus float (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/009.jpg
-    alt: "Photo 9 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "Dads in bucket hats and holiday shorts dancing on the grass (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/010.jpg
-    alt: "Photo 10 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "The dads in holiday shirts and shorts doing their dance routine (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/011.jpg
-    alt: "Photo 11 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "The bus float and tractor parked by the green, with crowds by the wall (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/012.jpg
-    alt: "Photo 12 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "The tractor with its Bradda Dads duck towing the bus float through the village (4 August 2012)"
   - src: /uploads/albums/2012-08-04-bradda-dads-go-on-a-summer-holiday-carnival-2012/013.jpg
-    alt: "Photo 13 of 13 from Carnival 2012: Bradda Dads go on a summer holiday (4 August 2012)"
+    alt: "Women in blue bathing costumes and caps dancing in the procession (4 August 2012)"
 ---
 
 

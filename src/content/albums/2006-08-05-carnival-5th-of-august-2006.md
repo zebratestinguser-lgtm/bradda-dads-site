@@ -9,67 +9,67 @@ photos:
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/001.jpg
     alt: "A child dressed as a pirate, with an eye patch and painted moustache, for the carnival (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/002.jpg
-    alt: "Photo 2 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A dad dressed as a pirate in a waistcoat and bandana (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/003.jpg
-    alt: "Photo 3 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Two pirates in bandanas and eye patches by a garden wall (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/004.jpg
-    alt: "Photo 4 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "The pirate ship float with its Bradda Dads duck sail and a St George's flag (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/005.jpg
-    alt: "Photo 5 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "The Bradda Dads pirate ship float, with pirates aboard and children alongside (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/006.jpg
-    alt: "Photo 6 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Pirates in tricorn hats and skull bandanas getting ready by the park (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/007.jpg
-    alt: "Photo 7 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "The whole pirate crew in striped tops and bandanas posing for a group photo (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/008.jpg
-    alt: "Photo 8 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "The pirate crew, adults and children, lined up on the grass (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/009.jpg
-    alt: "Photo 9 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A pirate and a man in a top hat holding up a carnival prize certificate (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/010.jpg
-    alt: "Photo 10 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A grinning pirate holding a carnival certificate beside a crocodile float (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/011.jpg
-    alt: "Photo 11 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "The tractor pulling the pirate ship float in the carnival procession (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/012.jpg
-    alt: "Photo 12 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Dads building the wooden pirate ship float and rigging its mast (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/013.jpg
-    alt: "Photo 13 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Dads fixing ropes to the mast of the pirate ship float (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/014.jpg
-    alt: "Photo 14 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "The pirate ship float taking shape, with its mast and rigging up (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/015.jpg
-    alt: "Photo 15 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Pirates dancing down the road in the carnival procession (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/016.jpg
-    alt: "Photo 16 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Children and adults dressed as pirates dancing along the street (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/017.jpg
-    alt: "Photo 17 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A pirate beside the community transport minibus in the procession (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/018.jpg
-    alt: "Photo 18 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Pirates dancing down the road with the ship float behind them (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/019.jpg
-    alt: "Photo 19 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "The pirates dancing down the road behind the Bradda Dads ship float (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/020.jpg
-    alt: "Photo 20 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A street full of dancing pirates in the carnival procession (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/021.jpg
-    alt: "Photo 21 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A pirate with a microphone talking to people in costume on the carnival field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/022.jpg
-    alt: "Photo 22 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A pirate interviewing a boy and people in fancy dress on the field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/023.jpg
-    alt: "Photo 23 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A pirate with a microphone chatting to two women on the carnival field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/024.jpg
-    alt: "Photo 24 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Two women laughing with a pirate holding a microphone by the marquee (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/025.jpg
-    alt: "Photo 25 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Pirates and children dancing together on the carnival field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/026.jpg
-    alt: "Photo 26 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Children and pirates doing a dance on the field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/027.jpg
-    alt: "Photo 27 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Children joining the pirates' dance on the carnival field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/028.jpg
-    alt: "Photo 28 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A kickabout on the playing field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/029.jpg
-    alt: "Photo 29 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "Dads playing football on the field, one with his shirt off (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/030.jpg
-    alt: "Photo 30 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A friendly football match on the field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/031.jpg
-    alt: "Photo 31 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A dad with children kicking a ball about on the field (5 August 2006)"
   - src: /uploads/albums/2006-08-05-carnival-5th-of-august-2006/032.jpg
-    alt: "Photo 32 of 32 from Carnival 2006 (5 August 2006)"
+    alt: "A dad with a group of children by the marquee (5 August 2006)"
 ---
 
 

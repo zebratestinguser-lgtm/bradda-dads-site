@@ -10,25 +10,25 @@ photos:
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/001.jpg
     alt: "Printed results sheet for the Boxing Day duck race (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/002.jpg
-    alt: "Photo 2 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "Marshals in the brook below the weir in low winter sun (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/003.jpg
-    alt: "Photo 3 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "Crowds along the brook between the houses, waiting for the ducks (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/004.jpg
-    alt: "Photo 4 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "The first ducks coming down the brook between the houses (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/005.jpg
-    alt: "Photo 5 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "Three marshals standing in the brook at the finish (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/006.jpg
-    alt: "Photo 6 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "Spectators leaning over to watch ducks at the finish (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/007.jpg
-    alt: "Photo 7 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "Ducks gathering at the finish as the crowd looks on (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/008.jpg
-    alt: "Photo 8 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "Marshals in the brook surrounded by ducks at the finish (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/009.jpg
-    alt: "Photo 9 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "A dad in a 'Don't give a DUCK' T-shirt picking out the winners (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/010.jpg
-    alt: "Photo 10 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "Ducks spread across the brook at the end of the race (26 December 2012)"
   - src: /uploads/albums/2012-12-26-boxing-day-2012-duck-race/011.jpg
-    alt: "Photo 11 of 11 from Boxing Day duck race 2012 (26 December 2012)"
+    alt: "White water rushing over the weir (26 December 2012)"
 ---
 
 

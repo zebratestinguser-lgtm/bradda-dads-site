@@ -9,11 +9,11 @@ photos:
   - src: /uploads/albums/2010-10-20-its-not-goodbye-its-just-au-revoir/001.jpg
     alt: "Two dads shaking hands at the annual general meeting (20 October 2010)"
   - src: /uploads/albums/2010-10-20-its-not-goodbye-its-just-au-revoir/002.jpg
-    alt: "Photo 2 of 4 from It's not goodbye, it's au revoir (20 October 2010)"
+    alt: "Two dads shaking hands at the AGM in the pub (20 October 2010)"
   - src: /uploads/albums/2010-10-20-its-not-goodbye-its-just-au-revoir/003.jpg
-    alt: "Photo 3 of 4 from It's not goodbye, it's au revoir (20 October 2010)"
+    alt: "Two dads smiling together at the AGM (20 October 2010)"
   - src: /uploads/albums/2010-10-20-its-not-goodbye-its-just-au-revoir/004.jpg
-    alt: "Photo 4 of 4 from It's not goodbye, it's au revoir (20 October 2010)"
+    alt: "Two dads shaking hands at the AGM, with others watching (20 October 2010)"
 ---
 
 

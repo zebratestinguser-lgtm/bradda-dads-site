@@ -9,15 +9,15 @@ photos:
   - src: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/001.jpg
     alt: "A woman opening a gift bag at a table (30 December 2012)"
   - src: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/002.jpg
-    alt: "Photo 2 of 6 from Valentine's raffle: a necklace and earrings set (now finished) (30 December 2012)"
+    alt: "A smiling woman with her raffle winnings (30 December 2012)"
   - src: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/003.jpg
-    alt: "Photo 3 of 6 from Valentine's raffle: a necklace and earrings set (now finished) (30 December 2012)"
+    alt: "A numbered raffle ticket, 176 (30 December 2012)"
   - src: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/004.jpg
-    alt: "Photo 4 of 6 from Valentine's raffle: a necklace and earrings set (now finished) (30 December 2012)"
+    alt: "A sapphire pendant necklace in a gift box, a Valentine's raffle prize (30 December 2012)"
   - src: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/005.jpg
-    alt: "Photo 5 of 6 from Valentine's raffle: a necklace and earrings set (now finished) (30 December 2012)"
+    alt: "Matching sapphire earrings in a gift box (30 December 2012)"
   - src: /uploads/albums/2012-12-30-win-a-unique-necklace-and-earrings-set-for-your-valentine/006.jpg
-    alt: "Photo 6 of 6 from Valentine's raffle: a necklace and earrings set (now finished) (30 December 2012)"
+    alt: "The necklace and earrings set side by side in their boxes (30 December 2012)"
 ---
 
 

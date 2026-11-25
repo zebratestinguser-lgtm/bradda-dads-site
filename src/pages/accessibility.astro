@@ -45,9 +45,11 @@ const described = photos.length - generic;
       <h2>What isn't finished yet</h2>
       <ul>
         <li>
-          <strong>Photo descriptions.</strong> We have described {described.toLocaleString('en-GB')} of our {photos.length.toLocaleString('en-GB')} photos, including the main photo of every album. The other
-          {generic.toLocaleString('en-GB')}, mostly older photos brought across from our previous websites, only say which album they're from and when they were taken. We're writing descriptions for them a few
-          albums at a time.
+          <strong>Photo descriptions.</strong>{' '}
+          {generic === 0
+            ? `Every one of our ${photos.length.toLocaleString('en-GB')} photos has a short description, with when it was taken.`
+            : `We have described ${described.toLocaleString('en-GB')} of our ${photos.length.toLocaleString('en-GB')} photos. The other ${generic.toLocaleString('en-GB')} only say which album they're from and when they were taken.`}
+          {' '}Descriptions of older photos were written from the pictures themselves, so if one is wrong, please tell us.
         </li>
         <li>
           <strong>Original race results.</strong> Some race years link to the original results PDF from the race organiser. These may not work well with screen readers, but the same results are on the

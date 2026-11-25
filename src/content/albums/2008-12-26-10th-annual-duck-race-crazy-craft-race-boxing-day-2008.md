@@ -10,27 +10,27 @@ photos:
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/001.jpg
     alt: "Printed results sheet for the 10th Boxing Day duck race, with duck-shaped winner labels (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/002.jpg
-    alt: "Photo 2 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "A boy with a trophy, with a dad in a yellow T-shirt and a woman presenting it (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/003.jpg
-    alt: "Photo 3 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "A Krazy Kraft prize-winner holding a Top Gear 'Stig' sign (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/004.jpg
-    alt: "Photo 4 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "A little girl receiving a shield for her raft (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/005.jpg
-    alt: "Photo 5 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "Dads in yellow T-shirts standing in the brook by the stone arch (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/006.jpg
-    alt: "Photo 6 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "Crowds packed along the brook wall in winter sunshine (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/007.jpg
-    alt: "Photo 7 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "Homemade rafts tumbling over the weir in the Krazy Kraft race (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/008.jpg
-    alt: "Photo 8 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "A smiling girl holding up her prizes in the street (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/009.jpg
-    alt: "Photo 9 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "Yellow ducks streaming out from under the bridge (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/010.jpg
-    alt: "Photo 10 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "Hundreds of ducks racing down the brook between stone walls (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/011.jpg
-    alt: "Photo 11 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "Dads in yellow T-shirts and hi-vis at the brook under the bridge (26 December 2008)"
   - src: /uploads/albums/2008-12-26-10th-annual-duck-race-crazy-craft-race-boxing-day-2008/012.jpg
-    alt: "Photo 12 of 12 from The 10th Boxing Day duck race and Crazy Craft race (26 December 2008)"
+    alt: "The last ducks floating down the brook (26 December 2008)"
 ---
 
 

@@ -9,41 +9,41 @@ photos:
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/001.jpg
     alt: "A dad having his face painted at a kitchen table before the carnival (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/002.jpg
-    alt: "Photo 2 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Clowns in spotty costumes and colourful wigs getting ready for the carnival (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/003.jpg
-    alt: "Photo 3 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Clowns inside the striped circus-cage float (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/004.jpg
-    alt: "Photo 4 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "The whole clown troupe posing in front of the circus float and tractor (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/005.jpg
-    alt: "Photo 5 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Clowns in polka-dot dresses and pink hats chatting by the road (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/006.jpg
-    alt: "Photo 6 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "A clown on a unicycle with other clowns in checked trousers (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/007.jpg
-    alt: "Photo 7 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "The clowns dancing down the road in the procession (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/008.jpg
-    alt: "Photo 8 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "A crowd of clowns parading down the main street (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/009.jpg
-    alt: "Photo 9 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Clowns dancing along the street in the carnival procession (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/010.jpg
-    alt: "Photo 10 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Clowns performing a routine with a microphone (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/011.jpg
-    alt: "Photo 11 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Clowns in checked dungarees doing a comedy routine (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/012.jpg
-    alt: "Photo 12 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Four clowns doing their act with a microphone (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/013.jpg
-    alt: "Photo 13 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "The clowns laughing during their act (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/014.jpg
-    alt: "Photo 14 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "The striped circus float with clowns alongside (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/015.jpg
-    alt: "Photo 15 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "A sheepdog herding a line of white ducks on the carnival field (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/016.jpg
-    alt: "Photo 16 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "A sheepdog rounding up ducks in front of the crowd (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/017.jpg
-    alt: "Photo 17 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "Clowns and the crowd watching the duck-herding display (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/018.jpg
-    alt: "Photo 18 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "A sheepdog steering ducks past the watching crowd (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradwell-carnival-31-july-2010/019.jpg
-    alt: "Photo 19 of 19 from Carnival 2010 (1 August 2010)"
+    alt: "A sheepdog guiding the ducks back into their pen (1 August 2010)"
 ---
 
 

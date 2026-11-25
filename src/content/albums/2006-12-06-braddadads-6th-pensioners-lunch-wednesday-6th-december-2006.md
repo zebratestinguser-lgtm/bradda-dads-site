@@ -10,25 +10,25 @@ photos:
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/001.jpg
     alt: "Printed invitation to the pensioners' Christmas lunch, with a Father Christmas picture (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/002.jpg
-    alt: "Photo 2 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "Pensioners in paper crowns at round tables, with the hall decorated for Christmas (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/003.jpg
-    alt: "Photo 3 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "Pensioners at round tables in paper hats enjoying Christmas lunch (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/004.jpg
-    alt: "Photo 4 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "Helpers in aprons getting ready in the kitchen (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/005.jpg
-    alt: "Photo 5 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "Volunteers in striped aprons working in the kitchen (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/006.jpg
-    alt: "Photo 6 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "Volunteers in aprons serving up in the kitchen (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/007.jpg
-    alt: "Photo 7 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "A smiling volunteer in an apron in the kitchen (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/008.jpg
-    alt: "Photo 8 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "Six women in aprons lined up in the kitchen, ready to serve (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/009.jpg
-    alt: "Photo 9 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "Pensioners in paper crowns chatting over lunch at a round table (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/010.jpg
-    alt: "Photo 10 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "A round table laid with crackers and a centrepiece, pensioners in paper hats around it (6 December 2006)"
   - src: /uploads/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006/011.jpg
-    alt: "Photo 11 of 11 from The 6th pensioners' Christmas lunch (6 December 2006)"
+    alt: "A dad with a microphone and children in school jumpers during the entertainment (6 December 2006)"
 ---
 
 

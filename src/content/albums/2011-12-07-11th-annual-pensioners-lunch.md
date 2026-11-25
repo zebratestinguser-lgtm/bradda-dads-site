@@ -10,41 +10,41 @@ photos:
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/001.jpg
     alt: "Dads in white shirts and yellow ties lined up at the pensioners' Christmas lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/002.jpg
-    alt: "Photo 2 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "The dads in white shirts and yellow ties lined up in the hall, one holding the award (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/003.jpg
-    alt: "Photo 3 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Four volunteers in aprons in the kitchen (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/004.jpg
-    alt: "Photo 4 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Volunteers plating up Christmas dinners in the kitchen (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/005.jpg
-    alt: "Photo 5 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Volunteers laughing in the kitchen before the lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/006.jpg
-    alt: "Photo 6 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Pensioners arriving in the decorated hall (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/007.jpg
-    alt: "Photo 7 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "The kitchen team chatting before serving (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/008.jpg
-    alt: "Photo 8 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Dads in yellow ties sharing a joke before the lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/009.jpg
-    alt: "Photo 9 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "The dads in yellow ties lined up having a bite to eat (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/010.jpg
-    alt: "Photo 10 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "A dad setting out a tray of mince pies (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/011.jpg
-    alt: "Photo 11 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Dads setting the tables in the hall (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/012.jpg
-    alt: "Photo 12 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "The hall laid out with round tables and Christmas decorations (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/013.jpg
-    alt: "Photo 13 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "The packed hall of pensioners at the 11th annual lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/014.jpg
-    alt: "Photo 14 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Pensioners in paper hats filling the hall at the 11th annual lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/015.jpg
-    alt: "Photo 15 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "The dads in yellow ties chatting at the side of the hall (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/016.jpg
-    alt: "Photo 16 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "A dad taking a well-earned seat with a plate of food (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/017.jpg
-    alt: "Photo 17 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "Dads stacking chairs after the lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/018.jpg
-    alt: "Photo 18 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "The dads with drinks in the pub after the lunch (7 December 2011)"
   - src: /uploads/albums/2011-12-07-11th-annual-pensioners-lunch/019.jpg
-    alt: "Photo 19 of 19 from The 11th pensioners' Christmas lunch (7 December 2011)"
+    alt: "People chatting with drinks in the pub by the Christmas tree (7 December 2011)"
 ---
 
 

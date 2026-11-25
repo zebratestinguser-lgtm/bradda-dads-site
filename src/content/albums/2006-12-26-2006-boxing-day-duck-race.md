@@ -10,21 +10,21 @@ photos:
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/001.jpg
     alt: "Two children sitting in a giant wooden duck with a sign selling duck race tickets (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/002.jpg
-    alt: "Photo 2 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "Homemade rafts lined up on the road before the Krazy Kraft race, one built like a games console (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/003.jpg
-    alt: "Photo 3 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "Two dads in yellow T-shirts selling duck race entries from a trailer with a giant duck on top (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/004.jpg
-    alt: "Photo 4 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "Dads in yellow T-shirts by the red phone box, with the big wooden duck sign (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/005.jpg
-    alt: "Photo 5 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "Homemade rafts lined up against a stone wall, waiting for the race (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/006.jpg
-    alt: "Photo 6 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "Rafts and boats made from bottles and boxes waiting by the wall (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/007.jpg
-    alt: "Photo 7 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "A crowd gathered along the wall at the duck race (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/008.jpg
-    alt: "Photo 8 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "The crowd watching as the rafts are taken down to the brook (26 December 2006)"
   - src: /uploads/albums/2006-12-26-2006-boxing-day-duck-race/009.jpg
-    alt: "Photo 9 of 9 from Boxing Day duck race 2006 (26 December 2006)"
+    alt: "Two children posing behind the wooden duck cut-out with a dad in a yellow T-shirt (26 December 2006)"
 ---
 
 

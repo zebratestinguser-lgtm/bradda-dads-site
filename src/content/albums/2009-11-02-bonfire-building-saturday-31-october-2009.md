@@ -10,27 +10,27 @@ photos:
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/001.jpg
     alt: "Dads leaning out of the windows of a wooden shed added to the bonfire (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/002.jpg
-    alt: "Photo 2 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "An old wooden shed on a trailer, heading for the bonfire (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/003.jpg
-    alt: "Photo 3 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "The red tractor towing the shed to the bonfire field (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/004.jpg
-    alt: "Photo 4 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "Dads pushing the shed off the trailer onto the bonfire site (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/005.jpg
-    alt: "Photo 5 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "Dads heaving the old shed into place on the bonfire (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/006.jpg
-    alt: "Photo 6 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "Dads shoving the shed onto the bonfire pile (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/007.jpg
-    alt: "Photo 7 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "Two dads in work gloves with the tractor, collecting wood for the bonfire (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/008.jpg
-    alt: "Photo 8 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "A pick-up truck loaded with branches for the bonfire (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/009.jpg
-    alt: "Photo 9 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "Dads gathered outside a cottage during the bonfire collection (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/010.jpg
-    alt: "Photo 10 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "Dads chatting on the lane during the bonfire wood collection (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/011.jpg
-    alt: "Photo 11 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "A dad on the trailer loading old furniture for the bonfire (2 November 2009)"
   - src: /uploads/albums/2009-11-02-bonfire-building-saturday-31-october-2009/012.jpg
-    alt: "Photo 12 of 12 from Building the bonfire 2009 (2 November 2009)"
+    alt: "Dads lifting an old wardrobe onto the trailer (2 November 2009)"
 ---
 
 

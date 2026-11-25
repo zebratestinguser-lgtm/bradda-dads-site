@@ -10,15 +10,15 @@ photos:
   - src: /uploads/albums/2004-12-08-bradda-dads-4th-pensioners-christmas-lunch-wednesday-8th-dec/001.jpg
     alt: "A packed hall of pensioners and schoolchildren in paper hats at the Christmas lunch (8 December 2004)"
   - src: /uploads/albums/2004-12-08-bradda-dads-4th-pensioners-christmas-lunch-wednesday-8th-dec/002.jpg
-    alt: "Photo 2 of 6 from The 4th pensioners' Christmas lunch (8 December 2004)"
+    alt: "Schoolchildren and a dad in a white shirt among pensioners in paper hats (8 December 2004)"
   - src: /uploads/albums/2004-12-08-bradda-dads-4th-pensioners-christmas-lunch-wednesday-8th-dec/003.jpg
-    alt: "Photo 3 of 6 from The 4th pensioners' Christmas lunch (8 December 2004)"
+    alt: "The hall packed with pensioners in paper hats and children in school uniform (8 December 2004)"
   - src: /uploads/albums/2004-12-08-bradda-dads-4th-pensioners-christmas-lunch-wednesday-8th-dec/004.jpg
-    alt: "Photo 4 of 6 from The 4th pensioners' Christmas lunch (8 December 2004)"
+    alt: "The dads in white shirts lined up at the back of the hall behind pensioners at round tables (8 December 2004)"
   - src: /uploads/albums/2004-12-08-bradda-dads-4th-pensioners-christmas-lunch-wednesday-8th-dec/005.jpg
-    alt: "Photo 5 of 6 from The 4th pensioners' Christmas lunch (8 December 2004)"
+    alt: "The hall laid out with round tables, festive tablecloths and paper chains (8 December 2004)"
   - src: /uploads/albums/2004-12-08-bradda-dads-4th-pensioners-christmas-lunch-wednesday-8th-dec/006.jpg
-    alt: "Photo 6 of 6 from The 4th pensioners' Christmas lunch (8 December 2004)"
+    alt: "A dad in a white shirt and patterned tie standing among pensioners at the lunch (8 December 2004)"
 ---
 
 

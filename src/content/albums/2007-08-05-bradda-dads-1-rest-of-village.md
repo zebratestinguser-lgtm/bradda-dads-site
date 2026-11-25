@@ -9,33 +9,33 @@ photos:
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/001.jpg
     alt: "Dads playing a football match on a village field (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/002.jpg
-    alt: "Photo 2 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Dads playing a football match on the playing field (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/003.jpg
-    alt: "Photo 3 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Players chasing the ball across the field (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/004.jpg
-    alt: "Photo 4 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "A goal-mouth scramble in the six-a-side football (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/005.jpg
-    alt: "Photo 5 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "A shot at goal in the six-a-side football (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/006.jpg
-    alt: "Photo 6 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "A player heading the ball during the match (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/007.jpg
-    alt: "Photo 7 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Players walking back after a goal (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/008.jpg
-    alt: "Photo 8 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Two players challenging for the ball (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/009.jpg
-    alt: "Photo 9 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "A player in white lining up a shot (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/010.jpg
-    alt: "Photo 10 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Two players chasing the ball near the goal (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/011.jpg
-    alt: "Photo 11 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Two players racing for the ball (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/012.jpg
-    alt: "Photo 12 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "A player heading the ball in the football match (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/013.jpg
-    alt: "Photo 13 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Players in the football match on the playing field (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/014.jpg
-    alt: "Photo 14 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "A player running with the ball as spectators watch from the grass (5 August 2007)"
   - src: /uploads/albums/2007-08-05-bradda-dads-1-rest-of-village/015.jpg
-    alt: "Photo 15 of 15 from Football: Bradda Dads 1, Rest of the Village 1 (5 August 2007)"
+    alt: "Players in front of the goal during the match (5 August 2007)"
 ---
 
 

@@ -10,23 +10,23 @@ photos:
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/001.jpg
     alt: "Printed invitation to the Bradda Dads pensioners' Christmas lunch (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/002.jpg
-    alt: "Photo 2 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "A dad laying the tables in the hall before the pensioners arrive, with crackers and festive tablecloths (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/003.jpg
-    alt: "Photo 3 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "A packed hall of pensioners at round tables wearing paper hats (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/004.jpg
-    alt: "Photo 4 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "Pensioners chatting over Christmas dinner at round tables under paper chains (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/005.jpg
-    alt: "Photo 5 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "Two dads in white shirts and ties chatting in the hall doorway (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/006.jpg
-    alt: "Photo 6 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "Children in blue school jumpers singing to the pensioners at the far end of the hall (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/007.jpg
-    alt: "Photo 7 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "The school choir singing carols to a full hall of pensioners (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/008.jpg
-    alt: "Photo 8 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "The dads lined up in white shirts and ties in front of the stage curtains (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/009.jpg
-    alt: "Photo 9 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "The dads in white shirts and ties posing for a group photo at the lunch (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/010.jpg
-    alt: "Photo 10 of 10 from The 3rd pensioners' Christmas lunch (10 December 2003)"
+    alt: "A row of dads in white shirts and ties, with pensioners at the tables behind (10 December 2003)"
 ---
 
 

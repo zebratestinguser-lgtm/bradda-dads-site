@@ -9,41 +9,41 @@ photos:
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/001.jpg
     alt: "An empty flatbed trailer in a barn, ready to be built into the 'Oliver' workhouse float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/002.jpg
-    alt: "Photo 2 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Dads measuring up the wooden frame of the workhouse float in a barn (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/003.jpg
-    alt: "Photo 3 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Dads building the timber frame on the trailer (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/004.jpg
-    alt: "Photo 4 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "The timber frame of the float going up in the barn (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/005.jpg
-    alt: "Photo 5 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Dads fixing the roof timbers of the workhouse float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/006.jpg
-    alt: "Photo 6 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "A dad on a ladder drilling the roof frame while others hold it steady (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/007.jpg
-    alt: "Photo 7 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Dads fitting white boards to the roof of the float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/008.jpg
-    alt: "Photo 8 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Dads cladding the frame of the workhouse float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/009.jpg
-    alt: "Photo 9 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Dads cutting timber with a power saw for the float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/010.jpg
-    alt: "Photo 10 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "The workhouse float clad in white boards with its windows cut out (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/011.jpg
-    alt: "Photo 11 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "The timber frame of the float in the barn (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/012.jpg
-    alt: "Photo 12 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Dads cladding the workhouse float in white board in the barn (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/013.jpg
-    alt: "Photo 13 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "The workhouse float clad in white with its roof on (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/014.jpg
-    alt: "Photo 14 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "The workhouse float frame half clad, seen from the back (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/015.jpg
-    alt: "Photo 15 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "Grey paint going onto the walls of the workhouse float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/016.jpg
-    alt: "Photo 16 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "A dad spray-painting the float's panels grey (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/017.jpg
-    alt: "Photo 17 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "A dad painting the workhouse float to look like old stone (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/018.jpg
-    alt: "Photo 18 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "A dad and a boy painting the Oliver! sign on the side of the float (8 August 2008)"
   - src: /uploads/albums/2008-08-08-bradda-dads-construction-of-the-oliver-workhouse-float-carni/019.jpg
-    alt: "Photo 19 of 19 from Building the Oliver workhouse float for the 2008 carnival (8 August 2008)"
+    alt: "The finished grey workhouse float at the carnival field (8 August 2008)"
 ---
 
 

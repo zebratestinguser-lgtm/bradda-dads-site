@@ -10,45 +10,45 @@ photos:
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/001.jpg
     alt: "Snow on the cars and pavements beside the brook on Boxing Day (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/002.jpg
-    alt: "Photo 2 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "A dad in a yellow T-shirt shovelling snow by the brook before the duck race (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/003.jpg
-    alt: "Photo 3 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Clearing snow from the lane by the brook on Boxing Day (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/004.jpg
-    alt: "Photo 4 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "A snowy street by the red phone box, with crowds arriving for the duck race (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/005.jpg
-    alt: "Photo 5 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Children crowding round a table as the Krazy Kraft prizes are handed out (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/006.jpg
-    alt: "Photo 6 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "A boy smiling with his Krazy Kraft prize in the snow (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/007.jpg
-    alt: "Photo 7 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "A girl holding her tinsel-covered boat and a prize shield (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/008.jpg
-    alt: "Photo 8 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "A man and a boy holding a raft and a shield in the snowy street (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/009.jpg
-    alt: "Photo 9 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Crowds along the brook in the snow, waiting for the ducks (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/010.jpg
-    alt: "Photo 10 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Ducks floating down the brook between snowy banks in the sunshine (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/011.jpg
-    alt: "Photo 11 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Yellow ducks pouring over the weir (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/012.jpg
-    alt: "Photo 12 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Ducks bobbing along the brook past snowy walls (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/013.jpg
-    alt: "Photo 13 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Spectators watching the ducks race down the brook in the snow (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/014.jpg
-    alt: "Photo 14 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Marshals in hi-vis standing in the brook under the bridge (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/015.jpg
-    alt: "Photo 15 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Marshals in the brook waiting for the leading ducks (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/016.jpg
-    alt: "Photo 16 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Marshals bending to pick out the winning ducks (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/017.jpg
-    alt: "Photo 17 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Ducks gathered at the finish between snowy banks (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/018.jpg
-    alt: "Photo 18 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Yellow ducks drifting between snowy banks at the end of the race (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/019.jpg
-    alt: "Photo 19 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Helpers scooping the ducks out of the brook into a sack (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/020.jpg
-    alt: "Photo 20 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Children in the brook collecting stray ducks, watched by the crowd (27 December 2009)"
   - src: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/021.jpg
-    alt: "Photo 21 of 21 from Boxing Day duck race 2009 (27 December 2009)"
+    alt: "Children wading down the snowy brook after the last ducks (27 December 2009)"
 ---
 
 

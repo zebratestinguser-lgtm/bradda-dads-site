@@ -9,15 +9,15 @@ photos:
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/001.jpg
     alt: "Dads in white T-shirts and slicked-back hair, dressed for the 'Grease' carnival float (31 July 2004)"
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/002.jpg
-    alt: "Photo 2 of 6 from Carnival 2004: the Grease float (31 July 2004)"
+    alt: "Pink Ladies in wigs and leather jackets beside the red Grease float trailer (31 July 2004)"
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/003.jpg
-    alt: "Photo 3 of 6 from Carnival 2004: the Grease float (31 July 2004)"
+    alt: "A dad in a flat cap and sunglasses climbing up onto the tractor pulling the Grease float (31 July 2004)"
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/004.jpg
-    alt: "Photo 4 of 6 from Carnival 2004: the Grease float (31 July 2004)"
+    alt: "The red Grease float trailer pulled by a tractor along the road (31 July 2004)"
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/005.jpg
-    alt: "Photo 5 of 6 from Carnival 2004: the Grease float (31 July 2004)"
+    alt: "The Grease float with its red trailer and tractor, ready for the carnival procession (31 July 2004)"
   - src: /uploads/albums/2004-07-31-carnival-2004-braddadads-grease-float/006.jpg
-    alt: "Photo 6 of 6 from Carnival 2004: the Grease float (31 July 2004)"
+    alt: "Women in pink tops and dads in white T-shirts dancing beside the Grease float (31 July 2004)"
 ---
 
 

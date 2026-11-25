@@ -10,43 +10,43 @@ photos:
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/001.jpg
     alt: "Printed results sheet for the 12th Boxing Day duck race, with duck-shaped winner labels (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/002.jpg
-    alt: "Photo 2 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A dad in wellies fixing the mesh grid under the bridge before the duck race (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/003.jpg
-    alt: "Photo 3 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A dad checking the catch grid under the arch of the bridge (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/004.jpg
-    alt: "Photo 4 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Krazy Kraft rafts laid out on the icy road before the race (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/005.jpg
-    alt: "Photo 5 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Dads in yellow T-shirts and hi-vis gathering in the icy street before the race (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/006.jpg
-    alt: "Photo 6 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Dads and marshals in wellies chatting in the street (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/007.jpg
-    alt: "Photo 7 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A crowd gathering by the phone box for the Boxing Day duck race (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/008.jpg
-    alt: "Photo 8 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Spectators lining the brook on a frosty Boxing Day (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/009.jpg
-    alt: "Photo 9 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A crowd along the brook wall by the bridge (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/010.jpg
-    alt: "Photo 10 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A homemade raft about to go over the weir (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/011.jpg
-    alt: "Photo 11 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A raft caught in the white water below the weir (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/012.jpg
-    alt: "Photo 12 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A man in the brook freeing a stuck raft with a shovel (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/013.jpg
-    alt: "Photo 13 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Marshals in the brook guiding the rafts along (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/014.jpg
-    alt: "Photo 14 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Two girls with their raft and prize shield (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/015.jpg
-    alt: "Photo 15 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "The brook winding past the snowy park, with ducks coming round the bend (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/016.jpg
-    alt: "Photo 16 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A line of ducks heading down the brook past the crowds (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/017.jpg
-    alt: "Photo 17 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Ducks tumbling over the weir (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/018.jpg
-    alt: "Photo 18 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "Ducks spreading out down the brook between frosty banks (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/019.jpg
-    alt: "Photo 19 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "The ducks reaching the finish by the stone wall (26 December 2010)"
   - src: /uploads/albums/2010-12-26-12th-boxing-day-duck-race/020.jpg
-    alt: "Photo 20 of 20 from The 12th Boxing Day duck race (26 December 2010)"
+    alt: "A dad presenting prizes to two boys in the street (26 December 2010)"
 ---
 
 

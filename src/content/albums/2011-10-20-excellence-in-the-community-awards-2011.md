@@ -9,15 +9,15 @@ photos:
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/001.jpg
     alt: "Programme cover for the Derbyshire Excellence in the Community Awards 2011 (20 October 2011)"
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/002.jpg
-    alt: "Photo 2 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
+    alt: "The programme cover for the Derbyshire Excellence in the Community Awards 2011 (20 October 2011)"
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/003.jpg
-    alt: "Photo 3 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
+    alt: "The running order of the 2011 Excellence in the Community Awards evening (20 October 2011)"
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/004.jpg
-    alt: "Photo 4 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
+    alt: "The awards programme entry for Bradda Dads, Bradwell: 'Improving Life' (20 October 2011)"
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/005.jpg
-    alt: "Photo 5 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
+    alt: "The dads in yellow ties with civic guests at the Excellence in the Community Awards (20 October 2011)"
   - src: /uploads/albums/2011-10-20-excellence-in-the-community-awards-2011/006.jpg
-    alt: "Photo 6 of 6 from Excellence in the Community Awards 2011 (20 October 2011)"
+    alt: "The dads on stage with their award certificate (20 October 2011)"
 ---
 
 

@@ -12,13 +12,13 @@ photos:
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/001.jpg
     alt: "A big field of runners on the start line of the Wolf's Pit race (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/002.png
-    alt: "Photo 2 of 5 from Wolf's Pit photos (Various years)"
+    alt: "The Fabian4 entry website logo (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/003.png
-    alt: "Photo 3 of 5 from Wolf's Pit photos (Various years)"
+    alt: "The Gritstone Series race series logo (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/004.jpg
-    alt: "Photo 4 of 5 from Wolf's Pit photos (Various years)"
+    alt: "Map of the Wolf's Pit course around Shatton Moor, marked in yellow (Various years)"
   - src: /uploads/albums/2018-10-17-wolfs-pit-photos/005.jpg
-    alt: "Photo 5 of 5 from Wolf's Pit photos (Various years)"
+    alt: "Fell runners climbing a grassy hillside under a rainbow (Various years)"
 ---
 
 ## **Sunday 8th March 2026**

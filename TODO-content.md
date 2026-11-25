@@ -71,10 +71,14 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 
 - [ ] **Photo dates.** Every photo shows when it was taken: the album's `date`, or `dateLabel` when there's no single date. For imported albums that's the old post's date, which is usually the event date. Corrected: Ball Race (13 June 2004), Carnival 2005 (30 July 2005), the 'Stig' feature (10 December 2008). Labelled: Carnival photos "2017–2021", Bonfire photos "2017–2019", Wolf's Pit photos "Various years", Summer Duck Race "Summer 2016". That last one starts with the same poster as the 2022 Boxing Day post, so check whether it really is 2016. If you spot a wrong date, change `date:` (or add `dateLabel:`) in the album's `index.md`.
 - [x] **Album covers described.** The first photo of all 94 albums (cover, news image and first photo in the viewer) has a real description plus its date. The other ~1,170 photos still have generic descriptions.
-- [ ] **Alt text (rest).** The remaining imported photos have generic descriptions ("Photo 3 of 12 from …"). Write real ones, at least for album covers and homepage photos.
+- [x] **Alt text (rest).** Done 25 Nov 2026: 1,162 more photos described from the pictures themselves (short, no names). A few may be wrong: fix them in the album's file or in Pages CMS. Only 9 left generic (see the blackface item below).
 - [ ] Captions. Some old posts had a caption above each photo; these are kept as text in the news story, not attached to the photos.
 - [ ] Old posts mention videos that were embedded on the old blog (marked "A video was embedded here on the old site"). Find them on YouTube/Facebook if they still exist.
 - [ ] Facebook photo albums since 2014 have not been imported (Facebook isn't covered by the migration).
+
+## ⚠️ Remove before publicising: blackface photos
+
+- [ ] **[Lee Bradbury's 40th birthday party (2008)](src/content/albums/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md)**: 8 photos show party guests in blackface make-up and afro wigs. One of them also appears as photo 3 in **[Mike Thompson retires (2011)](src/content/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea.md)**. These are live on the public site now. Recommendation: unpublish the 2008 album and its news story, and take that one photo out of the 2011 album. (They were left without descriptions on purpose.)
 
 ## Privacy review of imported content
 
@@ -136,6 +140,6 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 - [ ] **Facebook share previews:** event and news pages use their own photo and summary instead of the default image.
 - [ ] **Speed on phones:** mid-sized photo versions with srcset for headers and cards; run Lighthouse before and after (target 90+).
 - [ ] **Event dates in Google:** Event structured data on event pages; an "Add to calendar" link per event.
-- [ ] **Photo descriptions:** write real descriptions for the ~1,170 photos still described as "Photo N from…", in batches by event.
+- [x] **Photo descriptions:** done (25 Nov 2026), except the 9 blackface photos.
 - [x] **Duck race winners archive:** /events/duck-race/winners/ (7 races, 2008–2012, from the old results sheets and posts; `src/content/duck-winners/`, editable in Pages CMS). Krazy Kraft (children's raft race) winners were left off because they're children; they're still in the old posts.
 - [ ] Duck race winners: add results from other years if anyone has them (2013 onwards weren't on the old sites). Check the committee is happy for winners' names to be shown.

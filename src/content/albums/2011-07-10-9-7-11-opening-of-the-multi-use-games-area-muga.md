@@ -9,17 +9,17 @@ photos:
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/001.jpg
     alt: "Families on the grass at the opening of the new multi-use games area (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/002.jpg
-    alt: "Photo 2 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
+    alt: "The new fenced multi-use games area with floodlights on a sunny day (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/003.jpg
-    alt: "Photo 3 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
+    alt: "The first football match on the new games area (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/004.jpg
-    alt: "Photo 4 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
+    alt: "Players in action on the new all-weather pitch (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/005.jpg
-    alt: "Photo 5 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
+    alt: "A match on the new multi-use games area, with goals and a basketball hoop (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/006.jpg
-    alt: "Photo 6 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
+    alt: "Dads cooking at a barbecue at the games area opening (10 July 2011)"
   - src: /uploads/albums/2011-07-10-9-7-11-opening-of-the-multi-use-games-area-muga/007.jpg
-    alt: "Photo 7 of 7 from Opening the multi-use games area (MUGA) (10 July 2011)"
+    alt: "Two dads at the barbecue by a gazebo (10 July 2011)"
 ---
 
 

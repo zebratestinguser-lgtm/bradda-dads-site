@@ -10,7 +10,7 @@ photos:
   - src: /uploads/albums/2008-12-09-christmas-card-competition-2008/001.jpg
     alt: "A child's drawing of Father Christmas saying 'Ho ho ho! Happy Christmas!', entered in the card competition (9 December 2008)"
   - src: /uploads/albums/2008-12-09-christmas-card-competition-2008/002.jpg
-    alt: "Photo 2 of 2 from Christmas card competition 2008 (9 December 2008)"
+    alt: "A child's Christmas card design with a red sleigh, the moon and a Christmas tree (9 December 2008)"
 ---
 
 

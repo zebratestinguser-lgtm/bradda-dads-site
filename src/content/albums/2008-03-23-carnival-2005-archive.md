@@ -10,19 +10,19 @@ photos:
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/001.jpg
     alt: "A dad on the roof of a wooden hut being built on a trailer for the carnival float (30 July 2005)"
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/002.jpg
-    alt: "Photo 2 of 8 from Carnival 2005: from the archive (30 July 2005)"
+    alt: "The haunted house float with broken windows and cobwebs (30 July 2005)"
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/003.jpg
-    alt: "Photo 3 of 8 from Carnival 2005: from the archive (30 July 2005)"
+    alt: "The haunted house float, with a skeleton and an RIP coffin on the side (30 July 2005)"
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/004.jpg
-    alt: "Photo 4 of 8 from Carnival 2005: from the archive (30 July 2005)"
+    alt: "The haunted house float parked on the grass verge (30 July 2005)"
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/005.jpg
-    alt: "Photo 5 of 8 from Carnival 2005: from the archive (30 July 2005)"
+    alt: "A ghoul peering out of a cobwebbed window of the haunted house float (30 July 2005)"
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/006.jpg
-    alt: "Photo 6 of 8 from Carnival 2005: from the archive (30 July 2005)"
+    alt: "Dads in ghoul make-up and suits lined up by a stone wall (30 July 2005)"
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/007.jpg
-    alt: "Photo 7 of 8 from Carnival 2005: from the archive (30 July 2005)"
+    alt: "The zombies dancing up the street in the carnival procession (30 July 2005)"
   - src: /uploads/albums/2008-03-23-carnival-2005-archive/008.jpg
-    alt: "Photo 8 of 8 from Carnival 2005: from the archive (30 July 2005)"
+    alt: "Zombies in cobwebbed suits on the carnival field (30 July 2005)"
 ---
 
 

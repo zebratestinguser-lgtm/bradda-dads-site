@@ -14,7 +14,7 @@ import { join } from 'node:path';
 const BASE = process.argv[2] ?? 'http://localhost:4322/bradda-dads-site';
 const AXE = 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.2/axe.min.js';
 const PAGES = [
-  '/', '/events/', '/events/duck-race/', '/news/', '/news/2007-12-12-7th-annual-bradda-dads-christmas-lunch/',
+  '/', '/events/', '/events/duck-race/', '/events/duck-race/winners/', '/wolfspit/2009/', '/news/', '/news/2007-12-12-7th-annual-bradda-dads-christmas-lunch/',
   '/photos/', '/photos/2007-12-12-7th-annual-bradda-dads-christmas-lunch/', '/photos/category/bonfire/',
   '/races/', '/wolfspit/', '/wolfspit/2026/', '/tour-of-bradwell/', '/tour-of-bradwell/long-tour-2017/',
   '/our-story/', '/where-the-money-goes/', '/get-involved/', '/donate/', '/contact/', '/privacy/',

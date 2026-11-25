@@ -9,27 +9,27 @@ photos:
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/001.jpg
     alt: "Six-a-side football on the village field at the carnival (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/002.jpg
-    alt: "Photo 2 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "A floodlit evening football match on the playing field (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/003.jpg
-    alt: "Photo 3 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "Players crowding the goal mouth in the evening sun (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/004.jpg
-    alt: "Photo 4 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "Players in yellow and black and white during the evening match (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/005.jpg
-    alt: "Photo 5 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "A player in yellow running with the ball at dusk (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/006.jpg
-    alt: "Photo 6 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "A player in yellow controlling the ball on the field (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/007.jpg
-    alt: "Photo 7 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "A player in yellow dribbling down the wing in the evening match (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/008.jpg
-    alt: "Photo 8 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "Two players tangling for the ball (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/009.jpg
-    alt: "Photo 9 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "A scramble in front of the goal in the evening match (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/010.jpg
-    alt: "Photo 10 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "A player in yellow taking a tumble in a tackle (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/011.jpg
-    alt: "Photo 11 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "The goalkeeper diving as players crowd the goal mouth (8 August 2007)"
   - src: /uploads/albums/2007-08-08-6-a-side-carnival-football-2007/012.jpg
-    alt: "Photo 12 of 12 from Six-a-side carnival football 2007 (8 August 2007)"
+    alt: "Players in yellow and light blue chasing the ball by the corner flag (8 August 2007)"
 ---
 
 

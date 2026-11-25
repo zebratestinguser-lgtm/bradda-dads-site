@@ -9,13 +9,13 @@ photos:
   - src: /uploads/albums/2010-08-01-bradda-dads-vs-bradda-lads-carnival-football-match/001.jpg
     alt: "The Bradda Dads team lined up on the pitch before the carnival football match (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradda-dads-vs-bradda-lads-carnival-football-match/002.jpg
-    alt: "Photo 2 of 5 from Carnival football: Bradda Dads vs Bradda Lads (1 August 2010)"
+    alt: "The dads' football match on the playing field (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradda-dads-vs-bradda-lads-carnival-football-match/003.jpg
-    alt: "Photo 3 of 5 from Carnival football: Bradda Dads vs Bradda Lads (1 August 2010)"
+    alt: "Players spread out across the field during the match (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradda-dads-vs-bradda-lads-carnival-football-match/004.jpg
-    alt: "Photo 4 of 5 from Carnival football: Bradda Dads vs Bradda Lads (1 August 2010)"
+    alt: "The Dads versus Lads football match in full swing (1 August 2010)"
   - src: /uploads/albums/2010-08-01-bradda-dads-vs-bradda-lads-carnival-football-match/005.jpg
-    alt: "Photo 5 of 5 from Carnival football: Bradda Dads vs Bradda Lads (1 August 2010)"
+    alt: "The Dads versus Lads football match on the playing field (1 August 2010)"
 ---
 
 

@@ -10,33 +10,33 @@ photos:
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/001.jpg
     alt: "Dads in yellow T-shirts by the red phone box and the brook, setting up for the duck race (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/002.jpg
-    alt: "Photo 2 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "Dads in yellow T-shirts setting up the trailer by the phone box on a wet Boxing Day (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/003.jpg
-    alt: "Photo 3 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "The duck race entry trailer with the big wooden duck sign (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/004.jpg
-    alt: "Photo 4 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "Dads in yellow T-shirts and wellies by the red phone box (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/005.jpg
-    alt: "Photo 5 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "Two dads selling duck race entries from the back of the trailer (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/006.jpg
-    alt: "Photo 6 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "People buying duck race entries at the trailer (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/007.jpg
-    alt: "Photo 7 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "Families queuing at the trailer before the duck race (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/008.jpg
-    alt: "Photo 8 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "Homemade rafts lined up on the pavement for the Krazy Kraft race (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/009.jpg
-    alt: "Photo 9 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "A Krazy Kraft entrant receiving a prize, with the crowd watching (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/010.jpg
-    alt: "Photo 10 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "A single big yellow duck floating down the brook from the weir (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/011.jpg
-    alt: "Photo 11 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "Spectators lining the road and the brook on Boxing Day (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/012.jpg
-    alt: "Photo 12 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "Yellow ducks bobbing down the brook as people watch from the wall (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/013.jpg
-    alt: "Photo 13 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "The last few ducks swept along the fast-flowing brook (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/014.jpg
-    alt: "Photo 14 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "A young prize-winner holding her new toy beside the big wooden duck (26 December 2007)"
   - src: /uploads/albums/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race/015.jpg
-    alt: "Photo 15 of 15 from The 9th Boxing Day duck race and Krazy Kraft race (26 December 2007)"
+    alt: "A girl with her prize posing with the presenter by the wooden duck sign (26 December 2007)"
 ---
 
 

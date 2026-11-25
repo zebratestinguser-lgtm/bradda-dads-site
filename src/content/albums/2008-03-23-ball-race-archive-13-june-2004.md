@@ -10,23 +10,23 @@ photos:
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/001.jpg
     alt: "Dads in yellow T-shirts carrying big bags of yellow balls for the ball race (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/002.jpg
-    alt: "Photo 2 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Yellow balls rolling down the gutter of a steep village street in the ball race (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/003.jpg
-    alt: "Photo 3 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Yellow balls bouncing down the hill through the village (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/004.jpg
-    alt: "Photo 4 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "A boy chasing the stream of yellow balls down the road (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/005.jpg
-    alt: "Photo 5 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Children scrambling after hundreds of yellow balls in the street (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/006.jpg
-    alt: "Photo 6 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Crowds following the balls down the street, with a St George's flag flying (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/007.jpg
-    alt: "Photo 7 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Yellow balls scattered across the road at the bottom of the hill (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/008.jpg
-    alt: "Photo 8 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Children helping dads in yellow T-shirts gather balls into the finish pen (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/009.jpg
-    alt: "Photo 9 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Dads and children collecting the balls caught at the finish (13 June 2004)"
   - src: /uploads/albums/2008-03-23-ball-race-archive-13-june-2004/010.jpg
-    alt: "Photo 10 of 10 from The ball race, June 2004 (13 June 2004)"
+    alt: "Boys watching a dad check the winning ball numbers (13 June 2004)"
 ---
 
 

@@ -10,63 +10,63 @@ photos:
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/001.jpg
     alt: "A round table laid with a green cloth, red napkins and crackers for the 10th anniversary lunch (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/002.jpg
-    alt: "Photo 2 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "A table laid with crackers and napkins for the 10th anniversary lunch (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/003.jpg
-    alt: "Photo 3 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "A dad with a microphone shaking hands with another dad (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/004.jpg
-    alt: "Photo 4 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The dads in yellow ties setting out mince pies before the lunch (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/005.jpg
-    alt: "Photo 5 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Dads in white shirts and yellow ties putting out trays of mince pies (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/006.jpg
-    alt: "Photo 6 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The hall laid out with round tables, napkins and orange juice (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/007.jpg
-    alt: "Photo 7 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Dads helping a pensioner along a gritted path through the snow (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/008.jpg
-    alt: "Photo 8 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The gritted path to the hall between banks of snow (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/009.jpg
-    alt: "Photo 9 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The path to the hall cleared through deep snow (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/010.jpg
-    alt: "Photo 10 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Pensioners arriving and taking their seats in the decorated hall (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/011.jpg
-    alt: "Photo 11 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Guests coming into the hall and finding their tables (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/012.jpg
-    alt: "Photo 12 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Volunteers busy in the kitchen (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/013.jpg
-    alt: "Photo 13 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Dads in yellow ties serving pensioners in the packed hall (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/014.jpg
-    alt: "Photo 14 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The packed hall of pensioners at the 10th anniversary lunch (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/015.jpg
-    alt: "Photo 15 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Infant school children in red jumpers singing to the pensioners (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/016.jpg
-    alt: "Photo 16 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Pensioners in paper crowns tucking into Christmas dinner (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/017.jpg
-    alt: "Photo 17 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "A dad and volunteers at the serving hatch in the kitchen (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/018.jpg
-    alt: "Photo 18 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Volunteers washing up in the kitchen (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/019.jpg
-    alt: "Photo 19 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Pensioners in paper hats enjoying their dinner in the full hall (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/020.jpg
-    alt: "Photo 20 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Dads in yellow ties carrying trays of puddings to the tables (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/021.jpg
-    alt: "Photo 21 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Dads in white shirts serving Christmas pudding (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/022.jpg
-    alt: "Photo 22 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The dads chatting at the side of the hall (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/023.jpg
-    alt: "Photo 23 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The busy hall, with dads moving between the tables (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/024.jpg
-    alt: "Photo 24 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Junior school children in blue jumpers performing for the pensioners (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/025.jpg
-    alt: "Photo 25 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Children playing drums and singing for the guests (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/026.jpg
-    alt: "Photo 26 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Dads stacking chairs and clearing up after the lunch (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/027.jpg
-    alt: "Photo 27 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "Dads folding away the tables in the hall (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/028.jpg
-    alt: "Photo 28 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The dads celebrating at the bar afterwards (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/029.jpg
-    alt: "Photo 29 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "A dad behind the bar pulling pints for the others (9 December 2010)"
   - src: /uploads/albums/2010-12-09-10th-anniversary-pensioners-lunch-8-december-2010/030.jpg
-    alt: "Photo 30 of 30 from The 10th anniversary pensioners' Christmas lunch (9 December 2010)"
+    alt: "The dads in white shirts and yellow ties lined up along railings, with their names underneath (9 December 2010)"
 ---
 
 

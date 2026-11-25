@@ -10,33 +10,33 @@ photos:
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/001.jpg
     alt: "Walkers in hats and coats on a snowy hillside, walking the Wolf's Pit race route (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/002.jpg
-    alt: "Photo 2 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Walkers gathered in deep snow at the start of the route walk (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/003.jpg
-    alt: "Photo 3 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Snow-covered fields and moorland above Shatton (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/004.jpg
-    alt: "Photo 4 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "The group walking the race route across a snowy field (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/005.jpg
-    alt: "Photo 5 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Snowy hills in bright sunshine on the route walk (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/006.jpg
-    alt: "Photo 6 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Sheep huddled together in a snowy field (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/007.jpg
-    alt: "Photo 7 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Two walkers climbing a steep snowy slope (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/008.jpg
-    alt: "Photo 8 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "A snowy valley seen from the top of the race route (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/009.jpg
-    alt: "Photo 9 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "A stone wall leading to the mast on snowy Shatton Moor (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/010.jpg
-    alt: "Photo 10 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Walkers heading down a snowy track with the valley below (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/011.jpg
-    alt: "Photo 11 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "The walkers making their way down a snowy lane (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/012.jpg
-    alt: "Photo 12 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Walkers climbing up a snowy track in the sunshine (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/013.jpg
-    alt: "Photo 13 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "The snowy track to the mast at the top of Shatton Moor (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/014.jpg
-    alt: "Photo 14 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "The group stopped on the snowy track at the top of the route (7 February 2009)"
   - src: /uploads/albums/2009-02-07-wolfs-pit-fell-race-walk-around/015.jpg
-    alt: "Photo 15 of 15 from Walking the Wolf's Pit course (7 February 2009)"
+    alt: "Walkers crossing the snowy moor top in bright sunshine (7 February 2009)"
 ---
 
 

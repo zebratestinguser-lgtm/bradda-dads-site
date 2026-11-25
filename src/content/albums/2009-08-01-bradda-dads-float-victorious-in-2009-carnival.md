@@ -9,35 +9,35 @@ photos:
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/001.jpg
     alt: "Newspaper cutting about Bradwell Carnival 2009, with the dads' knights float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/002.jpg
-    alt: "Photo 2 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "A painted cut-out of a woman waving from a tower on the castle float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/003.jpg
-    alt: "Photo 3 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "A painted shark and a rubber duck on the moat of the castle float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/004.jpg
-    alt: "Photo 4 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "The pink castle float with its 'Knight Club' sign being built in a barn (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/005.jpg
-    alt: "Photo 5 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "Women dressed as medieval princesses in long gowns and pointed hats (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/006.jpg
-    alt: "Photo 6 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "Dads dressed as knights in chain mail and St George's tunics (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/007.jpg
-    alt: "Photo 7 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "Princesses and a knight in costume in the barn (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/008.jpg
-    alt: "Photo 8 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "A dad dressed as a crusader knight with a shield (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/009.jpg
-    alt: "Photo 9 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "Knights in red cloaks and a princess on the carnival field (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/010.jpg
-    alt: "Photo 10 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "The whole cast of knights and princesses in front of the pink castle float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/011.jpg
-    alt: "Photo 11 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "Children dressed as knights with shields in front of the castle float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/012.jpg
-    alt: "Photo 12 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "A knight and a child on a toy horse in front of the castle float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/013.jpg
-    alt: "Photo 13 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "The tractor pulling the pink castle float down the road (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/014.jpg
-    alt: "Photo 14 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "The pink castle float with flags and bunting in the procession (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/015.jpg
-    alt: "Photo 15 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "Knights and princesses marching down the road in the carnival procession (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/016.jpg
-    alt: "Photo 16 of 16 from Our float wins the 2009 carnival (1 August 2009)"
+    alt: "The knights and princesses parading along the wet road (1 August 2009)"
 ---
 
 
