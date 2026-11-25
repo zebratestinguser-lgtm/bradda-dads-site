@@ -78,7 +78,7 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 
 ## ⚠️ Remove before publicising: blackface photos
 
-- [ ] **[Lee Bradbury's 40th birthday party (2008)](src/content/albums/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md)**: 8 photos show party guests in blackface make-up and afro wigs. One of them also appears as photo 3 in **[Mike Thompson retires (2011)](src/content/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea.md)**. These are live on the public site now. Recommendation: unpublish the 2008 album and its news story, and take that one photo out of the 2011 album. (They were left without descriptions on purpose.)
+- [ ] **[Lee Bradbury's 40th birthday party (2008)](src/content/albums/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md)**: 8 photos show party guests in blackface make-up and afro wigs. One of them also appears as photo 3 in **[Mike Thompson retires (2011)](src/content/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea.md)**. These are live on the public site now. Recommendation: unpublish the 2008 album and its news story, and take that one photo out of the 2011 album. (They were left without descriptions on purpose.) **25 Nov 2026: Peter has asked the chair for his view; waiting on the decision.** Also listed in the committee's facts-to-check doc.
 
 ## Privacy review of imported content
 
