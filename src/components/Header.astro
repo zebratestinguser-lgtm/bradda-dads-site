@@ -67,7 +67,7 @@ const isCurrent = (item: Link) =>
         {
           nav.map((item, i) =>
             item.children ? (
-              <li class="nav__group" data-group>
+              <li class="nav__group" data-nav-group>
                 <button type="button" class:list={['nav__link', 'nav__toggle', { 'is-current': isCurrent(item) }]} aria-expanded="false" aria-controls={`subnav-${i}`} data-toggle>
                   {item.label}
                   <svg class="nav__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -146,7 +146,7 @@ const isCurrent = (item: Link) =>
   }
 
   // Drop-downs ("Events", "About us"): a button that shows or hides its list of links
-  const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')].map((g) => ({
+  const groups = [...document.querySelectorAll<HTMLElement>('[data-nav-group]')].map((g) => ({
     g,
     btn: g.querySelector<HTMLButtonElement>('[data-toggle]')!,
     list: g.querySelector<HTMLElement>('[data-subnav]')!,

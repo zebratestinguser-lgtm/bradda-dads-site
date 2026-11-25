@@ -28,6 +28,19 @@ export function srcset(src: string): string | undefined {
   return `${url(`/uploads/thumbs/${m[1]}.webp`)} 480w, ${url(`/uploads/thumbs/960/${m[1]}.webp`)} 960w, ${url(src)} 1200w`;
 }
 
+/** 320px preview (phone grids, small thumbnails); falls back to the original for non-photos */
+export function small(src: string): string {
+  const m = src.match(/^\/uploads\/(.+)\.(jpe?g|png|webp|avif|gif)$/i);
+  return m && !src.startsWith('/uploads/thumbs/') ? url(`/uploads/thumbs/320/${m[1]}.webp`) : url(src);
+}
+
+/** srcset for grid/card images: 320px and 480px previews (pair with a sizes attribute) */
+export function thumbSet(src: string): string | undefined {
+  const s = small(src);
+  const t = thumb(src);
+  return s === t ? undefined : `${s} 320w, ${t} 480w`;
+}
+
 export function url(path = '/'): string {
   if (/^([a-z]+:|#)/i.test(path)) return path; // external, mailto:, tel:, #anchor
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');

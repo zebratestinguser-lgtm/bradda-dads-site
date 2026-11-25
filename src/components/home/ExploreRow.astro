@@ -1,7 +1,7 @@
 ---
 // Four photo tiles leading to the main sections (replaces the long homepage sections).
 // Photos always show when they were taken.
-import { url, thumb } from '../../lib/url';
+import { url, thumb, thumbSet } from '../../lib/url';
 import { getAlbums } from '../../lib/albums';
 
 // Counted from the albums at every build, so it stays right as albums are added
@@ -48,7 +48,7 @@ const tiles = [
           <li>
             <a class="tile" href={url(t.href)}>
               <span class="tile__media">
-                <img src={thumb(t.img)} alt="" loading="lazy" decoding="async" width="480" height="320" />
+                <img src={thumb(t.img)} srcset={thumbSet(t.img)} sizes="(max-width: 600px) 50vw, 320px" alt="" loading="lazy" decoding="async" width="480" height="320" />
                 <span class="tile__date">{t.when}</span>
               </span>
               <span class="tile__body">

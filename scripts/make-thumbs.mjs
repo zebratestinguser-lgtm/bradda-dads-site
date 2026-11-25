@@ -1,6 +1,7 @@
 // Makes smaller copies of every photo in public/uploads/ (except /thumbs/ itself), as WebP:
 //   public/uploads/albums/x/001.jpg  →  public/uploads/thumbs/albums/x/001.webp      (480px wide: grids, cards)
 //                                    →  public/uploads/thumbs/960/albums/x/001.webp  (960px wide: headers, phones, photo viewer)
+//                                    →  public/uploads/thumbs/320/albums/x/001.webp  (320px wide: phone grids, small thumbnails)
 // Runs automatically before `npm run dev` and `npm run build`. Skips copies that are already up to date
 // (same source file size as last time, recorded in thumbs/.manifest.json, so it also works after a fresh
 // git checkout, where every file looks new). The copies are generated, not committed (see .gitignore).
@@ -16,6 +17,7 @@ const MANIFEST = join(OUT, '.manifest.json');
 const SIZES = [
   { width: 480, quality: 68, dir: OUT },
   { width: 960, quality: 70, dir: join(OUT, '960') },
+  { width: 320, quality: 66, dir: join(OUT, '320') },
 ];
 const EXT = /\.(jpe?g|png|webp|avif|gif)$/i;
 

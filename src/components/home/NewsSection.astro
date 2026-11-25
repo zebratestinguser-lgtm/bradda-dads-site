@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import NewsTile from '../NewsTile.astro';
 import { storyPhotos } from '../../lib/photos';
 import { formatDate, formatShortDate } from '../../lib/format';
-import { url, thumb, srcset } from '../../lib/url';
+import { url, thumb, srcset, small } from '../../lib/url';
 
 const all = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const lead = all[0]; // the newest story is always the big one
@@ -51,7 +51,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
             {recent.map((n, i) => (
               <article class="news-item">
                 {recentPhotos[i] ? (
-                  <img class="news-item__thumb" src={thumb(recentPhotos[i]!.src)} alt="" width="84" height="84" loading="lazy" decoding="async" />
+                  <img class="news-item__thumb" src={small(recentPhotos[i]!.src)} alt="" width="84" height="84" loading="lazy" decoding="async" />
                 ) : (
                   <div class="news-item__thumb">
                     <NewsTile tag={n.data.tag} />

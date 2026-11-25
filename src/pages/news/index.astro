@@ -8,7 +8,7 @@ import Band from '../../components/Band.astro';
 import NewsTile from '../../components/NewsTile.astro';
 import { NEWS_TAGS } from '../../content.config';
 import { formatDate } from '../../lib/format';
-import { url, thumb } from '../../lib/url';
+import { url, thumb, small, thumbSet } from '../../lib/url';
 import { storyPhotos } from '../../lib/photos';
 
 const LATEST = 6;
@@ -56,7 +56,7 @@ const href = (id: string) => url(`/news/${id}/`);
             <li class="card" data-row data-tag={n.data.tag}>
               {latestPhotos[i] ? (
                 <a class="card__media" href={href(n.id)} tabindex="-1" aria-hidden="true">
-                  <img src={thumb(latestPhotos[i]!.src)} alt="" loading="lazy" decoding="async" width="480" height="300" />
+                  <img src={thumb(latestPhotos[i]!.src)} srcset={thumbSet(latestPhotos[i]!.src)} sizes="(max-width: 600px) 100vw, 400px" alt="" loading="lazy" decoding="async" width="480" height="300" />
                   {latestPhotos[i]!.label && <span class="card__chip">{latestPhotos[i]!.own ? latestPhotos[i]!.label : `Archive photo · ${latestPhotos[i]!.label}`}</span>}
                 </a>
               ) : (
@@ -99,7 +99,7 @@ const href = (id: string) => url(`/news/${id}/`);
               {items.map((n) => (
                 <li class="row" data-row data-tag={n.data.tag}>
                   {n.data.image ? (
-                    <img class="row__thumb" src={thumb(n.data.image)} alt="" loading="lazy" decoding="async" width="72" height="72" />
+                    <img class="row__thumb" src={small(n.data.image)} alt="" loading="lazy" decoding="async" width="72" height="72" />
                   ) : (
                     <div class="row__thumb">
                       <NewsTile tag={n.data.tag} />

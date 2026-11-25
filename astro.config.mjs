@@ -9,5 +9,7 @@ export default defineConfig({
   site: 'https://zebratestinguser-lgtm.github.io',
   base: '/bradda-dads-site',
   trailingSlash: 'always',
+  // Speed: put the (small) stylesheet inside each page, so the first paint doesn't wait for a separate CSS file
+  build: { inlineStylesheets: 'always' },
   integrations: [sitemap(), hidePlaceholders()],
 });

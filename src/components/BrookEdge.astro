@@ -177,6 +177,10 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
   // stops. In a family the leader turns first and the ducklings follow in order, trailing behind and
   // catching up at their own pace; they swap places as they turn so the biggest duck always leads.
   // Nothing moves if the device asks for reduced motion.
+  // Speed: the ducks only start once the page has loaded and the browser is idle, so they never hold up
+  // the first view. Every measurement is done before anything moves (reading sizes straight after a
+  // change forces the browser to lay the whole page out again).
+  const startDucks = () => {
   const ducks = [...document.querySelectorAll<HTMLElement>('.brook__duck')];
   const still = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (ducks.length && !still.matches && 'IntersectionObserver' in window) {
@@ -339,12 +343,10 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
 
     // Start: put every duck straight into place for where the page is (no swim on load)
     measure();
-    for (const g of groups) {
-      place(g);
-      for (const d of g.ducks) {
-        d.pos = d.target;
-        d.el.style.setProperty('--swim', d.pos.toFixed(2) + 'px');
-      }
+    groups.forEach(place); // all the measuring first…
+    for (const d of all) {
+      d.pos = d.target; // …then all the moving
+      d.el.style.setProperty('--swim', d.pos.toFixed(2) + 'px');
     }
 
     let lastY = window.scrollY;
@@ -354,11 +356,9 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
         const dy = window.scrollY - lastY;
         lastY = window.scrollY;
         if (!dy) return;
-        for (const g of groups) {
-          if (!g.ducks.some((d) => d.visible)) continue;
-          place(g);
-          turn(g, dy > 0); // down = swimming right, up = swimming left, from the very first pixel
-        }
+        const onScreen = groups.filter((g) => g.ducks.some((d) => d.visible));
+        onScreen.forEach(place); // measure every group first…
+        onScreen.forEach((g) => turn(g, dy > 0)); // …then turn them (down = swimming right, up = left, from the very first pixel)
         kick();
       },
       { passive: true },
@@ -378,4 +378,8 @@ if (count > 1 && rand() < (count >= 4 ? 0.8 : 0.45)) {
       }
     });
   }
+  };
+  const whenIdle = () => ('requestIdleCallback' in window ? requestIdleCallback(startDucks, { timeout: 2000 }) : setTimeout(startDucks, 200));
+  if (document.readyState === 'complete') whenIdle();
+  else window.addEventListener('load', whenIdle, { once: true });
 </script>

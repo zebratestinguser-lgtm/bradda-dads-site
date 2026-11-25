@@ -7,7 +7,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import { getWolfspitYears, getRaceYears } from '../../lib/results';
 import { tourRaces } from '../../lib/tour';
 import { getSite } from '../../lib/site';
-import { url, thumb } from '../../lib/url';
+import { url, thumb, thumbSet } from '../../lib/url';
 
 const site = await getSite();
 const wolf = await getWolfspitYears();
@@ -29,7 +29,7 @@ const tourPhoto = await photoMatching(/runners coming up a woodland track on the
     <a class="race race--wolf" href={url('/wolfspit/')}>
       {wolfPhoto && (
         <span class="race__photo" aria-hidden="true">
-          <img src={thumb(wolfPhoto.src)} alt="" loading="lazy" decoding="async" />
+          <img src={thumb(wolfPhoto.src)} srcset={thumbSet(wolfPhoto.src)} sizes="(max-width: 600px) 100vw, 400px" alt="" loading="lazy" decoding="async" />
           <span class="race__chip">{wolfPhoto.label}</span>
         </span>
       )}
@@ -48,7 +48,7 @@ const tourPhoto = await photoMatching(/runners coming up a woodland track on the
     <a class="race" href={url('/tour-of-bradwell/')}>
       {tourPhoto && (
         <span class="race__photo" aria-hidden="true">
-          <img src={thumb(tourPhoto.src)} alt="" loading="lazy" decoding="async" />
+          <img src={thumb(tourPhoto.src)} srcset={thumbSet(tourPhoto.src)} sizes="(max-width: 600px) 100vw, 400px" alt="" loading="lazy" decoding="async" />
           <span class="race__chip">{tourPhoto.label}</span>
         </span>
       )}
