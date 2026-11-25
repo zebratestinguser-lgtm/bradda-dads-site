@@ -79,8 +79,8 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 ## Blackface photos: removed, never to be published again
 
 - [x] **Removed 25 Nov 2026:** the 2008 "Lee Bradbury's 40th birthday party" news story and its 9-photo album, and photo 16 of the 2011 Mike Thompson retirement album, all showing party guests in blackface make-up. **These must never be published again.** `scripts/blocked-content.json` stops the build if any of them come back (even under a different file name) and stops the old-site import from bringing the post back.
-- [ ] Older copies are still in the GitHub repository's history (the repo is public). Decide whether to have the history cleaned. It's a one-off technical job that rewrites the repository.
-- [ ] The original post is still on the old Blogspot site (braddadads.blogspot.com/2008/08/…). Whoever has the Blogspot login could delete it there too.
+- [x] **GitHub history cleaned (25 Nov 2026):** the photos and the 2008 story were removed from every past version in the repository, not just the current one.
+- [ ] **Take the original post down from the old Blogspot site:** https://braddadads.blogspot.com/2008/08/bradda-dad-lee-bradburys-40th-birthday.html (needs whoever has the Blogspot login: open the post in Blogger → Delete, or set it to Draft). Also check the 2011 Mike Thompson retirement post on Blogspot (https://braddadads.blogspot.com/2011/10/bradda-dads-legend-mike-thompson.html) for the reused photo, and delete that photo there too.
 
 ## Privacy review of imported content
 
