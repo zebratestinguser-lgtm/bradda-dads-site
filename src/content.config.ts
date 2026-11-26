@@ -320,6 +320,8 @@ const settings = defineCollection({
     contactEmail: z.string(),
     cicName: z.string(),
     cicNumber: z.string(),
+    /** Registered office address (company websites must show it). One line. */
+    registeredOffice: z.string().optional(),
     sumupStoreUrl: link,
     donationLinks: z
       .array(z.object({ amount: z.number(), url: link, label: z.string() }))

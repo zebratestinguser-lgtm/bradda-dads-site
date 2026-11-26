@@ -49,6 +49,12 @@ const links = [
                 {/^\d+$/.test(String(site.cicNumber)) && ' · Registered in England and Wales'}
               </>
             )}
+            {site.registeredOffice && !isPlaceholder(site.registeredOffice) && (
+              <>
+                <br />
+                Registered office: {site.registeredOffice}
+              </>
+            )}
           </p>
         )
       }

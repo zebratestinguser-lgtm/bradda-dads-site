@@ -1033,3 +1033,7 @@ content:
             label: Company number
             type: string
             required: true
+          - name: registeredOffice
+            label: Registered office address
+            description: As shown on Companies House. Company websites must show it (it appears in the footer).
+            type: string
