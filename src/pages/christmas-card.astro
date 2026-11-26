@@ -1,19 +1,20 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getSite } from '../lib/site';
 import { url } from '../lib/url';
+import { isOpen } from '../lib/events';
 
 const site = await getSite();
 const card = await getEntry('events', 'christmas-card');
-const { Content } = card ? await render(card) : { Content: null };
-const open = card?.data.status === 'open';
+// Open only until the deadline (entriesClose), not just while the status says "open"
+const open = card ? isOpen(card) : false;
 ---
 
-<BaseLayout title="Village Christmas card" description="One shared Christmas card for the whole village. Add your family's message for £5, and every penny goes back into Bradwell.">
+<BaseLayout title="Village Christmas card" description="One shared Christmas card for the whole village. Add your family's message for £5; the money goes back into the village through Bradda Dads' events.">
   <PageHeader eyebrow={open ? 'Open now' : 'Village Christmas card'} title={card?.data.heroTitle ?? 'One card for the whole village'} intro={card?.data.heroText ?? card?.data.summary}>
-    {card?.data.heroNote && <p class="closes">{card.data.heroNote}</p>}
+    {open && card?.data.heroNote && <p class="closes">{card.data.heroNote}</p>}
   </PageHeader>
 
   <section class="container page-section layout">
@@ -27,7 +28,7 @@ const open = card?.data.status === 'open';
           <strong>Pay £5.</strong> Secure payment by SumUp.
         </li>
         <li>
-          <strong>Look out for the card.</strong> Every message goes on the one shared village card, and every penny goes back into Bradwell.
+          <strong>Look out for the card.</strong> Every message goes on the one shared village card, delivered around Bradwell.
         </li>
       </ol>
 
@@ -40,13 +41,15 @@ const open = card?.data.status === 'open';
             </p>
           </div>
         ) : (
-          <p class="note">Entries for this year's card aren't open yet. Check back in December, or follow us on <a href={site.facebookUrl}>Facebook</a>.</p>
+          <p class="note">Entries for this year's card are closed. Follow us on <a href={site.facebookUrl}>Facebook</a> to hear when next year's opens.</p>
         )
       }
     </div>
 
     <div class="prose details">
-      {Content && <Content />}
+      <p>
+        <a href={url('/events/christmas-card/')}>This year's dates and how the card comes together →</a>
+      </p>
       <p>
         The 'Dads have a long history of Christmas cards: in 2008 the infant and junior schools designed a card that was given to every pensioner at the Christmas lunch (<a href={url('/news/2008-12-09-christmas-card-competition-2008/')}>read about it</a>).
       </p>

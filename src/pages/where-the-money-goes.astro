@@ -19,15 +19,10 @@ const stats = [
   ...(!isPlaceholder(site.groupsHelped) ? [{ big: site.groupsHelped, small: 'groups and projects helped' }] : []),
   { big: '100%', small: 'run by volunteers' },
 ];
-const steps = [
-  { title: 'You join in', text: 'Enter the duck race, come to the bonfire, add your message to the village Christmas card or donate.' },
-  { title: 'The dads run it', text: 'Every event is organised and run by volunteers, with plenty of help from the village.' },
-  { title: 'It goes back into Bradwell', text: 'The money raised goes to village groups, the schools and community projects.' },
-];
 ---
 
-<BaseLayout title="Where the money goes" description="Every pound Bradda Dads raises goes back into Bradwell. See the groups and projects we've helped.">
-  <PageHeader eyebrow="Your money at work" title="Where the money goes" intro="Everything we raise goes back into Bradwell: village groups, the schools, and community events like the bonfire and the pensioners' Christmas lunch.">
+<BaseLayout title="Where the money goes" description="Everything Bradda Dads raises goes back into Bradwell, mostly through the events we put on for the village, and also through local groups and projects.">
+  <PageHeader eyebrow="Your money at work" title="Where the money goes" intro="Everything we raise goes back into the village. Most of it pays for the events we put on for everyone, like the free pensioners' Christmas lunch and the bonfire and fireworks; the rest helps local groups and projects, like these.">
     <ul class="stats" role="list">
       {
         stats.map((s) => (
@@ -43,8 +38,7 @@ const steps = [
   <Band first>
     <section class="container page-section stack" aria-labelledby="projects-title">
       <div class="head">
-        <h2 class="subhead" id="projects-title">What your money has paid for</h2>
-        <p class="lede">A few of the groups and projects Bradda Dads has helped fund.</p>
+        <h2 class="subhead" id="projects-title">Local groups and projects we've helped</h2>
       </div>
       <ul class="projects" role="list">
         {
@@ -76,19 +70,7 @@ const steps = [
   </Band>
 
   <Band tone="mist">
-    <section class="container page-section stack" aria-labelledby="how-title">
-      <h2 class="subhead" id="how-title">How it works</h2>
-      <ol class="steps" role="list">
-        {
-          steps.map((s, i) => (
-            <li class="step">
-              <span class="step__num" aria-hidden="true">{i + 1}</span>
-              <h3 class="step__title">{s.title}</h3>
-              <p>{s.text}</p>
-            </li>
-          ))
-        }
-      </ol>
+    <section class="container page-section stack" aria-label="Help fund the next project">
       <div class="cta">
         <p class="cta__text">Want to help fund the next project?</p>
         <div class="cta__actions">
@@ -211,41 +193,6 @@ const steps = [
   .project__more {
     font-size: 15px;
     color: var(--muted);
-  }
-  .steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-    gap: 16px;
-  }
-  .step {
-    background: var(--panel);
-    border-radius: var(--radius-card);
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--muted-strong);
-  }
-  .step__num {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--yellow);
-    color: var(--text);
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 20px;
-    display: grid;
-    place-items: center;
-  }
-  .step__title {
-    font-size: 20px;
-    color: var(--text);
   }
   .cta {
     background: var(--green);

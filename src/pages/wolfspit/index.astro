@@ -1,5 +1,4 @@
 ---
-import { getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import WolfspitBand from '../../components/home/WolfspitBand.astro';
@@ -10,8 +9,6 @@ import { url } from '../../lib/url';
 const site = await getSite();
 const years = await getWolfspitYears();
 const latest = years[0];
-const event = await getEntry('events', 'wolfspit');
-const { Content } = event ? await render(event) : { Content: null };
 // Every runner across all years, for the cross-year search: [year, pos, name, club, time]
 // Years with no results on the site yet (2020 and 2021 were cancelled for Covid)
 const NO_RACE = [2020, 2021];
@@ -43,7 +40,7 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
   </div>
 
   <section class="container page-section about">
-    <div class="prose">{Content && <Content />}</div>
+    <p><a href={url('/events/wolfspit/')}>About the race: the course, records and how to enter →</a></p>
   </section>
 
   <section class="container page-section stack" id="all-years" aria-labelledby="search-title">

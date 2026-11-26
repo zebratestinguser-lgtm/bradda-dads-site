@@ -38,6 +38,6 @@ involvement:
     label: Volunteer
 ---
 
-Hundreds of numbered rubber ducks, one brook, and a village-wide cheer. Buy an entry, pick your spot on the bank, and help raise money for Bradwell. It's where Bradda Dads started, in 1999.
+Hundreds of numbered rubber ducks, one brook, and a village-wide cheer. Pick your spot on the bank and cheer yours home.
 
 **How it works:** every entry is a numbered duck, and cash prizes go to the entries whose ducks are first past the finish. Online entries are given their numbers after online sales close.

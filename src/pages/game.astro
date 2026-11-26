@@ -36,7 +36,7 @@ const entryUrl = race && entriesOpen && race.data.ctaUrl !== `/events/${race.id}
         <div class="game__overlay" data-overlay>
           <p class="overlay__season" data-season></p>
           <p class="overlay__title" data-overlay-title>Ready?</p>
-          <p class="overlay__text" data-overlay-text>Drag, tap or use the arrow keys to steer.</p>
+          <p class="overlay__text" data-overlay-text>Drag, tap or use the arrow keys to steer. Space pauses.</p>
           <div class="overlay__buttons">
             <button type="button" class="btn btn--yellow overlay__btn" data-start>Start swimming</button>
             <button type="button" class="btn btn--ghost-light overlay__btn" data-finish hidden>Finish</button>
@@ -90,27 +90,6 @@ const entryUrl = race && entriesOpen && race.data.ctaUrl !== `/events/${race.id}
     </section>
   </Band>
 
-  <Band tone="mist">
-    <section class="container page-section how" aria-labelledby="how-title">
-      <h2 class="subhead" id="how-title">How to play</h2>
-      <ul class="how__list">
-        <li><strong>Steer</strong> left, right, up and down by dragging your finger, using the arrow keys (or W, A, S and D), or the buttons under the game.</li>
-        <li><strong>Rescue ducklings</strong> by swimming into them: 10 points each, and they follow you in a line (up to 8; after that each one is worth 25 points). They're your lives too, and they can't be bumped themselves: only your duck can.</li>
-        <li><strong>Bump</strong> a branch or rock and ducklings at the back of your line scatter. Bump with no ducklings left and it's game over.</li>
-        <li><strong>Avoid whirlpools.</strong> They pull you in, and their middle spins a duckling away.</li>
-        <li><strong>Each season has its own challenge:</strong> slippery ice in winter, blossom clumps that slow you in spring, sandbanks that drag you back in summer, and leaf piles in autumn that sometimes hide a rock (look for a grey edge peeking out).</li>
-        <li><strong>Numbered race ducks</strong> drift down the brook in all sizes. Bump one and you bounce apart: little ones give you a nudge, big ones a real shove, and the rare giant sends you flying.</li>
-        <li>Catch the rare <strong>golden duck</strong> for double points for 10 seconds, and the even rarer <strong>red duck</strong> for a shield: nothing can hurt you for 8 seconds.</li>
-        <li>The ducks dress for the season: Christmas hats in winter, fell runners' headbands in spring, carnival party hats in summer, and witch and wizard hats in autumn for bonfire night.</li>
-        <li><strong>Watch out for the black duck.</strong> Now and then it hunts your line and takes a duckling if it reaches you. It's slower than you, so keep swimming out of its way and it soon gives up.</li>
-        <li><strong>Swim through the year.</strong> You start in today's season, and every 30 seconds the brook moves on to the next one and runs faster. Bumps cost more ducklings each season too: one in the first season, then two, three and four. Get through a whole season without a bump for 20 bonus points. Make it through all four seasons, then choose: <strong>finish</strong> and bank 25 bonus points for every duckling still in your line, or <strong>keep swimming</strong> into another year as it keeps getting faster (and lose that bonus if you're knocked out).</li>
-        <li><strong>Space</strong> or <strong>P</strong> pauses. Quacks and phone buzzes are off until you switch them on.</li>
-      </ul>
-      <p class="how__more">
-        Want to see the real thing? Come to the <a href={url('/events/duck-race/')}>Boxing Day Duck Race</a>.
-      </p>
-    </section>
-  </Band>
 </BaseLayout>
 
 <script>
@@ -173,7 +152,7 @@ const entryUrl = race && entriesOpen && race.data.ctaUrl !== `/events/${race.id}
     try {
       firstGame = !localStorage.getItem('duckDashSeen');
     } catch {}
-    if (firstGame) overlayText.textContent = "First time? The game will slow down and explain each new thing as you meet it. Drag, tap or use the arrow keys to steer.";
+    if (firstGame) overlayText.textContent = "First time? The game will slow down and explain each new thing as you meet it. Drag, tap or use the arrow keys to steer. Space pauses.";
 
     const C = {
       ripple: 'rgba(255,255,255,0.45)',
@@ -1935,26 +1914,6 @@ const entryUrl = race && entriesOpen && race.data.ctaUrl !== `/events/${race.id}
     color: var(--green);
     border: 2px solid var(--green);
   }
-  .how {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 72ch;
-  }
-  .how__list {
-    margin: 0;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--muted-strong);
-  }
-  .how__more {
-    font-size: 17px;
-  }
-
   .hud__gold {
     position: absolute;
     top: 46px;

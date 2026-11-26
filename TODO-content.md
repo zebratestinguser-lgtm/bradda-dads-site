@@ -11,7 +11,7 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 - [ ] **Contact form:** make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.
 - [ ] Contact email (`contactEmail`). The old blog used braddadads@btinternet.com; is it still in use?
-- [ ] CIC name and company number (`cicName`, `cicNumber`). The SumUp store is called "Bradda Dads Community Group"; is that the registered name?
+- [x] CIC name and company number: Bradda Dads CIC, no. 11682398 (Companies House, https://find-and-update.company-information.service.gov.uk/company/11682398). Footer links to the record.
 - [x] SumUp store URL and the three item links (duck tickets, Christmas card, donation)
 - [ ] What £5 / £10 / £20 pays for (`donationLinks[].label`). If the store's donation item has fixed amounts with their own links, add them here.
 - [ ] SumUp donation QR code image → save to `public/uploads/site/` and set `donationQr` (the QR panel only appears once this is set)
@@ -31,6 +31,8 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 ## Events: `src/content/events/`
 
+- [ ] **Family Fun Day** (`family-fun-day.md`, added 26 Nov 2026): annual, usually June (10 June 2017 at Town Bottom per Bradwell News issue 180; 15 June 2019 behind the Shoulder of Mutton per the old WordPress post; still running in 2026 per issue 287). Need the 2027 date, place, what's on and any costs.
+
 Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all listed at `/events/`). The card text comes from the front matter (`summary`, `when`, `ctaLabel` …). **Anything written below the `---` in the event's `.md` file appears on its page**, so that's the place for fuller details: timings, prices, what to bring, how to help, maps, FAQs.
 
 - [ ] **Duck race** (`duck-race.md`): 2026 start time (then set `startTimeConfirmed: true`; it was 11am in 2022), start point (Town Bottom Park in 2022), duck price (`price`), raft age categories. Done: ticket sales (online, Co-op 12 and 19 Dec), cash prizes, raft trophies, SumUp link.
@@ -44,7 +46,7 @@ Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all l
 - [ ] **Read [docs/history-from-bradwell-news.md](docs/history-from-bradwell-news.md)**: 20+ years of Bradwell News mentions, including that the group began as **"Bradda Ten"** (ask the committee for the story), the first community Christmas card in **2006**, and years and amounts for several "Where the money goes" entries. Nothing has been added to the site yet.
 
 - [ ] **Confirm the first bonfire year.** The 2012 post calls it the "12th annual" bonfire (so 2001), but a 2023 archive note thinks 2001 may have been the second.
-- [ ] Year Bradda Dads became a CIC
+- [x] Year Bradda Dads became a CIC: incorporated 16 November 2018 (Companies House). Added to Our story.
 - [ ] Year the £5-a-message village Christmas card started (different from the 2008 schools card competition). **Bradwell News suggests 2006** (Issue 65, Nov 2007: "Following last year's very successful Christmas card campaign…").
 
 ## Where the money goes: `src/content/funded/`
@@ -137,6 +139,8 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 - [ ] **You:** invite each editor by email (Pages CMS → the repo → Collaborators) and send them `docs/how-to-update.md`.
 
 ## Parked site improvements (suggested 21 Nov 2026)
+
+- [ ] **A shared Bradda Dads calendar people can subscribe to (Peter, 26 Nov 2026).** Set up a Google Calendar (or similar) that the committee maintains, and share its subscribe link so events appear in people's own diaries and update when we change them. Note: the site already has a subscribable feed built from the events (https://zebratestinguser-lgtm.github.io/bradda-dads-site/events.ics). Calendar apps that *subscribe* to that address (rather than downloading it once) refresh it automatically, so one option is simply to offer a "Subscribe" link to it; a Google Calendar is the other route if the committee prefers managing dates there.
 
 - [ ] **Visit counts (possible future idea, 25 Nov 2026).** Cookie-free counting with GoatCounter (free for non-profits, ~3.5 KB script loaded after the page) or Cloudflare Web Analytics (if hosting moves there). Plan: Peter signs up, pastes the site code into a new Site settings field; the script only loads on the live site, respects Do Not Track, and the privacy notice gains a line saying visits are counted anonymously. No consent banner needed.
 

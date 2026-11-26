@@ -31,7 +31,14 @@ const links = [
         !isPlaceholder(site.cicName) && (
           <p class="site-footer__cic">
             {site.cicName}
-            {!isPlaceholder(site.cicNumber) && ` · Company no. ${site.cicNumber}`}
+            {!isPlaceholder(site.cicNumber) && (
+              <>
+                {' · '}
+                <a href={`https://find-and-update.company-information.service.gov.uk/company/${site.cicNumber}`} rel="noopener">
+                  Company no. {site.cicNumber}
+                </a>
+              </>
+            )}
           </p>
         )
       }
@@ -87,6 +94,9 @@ const links = [
   }
   .site-footer__cic {
     font-size: 14px;
+  }
+  .site-footer__cic a {
+    color: inherit;
   }
   .site-footer__links {
     list-style: none;

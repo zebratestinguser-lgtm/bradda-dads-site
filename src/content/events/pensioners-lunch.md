@@ -33,6 +33,6 @@ involvement:
     label: Volunteer
 ---
 
-A free Christmas lunch for Bradwell's pensioners, cooked and served by the dads, with crackers, a decorated Christmas tree and the village children singing. It has run every December since 2001.
+The dads cook and serve, with crackers, a decorated Christmas tree and the village children singing.
 
 Duck race entries will be on sale on the day too.
