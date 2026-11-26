@@ -4,8 +4,8 @@ when: December
 location: Bradwell
 places:
   - label: Hand in paper slips
-    name: The Post Office
-    mapUrl: https://www.google.com/maps/search/?api=1&query=Bradwell+Post+Office+Hope+Valley
+    name: Bradwell Post Office
+    mapUrl: https://maps.app.goo.gl/MyEq59m5XWnjXr659
 summary: One shared card for the whole village. £5 per family message.
 status: open
 # From the 17 November 2026 minutes. After this time the card shows "Entries closed" and the homepage banner hides.

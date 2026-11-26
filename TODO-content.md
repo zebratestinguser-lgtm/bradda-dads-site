@@ -11,10 +11,9 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 - [x] **Group email and contact form** (26 Nov 2026): secretarybraddadads@gmail.com, Formspree form mjywldwk (free plan, 50 messages a month; Formspree login is the same Gmail). Shown on Contact, footer, Get involved, Where the money goes, privacy notice; links pre-pick the form topic (/contact/?topic=support|business|lunch|removal|volunteer|general).
 
-- [ ] **Shoulder of Mutton map link:** the Google Maps link Peter sent for it was the same as the Bowling Green's, so the site uses a Google Maps search for now. Send the right link, or paste it in Site settings → Meeting pubs.
 - [ ] **Meeting day:** the site says the third Tuesday at 8:30pm; the 2018 carnival album says the third Wednesday. Confirm.
 
-- [ ] **Two map links to fix** (Peter sent them 26 Nov 2026; the site uses a Google Maps search for now): the **Memorial Hall** link opened Ye Olde Bowling Green Inn, and the **Post Office** link was the same as the duck race's (a pin by the brook at Town Bottom). Send the right ones, or paste them into the event in the editor ("Map link for where" / "Other places").
+- [x] Memorial Hall, Post Office and Shoulder of Mutton map links fixed (26 Nov 2026).
 - [x] **Gala Day & Carnival** added as an event (/events/gala/, 26 Nov 2026): a village event Bradda Dads take part in (float every year; bar with live music in past years) but don't run (`runByUs: false`). Still need: the 2027 date, and who runs the gala (for a link).
 - [ ] **Float on the bonfire:** the site used to say every carnival float is burned on the bonfire. Peter says it happened maybe once (the skull float?). Removed for now; confirm the year if it's worth a mention.
 - [ ] **Pensioners' lunch bookings** were marked closed on 26 Nov 2026 (editor: tick "Closed now"). **Untick it next year** when bookings open, or set a "Deadline" date instead.
@@ -49,7 +48,7 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all listed at `/events/`). The card text comes from the front matter (`summary`, `when`, `ctaLabel` …). **Anything written below the `---` in the event's `.md` file appears on its page**, so that's the place for fuller details: timings, prices, what to bring, how to help, maps, FAQs.
 
-- [ ] **Duck race** (`duck-race.md`): 2026 start time (then set `startTimeConfirmed: true`; it was 11am in 2022), start point (Town Bottom Park in 2022), duck price (`price`), raft age categories. Done: ticket sales (online, Co-op 12 and 19 Dec), cash prizes, raft trophies, SumUp link.
+- [x] **Duck race** (`duck-race.md`, Peter 26 Nov 2026): £1 an entry; Krazy Krafts released 10:50am, ducks away 11am; prizes £50/£30/£20 (numbers go round again if all sell, so several winners possible); entries online, at the Co-op (12 and 19 Dec), Bradwell Post Office and on the day. Still to add: Krazy Kraft age categories, and where exactly the ducks go in (the map pin is by Town Bottom).
 - [x] **Bonfire** (`bonfire.md`): 2026 thank-you story added (around 600 people, thanks to Breedon). Still to add: photos, and the amount raised **if the committee is happy to publish it** (the minutes say £3,815.05 including £2,500 from Breedon; left off for now).
 - [x] **Christmas card** (`christmas-card.md`): closes midnight Fri 20 Nov (the banner hides itself afterwards via `entriesClose`), delivered week of 14 Dec. Still to add: where paper slips go. Next year, update `entriesClose` and set `status: open` again.
 - [ ] **Pensioners' lunch** (`pensioners-lunch.md`): Friday 4 Dec 2026 done. Still need the time, venue (the hall), and who to contact about deliveries or transport.

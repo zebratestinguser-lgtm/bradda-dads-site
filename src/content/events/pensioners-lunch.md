@@ -5,11 +5,11 @@ when: 4 December
 start: 2026-12-04T00:00:00+00:00
 startTimeConfirmed: false
 location: The Memorial Hall, Bradwell
-mapUrl: https://www.google.com/maps/search/?api=1&query=Bradwell+Memorial+Hall+Hope+Valley
+mapUrl: https://maps.app.goo.gl/HT4PLiw9oQaMBw4D8
 places:
   - label: Hand in booking slips
-    name: The Post Office
-    mapUrl: https://www.google.com/maps/search/?api=1&query=Bradwell+Post+Office+Hope+Valley
+    name: Bradwell Post Office
+    mapUrl: https://maps.app.goo.gl/MyEq59m5XWnjXr659
 summary: A free Christmas lunch for village pensioners, served by the dads, with carols from the village children.
 status: upcoming
 deadlineLabel: Book by
