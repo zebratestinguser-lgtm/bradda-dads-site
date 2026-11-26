@@ -1,5 +1,5 @@
 {
-  "_note": "Content that must NEVER be published on the Bradda Dads website. Removed 25 Nov 2026 on the decision to take down photos of party guests in blackface make-up (2008 birthday party album, and one reused in the 2011 Mike Thompson retirement album). scripts/make-thumbs.mjs (runs before every build) and scripts/migration/import-legacy.mjs refuse anything listed here. Do not remove entries. Added 26 Nov 2026: a photo of a carnival float participant (crusader costume) with blacked-up face, 2009 carnival album photo 8. Also photos 10 and 11 of the same 2009 album (group photos with the same blacked-up participant), reported by Peter 26 Nov 2026. And photo 16 (procession; the same participant), found in the full review 26 Nov 2026.",
+  "_note": "Content that must NEVER be published on the Bradda Dads website. Removed 25 Nov 2026 on the decision to take down photos of party guests in blackface make-up (2008 birthday party album, and one reused in the 2011 Mike Thompson retirement album). scripts/make-thumbs.mjs (runs before every build) and scripts/migration/import-legacy.mjs refuse anything listed here. Do not remove entries. Added 26 Nov 2026: a photo of a carnival float participant (crusader costume) with blacked-up face, 2009 carnival album photo 8. Also photos 10 and 11 of the same 2009 album (group photos with the same blacked-up participant), reported by Peter 26 Nov 2026. And photo 16 (procession; the same participant), found in the full review 26 Nov 2026. Also 2005 carnival photo 26 (possible: dark face under a yarn dreadlock wig, seen through a windscreen), removed as a precaution 26 Nov 2026.",
   "sha256": [
     "b716b13c134a9b86d9ef1b9263c3f4002db3fa5a453d00d0b4d417ee10439e8c",
     "757db72cd9a240aa2f06c9ca8a62c10cbc3fc71e26369b77606c081cfe6914d6",
@@ -14,7 +14,8 @@
     "df9928d090911309165e27cc2da1e34fd6484d4ecbc6d996ea0e72241068b5a8",
     "546658e3d411f5b5a8562e99ea56fceb2a5a4dbb39aa20013e829c4934745f0e",
     "14659d0eeaa189fe5c2f42473a06e6067d508762db2fac494e2df49200f3d86c",
-    "0ca93510134325adda698ee40657bcadc68b1ce4d96c5c6ddd9f1c427696b35d"
+    "0ca93510134325adda698ee40657bcadc68b1ce4d96c5c6ddd9f1c427696b35d",
+    "e0a68d2577597cd1cb076fda9c51a82074849220e16af31bb2c9a3f3f59358a1"
   ],
   "paths": [
     "src/content/news/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md",
@@ -24,7 +25,8 @@
     "public/uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/008.jpg",
     "public/uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/010.jpg",
     "public/uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/011.jpg",
-    "public/uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/016.jpg"
+    "public/uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/016.jpg",
+    "public/uploads/albums/2005-07-30-carnival-30th-july-2005/026.jpg"
   ],
   "sourceUrls": [
     "https://braddadads.blogspot.com/2008/08/bradda-dad-lee-bradburys-40th-birthday.html"
