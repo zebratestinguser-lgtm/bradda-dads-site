@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('members'); // Page wording form
 // Meet the dads: a group photo and introduction, then a card per member.
 // A member's card (and profile page) only appears once their real name replaces "[MEMBER NAME]"
 // in src/content/members/, so the page never shows blank placeholder cards.
@@ -19,8 +21,8 @@ const members = await getPublishedMembers();
 const group = await dadsGroupPhoto();
 ---
 
-<BaseLayout title="Meet the dads" noindex={members.length === 0} description="The volunteers behind Bradda Dads: who they are, what they do, and how long they've been part of it.">
-  <PageHeader eyebrow="Meet the dads" title="The people behind the ducks" intro="Every event is run by volunteers: dads from the parish who give up their evenings, weekends and Boxing Day mornings for the village." />
+<BaseLayout title={w.text('eyebrow')} noindex={members.length === 0} description={w.text('description')}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')} />
 
   <Band first>
     <section class="container page-section intro" aria-labelledby="intro-title">
@@ -33,8 +35,8 @@ const group = await dadsGroupPhoto();
         )
       }
       <div class="intro__text">
-        <h2 class="subhead" id="intro-title">Come and meet us</h2>
-        <p>We meet {site.meetingInfo}. New faces are always welcome, whether you want to join or just lend a hand at an event.</p>
+        <h2 class="subhead" id="intro-title">{w.text('meetTitle')}</h2>
+        <p>We meet {site.meetingInfo}. {w.text('meetText')}</p>
         <MeetingPubs />
         <div class="intro__actions">
           <a class="btn btn--green btn--md" href={url('/get-involved/')}>Get involved</a>
@@ -46,7 +48,7 @@ const group = await dadsGroupPhoto();
 
   <Band tone="mist">
     <section class="container page-section stack" aria-labelledby="members-title">
-      <h2 class="subhead" id="members-title">The dads</h2>
+      <h2 class="subhead" id="members-title">{w.text('dadsTitle')}</h2>
       {
         members.length > 0 ? (
           <ul class="members" role="list">
@@ -65,10 +67,7 @@ const group = await dadsGroupPhoto();
             ))}
           </ul>
         ) : (
-          <p class="note soon">
-            Profiles are on their way: we're asking each of the dads whether they're happy to appear here. In the meantime, the best way to meet them is at one of
-            our <a href={url('/events/')}>events</a>.
-          </p>
+          <div class="note soon" set:html={w.html('soonText')} />
         )
       }
     </section>

@@ -3,6 +3,7 @@ name: Gala Day & Carnival
 when: Late July or early August
 runByUs: false
 location: Beggar's Plot Playing Field, Bradwell
+category: "Carnival"
 mapUrl: https://maps.app.goo.gl/ZMtcbJMRNTkAsiz56
 summary: "Bradwell's village gala. It isn't ours, but we're always part of it: a float in the carnival parade every year, and in past years a bar with live music."
 status: upcoming

@@ -1,12 +1,14 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('photos'); // Page wording form
 import { url } from '../../lib/url';
 import Img from '../../components/Img.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
-import { NEWS_TAGS } from '../../content.config';
-import { getAlbums, photoYear, categorySlug, CATEGORY_ORDER } from '../../lib/albums';
+import { getAlbums, photoYear, categorySlug } from '../../lib/albums';
+import { categoryNames } from '../../lib/categories';
 import { getSite } from '../../lib/site';
 import { categoryPhoto, photoMatching } from '../../lib/photos';
 
@@ -15,8 +17,8 @@ const albums = await getAlbums();
 const total = albums.reduce((n, a) => n + a.data.photos.length, 0);
 
 // Categories in a friendly order, with photo counts; each links to a page showing every photo in it
-const categories = [...NEWS_TAGS]
-  .sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b))
+const listed = await categoryNames();
+const categories = [...listed, ...new Set(albums.map((a) => a.data.category ?? '').filter((c) => c && !listed.includes(c)))]
   .map((c) => ({ name: c, photos: albums.filter((a) => a.data.category === c).reduce((n, a) => n + a.data.photos.length, 0) }))
   .filter((c) => c.photos > 0);
 // A photo for each category tile, and one for the page header
@@ -34,21 +36,21 @@ const years = [...groups.keys()].sort((a, b) => (a === 'Other' ? 1 : b === 'Othe
 const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
 ---
 
-<BaseLayout title="Photos" description={`${albums.length} photo albums from Bradda Dads events in Bradwell since 2001: duck races, bonfires, carnivals, pensioners' lunches and fell races.`} ogImage={header?.src} ogImageAlt={header?.alt}>
+<BaseLayout title={w.text('eyebrow')} description={w.text('description', { albums: albums.length, photos: total.toLocaleString('en-GB') })} ogImage={header?.src} ogImageAlt={header?.alt}>
   <PageHeader
-    eyebrow="Photos"
-    title="Photo albums"
-    intro={`${albums.length} albums and ${total.toLocaleString('en-GB')} photos from Bradda Dads events, going back to 2001. Every album shows when the photos were taken.`}
+    eyebrow={w.text('eyebrow')}
+    title={w.text('title')}
+    intro={w.text('intro', { albums: albums.length, photos: total.toLocaleString('en-GB') })}
     image={header?.src}
     imageLabel={header?.label}
   >
-    <a class="btn btn--yellow btn--md" href={url(site.sharePhotosUrl)}>Share your photos</a>
+    <a class="btn btn--yellow btn--md" href={url(site.sharePhotosUrl)}>{w.text('shareButton')}</a>
   </PageHeader>
 
   <!-- Browse by event: one big photo tile per category -->
   <Band first>
     <section class="container page-section stack" aria-labelledby="browse-title">
-      <h2 class="subhead" id="browse-title">Browse by event</h2>
+      <h2 class="subhead" id="browse-title">{w.text('browseTitle')}</h2>
       <ul class="tiles" role="list">
         {
           tiles.map((c) => (
@@ -72,7 +74,7 @@ const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
   <Band tone="mist">
     <section class="container page-section stack" aria-labelledby="all-title">
       <div class="all-head">
-        <h2 class="subhead" id="all-title">Every album</h2>
+        <h2 class="subhead" id="all-title">{w.text('allTitle')}</h2>
         <nav aria-label="Jump to a year">
           <ul class="chips chips--small chips--scroll" role="list">
             {years.map((y) => <li><a class="chip" href={`#year-${y}`}>{yearName(y)}</a></li>)}

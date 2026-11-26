@@ -1,6 +1,5 @@
 ---
 import { getPublishedMembers } from '../lib/members';
-import { url } from '../lib/url';
 import Img from '../components/Img.astro';
 // Our story: introduction, then a timeline running down the page with a duck on each year and a photo
 // from that year's albums where there is one. Entries whose year isn't known yet are listed at the end.
@@ -10,10 +9,13 @@ import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
 import DuckLogo from '../components/DuckLogo.astro';
 import { getSite } from '../lib/site';
+import { getWording } from '../lib/wording';
+import { categoryNames } from '../lib/categories';
 import { isPlaceholder } from '../lib/events';
 import { yearPhoto, type PickedPhoto } from '../lib/photos';
 
 const site = await getSite();
+const w = await getWording('our-story'); // Page wording → Our story
 const timeline = (await getCollection('timeline')).sort((a, b) => a.data.order - b.data.order);
 
 // Which photo categories suit an entry, from words in its title
@@ -26,7 +28,9 @@ const HINTS: [RegExp, string][] = [
   [/tour/i, 'Tour of Bradwell'],
   [/card/i, 'Christmas card'],
 ];
-const hintsFor = (title: string) => HINTS.filter(([re]) => re.test(title)).map(([, c]) => c);
+// …plus any category whose own name is in the title (so new categories work too)
+const names = await categoryNames();
+const hintsFor = (title: string) => [...new Set([...HINTS.filter(([re]) => re.test(title)).map(([, c]) => c), ...names.filter((n) => title.toLowerCase().includes(n.toLowerCase()))])];
 
 const dated = timeline.filter((t) => !isPlaceholder(t.data.year));
 const undated = timeline.filter((t) => isPlaceholder(t.data.year));
@@ -38,12 +42,12 @@ const photos: (PickedPhoto | { src: string; alt: string; label?: string } | unde
 const hasMembers = (await getPublishedMembers()).length > 0;
 ---
 
-<BaseLayout ogImage={site.storyImage} ogImageAlt={site.storyImageAlt} title="Our story" description="How Bradda Dads started with a Boxing Day duck race in 1999, and what the group has done for Bradwell since.">
-  <PageHeader eyebrow="Our story" title="It started with a duck race" intro={site.storyIntro} image={site.storyImage} imageLabel={site.storyImageCaption} />
+<BaseLayout ogImage={site.storyImage} ogImageAlt={site.storyImageAlt} title={w.text('eyebrow')} description={w.text('description')}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={site.storyIntro} image={site.storyImage} imageLabel={site.storyImageCaption} />
 
   <Band first>
     <section class="container page-section stack" aria-labelledby="timeline-title">
-      <h2 class="subhead" id="timeline-title">Through the years</h2>
+      <h2 class="subhead" id="timeline-title">{w.text('timelineTitle')}</h2>
       <ol class="timeline" role="list">
         {
           dated.map((t, i) => {
@@ -78,7 +82,7 @@ const hasMembers = (await getPublishedMembers()).length > 0;
         {
           undated.length > 0 && (
             <>
-              <h2 class="subhead" id="more-title">Also part of the story</h2>
+              <h2 class="subhead" id="more-title">{w.text('undatedTitle')}</h2>
               <ul class="undated" role="list">
                 {undated.map((t) => (
                   <li>
@@ -89,11 +93,9 @@ const hasMembers = (await getPublishedMembers()).length > 0;
             </>
           )
         }
-        {undated.length === 0 && <h2 class="subhead" id="more-title">Help us fill the gaps</h2>}
+        {undated.length === 0 && <h2 class="subhead" id="more-title">{w.text('gapsTitle')}</h2>}
       </div>
-      <p class="note more__note">
-        Much of this history comes from the old Bradda Dads websites. If you remember something differently, or have old photos, <a href={url('/contact/')}>please get in touch</a>. You can also {hasMembers && <><a href={url('/members/')}>meet today's dads</a> or </>}<a href={url('/photos/')}>browse every photo album</a>.
-      </p>
+      <div class="note more__note" set:html={w.html('note', { members: hasMembers ? `[meet today's dads](/members/) or ` : '' })} />
     </section>
   </Band>
 </BaseLayout>

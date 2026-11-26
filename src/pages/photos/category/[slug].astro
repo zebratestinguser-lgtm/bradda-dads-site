@@ -6,13 +6,15 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import PhotoGrid from '../../../components/PhotoGrid.astro';
 import Lightbox from '../../../components/Lightbox.astro';
-import { NEWS_TAGS } from '../../../content.config';
-import { getAlbums, photoDate, photoYear, categorySlug, CATEGORY_ORDER } from '../../../lib/albums';
+import { getAlbums, photoDate, photoYear, categorySlug } from '../../../lib/albums';
+import { categoryNames } from '../../../lib/categories';
 import { url } from '../../../lib/url';
 
 export async function getStaticPaths() {
   const albums = await getAlbums();
-  return NEWS_TAGS.map((cat) => ({ cat, albums: albums.filter((a) => a.data.category === cat && a.data.photos.length > 0) }))
+  const listed = await categoryNames();
+  const names = [...listed, ...new Set(albums.map((a) => a.data.category ?? '').filter((c) => c && !listed.includes(c)))];
+  return names.map((cat) => ({ cat, albums: albums.filter((a) => a.data.category === cat && a.data.photos.length > 0) }))
     .filter((c) => c.albums.length > 0)
     .map((c) => ({ params: { slug: categorySlug(c.cat) }, props: c }));
 }
@@ -23,7 +25,7 @@ const news = await getCollection('news', (n) => !n.data.draft);
 const storyFor = (id: string) => news.find((n) => n.data.album?.id === id);
 // Other categories, for switching
 const all = await getAlbums();
-const others = CATEGORY_ORDER.filter((c) => c !== cat && all.some((a) => a.data.category === c && a.data.photos.length > 0));
+const others = (await categoryNames()).filter((c) => c !== cat && all.some((a) => a.data.category === c && a.data.photos.length > 0));
 const years = [...new Set(albums.map((a) => photoYear(a)))];
 const yearName = (y: string) => (y === 'Other' ? 'Various years' : y);
 // First album section for each year, so the year links have somewhere to jump to

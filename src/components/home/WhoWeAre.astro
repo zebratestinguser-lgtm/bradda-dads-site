@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('home'); // Page wording form
 // Homepage introduction: who Bradda Dads are, plus the community impact.
 // Shows the total raised / groups helped once those are filled in (site.yaml); until then it lists
 // the real groups and projects from src/content/funded/.
@@ -7,21 +9,15 @@ import DuckLogo from '../DuckLogo.astro';
 import { getSite } from '../../lib/site';
 import { isPlaceholder } from '../../lib/events';
 import { url } from '../../lib/url';
+import { featuredProjects } from '../../lib/funded';
 
 const site = await getSite();
 const eventCount = (await getCollection('events')).filter((e) => e.data.runByUs).length; // counted, so adding an event updates it
-const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
-// The homepage names just a few: the projects ticked "Show on the homepage" in the editor (onHomepage),
-// newest first, up to 5. "All our annual events" always sits third. The rest are on the full page.
-const SHOW = 5;
-const lastYear = (y: string) => Math.max(0, ...(y.match(/\d{4}/g) ?? []).map(Number));
-const shown = funded
-  .filter((f) => f.data.onHomepage)
-  .sort((a, b) => lastYear(b.data.year) - lastYear(a.data.year) || a.data.name.localeCompare(b.data.name))
-  .slice(0, SHOW);
-const more = funded.length - shown.length;
+// The projects ticked "Show on the homepage" (editor: Where the money goes), newest first, up to 5;
+// "All our annual events" (wording: Page wording → Homepage) always sits third. The rest are on the full page.
+const { all: funded, shown, more } = await featuredProjects();
 const pills = shown.map((f) => f.data.name);
-pills.splice(Math.min(2, pills.length), 0, 'All our annual events');
+pills.splice(Math.min(2, pills.length), 0, w.text('moneyEvents'));
 const facts = [
   { big: '1999', small: 'the year it all started' },
   { big: String(eventCount), small: 'big events every year' },
@@ -34,8 +30,8 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
 <section class="who" aria-labelledby="who-title">
   <div class="container who__inner">
     <div class="who__intro">
-      <p class="eyebrow who__eyebrow">Who we are</p>
-      <h2 id="who-title" class="section-title">Volunteer dads, raising money for Bradwell</h2>
+      <p class="eyebrow who__eyebrow">{w.text('whoEyebrow')}</p>
+      <h2 id="who-title" class="section-title">{w.text('whoTitle')}</h2>
       <p class="who__text">{site.whoWeAre}</p>
       <a class="link-arrow" href={url('/our-story/')}>Our story →</a>
     </div>
@@ -59,8 +55,8 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
             <DuckLogo size={48} />
           </span>
           <div class="impact__body">
-            <h3 class="impact__title">Where the money goes</h3>
-            <p class="impact__text">Everything we raise goes back into the village, mostly through the events we put on for everyone. Over the years we've also helped local groups and projects, including:</p>
+            <h3 class="impact__title">{w.text('moneyTitle')}</h3>
+            <p class="impact__text">{w.text('moneyText')}</p>
             <ul class="impact__list" role="list">
               {pills.map((label) => <li>{label}</li>)}
               {more > 0 && (
@@ -71,7 +67,7 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
             </ul>
           </div>
           <a class="btn btn--green btn--sm impact__btn" href={url('/where-the-money-goes/')}>
-            See where the money goes
+            {w.text('moneyButton')}
           </a>
         </div>
       </div>

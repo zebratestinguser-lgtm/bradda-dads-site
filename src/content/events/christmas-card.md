@@ -2,6 +2,7 @@
 name: Village Christmas Card
 when: December
 location: Bradwell
+category: "Christmas card"
 places:
   - label: Hand in paper slips
     name: Bradwell Post Office

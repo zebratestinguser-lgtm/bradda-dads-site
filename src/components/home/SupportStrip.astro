@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('home'); // Page wording form
 // Slim join/donate strip that closes the homepage (the full versions live on /get-involved/ and /donate/).
 import { getSite } from '../../lib/site';
 import { url } from '../../lib/url';
@@ -14,8 +16,8 @@ const site = await getSite();
         <p>{site.joinText} We meet {site.meetingInfo}.</p>
       </div>
       <div class="support__actions">
-        <a class="btn btn--yellow btn--sm" href={url('/get-involved/')}>Join the dads</a>
-        <a class="btn btn--ghost-light btn--sm" href={url('/donate/')}>Donate</a>
+        <a class="btn btn--yellow btn--sm" href={url('/get-involved/')}>{w.text('joinButton')}</a>
+        <a class="btn btn--ghost-light btn--sm" href={url('/donate/')}>{w.text('donateButton')}</a>
       </div>
     </div>
   </div>

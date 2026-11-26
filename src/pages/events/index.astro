@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('events'); // Page wording form
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -11,9 +13,9 @@ const events = await getEvents();
 const next = pickNextEvent(events);
 ---
 
-<BaseLayout title="Events" description="The Bradda Dads year: bonfire, village Christmas card, pensioners' Christmas lunch, Boxing Day Duck Race and the Wolf's Pit Fell Race.">
-  <PageHeader eyebrow="Events" title="The Bradda Dads year" intro="The big dates, all run by volunteer dads, all for the village. Each event has its own page with the details, photos from past years and news.">
-    <a class="cal" href={url('/events.ics')}>Add them to your calendar →</a>
+<BaseLayout title={w.text('eyebrow')} description={w.text('description')}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')}>
+    <a class="cal" href={url('/events.ics')}>{w.text('calendarLink')}</a>
   </PageHeader>
   <Band first><section class="container page-section">
     <ul class="grid" role="list">

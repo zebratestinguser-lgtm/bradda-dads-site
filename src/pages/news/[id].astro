@@ -1,4 +1,5 @@
 ---
+import { getCategory } from '../../lib/categories';
 import { url } from '../../lib/url';
 import Img from '../../components/Img.astro';
 import { getCollection, getEntry, render } from 'astro:content';
@@ -33,18 +34,8 @@ const related = all
   .slice(0, 3)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const relatedPhotos = await storyPhotos(related);
-const TOPIC: Record<string, string> = {
-  Bonfire: 'More about the bonfire',
-  'Christmas card': 'More about the Christmas card',
-  "Pensioners' lunch": "More about the pensioners' lunch",
-  'Duck race': 'More about the duck race',
-  "Wolf's Pit": "More about Wolf's Pit",
-  Village: 'More village news',
-  Carnival: 'More about the carnival',
-  'Tour of Bradwell': 'More about the Tour of Bradwell',
-  Social: 'More get-togethers',
-};
-const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
+// Heading set per category in the editor (Categories → "More about…" heading)
+const relatedHeading = (await getCategory(story.data.tag))?.data.moreHeading || 'More stories';
 ---
 
 <BaseLayout title={story.data.title} description={story.data.summary} ogImage={header?.own ? header.src : undefined} ogImageAlt={header?.own ? header.alt : undefined} ogType="article" publishedTime={story.data.date}>

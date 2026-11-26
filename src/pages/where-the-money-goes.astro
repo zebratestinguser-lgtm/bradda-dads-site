@@ -10,8 +10,10 @@ import DuckLogo from '../components/DuckLogo.astro';
 import { getSite } from '../lib/site';
 import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
+import { getWording } from '../lib/wording';
 
 const site = await getSite();
+const w = await getWording('where-the-money-goes'); // Page wording → Where the money goes
 // "Does your group need support?" (wording editable in Pages CMS: src/content/pages/support.md)
 const support = await getEntry('pages', 'support');
 const SupportText = support ? (await render(support)).Content : null;
@@ -25,8 +27,8 @@ const stats = [
 ];
 ---
 
-<BaseLayout title="Where the money goes" description="Everything Bradda Dads raises goes back into Bradwell, mostly through the events we put on for the village, and also through local groups and projects.">
-  <PageHeader eyebrow="Your money at work" title="Where the money goes" intro="Everything we raise goes back into the village. Most of it pays for the events we put on for everyone, like the free pensioners' Christmas lunch and the bonfire and fireworks; over the years we've also helped local groups and projects, like these.">
+<BaseLayout title={w.text('title')} description={w.text('description')}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')}>
     <ul class="stats" role="list">
       {
         stats.map((s) => (
@@ -42,7 +44,7 @@ const stats = [
   <Band first>
     <section class="container page-section stack" aria-labelledby="projects-title">
       <div class="head">
-        <h2 class="subhead" id="projects-title">Local groups and projects we've helped</h2>
+        <h2 class="subhead" id="projects-title">{w.text('projectsTitle')}</h2>
       </div>
       <ul class="projects" role="list">
         {
@@ -100,7 +102,7 @@ const stats = [
   <Band>
     <section class="container page-section stack" aria-label="Help fund the next project">
       <div class="cta">
-        <p class="cta__text">Want to help fund the next project?</p>
+        <p class="cta__text">{w.text('ctaText')}</p>
         <div class="cta__actions">
           <a class="btn btn--yellow btn--md" href={url('/donate/')}>Donate</a>
           <a class="btn btn--ghost-light btn--md" href={url('/events/')}>Come to an event</a>
@@ -111,7 +113,7 @@ const stats = [
 
   <Band>
     <section class="container page-section stack" aria-labelledby="map-title">
-      <h2 class="subhead" id="map-title">Around the village</h2>
+      <h2 class="subhead" id="map-title">{w.text('mapTitle')}</h2>
       <FundedMap tall />
     </section>
   </Band>

@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../lib/wording';
+const w = await getWording('supporters'); // Page wording form
 // Our supporters: businesses and organisations that help Bradda Dads (src/content/supporters/, editable
 // in Pages CMS as "Our supporters"). Current supporters first, then past ones, then how to get involved.
 import { getCollection } from 'astro:content';
@@ -14,18 +16,18 @@ const past = all.filter((s) => !s.data.current);
 const header = await photoMatching(/fireworks/i, /bonfire blazing/i);
 ---
 
-<BaseLayout title="Our supporters" description="The local businesses and organisations that help Bradda Dads raise money for Bradwell." ogImage={header?.src} ogImageAlt={header?.alt}>
+<BaseLayout title={w.text('title')} description={w.text('description')} ogImage={header?.src} ogImageAlt={header?.alt}>
   <PageHeader
-    eyebrow="About us"
-    title="Our supporters"
-    intro="Bradda Dads couldn't do it alone. These local businesses and organisations help make our events happen. Thank you."
+    eyebrow={w.text('eyebrow')}
+    title={w.text('title')}
+    intro={w.text('intro')}
     image={header?.src}
     imageLabel={header?.label}
   />
 
   <Band first>
     <section class="container page-section" aria-labelledby="current-title">
-      <h2 class="subhead" id="current-title">Thank you to</h2>
+      <h2 class="subhead" id="current-title">{w.text('thanksTitle')}</h2>
       {
         current.length > 0 ? (
           <ul class="supporters" role="list">
@@ -38,13 +40,13 @@ const header = await photoMatching(/fireworks/i, /bonfire blazing/i);
             ))}
           </ul>
         ) : (
-          <p>We're adding our supporters here soon.</p>
+          <p>{w.text('emptyText')}</p>
         )
       }
       {
         past.length > 0 && (
           <>
-            <h3 class="past-title">Who has helped in the past</h3>
+            <h3 class="past-title">{w.text('pastTitle')}</h3>
             <ul class="past" role="list">
               {past.map((s) => (
                 <li>
@@ -60,10 +62,8 @@ const header = await photoMatching(/fireworks/i, /bonfire blazing/i);
 
   <Band tone="mist">
     <section class="container page-section support" aria-labelledby="support-title">
-      <h2 class="subhead" id="support-title">Could your business help?</h2>
-      <p>
-        Sponsoring the fireworks, donating raffle prizes or lending equipment all help us put on events for the whole village. We'll thank you here and at the event.
-      </p>
+      <h2 class="subhead" id="support-title">{w.text('businessTitle')}</h2>
+      <Fragment set:html={w.html('businessText')} />
       <a class="btn btn--green btn--md" href={url('/contact/?topic=business')}>Get in touch</a>
     </section>
   </Band>

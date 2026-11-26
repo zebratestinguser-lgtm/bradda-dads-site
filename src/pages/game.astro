@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../lib/wording';
+const w = await getWording('game'); // Page wording form
 // Duck Dash: a little game. Steer a duck down Bradwell Brook between its stone walls. Dodge branches, rocks,
 // and whirlpools; rescue ducklings (they follow in a line and act as lives); numbered race ducks knock
 // you about if you bump them; catch the golden duck for double points. The brook changes with the seasons. Optional quacks
@@ -18,8 +20,8 @@ const entriesOpen = race ? race.data.status !== 'done' && (race.data.status !== 
 const entryUrl = race && entriesOpen && race.data.ctaUrl !== `/events/${race.id}/` ? url(race.data.ctaUrl) : undefined;
 ---
 
-<BaseLayout title="Duck Dash" description="A little game: steer a duck down Bradwell Brook, dodge the branches and whirlpools, and rescue the lost ducklings.">
-  <PageHeader eyebrow="Just for fun" title="Duck Dash" intro="Steer your duck down Bradwell Brook. Dodge the branches, rocks and whirlpools, and rescue the lost ducklings." />
+<BaseLayout title={w.text('title')} description={w.text('description')}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')} />
 
   <Band first>
     <section class="container page-section game-wrap" aria-labelledby="game-title">
@@ -47,9 +49,7 @@ const entryUrl = race && entriesOpen && race.data.ctaUrl !== `/events/${race.id}
           {
             race && (
               <div class="overlay__promo" data-promo hidden>
-                <p class="promo__text">
-                  <strong>Fancy the real thing?</strong> Race a numbered duck down the brook at the Boxing Day Duck Race{raceWhen && `, ${raceWhen}`}.
-                </p>
+                <p class="promo__text" set:html={w.inline('promo', { when: raceWhen ? `, ${raceWhen}` : '' })} />
                 <div class="promo__links">
                   {entryUrl && (
                     <a class="btn btn--yellow promo__btn" href={entryUrl}>

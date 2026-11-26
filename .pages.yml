@@ -21,6 +21,46 @@ media:
 
 content:
   # ───────────────────────── News ─────────────────────────
+  # ───────────────────────── Categories ─────────────────────────
+  - name: categories
+    label: Categories
+    description: Topics for news stories and photo albums (e.g. Bonfire, Duck race). Renaming one doesn't update stories already using the old name, so add a new one instead and change the stories.
+    type: collection
+    path: src/content/categories
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: false
+    view:
+      fields: [name, order]
+      primary: name
+      sort: [order]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: name
+        label: Name
+        description: As it appears on the site, e.g. "Duck race".
+        type: string
+        required: true
+      - name: order
+        label: Position
+        description: Where it comes in the list on the Photos and News pages (1 = first).
+        type: number
+        default: 50
+      - name: moreHeading
+        label: "\"More about…\" heading"
+        description: Heading over related stories at the end of a news story, e.g. "More about the bonfire".
+        type: string
+      - name: colour
+        label: Tile colour
+        description: Colour of the duck tile shown on stories that have no photo.
+        type: select
+        default: green
+        options:
+          values: [green, sky, cream, ember]
+
   - name: news
     label: News
     type: collection
@@ -54,10 +94,14 @@ content:
           format: yyyy-MM-dd
       - name: tag
         label: Topic
-        type: select
+        description: Pick from the Categories list (add a new category there first if none fits).
+        type: reference
         required: true
         options:
-          values: [Bonfire, Christmas card, "Pensioners' lunch", Duck race, "Wolf's Pit", Village, Carnival, Tour of Bradwell, Social]
+          collection: categories
+          search: name
+          value: "{fields.name}"
+          label: "{fields.name}"
       - name: summary
         label: Summary
         description: One or two sentences for the news cards and search results.
@@ -153,10 +197,14 @@ content:
         type: string
       - name: category
         label: Category
-        type: select
+        description: Pick from the Categories list (add a new category there first if none fits). Used to group photos on the Photos page.
+        type: reference
         required: true
         options:
-          values: [Bonfire, Christmas card, "Pensioners' lunch", Duck race, "Wolf's Pit", Village, Carnival, Tour of Bradwell, Social]
+          collection: categories
+          search: name
+          value: "{fields.name}"
+          label: "{fields.name}"
       - name: photos
         label: Photos
         description: Add each photo with a short description. Big phone photos are shrunk automatically when you save.
@@ -282,6 +330,15 @@ content:
         label: Where
         type: string
         required: true
+      - name: category
+        label: Photos and news category
+        description: The category this event's photo albums and news stories use, so they appear on the event page (e.g. Bonfire). For a new event, add a category in Categories first.
+        type: reference
+        options:
+          collection: categories
+          search: name
+          value: "{fields.name}"
+          label: "{fields.name}"
       - name: runByUs
         label: Run by Bradda Dads
         description: Untick for village events we take part in but don't run (like the gala).
@@ -779,10 +836,14 @@ content:
           format: yyyy-MM-dd
       - name: body
         label: Notice
-        description: The contact form section is added automatically once the form is switched on.
+        description: The section about the contact form is the next box; it only shows once the form is switched on.
         type: rich-text
         options:
           format: markdown
+      - name: formText
+        label: Section about the contact form
+        description: 'Shown only while the contact form is switched on. Blank line = new paragraph. "## " = heading. [words](https://…) = link.'
+        type: text
 
   # ───────────────────────── Our story ─────────────────────────
   - name: timeline
@@ -834,6 +895,694 @@ content:
         hidden: true
 
   # ───────────────────────── Site settings ─────────────────────────
+  # ───────────────────────── Page wording (one form per page) ─────────────────────────
+  - name: wording-home
+    label: "Page wording: Homepage"
+    type: file
+    path: src/content/pages/home.md
+    format: yaml-frontmatter
+    fields:
+      - name: whoEyebrow
+        label: '"Who we are": small label'
+        type: string
+      - name: whoTitle
+        label: '"Who we are": heading'
+        type: string
+      - name: moneyTitle
+        label: '"Where the money goes" box: heading'
+        type: string
+      - name: moneyText
+        label: '"Where the money goes" box: text'
+        description: The projects listed after it are the ones ticked "Show on the homepage" in Where the money goes.
+        type: text
+      - name: moneyEvents
+        label: '"Where the money goes" box: first item'
+        description: Shown third in the list of projects.
+        type: string
+      - name: moneyButton
+        label: '"Where the money goes" box: button'
+        type: string
+      - name: eventsTitle
+        label: "Events strip: heading"
+        type: string
+      - name: eventsIntro
+        label: "Events strip: line under the heading"
+        type: string
+      - name: newsTitle
+        label: "News: heading"
+        type: string
+      - name: exploreTitle
+        label: "Explore: heading"
+        type: string
+      - name: explore
+        label: Explore tiles
+        description: Use {albums} in a line to show the number of photo albums.
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: text
+            label: Line under the title
+            type: string
+          - name: link
+            label: Link (e.g. /photos/)
+            type: string
+          - name: image
+            label: Photo
+            type: image
+            options:
+              media: uploads
+              path: public/uploads/images
+          - name: when
+            label: When the photo was taken (shown on it)
+            type: string
+      - name: joinButton
+        label: "Join strip: join button"
+        type: string
+      - name: donateButton
+        label: "Join strip: donate button"
+        type: string
+      - name: cardArtTitle
+        label: "Christmas card banner: card picture title"
+        type: string
+      - name: cardArtNames
+        label: "Christmas card banner: names on the card picture"
+        type: string
+  - name: wording-event-pages
+    label: "Page wording: Event pages (all events)"
+    type: file
+    path: src/content/pages/event-pages.md
+    format: yaml-frontmatter
+    fields:
+      - name: happening
+        label: "Heading: what happens"
+        type: string
+      - name: whenWhere
+        label: "Heading: when and where"
+        type: string
+      - name: getInvolved
+        label: "Heading: ways to take part"
+        type: string
+      - name: pastYears
+        label: "Heading: photos and news from before"
+        type: string
+  - name: wording-events
+    label: "Page wording: Events page"
+    type: file
+    path: src/content/pages/events.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: calendarLink
+        label: Calendar link
+        type: string
+  - name: wording-get-involved
+    label: "Page wording: Get involved"
+    type: file
+    path: src/content/pages/get-involved.md
+    format: yaml-frontmatter
+    fields:
+      - name: meetTitle
+        label: "Meeting box: heading"
+        type: string
+      - name: meetText
+        label: "Meeting box: text after the meeting time"
+        description: Follows "We meet …" (the meeting time is in Site settings).
+        type: string
+      - name: helpTitle
+        label: "Helping box: heading"
+        type: string
+      - name: helpText
+        label: "Helping box: text"
+        description: The list of events underneath is automatic.
+        type: text
+      - name: otherTitle
+        label: "Third box: heading"
+        type: string
+      - name: otherText
+        label: "Third box: text"
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold.
+        type: text
+  - name: wording-donate
+    label: "Page wording: Donate"
+    type: file
+    path: src/content/pages/donate.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: giveTitle
+        label: "Online giving box: heading"
+        type: string
+      - name: giveText
+        label: "Online giving box: text"
+        type: string
+      - name: shopLink
+        label: "Online giving box: shop link"
+        type: string
+      - name: qrText
+        label: Line under the QR code
+        type: string
+      - name: moneyLead
+        label: Line before the projects list
+        description: The projects are the ones ticked "Show on the homepage" in Where the money goes.
+        type: string
+      - name: moneyLink
+        label: Link to the full list
+        type: string
+      - name: waysTitle
+        label: '"Other ways to help": heading'
+        type: string
+      - name: ways
+        label: Other ways to help
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Heading
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: link
+            label: Link (e.g. /get-involved/)
+            type: string
+          - name: label
+            label: Link words
+            type: string
+  - name: wording-contact
+    label: "Page wording: Contact"
+    type: file
+    path: src/content/pages/contact.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: formTitle
+        label: "Form: heading"
+        type: string
+      - name: topics
+        label: "Form: \"What's it about?\" choices"
+        description: The first choice is picked unless a link says otherwise (e.g. /contact/?topic=support).
+        type: object
+        list: true
+        fields:
+          - name: key
+            label: Short code (letters only; other pages link to it, so don't change existing ones)
+            type: string
+          - name: label
+            label: Choice as shown
+            type: string
+      - name: emailHint
+        label: "Form: note under the email box"
+        type: string
+      - name: sendButton
+        label: "Form: send button"
+        type: string
+      - name: formNote
+        label: "Form: note under the button"
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold.
+        type: string
+      - name: facebookTitle
+        label: "Facebook box: heading"
+        type: string
+      - name: facebookText
+        label: "Facebook box: text"
+        type: string
+      - name: facebookButton
+        label: "Facebook box: button"
+        type: string
+      - name: emailTitle
+        label: "Email box: heading"
+        type: string
+      - name: meetTitle
+        label: "Meetings box: heading"
+        type: string
+      - name: extraTitle
+        label: "Last box: heading"
+        type: string
+      - name: extraText
+        label: "Last box: text"
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold.
+        type: text
+  - name: wording-where-the-money-goes
+    label: "Page wording: Where the money goes"
+    type: file
+    path: src/content/pages/where-the-money-goes.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: projectsTitle
+        label: "Projects: heading"
+        type: string
+      - name: ctaText
+        label: "Donate box: text"
+        type: string
+      - name: mapTitle
+        label: "Map: heading"
+        type: string
+  - name: wording-christmas-card
+    label: "Page wording: Christmas card page"
+    type: file
+    path: src/content/pages/christmas-card.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: Not shown on the page. The title and introduction come from the Christmas card event.
+        type: text
+      - name: stepsTitle
+        label: "Steps: heading"
+        type: string
+      - name: steps
+        label: Steps
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Step (bold)
+            type: string
+          - name: text
+            label: Then
+            type: string
+      - name: payButton
+        label: Pay button (while open)
+        type: string
+      - name: openNote
+        label: Note under the pay button (while open)
+        description: Explain how families send their message. Anything in [square brackets] is hidden on the website.
+        type: text
+      - name: closedNote
+        label: Note when entries are closed
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold. {facebook} is the Facebook page link.
+        type: text
+      - name: details
+        label: Text beside the steps
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold.
+        type: text
+  - name: wording-races
+    label: "Page wording: Races page"
+    type: file
+    path: src/content/pages/races.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: wolfEyebrow
+        label: "Wolf's Pit box: small label"
+        type: string
+      - name: wolfLink
+        label: "Wolf's Pit box: link"
+        type: string
+      - name: tourEyebrow
+        label: "Tour of Bradwell box: small label"
+        type: string
+      - name: tourText
+        label: "Tour of Bradwell box: text"
+        type: text
+      - name: tourLink
+        label: "Tour of Bradwell box: link"
+        type: string
+  - name: wording-our-story
+    label: "Page wording: Our story"
+    type: file
+    path: src/content/pages/our-story.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: Not shown on the page. The introduction and photo are in Site settings.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: timelineTitle
+        label: "Timeline: heading"
+        type: string
+      - name: undatedTitle
+        label: Heading for entries without a year
+        type: string
+      - name: gapsTitle
+        label: Heading when every entry has a year
+        type: string
+      - name: note
+        label: Note at the bottom
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold. {members} becomes "meet today's dads or " once members are on the site.
+        type: text
+  - name: wording-supporters
+    label: "Page wording: Our supporters"
+    type: file
+    path: src/content/pages/supporters.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: thanksTitle
+        label: "List: heading"
+        type: string
+      - name: emptyText
+        label: Shown when the list is empty
+        type: string
+      - name: pastTitle
+        label: "Past supporters: heading"
+        type: string
+      - name: businessTitle
+        label: "Business box: heading"
+        type: string
+      - name: businessText
+        label: "Business box: text"
+        type: text
+  - name: wording-members
+    label: "Page wording: Meet the dads"
+    type: file
+    path: src/content/pages/members.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: meetTitle
+        label: "Meeting: heading"
+        type: string
+      - name: meetText
+        label: "Meeting: text after the meeting time"
+        description: Follows "We meet …" (the meeting time is in Site settings).
+        type: string
+      - name: dadsTitle
+        label: "Profiles: heading"
+        type: string
+      - name: soonText
+        label: Shown until profiles are added
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold.
+        type: text
+  - name: wording-news
+    label: "Page wording: News page"
+    description: "{count} is replaced by the number of stories."
+    type: file
+    path: src/content/pages/news.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: latestTitle
+        label: "Latest stories: heading"
+        type: string
+      - name: archiveTitle
+        label: "Archive: heading"
+        type: string
+      - name: archiveIntro
+        label: "Archive: line under the heading"
+        type: string
+  - name: wording-photos
+    label: "Page wording: Photos page"
+    description: "{albums} and {photos} are replaced by the numbers of albums and photos."
+    type: file
+    path: src/content/pages/photos.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: shareButton
+        label: Share button
+        description: Where it goes is in Site settings.
+        type: string
+      - name: browseTitle
+        label: "Categories: heading"
+        type: string
+      - name: allTitle
+        label: "All albums: heading"
+        type: string
+  - name: wording-wolfspit
+    label: "Page wording: Wolf's Pit results page"
+    type: file
+    path: src/content/pages/wolfspit.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Page title
+        description: The introduction is in Site settings.
+        type: string
+      - name: missingNote
+        label: Note about missing years
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold. {years} is replaced by the missing years.
+        type: text
+      - name: aboutLink
+        label: Link to the race page
+        type: string
+      - name: searchTitle
+        label: "Search: heading"
+        type: string
+  - name: wording-tour-of-bradwell
+    label: "Page wording: Tour of Bradwell results page"
+    type: file
+    path: src/content/pages/tour-of-bradwell.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: note
+        label: Note at the bottom
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold.
+        type: text
+  - name: wording-duck-race-winners
+    label: "Page wording: Duck race winners page"
+    description: "{races} and {years} are replaced by the number of races and the years they span."
+    type: file
+    path: src/content/pages/duck-race-winners.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: findTitle
+        label: "Search: heading"
+        type: string
+      - name: footerText
+        label: Text at the bottom
+        description: Blank line = new paragraph. "- " at the start of lines = bullet list. [words](/page/) = link. **words** = bold.
+        type: text
+      - name: footerButton
+        label: Button at the bottom
+        type: string
+  - name: wording-search
+    label: "Page wording: Search page"
+    type: file
+    path: src/content/pages/search.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: ideas
+        label: '"Try:" suggestions'
+        type: object
+        list: true
+        fields:
+          - name: text
+            label: Suggestion
+            type: string
+  - name: wording-game
+    label: "Page wording: Duck Dash game page"
+    type: file
+    path: src/content/pages/game.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: promo
+        label: "End of game: invitation to the real race"
+        description: '{when} becomes ", " and the race date. **words** = bold.'
+        type: string
+  - name: wording-not-found
+    label: "Page wording: Page not found"
+    type: file
+    path: src/content/pages/not-found.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Heading
+        type: string
+      - name: text
+        label: Text
+        type: text
+      - name: button
+        label: Button
+        type: string
+  - name: wording-accessibility
+    label: "Page wording: Accessibility statement"
+    description: The statement itself is the "Statement" box. Put {photo-descriptions} on its own line where the automatic sentence about photo descriptions should go.
+    type: file
+    path: src/content/pages/accessibility.md
+    format: yaml-frontmatter
+    fields:
+      - name: description
+        label: Description for Google and link previews
+        description: One or two sentences. Not shown on the page.
+        type: text
+      - name: eyebrow
+        label: Small label above the title
+        type: string
+      - name: title
+        label: Page title
+        type: string
+      - name: intro
+        label: Introduction under the title
+        type: text
+      - name: statement
+        label: Statement
+        description: 'Blank line = new paragraph. "- " at the start of lines = bullet list. "## " = heading. [words](/page/) = link. **words** = bold. Keep {photo-descriptions}: the site fills in the sentence about how many photos are described.'
+        type: text
+      - name: updatedNote
+        label: Last line (when it was written)
+        type: string
+
   - name: settings
     label: Site settings
     type: file

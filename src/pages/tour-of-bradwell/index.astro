@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('tour-of-bradwell'); // Page wording form
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import { RACES } from '../../content.config';
@@ -11,11 +13,11 @@ const all = (await Promise.all(tourRaces.map((r) => getRaceYears(r)))).flat().so
 const years = [...new Set(all.map((y) => y.year))];
 ---
 
-<BaseLayout title="Tour of Bradwell" description="Results of the Long Tour and Half Tour of Bradwell, fell running and challenge events around Bradwell, Derbyshire, 2016–2019.">
+<BaseLayout title={w.text('title')} description={w.text('description')}>
   <PageHeader
-    eyebrow="Fell race"
-    title="Tour of Bradwell"
-    intro="A fell running and challenge event around Bradwell, with a Long Tour and a Half Tour. Bradda Dads helped stage it from 2012 and went on to run it. Here are the results we have."
+    eyebrow={w.text('eyebrow')}
+    title={w.text('title')}
+    intro={w.text('intro')}
   />
   <section class="container page-section stack">
     {
@@ -39,9 +41,7 @@ const years = [...new Set(all.map((y) => y.year))];
         </div>
       ))
     }
-    <p class="note">
-      For future Tour of Bradwell events, see the official Tour of Bradwell website. Results for 2018 aren't on the site yet.
-    </p>
+    <div class="note" set:html={w.html('note')} />
   </section>
 </BaseLayout>
 

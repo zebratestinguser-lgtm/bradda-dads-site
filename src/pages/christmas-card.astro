@@ -4,56 +4,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getSite } from '../lib/site';
 import { url } from '../lib/url';
+import { getWording } from '../lib/wording';
 import { isOpen } from '../lib/events';
 
 const site = await getSite();
+const w = await getWording('christmas-card'); // Page wording → Christmas card page
+const steps = w.list<{ title: string; text: string }>('steps');
 const card = await getEntry('events', 'christmas-card');
 // Open only until the deadline (entriesClose), not just while the status says "open"
 const open = card ? isOpen(card) : false;
 ---
 
-<BaseLayout title="Village Christmas card" description="One shared Christmas card for the whole village. Add your family's message for £5; the money goes back into the village through Bradda Dads' events.">
+<BaseLayout title="Village Christmas card" description={w.text('description')}>
   <PageHeader eyebrow={open ? 'Open now' : 'Village Christmas card'} title={card?.data.heroTitle ?? 'One card for the whole village'} intro={card?.data.heroText ?? card?.data.summary}>
     {open && card?.data.heroNote && <p class="closes">{card.data.heroNote}</p>}
   </PageHeader>
 
   <section class="container page-section layout">
     <div class="steps-col">
-      <h2 class="subhead">How it works</h2>
+      <h2 class="subhead">{w.text('stepsTitle')}</h2>
       <ol class="steps">
-        <li>
-          <strong>Write your message.</strong> A line or two from your family to the village, such as "Merry Christmas from the family at No. 12".
-        </li>
-        <li>
-          <strong>Pay £5.</strong> Secure payment by SumUp.
-        </li>
-        <li>
-          <strong>Look out for the card.</strong> Every message goes on the one shared village card, delivered around Bradwell.
-        </li>
+        {steps.map((st) => (
+          <li>
+            <strong>{st.title}</strong> {st.text}
+          </li>
+        ))}
       </ol>
 
       {
         open ? (
           <div class="enter">
-            <a class="btn btn--green btn--md" href={url(site.christmasCardPaymentUrl)}>Pay £5 with SumUp</a>
-            <p class="note">
-              [PLACEHOLDER: the message form arrives in milestone 5. Until then, explain how families send their message, e.g. with the SumUp payment note or by email.]
-            </p>
+            <a class="btn btn--green btn--md" href={url(site.christmasCardPaymentUrl)}>{w.text('payButton')}</a>
+            <div class="note" set:html={w.html('openNote')} />
           </div>
         ) : (
-          <p class="note">Entries for this year's card are closed. Follow us on <a href={site.facebookUrl}>Facebook</a> to hear when next year's opens.</p>
+          <div class="note" set:html={w.html('closedNote', { facebook: site.facebookUrl })} />
         )
       }
     </div>
 
-    <div class="prose details">
-      <p>
-        <a href={url('/events/christmas-card/')}>This year's dates and how the card comes together →</a>
-      </p>
-      <p>
-        The 'Dads have a long history of Christmas cards: in 2008 the infant and junior schools designed a card that was given to every pensioner at the Christmas lunch (<a href={url('/news/2008-12-09-christmas-card-competition-2008/')}>read about it</a>).
-      </p>
-    </div>
+    <div class="prose details" set:html={w.html('details')} />
   </section>
 </BaseLayout>
 

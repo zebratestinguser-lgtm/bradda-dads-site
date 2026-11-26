@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../lib/wording';
+const w = await getWording('accessibility'); // Page wording form
 // Accessibility statement: what standard the site aims for, how it's checked, what isn't finished yet,
 // and how to report a problem. The number of photos still awaiting a description is counted at build.
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -6,70 +8,25 @@ import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getAlbums } from '../lib/albums';
 import { GENERIC } from '../lib/photos';
-import { url } from '../lib/url';
 
 const albums = await getAlbums();
 const photos = albums.flatMap((a) => a.data.photos);
 const generic = photos.filter((p) => GENERIC.test(p.alt)).length;
 const described = photos.length - generic;
+// The automatic sentence the statement's {photo-descriptions} marker turns into
+const photoSentence =
+  generic === 0
+    ? `Every one of our ${photos.length.toLocaleString('en-GB')} photos has a short description, with when it was taken.`
+    : `We have described ${described.toLocaleString('en-GB')} of our ${photos.length.toLocaleString('en-GB')} photos. The other ${generic.toLocaleString('en-GB')} only say which album they're from and when they were taken.`;
 ---
 
-<BaseLayout title="Accessibility" description="How the Bradda Dads website is made to work for everyone, what isn't finished yet, and how to tell us about a problem.">
-  <PageHeader eyebrow="Accessibility" title="Accessibility statement" intro="We want everyone in Bradwell to be able to use this website, whatever device you use and however you use it." />
+<BaseLayout title={w.text('eyebrow')} description={w.text('description')}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')} />
 
   <Band first>
     <section class="container page-section prose statement">
-      <h2>What we aim for</h2>
-      <p>
-        This website aims to meet the <a href="https://www.w3.org/TR/WCAG22/">Web Content Accessibility Guidelines (WCAG) 2.2</a> at level AA, the standard most UK organisations work to.
-      </p>
-      <p>You should be able to:</p>
-      <ul>
-        <li>use every part of the site with a keyboard alone, with a clear outline showing where you are</li>
-        <li>use it with a screen reader, such as VoiceOver, TalkBack or NVDA</li>
-        <li>zoom in up to 400% without text overlapping or the page scrolling sideways</li>
-        <li>read all text against its background (every colour pair meets the WCAG contrast ratio)</li>
-        <li>turn off animations: if your device is set to reduce motion, the bobbing ducks and sliding effects stop</li>
-        <li>see when every photo was taken, and read a description of the main photos</li>
-      </ul>
-
-      <h2>How we check</h2>
-      <p>Every time the site changes we run checks on each type of page, at phone and desktop sizes:</p>
-      <ul>
-        <li>automated accessibility testing (axe-core, against WCAG 2.2 A and AA)</li>
-        <li>keyboard testing of the menus, photo viewer, results tables and events carousel</li>
-        <li>colour contrast checks on every text and background colour the site uses</li>
-        <li>layout checks at phone widths down to 320 pixels</li>
-      </ul>
-
-      <h2>What isn't finished yet</h2>
-      <ul>
-        <li>
-          <strong>Photo descriptions.</strong>{' '}
-          {generic === 0
-            ? `Every one of our ${photos.length.toLocaleString('en-GB')} photos has a short description, with when it was taken.`
-            : `We have described ${described.toLocaleString('en-GB')} of our ${photos.length.toLocaleString('en-GB')} photos. The other ${generic.toLocaleString('en-GB')} only say which album they're from and when they were taken.`}
-          {' '}Descriptions of older photos were written from the pictures themselves, so if one is wrong, please tell us.
-        </li>
-        <li>
-          <strong>Original race results.</strong> Some race years link to the original results PDF from the race organiser. These may not work well with screen readers, but the same results are on the
-          site as a searchable table, and as a spreadsheet you can download.
-        </li>
-        <li>
-          <strong>The map.</strong> The "where the money goes" map can be hard to use without sight or a mouse, so every place on it is also listed underneath in plain text.
-        </li>
-        <li>
-          <strong>Older news stories.</strong> Stories from 2001 to 2024 were brought across from our old websites as they were written, so a few may link to pages that no longer exist.
-        </li>
-      </ul>
-
-      <h2>Tell us about a problem</h2>
-      <p>
-        If something on the site doesn't work for you, or you need information in a different format, please <a href={url('/contact/')}>get in touch</a>. Tell us the page and what went wrong.
-        We're volunteers, but we'll reply as soon as we can and fix what we can.
-      </p>
-
-      <p class="updated">This statement was written on 21 November 2026, when the site was last fully tested.</p>
+      <Fragment set:html={w.html('statement', { 'photo-descriptions': photoSentence })} />
+      <p class="updated">{w.text('updatedNote')}</p>
     </section>
   </Band>
 </BaseLayout>

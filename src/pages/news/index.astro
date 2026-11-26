@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('news'); // Page wording form
 import { url, small } from '../../lib/url';
 import Img from '../../components/Img.astro';
 // News: search, the latest stories as cards, then the archive folded by year.
@@ -9,7 +11,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import Band from '../../components/Band.astro';
 import NewsTile from '../../components/NewsTile.astro';
 import FacebookPosts from '../../components/FacebookPosts.astro';
-import { NEWS_TAGS } from '../../content.config';
+import { categoryNames } from '../../lib/categories';
 import { formatDate } from '../../lib/format';
 import { storyPhotos } from '../../lib/photos';
 
@@ -20,7 +22,9 @@ const latest = news.slice(0, LATEST);
 const archive = news.slice(LATEST);
 // Latest stories without their own photo borrow a dated archive photo from the same kind of event
 const latestPhotos = await storyPhotos(latest);
-const tags = NEWS_TAGS.filter((t) => news.some((n) => n.data.tag === t));
+// Topic buttons in the Categories order; any story category missing from that list goes last
+const listed = await categoryNames();
+const tags = [...listed, ...new Set(news.map((n) => n.data.tag).filter((t) => !listed.includes(t)))].filter((t) => news.some((n) => n.data.tag === t));
 const byYear = new Map<number, typeof news>();
 for (const n of archive) {
   const y = n.data.date.getFullYear();
@@ -30,8 +34,8 @@ for (const n of archive) {
 const href = (id: string) => url(`/news/${id}/`);
 ---
 
-<BaseLayout title="News" description={`News from Bradda Dads in Bradwell, Derbyshire: events, race results and village news, with ${news.length} stories going back to 2001.`}>
-  <PageHeader eyebrow="News" title="News from the Dads" intro={`The latest from Bradda Dads, and an archive of ${news.length} stories going back to the first pensioners' lunch in 2001.`}>
+<BaseLayout title={w.text('eyebrow')} description={w.text('description', { count: news.length })}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro', { count: news.length })}>
     <form class="news-search" action={url('/search/')} method="get" role="search">
       <label for="news-q" class="news-search__label">Search the news and photos</label>
       <div class="news-search__row">
@@ -52,7 +56,7 @@ const href = (id: string) => url(`/news/${id}/`);
     </div>
 
     <section aria-labelledby="latest-title" data-group>
-      <h2 class="subhead" id="latest-title">Latest news</h2>
+      <h2 class="subhead" id="latest-title">{w.text('latestTitle')}</h2>
       <ul class="latest" role="list">
         {
           latest.map((n, i) => (
@@ -88,8 +92,8 @@ const href = (id: string) => url(`/news/${id}/`);
   <Band tone="mist"><section class="container page-section news-page">
 
     <section class="archive" aria-labelledby="archive-title" data-group>
-      <h2 class="subhead" id="archive-title">From the archive</h2>
-      <p class="archive__intro">Older stories, year by year. Tap a year to open it.</p>
+      <h2 class="subhead" id="archive-title">{w.text('archiveTitle')}</h2>
+      <p class="archive__intro">{w.text('archiveIntro')}</p>
       {
         [...byYear.entries()].map(([year, items]) => (
           <details class="year" data-year>

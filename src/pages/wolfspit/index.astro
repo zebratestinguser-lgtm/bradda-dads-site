@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('wolfspit'); // Page wording form
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import WolfspitBand from '../../components/home/WolfspitBand.astro';
@@ -20,7 +22,7 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
 ---
 
 <BaseLayout title="Wolf's Pit Fell Race results" description={`The Wolf's Pit Fell Race: a 9 km fell race from Shatton, near Bamford. Results from ${years.length} years since ${first}, and a search across all years.`}>
-  <PageHeader eyebrow="Fell race" title="Wolf's Pit Fell Race" intro={site.wolfspitIntro}>
+  <PageHeader eyebrow="Fell race" title={w.text('title')} intro={site.wolfspitIntro}>
     <div class="actions">
       {site.wolfspitEntryUrl !== '#' && <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>Enter {latest ? latest.year + 1 : ''}</a>}
       <a class="btn btn--ghost-light btn--md" href="#wolfspit">Results</a>
@@ -32,19 +34,17 @@ const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.n
   <div class="container">
     {
       missing.length > 0 && (
-        <p class="note older">
-          Results for {listYears(missing)} aren't on the site yet (there was no race in 2020 or 2021). If you have a copy, <a href={url('/contact/')}>please get in touch</a>.
-        </p>
+        <div class="note older" set:html={w.html('missingNote', { years: listYears(missing) })} />
       )
     }
   </div>
 
   <section class="container page-section about">
-    <p><a href={url('/events/wolfspit/')}>About the race: the course, records and how to enter →</a></p>
+    <p><a href={url('/events/wolfspit/')}>{w.text('aboutLink')}</a></p>
   </section>
 
   <section class="container page-section stack" id="all-years" aria-labelledby="search-title">
-    <h2 class="subhead" id="search-title">Find yourself in any year</h2>
+    <h2 class="subhead" id="search-title">{w.text('searchTitle')}</h2>
     <div class="form-field search">
       <label for="any-year">Runner name</label>
       <input id="any-year" type="search" placeholder="Start typing a name" autocomplete="off" data-any-year data-base={url('/wolfspit/')} />

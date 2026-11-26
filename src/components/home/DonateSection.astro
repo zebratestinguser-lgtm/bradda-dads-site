@@ -4,6 +4,13 @@ import { getSite } from '../../lib/site';
 import { isPlaceholder } from '../../lib/events';
 import { url } from '../../lib/url';
 
+import type { Wording } from '../../lib/wording';
+
+interface Props {
+  /** Page wording → Donate */
+  wording: Wording;
+}
+const { wording: w } = Astro.props;
 const site = await getSite();
 // The QR column only appears once a real SumUp QR image is set in site.yaml (a fake one could confuse people)
 ---
@@ -12,10 +19,8 @@ const site = await getSite();
   <div class="container">
     <div class="donate">
       <div class="donate__copy">
-        <h2 id="donate-title" class="donate__title">Give online</h2>
-        <p class="donate__text">
-          Pick an amount to pay securely online.
-        </p>
+        <h2 id="donate-title" class="donate__title">{w.text('giveTitle')}</h2>
+        <p class="donate__text">{w.text('giveText')}</p>
         <ul class="amounts" role="list">
           {
             site.donationLinks.map((d) => (
@@ -30,7 +35,7 @@ const site = await getSite();
           }
         </ul>
         <div class="donate__foot">
-          <a class="link-arrow" href={url(site.sumupStoreUrl)}>Visit our SumUp shop →</a>
+          <a class="link-arrow" href={url(site.sumupStoreUrl)}>{w.text('shopLink')}</a>
           <span class="donate__secure">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="5" y="11" width="14" height="10" rx="2" />
@@ -44,7 +49,7 @@ const site = await getSite();
         site.donationQr ? (
           <div class="donate__qr-col">
             <img class="qr" src={url(site.donationQr)} alt="QR code: scan to donate to Bradda Dads via SumUp" width="200" height="200" loading="lazy" />
-            <p class="donate__qr-text">At an event? Scan to donate on your phone.</p>
+            <p class="donate__qr-text">{w.text('qrText')}</p>
           </div>
         ) : (
           <div class="donate__art" aria-hidden="true">

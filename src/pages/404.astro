@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../lib/wording';
+const w = await getWording('not-found'); // Page wording form
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DuckLogo from '../components/DuckLogo.astro';
 import { url } from '../lib/url';
@@ -8,9 +10,9 @@ import { url } from '../lib/url';
   <section class="not-found">
     <div class="container not-found__inner">
       <DuckLogo size={96} />
-      <h1>This duck has floated off</h1>
-      <p>We can't find the page you were looking for. It may have moved, or the link might be out of date.</p>
-      <a class="btn btn--green" href={url('/')}>Back to the homepage</a>
+      <h1>{w.text('title')}</h1>
+      <Fragment set:html={w.html('text')} />
+      <a class="btn btn--green" href={url('/')}>{w.text('button')}</a>
     </div>
   </section>
 </BaseLayout>

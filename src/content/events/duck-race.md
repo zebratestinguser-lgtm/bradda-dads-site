@@ -4,6 +4,7 @@ when: 26 December
 start: 2026-12-26T11:00:00+00:00
 startTimeConfirmed: true
 location: Bradwell Brook
+category: "Duck race"
 mapUrl: https://maps.app.goo.gl/jyz2QgtmaEKfUDfx6
 places:
   - label: Entries on sale (Sat 12 and 19 Dec)

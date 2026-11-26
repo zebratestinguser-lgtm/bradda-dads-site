@@ -9,8 +9,10 @@ import PageHeader from '../../components/PageHeader.astro';
 import { getWolfspitYears, getRaceYears } from '../../lib/results';
 import { tourRaces } from '../../lib/tour';
 import { getSite } from '../../lib/site';
+import { getWording } from '../../lib/wording';
 
 const site = await getSite();
+const w = await getWording('races'); // Page wording → Races page
 const wolf = await getWolfspitYears();
 const tour = (await Promise.all(tourRaces.map((r) => getRaceYears(r)))).flat();
 const tourYears = [...new Set(tour.map((t) => t.year))].sort((a, b) => b - a);
@@ -23,8 +25,8 @@ const wolfPhoto = await photoMatching(/big field of runners on the start line/i,
 const tourPhoto = await photoMatching(/runners coming up a woodland track on the long tour/i, /tour of bradwell/i);
 ---
 
-<BaseLayout title="Races" description="Fell races run by Bradda Dads: the Wolf's Pit Fell Race and the Tour of Bradwell. Results, records and how to enter." ogImage={header?.src} ogImageAlt={header?.alt}>
-  <PageHeader eyebrow="Races" title="Fell races" intro="Bradda Dads run fell races in the hills around Bradwell, with the money raised going back into the village. Find results from past years, records and how to enter." image={header?.src} imageLabel={header?.label} />
+<BaseLayout title={w.text('eyebrow')} description={w.text('description')} ogImage={header?.src} ogImageAlt={header?.alt}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')} image={header?.src} imageLabel={header?.label} />
 
   <Band first><section class="container page-section races">
     <a class="race race--wolf" href={url('/wolfspit/')}>
@@ -34,7 +36,7 @@ const tourPhoto = await photoMatching(/runners coming up a woodland track on the
           <span class="race__chip">{wolfPhoto.label}</span>
         </span>
       )}
-      <span class="race__eyebrow">Since 2009</span>
+      <span class="race__eyebrow">{w.text('wolfEyebrow')}</span>
       <h2 class="race__name">Wolf's Pit Fell Race</h2>
       <p class="race__text">{site.wolfspitIntro}</p>
       <ul class="race__facts" role="list">
@@ -43,7 +45,7 @@ const tourPhoto = await photoMatching(/runners coming up a woodland track on the
         {wolf[0] && <li>Latest: <strong>{wolf[0].year}</strong></li>}
       </ul>
       {wolfEvent && <p class="race__next">Next race: <strong>{wolfEvent.data.when}</strong></p>}
-      <span class="race__cta">Results, records and entry →</span>
+      <span class="race__cta">{w.text('wolfLink')}</span>
     </a>
 
     <a class="race" href={url('/tour-of-bradwell/')}>
@@ -53,14 +55,14 @@ const tourPhoto = await photoMatching(/runners coming up a woodland track on the
           <span class="race__chip">{tourPhoto.label}</span>
         </span>
       )}
-      <span class="race__eyebrow">Long Tour and Half Tour</span>
+      <span class="race__eyebrow">{w.text('tourEyebrow')}</span>
       <h2 class="race__name">Tour of Bradwell</h2>
-      <p class="race__text">A fell running and challenge event around Bradwell. The Long Tour is a punishing 33 miles with over 6,000 feet of climb. Bradda Dads helped stage it from 2012 and went on to run it.</p>
+      <p class="race__text">{w.text('tourText')}</p>
       <ul class="race__facts" role="list">
         <li><strong>{tourYears.length}</strong> years of results ({tourYears.at(-1)}–{tourYears[0]})</li>
         <li><strong>{tourRunners.toLocaleString('en-GB')}</strong> finishes</li>
       </ul>
-      <span class="race__cta">Results →</span>
+      <span class="race__cta">{w.text('tourLink')}</span>
     </a>
   </section></Band>
 </BaseLayout>

@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('home'); // Page wording form
 import { url } from '../../lib/url';
 import Img from '../Img.astro';
 // Four photo tiles leading to the main sections (replaces the long homepage sections).
@@ -8,41 +10,19 @@ import { getAlbums } from '../../lib/albums';
 // Counted from the albums at every build, so it stays right as albums are added
 const albumCount = (await getAlbums()).length;
 
-const tiles = [
-  {
-    title: 'Photos',
-    text: `${albumCount} albums going back to 2001`,
-    href: '/photos/',
-    img: '/uploads/albums/2012-08-07-duck-race-carnival-2012/010.jpg',
-    when: 'Aug 2012',
-  },
-  {
-    title: 'Races',
-    text: "Wolf's Pit and Tour of Bradwell results",
-    href: '/races/',
-    img: '/uploads/albums/2022-02-08-wolfs-pit-fell-race-2022/001.jpg',
-    when: 'Before 2022',
-  },
-  {
-    title: 'Our story',
-    text: 'From the first duck race in 1999',
-    href: '/our-story/',
-    img: '/uploads/albums/2001-12-12-first-ever-bradda-dads-pensioners-christmas-lunch-wednesday/001.jpg',
-    when: 'Dec 2001',
-  },
-  {
-    title: 'Where the money goes',
-    text: 'The groups and projects we help',
-    href: '/where-the-money-goes/',
-    img: '/uploads/news/facebook/2025-09-14-1311031744046641-1.jpg', // the footbridge the dads replaced in 2025
-    when: 'Jul 2011',
-  },
-];
+// Tiles: Page wording → Homepage → Explore tiles ({albums} in a line becomes the number of albums)
+const tiles = w.list<{ title: string; text: string; link: string; image: string; when?: string }>('explore').map((t) => ({
+  title: t.title,
+  text: String(t.text ?? '').replace('{albums}', String(albumCount)),
+  href: t.link,
+  img: t.image,
+  when: t.when,
+}));
 ---
 
 <section class="explore" aria-labelledby="explore-title">
   <div class="container">
-    <h2 id="explore-title" class="section-title explore__title">Explore</h2>
+    <h2 id="explore-title" class="section-title explore__title">{w.text('exploreTitle')}</h2>
     <ul class="explore__grid" role="list">
       {
         tiles.map((t) => (
@@ -50,7 +30,7 @@ const tiles = [
             <a class="tile" href={url(t.href)}>
               <span class="tile__media">
                 <Img kind="grid" src={t.img} sizes="(max-width: 600px) 50vw, 320px" alt="" loading="lazy" decoding="async" width="480" height="320" />
-                <span class="tile__date">{t.when}</span>
+                {t.when && <span class="tile__date">{t.when}</span>}
               </span>
               <span class="tile__body">
                 <span class="tile__name">{t.title}</span>

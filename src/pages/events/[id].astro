@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('event-pages'); // Page wording form
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Band from '../../components/Band.astro';
@@ -6,7 +8,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
 import { getEvents, pickNextEvent, statusFor, formatEventDates, isOpen, isPlaceholder, deadlineFor, shortDay, takingBookings } from '../../lib/events';
 import { getWolfspitYears } from '../../lib/results';
-import { getAlbums, EVENT_TAG, categorySlug } from '../../lib/albums';
+import { getAlbums, categorySlug } from '../../lib/albums';
 import { formatDate, formatTime } from '../../lib/format';
 import { url } from '../../lib/url';
 import { eventPhoto } from '../../lib/photos';
@@ -25,7 +27,7 @@ const next = pickNextEvent(await getEvents());
 const status = statusFor(event, event.id === next?.id).label;
 const deadline = deadlineFor(event);
 
-const tag = EVENT_TAG[event.id];
+const tag = event.data.category;
 const eventAlbums = (await getAlbums()).filter((a) => a.data.photos.length > 0 && (a.data.event?.id === event.id || (tag && a.data.category === tag)));
 const albums = eventAlbums.slice(0, 4);
 const news = tag
@@ -43,7 +45,7 @@ const latestRace = raceAll[0];
 // Past prize winners (duck race only)
 const duckWinners = event.id === 'duck-race' ? (await getCollection('duckWinners')).sort((a, b) => a.data.date.getTime() - b.data.date.getTime()) : [];
 // Header photo: the event's own heroImage if set, else the latest real photo from its albums
-const photo = d.heroImage ? { src: d.heroImage, label: d.heroImageCaption } : await eventPhoto(event.id);
+const photo = d.heroImage ? { src: d.heroImage, label: d.heroImageCaption } : await eventPhoto(event.id, tag);
 // The main action shows in the header, and again in a slim bar at the bottom of phone screens
 const showCta = () => !ctaIsSelf && !deadline?.passed && (d.status !== 'open' || open);
 const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
@@ -93,13 +95,13 @@ const jsonLd = addToCalendar
 
   <!-- 1. What's happening -->
   <Band first><section class="container page-section ev-section" aria-labelledby="what-title">
-    <h2 class="subhead" id="what-title">What's happening</h2>
+    <h2 class="subhead" id="what-title">{w.text('happening')}</h2>
     <div class="prose"><Content /></div>
   </section></Band>
 
   <!-- 2. When and where -->
   <Band tone="mist"><section class="container page-section ev-section" aria-labelledby="when-title">
-    <h2 class="subhead" id="when-title">When and where</h2>
+    <h2 class="subhead" id="when-title">{w.text('whenWhere')}</h2>
     <dl class="ww">
       <div class="ww__item">
         <dt>When</dt>
@@ -151,7 +153,7 @@ const jsonLd = addToCalendar
 
   <!-- 3. How to get involved -->
   <Band tone="white"><section class="container page-section ev-section" aria-labelledby="involved-title">
-    <h2 class="subhead" id="involved-title">How to get involved</h2>
+    <h2 class="subhead" id="involved-title">{w.text('getInvolved')}</h2>
     {
       ways.length > 0 ? (
         <ul class="ways" role="list">
@@ -179,7 +181,7 @@ const jsonLd = addToCalendar
   {
     (albums.length > 0 || news.length > 0 || isRace) && (
       <Band tone="mist"><section class="container page-section ev-section past" aria-labelledby="past-title">
-        <h2 class="subhead" id="past-title">From past years</h2>
+        <h2 class="subhead" id="past-title">{w.text('pastYears')}</h2>
         {isRace && latestRace && (
           <a class="race-link" href={url('/wolfspit/')}>
             <span class="race-link__label">Race results</span>

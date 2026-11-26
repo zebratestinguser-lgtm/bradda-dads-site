@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('home'); // Page wording form
 // Only shown while the Christmas card event's status is "open".
 import { getEntry } from 'astro:content';
 import { isOpen } from '../../lib/events';
@@ -28,11 +30,9 @@ const show = card ? isOpen(card) : false;
           </div>
           <div class="card-banner__art" aria-hidden="true">
             <div class="xmas-card">
-              <div class="xmas-card__title">Merry Christmas, Bradwell</div>
+              <div class="xmas-card__title">{w.text('cardArtTitle')}</div>
               <div class="xmas-card__rule" />
-              <div class="xmas-card__names">
-                The family at No. 12 · Grandma &amp; Grandad · Everyone at the top of the hill · The new neighbours · The dog-walking crew · and your family
-              </div>
+              <div class="xmas-card__names">{w.text('cardArtNames')}</div>
             </div>
           </div>
         </div>

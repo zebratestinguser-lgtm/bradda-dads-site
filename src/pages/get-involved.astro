@@ -8,9 +8,11 @@ import DiaryDates from '../components/DiaryDates.astro';
 import { getEvents } from '../lib/events';
 import { getSite } from '../lib/site';
 import { url } from '../lib/url';
+import { getWording } from '../lib/wording';
 import { photoMatching } from '../lib/photos';
 
 const site = await getSite();
+const w = await getWording('get-involved'); // Page wording → Get involved
 const events = await getEvents();
 const hasEmail = !site.contactEmail.startsWith('[');
 const header = await photoMatching(/dads in yellow t-shirts and hi-vis at the brook/i, /dads in yellow t-shirts/i);
@@ -22,8 +24,8 @@ const hasMembers = (await getPublishedMembers()).length > 0;
 
   <Band first><section class="container page-section grid">
     <div class="card card--green">
-      <h2 class="subhead">Come to a meeting</h2>
-      <p>We meet {site.meetingInfo}. Just turn up, or message us first if you'd like someone to look out for you.{hasMembers && <> <a class="on-green" href={url('/members/')}>Meet the dads</a> first if you like.</>}</p>
+      <h2 class="subhead">{w.text('meetTitle')}</h2>
+      <p>We meet {site.meetingInfo}. {w.text('meetText')}{hasMembers && <> <a class="on-green" href={url('/members/')}>Meet the dads</a> first if you like.</>}</p>
       <MeetingPubs onGreen />
       <div class="actions">
         <a class="btn btn--yellow btn--md" href={site.facebookUrl} rel="noopener">Message us on Facebook</a>
@@ -32,8 +34,8 @@ const hasMembers = (await getPublishedMembers()).length > 0;
     </div>
 
     <div class="card">
-      <h2 class="subhead">Help at an event</h2>
-      <p>Not ready to join? Every event needs extra hands: building the bonfire, marshalling the fell race, serving at the pensioners' lunch, or fishing ducks out of the brook.</p>
+      <h2 class="subhead">{w.text('helpTitle')}</h2>
+      <Fragment set:html={w.html('helpText')} />
       <ul class="event-list" role="list">
         {events.map((e) => (
           <li>
@@ -45,8 +47,8 @@ const hasMembers = (await getPublishedMembers()).length > 0;
     </div>
 
     <div class="card">
-      <h2 class="subhead">Not a dad?</h2>
-      <p>You can still help. Families, partners and friends have always pitched in. You can also support us by <a href={url('/donate/')}>donating</a>, buying a duck race entry, or adding your message to the <a href={url('/christmas-card/')}>village Christmas card</a>.</p>
+      <h2 class="subhead">{w.text('otherTitle')}</h2>
+      <Fragment set:html={w.html('otherText')} />
     </div>
   </section></Band>
   <Band tone="mist"><section class="container page-section">

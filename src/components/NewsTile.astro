@@ -3,6 +3,7 @@
 // Stories brought in from Facebook get their own look (the duck in a speech bubble on blue, "From Facebook"),
 // so they're easy to tell apart. Deliberately not Facebook's logo, which mustn't be altered or combined.
 import DuckLogo from './DuckLogo.astro';
+import { getCategory } from '../lib/categories';
 
 interface Props {
   tag: string;
@@ -11,19 +12,8 @@ interface Props {
   facebook?: boolean;
 }
 const { tag, size = 'thumb', facebook = false } = Astro.props;
-// Each tag gets its own colour so the list stays lively
-const tones: Record<string, string> = {
-  Bonfire: 'ember',
-  Carnival: 'sky',
-  'Duck race': 'sky',
-  "Pensioners' lunch": 'cream',
-  'Christmas card': 'cream',
-  "Wolf's Pit": 'green',
-  'Tour of Bradwell': 'green',
-  Social: 'cream',
-  Village: 'green',
-};
-const tone = facebook ? 'facebook' : (tones[tag] ?? 'green');
+// Each category has its own colour (set in the editor: Categories → Tile colour) so the list stays lively
+const tone = facebook ? 'facebook' : ((await getCategory(tag))?.data.colour ?? 'green');
 ---
 
 <div class:list={['news-tile', `news-tile--${size}`, `news-tile--${tone}`]} aria-hidden="true">

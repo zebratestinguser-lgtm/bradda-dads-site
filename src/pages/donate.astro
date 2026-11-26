@@ -1,54 +1,53 @@
 ---
 // Donate: the online giving box, other ways to help, and a pointer to where the money goes.
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
 import DonateSection from '../components/home/DonateSection.astro';
 import { photoMatching } from '../lib/photos';
 import { url } from '../lib/url';
+import { getWording } from '../lib/wording';
+import { featuredProjects } from '../lib/funded';
 
 const header = await photoMatching(/two children sitting in a giant wooden duck/i, /giant wooden duck/i);
-const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
-const ways = [
-  { title: 'Enter the duck race', text: 'Buy a numbered entry for the Boxing Day duck race, with cash prizes for the first ducks home.', href: '/events/duck-race/', label: 'Duck race details' },
-  { title: 'Add to the Christmas card', text: "Put your family's message on the village Christmas card for £5 instead of sending lots of cards.", href: '/events/christmas-card/', label: 'About the card' },
-  { title: 'Lend a hand', text: 'Every event needs helpers, from building the bonfire to serving at the pensioners’ lunch.', href: '/get-involved/', label: 'Get involved' },
-  { title: 'Support us as a business', text: 'Local businesses help too, even if they never come to an event: sponsoring fireworks, giving raffle prizes or lending equipment. Breedon helps make our bonfire fireworks possible.', href: '/contact/?topic=business', label: 'Get in touch' },
-];
+const w = await getWording('donate');
+// The projects ticked "Show on the homepage" (editor: Where the money goes); wording: Page wording → Donate
+const { shown: funded, more } = await featuredProjects();
+const ways = w.list<{ title: string; text: string; link: string; label: string }>('ways');
 ---
 
-<BaseLayout title="Donate" description="Donate to Bradda Dads. Everything goes back into Bradwell, mostly through the events we put on for the village, like the free pensioners' lunch and the bonfire." ogImage={header?.src} ogImageAlt={header?.alt}>
+<BaseLayout title={w.text('eyebrow')} description={w.text('description')} ogImage={header?.src} ogImageAlt={header?.alt}>
   <PageHeader
-    eyebrow="Donate"
-    title="Chip in for Bradwell"
-    intro="Bradda Dads are volunteers, and everything we raise goes back into the village: mostly through the events we put on for everyone, like the free pensioners' Christmas lunch and the bonfire, and the rest through local groups."
+    eyebrow={w.text('eyebrow')}
+    title={w.text('title')}
+    intro={w.text('intro')}
     image={header?.src}
     imageLabel={header?.label}
   />
 
   <Band first>
-    <DonateSection />
+    <DonateSection wording={w} />
     <div class="container page-section money">
-      <p class="money__text">Where it goes, recently:</p>
+      <p class="money__text">{w.text('moneyLead')}</p>
       <ul class="money__list" role="list">
         {funded.map((f) => <li>{f.data.name}</li>)}
+        {more > 0 && <li class="money__more"><a href={url('/where-the-money-goes/')}>and {more} more</a></li>}
       </ul>
-      <a class="link-arrow" href={url('/where-the-money-goes/')}>See where the money goes →</a>
+      <a class="link-arrow" href={url('/where-the-money-goes/')}>{w.text('moneyLink')}</a>
     </div>
   </Band>
 
   <Band tone="mist">
     <section class="container page-section stack" aria-labelledby="ways-title">
-      <h2 class="subhead" id="ways-title">Other ways to help</h2>
+      <h2 class="subhead" id="ways-title">{w.text('waysTitle')}</h2>
       <ul class="ways" role="list">
         {
-          ways.map((w) => (
+          ways.map((way) => (
             <li class="way">
-              <h3 class="way__title">{w.title}</h3>
-              <p class="way__text">{w.text}</p>
-              <a class="link-arrow" href={url(w.href)}>
-                {w.label} →
+              <h3 class="way__title">{way.title}</h3>
+              <p class="way__text">{way.text}</p>
+              <a class="link-arrow" href={url(way.link)}>
+                {way.label} →
               </a>
             </li>
           ))
@@ -85,6 +84,13 @@ const ways = [
     font-weight: 600;
     padding: 6px 12px;
     border-radius: var(--radius-pill);
+  }
+  .money__list li.money__more {
+    background: none;
+    border: 1px dashed var(--yellow-ink);
+  }
+  .money__more a {
+    color: inherit;
   }
   .stack {
     display: flex;

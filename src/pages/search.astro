@@ -1,11 +1,13 @@
 ---
+import { getWording } from '../lib/wording';
+const w = await getWording('search'); // Page wording form
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { url } from '../lib/url';
 ---
 
-<BaseLayout title="Search" noindex description="Search news, photo albums, race results and events on the Bradda Dads website.">
-  <PageHeader eyebrow="Search" title="Search the site" intro="News going back to 2001, photo albums, race results and events. Try a year, an event or a runner's name." />
+<BaseLayout title={w.text('eyebrow')} noindex description={w.text('description')}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')} />
   <section class="container page-section">
     <link rel="stylesheet" href={url('/pagefind/pagefind-ui.css')} />
     <label class="search__label" id="search-label">Search the site</label>
@@ -17,7 +19,7 @@ import { url } from '../lib/url';
     <div class="ideas">
       <p>Try:</p>
       <ul class="chips" role="list">
-        {['duck race 2008', 'carnival float', 'pensioners lunch', 'bonfire', 'Wolf\'s Pit 2025'].map((q) => (
+        {w.list<{ text: string }>('ideas').map(({ text: q }) => (
           <li><a class="chip" href={`?q=${encodeURIComponent(q)}`}>{q}</a></li>
         ))}
       </ul>

@@ -5,6 +5,7 @@ when: 4 December
 start: 2026-12-04T11:00:00+00:00
 startTimeConfirmed: true
 location: The Memorial Hall, Bradwell
+category: "Pensioners' lunch"
 mapUrl: https://maps.app.goo.gl/HT4PLiw9oQaMBw4D8
 places:
   - label: Hand in booking slips

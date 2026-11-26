@@ -2,7 +2,7 @@
 // One event card (homepage "year" strip and the Events page).
 import { getCollection } from 'astro:content';
 import { statusFor, deadlineFor, shortDay, formatEventDates, type EventEntry } from '../lib/events';
-import { EVENT_TAG, categorySlug } from '../lib/albums';
+import { categorySlug } from '../lib/albums';
 import { url } from '../lib/url';
 
 interface Props {
@@ -29,7 +29,7 @@ let showCta = !(dl?.passed || (e.data.status === 'open' && closed));
 let cta = { label: e.data.ctaLabel, href: ctaHref };
 // Finished for this year: point at the newest story about it (written in the last 3 months), or its photos
 if (closed && e.data.status !== 'open') {
-  const topic = EVENT_TAG[e.id];
+  const topic = e.data.category;
   const recent = topic
     ? (await getCollection('news', (n) => !n.data.draft))
         .filter((n) => n.data.tag === topic && now.getTime() - n.data.date.getTime() < 92 * 864e5)

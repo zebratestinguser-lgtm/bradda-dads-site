@@ -1,4 +1,5 @@
 ---
+import { getWording } from '../lib/wording';
 // Contact: a message form (Formspree, free plan) once contactFormUrl is set in site.yaml, plus the other ways
 // to reach us. Without JavaScript the form still works: Formspree shows its own thank-you page.
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -13,26 +14,21 @@ const site = await getSite();
 const hasEmail = !site.contactEmail.startsWith('[');
 const hasForm = site.contactFormUrl.startsWith('https://');
 // "What's it about?" choices. Other pages can link straight to one, e.g. /contact/?topic=support
-const TOPICS = [
-  { value: 'general', label: 'A general question' },
-  { value: 'lunch', label: "The pensioners' lunch" },
-  { value: 'support', label: 'Support for a group' },
-  { value: 'business', label: 'Business or sponsorship' },
-  { value: 'removal', label: 'Removing a photo or result' },
-  { value: 'volunteer', label: 'Joining or helping out' },
-];
+const w = await getWording('contact'); // Page wording → Contact
+// Form topics: key goes in links (/contact/?topic=support), label is what people see
+const TOPICS = w.list<{ key: string; label: string }>('topics').map((t) => ({ value: t.key, label: t.label }));
 const header = await photoMatching(/two dads shaking hands/i, /dads round a long table/i);
 ---
 
-<BaseLayout title="Contact" description="Get in touch with Bradda Dads in Bradwell, Derbyshire: send us a message, email us, find us on Facebook, or come to our monthly meeting." ogImage={header?.src} ogImageAlt={header?.alt}>
-  <PageHeader eyebrow="Contact" title="Get in touch" intro="Questions, ideas, old photos, or want to join? Here's how to reach us." image={header?.src} imageLabel={header?.label} />
+<BaseLayout title={w.text('eyebrow')} description={w.text('description')} ogImage={header?.src} ogImageAlt={header?.alt}>
+  <PageHeader eyebrow={w.text('eyebrow')} title={w.text('title')} intro={w.text('intro')} image={header?.src} imageLabel={header?.label} />
 
   <Band first>
     <section class:list={['container', 'page-section', 'layout', { 'layout--form': hasForm }]}>
       {
         hasForm && (
           <div class="form-card">
-            <h2 class="subhead">Send us a message</h2>
+            <h2 class="subhead">{w.text('formTitle')}</h2>
             <form class="form" action={site.contactFormUrl} method="POST" data-contact-form>
               <input type="hidden" name="_subject" value="Message from the Bradda Dads website" />
               {/* Spam trap: hidden from people, bots fill it in and Formspree drops the message */}
@@ -50,19 +46,17 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
               <div class="form-field">
                 <label for="c-email">Your email</label>
                 <input id="c-email" name="email" type="email" autocomplete="email" required />
-                <p class="hint">So we can reply. We won't use it for anything else.</p>
+                <p class="hint">{w.text('emailHint')}</p>
               </div>
               <div class="form-field">
                 <label for="c-message">Message</label>
                 <textarea id="c-message" name="message" rows="6" required />
               </div>
               <button class="btn btn--green btn--md" type="submit" data-submit>
-                Send message
+                {w.text('sendButton')}
               </button>
               <p class="status" role="status" aria-live="polite" data-status />
-              <p class="small">
-                Sent securely via Formspree. See our <a href={url('/privacy/')}>privacy notice</a>.
-              </p>
+              <p class="small" set:html={w.inline('formNote')} />
             </form>
           </div>
         )
@@ -70,16 +64,16 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
 
       <div class="cards">
         <div class="card">
-          <h2 class="card__title">Facebook</h2>
-          <p>The quickest way to reach us, and where we post day-to-day news.</p>
+          <h2 class="card__title">{w.text('facebookTitle')}</h2>
+          <p>{w.text('facebookText')}</p>
           <a class="btn btn--green btn--md" href={site.facebookUrl} rel="noopener">
-            Bradda Dads on Facebook
+            {w.text('facebookButton')}
           </a>
         </div>
         {
           hasEmail && (
             <div class="card">
-              <h2 class="card__title">Email</h2>
+              <h2 class="card__title">{w.text('emailTitle')}</h2>
               <p>
                 <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
               </p>
@@ -87,16 +81,14 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
           )
         }
         <div class="card">
-          <h2 class="card__title">Meetings</h2>
+          <h2 class="card__title">{w.text('meetTitle')}</h2>
           <p>We meet {site.meetingInfo}.</p>
           <MeetingPubs />
           <a class="link-arrow" href={url('/get-involved/')}>Get involved →</a>
         </div>
         <div class="card">
-          <h2 class="card__title">Wolf's Pit Fell Race</h2>
-          <p>
-            For race entries and questions, see the <a href={url('/wolfspit/')}>Wolf's Pit page</a> for the organiser's contact details.
-          </p>
+          <h2 class="card__title">{w.text('extraTitle')}</h2>
+          <Fragment set:html={w.html('extraText')} />
         </div>
       </div>
     </section>

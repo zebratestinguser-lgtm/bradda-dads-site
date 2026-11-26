@@ -18,17 +18,9 @@ const uploadPath = z
 /** A link: a full URL, or "#" while it is still a placeholder */
 const link = z.union([z.url(), z.literal('#'), z.string().startsWith('/'), z.string().startsWith('mailto:')]);
 
-export const NEWS_TAGS = [
-  'Bonfire',
-  'Christmas card',
-  "Pensioners' lunch",
-  'Duck race',
-  "Wolf's Pit",
-  'Village',
-  'Carnival',
-  'Tour of Bradwell',
-  'Social',
-] as const;
+/** A category name (news topic / photo category). The list lives in src/content/categories/ (editor: "Categories"),
+ *  and the editor stores the category's name, e.g. "Bonfire". */
+const categoryName = z.string().min(1);
 
 /** The editor (Pages CMS) stores links to other entries as file paths ("src/content/albums/x.md");
  *  turn those into plain ids ("x") so either form works. */
@@ -45,7 +37,8 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    tag: z.enum(NEWS_TAGS),
+    /** Category name, from the Categories list */
+    tag: categoryName,
     image: uploadPath.optional(),
     imageAlt: z.string().optional(),
     summary: z.string(),
@@ -75,6 +68,8 @@ const events = defineCollection({
      *  A date on its own (2027-07-11) means the whole of that day. */
     end: z.coerce.date().optional(),
     location: z.string(),
+    /** Category (from the Categories list) whose photos and news belong to this event, e.g. "Bonfire". */
+    category: categoryName.optional(),
     /** False for village events we take part in but don't run (e.g. the gala): not counted as one of "our" events */
     runByUs: z.boolean().default(true),
     /** Google Maps link for the location */
@@ -139,8 +134,8 @@ const albums = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/albums', generateId: ({ entry }) => entry.replace(/\.md$/, '') }),
   schema: z.object({
     title: z.string(),
-    /** What kind of event the photos are from (same list as news tags); used to filter the photos page. */
-    category: z.enum(NEWS_TAGS).optional(),
+    /** What kind of event the photos are from (a name from the Categories list); used to filter the photos page. */
+    category: categoryName.optional(),
     event: z.preprocess(entryId, reference('events')).optional(),
     /** When the photos were taken (used for sorting and shown on every photo). */
     date: z.coerce.date(),
@@ -240,13 +235,29 @@ const supporters = defineCollection({
 });
 
 /** Pages whose wording the team edits in the editor (e.g. src/content/pages/privacy.md). */
+/** Page wording edited in Pages CMS ("Page wording"): one file per page, each with its own fields
+ *  (headings, intros, paragraphs, lists). Read them with getWording() from src/lib/wording.ts. */
 const pages = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/pages' }),
-  schema: z.object({
-    title: z.string(),
+  schema: z.looseObject({
+    title: z.string().optional(),
     intro: z.string().optional(),
     /** When the wording was last checked, e.g. for the privacy notice */
     updated: z.coerce.date().optional(),
+  }),
+});
+
+/** Categories for news stories and photo albums (editor: "Categories"). One file each. */
+const categories = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/categories' }),
+  schema: z.object({
+    name: z.string(),
+    /** Position on the photos page and in topic lists (1 = first) */
+    order: z.number().int().default(50),
+    /** Heading over related stories, e.g. "More about the bonfire" */
+    moreHeading: z.string().optional(),
+    /** Colour of the duck tile on stories without a photo */
+    colour: z.enum(['green', 'sky', 'cream', 'ember']).default('green'),
   }),
 });
 
@@ -361,4 +372,4 @@ const settings = defineCollection({
   }),
 });
 
-export const collections = { news, events, albums, results, duckWinners, supporters, pages, timeline, funded, members, settings };
+export const collections = { categories, news, events, albums, results, duckWinners, supporters, pages, timeline, funded, members, settings };

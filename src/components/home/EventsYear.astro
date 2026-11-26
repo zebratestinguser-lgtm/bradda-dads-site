@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('home'); // Page wording form
 // "The Bradda Dads year": a swipeable strip of event cards (scroll-snap).
 // Phones: swipe. Desktop: arrow buttons or trackpad. Events come in calendar-year order from getEvents():
 // what's coming up this year first (soonest first), then the ones done for this year. On 1 January
@@ -19,8 +21,8 @@ const { events, nextId } = Astro.props;
   <div class="container events__inner">
     <div class="events__head">
       <div class="events__intro">
-        <h2 id="events-title" class="section-title">The Bradda Dads year</h2>
-        <p>The big dates in our year.</p>
+        <h2 id="events-title" class="section-title">{w.text('eventsTitle')}</h2>
+        <p>{w.text('eventsIntro')}</p>
       </div>
       <div class="events__tools">
         <div class="events__links">

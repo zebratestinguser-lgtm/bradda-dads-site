@@ -2,7 +2,7 @@
 // photo, event page headers, and album card covers. Choices are repeatable (same photo on every build)
 // and skip scans of posters, invitations, results sheets and press cuttings where a real scene exists.
 import type { CollectionEntry } from 'astro:content';
-import { getAlbums, photoDateShort, EVENT_TAG, type Album } from './albums';
+import { getAlbums, photoDateShort, type Album } from './albums';
 
 type NewsEntry = CollectionEntry<'news'>;
 type Photo = { src: string; alt?: string };
@@ -73,8 +73,7 @@ export async function storyPhotos(stories: NewsEntry[]) {
 }
 
 /** Header photo for an event page: the most recent real scene from that event's albums */
-export async function eventPhoto(eventId: string): Promise<PickedPhoto | undefined> {
-  const tag = EVENT_TAG[eventId];
+export async function eventPhoto(eventId: string, tag?: string): Promise<PickedPhoto | undefined> {
   const candidates = await sceneAlbums((a) => a.data.event?.id === eventId || (Boolean(tag) && a.data.category === tag));
   const album = candidates[0]; // getAlbums() is newest first
   const photo = album && displayCover(album);

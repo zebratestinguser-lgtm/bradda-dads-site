@@ -1,6 +1,7 @@
 ---
 title: Privacy notice
 intro: "[PLACEHOLDER: draft for the committee to review and approve before launch.]"
+formText: "## Messages you send us\n\nThe contact form is run by Formspree, which passes your name, email address and message to us by email. Formspree keeps submissions for 30 days. We only use your details to reply, and don't add you to any mailing list. See [Formspree's privacy policy](https://formspree.io/legal/privacy-policy/)."
 ---
 
 ## Who we are

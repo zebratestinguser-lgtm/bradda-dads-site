@@ -1,4 +1,5 @@
 ---
+import { blockHtml } from '../lib/wording';
 // Privacy notice. The wording lives in src/content/pages/privacy.md so the team can edit it in
 // Pages CMS ("Privacy notice"). The contact form section is added automatically once the form is live.
 import { getEntry, render } from 'astro:content';
@@ -15,18 +16,14 @@ const { Content } = await render(page);
 ---
 
 <BaseLayout title="Privacy" description="How the Bradda Dads website handles your information: no tracking, payments through SumUp, and how to ask for a photo or result to be removed.">
-  <PageHeader eyebrow="Privacy" title={page.data.title} intro={page.data.intro} />
+  <PageHeader eyebrow="Privacy" title={page.data.title ?? 'Privacy notice'} intro={page.data.intro} />
   <section class="container page-section">
     <div class="prose">
       <Content />
       {
         hasForm && (
           <>
-            <h2>Messages you send us</h2>
-            <p>
-              The contact form is run by Formspree, which passes your name, email address and message to us by email. Formspree keeps submissions for 30 days. We only use your details to reply, and
-              don't add you to any mailing list. See <a href="https://formspree.io/legal/privacy-policy/">Formspree's privacy policy</a>.
-            </p>
+            <Fragment set:html={blockHtml(String(page.data.formText ?? ''))} />
           </>
         )
       }

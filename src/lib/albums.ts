@@ -27,15 +27,5 @@ export const categorySlug = (c: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
-/** Friendly order for photo categories */
-export const CATEGORY_ORDER = ['Carnival', 'Duck race', 'Bonfire', "Pensioners' lunch", 'Christmas card', "Wolf's Pit", 'Tour of Bradwell', 'Social', 'Village'];
-
-/** News tag that matches each event, for "related news" on event pages. */
-export const EVENT_TAG: Record<string, string> = {
-  'duck-race': 'Duck race',
-  bonfire: 'Bonfire',
-  'pensioners-lunch': "Pensioners' lunch",
-  wolfspit: "Wolf's Pit",
-  'christmas-card': 'Christmas card',
-  gala: 'Carnival',
-};
+// Category order, names and colours live in src/content/categories/ (see src/lib/categories.ts).
+// Each event's category (its photos and news) is the event's own "category" field.

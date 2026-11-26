@@ -54,6 +54,35 @@ To see how an album looks on the website, open it on the live site: https://zebr
    - **Main button link:** usually the SumUp link.
 3. Press **Save**.
 
+## Add a new event (e.g. the Bradwell Hillbilly coming back)
+
+Everything about an event lives in its entry, so a new one needs no code.
+
+1. If its photos and news need their own topic, first open **Categories** → **Add an entry**: type the name (e.g. "Hillbilly"), a position, a "More about…" heading and a tile colour. Save.
+2. Open **Events** → **Add an entry** and fill it in: name, when (e.g. "June"), the usual month, where, a short summary, status, the main button (words and link), and its **Photos and news category** (the one from step 1, or an existing one such as "Village").
+3. Optional: the longer description (**What's happening**), a date and start time, map links, "How to get involved" cards, and the homepage headline and photo used when it's the next event.
+4. Save. Within a few minutes the event has its own page, appears in the Events menu, the homepage events strip and calendar, and becomes the homepage countdown when it's next. Albums and news stories with the same category appear under "From past years" on its page.
+
+If an event stops for good, set its **Status** to "done" rather than deleting it, or ask before deleting.
+
+## Categories (topics for news and photos)
+
+**Categories** lists the topics used for news stories and photo albums (Bonfire, Duck race, Carnival…). They decide the topic buttons on the News page, the "Browse by event" tiles on the Photos page, and which photos and stories appear on each event page.
+
+- **Add one** whenever a new kind of event or story needs it. Then pick it in stories, albums and the event.
+- **Don't rename one** that stories already use: their old name stays on them. Add the new name, change the stories over, then delete the old one.
+- **Position** sets the order; **Tile colour** colours the duck tile on stories without a photo.
+
+## Page wording (headings, introductions and paragraphs)
+
+Every page's fixed wording is under **Page wording: …** (one form per page, plus "Homepage" and "Event pages" for wording used on every event page). Change the text and save.
+
+- In the bigger boxes you can use simple formatting: a blank line starts a new paragraph, lines starting "- " make a bullet list, `[words](/contact/)` makes a link (pages on this site start with "/", other sites with "https://"), and `**words**` makes bold text.
+- Words in curly brackets, like `{count}`, are filled in by the website (the form says what each one becomes). Leave them in.
+- Lists such as **Explore tiles** (homepage), **Other ways to help** (Donate), the contact form's **"What's it about?" choices** and the Christmas card **Steps** can have items added, removed or reordered.
+- The contact form choices have a short code (e.g. `support`) that other pages link to: don't change existing codes.
+- Small interface labels (buttons like "Search", form box names, the countdown's "days/hours/mins", the game's instructions) are still in the code.
+
 ## Add the duck race winners
 
 After each duck race:

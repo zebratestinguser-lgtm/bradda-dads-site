@@ -2,7 +2,6 @@
 // "Coming up" strip for old stories and albums, so an old page isn't a dead end.
 // Shows the next run of the event the page is about (by its tag/category), otherwise the next event of all.
 import { getEvents, deadlineFor, shortDay, formatEventDates, isPlaceholder, nextOccurrence } from '../lib/events';
-import { EVENT_TAG } from '../lib/albums';
 import { url } from '../lib/url';
 
 interface Props {
@@ -11,7 +10,7 @@ interface Props {
 const { topic } = Astro.props;
 const now = new Date();
 const events = await getEvents(now);
-const match = topic ? events.find((e) => EVENT_TAG[e.id] === topic) : undefined;
+const match = topic ? events.find((e) => e.data.category === topic) : undefined;
 const e = match ?? events[0];
 const upcoming = e && e.data.start && (e.data.end ?? e.data.start) >= new Date(now.getTime() - 864e5);
 const dateText = e ? (upcoming ? formatEventDates(e, true) : isPlaceholder(e.data.when) ? undefined : `${e.data.when} ${nextOccurrence(e, now).getFullYear()}`) : undefined;

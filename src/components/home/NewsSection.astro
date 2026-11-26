@@ -1,4 +1,6 @@
 ---
+import { getWording } from '../../lib/wording';
+const w = await getWording('home'); // Page wording form
 import { url, small } from '../../lib/url';
 import FacebookPosts from '../FacebookPosts.astro';
 import Img from '../Img.astro';
@@ -20,7 +22,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
     <section id="news" class="news" aria-labelledby="news-title">
       <div class="container news__inner">
         <div class="news__head">
-          <h2 id="news-title" class="section-title">News</h2>
+          <h2 id="news-title" class="section-title">{w.text('newsTitle')}</h2>
           <a class="link-arrow" href={url('/news/')}>All news →</a>
         </div>
         <div class="news__layout">
