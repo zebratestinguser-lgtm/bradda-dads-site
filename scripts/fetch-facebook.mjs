@@ -297,10 +297,14 @@ try {
   }
   if (filled) console.log(`Facebook posts: added the rest of the photos to ${filled} stor${filled === 1 ? 'y' : 'ies'}.`);
 
-  // Tidy up: photos from drafts an editor has deleted (anything no story, map entry or timeline entry uses)
-  const allNews = [newsDir, join(root, 'src', 'content', 'funded'), join(root, 'src', 'content', 'timeline')]
-    .flatMap((d) => readdirSync(d).map((f) => readFileSync(join(d, f), 'utf8')))
-    .join('\n');
+  // Tidy up: photos from drafts an editor has deleted (anything no content file or setting uses).
+  // Every content folder counts (albums especially: facebook-albums.mjs moves a story's photos into
+  // an album, so the story no longer mentions them), plus src/data (site settings).
+  const textFiles = (d) =>
+    readdirSync(d, { withFileTypes: true }).flatMap((e) =>
+      e.isDirectory() ? textFiles(join(d, e.name)) : /\.(md|ya?ml|json)$/.test(e.name) ? [readFileSync(join(d, e.name), 'utf8')] : [],
+    );
+  const allNews = [join(root, 'src', 'content'), join(root, 'src', 'data')].flatMap(textFiles).join('\n');
   let removed = 0;
   for (const f of readdirSync(photoDir)) if (!allNews.includes(`/uploads/news/facebook/${f}`)) (unlinkSync(join(photoDir, f)), removed++);
   console.log(`Facebook posts: ${added} new draft stor${added === 1 ? 'y' : 'ies'}${firstRun ? ' (first run: whole history)' : ''}${removed ? `, ${removed} unused photos removed` : ''}.`);
