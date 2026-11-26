@@ -35,6 +35,7 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 - [ ] **Once on the own domain:** add the site to Google Search Console and Bing Webmaster Tools (send the sitemap, watch for errors), update the link on the parish site (bradda.org) and the Facebook page "website" field, and consider a free Google Business Profile so "Bradda Dads" searches show the group.
 - [ ] **Search engines and the test address:** decide whether Google should list the github.io copy now, or only once the privacy review is done and the own domain is live (see the privacy review below).
 - [ ] **Christmas card next year:** keep the SumUp "message to the merchant" route. The free Formspree form only takes 50 messages a month, too few for the card.
+- [ ] **Christmas card delivery week:** the site shows "Cards delivered: Monday 14 – Sunday 20 December" (from "delivered in the week of 14 December"). Confirm the end date, and each year set the new delivery week in the editor (Events → Village Christmas Card → Date / End).
 - [ ] **Family Fun Day 2027:** date, and whether anything costs money.
 - [ ] **Pensioners' lunch:** hall opens at 11am (added 26 Nov 2026). Still to confirm for next year: date, and whether to keep the newsletter slip as the only booking route.
 

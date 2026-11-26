@@ -44,7 +44,7 @@ if (event) {
 const pad = (n: number) => String(n);
 // Multi-day events (e.g. a gala weekend) stay in the hero until their last day, shown as "On now"
 const onNow = event ? isHappening(event) : false;
-const dates = event ? formatEventDates(event) : undefined;
+const dates = event ? [event.data.dateNote, formatEventDates(event)].filter(Boolean).join(': ') || undefined : undefined;
 const deadline = event ? deadlineFor(event) : undefined;
 ---
 
@@ -59,7 +59,7 @@ const deadline = event ? deadlineFor(event) : undefined;
             {highlight && <span class="hero__highlight">{highlight}</span>}
             {after}
           </h1>
-          <p class="hero__text">{event.data.heroText ?? event.data.summary}</p>
+          <p class="hero__text">{(deadline?.passed && event.data.heroTextClosed) || event.data.heroText || event.data.summary}</p>
           <ul class="hero__meta" role="list">
             {start && (
               <li>
@@ -70,7 +70,7 @@ const deadline = event ? deadlineFor(event) : undefined;
                 {dates}
               </li>
             )}
-            {start && (
+            {start && !event.data.dateNote && (
               <li>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="9" />

@@ -10,7 +10,7 @@
     "thumbs": "node scripts/make-thumbs.mjs",
     "predev": "node scripts/fetch-facebook.mjs && node scripts/facebook-albums.mjs && node scripts/make-thumbs.mjs",
     "dev": "astro dev",
-    "prebuild": "node scripts/fetch-facebook.mjs && node scripts/facebook-albums.mjs && node scripts/make-thumbs.mjs",
+    "prebuild": "node scripts/qa/editor-check.cjs && node scripts/fetch-facebook.mjs && node scripts/facebook-albums.mjs && node scripts/make-thumbs.mjs",
     "build": "astro check && astro build",
     "postbuild": "pagefind --site dist",
     "preview": "astro preview",

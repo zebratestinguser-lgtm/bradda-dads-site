@@ -66,6 +66,8 @@ const events = defineCollection({
     when: z.string(),
     /** Start date & time (UK time, e.g. 2026-12-26T11:00:00+00:00). Leave out if unknown. */
     start: z.coerce.date().optional(),
+    /** What the date is for, when it isn't the event itself, e.g. "Cards delivered" (shown as "Cards delivered: 14–20 December"). */
+    dateNote: z.string().optional(),
     /** Set true only once the start time (not just the date) is confirmed. */
     startTimeConfirmed: z.boolean().default(false),
     /** Last day (or end time) for events that run over several days, e.g. a gala weekend.
@@ -107,6 +109,8 @@ const events = defineCollection({
     heroHighlight: z.string().optional(),
     /** Paragraph under the headline. Defaults to the summary. */
     heroText: z.string().optional(),
+    /** Paragraph used instead once entries/bookings have closed (e.g. "Entries have closed; cards are delivered…"). */
+    heroTextClosed: z.string().optional(),
     /** Line above the countdown numbers, e.g. "Ducks hit the water in". */
     countdownLabel: z.string().optional(),
     /** Small note under the countdown, e.g. prize and where to buy. */

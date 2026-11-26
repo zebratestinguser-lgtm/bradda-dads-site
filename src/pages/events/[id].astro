@@ -66,7 +66,7 @@ const jsonLd = addToCalendar
     <ul class="facts" role="list">
       <li>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
-        {formatEventDates(event, true) ?? d.when}
+        {d.dateNote && d.start ? `${d.dateNote}: ` : ''}{formatEventDates(event, true) ?? d.when}
       </li>
       {d.start && (
         <li>
@@ -105,7 +105,7 @@ const jsonLd = addToCalendar
     <dl class="ww">
       <div class="ww__item">
         <dt>When</dt>
-        <dd>{formatEventDates(event, true) ?? d.when}</dd>
+        <dd>{d.dateNote && d.start ? `${d.dateNote}: ` : ''}{formatEventDates(event, true) ?? d.when}</dd>
       </div>
       {deadline && (
         <div class="ww__item">

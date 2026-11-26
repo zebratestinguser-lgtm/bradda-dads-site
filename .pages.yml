@@ -297,6 +297,10 @@ content:
         description: For the event cards, e.g. "26 December" or "November".
         type: string
         required: true
+      - name: dateNote
+        label: What the date is for (optional)
+        description: 'Only when the date isn''t the event itself, e.g. "Cards delivered". Shown before the date, like "Cards delivered: 14–20 December".'
+        type: string
       - name: start
         label: Date and start time
         description: Leave empty if this year's date isn't known yet.
@@ -439,6 +443,10 @@ content:
         type: string
       - name: heroText
         label: "Homepage: paragraph"
+        type: text
+      - name: heroTextClosed
+        label: "Homepage: paragraph once entries have closed (optional)"
+        description: Used instead of the paragraph above after the deadline, e.g. to say entries have closed and when the cards arrive.
         type: text
       - name: countdownLabel
         label: "Homepage: countdown heading"

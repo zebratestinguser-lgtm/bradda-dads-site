@@ -9,6 +9,9 @@ places:
     mapUrl: https://maps.app.goo.gl/MyEq59m5XWnjXr659
 summary: One shared card for the whole village. £5 per family message.
 status: open
+dateNote: Cards delivered
+start: 2026-12-14
+end: 2026-12-20
 # From the 17 November 2026 minutes. After this time the card shows "Entries closed" and the homepage banner hides.
 entriesClose: 2026-11-20T23:59:59+00:00
 ctaLabel: Add your message
@@ -18,6 +21,8 @@ order: 2
 month: 11
 # Homepage banner (shown only while entries are open)
 heroTitle: One card for the whole village
+heroTextClosed: Entries for this year's card have closed. The card is being put together now and will be delivered to every home in Bradwell in the week of 14 December.
+countdownLabel: Delivery starts in
 heroText: Skip the stack of cards this year. Add your family's Christmas message to the community card for £5. The money goes back into the village through the events we put on.
 heroNote: Entries close at midnight on Friday 20 November
 involvement:

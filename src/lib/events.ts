@@ -81,7 +81,7 @@ export function statusFor(e: EventEntry, isNext: boolean, now = new Date()) {
   if (isNext) return { label: 'Next up', kind: 'upcoming' };
   if (yearSlot(e, now).done) {
     // Entries closed this year (e.g. the Christmas card before delivery) or finished for the year
-    if (e.data.status === 'open' && dl?.passed) return { label: dl.closedText, kind: 'done' };
+    if (e.data.status === 'open' && dl?.passed && !(e.data.start && hasPassed(e, now))) return { label: dl.closedText, kind: 'done' };
     return { label: `Done for ${now.getFullYear()}`, kind: 'done' };
   }
   return { label: 'Coming up', kind: 'upcoming' };

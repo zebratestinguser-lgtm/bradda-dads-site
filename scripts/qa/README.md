@@ -30,3 +30,7 @@ Last full run (2026-11-20, after fixes): axe found 0 issues on 24 pages × 2 wid
 - **`speed-check.mjs`**: Lighthouse-style phone test without Lighthouse. Headless Edge as a phone on slow 4G with a 4× slower CPU and an empty cache. Reports FCP, LCP, layout shift (CLS), blocking time (TBT), bytes and requests for the main pages (`PAGES=/,/news/` to choose; in Git Bash add `MSYS_NO_PATHCONV=1`). Run it against the built site (`npm run build && npx astro preview`).
 
 Last run (2026-11-26): every page had LCP under 2.1s, CLS ≤ 0.02 and 104–548KB. TBT was 0–170ms except the homepage (~300ms) and Wolf's Pit (140–285ms). Tracing showed that time is the browser's first layout. A blank page costs 58ms of it in this headless Windows browser, and removing fonts or SVGs barely changed it, so it is mostly the test setup, not the site.
+
+## Editor
+
+- **`editor-check.cjs`**: runs before every build (`prebuild`). Fails the build if `.pages.yml` isn't valid YAML (Pages CMS wouldn't open), and warns if any field used in the content has no box in its editor form (saving that entry would drop it). `--verbose` lists every form. Watch for colons inside unquoted descriptions in `.pages.yml`: quote them.

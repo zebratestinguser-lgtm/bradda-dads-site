@@ -63,6 +63,8 @@ Everything about an event lives in its entry, so a new one needs no code.
 3. Optional: the longer description (**What's happening**), a date and start time, map links, "How to get involved" cards, and the homepage headline and photo used when it's the next event.
 4. Save. Within a few minutes the event has its own page, appears in the Events menu, the homepage events strip and calendar, and becomes the homepage countdown when it's next. Albums and news stories with the same category appear under "From past years" on its page.
 
+**When the date isn't the event itself** (e.g. the Christmas card, where the date is the delivery week): put that week in **Date and start time** / **End**, fill in **What the date is for** (e.g. "Cards delivered"), and optionally **Homepage: paragraph once entries have closed**. The card then stays "Entries closed" (not "Done") until the delivery week is over, shows "On now" during it, and the homepage counts down to delivery.
+
 If an event stops for good, set its **Status** to "done" rather than deleting it, or ask before deleting.
 
 ## Categories (topics for news and photos)
