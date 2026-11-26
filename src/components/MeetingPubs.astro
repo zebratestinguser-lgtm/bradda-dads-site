@@ -1,0 +1,44 @@
+---
+// "It's always one of these pubs" with map links (site.yaml meetingPubs, editor: Site settings → Meeting pubs).
+import { getSite } from '../lib/site';
+
+interface Props {
+  onGreen?: boolean;
+}
+const { onGreen = false } = Astro.props;
+const pubs = (await getSite()).meetingPubs ?? [];
+---
+
+{
+  pubs.length > 0 && (
+    <p class:list={['pubs', { 'pubs--on-green': onGreen }]}>
+      {pubs.length === 1 ? 'The meeting is at ' : "It's always one of these: "}
+      {pubs.map((p, i) => (
+        <>
+          {p.mapUrl ? (
+            <a href={p.mapUrl} rel="noopener">
+              {p.name}
+              <span class="visually-hidden"> (map)</span>
+            </a>
+          ) : (
+            <strong>{p.name}</strong>
+          )}
+          {i < pubs.length - 2 ? ', ' : i === pubs.length - 2 ? ' or ' : '.'}
+        </>
+      ))}
+      {pubs.length > 1 && <> Ask us which one this month.</>}
+    </p>
+  )
+}
+
+<style>
+  .pubs {
+    margin: 0;
+  }
+</style>
+<style>
+  .pubs--on-green a {
+    color: var(--yellow);
+    font-weight: 600;
+  }
+</style>

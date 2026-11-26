@@ -2,6 +2,7 @@
 // Contact: a message form (Formspree, free plan) once contactFormUrl is set in site.yaml, plus the other ways
 // to reach us. Without JavaScript the form still works: Formspree shows its own thank-you page.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MeetingPubs from '../components/MeetingPubs.astro';
 import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getSite } from '../lib/site';
@@ -71,6 +72,7 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
         <div class="card">
           <h2 class="card__title">Meetings</h2>
           <p>We meet {site.meetingInfo}.</p>
+          <MeetingPubs />
           <a class="link-arrow" href={url('/get-involved/')}>Get involved →</a>
         </div>
         <div class="card">

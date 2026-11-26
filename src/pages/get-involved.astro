@@ -1,5 +1,6 @@
 ---
 import { getPublishedMembers } from '../lib/members';
+import MeetingPubs from '../components/MeetingPubs.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
@@ -23,6 +24,7 @@ const hasMembers = (await getPublishedMembers()).length > 0;
     <div class="card card--green">
       <h2 class="subhead">Come to a meeting</h2>
       <p>We meet {site.meetingInfo}. Just turn up, or message us first if you'd like someone to look out for you.{hasMembers && <> <a class="on-green" href={url('/members/')}>Meet the dads</a> first if you like.</>}</p>
+      <MeetingPubs onGreen />
       <div class="actions">
         <a class="btn btn--yellow btn--md" href={site.facebookUrl} rel="noopener">Message us on Facebook</a>
         {hasEmail && <a class="btn btn--ghost-light btn--md" href={`mailto:${site.contactEmail}`}>Email us</a>}

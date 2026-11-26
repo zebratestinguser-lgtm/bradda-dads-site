@@ -29,7 +29,8 @@ Every event page should answer: date, start time, place (postcode or map link), 
 
 ## 4. Volunteers and new members
 
-- ⏳ **Which pub the monthly meeting is in.** A newcomer can't turn up without it.
+- ✅ Meeting pubs listed with map links (always the White Hart, Ye Olde Bowling Green or the Shoulder of Mutton; Peter, 26 Nov 2026). Editable in Site settings → Meeting pubs.
+- ⏳ Check the meeting day: site.yaml says the **third Tuesday**, but the 2018 carnival album says the third Wednesday (and "usually the Shoulder").
 - ✅ Meet the dads stays hidden until there are profiles.
 - ⏳ Member profiles, with each member's consent.
 

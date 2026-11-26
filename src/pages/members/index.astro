@@ -3,6 +3,7 @@
 // A member's card (and profile page) only appears once their real name replaces "[MEMBER NAME]"
 // in src/content/members/, so the page never shows blank placeholder cards.
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MeetingPubs from '../../components/MeetingPubs.astro';
 import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import MemberAvatar from '../../components/MemberAvatar.astro';
@@ -34,6 +35,7 @@ const group = await dadsGroupPhoto();
       <div class="intro__text">
         <h2 class="subhead" id="intro-title">Come and meet us</h2>
         <p>We meet {site.meetingInfo}. New faces are always welcome, whether you want to join or just lend a hand at an event.</p>
+        <MeetingPubs />
         <div class="intro__actions">
           <a class="btn btn--green btn--md" href={url('/get-involved/')}>Get involved</a>
           <a class="link-arrow" href={url('/our-story/')}>Our story →</a>

@@ -817,6 +817,22 @@ content:
             description: Completes the sentence "We meet …".
             type: string
             required: true
+          - name: meetingPubs
+            label: Meeting pubs
+            description: The meeting is always in one of these. Shown with a map link on Get involved, Contact and Meet the dads.
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{fields.name}"
+            fields:
+              - name: name
+                label: Pub name
+                type: string
+                required: true
+              - name: mapUrl
+                label: Map link (Google Maps)
+                type: string
           - name: joinHeadline
             label: Join us headline
             type: string

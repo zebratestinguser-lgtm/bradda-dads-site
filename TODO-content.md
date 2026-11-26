@@ -11,6 +11,9 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 - [ ] **Group email:** Bradda Dads already has an email address, but Peter can't get into it. Find who holds the login (or recover it), then set `contactEmail` in site.yaml and sign up to Formspree with it for the contact form (`contactFormUrl`).
 
+- [ ] **Shoulder of Mutton map link:** the Google Maps link Peter sent for it was the same as the Bowling Green's, so the site uses a Google Maps search for now. Send the right link, or paste it in Site settings → Meeting pubs.
+- [ ] **Meeting day:** the site says the third Tuesday at 8:30pm; the 2018 carnival album says the third Wednesday. Confirm.
+
 ## Site settings: `src/data/site.yaml`
 
 - [ ] **Contact form:** make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.

@@ -26,6 +26,13 @@ site:
   groupsHelped: "[NUMBER]"
   # From the 17 November 2026 minutes (Tuesday, 8.30pm, The White Hart)
   meetingInfo: "on the third Tuesday of the month at 8:30pm, in one of the village pubs"
+  meetingPubs:
+    - name: The White Hart Inn
+      mapUrl: https://maps.app.goo.gl/mBRfwHuVqQu9QY8f6
+    - name: Ye Olde Bowling Green Inn
+      mapUrl: https://maps.app.goo.gl/tsiyWm5LndQLLdaW7
+    - name: The Shoulder of Mutton
+      mapUrl: https://www.google.com/maps/search/?api=1&query=Shoulder+of+Mutton+Bradwell+Hope+Valley
   # Phase 1: "Share your photos" goes to Facebook (or a mailto: link)
   sharePhotosUrl: https://www.facebook.com/BraddaDads/
   accountsUrl: "#"

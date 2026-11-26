@@ -312,6 +312,8 @@ const settings = defineCollection({
     totalRaised: z.string(),
     groupsHelped: z.string(),
     meetingInfo: z.string(),
+    /** The pubs the monthly meeting is held in (it's always one of these) */
+    meetingPubs: z.array(z.object({ name: z.string(), mapUrl: link.optional() })).default([]),
     sharePhotosUrl: link,
     accountsUrl: link,
     /** Formspree form address for the contact form (https://formspree.io/f/…). "#" hides the form. */
