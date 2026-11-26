@@ -1,11 +1,11 @@
 ---
-title: "Another lovely (non-rainy) day and a great turn out for the race.…"
+title: "Wolf's Pit 2016 photos"
 date: 2016-08-19
-tag: "Village"
+tag: "Wolf's Pit"
 summary: "Another lovely (non-rainy) day and a great turn out for the race. Thanks to everyone for coming to the race and helping to make it another success. We hope you enjoyed the run, especially the run…"
 image: /uploads/news/facebook/2016-08-19-579976675516270-1.jpg
-imageAlt: "Photo 1 of 30 from the Facebook post of 19 August 2016"
-draft: true
+imageAlt: "Runners heading down a grassy hillside towards Shatton Lane, with bare trees and hills beyond (19 August 2016)"
+draft: false
 facebookId: "579874205526517_579976675516270"
 source: https://www.facebook.com/photo.php?fbid=579975382183066&set=a.579974152183189&type=3
 ---

@@ -6,11 +6,6 @@ summary: "Would just like to say how proud we are to have the community we do. H
 draft: false
 facebookId: "579874205526517_876262844190202"
 source: https://www.facebook.com/1680370807112731/posts/876262844190202
-photos:
-  - src: /uploads/news/facebook/2023-12-09-876262844190202-2.jpg
-    alt: "Photo 2 of 3 from the Facebook post of 9 December 2023"
-  - src: /uploads/news/facebook/2023-12-09-876262844190202-3.jpg
-    alt: "Photo 3 of 3 from the Facebook post of 9 December 2023"
 ---
 Would just like to say how proud we are to have the community we do. Hosting the pentioners lunch yesterday in the Bradwell War Memorial Hall worked really well.
 

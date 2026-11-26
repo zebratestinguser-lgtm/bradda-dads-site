@@ -42,6 +42,7 @@ async function graph(path) {
   if (process.env.FB_FAKE) {
     const fake = JSON.parse(readFileSync(process.env.FB_FAKE, 'utf8'));
     if (path.includes('/posts')) return fake;
+    if (path.includes('/photos')) return fake.albums?.[path.split('/')[0]] ?? { data: [] };
     return fake.data.find((p) => p.id === decodeURIComponent(path.split('?')[0])) ?? {};
   }
   const res = await fetch(path.startsWith('http') ? path : `${API}/${path}`, { headers: { Authorization: `Bearer ${token}` } });
@@ -242,21 +243,39 @@ try {
       const post = await graph(`${encodeURIComponent(id)}?fields=created_time,attachments{media_type,type,media,subattachments.limit(100){media_type,type,media}}`);
       const urls = photoUrls(post);
       const date = ukDate(post.created_time);
+      // The photos after the first (the first came in with the post, or was left off on purpose)
+      let rest = urls.slice(1).map((src, i) => ({ src, name: `${date}-${String(id).split('_').pop()}-${i + 2}.jpg` }));
+      // Older "photo album" posts: the post is one photo, and the others are in its Facebook album
+      if (!rest.length) {
+        const albumId = s.match(/^source: .*[?&]set=a\.(\d+)/m)?.[1];
+        const firstPhoto = s.match(/^source: .*[?&]fbid=(\d+)/m)?.[1];
+        if (albumId) {
+          const photos = [];
+          let next = `${albumId}/photos?fields=id,images&limit=100`;
+          while (next && photos.length < 300) {
+            const page = await graph(next);
+            photos.push(...(page.data ?? []));
+            next = page.paging?.next;
+          }
+          rest = photos
+            .filter((ph) => ph.id !== firstPhoto && ph.images?.length)
+            .map((ph) => ({ src: [...ph.images].sort((a, b) => b.width - a.width)[0].source, name: `${date}-${ph.id}.jpg` }));
+        }
+      }
+      const total = rest.length + 1;
       const added = [];
       let needed = 0;
-      for (const [i, src] of urls.entries()) {
-        if (i === 0) continue; // the first came in with the post (or was left off on purpose)
-        const name = `${date}-${String(id).split('_').pop()}-${i + 1}.jpg`;
+      for (const [i, { src, name }] of rest.entries()) {
         if (s.includes(`/uploads/news/facebook/${name}`)) continue;
         needed++;
         try {
           if (!existsSync(join(photoDir, name))) await savePhoto(src, join(photoDir, name), 1600);
-          added.push({ src: `/uploads/news/facebook/${name}`, alt: `Photo ${i + 1} of ${urls.length} from the Facebook post of ${longDate(post.created_time)}` });
+          added.push({ src: `/uploads/news/facebook/${name}`, alt: `Photo ${i + 2} of ${total} from the Facebook post of ${longDate(post.created_time)}` });
         } catch {
           // skip a photo that won't download
         }
       }
-      if (urls.length < 2 || added.length < needed) continue; // try again next build rather than lose the note
+      if (!rest.length || added.length < needed) continue; // try again next build rather than lose the note
       const items = added.flatMap((ph) => [`  - src: ${ph.src}`, `    alt: ${q(ph.alt)}`]).join('\n');
       const [, front, body] = s.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
       let fm = front;

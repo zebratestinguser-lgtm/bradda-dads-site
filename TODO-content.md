@@ -87,12 +87,12 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 
 34 posts published as news, 99 left out (deleted, never re-imported); the sorted list is [docs/facebook-review.md](docs/facebook-review.md). Still drafts:
 
-- [ ] **#1 (19 Aug 2016)**, "great turn out for the race… down Shatton Lane", 30 photos: which race? (The one photo that came across shows runners on a hillside with bare trees, so possibly Wolf's Pit.) Then publish with that headline.
+- [x] #1 (19 Aug 2016) published as "Wolf's Pit 2016 photos" (Peter: Shatton Lane = Wolf's Pit; bare trees and "see you in 2017" point to the March 2016 race, posted in August).
 - [ ] **#32 (13 Dec 2020)**, Father Christmas tour of the village during Covid: **ask the committee.** At the time it asked people not to share it outside the village. Kept hidden as a draft.
 - [ ] **#80 (2 Jul 2024)**, Bradda Dads run four stalls at the carnival: publish or delete?
 - [ ] **Frank Cooper:** the 2025 duck race poster (in the published story "Duck race 2025: where your money goes") holds the race in honour of Frank Cooper, "one of the founding fathers of the famous Bradda Dads Duck Race". Ask the committee (and his family?) whether Our story should mention him.
 - [ ] **Krazy Kraft age groups:** the 2025 poster had 6 and under, 8 and under, 10 and under, and 11+. Not on the duck race page until this year's are confirmed.
-- [ ] The two published stories whose only photo was a screenshot of someone's personal Facebook post or comments (pensioners' lunch 2023, fun day 2024) now have no photo. Add a real one if there is one.
+- [ ] The two published stories whose photos were all screenshots of someone's personal Facebook post or comments (pensioners' lunch 2023, fun day 2024) now have no photo. Add a real one if there is one.
 
 ## Imported photos and posts
 
