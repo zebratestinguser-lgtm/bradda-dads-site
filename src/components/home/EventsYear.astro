@@ -61,6 +61,9 @@ const { events, nextId } = Astro.props;
   // Endless strip: the cards are copied once before and once after the real ones, and the strip quietly
   // jumps back to the matching real card when it drifts into a copy, so it keeps going round with no end.
   // Copies are hidden from screen readers and skipped by Tab (each event is met once).
+  // Speed: copying and measuring the cards is the heaviest script on the homepage, so it waits until the
+  // visitor first touches, hovers, focuses or scrolls the strip (until then it's a normal strip that starts
+  // on the first card, which looks the same).
   document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
     const section = strip.closest('section')!;
     const btns = section.querySelector<HTMLElement>('[data-carousel-btns]');
@@ -83,14 +86,11 @@ const { events, nextId } = Astro.props;
       c.removeAttribute('data-next');
       return c;
     };
-    const before = originals.map(copy);
-    strip.prepend(...before);
-    strip.append(...originals.map(copy));
-
-    const first = strip.firstElementChild as HTMLElement;
+    let before: HTMLElement[] = [];
     const items = () => [...strip.children] as HTMLElement[];
-    const pos = (el: HTMLElement) => el.offsetLeft - first.offsetLeft; // scroll position that lines el up at the start
-    const lap = () => originals[0].offsetLeft - before[0].offsetLeft; // width of one set of cards
+    // scroll position that lines el up at the start
+    const pos = (el: HTMLElement) => el.offsetLeft - (strip.firstElementChild as HTMLElement).offsetLeft;
+    const lap = () => (before.length ? originals[0].offsetLeft - before[0].offsetLeft : 0); // width of one set of cards
     const home = () => pos(originals[0]);
 
     const jump = (to: number) => {
@@ -101,7 +101,17 @@ const { events, nextId } = Astro.props;
       strip.style.scrollBehavior = '';
     };
     // Back into the real set if we've drifted more than half a lap either way (looks identical)
+    // Add the copies (once), keeping whatever card is on screen where it is
+    const loop = () => {
+      if (before.length) return;
+      const x = strip.scrollLeft;
+      before = originals.map(copy);
+      strip.prepend(...before);
+      strip.append(...originals.map(copy));
+      jump(home() + x);
+    };
     const recentre = () => {
+      if (!before.length) return;
       const x = strip.scrollLeft;
       const h = home();
       const w = lap();
@@ -120,6 +130,7 @@ const { events, nextId } = Astro.props;
 
     buttons.forEach((b) =>
       b.addEventListener('click', () => {
+        loop();
         recentre();
         const el = current();
         const target = (Number(b.dataset.dir) > 0 ? el.nextElementSibling : el.previousElementSibling) as HTMLElement | null;
@@ -130,6 +141,7 @@ const { events, nextId } = Astro.props;
     strip.addEventListener(
       'scroll',
       () => {
+        loop();
         updateDots();
         // Fallback for browsers without "scrollend": recentre once scrolling pauses
         clearTimeout(settle);
@@ -148,9 +160,10 @@ const { events, nextId } = Astro.props;
       jump(home());
       updateDots();
     });
+    // First sign the visitor is about to use the strip: get the copies ready
+    for (const type of ['pointerenter', 'touchstart', 'focusin', 'wheel']) section.addEventListener(type, loop, { passive: true, once: true });
 
     // Start on the first real card (what's coming up next)
-    jump(home());
     updateDots();
   });
 </script>

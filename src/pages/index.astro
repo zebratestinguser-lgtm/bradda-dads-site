@@ -14,6 +14,8 @@ import WhoWeAre from '../components/home/WhoWeAre.astro';
 import SupportStrip from '../components/home/SupportStrip.astro';
 import WinnersNews from '../components/home/WinnersNews.astro';
 import { getEvents, pickNextEvent, isOpen } from '../lib/events';
+import { getSite } from '../lib/site';
+import { url } from '../lib/url';
 
 const events = await getEvents();
 const next = pickNextEvent(events);
@@ -26,9 +28,27 @@ const tone = () => tones[i++ % 2];
 const [whoTone, newsTone] = [tone(), tone()];
 const cardTone = showCard ? tone() : 'white';
 const [exploreTone, supportTone] = [tone(), tone()];
+
+// Tells search engines who runs the site (only facts from the settings: name, Facebook page, email, CIC number)
+const site = await getSite();
+const home = new URL(url('/'), Astro.site).href;
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NGO',
+  name: site.name,
+  ...(site.cicName && !site.cicName.startsWith('[') ? { legalName: site.cicName } : {}),
+  url: home,
+  logo: new URL(url('/icon-512.png'), Astro.site).href,
+  description: site.description,
+  areaServed: { '@type': 'Place', name: 'Bradwell, Derbyshire' },
+  ...(site.contactEmail && !site.contactEmail.startsWith('[') ? { email: site.contactEmail } : {}),
+  ...(site.cicNumber && /^d+$/.test(String(site.cicNumber)) ? { identifier: { '@type': 'PropertyValue', propertyID: 'UK Companies House number', value: String(site.cicNumber) } } : {}),
+  sameAs: [site.facebookUrl].filter(Boolean),
+};
 ---
 
 <BaseLayout>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(orgLd)} />
   {next ? <Hero event={next} /> : <h1 class="visually-hidden">Bradda Dads</h1>}
   <Band first><WinnersNews /><EventsYear events={events} nextId={next?.id} /></Band>
   <Band tone={whoTone}><WhoWeAre /></Band>

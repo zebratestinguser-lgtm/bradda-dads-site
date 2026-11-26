@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader.astro';
 import { url } from '../lib/url';
 ---
 
-<BaseLayout title="Search" description="Search news, photo albums, race results and events on the Bradda Dads website.">
+<BaseLayout title="Search" noindex description="Search news, photo albums, race results and events on the Bradda Dads website.">
   <PageHeader eyebrow="Search" title="Search the site" intro="News going back to 2001, photo albums, race results and events. Try a year, an event or a runner's name." />
   <section class="container page-section">
     <link rel="stylesheet" href={url('/pagefind/pagefind-ui.css')} />

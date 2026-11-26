@@ -44,6 +44,9 @@ const links = [
                 <a href={`https://find-and-update.company-information.service.gov.uk/company/${site.cicNumber}`} rel="noopener">
                   Company no. {site.cicNumber}
                 </a>
+                {/* UK company websites must say where the company is registered. A number that is all digits
+                    (no SC/NI prefix) is registered in England and Wales. */}
+                {/^\d+$/.test(String(site.cicNumber)) && ' · Registered in England and Wales'}
               </>
             )}
           </p>

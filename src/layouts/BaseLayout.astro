@@ -25,10 +25,12 @@ interface Props {
   /** 'article' for news stories (adds the published date) */
   ogType?: 'website' | 'article';
   publishedTime?: Date;
+  /** Keep this page out of search engines (search results page, pages not ready yet) */
+  noindex?: boolean;
 }
 
 const site = await getSite();
-const { title, description: rawDescription, ogImage, ogImageAlt, ogType = 'website', publishedTime } = Astro.props;
+const { title, description: rawDescription, ogImage, ogImageAlt, ogType = 'website', publishedTime, noindex = false } = Astro.props;
 // Never let a [PLACEHOLDER] note leak into Google or a Facebook preview
 const description = (rawDescription ?? site.description).replace(/\s*\[[^\]]*\]\s*/g, ' ').trim() || site.description;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name}: ${site.tagline.replace(/\.$/, '')}`;
@@ -77,6 +79,7 @@ const searchType = path.startsWith('/news/')
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
     <link rel="icon" type="image/png" sizes="192x192" href={url('/icon-192.png')} />
     <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />

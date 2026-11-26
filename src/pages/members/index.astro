@@ -19,7 +19,7 @@ const members = await getPublishedMembers();
 const group = await dadsGroupPhoto();
 ---
 
-<BaseLayout title="Meet the dads" description="The volunteers behind Bradda Dads: who they are, what they do, and how long they've been part of it.">
+<BaseLayout title="Meet the dads" noindex={members.length === 0} description="The volunteers behind Bradda Dads: who they are, what they do, and how long they've been part of it.">
   <PageHeader eyebrow="Meet the dads" title="The people behind the ducks" intro="Every event is run by volunteers: dads from the parish who give up their evenings, weekends and Boxing Day mornings for the village." />
 
   <Band first>
