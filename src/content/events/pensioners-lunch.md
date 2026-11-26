@@ -4,7 +4,12 @@ when: 4 December
 # Date from the 17 November 2026 minutes; time not confirmed yet
 start: 2026-12-04T00:00:00+00:00
 startTimeConfirmed: false
-location: "[VENUE]"
+location: The Memorial Hall, Bradwell
+mapUrl: https://www.google.com/maps/search/?api=1&query=Bradwell+Memorial+Hall+Hope+Valley
+places:
+  - label: Hand in booking slips
+    name: The Post Office
+    mapUrl: https://www.google.com/maps/search/?api=1&query=Bradwell+Post+Office+Hope+Valley
 summary: A free Christmas lunch for village pensioners, served by the dads, with carols from the village children.
 status: upcoming
 deadlineLabel: Book by
@@ -21,10 +26,9 @@ heroNote: "Book with the slip in **Bradda News**. Meals can be delivered, and tr
 heroImage: /uploads/albums/2012-12-05-12th-pensioners-christmas-lunch/011.jpg
 heroImageAlt: A line of Bradda Dads in white shirts and yellow ties under the Christmas decorations, ready to serve lunch
 heroImageCaption: December 2012
-whenWhereNote: "[PLACEHOLDER: time and venue (the hall).]"
 involvement:
   - title: Book a place
-    text: Fill in the lunch slip in Bradda News to book. It's free for village pensioners.
+    text: Fill in the lunch slip in Bradda News and hand it in at the Post Office. It's free for village pensioners.
   - title: Need a lift or a meal at home?
     text: "Meals can be delivered for anyone who can't make it, and transport to the hall can be arranged. [PLACEHOLDER: who to contact.]"
   - title: Help on the day

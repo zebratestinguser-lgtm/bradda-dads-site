@@ -1,7 +1,9 @@
 ---
 name: Bonfire & Fireworks
 when: November
-location: "[BONFIRE FIELD / VENUE]"
+location: Bradwell, off Michlow Lane
+mapUrl: https://maps.app.goo.gl/wTm8mfGFojbUDC4fA
+whenWhereNote: Access is from Michlow Lane.
 summary: The village bonfire and fireworks display. Thanks to everyone who came this year.
 status: done
 ctaLabel: See the photos

@@ -69,6 +69,10 @@ const events = defineCollection({
      *  A date on its own (2027-07-11) means the whole of that day. */
     end: z.coerce.date().optional(),
     location: z.string(),
+    /** Google Maps link for the location */
+    mapUrl: link.optional(),
+    /** Other places to know about, e.g. "Tickets on sale" at the Co-op, "Hand in slips" at the Post Office */
+    places: z.array(z.object({ label: z.string(), name: z.string(), mapUrl: link.optional() })).default([]),
     summary: z.string(),
     status: z.enum(['upcoming', 'open', 'done']),
     /** Deadline (UK time): last moment to enter, book or order. After it the sign-up button hides and the

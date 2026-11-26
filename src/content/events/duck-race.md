@@ -6,6 +6,11 @@ when: 26 December
 start: 2026-12-26T00:00:00+00:00
 startTimeConfirmed: false
 location: Bradwell Brook
+mapUrl: https://maps.app.goo.gl/jyz2QgtmaEKfUDfx6
+places:
+  - label: Entries on sale
+    name: The Co-op, Netherside
+    mapUrl: https://maps.app.goo.gl/8BZmbSZsSzr9uzPf6
 summary: Where it all started in 1999. Buy a numbered entry and cheer your duck down the brook.
 status: open
 entriesClose: 2026-12-19T23:59:59+00:00

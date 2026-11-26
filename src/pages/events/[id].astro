@@ -117,8 +117,20 @@ const jsonLd = addToCalendar
       </div>
       <div class="ww__item">
         <dt>Where</dt>
-        <dd>{isPlaceholder(d.location) ? 'To be confirmed' : d.location}</dd>
+        <dd>
+          {isPlaceholder(d.location) ? 'To be confirmed' : d.location}
+          {d.mapUrl && !isPlaceholder(d.location) && <a class="ww__map" href={d.mapUrl} rel="noopener">Map<span class="visually-hidden"> of {d.location}</span></a>}
+        </dd>
       </div>
+      {d.places.map((p) => (
+        <div class="ww__item">
+          <dt>{p.label}</dt>
+          <dd>
+            {p.name}
+            {p.mapUrl && <a class="ww__map" href={p.mapUrl} rel="noopener">Map<span class="visually-hidden"> of {p.name}</span></a>}
+          </dd>
+        </div>
+      ))}
     </dl>
     {d.whenWhereNote && <p class="ww__note">{d.whenWhereNote}</p>}
     {
@@ -333,6 +345,14 @@ const jsonLd = addToCalendar
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+  .ww__map {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-left: 10px;
+    font-size: 16px;
+    color: var(--green);
   }
   .ww__note {
     font-size: 16px;

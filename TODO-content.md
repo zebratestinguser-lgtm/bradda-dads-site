@@ -14,6 +14,10 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 - [ ] **Shoulder of Mutton map link:** the Google Maps link Peter sent for it was the same as the Bowling Green's, so the site uses a Google Maps search for now. Send the right link, or paste it in Site settings → Meeting pubs.
 - [ ] **Meeting day:** the site says the third Tuesday at 8:30pm; the 2018 carnival album says the third Wednesday. Confirm.
 
+- [ ] **Two map links to fix** (Peter sent them 26 Nov 2026; the site uses a Google Maps search for now): the **Memorial Hall** link opened Ye Olde Bowling Green Inn, and the **Post Office** link was the same as the duck race's (a pin by the brook at Town Bottom). Send the right ones, or paste them into the event in the editor ("Map link for where" / "Other places").
+- [ ] **Gala day** at Beggar's Plot Playing Field (map: https://maps.app.goo.gl/ZMtcbJMRNTkAsiz56): is it a Bradda Dads event? If so it needs an event page (dates, what's on).
+- [ ] **Wolf's Pit** map link for the start (Shatton), if wanted.
+
 ## Site settings: `src/data/site.yaml`
 
 - [ ] **Contact form:** make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.

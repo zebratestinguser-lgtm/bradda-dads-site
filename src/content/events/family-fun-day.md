@@ -1,7 +1,8 @@
 ---
 name: Family Fun Day
 when: June
-location: "[PLACEHOLDER: where]"
+location: Town Bottom Playing Field, Bradwell
+mapUrl: https://maps.app.goo.gl/chZhMYTQyrCgC4tG8
 summary: Bradda Dads' annual family fun day in the village.
 status: upcoming
 deadlineLabel: Entries close

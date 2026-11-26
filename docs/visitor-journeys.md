@@ -12,14 +12,16 @@ From the visitor journeys review (26 Nov 2026). Most visitors are villagers on p
 
 ## 2. Event details: the site knows *when* but not *what, where and how much*
 
+✅ Places and map links added 26 Nov 2026: lunch at the Memorial Hall, bonfire off Michlow Lane, duck race on the brook (entries at the Co-op), fun day at Town Bottom Playing Field, card and lunch slips to the Post Office.
+
 Every event page should answer: date, start time, place (postcode or map link), price, how to book or enter and by when, parking and access, what to bring, whether it suits children, and who to ask.
 
-- ⏳ **Pensioners' lunch:** time, venue, how else to book. Also check the newsletter's name: is it "Bradda News" or "Bradwell News"?
+- ⏳ **Pensioners' lunch:** time, how else to book (venue ✅ Memorial Hall). Also check the newsletter's name: is it "Bradda News" or "Bradwell News"?
 - ⏳ **Duck race:** entry price (on the button too), start time, start point, raft race age groups.
 - ⏳ **Bonfire:** gate time, display time, food, prices.
-- ⏳ **Family Fun Day:** date, place, what's on, costs.
+- ⏳ **Family Fun Day:** date, what's on, costs (place ✅ Town Bottom Playing Field).
 - ⏳ **Wolf's Pit 2027:** date and entry link.
-- ⏳ **Christmas card:** where to drop off paper slips. Messages can only reach us via a SumUp note; that needs the form service.
+- ✅ **Christmas card:** paper slips go to the Post Office. Messages can only reach us via a SumUp note; that needs the form service.
 
 ## 3. Local groups asking for money
 

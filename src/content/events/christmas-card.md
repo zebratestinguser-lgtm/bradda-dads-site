@@ -2,6 +2,10 @@
 name: Village Christmas Card
 when: December
 location: Bradwell
+places:
+  - label: Hand in paper slips
+    name: The Post Office
+    mapUrl: https://www.google.com/maps/search/?api=1&query=Bradwell+Post+Office+Hope+Valley
 summary: One shared card for the whole village. £5 per family message.
 status: open
 # From the 17 November 2026 minutes. After this time the card shows "Entries closed" and the homepage banner hides.
@@ -22,7 +26,7 @@ involvement:
     label: Pay £5 and add your message
     onlyWhenOpen: true
   - title: Prefer paper?
-    text: "Paper slips are counted too. [PLACEHOLDER: where to hand them in.]"
+    text: Paper slips are counted too. Hand them in at the Post Office.
     onlyWhenOpen: true
   - title: Help deliver the cards
     text: Cards are delivered around the village in the week of 14 December. Volunteers with a spare hour are very welcome.

@@ -244,6 +244,29 @@ content:
         label: Where
         type: string
         required: true
+      - name: mapUrl
+        label: Map link for where (Google Maps)
+        type: string
+      - name: places
+        label: Other places (optional)
+        description: e.g. "Tickets on sale" at the Co-op, or "Hand in slips" at the Post Office. Shown under "When and where" with a map link.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.label}: {fields.name}"
+        fields:
+          - name: label
+            label: What happens there
+            type: string
+            required: true
+          - name: name
+            label: Place
+            type: string
+            required: true
+          - name: mapUrl
+            label: Map link (Google Maps)
+            type: string
       - name: summary
         label: Summary
         type: text
