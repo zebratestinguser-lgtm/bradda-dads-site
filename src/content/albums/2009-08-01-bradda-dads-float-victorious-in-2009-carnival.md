@@ -30,8 +30,6 @@ photos:
     alt: "The pink castle float with flags and bunting in the procession (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/015.jpg
     alt: "Knights and princesses marching down the road in the carnival procession (1 August 2009)"
-  - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/016.jpg
-    alt: "The knights and princesses parading along the wet road (1 August 2009)"
 ---
 
 
