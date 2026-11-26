@@ -3,7 +3,7 @@ import { url } from '../../lib/url';
 import Img from '../Img.astro';
 import DuckLogo from '../DuckLogo.astro';
 import BrookEdge from '../BrookEdge.astro';
-import { isPlaceholder, isHappening, formatEventDates, type EventEntry } from '../../lib/events';
+import { isPlaceholder, isHappening, formatEventDates, deadlineFor, shortDay, type EventEntry } from '../../lib/events';
 import { formatTime, inlineBold } from '../../lib/format';
 
 interface Props {
@@ -45,6 +45,7 @@ const pad = (n: number) => String(n);
 // Multi-day events (e.g. a gala weekend) stay in the hero until their last day, shown as "On now"
 const onNow = event ? isHappening(event) : false;
 const dates = event ? formatEventDates(event) : undefined;
+const deadline = event ? deadlineFor(event) : undefined;
 ---
 
 {
@@ -76,6 +77,12 @@ const dates = event ? formatEventDates(event) : undefined;
                   <path d="M12 7v5l3 2" />
                 </svg>
                 {confirmed ? formatTime(start) : 'Time to be confirmed'}
+              </li>
+            )}
+            {deadline && (
+              <li class:list={['hero__deadline', { 'is-passed': deadline.passed }]}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 20h14M7 4c0 5 5 5 5 8s-5 3-5 8M17 4c0 5-5 5-5 8s5 3 5 8" /></svg>
+                {deadline.passed ? deadline.closedText : <>{deadline.label} <strong>{shortDay(deadline.date)}</strong></>}
               </li>
             )}
             {!isPlaceholder(event.data.location) && (
@@ -231,6 +238,10 @@ const dates = event ? formatEventDates(event) : undefined;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+  /* "Book by Fri 27 Nov": the deadline stands out in yellow while it's still to come */
+  .hero__deadline:not(.is-passed) strong {
+    color: var(--yellow);
   }
   .hero__meta li {
     display: inline-flex;

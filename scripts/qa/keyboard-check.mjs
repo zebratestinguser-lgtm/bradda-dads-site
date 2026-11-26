@@ -1,12 +1,12 @@
 // Keyboard-only checks with real key events (DevTools protocol): tab order, visible focus, skip link,
 // phone menu, carousel buttons, photo viewer, and that nothing hidden takes focus.
-//   node scripts/qa/keyboard-check.mjs [baseUrl]    (default http://localhost:4322/bradda-dads-site)
+//   node scripts/qa/keyboard-check.mjs [baseUrl]    (default http://localhost:4321/bradda-dads-site)
 import { spawn } from 'node:child_process';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const BASE = process.argv[2] ?? 'http://localhost:4322/bradda-dads-site';
+const BASE = process.argv[2] ?? 'http://localhost:4321/bradda-dads-site';
 const browser = process.env.BROWSER ?? 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const port = 9700 + Math.floor(Math.random() * 90);
 const proc = spawn(browser, ['--headless=new', '--disable-gpu', `--remote-debugging-port=${port}`, `--user-data-dir=${mkdtempSync(join(tmpdir(), 'kbd-'))}`, 'about:blank'], { stdio: 'ignore' });

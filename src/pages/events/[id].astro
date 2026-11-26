@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
-import { getEvents, pickNextEvent, statusFor, formatEventDates, isOpen, isPlaceholder } from '../../lib/events';
+import { getEvents, pickNextEvent, statusFor, formatEventDates, isOpen, isPlaceholder, deadlineFor, shortDay } from '../../lib/events';
 import { getWolfspitYears } from '../../lib/results';
 import { getAlbums, EVENT_TAG, categorySlug } from '../../lib/albums';
 import { formatDate, formatTime } from '../../lib/format';
@@ -23,6 +23,7 @@ const d = event.data;
 const { Content } = await render(event);
 const next = pickNextEvent(await getEvents());
 const status = statusFor(event, event.id === next?.id).label;
+const deadline = deadlineFor(event);
 
 const tag = EVENT_TAG[event.id];
 const eventAlbums = (await getAlbums()).filter((a) => a.data.photos.length > 0 && (a.data.event?.id === event.id || (tag && a.data.category === tag)));
@@ -71,6 +72,12 @@ const jsonLd = addToCalendar
           {d.startTimeConfirmed ? formatTime(d.start) : 'Time to be confirmed'}
         </li>
       )}
+      {deadline && (
+        <li class="facts__deadline">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14M5 20h14M7 4c0 5 5 5 5 8s-5 3-5 8M17 4c0 5-5 5-5 8s5 3 5 8" /></svg>
+          {deadline.passed ? deadline.closedText : <>{deadline.label} <strong>{shortDay(deadline.date)}</strong></>}
+        </li>
+      )}
       <li>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
         {isPlaceholder(d.location) ? 'Place to be confirmed' : d.location}
@@ -98,6 +105,12 @@ const jsonLd = addToCalendar
         <dt>When</dt>
         <dd>{formatEventDates(event, true) ?? d.when}</dd>
       </div>
+      {deadline && (
+        <div class="ww__item">
+          <dt>{deadline.label}</dt>
+          <dd>{deadline.passed ? `${deadline.closedText} (${shortDay(deadline.date)})` : formatDate(deadline.date)}</dd>
+        </div>
+      )}
       <div class="ww__item">
         <dt>Time</dt>
         <dd>{d.start && d.startTimeConfirmed ? formatTime(d.start) : 'To be confirmed'}</dd>
@@ -411,6 +424,9 @@ const jsonLd = addToCalendar
     margin: 4px 0 0;
     padding: 0;
     font-size: 17px;
+  }
+  .facts__deadline strong {
+    color: var(--yellow);
   }
   .facts li {
     display: inline-flex;

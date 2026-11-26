@@ -3,7 +3,7 @@
 // heading order, one h1, page title, tap-target size (WCAG 2.2 2.5.8: at least 24×24px) and reflow at 320px.
 //
 //   npm run build && npx astro preview --port 4322     (search only works on the built site)
-//   node scripts/qa/a11y-audit.mjs [baseUrl]            default http://localhost:4322/bradda-dads-site
+//   node scripts/qa/a11y-audit.mjs [baseUrl]            default http://localhost:4321/bradda-dads-site
 //
 // axe-core is loaded from cdnjs at test time (not a project dependency).
 import { spawn } from 'node:child_process';
@@ -11,7 +11,7 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const BASE = process.argv[2] ?? 'http://localhost:4322/bradda-dads-site';
+const BASE = process.argv[2] ?? 'http://localhost:4321/bradda-dads-site';
 const AXE = 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.2/axe.min.js';
 const PAGES = [
   '/', '/events/', '/events/duck-race/', '/events/duck-race/winners/', '/wolfspit/2009/', '/news/', '/news/2007-12-12-7th-annual-bradda-dads-christmas-lunch/',

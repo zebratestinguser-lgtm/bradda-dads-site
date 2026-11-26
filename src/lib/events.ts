@@ -39,14 +39,36 @@ export const isMultiDay = (e: EventEntry) => {
 export const isOpen = (e: EventEntry, now = new Date()) =>
   e.data.status === 'open' && (!e.data.entriesClose || e.data.entriesClose > now);
 
+/** Words for each kind of deadline: the deadline line, and the pill while open / once closed */
+const DEADLINE_WORDS = {
+  'Entries close': { open: 'Open now', closed: 'Entries closed' },
+  'Book by': { open: 'Booking open', closed: 'Bookings closed' },
+  'Orders close': { open: 'Orders open', closed: 'Orders closed' },
+} as const;
+
+/** The event's deadline, if it's this year's: { label: "Book by", date, passed, closedText } */
+export function deadlineFor(e: EventEntry, now = new Date()) {
+  const date = e.data.entriesClose;
+  if (!date || e.data.status !== 'open') return undefined;
+  if (date.getFullYear() < now.getFullYear() && date < now) return undefined; // last year's
+  const words = DEADLINE_WORDS[e.data.deadlineLabel];
+  return { label: e.data.deadlineLabel, date, passed: date <= now, openText: words.open, closedText: words.closed };
+}
+
+/** "Fri 27 Nov" (UK time) */
+export const shortDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: TZ });
+
 /** The status pill for an event. */
 export function statusFor(e: EventEntry, isNext: boolean, now = new Date()) {
   if (isHappening(e, now)) return { label: 'On now', kind: 'next' };
-  if (isOpen(e, now)) return { label: 'Open now', kind: 'open' };
+  const dl = deadlineFor(e, now);
+  if (isOpen(e, now)) return { label: dl?.openText ?? 'Open now', kind: 'open' };
+  // Deadline gone but the event itself is still to come (e.g. lunch bookings closed, lunch next week)
+  if (dl?.passed && e.data.start && e.data.start > now) return { label: dl.closedText, kind: isNext ? 'next' : 'upcoming' };
   if (isNext) return { label: 'Next up', kind: 'next' };
   // Dates from a previous year mean this year's hasn't happened yet: it's coming round again
   const lastYear = (d?: Date) => Boolean(d && d.getFullYear() < now.getFullYear());
-  if (e.data.status === 'open') return lastYear(e.data.entriesClose) ? { label: 'Coming up', kind: 'upcoming' } : { label: 'Entries closed', kind: 'done' };
+  if (e.data.status === 'open') return lastYear(e.data.entriesClose) ? { label: 'Coming up', kind: 'upcoming' } : { label: dl?.closedText ?? 'Entries closed', kind: 'done' };
   if (e.data.status === 'done') return { label: 'Done for this year', kind: 'done' };
   if (hasPassed(e, now)) return lastYear(endsAt(e)) ? { label: 'Coming up', kind: 'upcoming' } : { label: 'Done for this year', kind: 'done' };
   return { label: 'Coming up', kind: 'upcoming' };

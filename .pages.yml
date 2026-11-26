@@ -228,11 +228,18 @@ content:
         options:
           time: true
       - name: entriesClose
-        label: Entries or sales close (optional)
-        description: After this, "Open now" changes to "Entries closed" automatically.
+        label: Deadline (optional)
+        description: Last moment to enter, book or order. Set Status to "open" while people can sign up; after the deadline the button hides by itself. The event keeps its own date above.
         type: date
         options:
           time: true
+      - name: deadlineLabel
+        label: Deadline wording
+        description: How the deadline is shown, e.g. "Book by Fri 27 Nov".
+        type: select
+        options:
+          values: [Entries close, Book by, Orders close]
+        default: Entries close
       - name: location
         label: Where
         type: string

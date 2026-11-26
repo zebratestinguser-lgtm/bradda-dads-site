@@ -1,6 +1,9 @@
 ---
-// "Dates for your diary" from site.yaml (past dates drop off on the daily rebuild).
+// "Dates for your diary": every event's own date and sign-up deadline (automatic, from the events), plus
+// any extra dates typed into Site settings (e.g. Co-op selling days). A typed entry on the same day for
+// the same event wins, since it usually says more. Past dates drop off on the daily rebuild.
 import { getSite } from '../lib/site';
+import { getEvents, deadlineFor } from '../lib/events';
 import { url } from '../lib/url';
 
 interface Props {
@@ -11,7 +14,21 @@ const { limit = 8, title = 'Dates for your diary' } = Astro.props;
 const site = await getSite();
 const today = new Date();
 today.setHours(0, 0, 0, 0);
-const diary = site.diaryDates.filter((d) => d.date >= today).slice(0, limit);
+const dayKey = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'Europe/London' });
+const manual = site.diaryDates.map((d) => ({ date: d.date, label: d.label, text: d.text, url: d.url }));
+const WORDS = { 'Book by': 'Last day to book for the', 'Entries close': 'Last day for entries: the', 'Orders close': 'Last day to order: the' } as const;
+const auto: typeof manual = [];
+for (const e of await getEvents()) {
+  const page = `/events/${e.id}/`;
+  const taken = (date: Date) => manual.some((m) => dayKey(m.date) === dayKey(date) && (m.url === page || m.url === e.data.ctaUrl));
+  if (e.data.start && !taken(e.data.start)) auto.push({ date: e.data.start, label: undefined, text: e.data.name, url: page });
+  const dl = deadlineFor(e);
+  if (dl && !dl.passed && !taken(dl.date)) auto.push({ date: dl.date, label: undefined, text: `${WORDS[dl.label]} ${e.data.name}`, url: page });
+}
+const diary = [...manual, ...auto]
+  .filter((d) => d.date >= today)
+  .sort((a, b) => a.date.getTime() - b.date.getTime())
+  .slice(0, limit);
 const fmtDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Europe/London' });
 ---
 

@@ -7,7 +7,9 @@ start: 2026-12-26T00:00:00+00:00
 startTimeConfirmed: false
 location: Bradwell Brook
 summary: Where it all started in 1999. Buy a numbered entry and cheer your duck down the brook.
-status: upcoming
+status: open
+entriesClose: 2026-12-19T23:59:59+00:00
+deadlineLabel: Entries close
 ctaLabel: Buy an entry
 # SumUp store: Boxing Day Duck Race entries. People buy a numbered entry (each duck is numbered), not a duck.
 ctaUrl: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1

@@ -71,8 +71,11 @@ const events = defineCollection({
     location: z.string(),
     summary: z.string(),
     status: z.enum(['upcoming', 'open', 'done']),
-    /** When entries/sales close (UK time). After this, "Open now" becomes "Entries closed" and the homepage banner hides. */
+    /** Deadline (UK time): last moment to enter, book or order. After it the sign-up button hides and the
+     *  pill changes (e.g. "Booking open" → "Bookings closed"); the event itself keeps its own date. */
     entriesClose: z.coerce.date().optional(),
+    /** How the deadline is worded: "Entries close" (duck race, card), "Book by" (lunch), "Orders close". */
+    deadlineLabel: z.enum(['Entries close', 'Book by', 'Orders close']).default('Entries close'),
     ctaLabel: z.string(),
     ctaUrl: link,
     /** Tie-breaker when two events fall on the same date (1 = first). */

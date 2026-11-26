@@ -7,6 +7,7 @@ startTimeConfirmed: false
 location: "[VENUE]"
 summary: A free Christmas lunch for village pensioners, served by the dads, with carols from the village children.
 status: upcoming
+deadlineLabel: Book by
 ctaLabel: How to book
 ctaUrl: /events/pensioners-lunch/
 order: 3

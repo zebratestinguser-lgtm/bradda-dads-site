@@ -1,7 +1,8 @@
 ---
 // Site header: stays pinned to the top while scrolling.
 // Wide screens: every link visible. Phones/tablets: logo + a labelled "Menu" button that opens the links.
-// "Events" and "About us" open small drop-down lists (accordions inside the phone menu).
+// Home, then four drop-downs (Events, News & photos, About us, Get involved) and Search; drop-downs are
+// small lists on wide screens and accordions inside the phone menu.
 // Without JavaScript the links simply show as a wrapped list (nothing is ever hidden).
 import DuckLogo from './DuckLogo.astro';
 import { getSite } from '../lib/site';
@@ -14,7 +15,7 @@ const home = url('/');
 const events = await getEvents();
 
 type Link = { label: string; href: string; also?: string[]; icon?: boolean };
-type Item = Link & { children?: Link[] };
+type Item = Link & { children?: Link[]; cta?: boolean };
 const nav: Item[] = [
   { label: 'Home', href: home },
   {
@@ -27,9 +28,16 @@ const nav: Item[] = [
       { label: 'Play Duck Dash (game)', href: url('/game/') },
     ],
   },
-  { label: 'News', href: url('/news/') },
-  { label: 'Photos', href: url('/photos/') },
-  { label: 'Races', href: url('/races/'), also: [url('/wolfspit/'), url('/tour-of-bradwell/')] },
+  {
+    label: 'News & photos',
+    href: url('/news/'),
+    also: [url('/photos/'), url('/races/'), url('/wolfspit/'), url('/tour-of-bradwell/')],
+    children: [
+      { label: 'News', href: url('/news/') },
+      { label: 'Photos', href: url('/photos/') },
+      { label: 'Race results', href: url('/races/') },
+    ],
+  },
   {
     label: 'About us',
     href: url('/our-story/'),
@@ -41,10 +49,19 @@ const nav: Item[] = [
       { label: 'Our supporters', href: url('/supporters/') },
     ],
   },
-  { label: 'Donate', href: url('/donate/') },
   { label: 'Search', href: url('/search/'), icon: true },
+  {
+    label: 'Get involved',
+    href: url('/get-involved/'),
+    also: [url('/donate/'), url('/contact/')],
+    cta: true,
+    children: [
+      { label: 'Volunteer and join', href: url('/get-involved/') },
+      { label: 'Donate', href: url('/donate/') },
+      { label: 'Contact us', href: url('/contact/') },
+    ],
+  },
 ];
-const cta = { label: 'Get involved', href: url('/get-involved/') };
 // Home is only "current" on the homepage; other links match their whole section
 const isCurrent = (item: Link) =>
   item.href === home ? current === home : [item.href, ...(item.also ?? [])].some((h) => current.startsWith(h));
@@ -67,8 +84,8 @@ const isCurrent = (item: Link) =>
         {
           nav.map((item, i) =>
             item.children ? (
-              <li class="nav__group" data-nav-group>
-                <button type="button" class:list={['nav__link', 'nav__toggle', { 'is-current': isCurrent(item) }]} aria-expanded="false" aria-controls={`subnav-${i}`} data-toggle>
+              <li class:list={['nav__group', { 'nav__group--cta': item.cta }]} data-nav-group>
+                <button type="button" class:list={['nav__link', 'nav__toggle', { 'is-current': isCurrent(item), nav__cta: item.cta }]} aria-expanded="false" aria-controls={`subnav-${i}`} data-toggle>
                   {item.label}
                   <svg class="nav__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M6 9l6 6 6-6" />
@@ -99,11 +116,6 @@ const isCurrent = (item: Link) =>
             ),
           )
         }
-        <li class="nav__cta-item">
-          <a href={cta.href} class="nav__cta" aria-current={current.startsWith(cta.href) ? 'page' : undefined}>
-            {cta.label}
-          </a>
-        </li>
       </ul>
     </nav>
   </div>
@@ -344,6 +356,16 @@ const isCurrent = (item: Link) =>
     display: inline-flex;
     align-items: center;
   }
+  /* "Get involved" is a drop-down too, styled as the yellow button; its list opens from the right edge */
+  .nav__group--cta .nav__toggle.is-current {
+    color: var(--text);
+  }
+  @media (min-width: 1080px) {
+    .is-enhanced .nav__group--cta .subnav {
+      left: auto;
+      right: 0;
+    }
+  }
   .nav__cta:hover {
     color: var(--text);
     background: #f8cf63;
@@ -454,7 +476,7 @@ const isCurrent = (item: Link) =>
       box-shadow: inset 4px 0 0 var(--yellow);
       padding-left: 14px;
     }
-    .is-enhanced .nav__cta-item {
+    .is-enhanced .nav__group--cta {
       margin-top: 14px;
     }
     .is-enhanced .nav__cta {
