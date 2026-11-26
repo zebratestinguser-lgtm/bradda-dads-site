@@ -163,7 +163,7 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 
 - [ ] **Move hosting to Cloudflare when the site gets its own web address (decided 25 Nov 2026: wait until then).** Keep building on GitHub Actions and upload the finished site to Cloudflare (free): browsers can then keep photos and fonts for a year instead of 10 minutes, and old WordPress addresses can be redirected. Limits to watch: Cloudflare free = 20,000 files per site (now ~9,400; each photo adds 7), GitHub Pages = 1 GB (now ~430 MB). Needs a Cloudflare account and one API token stored as a GitHub secret (~20 minutes).
 
-- [ ] **Facebook posts on the site, automatically:** built 26 Nov 2026 (`scripts/fetch-facebook.mjs`, "Latest on Facebook" on the homepage and News page). **Waiting for Peter to create the Page token and add the FB_PAGE_ID and FB_PAGE_TOKEN secrets on GitHub:** step-by-step guide in [docs/facebook-setup.md](docs/facebook-setup.md).
+- [ ] **Facebook posts on the site, automatically:** built 26 Nov 2026 (`scripts/fetch-facebook.mjs`, "Latest on Facebook" on the homepage and News page). **Waiting for Peter to create the Page token and add the FB_PAGE_ID and FB_PAGE_TOKEN secrets on GitHub:** step-by-step guide in [docs/facebook-setup.md](docs/facebook-setup.md). Page ID 579874205526517 (not secret). **Late February 2027:** check the Facebook row is still showing; Meta's "data access" can lapse after about 3 months, and then the token needs making again (steps 2 to 6).
 
 - [ ] **Facebook share previews:** event and news pages use their own photo and summary instead of the default image.
 - [ ] **Speed on phones:** mid-sized photo versions with srcset for headers and cards; run Lighthouse before and after (target 90+).
