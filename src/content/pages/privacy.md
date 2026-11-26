@@ -23,8 +23,8 @@ The "where the money goes" map loads map images from OpenStreetMap's servers whe
 
 The site includes photos and stories from Bradda Dads events going back to 2001 (many brought across from our old websites), and fell race results that list runners' names, clubs, categories and times as published at the time.
 
-If you'd like a photo, a mention of you or your child, or your race result removed, [contact us](../contact/) and we'll take it down.
+If you'd like a photo, a mention of you or your child, or your race result removed, [send us a message](../contact/?topic=removal) or email secretarybraddadads@gmail.com and we'll take it down.
 
 ## Contact
 
-Questions about this notice: [get in touch](../contact/).
+Questions about this notice: email secretarybraddadads@gmail.com or [send us a message](../contact/).

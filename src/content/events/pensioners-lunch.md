@@ -32,7 +32,9 @@ involvement:
     text: Fill in the lunch slip in Bradda News and hand it in at the Post Office. It's free for village pensioners.
     onlyWhenOpen: true
   - title: Need a lift or a meal at home?
-    text: "Meals can be delivered for anyone who can't make it, and transport to the hall can be arranged. [PLACEHOLDER: who to contact.]"
+    text: Meals can be delivered for anyone who can't make it, and transport to the hall can be arranged. Get in touch and we'll sort it out.
+    url: /contact/?topic=booking
+    label: Get in touch
   - title: Help on the day
     text: The dads serve the food, and partners and families are welcome to come and help or watch the children sing.
     url: /get-involved/

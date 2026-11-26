@@ -16,6 +16,7 @@ const accountsHref = hasAccounts
     : undefined;
 const links = [
   { label: 'Contact us', href: url('/contact/') },
+  ...(!isPlaceholder(site.contactEmail) ? [{ label: site.contactEmail, href: `mailto:${site.contactEmail}` }] : []),
   { label: 'Facebook', href: site.facebookUrl },
   { label: 'Privacy', href: url('/privacy/') },
   { label: 'Accessibility', href: url('/accessibility/') },

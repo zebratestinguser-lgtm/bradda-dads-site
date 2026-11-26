@@ -12,10 +12,19 @@ import { url } from '../lib/url';
 const site = await getSite();
 const hasEmail = !site.contactEmail.startsWith('[');
 const hasForm = site.contactFormUrl.startsWith('https://');
+// "What's it about?" choices. Other pages can link straight to one, e.g. /contact/?topic=support
+const TOPICS = [
+  { value: 'general', label: 'A general question' },
+  { value: 'booking', label: 'Booking or the lunch' },
+  { value: 'support', label: 'Support for a group' },
+  { value: 'business', label: 'Business or sponsorship' },
+  { value: 'removal', label: 'Removing a photo or result' },
+  { value: 'volunteer', label: 'Joining or helping out' },
+];
 const header = await photoMatching(/two dads shaking hands/i, /dads round a long table/i);
 ---
 
-<BaseLayout title="Contact" description="How to get in touch with Bradda Dads in Bradwell, Derbyshire: our Facebook page, our monthly meeting, and the Wolf's Pit race organiser." ogImage={header?.src} ogImageAlt={header?.alt}>
+<BaseLayout title="Contact" description="Get in touch with Bradda Dads in Bradwell, Derbyshire: send us a message, email us, find us on Facebook, or come to our monthly meeting." ogImage={header?.src} ogImageAlt={header?.alt}>
   <PageHeader eyebrow="Contact" title="Get in touch" intro="Questions, ideas, old photos, or want to join? Here's how to reach us." image={header?.src} imageLabel={header?.label} />
 
   <Band first>
@@ -25,7 +34,15 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
           <div class="form-card">
             <h2 class="subhead">Send us a message</h2>
             <form class="form" action={site.contactFormUrl} method="POST" data-contact-form>
-              <input type="hidden" name="subject" value="Message from the Bradda Dads website" />
+              <input type="hidden" name="_subject" value="Message from the Bradda Dads website" />
+              {/* Spam trap: hidden from people, bots fill it in and Formspree drops the message */}
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="gotcha" />
+              <div class="form-field">
+                <label for="c-topic">What's it about?</label>
+                <select id="c-topic" name="topic" data-topic>
+                  {TOPICS.map((t) => <option value={t.label} data-key={t.value}>{t.label}</option>)}
+                </select>
+              </div>
               <div class="form-field">
                 <label for="c-name">Your name</label>
                 <input id="c-name" name="name" type="text" autocomplete="name" required />
@@ -90,6 +107,10 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
   // Send in the background and show the result here, instead of leaving for Formspree's page
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
   if (form) {
+    // Pre-pick the topic from the link (?topic=support etc.)
+    const key = new URLSearchParams(location.search).get('topic');
+    const opt = key && form.querySelector<HTMLOptionElement>(`[data-topic] option[data-key="${CSS.escape(key)}"]`);
+    if (opt) opt.selected = true;
     const status = form.querySelector<HTMLElement>('[data-status]')!;
     const button = form.querySelector<HTMLButtonElement>('[data-submit]')!;
     form.addEventListener('submit', async (e) => {
@@ -105,7 +126,7 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
         status.textContent = "Thanks, your message has been sent. We'll get back to you soon.";
       } catch {
         status.classList.add('status--error');
-        status.textContent = "Sorry, that didn't send. Please try again, or message us on Facebook.";
+        status.textContent = "Sorry, that didn't send. Please try again, or email us instead.";
       } finally {
         button.disabled = false;
       }
@@ -114,6 +135,9 @@ const header = await photoMatching(/two dads shaking hands/i, /dads round a long
 </script>
 
 <style>
+  .gotcha {
+    display: none;
+  }
   .layout {
     display: grid;
     gap: 24px;

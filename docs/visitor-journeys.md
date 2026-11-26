@@ -6,8 +6,8 @@ From the visitor journeys review (26 Nov 2026). Most visitors are villagers on p
 
 ## 1. Contact (the biggest blocker: 7 of 13 visitor groups need it)
 
-- ⏳🔧 **Contact email and message form.** At the moment Facebook is the only way to get in touch, which shuts out older people, businesses, funders, and anyone wanting a photo removed privately. Needs a group email address and a Formspree account. **The group already has an email address, but Peter can't get into it (26 Nov 2026)**: find out who holds the login, or recover it, then use it for Formspree too. The form is already built and switches on once `contactFormUrl` is set in site.yaml.
-- 🔧 Once there's an email, add it to: the privacy notice ("ask us to remove a photo"), the business card on Donate, the "Ask us for support" section, and the footer.
+- ✅ **Contact email and message form** (26 Nov 2026): secretarybraddadads@gmail.com and a Formspree form with a topic choice.
+- ✅ Email/form added to the privacy notice (photo removal), Donate and Supporters (business), Ask for support, lunch lifts/meals, footer.
 - ⏳ **A lunch booking route besides the newsletter slip**, such as a phone number or email for bookings and for arranging lifts or meals at home.
 
 ## 2. Event details: the site knows *when* but not *what, where and how much*
@@ -38,7 +38,7 @@ Every event page should answer: date, start time, place (postcode or map link), 
 
 ## 5. Businesses and donors
 
-- ⏳🔧 The "Support us as a business" route ends at Facebook. Point it to the contact form or email.
+- ✅ "Support us as a business" now goes to the contact form.
 - 🔧⏳ **Donation buttons.** £5, £10 and £20 all open the same SumUp page, where people choose the amount again. Fix with a separate SumUp payment link for each amount.
 - ⏳ A QR code for events, plus optional wording on what each amount pays for.
 

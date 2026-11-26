@@ -19,7 +19,7 @@ involvement:
     label: Volunteer
   - title: Sponsor the fireworks
     text: Local businesses like Breedon help make the fireworks possible. Get in touch if your business would like to help.
-    url: /contact/
+    url: /contact/?topic=business
     label: Get in touch
 ---
 
