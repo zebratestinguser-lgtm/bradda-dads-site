@@ -395,8 +395,8 @@ a:hover {
 .cat-stone {
   --cat-strong: #66716b;
   --cat-ink: #ffffff;
-  --cat-tint: #e9edeb;
-  --cat-tint-ink: #3d4641;
+  --cat-tint: var(--stone);
+  --cat-tint-ink: var(--stone-ink);
 }
 .cat-cream {
   --cat-strong: #f3d98f;

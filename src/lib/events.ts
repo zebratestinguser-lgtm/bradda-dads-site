@@ -71,12 +71,14 @@ export const shortDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 's
 
 /** The status pill for an event. */
 export function statusFor(e: EventEntry, isNext: boolean, now = new Date()) {
-  if (isHappening(e, now)) return { label: 'On now', kind: 'next' };
+  // kind: now (happening), open (can sign up), closed (sign-up over, event still to come),
+  // upcoming (coming up), done (finished for this year). Shown as distinct pills on event cards.
+  if (isHappening(e, now)) return { label: 'On now', kind: 'now' };
   const dl = deadlineFor(e, now);
   if (isOpen(e, now)) return { label: dl?.openText ?? 'Open now', kind: 'open' };
   // Deadline gone but the event itself is still to come (e.g. lunch bookings closed, lunch next week)
-  if (dl?.passed && e.data.start && e.data.start > now) return { label: dl.closedText, kind: isNext ? 'next' : 'upcoming' };
-  if (isNext) return { label: 'Next up', kind: 'next' };
+  if (dl?.passed && e.data.start && e.data.start > now) return { label: dl.closedText, kind: 'closed' };
+  if (isNext) return { label: 'Next up', kind: 'upcoming' };
   if (yearSlot(e, now).done) {
     // Entries closed this year (e.g. the Christmas card before delivery) or finished for the year
     if (e.data.status === 'open' && dl?.passed) return { label: dl.closedText, kind: 'done' };

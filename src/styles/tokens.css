@@ -28,6 +28,8 @@
   --on-dark-muted: #c9d6cd;
   --on-dark-soft: #dfe9e2;
   --white: #ffffff;
+  --stone: #e9edeb; /* quiet grey: "closed" and "done" pills, the Social category */
+  --stone-ink: #3d4641;
 
   /* Type */
   --font-heading: 'Bricolage Grotesque', Inter, system-ui, sans-serif;

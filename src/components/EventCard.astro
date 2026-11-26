@@ -43,20 +43,11 @@ if (closed && e.data.status !== 'open') {
 
 <article class:list={['event-card', { 'event-card--next': isNext, 'event-card--closed': closed }]}>
   <div class="event-card__top">
+    {isNext && tag.label !== 'Next up' && <span class="event-card__tag event-card__tag--nextup">Next up</span>}
     <span class={`event-card__tag event-card__tag--${tag.kind}`}>
-      {
-        closed &&
-          (e.data.status === 'open' ? (
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="5" y="11" width="14" height="10" rx="2" />
-              <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-            </svg>
-          ) : (
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12.5l4.5 4.5L19 7.5" />
-            </svg>
-          ))
-      }
+      {(tag.kind === 'open' || tag.kind === 'now') && <span class="event-card__dot" aria-hidden="true" />}
+      {(tag.kind === 'closed' || (tag.kind === 'done' && e.data.status === 'open')) && <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>}
+      {tag.kind === 'done' && e.data.status !== 'open' && <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>}
       {tag.label}
     </span>
   </div>
@@ -67,6 +58,7 @@ if (closed && e.data.status !== 'open') {
   {
     dl && !closed && !(dl.passed && tag.label === dl.closedText) && (
       <p class:list={['event-card__deadline', { 'is-passed': dl.passed }]}>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
         {dl.passed ? dl.closedText : <>{dl.label} <strong>{shortDay(dl.date)}</strong></>}
       </p>
     )
@@ -113,17 +105,13 @@ if (closed && e.data.status !== 'open') {
     border-color: var(--green);
     color: var(--white);
   }
-  /* Status pill always on its own line at the top, date underneath: same place on every card, at every width */
-  /* Closed for this year: a quieter blue-grey card with a dashed edge */
+  /* Status pills at the top ("Next up" first on the green card), date underneath: same place on every card */
+  /* Finished for this year: a quiet outline card (works on either band colour) */
   .event-card--closed {
-    background: #dfe7ec;
-    border: 1.5px dashed #9fb4c1;
+    background: transparent;
+    border: 1.5px dashed var(--brook);
   }
   .event-card--closed .event-card__name {
-    color: var(--muted-strong);
-  }
-  .event-card--closed .event-card__tag--done {
-    background: var(--white);
     color: var(--muted-strong);
   }
   .event-card__tag svg {
@@ -131,9 +119,9 @@ if (closed && e.data.status !== 'open') {
   }
   .event-card__top {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
   }
   /* The event's own date: always the most prominent fact on the card */
   .event-card__date {
@@ -149,47 +137,77 @@ if (closed && e.data.status !== 'open') {
   .event-card__date svg {
     flex-shrink: 0;
   }
-  /* Deadline: "Book by Fri 27 Nov" (yellow while open) */
+  /* Deadline: "Book by Fri 27 Nov", a plain line with a clock (not a badge, so it isn't mistaken for the status) */
   .event-card__deadline {
     margin: -6px 0 0;
-    align-self: flex-start;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 8px;
-    background: var(--yellow-panel);
-    color: var(--yellow-ink);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 15px;
+    color: var(--muted-strong);
+  }
+  .event-card__deadline svg {
+    flex-shrink: 0;
   }
   .event-card__deadline.is-passed {
-    background: var(--surface);
-    color: var(--muted-strong);
+    color: var(--muted);
   }
   .event-card--next .event-card__deadline {
-    background: var(--yellow);
-    color: var(--text);
+    color: var(--on-dark-soft);
   }
+  /* Status pills: one look per state, from the site palette (separate from the category colours) */
   .event-card__tag {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    padding: 5px 10px;
+    padding: 5px 11px;
     border-radius: var(--radius-pill);
-    background: var(--border-soft);
-    color: var(--muted-strong);
+    border: 1.5px solid transparent;
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
   }
+  .event-card__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  /* Open now / Booking open: duck yellow, like every "go ahead" button */
   .event-card__tag--open {
-    background: var(--yellow-panel);
-    color: var(--yellow-ink);
-  }
-  .event-card__tag--done {
-    color: var(--muted);
-  }
-  .event-card__tag--next {
     background: var(--yellow);
     color: var(--text);
+  }
+  /* On now: orange */
+  .event-card__tag--now {
+    background: var(--focus);
+    color: var(--white);
+  }
+  /* Coming up: plain outline */
+  .event-card__tag--upcoming {
+    background: var(--white);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  /* Closed (sign-up over) and done for the year: stone grey, with a padlock or a tick */
+  .event-card__tag--closed,
+  .event-card__tag--done {
+    background: var(--stone);
+    border-color: var(--input-border);
+    color: var(--stone-ink);
+  }
+  /* "Next up" on the green card */
+  .event-card__tag--nextup {
+    background: var(--white);
+    color: var(--green);
+  }
+  .event-card--next .event-card__tag--upcoming {
+    border-color: var(--white);
+  }
+  .event-card--next .event-card__tag--closed {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--white);
   }
   .event-card__name {
     font-weight: 700;
