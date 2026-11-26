@@ -33,6 +33,8 @@ const tone = facebook ? 'facebook' : ((await getCategory(tag))?.data.colour ?? '
   .news-tile {
     width: 100%;
     height: 100%;
+    /* the speech bubble sizes itself from the tile's shorter side (wide strips on desktop, squares on phones) */
+    container-type: size;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,13 +49,14 @@ const tone = facebook ? 'facebook' : ((await getCategory(tag))?.data.colour ?? '
     --tile-bg: var(--green);
     --tile-ink: var(--white);
   }
-  .news-tile--sky {
-    --tile-bg: #2f6fa3;
-    --tile-ink: var(--white);
+  /* Tile colours come from the site palette (src/styles/tokens.css); each category picks one in the editor */
+  .news-tile--orange {
+    --tile-bg: var(--orange);
+    --tile-ink: var(--green);
   }
-  .news-tile--ember {
-    --tile-bg: #8a3b12;
-    --tile-ink: var(--white);
+  .news-tile--water {
+    --tile-bg: var(--water-deep);
+    --tile-ink: var(--green);
   }
   .news-tile--cream {
     --tile-bg: var(--yellow-panel);
@@ -68,7 +71,7 @@ const tone = facebook ? 'facebook' : ((await getCategory(tag))?.data.colour ?? '
     position: relative;
     display: grid;
     place-items: center;
-    width: 46%;
+    width: min(46cqw, 62cqh);
     aspect-ratio: 1.15;
     background: var(--white);
     border-radius: 28%;
@@ -85,7 +88,7 @@ const tone = facebook ? 'facebook' : ((await getCategory(tag))?.data.colour ?? '
     clip-path: polygon(0 0, 100% 0, 0 100%);
   }
   .news-tile--lead .news-tile__bubble {
-    width: min(46%, 200px);
+    width: min(46cqw, 62cqh, 200px);
   }
   .news-tile__bubble :global(svg) {
     width: 66%;

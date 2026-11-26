@@ -16,7 +16,11 @@ const uploadPath = z
   .regex(/^\/uploads\/.+\.(jpe?g|png|webp|avif|gif|svg)$/i, 'Images must live in /uploads/ (public/uploads/)');
 
 /** A link: a full URL, or "#" while it is still a placeholder */
-const link = z.union([z.url(), z.literal('#'), z.string().startsWith('/'), z.string().startsWith('mailto:')]);
+const link = z.preprocess(
+  // Editors often paste "www.sumup.co.uk/…": add the missing https:// rather than stop the site updating
+  (v) => (typeof v === 'string' && /^(www\.|[a-z0-9-]+\.[a-z]{2,}(\.[a-z]{2,})?\/)/i.test(v.trim()) ? `https://${v.trim()}` : typeof v === 'string' ? v.trim() : v),
+  z.union([z.url(), z.literal('#'), z.string().startsWith('/'), z.string().startsWith('mailto:')]),
+);
 
 /** A category name (news topic / photo category). The list lives in src/content/categories/ (editor: "Categories"),
  *  and the editor stores the category's name, e.g. "Bonfire". */
@@ -257,7 +261,7 @@ const categories = defineCollection({
     /** Heading over related stories, e.g. "More about the bonfire" */
     moreHeading: z.string().optional(),
     /** Colour of the duck tile on stories without a photo */
-    colour: z.enum(['green', 'sky', 'cream', 'ember']).default('green'),
+    colour: z.enum(['green', 'orange', 'water', 'cream']).default('green'),
   }),
 });
 

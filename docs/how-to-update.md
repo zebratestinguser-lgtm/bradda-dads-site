@@ -71,7 +71,7 @@ If an event stops for good, set its **Status** to "done" rather than deleting it
 
 - **Add one** whenever a new kind of event or story needs it. Then pick it in stories, albums and the event.
 - **Don't rename one** that stories already use: their old name stays on them. Add the new name, change the stories over, then delete the old one.
-- **Position** sets the order; **Tile colour** colours the duck tile on stories without a photo.
+- **Position** sets the order; **Tile colour** (green, orange, water or cream) colours the duck tile on stories without a photo.
 
 ## Page wording (headings, introductions and paragraphs)
 

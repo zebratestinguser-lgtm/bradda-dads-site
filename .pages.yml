@@ -55,11 +55,11 @@ content:
         type: string
       - name: colour
         label: Tile colour
-        description: Colour of the duck tile shown on stories that have no photo.
+        description: "Colour of the duck tile shown on stories that have no photo: green (dark green), orange, water (pale brook blue) or cream."
         type: select
         default: green
         options:
-          values: [green, sky, cream, ember]
+          values: [green, orange, water, cream]
 
   - name: news
     label: News
@@ -249,6 +249,12 @@ content:
         label: Cover photo description
         type: string
 
+      - name: body
+        label: Text about the album (optional)
+        description: Shown above the photos, e.g. race details or a thank-you.
+        type: rich-text
+        options:
+          format: markdown
       - name: source
         label: Imported from (old site)
         type: string
@@ -297,6 +303,7 @@ content:
         type: date
         options:
           time: true
+          format: "yyyy-MM-dd'T'HH:mm"
       - name: startTimeConfirmed
         label: Start time confirmed
         description: Leave unticked until the time (not just the date) is certain; the site then says "Time to be confirmed".
@@ -308,12 +315,14 @@ content:
         type: date
         options:
           time: true
+          format: "yyyy-MM-dd'T'HH:mm"
       - name: entriesClose
         label: Deadline (optional)
         description: Last moment to enter, book or order. Set Status to "open" while people can sign up; after the deadline the button hides by itself. The event keeps its own date above.
         type: date
         options:
           time: true
+          format: "yyyy-MM-dd'T'HH:mm"
       - name: entriesClosed
         label: Closed now (no more entries or bookings)
         description: Tick when bookings or entries have closed and there's no deadline date set. The sign-up buttons hide and it shows e.g. "Bookings closed". Untick it for next year.
