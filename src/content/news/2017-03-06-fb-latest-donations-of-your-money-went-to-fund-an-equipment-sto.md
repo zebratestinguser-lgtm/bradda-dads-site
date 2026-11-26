@@ -1,9 +1,9 @@
 ---
-title: "Latest donations of your money went to fund an equipment storing shed…"
+title: "Pre-school shed, football goals and panto costumes"
 date: 2017-03-06
 tag: "Village"
 summary: "Latest donations of your money went to fund an equipment storing shed for the pre-school, new goals for the Junior foobal club, and a contribution to buy costumes for the Bradwell Centenary Players…"
-draft: true
+draft: false
 facebookId: "579874205526517_689489234565013"
 source: https://www.facebook.com/1680370807112731/posts/689489234565013
 ---

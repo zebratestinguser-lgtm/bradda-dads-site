@@ -1,9 +1,9 @@
 ---
-title: "Just had the AGM so it is a good time to keep you up-to-date with…"
+title: "What we did in 2016, and where the money went"
 date: 2016-10-24
-tag: "Duck race"
+tag: "Village"
 summary: "Just had the AGM so it is a good time to keep you up-to-date with some of the things we have done this year and the donations we have made: Organised and paid for village bonfire and firework display…"
-draft: true
+draft: false
 facebookId: "579874205526517_612377895609481"
 source: https://www.facebook.com/1680370807112731/posts/612377895609481
 ---

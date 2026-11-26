@@ -1,22 +1,22 @@
 ---
-// "Latest on Facebook": the newest posts from the Bradda Dads Facebook page (see src/lib/facebook.ts).
-// Shows nothing until there are posts. Photos are copies saved at build time, so visitors never load
+// "New on Facebook": the newest Facebook posts that aren't on the website yet (see src/lib/facebook.ts).
+// Every post also arrives as a draft news story; once an editor publishes it, it's in the news list
+// instead, so it drops out of here. Shows nothing when there's nothing new. Photos are copies saved at build time, so visitors never load
 // anything from Facebook.
 import Img from './Img.astro';
 import { getFacebookPosts } from '../lib/facebook';
 import { getSite } from '../lib/site';
 import { formatDate } from '../lib/format';
 import { getCollection } from 'astro:content';
-import { url } from '../lib/url';
 
 interface Props {
   headingLevel?: 'h2' | 'h3';
 }
 const { headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
-const posts = (await getFacebookPosts()).slice(0, 3);
-// Posts an editor has published as news stories link to the full story on this site
-const stories = new Map((await getCollection('news', (n) => !n.data.draft && Boolean(n.data.facebookId))).map((n) => [n.data.facebookId!, n.id]));
+// Leave out posts that are already published as news stories
+const published = new Set((await getCollection('news', (n) => !n.data.draft && Boolean(n.data.facebookId))).map((n) => n.data.facebookId!));
+const posts = (await getFacebookPosts()).filter((p) => !p.id || !published.has(p.id)).slice(0, 3);
 const site = await getSite();
 ---
 
@@ -24,7 +24,7 @@ const site = await getSite();
   posts.length > 0 && (
     <section class="fb" aria-labelledby="fb-title">
       <div class="fb__head">
-        <Heading class="subhead" id="fb-title">Latest on Facebook</Heading>
+        <Heading class="subhead" id="fb-title">New on Facebook</Heading>
         <a class="link-arrow" href={site.facebookUrl} rel="noopener">Follow us on Facebook →</a>
       </div>
       <ul class="fb__list" role="list">
@@ -38,18 +38,9 @@ const site = await getSite();
             <div class="fb__body">
               {p.date ? <time datetime={p.date.toISOString()}>Posted {formatDate(p.date)}</time> : p.dateText && <p class="fb__date">{p.dateText}</p>}
               <p class="fb__text">{p.text}</p>
-              {p.id && stories.has(p.id) ? (
-                <div class="fb__links">
-                  <a class="fb__link" href={url(`/news/${stories.get(p.id)}/`)}>
-                    Read the full post<span class="visually-hidden"> from {p.date ? formatDate(p.date) : p.dateText}</span> →
-                  </a>
-                  <a class="fb__fb" href={p.url} rel="noopener">View on Facebook</a>
-                </div>
-              ) : (
-                <a class="fb__link" href={p.url} rel="noopener">
-                  Read on Facebook<span class="visually-hidden"> (post from {p.date ? formatDate(p.date) : p.dateText})</span> →
-                </a>
-              )}
+              <a class="fb__link" href={p.url} rel="noopener">
+                Read on Facebook<span class="visually-hidden"> (post from {p.date ? formatDate(p.date) : p.dateText})</span> →
+              </a>
             </div>
           </li>
         ))}

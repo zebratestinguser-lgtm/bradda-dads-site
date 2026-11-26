@@ -1,11 +1,11 @@
 ---
-title: "Sorry about the delay in getting these photos on Facebook - I've been…"
+title: "Pensioners' lunch 2016 photos"
 date: 2017-01-11
-tag: "Village"
+tag: "Pensioners' lunch"
 summary: "Sorry about the delay in getting these photos on Facebook - I've been away and er... lots of other excuses too, but anyway, here they are. I loved looking through these and I hope you do too. Thanks…"
 image: /uploads/news/facebook/2017-01-11-658659467647990-1.jpg
-imageAlt: "Photo 1 of 25 from the Facebook post of 11 January 2017"
-draft: true
+imageAlt: "Three pensioners smiling at a table with gold Christmas crackers at the pensioners' lunch (11 January 2017)"
+draft: false
 facebookId: "579874205526517_658659467647990"
 source: https://www.facebook.com/photo.php?fbid=658661770981093&set=a.658649070982363&type=3
 ---

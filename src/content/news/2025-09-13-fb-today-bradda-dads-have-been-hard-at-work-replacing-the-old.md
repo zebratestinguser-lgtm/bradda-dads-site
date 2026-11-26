@@ -1,11 +1,11 @@
 ---
-title: "Today, Bradda Dads have been hard at work replacing the old…"
+title: "A new footbridge between Hall Gate View and Springfield Road"
 date: 2025-09-13
 tag: "Village"
 summary: "Today, Bradda Dads have been hard at work replacing the old footbridge between Hall Gate View and Springfield Road. We would like to thank Bradwell Parish Council for their grant contribution towards…"
 image: /uploads/news/facebook/2025-09-13-1310285807454568-1.jpg
-imageAlt: "Photo 1 of 2 from the Facebook post of 13 September 2025"
-draft: true
+imageAlt: "The old wooden footbridge with a hole in its boards, before it was replaced (13 September 2025)"
+draft: false
 facebookId: "579874205526517_1310285807454568"
 source: https://www.facebook.com/1680370807112731/posts/1310285807454568
 ---

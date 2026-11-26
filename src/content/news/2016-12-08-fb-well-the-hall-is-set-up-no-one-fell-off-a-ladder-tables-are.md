@@ -1,9 +1,9 @@
 ---
-title: "Well, the hall is set up. No one fell off a ladder, tables are laid,…"
+title: "Pensioners' lunch 2016: the hall is ready"
 date: 2016-12-08
-tag: "Village"
+tag: "Pensioners' lunch"
 summary: "Well, the hall is set up. No one fell off a ladder, tables are laid, decorations and children's Xmas cards are up, and the Bradda Dads have retired to the White Hart for the December meeting to more…"
-draft: true
+draft: false
 facebookId: "579874205526517_639699766210627"
 source: https://www.facebook.com/1680370807112731/posts/639699766210627
 ---

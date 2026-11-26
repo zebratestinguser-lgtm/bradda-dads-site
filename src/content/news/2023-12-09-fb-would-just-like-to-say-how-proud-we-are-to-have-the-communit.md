@@ -1,11 +1,9 @@
 ---
-title: "Would just like to say how proud we are to have the community we do.…"
+title: "Pensioners' lunch 2023 at the Memorial Hall"
 date: 2023-12-09
-tag: "Duck race"
+tag: "Pensioners' lunch"
 summary: "Would just like to say how proud we are to have the community we do. Hosting the pentioners lunch yesterday in the Bradwell War Memorial Hall worked really well. We have seen several posts of…"
-image: /uploads/news/facebook/2023-12-09-876262844190202-1.jpg
-imageAlt: "Photo 1 of 3 from the Facebook post of 9 December 2023"
-draft: true
+draft: false
 facebookId: "579874205526517_876262844190202"
 source: https://www.facebook.com/1680370807112731/posts/876262844190202
 ---

@@ -1,9 +1,9 @@
 ---
-title: "On behalf of the Bradda dads, we would like to thank you for your…"
+title: "Wolf's Pit 2024: thank you"
 date: 2024-03-20
 tag: "Wolf's Pit"
 summary: "On behalf of the Bradda dads, we would like to thank you for your support during wolfspit fell race. The next event coming is the hill billy. Please keep an eye out for upcoming posts. Half the…"
-draft: true
+draft: false
 facebookId: "579874205526517_934003958416090"
 source: https://www.facebook.com/1680370807112731/posts/934003958416090
 ---

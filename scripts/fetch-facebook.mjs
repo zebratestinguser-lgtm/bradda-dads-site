@@ -16,7 +16,7 @@ import sharp from 'sharp';
 
 const API = 'https://graph.facebook.com/v27.0'; // Graph API versions last about two years; bump when Meta retires it
 const ROW = 6; // posts kept for the "Latest on Facebook" row (the page shows 3)
-const MAX_PHOTOS = 12; // photos per new post
+const MAX_PHOTOS = 100; // photos per new post (all of them, within reason)
 const root = join(import.meta.dirname, '..');
 const rowFile = join(root, 'src', 'data', 'facebook.json');
 const rowImgDir = join(root, 'public', 'uploads', 'facebook');
@@ -39,7 +39,11 @@ const FIELDS = 'id,message,created_time,permalink_url,full_picture,attachments{m
 
 async function graph(path) {
   // Testing aid: FB_FAKE=path/to/posts.json reads { "data": [...] } from a file instead of Facebook
-  if (process.env.FB_FAKE) return JSON.parse(readFileSync(process.env.FB_FAKE, 'utf8'));
+  if (process.env.FB_FAKE) {
+    const fake = JSON.parse(readFileSync(process.env.FB_FAKE, 'utf8'));
+    if (path.includes('/posts')) return fake;
+    return fake.data.find((p) => p.id === decodeURIComponent(path.split('?')[0])) ?? {};
+  }
   const res = await fetch(path.startsWith('http') ? path : `${API}/${path}`, { headers: { Authorization: `Bearer ${token}` } });
   const body = await res.json();
   if (!res.ok) throw new Error(body?.error?.message ?? `HTTP ${res.status}`);
@@ -225,8 +229,54 @@ try {
   }
   writeFileSync(seenFile, JSON.stringify(seen, null, 2) + '\n');
 
-  // Tidy up: photos from drafts an editor has deleted
-  const allNews = readdirSync(newsDir).map((f) => readFileSync(join(newsDir, f), 'utf8')).join('\n');
+  // ---------- 3. the rest of the photos for stories that only have the first ----------
+  // (the history import kept one photo per post; each such story says "N more photos with the original post")
+  const MORE = /\n*_\d+ more photos? with \[the original post on Facebook\]\([^)]*\)\._\n?/;
+  let filled = 0;
+  for (const f of readdirSync(newsDir)) {
+    const path = join(newsDir, f);
+    let s = readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
+    const id = s.match(/^facebookId: "?([^"\n]+)"?$/m)?.[1];
+    if (!id || !MORE.test(s)) continue;
+    try {
+      const post = await graph(`${encodeURIComponent(id)}?fields=created_time,attachments{media_type,type,media,subattachments.limit(100){media_type,type,media}}`);
+      const urls = photoUrls(post);
+      const date = ukDate(post.created_time);
+      const added = [];
+      let needed = 0;
+      for (const [i, src] of urls.entries()) {
+        if (i === 0) continue; // the first came in with the post (or was left off on purpose)
+        const name = `${date}-${String(id).split('_').pop()}-${i + 1}.jpg`;
+        if (s.includes(`/uploads/news/facebook/${name}`)) continue;
+        needed++;
+        try {
+          if (!existsSync(join(photoDir, name))) await savePhoto(src, join(photoDir, name), 1600);
+          added.push({ src: `/uploads/news/facebook/${name}`, alt: `Photo ${i + 1} of ${urls.length} from the Facebook post of ${longDate(post.created_time)}` });
+        } catch {
+          // skip a photo that won't download
+        }
+      }
+      if (urls.length < 2 || added.length < needed) continue; // try again next build rather than lose the note
+      const items = added.flatMap((ph) => [`  - src: ${ph.src}`, `    alt: ${q(ph.alt)}`]).join('\n');
+      const [, front, body] = s.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      let fm = front;
+      if (!added.length) {
+        // nothing missing: just drop the note
+      } else if (/^photos: \[\]$/m.test(fm)) fm = fm.replace(/^photos: \[\]$/m, `photos:\n${items}`);
+      else if (/^photos:$/m.test(fm)) fm = fm.replace(/^photos:\n((?:[ ]{2,}.*(?:\n|$))*)/m, (m) => `${m.replace(/\n?$/, '\n')}${items}\n`).replace(/\n$/, '');
+      else fm = `${fm}\nphotos:\n${items}`;
+      writeFileSync(path, `---\n${fm}\n---\n${body.replace(MORE, '\n')}`);
+      filled++;
+    } catch (err) {
+      warn(`couldn't fetch the rest of the photos for ${f} (${err.message}).`);
+    }
+  }
+  if (filled) console.log(`Facebook posts: added the rest of the photos to ${filled} stor${filled === 1 ? 'y' : 'ies'}.`);
+
+  // Tidy up: photos from drafts an editor has deleted (anything no story, map entry or timeline entry uses)
+  const allNews = [newsDir, join(root, 'src', 'content', 'funded'), join(root, 'src', 'content', 'timeline')]
+    .flatMap((d) => readdirSync(d).map((f) => readFileSync(join(d, f), 'utf8')))
+    .join('\n');
   let removed = 0;
   for (const f of readdirSync(photoDir)) if (!allNews.includes(`/uploads/news/facebook/${f}`)) (unlinkSync(join(photoDir, f)), removed++);
   console.log(`Facebook posts: ${added} new draft stor${added === 1 ? 'y' : 'ies'}${firstRun ? ' (first run: whole history)' : ''}${removed ? `, ${removed} unused photos removed` : ''}.`);

@@ -1,11 +1,11 @@
 ---
-title: "We would like to thank everyone who attended the torchlit procession,…"
+title: "Torchlit procession and fireworks 2024: thank you"
 date: 2024-11-03
-tag: "Duck race"
+tag: "Bonfire"
 summary: "We would like to thank everyone who attended the torchlit procession, and the fireworks event. And the kids who did some lovely drawings, that we got to illuminate Without your bradda dad’s Christmas…"
 image: /uploads/news/facebook/2024-11-03-1078373757312442-1.jpg
-imageAlt: "Photo 1 of 1 from the Facebook post of 3 November 2024"
-draft: true
+imageAlt: "Fireworks bursting above a burning duck-shaped fire display on bonfire night (3 November 2024)"
+draft: false
 facebookId: "579874205526517_1078373757312442"
 source: https://www.facebook.com/1680370807112731/posts/1078373757312442
 ---

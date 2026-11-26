@@ -1,9 +1,9 @@
 ---
-title: "Thank you to everyone who came out to support the duck race. Here are…"
+title: "Boxing Day duck race 2021 results"
 date: 2021-12-28
 tag: "Duck race"
 summary: "Thank you to everyone who came out to support the duck race. Here are the winners: 1st ticket 385 - Janet Harding. £50 2nd ticket 447 - Alan + June Alyling. £30 3rd ticket 321 - Mike Sayfriz and…"
-draft: true
+draft: false
 facebookId: "579874205526517_2018465138334076"
 source: https://www.facebook.com/1680370807112731/posts/2018465138334076
 ---

@@ -1,5 +1,7 @@
 # Facebook posts to review (imported 26 Nov 2026)
 
+**Done 26 Nov 2026:** the "Publish" list is live (plus #101, the 2025 fun day cancellation), the "Leave out" list and #135 are deleted (#135's detail went into the existing bonfire story), and #1, #32 and #80 are still drafts (see TODO-content.md).
+
 136 posts from the Bradda Dads Facebook page (2016 to 2026) came in as **draft** news stories. None of them are on the website yet. Below is my suggestion for each one. Say "go with your suggestions" (plus any changes) and I'll publish the first list, tidy what's noted, and delete the rest. Deleted drafts never come back.
 
 Numbers match the order of the drafts (oldest first).

@@ -64,6 +64,7 @@ Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all l
 
 ## Where the money goes: `src/content/funded/`
 
+- [ ] **Review every map entry** (Peter, 26 Nov 2026). Only the new footbridge has a confirmed position. All the others are guessed pins near the village centre ("Map position to be confirmed"), including the nine added from the Facebook posts on 26 Nov 2026 (Friends of Bradwell Schools, junior school carpets, pre-school, bowls club benches, junior football goals, Guides, Teddy Bear club, Young Farmers) and the four older ones. For each: the real spot (or remove it from the map if it isn't a place, e.g. a donation to a club that meets elsewhere), the year and the amount. Hope Valley Young Farmers isn't in Bradwell at all.
 - [ ] **All four map pins are guesses near the village centre.** Set the real `lat`/`lng`, then `locationConfirmed: true`.
 - [ ] Year, amount and details for: school stage lighting, Bradwell Youth Activities, Centenary Players, Lumb Christmas lights
 - [ ] Add other funded groups and projects
@@ -81,6 +82,17 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 - [ ] 2022 results have no clubs or categories, and 2025 only has them for the first 53 runners. If the organiser has the full spreadsheets, swap them in.
 - [ ] Decide what "First junior" means for the podium (`src/lib/results.ts`, `PODIUM_RULES`). Wolf's Pit is 18+, so at the moment it picks the first MU19/MU21/MU23 runner.
 - [ ] Tour of Bradwell 2018 results (not found on the old site)
+
+## Facebook posts (imported 26 Nov 2026)
+
+34 posts published as news, 99 left out (deleted, never re-imported); the sorted list is [docs/facebook-review.md](docs/facebook-review.md). Still drafts:
+
+- [ ] **#1 (19 Aug 2016)**, "great turn out for the race… down Shatton Lane", 30 photos: which race? (The one photo that came across shows runners on a hillside with bare trees, so possibly Wolf's Pit.) Then publish with that headline.
+- [ ] **#32 (13 Dec 2020)**, Father Christmas tour of the village during Covid: **ask the committee.** At the time it asked people not to share it outside the village. Kept hidden as a draft.
+- [ ] **#80 (2 Jul 2024)**, Bradda Dads run four stalls at the carnival: publish or delete?
+- [ ] **Frank Cooper:** the 2025 duck race poster (in the published story "Duck race 2025: where your money goes") holds the race in honour of Frank Cooper, "one of the founding fathers of the famous Bradda Dads Duck Race". Ask the committee (and his family?) whether Our story should mention him.
+- [ ] **Krazy Kraft age groups:** the 2025 poster had 6 and under, 8 and under, 10 and under, and 11+. Not on the duck race page until this year's are confirmed.
+- [ ] The two published stories whose only photo was a screenshot of someone's personal Facebook post or comments (pensioners' lunch 2023, fun day 2024) now have no photo. Add a real one if there is one.
 
 ## Imported photos and posts
 

@@ -1,9 +1,9 @@
 ---
-title: "Hello all"
+title: "Hill Billy cycle sportive 2023: helpers wanted"
 date: 2023-05-02
-tag: "Pensioners' lunch"
+tag: "Village"
 summary: "I would like to thank all the people who have assisted me with the organisation of the Bradwell Hillbilly cycle sportive for the last few years. Especially the Bradda dads and Pre-school…"
-draft: true
+draft: false
 facebookId: "579874205526517_758263582656796"
 source: https://www.facebook.com/1680370807112731/posts/758263582656796
 ---

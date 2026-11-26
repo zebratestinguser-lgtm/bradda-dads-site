@@ -1,9 +1,9 @@
 ---
-title: "A huge thank you to everyone who helped make yesterday's Bradda Dads…"
+title: "Family fun day 2026: thank you"
 date: 2026-07-28
 tag: "Village"
 summary: "A huge thank you to everyone who helped make yesterday's Bradda Dads Family Fun Day such a fantastic success! Special thanks to Lynne and Nick at the Shoulder of Mutton for kindly providing the…"
-draft: true
+draft: false
 facebookId: "579874205526517_1568010841682062"
 source: https://www.facebook.com/reel/1730487884720081/
 ---

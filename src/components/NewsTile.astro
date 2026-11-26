@@ -1,12 +1,16 @@
 ---
 // Stand-in "image" for news stories without a photo: a coloured tile with the duck and the story's tag.
+// Stories brought in from Facebook get their own look (the duck in a speech bubble on blue, "From Facebook"),
+// so they're easy to tell apart. Deliberately not Facebook's logo, which mustn't be altered or combined.
 import DuckLogo from './DuckLogo.astro';
 
 interface Props {
   tag: string;
   size?: 'lead' | 'thumb';
+  /** The story came from the Bradda Dads Facebook page */
+  facebook?: boolean;
 }
-const { tag, size = 'thumb' } = Astro.props;
+const { tag, size = 'thumb', facebook = false } = Astro.props;
 // Each tag gets its own colour so the list stays lively
 const tones: Record<string, string> = {
   Bonfire: 'ember',
@@ -19,12 +23,20 @@ const tones: Record<string, string> = {
   Social: 'cream',
   Village: 'green',
 };
-const tone = tones[tag] ?? 'green';
+const tone = facebook ? 'facebook' : (tones[tag] ?? 'green');
 ---
 
 <div class:list={['news-tile', `news-tile--${size}`, `news-tile--${tone}`]} aria-hidden="true">
-  <DuckLogo size={size === 'lead' ? 120 : 44} />
-  {size === 'lead' && <span class="news-tile__tag">{tag}</span>}
+  {
+    facebook ? (
+      <span class="news-tile__bubble">
+        <DuckLogo size={size === 'lead' ? 96 : 36} />
+      </span>
+    ) : (
+      <DuckLogo size={size === 'lead' ? 120 : 44} />
+    )
+  }
+  {size === 'lead' && <span class="news-tile__tag">{facebook ? 'From Facebook' : tag}</span>}
 </div>
 
 <style>
@@ -56,6 +68,38 @@ const tone = tones[tag] ?? 'green';
   .news-tile--cream {
     --tile-bg: var(--yellow-panel);
     --tile-ink: var(--yellow-ink);
+  }
+  .news-tile--facebook {
+    --tile-bg: #1458bf;
+    --tile-ink: var(--white);
+  }
+  /* White speech bubble with a tail at the bottom left, holding the duck */
+  .news-tile__bubble {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 46%;
+    aspect-ratio: 1.15;
+    background: var(--white);
+    border-radius: 28%;
+    margin-bottom: 6%;
+  }
+  .news-tile__bubble::after {
+    content: '';
+    position: absolute;
+    left: 16%;
+    bottom: -14%;
+    width: 22%;
+    height: 22%;
+    background: var(--white);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+  .news-tile--lead .news-tile__bubble {
+    width: min(46%, 200px);
+  }
+  .news-tile__bubble :global(svg) {
+    width: 66%;
+    height: auto;
   }
   .news-tile__tag {
     font-family: var(--font-heading);

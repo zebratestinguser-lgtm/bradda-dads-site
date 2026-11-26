@@ -1,9 +1,9 @@
 ---
-title: "Breaking news: (albeit 1 week late), Treasurer and Secretary…"
+title: "AGM 2016: a new chair"
 date: 2016-10-24
 tag: "Village"
 summary: "Breaking news: (albeit 1 week late), Treasurer and Secretary re-elected, but dramatic last-minute stand-down of the Chair leaving a space for Darren to be thrust into the limelight. Thanks for a…"
-draft: true
+draft: false
 facebookId: "579874205526517_612372722276665"
 source: https://www.facebook.com/1680370807112731/posts/612372722276665
 ---

@@ -13,7 +13,8 @@ import { NEWS_TAGS } from '../../content.config';
 import { formatDate } from '../../lib/format';
 import { storyPhotos } from '../../lib/photos';
 
-const LATEST = 6;
+// The newest three stay open; everything else sits in its year below
+const LATEST = 3;
 const news = (await getCollection('news', (n) => !n.data.draft)).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const latest = news.slice(0, LATEST);
 const archive = news.slice(LATEST);
@@ -63,7 +64,7 @@ const href = (id: string) => url(`/news/${id}/`);
                 </a>
               ) : (
                 <div class="card__strip">
-                  <NewsTile tag={n.data.tag} />
+                  <NewsTile tag={n.data.tag} facebook={Boolean(n.data.facebookId)} />
                 </div>
               )}
               <div class="card__body">
@@ -105,7 +106,7 @@ const href = (id: string) => url(`/news/${id}/`);
                     <img class="row__thumb" src={small(n.data.image)} alt="" loading="lazy" decoding="async" width="72" height="72" />
                   ) : (
                     <div class="row__thumb">
-                      <NewsTile tag={n.data.tag} />
+                      <NewsTile tag={n.data.tag} facebook={Boolean(n.data.facebookId)} />
                     </div>
                   )}
                   <div class="row__body">

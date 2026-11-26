@@ -28,6 +28,7 @@ const pairs = [
   ['#4b5a51', '#e8f0f5', 'pill "Done"'],
   ['#ffffff', '#2f6fa3', 'white on sky news tile', true],
   ['#ffffff', '#8a3b12', 'white on ember news tile', true],
+  ['#ffffff', '#1458bf', 'white on Facebook news tile', true],
   ['#ffffff', 'rgba(16,36,26,0.85)/#5b7a5a', 'date chip over a mid-tone photo (worst case)'],
   ['#c4511a', '#ffffff', 'focus ring on white (non-text, needs 3:1)', true],
   ['#c4511a', '#cfe3ee', 'focus ring on deep water (non-text, needs 3:1)', true],

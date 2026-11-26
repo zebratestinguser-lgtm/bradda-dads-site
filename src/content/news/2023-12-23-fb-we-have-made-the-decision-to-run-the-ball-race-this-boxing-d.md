@@ -1,11 +1,11 @@
 ---
-title: "We have made the decision to run the ball race this Boxing Day…"
+title: "Boxing Day 2023: a ball race instead of the duck race"
 date: 2023-12-23
 tag: "Duck race"
 summary: "We have made the decision to run the ball race this Boxing Day instead of the duck race. We feel it wouldn’t be very health and safety conscious to stand in the brook, let alone try and catch the…"
 image: /uploads/news/facebook/2023-12-23-884243856725434-1.jpg
-imageAlt: "Photo 1 of 1 from the Facebook post of 23 December 2023"
-draft: true
+imageAlt: "The Bradda Dads duck race poster: tickets £1, raft race 10.30am, ducks away 11am, prizes of £50, £30 and £20 (23 December 2023)"
+draft: false
 facebookId: "579874205526517_884243856725434"
 source: https://www.facebook.com/1680370807112731/posts/884243856725434
 ---

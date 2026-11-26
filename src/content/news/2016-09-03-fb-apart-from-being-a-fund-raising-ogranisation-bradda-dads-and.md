@@ -1,9 +1,9 @@
 ---
-title: "Apart from being a fund-raising ogranisation, Bradda Dads (and their…"
+title: "Carnival 2016: our float won first prize"
 date: 2016-09-03
 tag: "Carnival"
 summary: "Apart from being a fund-raising ogranisation, Bradda Dads (and their families) also take part in the annual Bradwell Carnival parade - this year we won first prize for our float! Each summer, we also…"
-draft: true
+draft: false
 facebookId: "579874205526517_550616313526783"
 source: https://www.facebook.com/579874205526517/posts/586858498161421/
 ---

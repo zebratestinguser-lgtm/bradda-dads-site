@@ -1,9 +1,9 @@
 ---
-title: "Duck Race December 2016 results: Apart from a few of the ducks trying…"
+title: "Boxing Day duck race 2016 results"
 date: 2017-01-04
 tag: "Duck race"
 summary: "Duck Race December 2016 results: Apart from a few of the ducks trying to hide under the bridge, the training they had put in since summer was reflected in the fast pace of the race and the need for a…"
-draft: true
+draft: false
 facebookId: "579874205526517_654693864711217"
 source: https://www.facebook.com/1680370807112731/posts/654693864711217
 ---

@@ -1,9 +1,9 @@
 ---
-title: "Thank You Bradwell!"
+title: "Bonfire night 2025: thank you"
 date: 2025-11-02
-tag: "Duck race"
+tag: "Bonfire"
 summary: "What an incredible night! The torchlit procession, bonfire, and fireworks were absolutely fantastic. It was brilliant to see so many people come out to enjoy it together. A huge thank you to everyone…"
-draft: true
+draft: false
 facebookId: "579874205526517_1352992289850586"
 source: https://www.facebook.com/1680370807112731/posts/1352992289850586
 ---

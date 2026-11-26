@@ -32,7 +32,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
               </div>
             ) : (
               <div class="news-lead__img">
-                <NewsTile tag={lead.data.tag} size="lead" />
+                <NewsTile tag={lead.data.tag} size="lead" facebook={Boolean(lead.data.facebookId)} />
               </div>
             )}
             <div class="news-lead__body">
@@ -56,7 +56,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
                   <img class="news-item__thumb" src={small(recentPhotos[i]!.src)} alt="" width="84" height="84" loading="lazy" decoding="async" />
                 ) : (
                   <div class="news-item__thumb">
-                    <NewsTile tag={n.data.tag} />
+                    <NewsTile tag={n.data.tag} facebook={Boolean(n.data.facebookId)} />
                   </div>
                 )}
                 <div class="news-item__body">
