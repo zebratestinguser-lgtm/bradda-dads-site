@@ -9,7 +9,7 @@ import { isPlaceholder } from '../../lib/events';
 import { url } from '../../lib/url';
 
 const site = await getSite();
-const eventCount = (await getCollection('events')).length; // counted, so adding an event updates it
+const eventCount = (await getCollection('events')).filter((e) => e.data.runByUs).length; // counted, so adding an event updates it
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const facts = [
   { big: '1999', small: 'the year it all started' },
@@ -49,7 +49,7 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
           </span>
           <div class="impact__body">
             <h3 class="impact__title">Where the money goes</h3>
-            <p class="impact__text">Everything we raise goes back into the village, mostly through the events we put on for everyone. We also help local groups and projects, recently including:</p>
+            <p class="impact__text">Everything we raise goes back into the village, mostly through the events we put on for everyone. Over the years we've also helped local groups and projects, including:</p>
             <ul class="impact__list" role="list">
               {funded.map((f) => (
                 <li>{f.data.name}</li>

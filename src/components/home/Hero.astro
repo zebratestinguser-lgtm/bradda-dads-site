@@ -96,10 +96,14 @@ const deadline = event ? deadlineFor(event) : undefined;
             )}
           </ul>
           <div class="hero__actions">
-            <a class="btn btn--yellow" href={url(event.data.ctaUrl)}>
-              {event.data.ctaLabel}
-              {event.data.price && ` · ${event.data.price}`}
-            </a>
+            {deadline?.passed ? (
+              <a class="btn btn--yellow" href={url(`/events/${event.id}/`)}>More details</a>
+            ) : (
+              <a class="btn btn--yellow" href={url(event.data.ctaUrl)}>
+                {event.data.ctaLabel}
+                {event.data.price && ` · ${event.data.price}`}
+              </a>
+            )}
             <a class="btn btn--ghost-light" href={url('/events/')}>All events</a>
           </div>
         </div>
@@ -145,7 +149,7 @@ const deadline = event ? deadlineFor(event) : undefined;
                 )}
               </div>
               )}
-              {event.data.heroNote && (
+              {event.data.heroNote && !deadline?.passed && (
                 <div class="countdown__note">
                   <DuckLogo size={56} />
                   <p set:html={inlineBold(event.data.heroNote)} />

@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Band from '../../components/Band.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import AlbumCard from '../../components/AlbumCard.astro';
-import { getEvents, pickNextEvent, statusFor, formatEventDates, isOpen, isPlaceholder, deadlineFor, shortDay } from '../../lib/events';
+import { getEvents, pickNextEvent, statusFor, formatEventDates, isOpen, isPlaceholder, deadlineFor, shortDay, takingBookings } from '../../lib/events';
 import { getWolfspitYears } from '../../lib/results';
 import { getAlbums, EVENT_TAG, categorySlug } from '../../lib/albums';
 import { formatDate, formatTime } from '../../lib/format';
@@ -34,7 +34,7 @@ const news = tag
 const ctaHref = url(d.ctaUrl);
 // "How to get involved" cards; some only apply while entries are open
 const open = isOpen(event);
-const ways = d.involvement.filter((w) => !w.onlyWhenOpen || open);
+const ways = d.involvement.filter((w) => !w.onlyWhenOpen || takingBookings(event));
 // Race results for the fell race
 const isRace = event.id === 'wolfspit';
 const raceAll = isRace ? await getWolfspitYears() : [];
@@ -45,7 +45,7 @@ const duckWinners = event.id === 'duck-race' ? (await getCollection('duckWinners
 // Header photo: the event's own heroImage if set, else the latest real photo from its albums
 const photo = d.heroImage ? { src: d.heroImage, label: d.heroImageCaption } : await eventPhoto(event.id);
 // The main action shows in the header, and again in a slim bar at the bottom of phone screens
-const showCta = () => !ctaIsSelf && (d.status !== 'open' || open);
+const showCta = () => !ctaIsSelf && !deadline?.passed && (d.status !== 'open' || open);
 const ctaIsSelf = d.ctaUrl === `/events/${event.id}/`;
 // Add to calendar (only while this year's date is still to come) and the Event details Google reads
 const site = await getSite();
@@ -108,7 +108,7 @@ const jsonLd = addToCalendar
       {deadline && (
         <div class="ww__item">
           <dt>{deadline.label}</dt>
-          <dd>{deadline.passed ? `${deadline.closedText} (${shortDay(deadline.date)})` : formatDate(deadline.date)}</dd>
+          <dd>{deadline.passed ? deadline.date ? `${deadline.closedText} (${shortDay(deadline.date)})` : deadline.closedText : formatDate(deadline.date)}</dd>
         </div>
       )}
       <div class="ww__item">

@@ -37,4 +37,5 @@ export const EVENT_TAG: Record<string, string> = {
   'pensioners-lunch': "Pensioners' lunch",
   wolfspit: "Wolf's Pit",
   'christmas-card': 'Christmas card',
+  gala: 'Carnival',
 };

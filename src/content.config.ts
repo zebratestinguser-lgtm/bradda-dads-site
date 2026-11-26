@@ -69,6 +69,8 @@ const events = defineCollection({
      *  A date on its own (2027-07-11) means the whole of that day. */
     end: z.coerce.date().optional(),
     location: z.string(),
+    /** False for village events we take part in but don't run (e.g. the gala): not counted as one of "our" events */
+    runByUs: z.boolean().default(true),
     /** Google Maps link for the location */
     mapUrl: link.optional(),
     /** Other places to know about, e.g. "Tickets on sale" at the Co-op, "Hand in slips" at the Post Office */
@@ -78,6 +80,8 @@ const events = defineCollection({
     /** Deadline (UK time): last moment to enter, book or order. After it the sign-up button hides and the
      *  pill changes (e.g. "Booking open" → "Bookings closed"); the event itself keeps its own date. */
     entriesClose: z.coerce.date().optional(),
+    /** Tick to close entries/bookings now, when there's no set deadline (untick for next year) */
+    entriesClosed: z.boolean().default(false),
     /** How the deadline is worded: "Entries close" (duck race, card), "Book by" (lunch), "Orders close". */
     deadlineLabel: z.enum(['Entries close', 'Book by', 'Orders close']).default('Entries close'),
     ctaLabel: z.string(),

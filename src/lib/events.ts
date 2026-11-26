@@ -37,7 +37,7 @@ export const isMultiDay = (e: EventEntry) => {
 
 /** Is the event taking entries right now? (status "open" and the closing time, if set, hasn't passed) */
 export const isOpen = (e: EventEntry, now = new Date()) =>
-  e.data.status === 'open' && (!e.data.entriesClose || e.data.entriesClose > now);
+  e.data.status === 'open' && !e.data.entriesClosed && (!e.data.entriesClose || e.data.entriesClose > now);
 
 /** Words for each kind of deadline: the deadline line, and the pill while open / once closed */
 const DEADLINE_WORDS = {
@@ -46,14 +46,23 @@ const DEADLINE_WORDS = {
   'Orders close': { open: 'Orders open', closed: 'Orders closed' },
 } as const;
 
-/** The event's deadline, if it's this year's: { label: "Book by", date, passed, closedText } */
-export function deadlineFor(e: EventEntry, now = new Date()) {
+type Deadline = { label: EventEntry['data']['deadlineLabel']; openText: string; closedText: string } & ({ passed: false; date: Date } | { passed: true; date?: Date });
+
+/** The event's deadline, if it's this year's: { label: "Book by", date, passed, closedText }.
+ *  "Closed now" (entriesClosed) counts as passed, with no date, until the event itself is over. */
+export function deadlineFor(e: EventEntry, now = new Date()): Deadline | undefined {
+  const words = DEADLINE_WORDS[e.data.deadlineLabel];
+  const base = { label: e.data.deadlineLabel, openText: words.open, closedText: words.closed };
+  if (e.data.entriesClosed && e.data.status !== 'done' && !hasPassed(e, now)) return { ...base, passed: true, date: e.data.entriesClose };
   const date = e.data.entriesClose;
   if (!date || e.data.status !== 'open') return undefined;
   if (date.getFullYear() < now.getFullYear() && date < now) return undefined; // last year's
-  const words = DEADLINE_WORDS[e.data.deadlineLabel];
-  return { label: e.data.deadlineLabel, date, passed: date <= now, openText: words.open, closedText: words.closed };
+  return date <= now ? { ...base, passed: true, date } : { ...base, passed: false, date };
 }
+
+/** Can people still sign up / book? Upcoming events: yes unless closed; open: before the deadline; done: no. */
+export const takingBookings = (e: EventEntry, now = new Date()) =>
+  e.data.status === 'open' ? isOpen(e, now) : e.data.status === 'upcoming' && !deadlineFor(e, now)?.passed;
 
 /** "Fri 27 Nov" (UK time) */
 export const shortDay = (d: Date) => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: TZ });

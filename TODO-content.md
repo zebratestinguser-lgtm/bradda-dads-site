@@ -15,7 +15,9 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 - [ ] **Meeting day:** the site says the third Tuesday at 8:30pm; the 2018 carnival album says the third Wednesday. Confirm.
 
 - [ ] **Two map links to fix** (Peter sent them 26 Nov 2026; the site uses a Google Maps search for now): the **Memorial Hall** link opened Ye Olde Bowling Green Inn, and the **Post Office** link was the same as the duck race's (a pin by the brook at Town Bottom). Send the right ones, or paste them into the event in the editor ("Map link for where" / "Other places").
-- [ ] **Gala day** at Beggar's Plot Playing Field (map: https://maps.app.goo.gl/ZMtcbJMRNTkAsiz56): is it a Bradda Dads event? If so it needs an event page (dates, what's on).
+- [x] **Gala Day & Carnival** added as an event (/events/gala/, 26 Nov 2026): a village event Bradda Dads take part in (float every year; bar with live music in past years) but don't run (`runByUs: false`). Still need: the 2027 date, and who runs the gala (for a link).
+- [ ] **Float on the bonfire:** the site used to say every carnival float is burned on the bonfire. Peter says it happened maybe once (the skull float?). Removed for now; confirm the year if it's worth a mention.
+- [ ] **Pensioners' lunch bookings** were marked closed on 26 Nov 2026 (editor: tick "Closed now"). **Untick it next year** when bookings open, or set a "Deadline" date instead.
 - [ ] **Wolf's Pit** map link for the start (Shatton), if wanted.
 
 ## Site settings: `src/data/site.yaml`

@@ -25,7 +25,7 @@ const dl = deadlineFor(e, now);
 const upcomingDate = e.data.start && (e.data.end ?? e.data.start) >= new Date(now.getTime() - 864e5) ? formatEventDates(e) : undefined;
 const dateText = upcomingDate ?? e.data.when;
 // A sign-up button (status "open") hides once its deadline has gone
-let showCta = !(e.data.status === 'open' && (closed || dl?.passed));
+let showCta = !(dl?.passed || (e.data.status === 'open' && closed));
 let cta = { label: e.data.ctaLabel, href: ctaHref };
 // Finished for this year: point at the newest story about it (written in the last 3 months), or its photos
 if (closed && e.data.status !== 'open') {
@@ -65,7 +65,7 @@ if (closed && e.data.status !== 'open') {
     <span>{dateText}</span>
   </p>
   {
-    dl && !closed && (
+    dl && !closed && !(dl.passed && tag.label === dl.closedText) && (
       <p class:list={['event-card__deadline', { 'is-passed': dl.passed }]}>
         {dl.passed ? dl.closedText : <>{dl.label} <strong>{shortDay(dl.date)}</strong></>}
       </p>

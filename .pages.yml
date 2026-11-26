@@ -233,6 +233,11 @@ content:
         type: date
         options:
           time: true
+      - name: entriesClosed
+        label: Closed now (no more entries or bookings)
+        description: Tick when bookings or entries have closed and there's no deadline date set. The sign-up buttons hide and it shows e.g. "Bookings closed". Untick it for next year.
+        type: boolean
+        default: false
       - name: deadlineLabel
         label: Deadline wording
         description: How the deadline is shown, e.g. "Book by Fri 27 Nov".
@@ -244,6 +249,11 @@ content:
         label: Where
         type: string
         required: true
+      - name: runByUs
+        label: Run by Bradda Dads
+        description: Untick for village events we take part in but don't run (like the gala).
+        type: boolean
+        default: true
       - name: mapUrl
         label: Map link for where (Google Maps)
         type: string
