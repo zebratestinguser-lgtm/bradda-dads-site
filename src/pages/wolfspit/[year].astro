@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 const { year, all } = Astro.props;
 ---
 
-<BaseLayout title={`Wolf's Pit Fell Race ${year.year} results`} description={`Full results of the ${year.year} Wolf's Pit Fell Race: ${year.finishers} finishers.`}>
+<BaseLayout title={`Wolf's Pit Fell Race ${year.year} results`} description={`Full results of the ${year.year} Wolf's Pit Fell Race at Shatton, near Bamford: ${year.finishers} finishers, with the podium, a runner search and a CSV download.`}>
   <PageHeader eyebrow="Race results" title={`Wolf's Pit ${year.year}`}>
     <a class="back" href={url('/wolfspit/')}>About the race, and every year →</a>
   </PageHeader>

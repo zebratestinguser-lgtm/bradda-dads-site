@@ -1,4 +1,5 @@
 ---
+import { getPublishedMembers } from '../lib/members';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
@@ -12,6 +13,7 @@ const site = await getSite();
 const events = await getEvents();
 const hasEmail = !site.contactEmail.startsWith('[');
 const header = await photoMatching(/dads in yellow t-shirts and hi-vis at the brook/i, /dads in yellow t-shirts/i);
+const hasMembers = (await getPublishedMembers()).length > 0;
 ---
 
 <BaseLayout title="Get involved" description={site.joinText} ogImage={header?.src} ogImageAlt={header?.alt}>
@@ -20,7 +22,7 @@ const header = await photoMatching(/dads in yellow t-shirts and hi-vis at the br
   <Band first><section class="container page-section grid">
     <div class="card card--green">
       <h2 class="subhead">Come to a meeting</h2>
-      <p>We meet {site.meetingInfo}. Just turn up, or message us first if you'd like someone to look out for you. <a class="on-green" href={url('/members/')}>Meet the dads</a> first if you like.</p>
+      <p>We meet {site.meetingInfo}. Just turn up, or message us first if you'd like someone to look out for you.{hasMembers && <> <a class="on-green" href={url('/members/')}>Meet the dads</a> first if you like.</>}</p>
       <div class="actions">
         <a class="btn btn--yellow btn--md" href={site.facebookUrl} rel="noopener">Message us on Facebook</a>
         {hasEmail && <a class="btn btn--ghost-light btn--md" href={`mailto:${site.contactEmail}`}>Email us</a>}

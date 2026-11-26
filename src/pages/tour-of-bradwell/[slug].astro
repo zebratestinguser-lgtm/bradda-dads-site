@@ -17,7 +17,7 @@ const name = RACES[year.race as keyof typeof RACES];
 const slug = tourSlug(year.race, year.year);
 ---
 
-<BaseLayout title={`${name} ${year.year} results`} description={`Full results of the ${name} ${year.year}: ${year.finishers} finishers.`}>
+<BaseLayout title={`${name} ${year.year} results`} description={`Full results of the ${name} ${year.year}, a fell running and challenge event around Bradwell: ${year.finishers} finishers, with search and a CSV download.`}>
   <PageHeader eyebrow="Race results" title={`${name} ${year.year}`}>
     <a class="back" href={url('/tour-of-bradwell/')}>All Tour of Bradwell results →</a>
   </PageHeader>

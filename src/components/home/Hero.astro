@@ -140,7 +140,7 @@ const deadline = event ? deadlineFor(event) : undefined;
                   </>
                 ) : (
                   <div class="countdown__cell countdown__cell--wide">
-                    <span class="countdown__tbc">Start time to be confirmed</span>
+                    <span class="countdown__tbc">{shortDay(start)}</span>
                   </div>
                 )}
               </div>
@@ -356,11 +356,13 @@ const deadline = event ? deadlineFor(event) : undefined;
     color: var(--muted);
     margin-top: 6px;
   }
+  /* The day itself when the start time isn't known yet, e.g. "Fri 4 Dec" */
   .countdown__tbc {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--muted-strong);
-    line-height: 1.3;
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
   }
   .countdown__live {
     display: flex;
@@ -465,7 +467,7 @@ const deadline = event ? deadlineFor(event) : undefined;
       font-size: 30px;
     }
     .countdown__tbc {
-      font-size: 13px;
+      font-size: 18px;
     }
     .countdown__note {
       gap: 12px;

@@ -8,13 +8,19 @@ import { url } from '../lib/url';
 
 const site = await getSite();
 const hasAccounts = Boolean(site.accountsUrl) && site.accountsUrl !== '#' && !isPlaceholder(site.accountsUrl);
+// Without our own accounts page, link to the CIC's filed accounts on Companies House
+const accountsHref = hasAccounts
+  ? url(site.accountsUrl)
+  : !isPlaceholder(site.cicNumber)
+    ? `https://find-and-update.company-information.service.gov.uk/company/${site.cicNumber}/filing-history`
+    : undefined;
 const links = [
   { label: 'Contact us', href: url('/contact/') },
   { label: 'Facebook', href: site.facebookUrl },
   { label: 'Privacy', href: url('/privacy/') },
   { label: 'Accessibility', href: url('/accessibility/') },
   { label: 'Play Duck Dash', href: url('/game/') },
-  ...(hasAccounts ? [{ label: 'Annual accounts', href: url(site.accountsUrl) }] : []),
+  ...(accountsHref ? [{ label: 'Annual accounts', href: accountsHref }] : []),
 ];
 ---
 

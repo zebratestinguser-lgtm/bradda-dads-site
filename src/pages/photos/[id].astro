@@ -25,7 +25,7 @@ const cat = album.data.category;
 ---
 
 <BaseLayout
-  title={album.data.title}
+  title={`${album.data.title}: photos`}
   description={`${photos.length} photos from ${album.data.title}, taken ${when}.`}
   ogImage={album.data.cover ?? photos[0]?.src}
 >

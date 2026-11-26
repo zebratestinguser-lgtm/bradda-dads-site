@@ -28,7 +28,7 @@ for (const n of archive) {
 const href = (id: string) => url(`/news/${id}/`);
 ---
 
-<BaseLayout title="News" description={`News from Bradda Dads, Bradwell: ${news.length} stories going back to 2001.`}>
+<BaseLayout title="News" description={`News from Bradda Dads in Bradwell, Derbyshire: events, race results and village news, with ${news.length} stories going back to 2001.`}>
   <PageHeader eyebrow="News" title="News from the Dads" intro={`The latest from Bradda Dads, and an archive of ${news.length} stories going back to the first pensioners' lunch in 2001.`}>
     <form class="news-search" action={url('/search/')} method="get" role="search">
       <label for="news-q" class="news-search__label">Search the news and photos</label>

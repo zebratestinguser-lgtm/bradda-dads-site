@@ -57,7 +57,7 @@ const jsonLd = addToCalendar
   : undefined;
 ---
 
-<BaseLayout title={d.name} description={d.summary} ogImage={photo?.src} ogImageAlt={d.heroImage ? d.heroImageAlt : photo && 'alt' in photo ? photo.alt : undefined}>
+<BaseLayout title={d.name} description={`${d.summary} ${formatEventDates(event, true) ?? d.when}${isPlaceholder(d.location) ? "" : `, ${d.location}`}.`} ogImage={photo?.src} ogImageAlt={d.heroImage ? d.heroImageAlt : photo && 'alt' in photo ? photo.alt : undefined}>
   {jsonLd && <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   <PageHeader eyebrow={status} title={d.name} intro={d.summary} image={photo?.src} imageLabel={photo?.label}>
     <a class="back" href={url('/events/')}>← All events</a>

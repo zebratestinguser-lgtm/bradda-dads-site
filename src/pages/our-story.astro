@@ -1,4 +1,5 @@
 ---
+import { getPublishedMembers } from '../lib/members';
 import { url } from '../lib/url';
 import Img from '../components/Img.astro';
 // Our story: introduction, then a timeline running down the page with a duck on each year and a photo
@@ -34,6 +35,7 @@ const photos: (PickedPhoto | { src: string; alt: string; label?: string } | unde
     t.data.image ? { src: t.data.image, alt: t.data.imageAlt ?? '' } : yearPhoto(t.data.year.slice(0, 4), hintsFor(t.data.title)),
   ),
 );
+const hasMembers = (await getPublishedMembers()).length > 0;
 ---
 
 <BaseLayout ogImage={site.storyImage} ogImageAlt={site.storyImageAlt} title="Our story" description="How Bradda Dads started with a Boxing Day duck race in 1999, and what the group has done for Bradwell since.">
@@ -90,7 +92,7 @@ const photos: (PickedPhoto | { src: string; alt: string; label?: string } | unde
         {undated.length === 0 && <h2 class="subhead" id="more-title">Help us fill the gaps</h2>}
       </div>
       <p class="note more__note">
-        Much of this history comes from the old Bradda Dads websites. If you remember something differently, or have old photos, <a href={url('/contact/')}>please get in touch</a>. You can also <a href={url('/members/')}>meet today's dads</a> or <a href={url('/photos/')}>browse every photo album</a>.
+        Much of this history comes from the old Bradda Dads websites. If you remember something differently, or have old photos, <a href={url('/contact/')}>please get in touch</a>. You can also {hasMembers && <><a href={url('/members/')}>meet today's dads</a> or </>}<a href={url('/photos/')}>browse every photo album</a>.
       </p>
     </section>
   </Band>

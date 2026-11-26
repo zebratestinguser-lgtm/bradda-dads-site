@@ -7,12 +7,15 @@
 import DuckLogo from './DuckLogo.astro';
 import { getSite } from '../lib/site';
 import { getEvents } from '../lib/events';
+import { getPublishedMembers } from '../lib/members';
 import { url } from '../lib/url';
 
 const site = await getSite();
 const current = Astro.url.pathname;
 const home = url('/');
 const events = await getEvents();
+// "Meet the dads" only appears once at least one dad has agreed to a profile
+const hasMembers = (await getPublishedMembers()).length > 0;
 
 type Link = { label: string; href: string; also?: string[]; icon?: boolean };
 type Item = Link & { children?: Link[]; cta?: boolean };
@@ -44,7 +47,7 @@ const nav: Item[] = [
     also: [url('/members/'), url('/where-the-money-goes/'), url('/supporters/')],
     children: [
       { label: 'Our story', href: url('/our-story/') },
-      { label: 'Meet the dads', href: url('/members/') },
+      ...(hasMembers ? [{ label: 'Meet the dads', href: url('/members/') }] : []),
       { label: 'Where the money goes', href: url('/where-the-money-goes/') },
       { label: 'Our supporters', href: url('/supporters/') },
     ],

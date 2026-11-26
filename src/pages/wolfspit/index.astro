@@ -19,7 +19,7 @@ const listYears = (ys: number[]) => (ys.length > 1 ? `${ys.slice(0, -1).join(', 
 const everyone = years.flatMap((y) => y.rows.map((r) => [y.year, r.position, r.name, r.club, r.time]));
 ---
 
-<BaseLayout title="Wolf's Pit Fell Race" description={`The Wolf's Pit Fell Race: a 9 km fell race from Shatton, near Bamford. Results from ${years.length} years since ${first}, and a search across all years.`}>
+<BaseLayout title="Wolf's Pit Fell Race results" description={`The Wolf's Pit Fell Race: a 9 km fell race from Shatton, near Bamford. Results from ${years.length} years since ${first}, and a search across all years.`}>
   <PageHeader eyebrow="Fell race" title="Wolf's Pit Fell Race" intro={site.wolfspitIntro}>
     <div class="actions">
       {site.wolfspitEntryUrl !== '#' && <a class="btn btn--yellow btn--md" href={url(site.wolfspitEntryUrl)}>Enter {latest ? latest.year + 1 : ''}</a>}
