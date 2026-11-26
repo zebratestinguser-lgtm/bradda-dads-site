@@ -331,11 +331,84 @@ a:hover {
   border-color: var(--green);
   color: var(--white);
 }
+/* Topic buttons in their category's colour */
+.chip[class*='cat-'] {
+  background: var(--cat-tint);
+  border-color: var(--cat-tint);
+  color: var(--cat-tint-ink);
+}
+.chip[class*='cat-']:hover {
+  border-color: var(--cat-strong);
+}
+.chip[class*='cat-'][aria-pressed='true'] {
+  background: var(--cat-strong);
+  border-color: var(--cat-strong);
+  color: var(--cat-ink);
+}
+
+
+/* Category colours (src/content/categories, editor "Categories" → Colour). Chosen to sit with the site's
+   greens, water blues, cream and orange; every text pair passes WCAG AA (scripts/qa/contrast.mjs).
+   strong = duck tiles and the selected filter button; tint = topic labels and unselected buttons. */
+.cat-green {
+  --cat-strong: #1d3b2c;
+  --cat-ink: #ffffff;
+  --cat-tint: #e4ece3;
+  --cat-tint-ink: #1d3b2c;
+}
+.cat-moss {
+  --cat-strong: #4d6b35;
+  --cat-ink: #ffffff;
+  --cat-tint: #e8efdd;
+  --cat-tint-ink: #35501f;
+}
+.cat-teal {
+  --cat-strong: #24705f;
+  --cat-ink: #ffffff;
+  --cat-tint: #dcefe9;
+  --cat-tint-ink: #17503f;
+}
+.cat-brook {
+  --cat-strong: #2f6a8a;
+  --cat-ink: #ffffff;
+  --cat-tint: #d9e9f2;
+  --cat-tint-ink: #1e4d66;
+}
+.cat-heather {
+  --cat-strong: #6b4f80;
+  --cat-ink: #ffffff;
+  --cat-tint: #ece4f2;
+  --cat-tint-ink: #4f3863;
+}
+.cat-berry {
+  --cat-strong: #9b3a48;
+  --cat-ink: #ffffff;
+  --cat-tint: #f5e0e3;
+  --cat-tint-ink: #7a2836;
+}
+.cat-orange {
+  --cat-strong: #c4511a;
+  --cat-ink: #ffffff;
+  --cat-tint: #fbe3d2;
+  --cat-tint-ink: #8a3b12;
+}
+.cat-stone {
+  --cat-strong: #66716b;
+  --cat-ink: #ffffff;
+  --cat-tint: #e9edeb;
+  --cat-tint-ink: #3d4641;
+}
+.cat-cream {
+  --cat-strong: #f3d98f;
+  --cat-ink: #6b4b00;
+  --cat-tint: #fbe9b7;
+  --cat-tint-ink: #6b4b00;
+}
 
 .tag {
   display: inline-block;
-  background: var(--yellow-panel);
-  color: var(--yellow-ink);
+  background: var(--cat-tint, var(--yellow-panel));
+  color: var(--cat-tint-ink, var(--yellow-ink));
   font-size: 13px;
   font-weight: 600;
   padding: 4px 10px;

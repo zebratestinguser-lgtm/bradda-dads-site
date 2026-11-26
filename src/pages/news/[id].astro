@@ -1,4 +1,6 @@
 ---
+import { categoryClasses } from '../../lib/categories';
+const cat = await categoryClasses(); // category colours for labels
 import { getCategory } from '../../lib/categories';
 import { url } from '../../lib/url';
 import Img from '../../components/Img.astro';
@@ -52,7 +54,7 @@ const relatedHeading = (await getCategory(story.data.tag))?.data.moreHeading || 
       <div class="container story__header-inner">
         <a class="story__back" href={url('/news/')}>← All news</a>
         <p class="story__meta">
-          <span class="tag">{story.data.tag}</span>
+          <span class:list={['tag', cat(story.data.tag)]}>{story.data.tag}</span>
           <time datetime={story.data.date.toISOString().slice(0, 10)}>Posted {formatDate(story.data.date)}</time>
         </p>
         <h1 class="story__title">{story.data.title}</h1>

@@ -1,4 +1,6 @@
 ---
+import { categoryClasses } from '../../lib/categories';
+const cat = await categoryClasses(); // category colours for labels
 import { getWording } from '../../lib/wording';
 const w = await getWording('home'); // Page wording form
 import { url, small } from '../../lib/url';
@@ -39,7 +41,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
             )}
             <div class="news-lead__body">
               <div class="news-lead__meta">
-                <span class="tag">{lead.data.tag}</span>
+                <span class:list={['tag', cat(lead.data.tag)]}>{lead.data.tag}</span>
                 <time datetime={lead.data.date.toISOString()}>Posted {formatDate(lead.data.date)}</time>
               </div>
               <h3 class="news-lead__title">
@@ -63,7 +65,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
                 )}
                 <div class="news-item__body">
                   <p class="news-item__meta">
-                    <span class="news-item__tag">{n.data.tag}</span> ·{' '}
+                    <span class:list={['news-item__tag', cat(n.data.tag)]}>{n.data.tag}</span> ·{' '}
                     <time datetime={n.data.date.toISOString()}>{formatShortDate(n.data.date)}</time>
                   </p>
                   <h3 class="news-item__title">
@@ -207,7 +209,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
   }
   .news-item__tag {
     font-weight: 600;
-    color: var(--green);
+    color: var(--cat-tint-ink, var(--green));
   }
   .news-item__title a {
     display: block;

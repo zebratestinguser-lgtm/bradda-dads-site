@@ -1,4 +1,6 @@
 ---
+import { categoryClasses } from '../../lib/categories';
+const cat = await categoryClasses(); // category colours for labels
 import { getWording } from '../../lib/wording';
 const w = await getWording('news'); // Page wording form
 import { url, small } from '../../lib/url';
@@ -50,7 +52,7 @@ const href = (id: string) => url(`/news/${id}/`);
       <p class="filters__label" id="tag-filter-label">Show:</p>
       <ul class="chips chips--scroll" role="list" aria-labelledby="tag-filter-label" data-filters>
         <li><button type="button" class="chip" aria-pressed="true" data-tag="">All</button></li>
-        {tags.map((t) => <li><button type="button" class="chip" aria-pressed="false" data-tag={t}>{t}</button></li>)}
+        {tags.map((t) => <li><button type="button" class:list={['chip', cat(t)]} aria-pressed="false" data-tag={t}>{t}</button></li>)}
       </ul>
       <p class="visually-hidden" aria-live="polite" data-filter-status></p>
     </div>
@@ -73,7 +75,7 @@ const href = (id: string) => url(`/news/${id}/`);
               )}
               <div class="card__body">
                 <p class="meta">
-                  <span class="tag">{n.data.tag}</span>
+                  <span class:list={['tag', cat(n.data.tag)]}>{n.data.tag}</span>
                   <time datetime={n.data.date.toISOString().slice(0, 10)}>Posted {formatDate(n.data.date)}</time>
                 </p>
                 <h3 class="card__title">
@@ -115,7 +117,7 @@ const href = (id: string) => url(`/news/${id}/`);
                   )}
                   <div class="row__body">
                     <p class="meta">
-                      <span class="tag">{n.data.tag}</span>
+                      <span class:list={['tag', cat(n.data.tag)]}>{n.data.tag}</span>
                       <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
                     </p>
                     <h3 class="row__title">

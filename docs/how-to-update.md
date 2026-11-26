@@ -71,7 +71,7 @@ If an event stops for good, set its **Status** to "done" rather than deleting it
 
 - **Add one** whenever a new kind of event or story needs it. Then pick it in stories, albums and the event.
 - **Don't rename one** that stories already use: their old name stays on them. Add the new name, change the stories over, then delete the old one.
-- **Position** sets the order; **Tile colour** (green, orange, water or cream) colours the duck tile on stories without a photo.
+- **Position** sets the order. **Colour** is the category's colour everywhere: its topic labels, its button on the News page and the duck tile on stories without a photo. There are nine (green, moss, teal, brook, heather, berry, orange, stone, cream), all chosen to suit the site and to be easy to read; give each category its own.
 
 ## Page wording (headings, introductions and paragraphs)
 

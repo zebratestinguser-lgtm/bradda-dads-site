@@ -261,7 +261,7 @@ const categories = defineCollection({
     /** Heading over related stories, e.g. "More about the bonfire" */
     moreHeading: z.string().optional(),
     /** Colour of the duck tile on stories without a photo */
-    colour: z.enum(['green', 'orange', 'water', 'cream']).default('green'),
+    colour: z.enum(['green', 'moss', 'teal', 'brook', 'heather', 'berry', 'orange', 'stone', 'cream']).default('green'),
   }),
 });
 

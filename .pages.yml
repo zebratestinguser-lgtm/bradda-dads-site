@@ -54,12 +54,12 @@ content:
         description: Heading over related stories at the end of a news story, e.g. "More about the bonfire".
         type: string
       - name: colour
-        label: Tile colour
-        description: "Colour of the duck tile shown on stories that have no photo: green (dark green), orange, water (pale brook blue) or cream."
+        label: Colour
+        description: "The category's colour: its topic labels, its button on the News page and the duck tile on stories with no photo. Give each category its own."
         type: select
         default: green
         options:
-          values: [green, orange, water, cream]
+          values: [green, moss, teal, brook, heather, berry, orange, stone, cream]
 
   - name: news
     label: News

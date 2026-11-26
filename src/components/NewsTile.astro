@@ -12,11 +12,11 @@ interface Props {
   facebook?: boolean;
 }
 const { tag, size = 'thumb', facebook = false } = Astro.props;
-// Each category has its own colour (set in the editor: Categories → Tile colour) so the list stays lively
-const tone = facebook ? 'facebook' : ((await getCategory(tag))?.data.colour ?? 'green');
+// Each category has its own colour (editor: Categories → Colour), the same as its labels and News button
+const look = facebook ? 'news-tile--facebook' : `cat-${(await getCategory(tag))?.data.colour ?? 'green'}`;
 ---
 
-<div class:list={['news-tile', `news-tile--${size}`, `news-tile--${tone}`]} aria-hidden="true">
+<div class:list={['news-tile', `news-tile--${size}`, look]} aria-hidden="true">
   {
     facebook ? (
       <span class="news-tile__bubble">
@@ -40,27 +40,11 @@ const tone = facebook ? 'facebook' : ((await getCategory(tag))?.data.colour ?? '
     align-items: center;
     justify-content: center;
     gap: 12px;
-    background-color: var(--tile-bg);
+    /* the category's colours (cat-… classes in global.css); green if the category isn't in the list */
+    background-color: var(--tile-bg, var(--cat-strong, var(--green)));
     background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12) 0 18%, transparent 19%),
       radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.08) 0 26%, transparent 27%);
-    color: var(--tile-ink);
-  }
-  .news-tile--green {
-    --tile-bg: var(--green);
-    --tile-ink: var(--white);
-  }
-  /* Tile colours come from the site palette (src/styles/tokens.css); each category picks one in the editor */
-  .news-tile--orange {
-    --tile-bg: var(--orange);
-    --tile-ink: var(--green);
-  }
-  .news-tile--water {
-    --tile-bg: var(--water-deep);
-    --tile-ink: var(--green);
-  }
-  .news-tile--cream {
-    --tile-bg: var(--yellow-panel);
-    --tile-ink: var(--yellow-ink);
+    color: var(--tile-ink, var(--cat-ink, var(--white)));
   }
   .news-tile--facebook {
     --tile-bg: #1458bf;

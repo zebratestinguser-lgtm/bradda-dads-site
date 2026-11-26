@@ -13,6 +13,12 @@ export async function categoryNames() {
   return (await getCategories()).map((c) => c.data.name);
 }
 
+/** CSS class with a category's colours (cat-green, cat-heather…; defined in global.css). Unknown names get none. */
+export async function categoryClasses() {
+  const map = new Map((await getCategories()).map((c) => [c.data.name, `cat-${c.data.colour}`]));
+  return (name: string | undefined) => (name ? (map.get(name) ?? '') : '');
+}
+
 /** The settings for one category (undefined if a story uses a name that isn't in the list) */
 export async function getCategory(name: string | undefined) {
   if (!name) return undefined;
