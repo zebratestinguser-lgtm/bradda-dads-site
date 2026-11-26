@@ -83,7 +83,7 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
       {
         gallery.length > 0 && (
           <section class="story__gallery" aria-label="More photos">
-            <PhotoGrid photos={gallery} title={story.data.title} when={when ? `Photo ${when}` : ''} />
+            <PhotoGrid photos={gallery} title={story.data.title} when={when ? `Photo ${when}` : ''} collapseAfter={12} />
           </section>
         )
       }

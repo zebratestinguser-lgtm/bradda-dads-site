@@ -57,13 +57,13 @@ jobs:
       # another deploy.) If the push fails, nothing is lost: the next build imports them again.
       - name: Save Facebook drafts
         run: |
-          git add -A src/content/news
+          git add -A src/content/news src/content/albums
           if [ -f src/data/facebook-seen.json ]; then git add src/data/facebook-seen.json; fi
           if [ -d public/uploads/news/facebook ]; then git add -A public/uploads/news/facebook; fi
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "Add new Facebook posts as draft news stories"
+            git commit -m "Facebook posts: new drafts, photos and albums"
             git push || echo "Couldn't save the Facebook drafts (a newer change arrived); the next build will retry."
           fi
       - uses: actions/upload-pages-artifact@v5

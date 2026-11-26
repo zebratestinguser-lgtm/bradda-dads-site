@@ -123,3 +123,5 @@ To publish one:
 Not everything needs to be on the website: quick reminders ("1 hour to go!") and reposts can simply be **deleted**. A deleted draft never comes back, and its photos are tidied away automatically.
 
 Things to watch for: children's names (never publish them), private details such as phone numbers, and photos someone might not want kept online.
+
+**Photos from Facebook:** when you publish a Facebook story with three or more photos, the next update also turns its photos into an album on the Photos page (with the story's topic and date), and the story shows a "See all photos" strip. You can then rename the album or describe the photos under **Photo albums** in the editor.

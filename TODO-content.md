@@ -17,7 +17,7 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 - [x] **Gala Day & Carnival** added as an event (/events/gala/, 26 Nov 2026): a village event Bradda Dads take part in (float every year; bar with live music in past years) but don't run (`runByUs: false`). Still need: the 2027 date, and who runs the gala (for a link).
 - [ ] **Float on the bonfire:** the site used to say every carnival float is burned on the bonfire. Peter says it happened maybe once (the skull float?). Removed for now; confirm the year if it's worth a mention.
 - [ ] **Pensioners' lunch bookings** were marked closed on 26 Nov 2026 (editor: tick "Closed now"). **Untick it next year** when bookings open, or set a "Deadline" date instead.
-- [ ] **Wolf's Pit** map link for the start (Shatton), if wanted.
+- [x] Wolf's Pit start/finish map link added (26 Nov 2026).
 
 ## Site settings: `src/data/site.yaml`
 
