@@ -48,6 +48,10 @@ jobs:
           key: thumbs-${{ github.run_id }}
           restore-keys: thumbs-
       - run: npm run build
+        env:
+          # Latest Facebook posts (scripts/fetch-facebook.mjs); without these the site just skips them
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/

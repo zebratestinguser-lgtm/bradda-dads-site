@@ -1,0 +1,119 @@
+---
+// "Latest on Facebook": the newest posts from the Bradda Dads Facebook page (see src/lib/facebook.ts).
+// Shows nothing until there are posts. Photos are copies saved at build time, so visitors never load
+// anything from Facebook.
+import Img from './Img.astro';
+import { getFacebookPosts } from '../lib/facebook';
+import { getSite } from '../lib/site';
+import { formatDate } from '../lib/format';
+
+interface Props {
+  headingLevel?: 'h2' | 'h3';
+}
+const { headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+const posts = await getFacebookPosts();
+const site = await getSite();
+---
+
+{
+  posts.length > 0 && (
+    <section class="fb" aria-labelledby="fb-title">
+      <div class="fb__head">
+        <Heading class="subhead" id="fb-title">Latest on Facebook</Heading>
+        <a class="link-arrow" href={site.facebookUrl} rel="noopener">Follow us on Facebook →</a>
+      </div>
+      <ul class="fb__list" role="list">
+        {posts.map((p) => (
+          <li class="fb__post">
+            {p.image && (
+              <div class="fb__media">
+                <Img kind="grid" src={p.image} sizes="(max-width: 600px) 100vw, 380px" alt={p.imageAlt ?? ''} loading="lazy" decoding="async" />
+              </div>
+            )}
+            <div class="fb__body">
+              {p.date ? <time datetime={p.date.toISOString()}>Posted {formatDate(p.date)}</time> : p.dateText && <p class="fb__date">{p.dateText}</p>}
+              <p class="fb__text">{p.text}</p>
+              <a class="fb__link" href={p.url} rel="noopener">
+                Read on Facebook<span class="visually-hidden"> (post from {p.date ? formatDate(p.date) : p.dateText})</span> →
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .fb {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .fb__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 20px;
+  }
+  .fb__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 18px;
+  }
+  .fb__post {
+    display: flex;
+    flex-direction: column;
+    background: var(--panel, var(--white));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .fb__media {
+    aspect-ratio: 4 / 3;
+    background: var(--surface);
+  }
+  .fb__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .fb__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 20px 20px;
+    flex: 1;
+  }
+  .fb__body time,
+  .fb__date {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .fb__text {
+    margin: 0;
+    white-space: pre-line;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--text);
+  }
+  .fb__link {
+    margin-top: auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    color: var(--green);
+  }
+</style>

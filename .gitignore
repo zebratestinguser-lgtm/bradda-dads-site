@@ -5,6 +5,10 @@ dist/
 # generated photo previews (scripts/make-thumbs.mjs)
 public/uploads/thumbs/
 
+# Facebook posts fetched at build time (scripts/fetch-facebook.mjs)
+src/data/facebook.json
+public/uploads/facebook/
+
 # dependencies
 node_modules/
 

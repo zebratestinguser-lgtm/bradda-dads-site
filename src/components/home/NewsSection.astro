@@ -1,5 +1,6 @@
 ---
 import { url, small } from '../../lib/url';
+import FacebookPosts from '../FacebookPosts.astro';
 import Img from '../Img.astro';
 import { getCollection } from 'astro:content';
 import NewsTile from '../NewsTile.astro';
@@ -71,6 +72,7 @@ const [leadPhoto, ...recentPhotos] = await storyPhotos(lead ? [lead, ...recent] 
             ))}
           </div>
         </div>
+        <FacebookPosts headingLevel="h3" />
       </div>
     </section>
   )
