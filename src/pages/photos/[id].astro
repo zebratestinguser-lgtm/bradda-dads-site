@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import PhotoGrid from '../../components/PhotoGrid.astro';
 import Lightbox from '../../components/Lightbox.astro';
+import ComingUp from '../../components/ComingUp.astro';
 import { getAlbums, photoDate, categorySlug } from '../../lib/albums';
 import { url } from '../../lib/url';
 
@@ -54,6 +55,8 @@ const cat = album.data.category;
         From the old Bradda Dads website: <a href={album.data.source}>view the original</a>.
       </p>
     )}
+
+    <ComingUp topic={cat} />
 
     <nav class="album-nav" aria-label="More albums">
       {newer ? <a href={url(`/photos/${newer.id}/`)}>← Newer: {newer.data.title} ({photoDate(newer)})</a> : <span />}

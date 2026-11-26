@@ -103,3 +103,8 @@ Open **Meet the dads**. Only add someone **once they've agreed** to appear on th
 - **Nothing changed after 5 minutes:** something in the entry wasn't accepted, often a missing required box such as a photo description, or a results file in the wrong format. The website stays as it was, so nothing breaks. Check the entry, or ask Peter.
 - **Made a mistake:** just edit it again and save. Every change is recorded, so anything can be undone. Ask Peter if you need an old version back.
 - **Deleting:** please ask Peter before deleting anything.
+
+## Asking for support and duck race winners
+
+- **Asking for support (groups)** in the editor holds the "Does your group need support?" wording on the Where the money goes page. Fill in the committee's rules (who can ask, typical amounts, how and when requests are decided) and delete the `[PLACEHOLDER]` line.
+- When you add a race in **Duck race winners**, the homepage shows "The winners are in!" for two weeks after the race date, then hides it by itself.

@@ -5,6 +5,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrookEdge from '../../components/BrookEdge.astro';
 import Band from '../../components/Band.astro';
+import ComingUp from '../../components/ComingUp.astro';
 import { storyPhoto, storyPhotos } from '../../lib/photos';
 import { photoDate } from '../../lib/albums';
 import { formatDate, formatShortDate } from '../../lib/format';
@@ -99,6 +100,8 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
           </section>
         )
       }
+
+      <ComingUp topic={story.data.tag} />
 
       <nav class="story__nav" aria-label="More stories">
         {newer ? <a href={url(`/news/${newer.id}/`)}>← Newer: {newer.data.title}</a> : <span />}

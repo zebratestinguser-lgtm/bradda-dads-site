@@ -660,6 +660,33 @@ content:
         type: string
         hidden: true
 
+  # ───────────────────────── Asking for support ─────────────────────────
+  - name: support
+    label: Asking for support (groups)
+    type: file
+    path: src/content/pages/support.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Heading
+        type: string
+        required: true
+      - name: intro
+        label: Introduction
+        type: string
+      - name: updated
+        label: Last checked (date)
+        type: date
+        hidden: true
+        options:
+          format: yyyy-MM-dd
+      - name: body
+        label: What to tell us, and our rules
+        description: Shown on the "Where the money goes" page, with an Email us / Get in touch button underneath.
+        type: rich-text
+        options:
+          format: markdown
+
   # ───────────────────────── Privacy notice ─────────────────────────
   - name: privacy
     label: Privacy notice

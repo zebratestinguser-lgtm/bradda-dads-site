@@ -1,7 +1,7 @@
 ---
 // Where the money goes: the projects first (what the village got), then how it works, then the map.
 // The totals in the header appear by themselves once totalRaised / groupsHelped are filled in (site.yaml).
-import { getCollection, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Band from '../components/Band.astro';
 import PageHeader from '../components/PageHeader.astro';
@@ -12,6 +12,10 @@ import { isPlaceholder } from '../lib/events';
 import { url } from '../lib/url';
 
 const site = await getSite();
+// "Does your group need support?" (wording editable in Pages CMS: src/content/pages/support.md)
+const support = await getEntry('pages', 'support');
+const SupportText = support ? (await render(support)).Content : null;
+const hasEmail = !isPlaceholder(site.contactEmail);
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const items = await Promise.all(funded.map(async (f) => ({ f, Content: (await render(f)).Content })));
 const stats = [
@@ -69,7 +73,31 @@ const stats = [
     </section>
   </Band>
 
-  <Band tone="mist">
+  {
+    support && SupportText && (
+      <Band tone="mist">
+        <section class="container page-section ask" aria-labelledby="ask-title">
+          <h2 class="subhead" id="ask-title">{support.data.title}</h2>
+          {support.data.intro && <p class="ask__intro">{support.data.intro}</p>}
+          <div class="prose">
+            <SupportText />
+          </div>
+          <div class="ask__actions">
+            {hasEmail && (
+              <a class="btn btn--green btn--md" href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Asking for support')}`}>
+                Email us
+              </a>
+            )}
+            <a class:list={['btn btn--md', hasEmail ? 'btn--outline' : 'btn--green']} href={url('/contact/')}>
+              Get in touch
+            </a>
+          </div>
+        </section>
+      </Band>
+    )
+  }
+
+  <Band>
     <section class="container page-section stack" aria-label="Help fund the next project">
       <div class="cta">
         <p class="cta__text">Want to help fund the next project?</p>
@@ -193,6 +221,23 @@ const stats = [
   .project__more {
     font-size: 15px;
     color: var(--muted);
+  }
+  .ask {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    max-width: 68ch;
+  }
+  .ask__intro {
+    margin: 0;
+    font-size: 18px;
+    color: var(--muted-strong);
+  }
+  .ask__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
   .cta {
     background: var(--green);

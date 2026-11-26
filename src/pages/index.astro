@@ -12,6 +12,7 @@ import CardBanner from '../components/home/CardBanner.astro';
 import ExploreRow from '../components/home/ExploreRow.astro';
 import WhoWeAre from '../components/home/WhoWeAre.astro';
 import SupportStrip from '../components/home/SupportStrip.astro';
+import WinnersNews from '../components/home/WinnersNews.astro';
 import { getEvents, pickNextEvent, isOpen } from '../lib/events';
 
 const events = await getEvents();
@@ -29,7 +30,7 @@ const [exploreTone, supportTone] = [tone(), tone()];
 
 <BaseLayout>
   {next ? <Hero event={next} /> : <h1 class="visually-hidden">Bradda Dads</h1>}
-  <Band first><EventsYear events={events} nextId={next?.id} /></Band>
+  <Band first><WinnersNews /><EventsYear events={events} nextId={next?.id} /></Band>
   <Band tone={whoTone}><WhoWeAre /></Band>
   <Band tone={newsTone}><NewsSection /></Band>
   {showCard && <Band tone={cardTone}><CardBanner /></Band>}

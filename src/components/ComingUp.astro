@@ -1,0 +1,101 @@
+---
+// "Coming up" strip for old stories and albums, so an old page isn't a dead end.
+// Shows the next run of the event the page is about (by its tag/category), otherwise the next event of all.
+import { getEvents, deadlineFor, shortDay, formatEventDates, isPlaceholder, nextOccurrence } from '../lib/events';
+import { EVENT_TAG } from '../lib/albums';
+import { url } from '../lib/url';
+
+interface Props {
+  topic?: string;
+}
+const { topic } = Astro.props;
+const now = new Date();
+const events = await getEvents(now);
+const match = topic ? events.find((e) => EVENT_TAG[e.id] === topic) : undefined;
+const e = match ?? events[0];
+const upcoming = e && e.data.start && (e.data.end ?? e.data.start) >= new Date(now.getTime() - 864e5);
+const dateText = e ? (upcoming ? formatEventDates(e, true) : isPlaceholder(e.data.when) ? undefined : `${e.data.when} ${nextOccurrence(e, now).getFullYear()}`) : undefined;
+const dl = e ? deadlineFor(e, now) : undefined;
+---
+
+{
+  e && (
+    <aside class="coming-up" aria-label="Coming up">
+      <p class="coming-up__eyebrow">{match ? 'Next time' : 'Coming up'}</p>
+      <p class="coming-up__name">
+        <a href={url(`/events/${e.id}/`)}>{e.data.name}</a>
+        {dateText && <span class="coming-up__date">{dateText}</span>}
+      </p>
+      {dl && !dl.passed && (
+        <p class="coming-up__deadline">
+          {dl.label} {shortDay(dl.date)}
+        </p>
+      )}
+      <a class="link-arrow coming-up__all" href={url('/events/')}>
+        All events →
+      </a>
+    </aside>
+  )
+}
+
+<style>
+  .coming-up {
+    display: grid;
+    gap: 4px 16px;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin-block: 28px 8px;
+    padding: 16px 20px;
+    border-radius: 18px;
+    background: var(--yellow-panel);
+    color: var(--text);
+  }
+  .coming-up > p {
+    grid-column: 1;
+    margin: 0;
+  }
+  .coming-up__eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted-strong);
+  }
+  .coming-up__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    align-items: baseline;
+  }
+  .coming-up__name a {
+    color: var(--green);
+  }
+  .coming-up__date {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--muted-strong);
+  }
+  .coming-up__deadline {
+    font-size: 15px;
+    color: var(--muted-strong);
+  }
+  .coming-up__all {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    white-space: nowrap;
+  }
+  @media (max-width: 480px) {
+    .coming-up {
+      grid-template-columns: 1fr;
+    }
+    .coming-up__all {
+      grid-column: 1;
+      grid-row: auto;
+      margin-top: 4px;
+    }
+  }
+</style>

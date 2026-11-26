@@ -31,6 +31,7 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 ## Events: `src/content/events/`
 
+- [ ] **Event details checklist** (from the user journeys review, 26 Nov 2026). Every event page should answer: date, start time, place (with a map link or postcode), price, how to buy/book and by when, what to bring, whether it's suitable for children/accessible, and who to ask. Most events are missing at least the time, place or price.
 - [ ] **Family Fun Day** (`family-fun-day.md`, added 26 Nov 2026): annual, usually June (10 June 2017 at Town Bottom per Bradwell News issue 180; 15 June 2019 behind the Shoulder of Mutton per the old WordPress post; still running in 2026 per issue 287). Need the 2027 date, place, what's on and any costs.
 
 Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all listed at `/events/`). The card text comes from the front matter (`summary`, `when`, `ctaLabel` …). **Anything written below the `---` in the event's `.md` file appears on its page**, so that's the place for fuller details: timings, prices, what to bring, how to help, maps, FAQs.
@@ -54,6 +55,8 @@ Each event has its own page (`/events/bonfire/`, `/events/duck-race/` …, all l
 - [ ] **All four map pins are guesses near the village centre.** Set the real `lat`/`lng`, then `locationConfirmed: true`.
 - [ ] Year, amount and details for: school stage lighting, Bradwell Youth Activities, Centenary Players, Lumb Christmas lights
 - [ ] Add other funded groups and projects
+- [ ] **School leavers' hoodies** (Peter, 26 Nov 2026: "I think we have done these, need to check"). If confirmed (which school, which year, roughly how much), add it as a `funded` entry. Not on the site yet.
+- [ ] **Rules for asking us for support** (`src/content/pages/support.md`, editor form "Asking for support (groups)"; shown on Where the money goes since 26 Nov 2026). The section currently just says what to tell us and links to the contact page. The committee to decide and fill in: who can ask (groups only? individuals? must be in Bradwell?), typical amounts, how to ask (email/form/letter), and when requests are decided (e.g. at the monthly meeting). Then delete the `[PLACEHOLDER]` line.
 
 ## Results: `src/content/results/`
 
