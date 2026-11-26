@@ -4,10 +4,11 @@ name: "Hydro-power Christmas lights on the Lumb"
 lat: 53.3300
 lng: -1.7380
 locationConfirmed: false
-year: "[YEAR]"
-summary: "We helped fund the hydro-powered Christmas lights on the Lumb."
+year: "2018"
+amount: "£150"
+summary: "In December 2018 a small group of residents and the junior school built a hydro-electric generator in the brook to power Christmas lights in the trees around the playground. We paid part of the cost of the materials (£150)."
 source: https://braddadads.wordpress.com/news-2/
 # Source note: Mentioned on the old WordPress site (around 2018–19) as a recent hand-over of funds.
 ---
 
-[PLACEHOLDER: year, amount, what it paid for.]
+Source: [Community interest company report for the year to 30 November 2019, filed at Companies House](https://find-and-update.company-information.service.gov.uk/company/11682398/filing-history/MzI4MTM3OTM0OWFkaXF6a2N4/document?format=pdf&download=0).
