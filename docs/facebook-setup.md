@@ -10,7 +10,7 @@ To let the site read the page, a **Page admin** needs to create an "access token
 
 1. Go to **developers.facebook.com** and log in with your own Facebook account (the one that's an admin of the Bradda Dads page). If asked, register as a developer and accept the terms.
 2. Click **My Apps → Create app**.
-3. When asked what the app should do, choose **Other**, then the app type **Business**. (If it offers a use case like "Manage everything on your Page", that's fine too.)
+3. Under **Add use cases**, filter by **Content management** and tick the Page use case (something like **Manage everything on your Page**). Only if there isn't one, pick **Other** (Meta is phasing that option out), then the app type **Business**.
 4. Name it **Bradda Dads website**, and leave the business portfolio empty if that's allowed.
 
 The app can stay in **Development** mode: that's enough for reading your own page.
