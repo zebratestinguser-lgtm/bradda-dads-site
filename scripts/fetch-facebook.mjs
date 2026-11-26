@@ -263,6 +263,11 @@ try {
         }
       }
       const total = rest.length + 1;
+      // Shows in the build's annotations (readable without signing in), to see what Facebook sent back
+      if (!rest.length && process.env.GITHUB_ACTIONS) {
+        const albumId = s.match(/^source: .*[?&]set=a\.(\d+)/m)?.[1];
+        console.log(`::notice::Facebook photos: nothing more found for ${f} (photos in post: ${urls.length}, album: ${albumId ?? 'none'}, attachments: ${JSON.stringify(post.attachments?.data?.map((a) => a.type ?? a.media_type) ?? [])})`);
+      }
       const added = [];
       let needed = 0;
       for (const [i, { src, name }] of rest.entries()) {
