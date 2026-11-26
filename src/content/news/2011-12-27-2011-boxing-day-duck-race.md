@@ -40,7 +40,7 @@ V Austin and Hannah Naylor
 
 duck number 494
 
-Ann Smith and and Marge Van Remmen (a visitor from the USA, if you know this lady please contact a Bradda Dad or email braddadads@btinternet.com )
+Ann Smith and Marge Van Remmen
 
 This year we gave a prize of a duck radio to the holder of the ticket(s) for the duck that came in last! This was duck number 46
 

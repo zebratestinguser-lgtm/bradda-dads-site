@@ -11,7 +11,7 @@ source: https://braddadads.blogspot.com/2008/12/christmas-card-competition-2008.
 
 Bradda Dads for the first time organised a Christmas card competition with both the infant and junior schools taking part. The 'Dads thought it would be nice for one winner from each school to have their design printed on a bespoke Christmas card and for the card to be given to each pensioner attending the Bradda Dads pensioners Christmas lunch.
 
-£100 prizes were given to each school and £25 in High Street vouchers went to the winning designers; Ben Allen, age 6 years (Infant School) and Rosie Rowland, age 10 years (Junior School).
+£100 prizes were given to each school and £25 in High Street vouchers went to the winning designer from each school.
 
 The winning designs:
 

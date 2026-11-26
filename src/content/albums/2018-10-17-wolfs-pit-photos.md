@@ -55,8 +55,6 @@ A huge Thank You to everyone who entered and helped run the event this year! [Wo
 
 Email: wolfspitfellrace@gmail.com
 
-Text/WhatsApp/Phone: Stu on 07590 047104
-
 ## Records
 
 - **Male record:** F Grant – 00:37:56 – 2022

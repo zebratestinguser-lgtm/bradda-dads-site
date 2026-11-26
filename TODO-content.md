@@ -110,11 +110,11 @@ Race results name every runner. That's normal for published fell race results, b
 Phone numbers and email addresses copied from the old sites.
 
 - [x] [events/wolfspit.md](src/content/events/wolfspit.md): the organiser's mobile number has been taken off the event page (an "Email the organiser" button remains). It's still in the imported Wolf's Pit photos album text below.
-- [ ] [2011 Boxing Day Duck Race](src/content/news/2011-12-27-2011-boxing-day-duck-race.md): braddadads@btinternet.com
-- [ ] [Wolf's Pit photos](src/content/albums/2018-10-17-wolfs-pit-photos.md) (album text from the old WordPress page): 07590 047104, wolfspitfellrace@gmail.com
-- [ ] [Wolf's Pit 2020: further info on cancellation](src/content/news/2020-03-26-wolfs-pit-2020-further-info-on-cancellation.md): wolfspitfellrace@gmail.com
+- [x] 2011 Boxing Day Duck Race: old group email and "if you know this lady" request removed (26 Nov 2026).
+- [x] Wolf's Pit photos album: organiser's mobile removed; race email kept (public race address) (26 Nov 2026).
+- [x] Wolf's Pit 2020 cancellation: race email kept (public race address).
 
-- [ ] **Scanned lunch invitations** (photo 1 in the albums [3rd Pensioners Christmas Lunch, 2003](src/content/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003.md) and [6th Pensioners Lunch, 2006](src/content/albums/2006-12-06-braddadads-6th-pensioners-lunch-wednesday-6th-december-2006.md)) show a member's home address and phone number. Consider removing or cropping them.
+- [x] **Scanned lunch invitations** (2003, 2006) showing a member's home address and phone: photos removed (26 Nov 2026).
 
 ### Posts about named individuals (7)
 
@@ -128,8 +128,9 @@ Phone numbers and email addresses copied from the old sites.
 
 ### Children named with ages or school details (2)
 
-- [ ] [9th Annual Boxing Day Krazy Kraft and Duck Race (2007)](src/content/news/2007-12-26-9th-annual-boxing-day-krazy-kraft-and-duck-race.md): kraft race winners
-- [ ] [Christmas Card Competition 2008](src/content/news/2008-12-09-christmas-card-competition-2008.md): winners named with ages and schools
+- [x] 2007 Krazy Kraft and duck race: children's names removed (26 Nov 2026).
+- [ ] Children named as Krazy Kraft winners also in the 2008, 2009 and 2010 duck race stories: ask Peter.
+- [x] Christmas Card Competition 2008: children's names, ages and schools removed (26 Nov 2026).
 
 ### Posts naming many people (22)
 

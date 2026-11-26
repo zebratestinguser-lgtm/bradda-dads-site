@@ -3,12 +3,10 @@ title: "The 3rd pensioners' Christmas lunch"
 category: "Pensioners' lunch"
 event: pensioners-lunch
 date: 2003-12-10
-cover: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/001.jpg
-coverAlt: "Printed invitation to the Bradda Dads pensioners' Christmas lunch (10 December 2003)"
+cover: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/002.jpg
+coverAlt: "A dad laying the tables in the hall before the pensioners arrive, with crackers and festive tablecloths (10 December 2003)"
 source: https://braddadads.blogspot.com/2003/12/braddadads-3rd-pensioners-christmas.html
 photos:
-  - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/001.jpg
-    alt: "Printed invitation to the Bradda Dads pensioners' Christmas lunch (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/002.jpg
     alt: "A dad laying the tables in the hall before the pensioners arrive, with crackers and festive tablecloths (10 December 2003)"
   - src: /uploads/albums/2003-12-10-braddadads-3rd-pensioners-christmas-lunch-10th-december-2003/003.jpg
