@@ -6,7 +6,9 @@ const w = await getWording('news'); // Page wording form
 import { url, small } from '../../lib/url';
 import Img from '../../components/Img.astro';
 // News: search, the latest stories as cards, then the archive folded by year.
-// Topic filters work across both (choosing one shows every matching story from all years).
+// Picking a topic switches to "results" mode: one list of every matching story, newest first, with year
+// dividers, a summary line and links to that topic's photos and event; the Facebook row and the folded
+// archive hide. The topic goes in the address (/news/?topic=bonfire) so it can be shared and Back works.
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -16,6 +18,8 @@ import FacebookPosts from '../../components/FacebookPosts.astro';
 import { categoryNames } from '../../lib/categories';
 import { formatDate } from '../../lib/format';
 import { storyPhotos } from '../../lib/photos';
+import { categorySlug, getAlbums } from '../../lib/albums';
+import { getEvents } from '../../lib/events';
 
 // The newest three stay open; everything else sits in its year below
 const LATEST = 3;
@@ -34,6 +38,23 @@ for (const n of archive) {
   byYear.get(y)!.push(n);
 }
 const href = (id: string) => url(`/news/${id}/`);
+// For results mode: each topic's address slug, and links to its photos and event (if any)
+const albums = await getAlbums();
+const events = await getEvents();
+const topics = Object.fromEntries(
+  tags.map((t) => {
+    const event = events.find((e) => e.data.category === t && e.data.runByUs) ?? events.find((e) => e.data.category === t);
+    const hasPhotos = albums.some((a) => a.data.category === t && a.data.photos.length > 0);
+    return [
+      t,
+      {
+        slug: categorySlug(t),
+        photos: hasPhotos ? { label: `${t} photos`, url: url(`/photos/category/${categorySlug(t)}/`) } : null,
+        event: event ? { label: event.data.name, url: url(`/events/${event.id}/`) } : null,
+      },
+    ];
+  }),
+);
 ---
 
 <BaseLayout title={w.text('eyebrow')} description={w.text('description', { count: news.length })}>
@@ -50,14 +71,47 @@ const href = (id: string) => url(`/news/${id}/`);
   <Band first><section class="container page-section news-page">
     <div class="filters">
       <p class="filters__label" id="tag-filter-label">Show:</p>
-      <ul class="chips chips--scroll" role="list" aria-labelledby="tag-filter-label" data-filters>
+      <ul class="chips chips--scroll" role="list" aria-labelledby="tag-filter-label" data-filters data-topics={JSON.stringify(topics)}>
         <li><button type="button" class="chip" aria-pressed="true" data-tag="">All</button></li>
         {tags.map((t) => <li><button type="button" class:list={['chip', cat(t)]} aria-pressed="false" data-tag={t}>{t}</button></li>)}
       </ul>
       <p class="visually-hidden" aria-live="polite" data-filter-status></p>
     </div>
 
-    <section aria-labelledby="latest-title" data-group>
+    <!-- Results mode (filled in by the script below when a topic is picked) -->
+    <section class="results" aria-labelledby="results-title" data-results hidden>
+      <div class="results__head">
+        <h2 class="subhead" id="results-title" data-results-title></h2>
+        <p class="results__count" data-results-count></p>
+      </div>
+      <p class="results__links" data-results-links></p>
+      <div data-results-list></div>
+    </section>
+    <template data-pagefind-ignore data-results-tpl><h3 class="results__year"></h3><ul class="year__list" role="list"></ul><a class="link-arrow results__link"></a></template>
+    <template data-pagefind-ignore data-latest-rows>
+      {latest.map((n) => (
+        <li class="row" data-row data-tag={n.data.tag} data-year={n.data.date.getFullYear()}>
+          {n.data.image ? (
+            <img class="row__thumb" src={small(n.data.image)} alt="" loading="lazy" decoding="async" width="72" height="72" />
+          ) : (
+            <div class="row__thumb">
+              <NewsTile tag={n.data.tag} facebook={Boolean(n.data.facebookId)} />
+            </div>
+          )}
+          <div class="row__body">
+            <p class="meta">
+              <span class:list={['tag', cat(n.data.tag)]}>{n.data.tag}</span>
+              <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date)}</time>
+            </p>
+            <h3 class="row__title">
+              <a href={href(n.id)}>{n.data.title}</a>
+            </h3>
+          </div>
+        </li>
+      ))}
+    </template>
+
+    <section aria-labelledby="latest-title" data-group data-normal>
       <h2 class="subhead" id="latest-title">{w.text('latestTitle')}</h2>
       <ul class="latest" role="list">
         {
@@ -88,10 +142,10 @@ const href = (id: string) => url(`/news/${id}/`);
         }
       </ul>
     </section>
-    <FacebookPosts />
+    <div data-normal><FacebookPosts /></div>
   </section></Band>
 
-  <Band tone="mist"><section class="container page-section news-page">
+  <Band tone="mist" class="archive-band"><section class="container page-section news-page">
 
     <section class="archive" aria-labelledby="archive-title" data-group>
       <h2 class="subhead" id="archive-title">{w.text('archiveTitle')}</h2>
@@ -107,7 +161,7 @@ const href = (id: string) => url(`/news/${id}/`);
             </summary>
             <ul class="year__list" role="list">
               {items.map((n) => (
-                <li class="row" data-row data-tag={n.data.tag}>
+                <li class="row" data-row data-tag={n.data.tag} data-year={year}>
                   {n.data.image ? (
                     <img class="row__thumb" src={small(n.data.image)} alt="" loading="lazy" decoding="async" width="72" height="72" />
                   ) : (
@@ -135,33 +189,84 @@ const href = (id: string) => url(`/news/${id}/`);
 </BaseLayout>
 
 <script>
-  // Topic filter across the latest cards and every archive year
-  const filters = document.querySelector('[data-filters]');
+  // Topic buttons. "All" = the normal page. A topic = results mode: every matching story (latest and
+  // archive) in one list, newest first, with year dividers, a summary and links to its photos/event.
+  type Link = { label: string; url: string };
+  type Topic = { slug: string; photos: Link | null; event: Link | null };
+  const filters = document.querySelector<HTMLElement>('[data-filters]');
   const status = document.querySelector('[data-filter-status]');
-  if (filters) {
+  const results = document.querySelector<HTMLElement>('[data-results]');
+  if (filters && results) {
+    const topics: Record<string, Topic> = JSON.parse(filters.dataset.topics ?? '{}');
     const buttons = [...filters.querySelectorAll<HTMLButtonElement>('button[data-tag]')];
-    const rows = [...document.querySelectorAll<HTMLElement>('[data-row]')];
-    const years = [...document.querySelectorAll<HTMLDetailsElement>('[data-year]')];
-    const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
+    const tpl = document.querySelector<HTMLTemplateElement>('[data-results-tpl]')!.content;
+    const latestRows = [...document.querySelector<HTMLTemplateElement>('[data-latest-rows]')!.content.querySelectorAll<HTMLElement>('[data-row]')];
+    const archiveRows = [...document.querySelectorAll<HTMLElement>('.archive [data-row]')];
+    const allRows = [...latestRows, ...archiveRows]; // already newest first
+    const title = results.querySelector('[data-results-title]')!;
+    const count = results.querySelector('[data-results-count]')!;
+    const links = results.querySelector<HTMLElement>('[data-results-links]')!;
+    const list = results.querySelector('[data-results-list]')!;
+    const tagForSlug = (slug: string | null) => Object.keys(topics).find((t) => topics[t].slug === slug) ?? '';
+    const stories = (n: number) => `${n} ${n === 1 ? 'story' : 'stories'}`;
+
+    const apply = (tag: string) => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.tag ?? '') === tag)));
+      const on = Boolean(tag);
+      document.documentElement.toggleAttribute('data-news-topic', on);
+      results.hidden = !on;
+      document.querySelectorAll<HTMLElement>('[data-normal]').forEach((el) => (el.hidden = on));
+      list.replaceChildren();
+      links.replaceChildren();
+      if (!on) {
+        if (status) status.textContent = 'All stories shown';
+        return;
+      }
+      const matches = allRows.filter((r) => r.dataset.tag === tag);
+      let ul: HTMLElement | null = null;
+      let year = '';
+      for (const r of matches) {
+        if (r.dataset.year !== year) {
+          year = r.dataset.year ?? '';
+          const h = tpl.querySelector('.results__year')!.cloneNode(false) as HTMLElement;
+          h.textContent = year;
+          ul = tpl.querySelector('.year__list')!.cloneNode(false) as HTMLElement;
+          list.append(h, ul);
+        }
+        ul!.append(r.cloneNode(true));
+      }
+      title.textContent = tag;
+      count.textContent = `${stories(matches.length)}, newest first`;
+      const t = topics[tag];
+      for (const l of [t?.photos, t?.event]) {
+        if (!l) continue;
+        const a = tpl.querySelector('.results__link')!.cloneNode(false) as HTMLAnchorElement;
+        a.href = l.url;
+        a.textContent = `${l.label} →`;
+        links.append(a);
+      }
+      links.hidden = !links.childElementCount;
+      if (status) status.textContent = `${stories(matches.length)} about ${tag}, newest first`;
+    };
+
+    const setUrl = (tag: string, push: boolean) => {
+      const u = new URL(location.href);
+      if (tag) u.searchParams.set('topic', topics[tag]?.slug ?? tag);
+      else u.searchParams.delete('topic');
+      if (u.href !== location.href) history[push ? 'pushState' : 'replaceState'](null, '', u);
+    };
+
     buttons.forEach((b) =>
       b.addEventListener('click', () => {
-        const tag = b.dataset.tag!;
-        buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-        let shown = 0;
-        rows.forEach((r) => {
-          const on = !tag || r.dataset.tag === tag;
-          r.hidden = !on;
-          if (on) shown++;
-        });
-        years.forEach((y) => {
-          const any = !!y.querySelector('[data-row]:not([hidden])');
-          y.hidden = !any;
-          y.open = Boolean(tag) && any; // with a topic chosen, show every matching story at once
-        });
-        groups.forEach((g) => (g.hidden = !g.querySelector('[data-row]:not([hidden])')));
-        if (status) status.textContent = tag ? `${shown} ${tag} stories shown` : 'All stories shown';
+        const tag = b.dataset.tag ?? '';
+        apply(tag);
+        setUrl(tag, true);
       }),
     );
+    window.addEventListener('popstate', () => apply(tagForSlug(new URLSearchParams(location.search).get('topic'))));
+    // Arriving with ?topic=… (a shared link, an event page link, or Back)
+    const start = tagForSlug(new URLSearchParams(location.search).get('topic'));
+    if (start) apply(start);
   }
 </script>
 
@@ -303,6 +408,43 @@ const href = (id: string) => url(`/news/${id}/`);
   }
   .archive__intro {
     color: var(--muted);
+  }
+  /* Results mode (a topic is picked): one panel with every matching story; the folded archive hides */
+  :global(html[data-news-topic] .archive-band) {
+    display: none;
+  }
+  .results {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .results__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+  }
+  .results__count {
+    color: var(--muted);
+    font-size: 16px;
+  }
+  .results__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+  }
+  .results [data-results-list] {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--white);
+    padding: 6px 0 4px;
+  }
+  .results__year {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--green);
+    padding: 14px 20px 2px;
   }
   .year {
     border: 1px solid var(--border);

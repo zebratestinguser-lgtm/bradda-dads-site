@@ -414,6 +414,13 @@ a:hover {
   padding: 4px 10px;
   border-radius: var(--radius-pill);
 }
+/* A topic label that links to that topic's news (/news/?topic=…) */
+a.tag--link {
+  text-decoration: none;
+}
+a.tag--link:hover {
+  text-decoration: underline;
+}
 
 .note {
   background: var(--panel, var(--surface));

@@ -222,6 +222,11 @@ const jsonLd = addToCalendar
                 </li>
               ))}
             </ul>
+            {tag && (
+              <a class="link-arrow" href={url(`/news/?topic=${categorySlug(tag)}`)}>
+                All {tag} news →
+              </a>
+            )}
           </div>
         )}
       </section></Band>

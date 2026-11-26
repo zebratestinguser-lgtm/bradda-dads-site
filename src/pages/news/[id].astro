@@ -3,6 +3,7 @@ import { categoryClasses } from '../../lib/categories';
 const cat = await categoryClasses(); // category colours for labels
 import { getCategory } from '../../lib/categories';
 import { url } from '../../lib/url';
+import { categorySlug } from '../../lib/albums';
 import Img from '../../components/Img.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -54,7 +55,7 @@ const relatedHeading = (await getCategory(story.data.tag))?.data.moreHeading || 
       <div class="container story__header-inner">
         <a class="story__back" href={url('/news/')}>← All news</a>
         <p class="story__meta">
-          <span class:list={['tag', cat(story.data.tag)]}>{story.data.tag}</span>
+          <a class:list={['tag', 'tag--link', cat(story.data.tag)]} href={url(`/news/?topic=${categorySlug(story.data.tag)}`)} title={`All ${story.data.tag} news`}>{story.data.tag}</a>
           <time datetime={story.data.date.toISOString().slice(0, 10)}>Posted {formatDate(story.data.date)}</time>
         </p>
         <h1 class="story__title">{story.data.title}</h1>
