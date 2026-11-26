@@ -240,10 +240,10 @@ content:
         default: false
       - name: deadlineLabel
         label: Deadline wording
-        description: How the deadline is shown, e.g. "Book by Fri 27 Nov".
+        description: How the deadline is shown, e.g. "Book by Fri 27 Nov". Use "Online sales close" when people can still buy on the day (it then says "On sale on the day").
         type: select
         options:
-          values: [Entries close, Book by, Orders close]
+          values: [Entries close, Book by, Orders close, Online sales close]
         default: Entries close
       - name: location
         label: Where

@@ -16,7 +16,7 @@ const today = new Date();
 today.setHours(0, 0, 0, 0);
 const dayKey = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'Europe/London' });
 const manual = site.diaryDates.map((d) => ({ date: d.date, label: d.label, text: d.text, url: d.url }));
-const WORDS = { 'Book by': 'Last day to book for the', 'Entries close': 'Last day for entries: the', 'Orders close': 'Last day to order: the' } as const;
+const WORDS = { 'Book by': 'Last day to book for the', 'Entries close': 'Last day for entries: the', 'Orders close': 'Last day to order: the', 'Online sales close': 'Last day to buy online: the' } as const;
 const auto: typeof manual = [];
 for (const e of await getEvents()) {
   const page = `/events/${e.id}/`;

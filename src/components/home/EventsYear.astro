@@ -1,11 +1,10 @@
 ---
 // "The Bradda Dads year": a swipeable strip of event cards (scroll-snap).
-// Phones: swipe. Desktop: arrow buttons or trackpad. Events come in rolling-year order from getEvents():
-// whatever is on now first, then upcoming, then this year's finished events (as next year's).
-// It loops endlessly: after the last event a "Round again" marker leads into the first again. No auto-play (moving content is hard
-// to read and an accessibility problem).
+// Phones: swipe. Desktop: arrow buttons or trackpad. Events come in calendar-year order from getEvents():
+// what's coming up this year first (soonest first), then the ones done for this year. On 1 January
+// everything opens up again. It scrolls endlessly both ways (copies of the cards before and after, no
+// "round again" marker). No auto-play (moving content is hard to read and an accessibility problem).
 import EventCard from '../EventCard.astro';
-import DuckLogo from '../DuckLogo.astro';
 import type { EventEntry } from '../../lib/events';
 import { url } from '../../lib/url';
 
@@ -21,7 +20,7 @@ const { events, nextId } = Astro.props;
     <div class="events__head">
       <div class="events__intro">
         <h2 id="events-title" class="section-title">The Bradda Dads year</h2>
-        <p>The big dates, all run by volunteer dads, all for the village.</p>
+        <p>The big dates in our year, from the ones we run to the village events we join in.</p>
       </div>
       <div class="events__tools">
         <div class="events__links">
@@ -50,19 +49,6 @@ const { events, nextId } = Astro.props;
         ))
       }
     </ul>
-    <template data-loop-marker>
-      <li class="strip__loop" aria-hidden="true">
-        <span class="loop__duck"><DuckLogo size={40} /></span>
-        <span class="loop__title">Round again</span>
-        <span class="loop__text">into next year</span>
-        <svg class="loop__arrow" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 12a9 9 0 0 1 15.5-6.2L21 8" />
-          <path d="M21 3v5h-5" />
-          <path d="M21 12a9 9 0 0 1-15.5 6.2L3 16" />
-          <path d="M3 21v-5h5" />
-        </svg>
-      </li>
-    </template>
   </div>
   <div class="container">
     <div class="strip-dots" data-dots aria-hidden="true">
@@ -72,26 +58,23 @@ const { events, nextId } = Astro.props;
 </section>
 
 <script>
-  // Endless loop that shows it has looped: the cards are copied once before and once after the real
-  // ones, with a "Round again" marker between each lap. The strip quietly jumps back to the matching real
-  // card when it drifts into a copy, so it keeps going round instead of springing back to the start.
-  // Copies and markers are hidden from screen readers and skipped by Tab (each event is met once).
+  // Endless strip: the cards are copied once before and once after the real ones, and the strip quietly
+  // jumps back to the matching real card when it drifts into a copy, so it keeps going round with no end.
+  // Copies are hidden from screen readers and skipped by Tab (each event is met once).
   document.querySelectorAll<HTMLElement>('[data-strip]').forEach((strip) => {
     const section = strip.closest('section')!;
     const btns = section.querySelector<HTMLElement>('[data-carousel-btns]');
     const buttons = [...section.querySelectorAll<HTMLButtonElement>('.carousel-btn')];
     const dots = [...section.querySelectorAll<HTMLElement>('.strip-dot')];
-    const tpl = section.querySelector<HTMLTemplateElement>('template[data-loop-marker]');
     const originals = [...strip.querySelectorAll<HTMLElement>('.strip__item')];
     const n = originals.length;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Everything fits on screen (or a single card): no need to scroll, loop or show buttons
-    if (n < 2 || !tpl || strip.scrollWidth <= strip.clientWidth + 2) return;
+    if (n < 2 || strip.scrollWidth <= strip.clientWidth + 2) return;
     if (btns) btns.hidden = false;
 
     originals.forEach((o, i) => (o.dataset.i = String(i)));
-    const marker = () => tpl.content.firstElementChild!.cloneNode(true) as HTMLElement;
     const copy = (item: HTMLElement) => {
       const c = item.cloneNode(true) as HTMLElement;
       c.setAttribute('aria-hidden', 'true');
@@ -100,16 +83,14 @@ const { events, nextId } = Astro.props;
       c.removeAttribute('data-next');
       return c;
     };
-    // Laps: [marker, copies] [marker, real cards] [marker, copies]
-    const lapBefore = [marker(), ...originals.map(copy)];
-    strip.prepend(...lapBefore);
-    originals[0].before(marker());
-    strip.append(marker(), ...originals.map(copy));
+    const before = originals.map(copy);
+    strip.prepend(...before);
+    strip.append(...originals.map(copy));
 
     const first = strip.firstElementChild as HTMLElement;
     const items = () => [...strip.children] as HTMLElement[];
     const pos = (el: HTMLElement) => el.offsetLeft - first.offsetLeft; // scroll position that lines el up at the start
-    const lap = () => originals[0].offsetLeft - lapBefore[1].offsetLeft; // width of one lap (marker + cards)
+    const lap = () => originals[0].offsetLeft - before[0].offsetLeft; // width of one set of cards
     const home = () => pos(originals[0]);
 
     const jump = (to: number) => {
@@ -119,7 +100,7 @@ const { events, nextId } = Astro.props;
       strip.style.scrollSnapType = '';
       strip.style.scrollBehavior = '';
     };
-    // Back into the real lap if we've drifted more than half a lap either way (looks identical)
+    // Back into the real set if we've drifted more than half a lap either way (looks identical)
     const recentre = () => {
       const x = strip.scrollLeft;
       const h = home();
@@ -127,14 +108,13 @@ const { events, nextId } = Astro.props;
       if (x < h - w / 2) jump(x + w);
       else if (x > h + w / 2) jump(x - w);
     };
-    // The item currently lined up at the start of the strip
+    // The card currently lined up at the start of the strip
     const current = () => {
       const x = strip.scrollLeft;
       return items().reduce((best, el) => (Math.abs(pos(el) - x) < Math.abs(pos(best) - x) ? el : best));
     };
     const updateDots = () => {
-      const el = current();
-      const i = el.dataset.i ?? (el.nextElementSibling as HTMLElement | null)?.dataset.i ?? '0';
+      const i = current().dataset.i ?? '0';
       dots.forEach((d, k) => d.classList.toggle('is-active', String(k) === i));
     };
 
@@ -153,17 +133,23 @@ const { events, nextId } = Astro.props;
         updateDots();
         // Fallback for browsers without "scrollend": recentre once scrolling pauses
         clearTimeout(settle);
-        settle = window.setTimeout(recentre, 160);
+        settle = window.setTimeout(() => {
+          recentre();
+          updateDots();
+        }, 160);
       },
       { passive: true },
     );
-    strip.addEventListener('scrollend', recentre);
+    strip.addEventListener('scrollend', () => {
+      recentre();
+      updateDots();
+    });
     window.addEventListener('resize', () => {
       jump(home());
       updateDots();
     });
 
-    // Events are already in rolling-year order (what's on now first), so start on the first real card
+    // Start on the first real card (what's coming up next)
     jump(home());
     updateDots();
   });
@@ -266,35 +252,6 @@ const { events, nextId } = Astro.props;
   .strip__item > :global(*) {
     width: 100%;
   }
-  /* "Round again" marker between laps of the loop */
-  .strip__loop {
-    flex: 0 0 150px;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    text-align: center;
-    border: 2px dashed var(--brook);
-    border-radius: var(--radius-card);
-    color: var(--green);
-    padding: 16px 12px;
-  }
-  .loop__title {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 1.1;
-  }
-  .loop__text {
-    font-size: 14px;
-    color: var(--muted);
-  }
-  .loop__arrow {
-    color: var(--green);
-    margin-top: 4px;
-  }
   @media (prefers-reduced-motion: no-preference) {
     .strip {
       scroll-behavior: smooth;
@@ -333,9 +290,6 @@ const { events, nextId } = Astro.props;
     }
     .strip__item {
       flex-basis: 82vw;
-    }
-    .strip__loop {
-      flex-basis: 128px;
     }
   }
 </style>

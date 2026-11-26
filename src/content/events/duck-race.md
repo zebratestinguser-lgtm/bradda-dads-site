@@ -8,13 +8,13 @@ startTimeConfirmed: false
 location: Bradwell Brook
 mapUrl: https://maps.app.goo.gl/jyz2QgtmaEKfUDfx6
 places:
-  - label: Entries on sale
+  - label: Entries on sale (Sat 12 and 19 Dec)
     name: The Co-op, Netherside
     mapUrl: https://maps.app.goo.gl/8BZmbSZsSzr9uzPf6
 summary: Where it all started in 1999. Buy a numbered entry and cheer your duck down the brook.
 status: open
 entriesClose: 2026-12-19T23:59:59+00:00
-deadlineLabel: Entries close
+deadlineLabel: Online sales close
 ctaLabel: Buy an entry
 # SumUp store: Boxing Day Duck Race entries. People buy a numbered entry (each duck is numbered), not a duck.
 ctaUrl: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
@@ -25,7 +25,7 @@ heroTitle: The Boxing Day Duck Race
 heroHighlight: Duck Race
 heroText: Hundreds of numbered rubber ducks, one brook, and a village-wide cheer. Buy an entry, pick your spot on the bank, and help raise money for Bradwell. Running since 1999.
 countdownLabel: Ducks hit the water in
-heroNote: "**Cash prizes** for the first ducks home. Entries on sale online, and at the Co-op on Saturdays 12 and 19 December, 10am to 2pm."
+heroNote: "**Cash prizes** for the first ducks home. Entries on sale online, at the Co-op on Saturdays 12 and 19 December (10am to 2pm), and on the day."
 heroImage: /uploads/albums/2009-12-27-boxing-day-2009-duck-race/011.jpg
 heroImageAlt: Hundreds of yellow rubber ducks tumbling over the weir in Bradwell Brook
 heroImageCaption: Boxing Day 2009
@@ -35,6 +35,9 @@ involvement:
     text: "Online until midnight on Saturday 19 December, at the Co-op on Saturdays 12 and 19 December (10am to 2pm, card or cash), or at the pensioners' lunch."
     url: https://bradda-dads-community-group.sumupstore.com/product/boxing-day-duck-race-tickets-1
     label: Buy an entry online
+    onlyWhenOpen: true
+  - title: Buy on the day
+    text: Entries are on sale in person on Boxing Day too.
   - title: Race a raft
     text: "Build a raft and race it down the brook. Trophies for 1st, 2nd and 3rd, best style, first to sink and, biggest of all, last place. Everyone who enters gets a treat. [PLACEHOLDER: age categories.]"
   - title: Help on the day

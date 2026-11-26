@@ -44,6 +44,8 @@ const DEADLINE_WORDS = {
   'Entries close': { open: 'Open now', closed: 'Entries closed' },
   'Book by': { open: 'Booking open', closed: 'Bookings closed' },
   'Orders close': { open: 'Orders open', closed: 'Orders closed' },
+  // Advance sales end, but you can still buy on the day (e.g. duck race entries)
+  'Online sales close': { open: 'Open now', closed: 'On sale on the day' },
 } as const;
 
 type Deadline = { label: EventEntry['data']['deadlineLabel']; openText: string; closedText: string } & ({ passed: false; date: Date } | { passed: true; date?: Date });
@@ -75,11 +77,11 @@ export function statusFor(e: EventEntry, isNext: boolean, now = new Date()) {
   // Deadline gone but the event itself is still to come (e.g. lunch bookings closed, lunch next week)
   if (dl?.passed && e.data.start && e.data.start > now) return { label: dl.closedText, kind: isNext ? 'next' : 'upcoming' };
   if (isNext) return { label: 'Next up', kind: 'next' };
-  // Dates from a previous year mean this year's hasn't happened yet: it's coming round again
-  const lastYear = (d?: Date) => Boolean(d && d.getFullYear() < now.getFullYear());
-  if (e.data.status === 'open') return lastYear(e.data.entriesClose) ? { label: 'Coming up', kind: 'upcoming' } : { label: dl?.closedText ?? 'Entries closed', kind: 'done' };
-  if (e.data.status === 'done') return { label: 'Done for this year', kind: 'done' };
-  if (hasPassed(e, now)) return lastYear(endsAt(e)) ? { label: 'Coming up', kind: 'upcoming' } : { label: 'Done for this year', kind: 'done' };
+  if (yearSlot(e, now).done) {
+    // Entries closed this year (e.g. the Christmas card before delivery) or finished for the year
+    if (e.data.status === 'open' && dl?.passed) return { label: dl.closedText, kind: 'done' };
+    return { label: `Done for ${now.getFullYear()}`, kind: 'done' };
+  }
   return { label: 'Coming up', kind: 'upcoming' };
 }
 
@@ -114,10 +116,31 @@ export function nextOccurrence(e: EventEntry, now = new Date()) {
   return now < monthEnd ? thisYear : nextYear;
 }
 
-/** All events in rolling-year order: open/on now first, then upcoming, with this year's finished ones last. */
+/**
+ * This calendar year's run of the event. Everything starts again on 1 January:
+ *  - date: when it happens this year (its start date if that's this year, else the 1st of its usual month)
+ *  - done: finished for this year (its date has gone by; marked "done" once its month has come;
+ *    entries closed this year with no event date still to come; or its usual month is over)
+ */
+export function yearSlot(e: EventEntry, now = new Date()) {
+  const y = now.getFullYear();
+  const start = e.data.start && e.data.start.getFullYear() === y ? e.data.start : undefined;
+  const month = e.data.month ?? (e.data.start ? e.data.start.getMonth() + 1 : 12);
+  const date = start ?? new Date(y, month - 1, 1);
+  let done: boolean;
+  if (isHappening(e, now) || isOpen(e, now)) done = false;
+  else if (start) done = hasPassed(e, now) || (e.data.status === 'done' && start <= now);
+  else if (e.data.status === 'done') done = now >= date;
+  else if (e.data.status === 'open' && (e.data.entriesClosed || e.data.entriesClose?.getFullYear() === y)) done = true;
+  else done = now >= new Date(y, month, 1);
+  return { date, done };
+}
+
+/** All events for this calendar year: coming up first (soonest first), then the ones done for this year. */
 export async function getEvents(now = new Date()) {
+  const key = (e: EventEntry) => (isHappening(e, now) ? now : yearSlot(e, now).date).getTime();
   return (await getCollection('events')).sort(
-    (a, b) => nextOccurrence(a, now).getTime() - nextOccurrence(b, now).getTime() || a.data.order - b.data.order,
+    (a, b) => Number(yearSlot(a, now).done) - Number(yearSlot(b, now).done) || key(a) - key(b) || a.data.order - b.data.order,
   );
 }
 

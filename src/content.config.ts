@@ -83,7 +83,7 @@ const events = defineCollection({
     /** Tick to close entries/bookings now, when there's no set deadline (untick for next year) */
     entriesClosed: z.boolean().default(false),
     /** How the deadline is worded: "Entries close" (duck race, card), "Book by" (lunch), "Orders close". */
-    deadlineLabel: z.enum(['Entries close', 'Book by', 'Orders close']).default('Entries close'),
+    deadlineLabel: z.enum(['Entries close', 'Book by', 'Orders close', 'Online sales close']).default('Entries close'),
     ctaLabel: z.string(),
     ctaUrl: link,
     /** Tie-breaker when two events fall on the same date (1 = first). */

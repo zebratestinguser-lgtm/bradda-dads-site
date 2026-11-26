@@ -33,7 +33,7 @@ involvement:
     onlyWhenOpen: true
   - title: Need a lift or a meal at home?
     text: Meals can be delivered for anyone who can't make it, and transport to the hall can be arranged. Get in touch and we'll sort it out.
-    url: /contact/?topic=booking
+    url: /contact/?topic=lunch
     label: Get in touch
   - title: Help on the day
     text: The dads serve the food, and partners and families are welcome to come and help or watch the children sing.
