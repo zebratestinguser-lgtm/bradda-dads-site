@@ -7,6 +7,8 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 **Meet the dads:** a member's card and profile page only appear once their real name replaces "[MEMBER NAME]" in `src/content/members/`. Until then the page shows a group photo and "profiles are on their way".
 
+**Visitor journeys:** the full list of improvements, by who visits and why, is in [docs/visitor-journeys.md](docs/visitor-journeys.md).
+
 ## Site settings: `src/data/site.yaml`
 
 - [ ] **Contact form:** make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.
