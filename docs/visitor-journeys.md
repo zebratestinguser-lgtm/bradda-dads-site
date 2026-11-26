@@ -6,7 +6,7 @@ From the visitor journeys review (26 Nov 2026). Most visitors are villagers on p
 
 ## 1. Contact (the biggest blocker: 7 of 13 visitor groups need it)
 
-- ⏳🔧 **Contact email and message form.** At the moment Facebook is the only way to get in touch, which shuts out older people, businesses, funders, and anyone wanting a photo removed privately. Needs a group email address and a Formspree account. The form is already built and switches on once `contactFormUrl` is set in site.yaml.
+- ⏳🔧 **Contact email and message form.** At the moment Facebook is the only way to get in touch, which shuts out older people, businesses, funders, and anyone wanting a photo removed privately. Needs a group email address and a Formspree account. **The group already has an email address, but Peter can't get into it (26 Nov 2026)**: find out who holds the login, or recover it, then use it for Formspree too. The form is already built and switches on once `contactFormUrl` is set in site.yaml.
 - 🔧 Once there's an email, add it to: the privacy notice ("ask us to remove a photo"), the business card on Donate, the "Ask us for support" section, and the footer.
 - ⏳ **A lunch booking route besides the newsletter slip**, such as a phone number or email for bookings and for arranging lifts or meals at home.
 
@@ -50,7 +50,7 @@ Every event page should answer: date, start time, place (postcode or map link), 
 
 - ✅ Old stories and albums end with a "Coming up" box showing the next run of their event.
 - ✅ Albums are titled "…: photos" so they don't clash with their story.
-- 🔧 Story pages could show their album as a strip instead of the full photo set, so the 94 story–album pairs aren't near-duplicates.
+- ✅ Story and album pages aren't duplicates after all (checked 26 Nov 2026): stories show only 8 preview photos and link to the album, and albums carry no copy of the story text (4 of 93 have short text of their own).
 - ⏳ Missing Wolf's Pit results: 2010–12 and 2017–18.
 
 ## 8. Trust: parish council, press, funders
