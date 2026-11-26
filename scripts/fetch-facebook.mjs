@@ -12,7 +12,7 @@ import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
 
-const API = 'https://graph.facebook.com/v23.0'; // Graph API versions last about two years; bump when Meta retires it
+const API = 'https://graph.facebook.com/v27.0'; // Graph API versions last about two years; bump when Meta retires it
 const KEEP = 3; // posts to show
 const root = join(import.meta.dirname, '..');
 const dataFile = join(root, 'src', 'data', 'facebook.json');
