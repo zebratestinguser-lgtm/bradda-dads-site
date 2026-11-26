@@ -108,3 +108,18 @@ Open **Meet the dads**. Only add someone **once they've agreed** to appear on th
 
 - **Asking for support (groups)** in the editor holds the "Does your group need support?" wording on the Where the money goes page. Fill in the committee's rules (who can ask, typical amounts, how and when requests are decided) and delete the `[PLACEHOLDER]` line.
 - When you add a race in **Duck race winners**, the homepage shows "The winners are in!" for two weeks after the race date, then hides it by itself.
+
+## Facebook posts arrive as draft news stories
+
+Every morning the website checks the Bradda Dads Facebook page. Each new post becomes a **draft** story in the editor's **News** list (the Draft column says so). Drafts are not on the website.
+
+To publish one:
+
+1. Open it in **News**.
+2. Check the **Headline** (it's made from the post's first line, so it may need tidying: no shouting, no emoji), the **Topic** (a guess) and the **Summary**.
+3. If the photos are good, describe them: the descriptions start as "Photo 1 of 3 from the Facebook post…".
+4. Untick **Draft** and save. It appears on the site after the next rebuild (a few minutes).
+
+Not everything needs to be on the website: quick reminders ("1 hour to go!") and reposts can simply be **deleted**. A deleted draft never comes back, and its photos are tidied away automatically.
+
+Things to watch for: children's names (never publish them), private details such as phone numbers, and photos someone might not want kept online.

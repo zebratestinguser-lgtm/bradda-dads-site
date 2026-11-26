@@ -14,7 +14,7 @@ import { formatDate } from '../../lib/format';
 import { storyPhotos } from '../../lib/photos';
 
 const LATEST = 6;
-const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const news = (await getCollection('news', (n) => !n.data.draft)).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const latest = news.slice(0, LATEST);
 const archive = news.slice(LATEST);
 // Latest stories without their own photo borrow a dated archive photo from the same kind of event

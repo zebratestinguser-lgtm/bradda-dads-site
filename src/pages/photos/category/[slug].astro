@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 
 const { cat, albums } = Astro.props;
 const total = albums.reduce((n, a) => n + a.data.photos.length, 0);
-const news = await getCollection('news');
+const news = await getCollection('news', (n) => !n.data.draft);
 const storyFor = (id: string) => news.find((n) => n.data.album?.id === id);
 // Other categories, for switching
 const all = await getAlbums();

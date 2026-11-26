@@ -1,6 +1,8 @@
-# Showing the latest Facebook posts on the website
+# Facebook posts on the website
 
 The website can show the three newest posts from the Bradda Dads Facebook page on the homepage and the News page ("Latest on Facebook"). Every time the site rebuilds (each morning, and whenever anyone saves a change), it fetches the posts and copies their photos onto the site. Visitors never load anything from Facebook, so there's no tracking.
+
+Each new post also arrives in the editor as a **draft news story**, ready to check and publish (see docs/how-to-update.md). The first time it runs, the page's older posts come in as drafts too (with one photo each).
 
 To let the site read the page, a **Page admin** needs to create an "access token" once. It takes about 20 minutes. Meta changes its screens from time to time, so the button names may differ slightly.
 

@@ -7,7 +7,11 @@ import type { Album } from '../lib/albums';
 import { photoDate } from '../lib/albums';
 
 interface Props {
-  album: Album;
+  album?: Album;
+  /** Or a plain list of photos (e.g. a news story's gallery), with the words for the viewer caption */
+  photos?: { src: string; alt: string; caption?: string }[];
+  title?: string;
+  when?: string;
   /** Include the album title in the viewer caption (on pages showing several albums) */
   titleInCaption?: boolean;
   /** Show this many, with a "Show all" button for the rest (JS only; without JS every photo shows) */
@@ -15,8 +19,9 @@ interface Props {
   eagerCount?: number;
 }
 const { album, titleInCaption = false, collapseAfter, eagerCount = 0 } = Astro.props;
-const photos = album.data.photos;
-const when = photoDate(album);
+const photos: { src: string; alt: string; caption?: string }[] = album ? album.data.photos : (Astro.props.photos ?? []);
+const when = album ? photoDate(album) : (Astro.props.when ?? '');
+const title = album ? album.data.title : (Astro.props.title ?? '');
 const extra = collapseAfter && photos.length > collapseAfter + 2 ? photos.length - collapseAfter : 0;
 ---
 
@@ -24,10 +29,10 @@ const extra = collapseAfter && photos.length > collapseAfter + 2 ? photos.length
   <ul class="pg__grid" role="list">
     {
       photos.map((p, i) => {
-        const cap = [titleInCaption ? album.data.title : '', when, `Photo ${i + 1} of ${photos.length}`, p.caption ?? ''].filter(Boolean).join(' · ');
+        const cap = [titleInCaption ? title : '', when, `Photo ${i + 1} of ${photos.length}`, p.caption ?? ''].filter(Boolean).join(' · ');
         return (
           <li class="pg__item" data-extra={extra && i >= collapseAfter! ? '' : undefined}>
-            <a class="pg__link" href={url(p.src)} data-lb-srcset={srcset(p.src)} data-lb-avif={avifSet(p.src, 'large')} data-lb data-lb-caption={cap} aria-label={`Open photo ${i + 1} of ${photos.length}${titleInCaption ? ` from ${album.data.title}` : ''}${p.caption ? `: ${p.caption}` : ''}`}>
+            <a class="pg__link" href={url(p.src)} data-lb-srcset={srcset(p.src)} data-lb-avif={avifSet(p.src, 'large')} data-lb data-lb-caption={cap} aria-label={`Open photo ${i + 1} of ${photos.length}${titleInCaption ? ` from ${title}` : ''}${p.caption ? `: ${p.caption}` : ''}`}>
               <Img kind="grid" src={p.src} sizes="(max-width: 600px) 50vw, 240px" alt={p.alt} loading={i < eagerCount ? 'eager' : 'lazy'} decoding="async" width="480" height="360" />
             </a>
           </li>

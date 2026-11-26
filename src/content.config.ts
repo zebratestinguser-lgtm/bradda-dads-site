@@ -51,6 +51,12 @@ const news = defineCollection({
     summary: z.string(),
     /** Photo album for this story, if there is one. */
     album: z.preprocess(entryId, reference('albums')).optional(),
+    /** Drafts don't appear anywhere on the site (Facebook posts arrive as drafts for an editor to check). */
+    draft: z.boolean().default(false),
+    /** More photos shown in the story (e.g. every photo from a Facebook post) */
+    photos: z.array(z.object({ src: uploadPath, alt: z.string() })).default([]),
+    /** The Facebook post this story came from (so it's never imported twice) */
+    facebookId: z.string().optional(),
     source,
   }),
 });

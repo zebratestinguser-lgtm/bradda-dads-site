@@ -10,7 +10,7 @@ import { formatDate } from '../../../lib/format';
 import { photoMatching } from '../../../lib/photos';
 
 const races = (await getCollection('duckWinners')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-const news = await getCollection('news');
+const news = await getCollection('news', (n) => !n.data.draft);
 // The old blog post each list came from, if it's on this site too
 const storyFor = (src?: string) => (src ? news.find((n) => n.data.source === src) : undefined);
 const header = await photoMatching(/ducks tumbling over the weir/i, /ducks pour over the yellow barrier/i);

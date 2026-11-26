@@ -6,6 +6,7 @@ import { getSite } from './site';
 import { isPlaceholder } from './events';
 
 export interface FacebookPost {
+  id?: string;
   date?: Date;
   dateText?: string;
   text: string;
@@ -18,8 +19,8 @@ export async function getFacebookPosts(): Promise<FacebookPost[]> {
   const file = join(process.cwd(), 'src', 'data', 'facebook.json');
   if (existsSync(file)) {
     try {
-      const posts = JSON.parse(readFileSync(file, 'utf8')) as { date: string; text: string; url: string; image?: string }[];
-      if (posts.length) return posts.map((p) => ({ date: new Date(p.date), text: p.text, url: p.url, image: p.image }));
+      const posts = JSON.parse(readFileSync(file, 'utf8')) as { id: string; date: string; text: string; url: string; image?: string }[];
+      if (posts.length) return posts.map((p) => ({ id: p.id, date: new Date(p.date), text: p.text, url: p.url, image: p.image }));
     } catch {
       // fall through to the hand-picked posts
     }

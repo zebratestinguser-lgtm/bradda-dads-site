@@ -30,13 +30,18 @@ content:
       template: "{fields.date}-{primary}.md"
       field: false
     view:
-      fields: [title, date, tag]
+      fields: [title, date, tag, draft]
       primary: title
       sort: [date, title]
       default:
         sort: date
         order: desc
     fields:
+      - name: draft
+        label: Draft (not on the website yet)
+        description: Facebook posts arrive as drafts. Check the headline, summary and photos, then untick this to publish it (or delete the story if it shouldn't be on the website).
+        type: boolean
+        default: false
       - name: title
         label: Headline
         type: string
@@ -60,7 +65,7 @@ content:
         required: true
       - name: image
         label: Photo (optional)
-        description: Leave empty and the site shows an older photo from the same kind of event, labelled with its date.
+        description: Leave empty and the story shows a duck picture instead.
         type: image
         options:
           media: uploads
@@ -78,6 +83,26 @@ content:
           search: title
           value: "{path}"
           label: "{title}"
+      - name: photos
+        label: More photos (optional)
+        description: Shown as a gallery in the story. Describe each one.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.alt}"
+        fields:
+          - name: src
+            label: Photo
+            type: image
+            required: true
+            options:
+              media: uploads
+              path: public/uploads/news
+          - name: alt
+            label: Photo description
+            type: string
+            required: true
       - name: body
         label: Story
         type: rich-text
@@ -87,7 +112,11 @@ content:
           path: public/uploads/news
 
       - name: source
-        label: Imported from (old site)
+        label: Imported from (old site or Facebook post)
+        type: string
+        hidden: true
+      - name: facebookId
+        label: Facebook post id
         type: string
         hidden: true
 

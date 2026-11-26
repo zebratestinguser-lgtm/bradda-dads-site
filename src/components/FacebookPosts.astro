@@ -6,13 +6,17 @@ import Img from './Img.astro';
 import { getFacebookPosts } from '../lib/facebook';
 import { getSite } from '../lib/site';
 import { formatDate } from '../lib/format';
+import { getCollection } from 'astro:content';
+import { url } from '../lib/url';
 
 interface Props {
   headingLevel?: 'h2' | 'h3';
 }
 const { headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
-const posts = await getFacebookPosts();
+const posts = (await getFacebookPosts()).slice(0, 3);
+// Posts an editor has published as news stories link to the full story on this site
+const stories = new Map((await getCollection('news', (n) => !n.data.draft && Boolean(n.data.facebookId))).map((n) => [n.data.facebookId!, n.id]));
 const site = await getSite();
 ---
 
@@ -34,9 +38,18 @@ const site = await getSite();
             <div class="fb__body">
               {p.date ? <time datetime={p.date.toISOString()}>Posted {formatDate(p.date)}</time> : p.dateText && <p class="fb__date">{p.dateText}</p>}
               <p class="fb__text">{p.text}</p>
-              <a class="fb__link" href={p.url} rel="noopener">
-                Read on Facebook<span class="visually-hidden"> (post from {p.date ? formatDate(p.date) : p.dateText})</span> →
-              </a>
+              {p.id && stories.has(p.id) ? (
+                <div class="fb__links">
+                  <a class="fb__link" href={url(`/news/${stories.get(p.id)}/`)}>
+                    Read the full post<span class="visually-hidden"> from {p.date ? formatDate(p.date) : p.dateText}</span> →
+                  </a>
+                  <a class="fb__fb" href={p.url} rel="noopener">View on Facebook</a>
+                </div>
+              ) : (
+                <a class="fb__link" href={p.url} rel="noopener">
+                  Read on Facebook<span class="visually-hidden"> (post from {p.date ? formatDate(p.date) : p.dateText})</span> →
+                </a>
+              )}
             </div>
           </li>
         ))}
@@ -107,6 +120,20 @@ const site = await getSite();
     -webkit-box-orient: vertical;
     overflow: hidden;
     color: var(--text);
+  }
+  .fb__links {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 16px;
+  }
+  .fb__fb {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+    color: var(--muted-strong);
   }
   .fb__link {
     margin-top: auto;

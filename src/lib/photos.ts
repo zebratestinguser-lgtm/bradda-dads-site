@@ -59,7 +59,7 @@ export async function storyPhoto(story: NewsEntry, _avoid = new Set<string>()): 
     src: story.data.image,
     alt: story.data.imageAlt ?? '',
     album: album!,
-    label: album ? photoDateShort(album) : '',
+    label: album ? photoDateShort(album) : story.data.facebookId ? story.data.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'Europe/London' }) : '',
     own: true,
   };
 }

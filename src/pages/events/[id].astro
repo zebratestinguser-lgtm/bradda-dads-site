@@ -29,7 +29,7 @@ const tag = EVENT_TAG[event.id];
 const eventAlbums = (await getAlbums()).filter((a) => a.data.photos.length > 0 && (a.data.event?.id === event.id || (tag && a.data.category === tag)));
 const albums = eventAlbums.slice(0, 4);
 const news = tag
-  ? (await getCollection('news')).filter((n) => n.data.tag === tag).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 5)
+  ? (await getCollection('news', (n) => !n.data.draft)).filter((n) => n.data.tag === tag).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 5)
   : [];
 const ctaHref = url(d.ctaUrl);
 // "How to get involved" cards; some only apply while entries are open

@@ -6,12 +6,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrookEdge from '../../components/BrookEdge.astro';
 import Band from '../../components/Band.astro';
 import ComingUp from '../../components/ComingUp.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import Lightbox from '../../components/Lightbox.astro';
 import { storyPhoto, storyPhotos } from '../../lib/photos';
 import { photoDate } from '../../lib/albums';
 import { formatDate, formatShortDate } from '../../lib/format';
 
 export async function getStaticPaths() {
-  const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const news = (await getCollection('news', (n) => !n.data.draft)).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
   return news.map((story, i) => ({ params: { id: story.id }, props: { story, newer: news[i - 1], older: news[i + 1], all: news } }));
 }
 
@@ -19,7 +21,9 @@ const { story, newer, older, all } = Astro.props;
 const { Content } = await render(story);
 const album = story.data.album ? await getEntry(story.data.album) : undefined;
 const preview = album ? album.data.photos.slice(0, 8) : [];
-const when = album ? photoDate(album) : undefined;
+// Facebook stories: their photos are dated by the post
+const when = album ? photoDate(album) : story.data.facebookId ? `posted on Facebook ${formatDate(story.data.date)}` : undefined;
+const gallery = story.data.photos;
 // Header photo: the story's own, or a dated archive photo from the same kind of event
 const header = await storyPhoto(story);
 // "More about …": the three stories on the same topic closest in date
@@ -70,11 +74,19 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
         story.data.image && (
           <figure class="story__figure">
             <Img kind="large" src={story.data.image} sizes="(max-width: 800px) 100vw, 760px" alt={story.data.imageAlt ?? ''} decoding="async" />
-            {when && <figcaption>Photo taken {when}</figcaption>}
+            {when && <figcaption>{album ? `Photo taken ${when}` : `Photo ${when}`}</figcaption>}
           </figure>
         )
       }
       <div class="prose"><Content /></div>
+
+      {
+        gallery.length > 0 && (
+          <section class="story__gallery" aria-label="More photos">
+            <PhotoGrid photos={gallery} title={story.data.title} when={when ? `Photo ${when}` : ''} />
+          </section>
+        )
+      }
 
       {
         album && preview.length > 0 && (
@@ -140,6 +152,7 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
       </Band>
     )
   }
+  {gallery.length > 0 && <Lightbox />}
 </BaseLayout>
 
 <style>
@@ -246,6 +259,9 @@ const relatedHeading = TOPIC[story.data.tag] ?? 'More stories';
   .story__figure figcaption {
     font-size: 14px;
     color: var(--muted);
+  }
+  .story__gallery {
+    margin-top: 28px;
   }
   .story__album {
     display: flex;

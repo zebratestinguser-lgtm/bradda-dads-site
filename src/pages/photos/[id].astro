@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 const { album, newer, older } = Astro.props;
 const { Content } = await render(album);
 const event = album.data.event ? await getEntry(album.data.event) : undefined;
-const story = (await getCollection('news')).find((n) => n.data.album?.id === album.id);
+const story = (await getCollection('news', (n) => !n.data.draft)).find((n) => n.data.album?.id === album.id);
 const when = photoDate(album);
 const photos = album.data.photos;
 const cat = album.data.category;

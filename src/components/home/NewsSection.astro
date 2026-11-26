@@ -7,7 +7,7 @@ import NewsTile from '../NewsTile.astro';
 import { storyPhotos } from '../../lib/photos';
 import { formatDate, formatShortDate } from '../../lib/format';
 
-const all = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const all = (await getCollection('news', (n) => !n.data.draft)).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const lead = all[0]; // the newest story is always the big one
 const recent = all.filter((n) => n !== lead).slice(0, 3);
 const href = (id: string) => url(`/news/${id}/`);

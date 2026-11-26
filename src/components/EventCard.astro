@@ -31,7 +31,7 @@ let cta = { label: e.data.ctaLabel, href: ctaHref };
 if (closed && e.data.status !== 'open') {
   const topic = EVENT_TAG[e.id];
   const recent = topic
-    ? (await getCollection('news'))
+    ? (await getCollection('news', (n) => !n.data.draft))
         .filter((n) => n.data.tag === topic && now.getTime() - n.data.date.getTime() < 92 * 864e5)
         .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0]
     : undefined;
