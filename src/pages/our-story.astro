@@ -32,7 +32,7 @@ const dated = timeline.filter((t) => !isPlaceholder(t.data.year));
 const undated = timeline.filter((t) => isPlaceholder(t.data.year));
 const photos: (PickedPhoto | { src: string; alt: string; label?: string } | undefined)[] = await Promise.all(
   dated.map(async (t) =>
-    t.data.image ? { src: t.data.image, alt: t.data.imageAlt ?? '' } : yearPhoto(t.data.year.slice(0, 4), hintsFor(t.data.title)),
+    t.data.image ? { src: t.data.image, alt: t.data.imageAlt ?? '', label: t.data.imageAlt?.match(/\(([^)]*\d{4})\)$/)?.[1] } : yearPhoto(t.data.year.slice(0, 4), hintsFor(t.data.title)),
   ),
 );
 const hasMembers = (await getPublishedMembers()).length > 0;

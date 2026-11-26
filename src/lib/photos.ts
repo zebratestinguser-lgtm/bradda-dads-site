@@ -117,7 +117,8 @@ export async function categoryPhoto(category: string): Promise<PickedPhoto | und
 /** A photo from a given year, preferring albums whose category matches one of the hints */
 export async function yearPhoto(year: string, hints: string[] = []): Promise<PickedPhoto | undefined> {
   const albums = (await getAlbums()).filter((a) => a.data.photos.length > 0 && !a.data.dateLabel && String(a.data.date.getFullYear()) === year && isScene(displayCover(a)?.alt));
-  const album = albums.find((a) => hints.includes(a.data.category ?? '')) ?? (hints.length ? undefined : albums[0]);
+  // Only a photo from the same kind of event: a random photo from that year could be from anything
+  const album = albums.find((a) => hints.includes(a.data.category ?? ''));
   const photo = album && displayCover(album);
   return album && photo ? asPicked(album, photo) : undefined;
 }
