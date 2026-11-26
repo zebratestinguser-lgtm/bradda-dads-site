@@ -8,4 +8,4 @@ locationConfirmed: false
 source: https://find-and-update.company-information.service.gov.uk/company/11682398/filing-history/MzQ2NzE2NDM3OWFkaXF6a2N4/document?format=pdf&download=0
 ---
 
-Source: [Community interest company report for the year to 30 November 2024, filed at Companies House](https://find-and-update.company-information.service.gov.uk/company/11682398/filing-history/MzQ2NzE2NDM3OWFkaXF6a2N4/document?format=pdf&download=0). The report doesn't give the amount.
+Source: [Community interest company report for the year to 30 November 2024, filed at Companies House](https://find-and-update.company-information.service.gov.uk/company/11682398/filing-history/MzQ2NzE2NDM3OWFkaXF6a2N4/document?format=pdf&download=0).
