@@ -11,6 +11,15 @@ import { url } from '../../lib/url';
 const site = await getSite();
 const eventCount = (await getCollection('events')).filter((e) => e.data.runByUs).length; // counted, so adding an event updates it
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+// The homepage names just a few (file names in src/content/funded/); the rest are on the full page.
+// If one of these is removed, the next ones alphabetically fill the gap.
+const HIGHLIGHTS = ['footbridge-hall-gate-view', 'friends-of-bradwell-schools', 'centenary-players', 'bradwell-pre-school', 'lumb-christmas-lights'];
+const SHOW = 5;
+const shown = [
+  ...HIGHLIGHTS.map((id) => funded.find((f) => f.id === id)).filter((f) => f !== undefined),
+  ...funded.filter((f) => !HIGHLIGHTS.includes(f.id)),
+].slice(0, SHOW);
+const more = funded.length - shown.length;
 const facts = [
   { big: '1999', small: 'the year it all started' },
   { big: String(eventCount), small: 'big events every year' },
@@ -51,9 +60,14 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
             <h3 class="impact__title">Where the money goes</h3>
             <p class="impact__text">Everything we raise goes back into the village, mostly through the events we put on for everyone. Over the years we've also helped local groups and projects, including:</p>
             <ul class="impact__list" role="list">
-              {funded.map((f) => (
+              {shown.map((f) => (
                 <li>{f.data.name}</li>
               ))}
+              {more > 0 && (
+                <li class="impact__more">
+                  <a href={url('/where-the-money-goes/')}>and {more} more →</a>
+                </li>
+              )}
             </ul>
           </div>
           <a class="btn btn--green btn--sm impact__btn" href={url('/where-the-money-goes/')}>
@@ -162,6 +176,19 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
     padding: 5px 14px;
     font-size: 14px;
     font-weight: 600;
+  }
+  .impact__list li.impact__more {
+    padding: 0;
+    border-style: dashed;
+  }
+  .impact__more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 0 14px;
+    color: var(--green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .btn--sm {
     min-height: 50px;
