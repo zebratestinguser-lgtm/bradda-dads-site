@@ -19,6 +19,18 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 - [ ] **Pensioners' lunch bookings** were marked closed on 26 Nov 2026 (editor: tick "Closed now"). **Untick it next year** when bookings open, or set a "Deadline" date instead.
 - [x] Wolf's Pit start/finish map link added (26 Nov 2026).
 
+## Site jobs still outstanding (26 Nov 2026)
+
+- [ ] **Check the editor (Pages CMS) still opens everything** after the new fields: open one news story (Draft, More photos), one event (Map link, Other places, Closed now, Done for year, Run by Bradda Dads) and Site settings (Meeting pubs). Tell Claude about any error.
+- [ ] **Donation buttons:** £5/£10/£20 all open the same SumUp page. Make three fixed-amount SumUp payment links and put them in Site settings → Donation links.
+- [ ] **Donation QR code** (in the original brief, still missing): needs a small QR-code tool adding to the project (ask first), or make one in SumUp and upload it (Site settings → donationQr).
+- [ ] **Own web address** (committee): then point the site at it (`site` and `base` in astro.config.mjs) and redirect what's possible from the old addresses.
+- [ ] **After launch:** put a short notice on the old Blogspot and WordPress sites pointing to the new one (and take the blackface photos down from Blogspot, see above).
+- [ ] **Speed check on the big albums** (Tour of Bradwell 2016 has 215 photos): run the phone speed test on an album page and a story page with a gallery.
+- [ ] **Christmas card next year:** keep the SumUp "message to the merchant" route. The free Formspree form only takes 50 messages a month, too few for the card.
+- [ ] **Family Fun Day 2027:** date, and whether anything costs money.
+- [ ] **Pensioners' lunch:** hall opens at 11am (added 26 Nov 2026). Still to confirm for next year: date, and whether to keep the newsletter slip as the only booking route.
+
 ## Site settings: `src/data/site.yaml`
 
 - [ ] **Contact form:** make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.

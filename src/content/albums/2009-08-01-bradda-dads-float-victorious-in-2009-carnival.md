@@ -20,8 +20,6 @@ photos:
     alt: "Dads dressed as knights in chain mail and St George's tunics (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/007.jpg
     alt: "Princesses and a knight in costume in the barn (1 August 2009)"
-  - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/008.jpg
-    alt: "A dad dressed as a crusader knight with a shield (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/009.jpg
     alt: "Knights in red cloaks and a princess on the carnival field (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/010.jpg

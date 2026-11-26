@@ -2,8 +2,8 @@
 name: Pensioners' Christmas Lunch
 when: 4 December
 # Date from the 17 November 2026 minutes; time not confirmed yet
-start: 2026-12-04T00:00:00+00:00
-startTimeConfirmed: false
+start: 2026-12-04T11:00:00+00:00
+startTimeConfirmed: true
 location: The Memorial Hall, Bradwell
 mapUrl: https://maps.app.goo.gl/HT4PLiw9oQaMBw4D8
 places:
@@ -22,11 +22,12 @@ month: 12
 heroTitle: The Pensioners' Christmas Lunch
 heroHighlight: Christmas Lunch
 heroText: A free Christmas lunch for Bradwell's pensioners, with local homemade food served by the dads, with crackers, a Christmas tree and carols from the village children. Running every December since 2001.
-countdownLabel: Lunch is served in
+countdownLabel: The hall opens in
 heroNote: "Book with the slip in **Bradda News**. Meals can be delivered, and transport to the hall arranged."
 heroImage: /uploads/albums/2012-12-05-12th-pensioners-christmas-lunch/011.jpg
 heroImageAlt: A line of Bradda Dads in white shirts and yellow ties under the Christmas decorations, ready to serve lunch
 heroImageCaption: December 2012
+whenWhereNote: The hall opens at 11am.
 involvement:
   - title: Book a place
     text: Fill in the lunch slip in Bradda News and hand it in at the Post Office. It's free for village pensioners.

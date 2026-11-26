@@ -24,6 +24,8 @@ source: https://bradda.org/wp-content/uploads/2026/08/Bradwell-News-September-20
 
 Gala Week is one of the big dates in the Bradwell year. Bradda Dads don't run it, but we've joined in for years: building a float for the carnival parade, and in past years running a bar with live music on the field.
 
+In 2024 we ran four stalls at the carnival: hook a duck, tin can alley, tombola and wheel of fortune ([Facebook, July 2024](https://www.facebook.com/1680370807112731/posts/996264705523348)).
+
 Our floats have been everything from an army to a circus. The 2010 circus float won first prize for best float, and you can see them all in the [carnival photos](../../photos/category/carnival/).
 
 In 2026 we put on "Bradda Rocks" on Carnival Eve, ran the Ball Race in Gala Week and the bar on Carnival Day, and entered a float in the parade ([Bradwell News, September 2026](https://bradda.org/wp-content/uploads/2026/08/Bradwell-News-September-2026-4-pages.pdf)).

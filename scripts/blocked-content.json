@@ -1,5 +1,5 @@
 {
-  "_note": "Content that must NEVER be published on the Bradda Dads website. Removed 25 Nov 2026 on the decision to take down photos of party guests in blackface make-up (2008 birthday party album, and one reused in the 2011 Mike Thompson retirement album). scripts/make-thumbs.mjs (runs before every build) and scripts/migration/import-legacy.mjs refuse anything listed here. Do not remove entries.",
+  "_note": "Content that must NEVER be published on the Bradda Dads website. Removed 25 Nov 2026 on the decision to take down photos of party guests in blackface make-up (2008 birthday party album, and one reused in the 2011 Mike Thompson retirement album). scripts/make-thumbs.mjs (runs before every build) and scripts/migration/import-legacy.mjs refuse anything listed here. Do not remove entries. Added 26 Nov 2026: a photo of a carnival float participant (crusader costume) with blacked-up face, 2009 carnival album photo 8.",
   "sha256": [
     "b716b13c134a9b86d9ef1b9263c3f4002db3fa5a453d00d0b4d417ee10439e8c",
     "757db72cd9a240aa2f06c9ca8a62c10cbc3fc71e26369b77606c081cfe6914d6",
@@ -10,13 +10,15 @@
     "d8ff9fe9d25b876eb974dbcfbb431bca5b5c0ac79e910476b021489cf5be7401",
     "6a46a4310656f863fc64fc797cd6c35268eb979bb5de93e9c464daa698e47b1b",
     "96d1f6bb1d87263452f023f4adf0309f6e8387acf8262d9f03ea9ff4bced0acd",
-    "26fd0882241567886dfeb47f62842e0cfc4c4f090822d8945cf86b2d14f95850"
+    "26fd0882241567886dfeb47f62842e0cfc4c4f090822d8945cf86b2d14f95850",
+    "df9928d090911309165e27cc2da1e34fd6484d4ecbc6d996ea0e72241068b5a8"
   ],
   "paths": [
     "src/content/news/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md",
     "src/content/albums/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8.md",
     "public/uploads/albums/2008-08-17-bradda-dad-lee-bradburys-40th-birthday-party-16-8",
-    "public/uploads/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea/016.jpg"
+    "public/uploads/albums/2011-10-20-bradda-dads-legend-mike-thompson-retires-after-nearly-13-yea/016.jpg",
+    "public/uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/008.jpg"
   ],
   "sourceUrls": [
     "https://braddadads.blogspot.com/2008/08/bradda-dad-lee-bradburys-40th-birthday.html"
