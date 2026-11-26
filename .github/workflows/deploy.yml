@@ -23,8 +23,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24 # Astro 7 needs Node 22.23+
           cache: npm
@@ -42,7 +42,7 @@ jobs:
             git push || echo "Couldn't push resized photos (a newer change arrived); the next build will retry."
           fi
       # Keep the generated 480px/960px photo copies between builds (make-thumbs.mjs only makes missing ones)
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: public/uploads/thumbs
           key: thumbs-${{ github.run_id }}
@@ -66,7 +66,7 @@ jobs:
             git commit -m "Add new Facebook posts as draft news stories"
             git push || echo "Couldn't save the Facebook drafts (a newer change arrived); the next build will retry."
           fi
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist/
 
@@ -79,4 +79,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -10,7 +10,7 @@ facebookId: "579874205526517_1310285807454568"
 source: https://www.facebook.com/1680370807112731/posts/1310285807454568
 photos:
   - src: /uploads/news/facebook/2025-09-13-1310285807454568-2.jpg
-    alt: "Photo 2 of 2 from the Facebook post of 13 September 2025"
+    alt: "The new footbridge with its timber handrails, seen from the side (13 September 2025)"
 ---
 Today, Bradda Dads have been hard at work replacing the old footbridge between Hall Gate View and Springfield Road. We would like to thank Bradwell Parish Council for their grant contribution towards the costs of this much-needed replacement.
 

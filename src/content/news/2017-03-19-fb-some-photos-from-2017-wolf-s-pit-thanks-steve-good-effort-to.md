@@ -10,57 +10,57 @@ facebookId: "579874205526517_697108197136450"
 source: https://www.facebook.com/1680370807112731/posts/697108197136450
 photos:
   - src: /uploads/news/facebook/2017-03-19-697108197136450-2.jpg
-    alt: "Photo 2 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a dark top climbing the hillside, with others following below (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-3.jpg
-    alt: "Photo 3 of 27 from the Facebook post of 19 March 2017"
+    alt: "The hillside above Shatton, with walled fields in the valley below (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-4.jpg
-    alt: "Photo 4 of 27 from the Facebook post of 19 March 2017"
+    alt: "The steep grassy hillside and its stone wall, with a faint rainbow over the valley (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-5.jpg
-    alt: "Photo 5 of 27 from the Facebook post of 19 March 2017"
+    alt: "Looking out over the valley from the hillside, with a rainbow in the sky (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-6.jpg
-    alt: "Photo 6 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a dark top climbing under a rainbow, with a line of runners behind (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-7.jpg
-    alt: "Photo 7 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a grey top climbing under a rainbow, with runners strung out behind (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-8.jpg
-    alt: "Photo 8 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a blue top climbing under a rainbow (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-9.jpg
-    alt: "Photo 9 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a yellow top climbing under a rainbow (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-10.jpg
-    alt: "Photo 10 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a red vest climbing under a rainbow (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-11.jpg
-    alt: "Photo 11 of 27 from the Facebook post of 19 March 2017"
+    alt: "A line of runners climbing the hillside under a rainbow (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-12.jpg
-    alt: "Photo 12 of 27 from the Facebook post of 19 March 2017"
+    alt: "Runners in blue and green tops climbing close by, with the field strung out behind (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-13.jpg
-    alt: "Photo 13 of 27 from the Facebook post of 19 March 2017"
+    alt: "A group of runners climbing under a bright rainbow (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-14.jpg
-    alt: "Photo 14 of 27 from the Facebook post of 19 March 2017"
+    alt: "Runners climbing under a full rainbow, one in a pale yellow jacket (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-15.jpg
-    alt: "Photo 15 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a yellow top on the stony track beside a dry stone wall (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-16.jpg
-    alt: "Photo 16 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a dark top on the stony track beside the wall (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-17.jpg
-    alt: "Photo 17 of 27 from the Facebook post of 19 March 2017"
+    alt: "Green walled fields across the valley from the course (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-18.jpg
-    alt: "Photo 18 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a dark top coming along the stony track by the wall (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-19.jpg
-    alt: "Photo 19 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a dark top on the track, with more runners behind (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-20.jpg
-    alt: "Photo 20 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a red vest coming along the track (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-21.jpg
-    alt: "Photo 21 of 27 from the Facebook post of 19 March 2017"
+    alt: "Two runners coming along the track by the wall (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-22.jpg
-    alt: "Photo 22 of 27 from the Facebook post of 19 March 2017"
+    alt: "Runners strung out along the track, one in a blue top in front (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-23.jpg
-    alt: "Photo 23 of 27 from the Facebook post of 19 March 2017"
+    alt: "A smiling marshal in a hi-vis vest at the wheel of a car (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-24.jpg
-    alt: "Photo 24 of 27 from the Facebook post of 19 March 2017"
+    alt: "A smiling marshal in a white hoodie at a car window (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-25.jpg
-    alt: "Photo 25 of 27 from the Facebook post of 19 March 2017"
+    alt: "A runner in a blonde wig and a white vest on the track (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-26.jpg
-    alt: "Photo 26 of 27 from the Facebook post of 19 March 2017"
+    alt: "The runner in the blonde wig, with more runners behind on the track (19 March 2017)"
   - src: /uploads/news/facebook/2017-03-19-697108197136450-27.jpg
-    alt: "Photo 27 of 27 from the Facebook post of 19 March 2017"
+    alt: "Fields and woods in the valley below the hillside (19 March 2017)"
 ---
 Some photos from 2017 Wolf's Pit - thanks Steve. Good effort to keep the wig on all the way around (well, I think it was a wig).  Thanks everyone for supporting this event- lovely blustery spring weather and beautiful rainbows. As usual, you are an inspiration to everyone watching. Hope to see you next year.
 

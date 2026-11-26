@@ -10,15 +10,15 @@ facebookId: "579874205526517_1311031744046641"
 source: https://www.facebook.com/1680370807112731/posts/1311031744046641
 photos:
   - src: /uploads/news/facebook/2025-09-14-1311031744046641-2.jpg
-    alt: "Photo 2 of 6 from the Facebook post of 14 September 2025"
+    alt: "The new footbridge and its handrail beside a garden fence (14 September 2025)"
   - src: /uploads/news/facebook/2025-09-14-1311031744046641-3.jpg
-    alt: "Photo 3 of 6 from the Facebook post of 14 September 2025"
+    alt: "The new bridge's handrail running along beside the fence (14 September 2025)"
   - src: /uploads/news/facebook/2025-09-14-1311031744046641-4.jpg
-    alt: "Photo 4 of 6 from the Facebook post of 14 September 2025"
+    alt: "Close-up of the new timber handrails (14 September 2025)"
   - src: /uploads/news/facebook/2025-09-14-1311031744046641-5.jpg
-    alt: "Photo 5 of 6 from the Facebook post of 14 September 2025"
+    alt: "The new timber handrails and bridge deck from the side (14 September 2025)"
   - src: /uploads/news/facebook/2025-09-14-1311031744046641-6.jpg
-    alt: "Photo 6 of 6 from the Facebook post of 14 September 2025"
+    alt: "Looking along the new footbridge towards the houses (14 September 2025)"
 ---
 Thanks all for bearing with us with the footpath closure. We're now 95% complete with just a few small bits of additional fencing to be instated at a future date. We wish you all a happy crossing!
 
