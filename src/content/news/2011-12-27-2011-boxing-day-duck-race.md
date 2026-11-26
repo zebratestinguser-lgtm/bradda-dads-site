@@ -46,15 +46,7 @@ This year we gave a prize of a duck radio to the holder of the ticket(s) for the
 
 Michelle Naylor, Trevor and Enid Smith and M Ridgeway
 
-The krazy kraft results were:
-
-Under 8s best design of kraft - Ffionn Patten
-
-Over 8s best design design of kraft - Jack Tanfield
-
-Under 8s race winner - Ffionn Patten
-
-Overall race winner - Samuel Cooper
+In the Krazy Kraft race there were prizes for the best-designed krafts (under 8s and over 8s), the under 8s race winner and the overall race winner.
 
 Thanks to everyone who took part and came to watch - see you at the 2012 carnival duck race.
 

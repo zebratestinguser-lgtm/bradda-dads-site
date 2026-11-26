@@ -129,7 +129,8 @@ Phone numbers and email addresses copied from the old sites.
 ### Children named with ages or school details (2)
 
 - [x] 2007 Krazy Kraft and duck race: children's names removed (26 Nov 2026).
-- [ ] Children named as Krazy Kraft winners also in the 2008, 2009 and 2010 duck race stories: ask Peter.
+- [x] Children's names removed from the Krazy Kraft results (2008, 2009, 2010, 2011 duck race stories) and the 2009 card competition (26 Nov 2026, Peter: "remove children names").
+- [ ] Possibly children, to check: "Happy birthday Ben Ollerenshaw" (2010 Eyam carnival story), the front row of the 2012 Jubilee beacon photo caption (Harvey Pembleton, Alfie Baker …), and the 2010 Dads vs Lads football team list.
 - [x] Christmas Card Competition 2008: children's names, ages and schools removed (26 Nov 2026).
 
 ### Posts naming many people (22)
