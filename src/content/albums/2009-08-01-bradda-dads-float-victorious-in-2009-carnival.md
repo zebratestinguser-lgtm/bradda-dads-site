@@ -22,10 +22,6 @@ photos:
     alt: "Princesses and a knight in costume in the barn (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/009.jpg
     alt: "Knights in red cloaks and a princess on the carnival field (1 August 2009)"
-  - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/010.jpg
-    alt: "The whole cast of knights and princesses in front of the pink castle float (1 August 2009)"
-  - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/011.jpg
-    alt: "Children dressed as knights with shields in front of the castle float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/012.jpg
     alt: "A knight and a child on a toy horse in front of the castle float (1 August 2009)"
   - src: /uploads/albums/2009-08-01-bradda-dads-float-victorious-in-2009-carnival/013.jpg
