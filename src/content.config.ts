@@ -77,6 +77,8 @@ const events = defineCollection({
     places: z.array(z.object({ label: z.string(), name: z.string(), mapUrl: link.optional() })).default([]),
     summary: z.string(),
     status: z.enum(['upcoming', 'open', 'done']),
+    /** With status "done": the year it's done for (e.g. 2026). From 1 January after that it shows as coming up again. */
+    doneYear: z.number().int().optional(),
     /** Deadline (UK time): last moment to enter, book or order. After it the sign-up button hides and the
      *  pill changes (e.g. "Booking open" → "Bookings closed"); the event itself keeps its own date. */
     entriesClose: z.coerce.date().optional(),

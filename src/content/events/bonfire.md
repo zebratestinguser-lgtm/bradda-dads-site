@@ -6,10 +6,13 @@ mapUrl: https://maps.app.goo.gl/wTm8mfGFojbUDC4fA
 whenWhereNote: Access is from Michlow Lane.
 summary: The village bonfire and fireworks display. Thanks to everyone who came this year.
 status: done
+doneYear: 2026
 ctaLabel: See the photos
 ctaUrl: /photos/
 order: 1
 month: 11
+start: 2026-11-07T00:00:00+00:00
+startTimeConfirmed: false
 involvement:
   - title: Come along
     text: "The village bonfire and fireworks, every November, with hot food and drinks. [PLACEHOLDER: date, gates and tickets.]"

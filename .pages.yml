@@ -205,6 +205,10 @@ content:
         required: true
         options:
           values: [upcoming, open, done]
+      - name: doneYear
+        label: Done for year (with status "done")
+        description: The year it's finished for, e.g. 2026. From 1 January it shows as "Coming up" again by itself.
+        type: number
       - name: when
         label: When (short)
         description: For the event cards, e.g. "26 December" or "November".

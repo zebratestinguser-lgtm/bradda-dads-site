@@ -129,7 +129,8 @@ export function yearSlot(e: EventEntry, now = new Date()) {
   const date = start ?? new Date(y, month - 1, 1);
   let done: boolean;
   if (isHappening(e, now) || isOpen(e, now)) done = false;
-  else if (start) done = hasPassed(e, now) || (e.data.status === 'done' && start <= now);
+  else if (start) done = hasPassed(e, now) || (e.data.status === 'done' && start <= now && (e.data.doneYear ?? y) >= y);
+  else if (e.data.status === 'done' && e.data.doneYear) done = e.data.doneYear >= y;
   else if (e.data.status === 'done') done = now >= date;
   else if (e.data.status === 'open' && (e.data.entriesClosed || e.data.entriesClose?.getFullYear() === y)) done = true;
   else done = now >= new Date(y, month, 1);
