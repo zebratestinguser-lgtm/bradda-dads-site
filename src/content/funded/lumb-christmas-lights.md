@@ -3,6 +3,7 @@ name: "Hydro-power Christmas lights on the Lumb"
 # [PLACEHOLDER] pin position is a guess near the village centre. Replace with the real spot, then set locationConfirmed: true.
 lat: 53.3300
 lng: -1.7380
+onHomepage: true
 locationConfirmed: false
 year: "2018"
 amount: "£150"

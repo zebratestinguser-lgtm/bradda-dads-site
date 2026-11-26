@@ -278,6 +278,8 @@ const funded = defineCollection({
     imageAlt: z.string().optional(),
     /** Set false while the pin position is still a guess. */
     locationConfirmed: z.boolean().default(false),
+    /** Named in the homepage "Where the money goes" box (newest first, up to 5). */
+    onHomepage: z.boolean().default(false),
     source,
   }),
 });

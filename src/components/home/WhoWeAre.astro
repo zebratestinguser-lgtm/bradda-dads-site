@@ -11,15 +11,17 @@ import { url } from '../../lib/url';
 const site = await getSite();
 const eventCount = (await getCollection('events')).filter((e) => e.data.runByUs).length; // counted, so adding an event updates it
 const funded = (await getCollection('funded')).sort((a, b) => a.data.name.localeCompare(b.data.name));
-// The homepage names just a few (file names in src/content/funded/); the rest are on the full page.
-// If one of these is removed, the next ones alphabetically fill the gap.
-const HIGHLIGHTS = ['footbridge-hall-gate-view', 'friends-of-bradwell-schools', 'centenary-players', 'bradwell-pre-school', 'lumb-christmas-lights'];
+// The homepage names just a few: the projects ticked "Show on the homepage" in the editor (onHomepage),
+// newest first, up to 5. "All our annual events" always sits third. The rest are on the full page.
 const SHOW = 5;
-const shown = [
-  ...HIGHLIGHTS.map((id) => funded.find((f) => f.id === id)).filter((f) => f !== undefined),
-  ...funded.filter((f) => !HIGHLIGHTS.includes(f.id)),
-].slice(0, SHOW);
+const lastYear = (y: string) => Math.max(0, ...(y.match(/\d{4}/g) ?? []).map(Number));
+const shown = funded
+  .filter((f) => f.data.onHomepage)
+  .sort((a, b) => lastYear(b.data.year) - lastYear(a.data.year) || a.data.name.localeCompare(b.data.name))
+  .slice(0, SHOW);
 const more = funded.length - shown.length;
+const pills = shown.map((f) => f.data.name);
+pills.splice(Math.min(2, pills.length), 0, 'All our annual events');
 const facts = [
   { big: '1999', small: 'the year it all started' },
   { big: String(eventCount), small: 'big events every year' },
@@ -60,9 +62,7 @@ if (!isPlaceholder(site.groupsHelped)) facts.push({ big: site.groupsHelped, smal
             <h3 class="impact__title">Where the money goes</h3>
             <p class="impact__text">Everything we raise goes back into the village, mostly through the events we put on for everyone. Over the years we've also helped local groups and projects, including:</p>
             <ul class="impact__list" role="list">
-              {shown.map((f) => (
-                <li>{f.data.name}</li>
-              ))}
+              {pills.map((label) => <li>{label}</li>)}
               {more > 0 && (
                 <li class="impact__more">
                   <a href={url('/where-the-money-goes/')}>and {more} more →</a>

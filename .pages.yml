@@ -536,6 +536,11 @@ content:
         label: Map position is correct
         type: boolean
         default: false
+      - name: onHomepage
+        label: Show on the homepage
+        description: Tick to name this in the homepage "Where the money goes" box. Up to 5 are shown, newest first (the rest are on the full page).
+        type: boolean
+        default: false
       - name: body
         label: More detail (optional)
         type: rich-text

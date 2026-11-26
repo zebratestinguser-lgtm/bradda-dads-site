@@ -2,6 +2,7 @@
 name: "New footbridge, Hall Gate View to Springfield Road"
 lat: 53.330717
 lng: -1.739454
+onHomepage: true
 locationConfirmed: true
 year: "2025"
 summary: "The dads replaced the old footbridge between Hall Gate View and Springfield Road, with a grant from Bradwell Parish Council towards the cost."

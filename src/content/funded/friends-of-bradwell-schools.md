@@ -2,6 +2,7 @@
 name: "Friends of Bradwell Schools"
 lat: 53.3283
 lng: -1.7408
+onHomepage: true
 locationConfirmed: false
 year: "2016–2024"
 summary: "Donations to the Friends of Bradwell Schools: £1,285 in 2016, money for the schools' Christmas parties in December 2016, and £200 from the 2024 bonfire collection."

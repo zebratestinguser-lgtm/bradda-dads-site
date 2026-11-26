@@ -2,6 +2,7 @@
 name: "Bradwell pre-school"
 lat: 53.3275
 lng: -1.7405
+onHomepage: true
 locationConfirmed: false
 year: "2016–2017"
 summary: "A donation of £164 in 2016, then an equipment storage shed in 2017."

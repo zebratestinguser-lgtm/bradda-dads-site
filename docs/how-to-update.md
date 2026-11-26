@@ -94,6 +94,14 @@ Open **Site settings**:
 
 Anything still in [SQUARE BRACKETS] is hidden on the website until it's filled in.
 
+## Where the money goes (groups and projects we've helped)
+
+Open **Where the money goes** and choose **Add an entry** for a new gift or project, or open one to change it.
+
+- **Group or project**, **What the money paid for** and **Year** are needed; **Amount** is optional.
+- **Map position:** right-click the spot in Google Maps and copy the two numbers (latitude first). Tick **Map position is correct** once it's the real spot; until then the map says "to be confirmed".
+- **Show on the homepage:** tick this to name it in the "Where the money goes" box on the homepage. Up to 5 are shown, newest first, with "All our annual events" always in the list; everything else is on the full page (the homepage link says "and N more"). Untick an old one to make room for a new one.
+
 ## Meet the dads
 
 Open **Meet the dads**. Only add someone **once they've agreed** to appear on the site. Their card appears as soon as their real name replaces "[MEMBER NAME]".
