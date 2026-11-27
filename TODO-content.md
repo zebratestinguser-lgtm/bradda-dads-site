@@ -135,7 +135,8 @@ Converted from the old site's PDFs: Wolf's Pit 2022–2026; Tour of Bradwell 201
 - [x] **Full review of every photo (26 Nov 2026):** every album, news photo and site image was checked. More taken down and blocked: the 2009 carnival album photos 8, 10, 11 and 16 (the blacked-up knight), and 2005 carnival photo 26 (dreadlock wig and possibly a darkened face behind a windscreen, removed as a precaution). Peter confirmed there has been no blackface since he joined in 2024. Limits: low-risk albums (races, duck races, lunches) were checked on contact sheets, where faces in crowd shots are small.
 - [x] **Checked by Peter and kept (26 Nov 2026):** 2006 carnival (pirates) photo 6 and 2017–2021 carnival photos, photo 13 (Cat in the Hat). Both fine.
 - [ ] **Take these down from Blogspot too:** the 2009 carnival post (https://braddadads.blogspot.com/2009/08/bradda-dads-float-victorius-in-2009.html, photos 8, 10, 11, 16) and the 2005 carnival post (https://braddadads.blogspot.com/2005/08/carnival-august-2005.html, photo 26).
-- [ ] **GitHub history:** the five photos removed on 26 Nov are still in the repository's past versions (the 25 Nov ones were cleaned out). Ask Claude to clean the history again if wanted (it rewrites history, so it needs a quiet moment with no editor changes in flight).
+- [x] **GitHub history cleaned again (27 Nov 2026):** the five photos removed on 26 Nov (2009 carnival 8, 10, 11, 16; 2005 carnival 26) are gone from every past version on GitHub.
+- [ ] **Ask GitHub Support to purge old copies** (owner only): GitHub still serves the old versions to anyone who has their exact links until it tidies up. Use https://support.github.com/contact ("Remove sensitive data / cached views"), repository zebratestinguser-lgtm/bradda-dads-site, and ask them to remove dereferenced commits and cached views after a history rewrite to remove sensitive photos. The same applies to the 25 Nov clean-up.
 
 ## Privacy review of imported content
 
