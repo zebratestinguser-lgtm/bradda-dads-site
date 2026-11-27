@@ -42,8 +42,8 @@ Tick items off as they're done. Updated: 20 November 2026 (17 November minutes +
 
 ## Site settings: `src/data/site.yaml`
 
-- [ ] **Contact form:** make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.
-- [ ] Contact email (`contactEmail`). The old blog used braddadads@btinternet.com; is it still in use?
+- [x] **Contact form:** (done 26 Nov 2026, form mjywldwk on the group Gmail) make a free Formspree account at https://formspree.io (50 messages a month free), create a form that emails the group's address, then paste its address (https://formspree.io/f/…) into `contactFormUrl` (Site settings → Contact form address). The form appears on the Contact page by itself.
+- [x] Contact email (`contactEmail`): secretarybraddadads@gmail.com (26 Nov 2026).
 - [x] CIC name and company number: Bradda Dads CIC, no. 11682398 (Companies House, https://find-and-update.company-information.service.gov.uk/company/11682398). Footer links to the record.
 - [x] SumUp store URL and the three item links (duck tickets, Christmas card, donation)
 - [ ] What £5 / £10 / £20 pays for (`donationLinks[].label`). If the store's donation item has fixed amounts with their own links, add them here.
@@ -200,11 +200,11 @@ Usually captions and thank-yous, so probably fine, but worth a skim. Full list f
 
 - [ ] **Move hosting to Cloudflare when the site gets its own web address (decided 25 Nov 2026: wait until then).** Keep building on GitHub Actions and upload the finished site to Cloudflare (free): browsers can then keep photos and fonts for a year instead of 10 minutes, and old WordPress addresses can be redirected. Limits to watch: Cloudflare free = 20,000 files per site (now ~9,400; each photo adds 7), GitHub Pages = 1 GB (now ~430 MB). Needs a Cloudflare account and one API token stored as a GitHub secret (~20 minutes).
 
-- [ ] **Facebook posts on the site, automatically:** built 26 Nov 2026 (`scripts/fetch-facebook.mjs`, "Latest on Facebook" on the homepage and News page). **Waiting for Peter to create the Page token and add the FB_PAGE_ID and FB_PAGE_TOKEN secrets on GitHub:** step-by-step guide in [docs/facebook-setup.md](docs/facebook-setup.md). Page ID 579874205526517 (not secret). **Late February 2027:** check the Facebook row is still showing; Meta's "data access" can lapse after about 3 months, and then the token needs making again (steps 2 to 6).
+- [x] **Facebook posts on the site, automatically:** (secrets added and working, 26 Nov 2026; still do the late-February check below) built 26 Nov 2026 (`scripts/fetch-facebook.mjs`, "Latest on Facebook" on the homepage and News page). **Waiting for Peter to create the Page token and add the FB_PAGE_ID and FB_PAGE_TOKEN secrets on GitHub:** step-by-step guide in [docs/facebook-setup.md](docs/facebook-setup.md). Page ID 579874205526517 (not secret). **Late February 2027:** check the Facebook row is still showing; Meta's "data access" can lapse after about 3 months, and then the token needs making again (steps 2 to 6).
 
-- [ ] **Facebook share previews:** event and news pages use their own photo and summary instead of the default image.
-- [ ] **Speed on phones:** mid-sized photo versions with srcset for headers and cards; run Lighthouse before and after (target 90+).
-- [ ] **Event dates in Google:** Event structured data on event pages; an "Add to calendar" link per event.
+- [x] **Facebook share previews:** event and news pages use their own photo and summary instead of the default image.
+- [x] **Speed on phones:** (done; Lighthouse 27 Nov 2026: 98–100 on phones, 100 on desktop) mid-sized photo versions with srcset for headers and cards; run Lighthouse before and after (target 90+).
+- [x] **Event dates in Google:** Event structured data on event pages; an "Add to calendar" link per event.
 - [x] **Photo descriptions:** done (25 Nov 2026), except the 9 blackface photos.
 - [x] **Duck race winners archive:** /events/duck-race/winners/ (7 races, 2008–2012, from the old results sheets and posts; `src/content/duck-winners/`, editable in Pages CMS). Krazy Kraft (children's raft race) winners are left off because they're children (their names were also removed from the old posts).
 - [ ] Duck race winners: add results from other years if anyone has them (2013 onwards weren't on the old sites). Check the committee is happy for winners' names to be shown.
