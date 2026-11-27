@@ -11,7 +11,7 @@ source: https://www.facebook.com/1680370807112731/posts/812953997187754
 ---
 Bradda dad's would just like to offer a thanks to everyone who bought tickets to the ball race.
 
-(your contribution will help with putting on the best firework and bonfire event and a sumptuous pensioners lunch amongst other things)
+(your contribution will help with putting on the best firework and bonfire event and a sumptuous pensioners' lunch amongst other things)
 
 The winning numbers are as follows
 

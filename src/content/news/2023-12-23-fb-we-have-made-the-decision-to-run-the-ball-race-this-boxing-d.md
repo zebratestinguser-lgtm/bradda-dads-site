@@ -19,6 +19,6 @@ Still running the same times, maybe add wheels to the crazy rafts / create a cra
 
 I’ve attached the original duck race poster for the timings, ticket sales and refreshments will be available at town bottom park as usual.
 
-Thankyou for your support.
+Thank you for your support.
 
 _Originally posted on [the Bradda Dads Facebook page](https://www.facebook.com/1680370807112731/posts/884243856725434)._

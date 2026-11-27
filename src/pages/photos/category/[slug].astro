@@ -36,7 +36,7 @@ albums.forEach((a) => {
 });
 ---
 
-<BaseLayout title={`${cat} photos`} description={`Every ${cat.toLowerCase()} photo from Bradda Dads: ${albums.length} albums, ${total} photos.`} ogImage={albums[0]?.data.cover ?? albums[0]?.data.photos[0]?.src}>
+<BaseLayout title={`${cat} photos`} description={`Every ${cat} photo from Bradda Dads: ${albums.length} albums, ${total} photos.`} ogImage={albums[0]?.data.cover ?? albums[0]?.data.photos[0]?.src}>
   <PageHeader eyebrow="Photos" title={`${cat} photos`} intro={`${total.toLocaleString('en-GB')} photos from ${albums.length} album${albums.length === 1 ? '' : 's'}, newest first. Tap any photo to view it large, then use the arrows to go through every year.`}>
     <a class="back" href={url('/photos/')}>← All albums</a>
   </PageHeader>

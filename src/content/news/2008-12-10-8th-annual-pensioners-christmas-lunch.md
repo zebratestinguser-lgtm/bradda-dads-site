@@ -2,20 +2,20 @@
 title: "The 8th pensioners' Christmas lunch"
 date: 2008-12-10
 tag: "Pensioners' lunch"
-summary: "Excellent pensioners lunch. Very good feedback from our guests (see above). Attendance: 122."
+summary: "Excellent pensioners' lunch. Very good feedback from our guests (see above). Attendance: 122."
 image: /uploads/albums/2008-12-10-8th-annual-pensioners-christmas-lunch/001.jpg
 imageAlt: "Round tables laid with red and green cloths and crackers, ready for the Christmas lunch (10 December 2008)"
 album: 2008-12-10-8th-annual-pensioners-christmas-lunch
 source: https://braddadads.blogspot.com/2008/12/8th-annual-pensioners-christmas-lunch.html
 ---
 
-Excellent pensioners lunch. Very good feedback from our guests (see above). Attendance: 122. In the words of Betty Bradwell 'it keeps getting better every year.'
+Excellent pensioners' lunch. Very good feedback from our guests (see above). Attendance: 122. In the words of Betty Bradwell 'it keeps getting better every year.'
 
 Time to relax with breakfast before the lunch commences
 
 Examples of pictures from the Bradwell school's Christmas card competition
 
-Back row l to r: Malcom 'The Stig' Sowerby,Lee Bradbury, Mike Thompson, Jaak Ojari, Mark Johnston, John Boyle, Jonathan Morgan, Keith Cooper and Chris Baker.
+Back row l to r: Malcom 'The Stig' Sowerby, Lee Bradbury, Mike Thompson, Jaak Ojari, Mark Johnston, John Boyle, Jonathan Morgan, Keith Cooper and Chris Baker.
 
 Front row l to r: Richard Houchin, Darren Pembleton, Nigel Ollerenshaw, Michael Taylor, Paul Karlsons and Paul Richardson
 

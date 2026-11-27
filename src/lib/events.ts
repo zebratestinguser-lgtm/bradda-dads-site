@@ -163,10 +163,12 @@ export function pickNextEvent(events: EventEntry[], now = new Date()) {
 export function formatEventDates(e: EventEntry, withYear = false): string | undefined {
   const start = e.data.start;
   if (!start) return undefined;
-  const opts: Intl.DateTimeFormatOptions = { timeZone: TZ, weekday: 'long', day: 'numeric', month: 'long', ...(withYear ? { year: 'numeric' } : {}) };
+  // Built in parts: with a year, en-GB adds a comma after the weekday ("Friday, 4 December 2026"),
+  // and the rest of the site writes "Friday 4 December 2026"
+  const day = (d: Date, month = true, year = withYear) =>
+    `${d.toLocaleDateString('en-GB', { timeZone: TZ, weekday: 'long' })} ${d.toLocaleDateString('en-GB', { timeZone: TZ, day: 'numeric', ...(month ? { month: 'long' } : {}), ...(year ? { year: 'numeric' } : {}) })}`;
   const end = endsAt(e)!;
-  if (!isMultiDay(e)) return start.toLocaleDateString('en-GB', opts);
+  if (!isMultiDay(e)) return day(start);
   const sameMonth = start.toLocaleDateString('en-GB', { timeZone: TZ, month: 'long', year: 'numeric' }) === end.toLocaleDateString('en-GB', { timeZone: TZ, month: 'long', year: 'numeric' });
-  const startText = start.toLocaleDateString('en-GB', sameMonth ? { timeZone: TZ, weekday: 'long', day: 'numeric' } : { timeZone: TZ, weekday: 'long', day: 'numeric', month: 'long' });
-  return `${startText} – ${end.toLocaleDateString('en-GB', opts)}`;
+  return `${day(start, !sameMonth, false)} – ${day(end)}`;
 }

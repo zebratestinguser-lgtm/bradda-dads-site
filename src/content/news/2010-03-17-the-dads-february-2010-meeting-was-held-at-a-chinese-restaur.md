@@ -2,7 +2,7 @@
 title: "February meeting at a Chinese restaurant in Chapel"
 date: 2010-03-17
 tag: "Social"
-summary: "Photos from the old Bradda Dads website: The 'Dads February 2010 meeting was held at a Chinese restaurant in Chapel.  What a happy looking bunch!."
+summary: "Photos from the old Bradda Dads website: The 'Dads February 2010 meeting was held at a Chinese restaurant in Chapel.  What a happy looking bunch!"
 image: /uploads/albums/2010-03-17-the-dads-february-2010-meeting-was-held-at-a-chinese-restaur/001.jpg
 imageAlt: "Dads round a long table at a restaurant for their monthly meeting (17 March 2010)"
 album: 2010-03-17-the-dads-february-2010-meeting-was-held-at-a-chinese-restaur

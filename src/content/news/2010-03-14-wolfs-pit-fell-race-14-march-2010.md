@@ -9,7 +9,7 @@ album: 2010-03-14-wolfs-pit-fell-race-14-march-2010
 source: https://braddadads.blogspot.com/2010/03/wolfs-pit-fell-race.html
 ---
 
-Bradda Dad and Wolf's Pit Fell Race race organiser John Boyle takes 6th place.
+Bradda Dad and Wolf's Pit Fell Race organiser John Boyle takes 6th place.
 
 Very well done.
 

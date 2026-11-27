@@ -39,7 +39,7 @@ const cat = album.data.category;
     </p>
     <ul class="album-links" role="list">
       {story && <li><a href={url(`/news/${story.id}/`)}>Read the story →</a></li>}
-      {cat && <li><a href={url(`/photos/category/${categorySlug(cat)}/`)}>All {cat.toLowerCase()} photos →</a></li>}
+      {cat && <li><a href={url(`/photos/category/${categorySlug(cat)}/`)}>All {cat} photos →</a></li>}
       {event && <li><a href={url(`/events/${event.id}/`)}>About the {event.data.name} →</a></li>}
       <li><a href={url('/photos/')}>All albums →</a></li>
     </ul>

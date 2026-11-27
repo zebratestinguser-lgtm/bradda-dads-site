@@ -10,4 +10,4 @@ source: https://braddadads.wordpress.com/news-2/
 # Source note: Mentioned on the old WordPress site (around 2018–19) as a recent hand-over of funds.
 ---
 
-Sources: [2016 AGM round-up](https://www.facebook.com/1680370807112731/posts/612377895609481), [2017 donations](https://www.facebook.com/1680370807112731/posts/689489234565013)., [Community interest company report for the year to 30 November 2019, filed at Companies House](https://find-and-update.company-information.service.gov.uk/company/11682398/filing-history/MzI4MTM3OTM0OWFkaXF6a2N4/document?format=pdf&download=0).
+Sources: [2016 AGM round-up](https://www.facebook.com/1680370807112731/posts/612377895609481), [2017 donations](https://www.facebook.com/1680370807112731/posts/689489234565013), [Community interest company report for the year to 30 November 2019, filed at Companies House](https://find-and-update.company-information.service.gov.uk/company/11682398/filing-history/MzI4MTM3OTM0OWFkaXF6a2N4/document?format=pdf&download=0).

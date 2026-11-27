@@ -21,7 +21,7 @@ photos:
 
 ## Results for 2026!
 
-A huge Thank You to everyone who entered and helped run the event this year! [Wolfs Pit Results 2026](https://braddadads.wordpress.com/wp-content/uploads/2026/03/wolfs-pit-results-2026-wolfs-pit-results-2026.pdf)
+A huge Thank You to everyone who entered and helped run the event this year! [Wolf’s Pit Results 2026](https://braddadads.wordpress.com/wp-content/uploads/2026/03/wolfs-pit-results-2026-wolfs-pit-results-2026.pdf)
 
 ## Race Details
 

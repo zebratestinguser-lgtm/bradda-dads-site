@@ -2,15 +2,15 @@
 title: "Boxing Day duck race 2024 raised £900"
 date: 2024-12-27
 tag: "Duck race"
-summary: "Would like to say thanks to everyone who bought tickets after the prizes money has been paid out, you have raised £900 which goes directly back in to the comunity. For which we really appreciate the…"
+summary: "Would like to say thanks to everyone who bought tickets after the prizes money has been paid out, you have raised £900 which goes directly back into the community. For which we really appreciate the…"
 draft: false
 facebookId: "579874205526517_1114999363649881"
 source: https://www.facebook.com/1680370807112731/posts/1114999363649881
 ---
-Would like to say thanks to everyone who bought tickets after the prizes money has been paid out, you have raised £900 which goes directly back in to the comunity. For which we really appreciate the support. Prize winners included:  
+Would like to say thanks to everyone who bought tickets after the prizes money has been paid out, you have raised £900 which goes directly back into the community. For which we really appreciate the support. Prize winners included:  
 £50 for sue smith first prize  
 £30 for Hanna Byrne second prize  
-And Anita waining the booby prize.  
+And Anita Waining the booby prize.  
 
 
 Also a shout out to the brook café for there £60 donation from the Santa charity fund raiser.

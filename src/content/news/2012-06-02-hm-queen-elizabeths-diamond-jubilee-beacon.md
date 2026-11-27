@@ -37,7 +37,7 @@ Our entry from the official web site [http://www.diamondjubileebeacons.co.uk](ht
 
 Organisation: Bradda Dads
 
-Organiser : Michael Taylor
+Organiser: Michael Taylor
 
 Location: Rebellion Knoll, Bradwell Edge
 

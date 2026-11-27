@@ -12,7 +12,7 @@ Thank you to everyone who came out to support the duck race. Here are the winner
 1st ticket 385 - Janet Harding. £50  
 2nd ticket 447 - Alan + June Alyling. £30  
 3rd ticket 321 - Mike Sayfriz and Jamie Macleod £20 each  
-Boobie Prize ticket 500 - Fiona Johnston.
+Booby Prize ticket 500 - Fiona Johnston.
 
 Congratulations all!
 

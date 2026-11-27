@@ -9,7 +9,7 @@ album: 2007-08-05-bradda-dads-1-rest-of-village
 source: https://braddadads.blogspot.com/2007/08/bradda-dads-1-rest-of-village-1.html
 ---
 
-A hard fought battle this afternoon amid the torrid heat at the Stade de Bradda Sports. Veteran keeper Bradbury kept the 'Dads level until late into the first half when Cooper (F), who until kick-off was apparantly never certain to turn up for the match, managed to scramble a high-bouncing ball into the net - much to Bradbury's dismay. The scores were levelled by the 'Dads in the second half by some lovely build-up play ending in a fine individual effort by Bradbury.
+A hard fought battle this afternoon amid the torrid heat at the Stade de Bradda Sports. Veteran keeper Bradbury kept the 'Dads level until late into the first half when Cooper (F), who until kick-off was apparently never certain to turn up for the match, managed to scramble a high-bouncing ball into the net - much to Bradbury's dismay. The scores were levelled by the 'Dads in the second half by some lovely build-up play ending in a fine individual effort by Bradbury.
 
 The pre-match banter was however marred by a possible transfer dispute and Brown, manager for the opposition, may refer Bradbury's position in the Bradda Dads team to the WFA (Whitehart Football Association) and this is likely to need a number of meetings to resolve the situation.
 
