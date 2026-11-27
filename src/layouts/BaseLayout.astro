@@ -79,7 +79,8 @@ const searchType = path.startsWith('/news/')
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {/* Site settings → "Hide the site from search engines" (on until the own web address), or a page that asks */}
+    {(noindex || site.hideFromSearchEngines) && <meta name="robots" content={site.hideFromSearchEngines ? 'noindex, nofollow' : 'noindex, follow'} />}
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
     <link rel="icon" type="image/png" sizes="192x192" href={url('/icon-192.png')} />
     <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />

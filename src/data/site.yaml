@@ -9,6 +9,7 @@ site:
   cicName: "Bradda Dads CIC"
   cicNumber: "11682398"
   registeredOffice: "The Post Office, 8 Netherside, Bradwell, Hope Valley, Derbyshire S33 9AA"
+  hideFromSearchEngines: true
   # SumUp online store (three items: duck race entries, community Christmas card, donation)
   sumupStoreUrl: https://bradda-dads-community-group.sumupstore.com/
   # All three amounts go to the store's donation item, where the amount is chosen

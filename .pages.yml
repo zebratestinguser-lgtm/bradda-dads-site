@@ -1808,3 +1808,8 @@ content:
             label: Registered office address
             description: As shown on Companies House. Company websites must show it (it appears in the footer).
             type: string
+          - name: hideFromSearchEngines
+            label: Hide the site from Google and other search engines
+            description: 'Ticked while the site is on its test address and the privacy review of old posts is not finished. UNTICK when the site moves to its own web address, or it will not appear in Google.'
+            type: boolean
+            default: false

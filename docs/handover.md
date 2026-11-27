@@ -53,7 +53,8 @@ In Pages CMS, someone with GitHub access to the repository opens the project's s
 3. In the repository's Settings → **Transfer ownership**, move `bradda-dads-site` to the organisation.
 4. Reconnect Pages CMS to the moved repository and re-invite the editors.
 5. The site's address changes when it moves (it contains the account name), so **do this when the group's own web address is set up**. A developer, or Claude, then updates `site` and `base` in `astro.config.mjs` to the new address.
-6. Check GitHub Pages is switched on in the moved repository (Settings → Pages → "GitHub Actions"), and the Facebook secrets came across (Settings → Secrets).
+6. **In Site settings, untick "Hide the site from Google and other search engines"** (it was ticked while the site was on its test address). Otherwise the site never appears in Google.
+7. Check GitHub Pages is switched on in the moved repository (Settings → Pages → "GitHub Actions"), and the Facebook secrets came across (Settings → Secrets).
 
 ## 6. Getting help
 

@@ -343,6 +343,8 @@ const settings = defineCollection({
     cicNumber: z.string(),
     /** Registered office address (company websites must show it). One line. */
     registeredOffice: z.string().optional(),
+    /** Ask search engines not to list any page (while on the test address and before the privacy review). Untick when the site moves to its own web address. */
+    hideFromSearchEngines: z.boolean().default(false),
     sumupStoreUrl: link,
     donationLinks: z
       .array(z.object({ amount: z.number(), url: link, label: z.string() }))
